@@ -1,11 +1,6 @@
 import React from 'react';
+import Auth from '../components/Auth';
 
-const AuthPage = () => {
-    return (
-        <div>
-            AuthPage
-        </div>
-    );
-};
+const AuthPage = () => <Auth />;
 
 export default AuthPage;
