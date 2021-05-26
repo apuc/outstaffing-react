@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, lazy } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-function App() {
+const AuthPage = lazy(() => import('./pages/AuthPage'))
+const HomePage = lazy(() => import('./pages/HomePage'))
+const CandidatePage = lazy(() => import('./pages/CandidatePage'))
+
+const App = () => {
+  const isAuth = true
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        {isAuth ? (
+          <Switch>
+            <Route path="/" exact component={HomePage} />
+            <Route path="/candidate/:id" component={CandidatePage} />
+            <Route compoent={<div>Not found page</div>} />
+          </Switch>
+        ) : (
+          <Route path="/" exact component={AuthPage} />
+        )}
+      </Suspense>
+    </Router>
+  )
 }
 
-export default App;
+export default App
