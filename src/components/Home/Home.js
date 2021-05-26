@@ -1,16 +1,15 @@
 import React from 'react';
 import Outstaffing from './sections/Outstaffing';
 import Description from './sections/Description';
+import Search from './sections/Search';
 
 const Home = () => {
   return (
-    <div>
-      {/* <h1>HomePage</h1>
-      <ul>{renderCandidatesList}</ul> */}
-
+    <>
       <Outstaffing />
+      <Search />
       <Description />
-    </div>
+    </>
   );
 };
 

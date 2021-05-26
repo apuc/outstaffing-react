@@ -4,7 +4,7 @@ import photo from '../../../images/medium_male.png';
 import rectangle from '../../../images/rectangle_secondPage.png';
 import arrowLeft from '../../../images/arrow_left.png';
 import arrowRight from '../../../images/arrow_right.png';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const candidatesList = [
   { id: 1, name: 'Artyom' },
@@ -30,9 +30,9 @@ const Description = () => {
                 <p className={style.description__text}>- 3 года преподаю в IOS-школе Сбера</p>
               </div>
               <div className="col-4">
-                <Link to={`/candidate/${el.id}`}>
+                <NavLink to={`/candidate/${el.id}`}>
                   <button className={style.description__button}>Подробное резюме</button>
-                </Link>
+                </NavLink>
               </div>
               <div className="col-12">
                 <span className={style.description__sp}>
@@ -50,9 +50,7 @@ const Description = () => {
           <div className="col-12">
             <div className={style.description__footer}>
               <div className={style.description__footer__btn}>
-                <button>
-                  <a href="#">Загрузить еще</a>
-                </button>
+                <button>Загрузить еще</button>
               </div>
               <div className={style.description__footer__box}>
                 <div className={style.arrow__left}>

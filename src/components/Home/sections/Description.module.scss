@@ -72,17 +72,15 @@
                 border: 1px solid #5ab424;
                 background-color: white;
                 margin-right: 60px;
-                & a {
-                    text-decoration: none;
-                    color: #a0a0a0;
-                    font-family: "GT Eesti Pro Display";
-                    font-size: 18px;
-                    font-weight: 600;
-                    font-style: normal;
-                    letter-spacing: normal;
-                    line-height: normal;
-                    text-align: left;
-                }
+                color: #a0a0a0;
+                font-family: "GT Eesti Pro Display";
+                font-size: 18px;
+                font-weight: 600;
+                font-style: normal;
+                letter-spacing: normal;
+                line-height: normal;
+                text-align: center;
+ 
             }
         }
         &__box {
