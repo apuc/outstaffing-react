@@ -4,8 +4,15 @@ import style from './Candidate.module.scss';
 // import { candidatesList } from '../Home/sections/Description';
 import icon from '../../images/front_end.png';
 import arrow from '../../images/right-arrow.png';
-
+import rectangle from '../../images/rectangle_secondPage.png';
+import Sidebar from './sections/Sidebar';
 import classes from './Candidate.module.scss';
+import SectionOne from './sections/SectionOne';
+import SectionTwo from './sections/SectionTwo';
+import SectionThree from './sections/SectionThree';
+import SectionFour from './sections/SectionFour';
+import SectionFive from './sections/SectionFive';
+import SectionSkills from './sections/SectionSkills';
 
 const Candidate = () => {
   const history = useHistory();
@@ -44,20 +51,24 @@ const Candidate = () => {
         <div className={style.candidate__main}>
           <div className="row">
             <div className="col-4">
-              <div className="">
-                <p>
-                  sddddddddddddddddddddddddddddddddd <br /> ddddddddddddddddddddddddddd <br />
-                  ddddddddddddddddddd
-                </p>
-              </div>
+              <Sidebar />
             </div>
 
             <div className="col-8">
-              <div className="">
-                <p>
-                  sddddddddddddddddddddddddddddddddd <br /> ddddddddddddddddddddddddddd <br />
-                  ddddddddddddddddddd
-                </p>
+              <div className={style.candidate__main__description}>
+                <h2>Frontend разработчик, Middle</h2>
+                <img src={rectangle} alt="" />
+                <p># Описание опыта</p>
+                <SectionOne />
+                <p># Средства и инструменты:</p>
+                <SectionTwo />
+                <p># Описание опыта</p>
+                <SectionThree />
+                <p># Средства и инструменты:</p>
+                <SectionFour />
+                <p># Функционал:</p>
+                <SectionFive />
+                <SectionSkills />
               </div>
             </div>
           </div>

@@ -1,0 +1,27 @@
+.SectionSkills {
+  border: 1px solid #69bf2c;
+  padding: 28px 40px 16px 30px;
+  margin-top: 60px;
+  border-radius: 10px;
+  margin-bottom: 60px;
+  & h3 {
+    font-family: 'GT Eesti Pro Display';
+    font-size: 1.8em;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 28px;
+    text-align: left;
+  }
+
+  & p {
+    font-family: 'GT Eesti Pro Display - Thin';
+    font-size: 2em;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 28px;
+    text-align: left;
+    color: #444444;
+  }
+}

@@ -4,12 +4,8 @@ import photo from '../../../images/medium_male.png';
 import rectangle from '../../../images/rectangle_secondPage.png';
 import arrowLeft from '../../../images/arrow_left.png';
 import arrowRight from '../../../images/arrow_right.png';
-import { NavLink } from 'react-router-dom';
-
-export const candidatesList = [
-  { id: 1, name: 'Artyom' },
-  { id: 2, name: 'Vitaliy' },
-];
+import { Link } from 'react-router-dom';
+import { candidatesList } from '../sections/Search';
 
 const Description = () => {
   return (
@@ -30,9 +26,9 @@ const Description = () => {
                 <p className={style.description__text}>- 3 года преподаю в IOS-школе Сбера</p>
               </div>
               <div className="col-4">
-                <NavLink to={`/candidate/${el.id}`}>
+                <Link to={`/candidate/${el.id}`}>
                   <button className={style.description__button}>Подробное резюме</button>
-                </NavLink>
+                </Link>
               </div>
               <div className="col-12">
                 <span className={style.description__sp}>

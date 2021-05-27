@@ -5,7 +5,7 @@
       text-align: center;
       color: #52b709;
       font-family: 'GT Eesti Pro Display';
-      font-size: 53px;
+      font-size: 5em;
       font-weight: 700;
       font-style: normal;
       letter-spacing: normal;
@@ -33,11 +33,41 @@
       & span {
         margin-left: 40px;
         margin-right: 120px;
+        font-family: 'GT Eesti Pro Display - Thin';
+        font-size: 1.8em;
+        font-weight: 400;
+        font-style: normal;
+        letter-spacing: normal;
+        line-height: 36px;
+        text-align: left;
       }
     }
   }
 
   &__main {
     margin-top: 60px;
+
+    &__description {
+      padding-left: 16px;
+      & h2 {
+        font-family: 'GT Eesti Pro Display';
+        font-size: 2.8em;
+        font-weight: 700;
+        font-style: normal;
+        letter-spacing: normal;
+        line-height: 36px;
+        text-align: left;
+      }
+      & p {
+        font-family: 'GT Eesti Pro Display';
+        font-size: 1.2em;
+        font-weight: 300;
+        font-style: normal;
+        letter-spacing: normal;
+        line-height: 36px;
+        text-align: left;
+        margin: 20px 0px;
+      }
+    }
   }
 }

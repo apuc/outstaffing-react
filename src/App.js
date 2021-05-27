@@ -1,13 +1,14 @@
-import React, { Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './fonts/stylesheet.css';
 
-const AuthPage = lazy(() => import('./pages/AuthPage'))
-const HomePage = lazy(() => import('./pages/HomePage'))
-const CandidatePage = lazy(() => import('./pages/CandidatePage'))
+const AuthPage = lazy(() => import('./pages/AuthPage'));
+const HomePage = lazy(() => import('./pages/HomePage'));
+const CandidatePage = lazy(() => import('./pages/CandidatePage'));
 
 const App = () => {
-  const isAuth = true
+  const isAuth = true;
   return (
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
@@ -22,7 +23,7 @@ const App = () => {
         )}
       </Suspense>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;

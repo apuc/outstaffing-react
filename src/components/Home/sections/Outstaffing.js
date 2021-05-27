@@ -22,7 +22,7 @@ const Outstaffing = () => {
           <div className="col-4">
             <div className={style.outstaffing__box}>
               <img src={front} alt="" />
-
+              <p># Популярный стек </p>
               <ul className={style.items}>
                 <li>Ruby on Rails</li>
                 <li>Nginx</li>
@@ -38,6 +38,7 @@ const Outstaffing = () => {
           <div className="col-4">
             <div className={style.outstaffing__box}>
               <img src={back} alt="" />
+              <p># Популярный стек</p>
 
               <ul className={style.items}>
                 <li>Ruby on Rails</li>
@@ -54,6 +55,7 @@ const Outstaffing = () => {
           <div className="col-4">
             <div className={style.outstaffing__box}>
               <img src={design} alt="" />
+              <p># Популярный стек</p>
 
               <ul className={style.items}>
                 <li>Ruby on Rails</li>
