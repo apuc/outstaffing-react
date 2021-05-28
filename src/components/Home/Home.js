@@ -1,14 +1,19 @@
 import React from 'react';
 import Outstaffing from './sections/Outstaffing';
 import Description from './sections/Description';
-import Search from './sections/Search';
+import TagSelect from '../Select/Select';
+
+export const candidatesList = [
+  { id: 1, name: 'Frontend' },
+  { id: 2, name: 'Backend' },
+];
 
 const Home = () => {
   return (
     <>
       <Outstaffing />
-      <Search />
-      <Description />
+      <TagSelect />
+      <Description arr={candidatesList} />
     </>
   );
 };

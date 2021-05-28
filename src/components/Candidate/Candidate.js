@@ -1,7 +1,7 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import style from './Candidate.module.scss';
-// import { candidatesList } from '../Home/sections/Description';
+import { candidatesList } from '../Home/Home';
 import icon from '../../images/front_end.png';
 import arrow from '../../images/right-arrow.png';
 import rectangle from '../../images/rectangle_secondPage.png';
@@ -17,9 +17,11 @@ import SectionSkills from './sections/SectionSkills';
 const Candidate = () => {
   const history = useHistory();
 
-  // const { id: candidateId } = useParams();
+  const { id: candidateId } = useParams();
 
-  // const currentCandidate = candidatesList.find((el) => el.id === Number(candidateId));
+  const currentCandidate = candidatesList.find((el) => el.id === Number(candidateId));
+
+  const { name } = currentCandidate;
 
   return (
     <section className={classes.candidate}>
@@ -56,7 +58,7 @@ const Candidate = () => {
 
             <div className="col-8">
               <div className={style.candidate__main__description}>
-                <h2>Frontend разработчик, Middle</h2>
+                <h2>{name} разработчик, Middle</h2>
                 <img src={rectangle} alt="" />
                 <p># Описание опыта</p>
                 <SectionOne />

@@ -5,20 +5,19 @@ import rectangle from '../../../images/rectangle_secondPage.png';
 import arrowLeft from '../../../images/arrow_left.png';
 import arrowRight from '../../../images/arrow_right.png';
 import { Link } from 'react-router-dom';
-import { candidatesList } from '../sections/Search';
 
-const Description = () => {
+const Description = ({ arr }) => {
   return (
     <section className={style.description}>
       <div className="container">
         <div className={style.description__wrapper}>
-          {candidatesList.map((el) => (
+          {arr.map((el) => (
             <div className="row" key={el.id}>
               <div className="col-2">
                 <img className={style.description__img} src={photo} alt="" />
               </div>
               <div className="col-6">
-                <h3 className={style.description__title}>Frontend разработчик, Middle</h3>
+                <h3 className={style.description__title}>{el.name} разработчик, Middle</h3>
                 <p className={style.description__text}>
                   - 10 лет пишу приложения под IOS, отлично владею Objective-C и Swift.
                 </p>
