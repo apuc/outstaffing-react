@@ -1,6 +1,7 @@
 .search {
   margin-top: 40px;
-  & h2 {
+}
+  .search__title {
     font-family: 'GT Eesti Pro Display';
     font-size: 2.4em;
     font-weight: 700;
@@ -11,12 +12,12 @@
     margin-bottom: 40px;
   }
 
-  &__box {
+  .search__box {
     display: flex;
     justify-content: space-between;
   }
 
-  & button {
+  .search__box > button {
     width: 131px;
     height: 40px;
     border-radius: 10px;
@@ -29,26 +30,26 @@
     letter-spacing: normal;
     text-align: center;
   }
-}
+
 
 .select {
   width: 85%;
+}
 
-  [class$='-placeholder'] {
-    display: none;
-  }
+[class$='-placeholder'] {
+  display: none;
+}
 
-  [class$='-control'] {
-    border-color: #e8e8e8 !important;
-    box-shadow: 0 0 0 1px #e8e8e8;
-  }
+[class$='-control'] {
+  border-color: #e8e8e8 !important;
+  box-shadow: 0 0 0 1px #e8e8e8 !important;
+}
 
-  [class$='-value'] {
-    font-size: 1.6em;
-  }
+[class$='-value__label'] {
+  font-size: 1.4em !important;
+}
 
-  [class$='-option'] {
-    font-size: 1.6em;
-    color: gray;
-  }
+[class$='-option'] {
+  font-size: 1.6em !important;
+  color: gray !important;
 }

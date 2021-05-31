@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import style from './Select.module.scss';
+import style from './Select.module.css';
 
 const options = [
   { value: 'Ruby on Rails', label: 'Ruby on Rails' },
@@ -35,7 +35,7 @@ const TagSelect = () => {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <h2>Найти специалиста по навыкам</h2>
+              <h2 className={style.search__title}>Найти специалиста по навыкам</h2>
               <div className={style.search__box}>
                 <Select
                   value={items}

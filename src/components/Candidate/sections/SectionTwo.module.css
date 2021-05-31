@@ -1,5 +1,5 @@
-.SectionTwo {
-  & p {
+ 
+  .SectionTwo > p {
     font-family: 'GT Eesti Pro Display';
     font-size: 1.8em;
     font-weight: 400;
@@ -9,4 +9,4 @@
     text-align: left;
     color: #444444;
   }
-}
+

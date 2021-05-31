@@ -1,0 +1,26 @@
+.auth {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background-color: #f2f2f2;
+
+}
+
+.auth__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth__container > img {
+  object-fit: contain;
+  height: 200px;
+}
+
+.auth__btn {
+  width: 180px;
+  height: 40px;
+  border: 2px solid gray;
+  border-radius: 100px;
+  font-size: 1.6em;
+  margin: 0 auto;
+}

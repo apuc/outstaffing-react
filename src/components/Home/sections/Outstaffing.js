@@ -1,10 +1,18 @@
-import React from 'react';
-import style from './Outstaffing.module.scss';
+import React, { useState, useEffect } from 'react';
+import style from './Outstaffing.module.css';
 import front from '../../../images/front_end.png';
 import back from '../../../images/back_end.png';
 import design from '../../../images/design.png';
+import OutstaffingBlock from '../../Blocks/OutstaffingBlock';
 
 const Outstaffing = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const tempData = ['Ruby on Rails', 'Nginx', 'Docker', 'PostgreSQL', 'Git', 'Typescript', 'ReactJS'];
+    setData(tempData);
+  }, []);
+
   return (
     <section className={style.outstaffing}>
       <div className="container">
@@ -19,55 +27,9 @@ const Outstaffing = () => {
         </div>
 
         <div className="row">
-          <div className="col-4">
-            <div className={style.outstaffing__box}>
-              <img src={front} alt="" />
-              <p># Популярный стек </p>
-              <ul className={style.items}>
-                <li>Ruby on Rails</li>
-                <li>Nginx</li>
-                <li>Docker</li>
-                <li>PostgreSQL</li>
-                <li>Git</li>
-                <li>Typescript</li>
-                <li>ReactJS</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="col-4">
-            <div className={style.outstaffing__box}>
-              <img src={back} alt="" />
-              <p># Популярный стек</p>
-
-              <ul className={style.items}>
-                <li>Ruby on Rails</li>
-                <li>Nginx</li>
-                <li>Docker</li>
-                <li>PostgreSQL</li>
-                <li>Git</li>
-                <li>Typescript</li>
-                <li>ReactJS</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="col-4">
-            <div className={style.outstaffing__box}>
-              <img src={design} alt="" />
-              <p># Популярный стек</p>
-
-              <ul className={style.items}>
-                <li>Ruby on Rails</li>
-                <li>Nginx</li>
-                <li>Docker</li>
-                <li>PostgreSQL</li>
-                <li>Git</li>
-                <li>Typescript</li>
-                <li>ReactJS</li>
-              </ul>
-            </div>
-          </div>
+          <OutstaffingBlock image={front} data={data} header={'# Популярный стек'} />
+          <OutstaffingBlock image={back} data={data} header={'# Популярный стек'} />
+          <OutstaffingBlock image={design} data={data} header={'# Популярный стек'} />
         </div>
       </div>
     </section>

@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './SectionOne.module.scss';
+import style from './SectionOne.module.css';
 
 const SectionOne = () => {
   return (

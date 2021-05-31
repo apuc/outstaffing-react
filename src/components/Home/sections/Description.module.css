@@ -1,0 +1,134 @@
+.description {
+  margin-top: 120px;
+  margin-bottom: 120px;
+ 
+}
+
+.description__wrapper {
+  border: 2px solid whitesmoke;
+  padding-top: 60px;
+  border-bottom: none;
+}
+.description__img {
+  margin-left: 40px;
+  margin-top: 16px;
+}
+.description__title {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 2.5em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 36px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+.description__text {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.6em;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 24px;
+  text-align: left;
+  line-height: 28px;
+}
+.description__button {
+  width: 280px;
+  height: 62px;
+  border-radius: 100px;
+  background-color: #5ab426;
+  border: none;
+  color: #ffffff;
+  font-family: 'Muller Extra Bold';
+  font-size: 1.8em;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: center;
+  margin-top: 74px;
+}
+.description__sp {
+  display: block;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.6em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: center;
+  margin-top: 20px;
+}
+.description__rectangle {
+  display: block;
+  margin: 60px auto;
+}
+.description__footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.description__footer__btn > button {
+  width: 220px;
+  height: 60px;
+  border-radius: 100px;
+  border: 1px solid #5ab424;
+  background-color: white;
+  margin-right: 60px;
+  color: #a0a0a0;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.8em;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  text-align: center;
+}
+.description__footer__box {
+  display: flex;
+  align-items: center;
+}
+
+.description__footer__sp {
+  color: #705fa3;
+  font-family: Circe;
+  font-size: 1.6em;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: center;
+  margin: 0 10px;
+}
+.arrow__left {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  background-color: #f6f6f6;
+  
+}
+
+.arrow__left > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.arrow__right {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  background-color: #74be4d;
+
+}
+
+.arrow__right > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+

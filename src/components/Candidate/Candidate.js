@@ -1,12 +1,11 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import style from './Candidate.module.scss';
+import style from './Candidate.module.css';
 import { candidatesList } from '../Home/Home';
 import icon from '../../images/front_end.png';
 import arrow from '../../images/right-arrow.png';
 import rectangle from '../../images/rectangle_secondPage.png';
 import Sidebar from './sections/Sidebar';
-import classes from './Candidate.module.scss';
 import SectionOne from './sections/SectionOne';
 import SectionTwo from './sections/SectionTwo';
 import SectionThree from './sections/SectionThree';
@@ -24,7 +23,7 @@ const Candidate = () => {
   const { name } = currentCandidate;
 
   return (
-    <section className={classes.candidate}>
+    <section className={style.candidate}>
       <div className="container">
         <div className="row">
           <div className="col-12">

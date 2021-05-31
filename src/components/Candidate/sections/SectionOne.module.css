@@ -1,5 +1,5 @@
-.SectionThree {
-  & h3 {
+
+  .SectionOne > h3 {
     font-family: 'GT Eesti Pro Display';
     font-size: 2.2em;
     font-weight: 400;
@@ -9,7 +9,7 @@
     text-align: left;
   }
 
-  & p {
+  .SectionOne > p {
     font-family: 'GT Eesti Pro Display - Thin';
     font-size: 1.8em;
     font-weight: 400;
@@ -20,7 +20,7 @@
     color: #444444;
   }
 
-  & h4 {
+  .SectionOne > h4 {
     font-family: 'GT Eesti Pro Display';
     font-size: 1.8em;
     font-weight: 700;
@@ -29,4 +29,4 @@
     line-height: 36px;
     text-align: left;
   }
-}
+

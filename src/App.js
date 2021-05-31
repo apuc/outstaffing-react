@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './fonts/stylesheet.css';
@@ -10,17 +10,32 @@ const CandidatePage = lazy(() => import('./pages/CandidatePage'));
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
 
+  useEffect(() => {
+    const auth = localStorage.getItem('auth');
+    if (auth === 'true') {
+      setIsAuth(true);
+    }
+  }, []);
+
   return (
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
         {isAuth ? (
           <Switch>
-            <Route path="/" exact component={HomePage} />
-            <Route path="/candidate/:id" component={CandidatePage} />
-            <Route component={<div>Not found page</div>} />
+            <Route path="/" exact>
+              <HomePage />
+            </Route>
+            <Route path="/candidate/:id">
+              <CandidatePage />
+            </Route>
+            <Route>
+              <div>Not found page</div>
+            </Route>
           </Switch>
         ) : (
-          <Route path="/" exact component={(props) => <AuthPage {...props} setAuth={setIsAuth} />} />
+          <Route path="/" exact>
+            <AuthPage setAuth={setIsAuth} />
+          </Route>
         )}
       </Suspense>
     </Router>
