@@ -1,10 +1,15 @@
 import React from 'react';
 import style from './Auth.module.scss';
 
-const Auth = () => {
+const Auth = ({ setAuthed }) => {
   return (
     <div className={style.auth}>
-      <h2>THIS IS AUTH!!!</h2>
+      <div className={style.auth__container}>
+        <img src="https://www.google.com/gmail/about/static/images/logo-gmail.png?cache=1adba63" alt="" />
+        <button className={style.auth__btn} onClick={() => setAuthed(true)}>
+          Log in
+        </button>
+      </div>
     </div>
   );
 };

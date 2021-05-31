@@ -38,7 +38,17 @@
     display: none;
   }
 
+  [class$='-control'] {
+    border-color: #e8e8e8 !important;
+    box-shadow: 0 0 0 1px #e8e8e8;
+  }
+
   [class$='-value'] {
-    font-size: 1.4em;
+    font-size: 1.6em;
+  }
+
+  [class$='-option'] {
+    font-size: 1.6em;
+    color: gray;
   }
 }
