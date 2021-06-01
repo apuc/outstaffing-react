@@ -1,7 +1,7 @@
 import React from 'react';
-import male from '../../../images/medium_male.png';
-import arrowLeft from '../../../images/arrow_left.png';
-import arrowRight from '../../../images/arrow_right.png';
+import male from '../../images/medium_male.png';
+import arrowLeft from '../../images/arrow_left.png';
+import arrowRight from '../../images/arrow_right.png';
 import style from './Sidebar.module.css';
 
 const Sidebar = () => {

@@ -5,7 +5,7 @@ import { candidatesList } from '../Home/Home';
 import icon from '../../images/front_end.png';
 import arrow from '../../images/right-arrow.png';
 import rectangle from '../../images/rectangle_secondPage.png';
-import Sidebar from './sections/Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 import SectionOne from './sections/SectionOne';
 import SectionTwo from './sections/SectionTwo';
 import SectionThree from './sections/SectionThree';

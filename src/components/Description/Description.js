@@ -1,9 +1,9 @@
 import React from 'react';
 import style from './Description.module.css';
-import photo from '../../../images/medium_male.png';
-import rectangle from '../../../images/rectangle_secondPage.png';
-import arrowLeft from '../../../images/arrow_left.png';
-import arrowRight from '../../../images/arrow_right.png';
+import photo from '../../images/medium_male.png';
+import rectangle from '../../images/rectangle_secondPage.png';
+import arrowLeft from '../../images/arrow_left.png';
+import arrowRight from '../../images/arrow_right.png';
 import { Link } from 'react-router-dom';
 
 const Description = ({ arr }) => {
