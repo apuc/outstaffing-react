@@ -10,7 +10,6 @@ const Auth = ({ setAuthed }) => {
           className={style.auth__btn}
           onClick={() => {
             setAuthed(true);
-            // localStorage.setItem('auth', 'true');
           }}
         >
           Log in
