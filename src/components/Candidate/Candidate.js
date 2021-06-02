@@ -2,7 +2,6 @@ import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import style from './Candidate.module.css';
 import { candidatesList } from '../Home/Home';
-import icon from '../../images/front_end.png';
 import arrow from '../../images/right-arrow.png';
 import rectangle from '../../images/rectangle_secondPage.png';
 import Sidebar from '../Sidebar/Sidebar';
@@ -17,10 +16,11 @@ const Candidate = () => {
   const history = useHistory();
 
   const { id: candidateId } = useParams();
+  console.log('candidateId', candidateId);
 
   const currentCandidate = candidatesList.find((el) => el.id === Number(candidateId));
 
-  const { name } = currentCandidate;
+  const { name, img } = currentCandidate;
 
   return (
     <section className={style.candidate}>
@@ -44,7 +44,7 @@ const Candidate = () => {
               </div>
 
               <div className="icon">
-                <img src={icon} alt="" />
+                <img src={img} alt="" />
               </div>
             </div>
           </div>

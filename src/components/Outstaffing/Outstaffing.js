@@ -14,18 +14,21 @@ const Outstaffing = () => {
     const tags = [
       {
         name: 'front',
-        img: '../../images/front_end.png',
-        tags: ['Vue.js', 'ReactJS', 'Angular', 'JavaScript', 'Html', 'Css'],
+        img: front,
+        header: '# Популярный стек',
+        tags: ['Vue.js', 'ReactJS', 'Angular', 'JavaScript', 'Html', 'Css', 'MobX'],
       },
       {
         name: 'back',
-        img: '../../images/back_end.png',
-        tags: ['Ruby on Rails', 'Node.js', 'Express', 'Php', 'Python', 'Wordpress'],
+        img: back,
+        header: '# Популярный стек',
+        tags: ['Node.js', 'Express', 'Php', 'Ruby on Rails', 'Python', 'Wordpress', ' Java'],
       },
       {
         name: 'design',
-        img: '../../images/design.png',
-        tags: ['Figma', 'Avocode', 'PhotoShop', 'Xara', 'Pinegrow', 'Macaw'],
+        img: design,
+        header: '# Популярный стек',
+        tags: ['Figma', 'Avocode', 'PhotoShop', 'Xara', 'Pinegrow', 'Macaw', 'KompoZer'],
       },
     ];
 
@@ -66,25 +69,19 @@ const Outstaffing = () => {
           <div className="row">
             <div className="col-4">
               <OutstaffingBlock
-                image={front}
                 data={data.find((item) => item.name === 'front')}
-                header={'# Популярный  стек'}
                 onClick={(item) => handleBlockClick(item)}
               />
             </div>
             <div className="col-4">
               <OutstaffingBlock
-                image={back}
                 data={data.find((item) => item.name === 'back')}
-                header={'# Популярный стек'}
                 onClick={(item) => handleBlockClick(item)}
               />
             </div>
             <div className="col-4">
               <OutstaffingBlock
-                image={design}
                 data={data.find((item) => item.name === 'design')}
-                header={'# Популярный стек'}
                 onClick={(item) => handleBlockClick(item)}
               />
             </div>

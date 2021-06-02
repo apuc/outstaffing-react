@@ -6,12 +6,12 @@ import arrowLeft from '../../images/arrow_left.png';
 import arrowRight from '../../images/arrow_right.png';
 import { Link } from 'react-router-dom';
 
-const Description = ({ arr }) => {
+const Description = ({ candidatesListArr }) => {
   return (
     <section className={style.description}>
       <div className="container">
         <div className={style.description__wrapper}>
-          {arr.map((el) => (
+          {candidatesListArr.map((el) => (
             <div className="row" key={el.id}>
               <div className="col-2">
                 <img className={style.description__img} src={photo} alt="" />
@@ -30,11 +30,7 @@ const Description = ({ arr }) => {
                 </Link>
               </div>
               <div className="col-12">
-                <span className={style.description__sp}>
-                  {' '}
-                  JavaScript · Typescript · ReactJS · Vue.js · Redux · MobX · Storybook · Jest · Адаптивная верстка ·
-                  БЭМ
-                </span>
+                <span className={style.description__sp}> {el.tags}</span>
                 <img className={style.description__rectangle} src={rectangle} alt="" />
               </div>
             </div>

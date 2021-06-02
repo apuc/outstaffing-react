@@ -1,21 +1,21 @@
 import React from 'react';
 import style from './Outstaffing.module.css';
 
-const OutstaffingBlock = ({ text, image, data, onClick }) => {
+const OutstaffingBlock = ({ data = {}, onClick }) => {
+  const { img, header, tags } = data;
   return (
     <div className={style.outstaffing__box}>
-      <img src={image} alt="img" />
-      <p>{text}</p>
-      <ul className={style.items}>
-        {data &&
-          data.tags &&
-          data.tags.length &&
-          data.tags.map((item) => (
+      <img src={img} alt="img" />
+      <p>{header}</p>
+      {tags && (
+        <ul className={style.items}>
+          {tags.map((item) => (
             <li key={item} onClick={() => onClick(item)}>
               {item}
             </li>
           ))}
-      </ul>
+        </ul>
+      )}
     </div>
   );
 };
