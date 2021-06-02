@@ -1,3 +1,4 @@
+import React from 'react';
 import style from './Outstaffing.module.css';
 
 const OutstaffingBlock = ({ text, image, data, onClick }) => {
@@ -6,11 +7,14 @@ const OutstaffingBlock = ({ text, image, data, onClick }) => {
       <img src={image} alt="img" />
       <p>{text}</p>
       <ul className={style.items}>
-        {data.map((item, index) => (
-          <li key={index.toString()} onClick={() => onClick(index)}>
-            {index} {item}
-          </li>
-        ))}
+        {data &&
+          data.tags &&
+          data.tags.length &&
+          data.tags.map((item) => (
+            <li key={item} onClick={() => onClick(item)}>
+              {item}
+            </li>
+          ))}
       </ul>
     </div>
   );

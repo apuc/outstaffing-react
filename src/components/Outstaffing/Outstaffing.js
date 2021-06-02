@@ -11,17 +11,34 @@ const Outstaffing = () => {
   const [selectedItems, setSelectedItems] = useState([]);
 
   useEffect(() => {
-    const tempData = ['Ruby on Rails', 'Nginx', 'Docker', 'PostgreSQL', 'Vue.js', 'Typescript', 'ReactJS'];
-    setData(tempData);
+    const tags = [
+      {
+        name: 'front',
+        img: '../../images/front_end.png',
+        tags: ['Vue.js', 'ReactJS', 'Angular', 'JavaScript', 'Html', 'Css'],
+      },
+      {
+        name: 'back',
+        img: '../../images/back_end.png',
+        tags: ['Ruby on Rails', 'Node.js', 'Express', 'Php', 'Python', 'Wordpress'],
+      },
+      {
+        name: 'design',
+        img: '../../images/design.png',
+        tags: ['Figma', 'Avocode', 'PhotoShop', 'Xara', 'Pinegrow', 'Macaw'],
+      },
+    ];
+
+    setData(tags);
   }, []);
 
-  const handleBlockClick = (index) => {
-    if (selectedItems.find((item) => item.value === data[index])) {
-      return;
-      // setSelectedItems(selectedItems.filter((item) => item.value !== data[index]));
-    } else {
-      setSelectedItems([...selectedItems, { value: data[index], label: data[index] }]);
+  const handleBlockClick = (item) => {
+    if (!selectedItems.find((el) => item === el.value)) {
+      setSelectedItems([...selectedItems, { value: item, label: item }]);
     }
+    // else {
+    // setSelectedItems(selectedItems.filter((el) => item !== el.value));
+    // }
   };
 
   const handleSubmit = () => {
@@ -50,25 +67,25 @@ const Outstaffing = () => {
             <div className="col-4">
               <OutstaffingBlock
                 image={front}
-                data={data}
-                header={'# Популярный стек'}
-                onClick={(index) => handleBlockClick(index)}
+                data={data.find((item) => item.name === 'front')}
+                header={'# Популярный  стек'}
+                onClick={(item) => handleBlockClick(item)}
               />
             </div>
             <div className="col-4">
               <OutstaffingBlock
                 image={back}
-                data={data}
+                data={data.find((item) => item.name === 'back')}
                 header={'# Популярный стек'}
-                onClick={(index) => handleBlockClick(index)}
+                onClick={(item) => handleBlockClick(item)}
               />
             </div>
             <div className="col-4">
               <OutstaffingBlock
                 image={design}
-                data={data}
+                data={data.find((item) => item.name === 'design')}
                 header={'# Популярный стек'}
-                onClick={(index) => handleBlockClick(index)}
+                onClick={(item) => handleBlockClick(item)}
               />
             </div>
           </div>
