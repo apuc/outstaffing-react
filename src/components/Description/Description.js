@@ -6,7 +6,7 @@ import arrowLeft from '../../images/arrow_left.png';
 import arrowRight from '../../images/arrow_right.png';
 import { Link } from 'react-router-dom';
 
-const Description = ({ candidatesListArr }) => {
+const Description = ({ candidatesListArr, onhandleTabBar }) => {
   return (
     <section className={style.description}>
       <div className="container">
@@ -29,10 +29,12 @@ const Description = ({ candidatesListArr }) => {
                   <button className={style.description__button}>Подробное резюме</button>
                 </Link>
               </div>
-              <div className="col-12">
+              <div className="col-2"></div>
+              <div className="col-6">
                 <span className={style.description__sp}> {el.tags}</span>
                 <img className={style.description__rectangle} src={rectangle} alt="" />
               </div>
+              <div className="col-4"></div>
             </div>
           ))}
         </div>
@@ -47,7 +49,7 @@ const Description = ({ candidatesListArr }) => {
                 <div className={style.arrow__left}>
                   <img src={arrowLeft} alt="" />
                 </div>
-                <span className={style.description__footer__sp}>1/15</span>
+                <span className={style.description__footer__sp}>1 / 15</span>
                 <div className={style.arrow__right}>
                   <img src={arrowRight} alt="" />
                 </div>

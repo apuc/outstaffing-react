@@ -1,10 +1,10 @@
 .search {
-  margin-top: 40px;
+  margin-top: 73px;
 }
   .search__title {
     font-family: 'GT Eesti Pro Display';
     font-size: 2.4em;
-    font-weight: 700;
+    font-weight: 500;
     font-style: normal;
     letter-spacing: normal;
     line-height: normal;
@@ -18,17 +18,18 @@
   }
 
   .search__box > button {
+    color: white;
     width: 131px;
     height: 40px;
     border-radius: 10px;
-    background-color: #e8e8e8;
     border: none;
-    font-family: 'GT Eesti Pro Display';
+    font-family: 'Muller Extra Bold';
     font-size: 1.8em;
-    font-weight: 400;
     font-style: normal;
     letter-spacing: normal;
     text-align: center;
+    background-color: #73c141;
+    font-weight: 600;
   }
 
 
@@ -42,7 +43,7 @@
 
 [class$='-control'] {
   border-color: #e8e8e8 !important;
-  box-shadow: 0 0 0 1px #e8e8e8 !important;
+  box-shadow: 0 0 0 0 #e8e8e8 !important;
 }
 
 [class$='-value__label'] {

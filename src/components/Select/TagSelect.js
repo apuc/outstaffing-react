@@ -25,7 +25,7 @@ const TagSelect = ({ selectedItems, tagSubmit, options, setSelectedItems }) => {
                     })}
                 />
                 <button onClick={tagSubmit} type="submit">
-                  Submit
+                  Поиск
                 </button>
               </div>
             </div>

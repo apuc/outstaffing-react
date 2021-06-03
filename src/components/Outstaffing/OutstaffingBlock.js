@@ -1,11 +1,11 @@
 import React from 'react';
 import style from './Outstaffing.module.css';
 
-const OutstaffingBlock = ({ data = {}, onClick }) => {
-  const { img, header, tags } = data;
+const OutstaffingBlock = ({ data = {}, onClick, onClickhandleTabBar }) => {
+  const { img, header, tags, name } = data;
   return (
     <div className={style.outstaffing__box}>
-      <img src={img} alt="img" />
+      <img onClick={() => onClickhandleTabBar(name)} src={img} alt="img" />
       <p>{header}</p>
       {tags && (
         <ul className={style.items}>

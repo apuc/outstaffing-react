@@ -334,3 +334,13 @@
     font-style: italic;
 }
 
+@font-face {
+    font-family: 'Circle';
+    src: 
+        url('BasierCircle-Regular.woff2') format('woff2'),
+        url('BasierCircle-Regular.woff') format('woff'),
+        url('BasierCircle-Regular.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+

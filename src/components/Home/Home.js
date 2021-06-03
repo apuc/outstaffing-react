@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Outstaffing from '../Outstaffing/Outstaffing';
 import Description from '../Description/Description';
 import front from '../../images/front_end.png';
@@ -28,10 +28,19 @@ export const candidatesList = [
 ];
 
 const Home = () => {
+  const [tabs, setTabs] = useState([]);
+
+  const handleTabBar = (name) => {
+    const tabFilter = candidatesList.filter((el) => el.name.toLowerCase() === name);
+
+    console.log(tabFilter);
+
+    setTabs(tabFilter);
+  };
   return (
     <>
-      <Outstaffing />
-      <Description candidatesListArr={candidatesList} />
+      <Outstaffing onhandleTabBar={(name) => handleTabBar(name)} />
+      <Description candidatesListArr={tabs.length > 0 ? tabs : candidatesList} />
     </>
   );
 };

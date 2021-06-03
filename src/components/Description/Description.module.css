@@ -5,7 +5,8 @@
 }
 
 .description__wrapper {
-  border: 2px solid whitesmoke;
+  border: 1px solid #efefef;
+  background-color: #fdfdfd;
   padding-top: 60px;
   border-bottom: none;
 }
@@ -25,8 +26,8 @@
 }
 .description__text {
   font-family: 'GT Eesti Pro Display';
-  font-size: 1.6em;
-  font-weight: 400;
+  font-size: 1.7em;
+  font-weight: 100;
   font-style: normal;
   letter-spacing: normal;
   line-height: 24px;
@@ -35,32 +36,35 @@
 }
 .description__button {
   width: 280px;
-  height: 62px;
+  height: 60px;
   border-radius: 100px;
-  background-color: #5ab426;
+  background-color: #73c141;
   border: none;
   color: #ffffff;
   font-family: 'Muller Extra Bold';
-  font-size: 1.8em;
+  font-size: 1.6em;
   font-weight: 600;
+  line-height: normal;
   font-style: normal;
-  letter-spacing: normal;
+  letter-spacing: 0.8px;
   text-align: center;
   margin-top: 74px;
+  margin-left: 30px;
 }
 .description__sp {
   display: block;
   font-family: 'GT Eesti Pro Display';
-  font-size: 1.6em;
-  font-weight: 700;
+  font-size: 1.7em;
+  font-weight: 400;
   font-style: normal;
   letter-spacing: normal;
-  text-align: center;
+  text-align: left;
+  line-height: 36px;
   margin-top: 20px;
 }
 .description__rectangle {
   display: block;
-  margin: 60px auto;
+  margin: 50px auto;
 }
 .description__footer {
   display: flex;
@@ -69,18 +73,18 @@
 }
 
 .description__footer__btn > button {
-  width: 220px;
-  height: 60px;
+  width: 200px;
+  height: 48px;
   border-radius: 100px;
-  border: 1px solid #5ab424;
+  border: 1px solid #73c141;
   background-color: white;
   margin-right: 60px;
   color: #a0a0a0;
   font-family: 'GT Eesti Pro Display';
   font-size: 1.8em;
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
-  letter-spacing: normal;
+  letter-spacing: 0.6px;
   line-height: normal;
   text-align: center;
 }
@@ -92,7 +96,7 @@
 .description__footer__sp {
   color: #705fa3;
   font-family: Circe;
-  font-size: 1.6em;
+  font-size: 1.3em;
   font-weight: 400;
   font-style: normal;
   letter-spacing: normal;
@@ -105,7 +109,7 @@
   height: 30px;
   border-radius: 20px;
   background-color: #f6f6f6;
-  
+  cursor: pointer;
 }
 
 .arrow__left > img {
@@ -121,7 +125,7 @@
   height: 30px;
   border-radius: 20px;
   background-color: #74be4d;
-
+cursor: pointer;
 }
 
 .arrow__right > img {

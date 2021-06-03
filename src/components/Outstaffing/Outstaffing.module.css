@@ -1,4 +1,4 @@
- 
+
   .outstaffing__title {
     margin-top: 60px;
     }
@@ -27,7 +27,8 @@
     
   .outstaffing__box > img {
     max-width: 240px;
-    max-height: 120px;
+    min-height: 120px;
+    cursor: pointer;
   }
 
   .outstaffing__box > p{
@@ -52,9 +53,9 @@
  
 
   .items > li {
-    font-family: 'GT Eesti Pro Display - Thin';
+    font-family: 'GT Eesti Pro Display';
     font-size: 1.8em;
-    font-weight: 400;
+    font-weight: 100;
     font-style: normal;
     letter-spacing: normal;
     line-height: 36px;
@@ -62,3 +63,4 @@
     list-style: none;
     cursor: pointer;
 }
+
