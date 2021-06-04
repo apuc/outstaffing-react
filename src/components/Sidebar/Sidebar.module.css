@@ -20,7 +20,7 @@
 .candidateSidebar__info__e {
   font-family: 'GT Eesti Pro Display';
   font-size: 1.8em;
-  font-weight: 400;
+  font-weight: normal;
   font-style: normal;
   letter-spacing: normal;
   line-height: 36px;
@@ -28,7 +28,7 @@
 }
 
 .candidateSidebar__info__y {
-  font-family: 'GT Eesti Pro Display - Bold';
+  font-family: 'GT Eesti Pro Display';
   font-size: 3em;
   font-weight: 700;
   font-style: normal;
@@ -41,17 +41,17 @@
   height: 60px;
   border-radius: 100px;
   border: none;
-  background-color: #70c03e;
+  background-color: #73c141;
   color: #ffffff;
-  font-family: 'GT Eesti Pro Display';
-  font-size: 1.8em;
-  font-weight: 600;
+  font-family: 'Muller';
+  font-size: 1.6em;
   font-style: normal;
   letter-spacing: normal;
   line-height: normal;
   text-align: center;
   margin-top: 20px;
   margin-bottom: 120px;
+  
 }
 
 .candidateSidebar__info__l {
@@ -88,8 +88,8 @@
 
 .arrows__sp {
   color: #705fa3;
-  font-family: Circe;
-  font-size: 1.6em;
+  font-family: 'Circe';
+  font-size: 1.3em;
   font-weight: 400;
   font-style: normal;
   letter-spacing: normal;

@@ -344,3 +344,14 @@
     font-style: italic;
 }
 
+@font-face {
+    font-family: 'Muller';
+    src: 
+        url('muller_extrabold_demo.woff2') format('woff2'),
+        url('muller_extrabold_demo.woff') format('woff'),
+        url('muller_extrabold_demo.ttf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+}
+
+
