@@ -6,7 +6,7 @@ import arrowLeft from '../../images/arrow_left.png';
 import arrowRight from '../../images/arrow_right.png';
 import { Link } from 'react-router-dom';
 
-const Description = ({ candidatesListArr, onhandleTabBar }) => {
+const Description = ({ candidatesListArr }) => {
   return (
     <section className={style.description}>
       <div className="container">
@@ -16,7 +16,7 @@ const Description = ({ candidatesListArr, onhandleTabBar }) => {
               <div className="col-2">
                 <img className={style.description__img} src={photo} alt="" />
               </div>
-              <div className="col-6">
+              <div className="col-12 col-xl-6">
                 <h3 className={style.description__title}>{el.name} разработчик, Middle</h3>
                 <p className={style.description__text}>
                   - 10 лет пишу приложения под IOS, отлично владею Objective-C и Swift.
@@ -24,17 +24,17 @@ const Description = ({ candidatesListArr, onhandleTabBar }) => {
                 <p className={style.description__text}>- 5 лет руковожу командами мобильной разработки.</p>
                 <p className={style.description__text}>- 3 года преподаю в IOS-школе Сбера</p>
               </div>
-              <div className="col-4">
+              <div className="col-12 col-xl-4">
                 <Link to={`/candidate/${el.id}`}>
                   <button className={style.description__button}>Подробное резюме</button>
                 </Link>
               </div>
-              <div className="col-2"></div>
-              <div className="col-6">
+              <div className="col-xl-2"></div>
+              <div className="col-12 col-xl-6">
                 <span className={style.description__sp}> {el.tags}</span>
                 <img className={style.description__rectangle} src={rectangle} alt="" />
               </div>
-              <div className="col-4"></div>
+              <div className="col-xl-4"></div>
             </div>
           ))}
         </div>

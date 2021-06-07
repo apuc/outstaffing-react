@@ -39,8 +39,12 @@ const Candidate = () => {
           <div className="col-12">
             <div className={style.candidate__header}>
               <div className={style.arrow} onClick={() => history.push('/')}>
-                <img src={arrow} alt="" />
-                <span>Вернуться к списку</span>
+                <div className={style.arrow__img}>
+                  <img src={arrow} alt="" />
+                </div>
+                <div className={style.arrow__sp}>
+                  <span>Вернуться к списку</span>
+                </div>
               </div>
 
               <div className="icon">

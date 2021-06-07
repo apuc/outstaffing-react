@@ -72,41 +72,46 @@
   }
 } */
 
-
 .candidate__title {
   margin-top: 60px;
 }
 
 .candidate__title > h2 {
   text-align: center;
-      color: #52b709;
-      font-family: 'GT Eesti Pro Display';
-      font-size: 5em;
-      font-weight: 700;
-      font-style: normal;
-      letter-spacing: normal;
-      line-height: 77.81px;
+  color: #52b709;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 5em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 77.81px;
 }
 
 .candidate__title > h2 > span {
   color: #282828;
-        font-style: normal;
-        letter-spacing: 0.56px;
-        line-height: normal;
+  font-style: normal;
+  letter-spacing: 0.56px;
+  line-height: normal;
 }
 
 .candidate__header {
   display: flex;
-    align-items: center;
-    margin-top: 120px;
-    margin-left: 60px;
+  align-items: center;
+  margin-top: 120px;
+  margin-left: 60px;
 }
 
-.arrow > img {
-cursor: pointer;
+.arrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.arrow > span {
+.arrow__img > img {
+  cursor: pointer;
+}
+
+.arrow__sp > span {
   margin-left: 40px;
   margin-right: 120px;
   font-family: 'GT Eesti Pro Display';
@@ -116,33 +121,33 @@ cursor: pointer;
   letter-spacing: normal;
   line-height: 36px;
   text-align: left;
-  }
+}
 
-  .candidate__main {
-    margin-top: 60px;
-  }
+.candidate__main {
+  margin-top: 60px;
+}
 
-  .candidate__main__description {
-    padding-left: 16px;
-  }
+.candidate__main__description {
+  padding-left: 16px;
+}
 
-  .candidate__main__description > h2 {
-    font-family: 'GT Eesti Pro Display';
-    font-size: 2.8em;
-    font-weight: 700;
-    font-style: normal;
-    letter-spacing: normal;
-    line-height: 36px;
-    text-align: left;
-  }
+.candidate__main__description > h2 {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 2.8em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 36px;
+  text-align: left;
+}
 
-  .candidate__main__description > p {
-    font-family: 'GT Eesti Pro Display';
-    font-size: 1.2em;
-    font-weight: 300;
-    font-style: normal;
-    letter-spacing: normal;
-    line-height: 36px;
-    text-align: left;
-    margin: 20px 0px;
-  }
+.candidate__main__description > p {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.2em;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 36px;
+  text-align: left;
+  margin: 20px 0px;
+}

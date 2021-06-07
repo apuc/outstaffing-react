@@ -1,39 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import style from './Outstaffing.module.css';
-import front from '../../images/front_end.png';
-import back from '../../images/back_end.png';
-import design from '../../images/design.png';
 import OutstaffingBlock from './OutstaffingBlock';
 import TagSelect from '../Select/TagSelect';
 
-const Outstaffing = ({ onhandleTabBar }) => {
-  const [data, setData] = useState([]);
+const Outstaffing = ({ onhandleTabBar, selected, tabs }) => {
   const [selectedItems, setSelectedItems] = useState([]);
-
-  useEffect(() => {
-    const tags = [
-      {
-        name: 'frontend',
-        img: front,
-        header: '# Популярный стек',
-        tags: ['Vue.js', 'ReactJS', 'Angular', 'JavaScript', 'Html', 'Css', 'MobX'],
-      },
-      {
-        name: 'backend',
-        img: back,
-        header: '# Популярный стек',
-        tags: ['Node.js', 'Express', 'Php', 'Ruby on Rails', 'Python', 'Wordpress', ' Java'],
-      },
-      {
-        name: 'design',
-        img: design,
-        header: '# Популярный стек',
-        tags: ['Figma', 'Avocode', 'PhotoShop', 'Xara', 'Pinegrow', 'Macaw', 'KompoZer'],
-      },
-    ];
-
-    setData(tags);
-  }, []);
 
   const handleBlockClick = (item) => {
     if (!selectedItems.find((el) => item === el.value)) {
@@ -67,32 +38,35 @@ const Outstaffing = ({ onhandleTabBar }) => {
           </div>
 
           <div className="row">
-            <div className="col-4">
+            <div className="col-12 col-xl-4">
               <OutstaffingBlock
-                data={data.find((item) => item.name === 'frontend')}
+                data={tabs.find((item) => item.name === 'Frontend')}
                 onClick={(item) => handleBlockClick(item)}
-                onClickhandleTabBar={(name) => onhandleTabBar(name)}
+                onTabBarClick={(name) => onhandleTabBar(name)}
+                selected={selected === 'Frontend'}
               />
             </div>
-            <div className="col-4">
+            <div className="col-12 col-xl-4">
               <OutstaffingBlock
-                data={data.find((item) => item.name === 'backend')}
+                data={tabs.find((item) => item.name === 'Backend')}
                 onClick={(item) => handleBlockClick(item)}
-                onClickhandleTabBar={(name) => onhandleTabBar(name)}
+                onTabBarClick={(name) => onhandleTabBar(name)}
+                selected={selected === 'Backend'}
               />
             </div>
-            <div className="col-4">
+            <div className="col-12 col-xl-4">
               <OutstaffingBlock
-                data={data.find((item) => item.name === 'design')}
+                data={tabs.find((item) => item.name === 'Design')}
                 onClick={(item) => handleBlockClick(item)}
-                onClickhandleTabBar={(name) => onhandleTabBar(name)}
+                onTabBarClick={(name) => onhandleTabBar(name)}
+                selected={selected === 'Design'}
               />
             </div>
           </div>
         </div>
       </section>
       <TagSelect
-        options={data}
+        options={tabs}
         selectedItems={selectedItems}
         tagSubmit={handleSubmit}
         setSelectedItems={setSelectedItems}

@@ -4,7 +4,8 @@
   align-items: center;
   border: 2px solid whitesmoke;
   border-bottom: none !important;
-
+  position: sticky;
+  top: 80px;
 }
 
 .candidateSidebar__info {
@@ -51,7 +52,6 @@
   text-align: center;
   margin-top: 20px;
   margin-bottom: 120px;
-  
 }
 
 .candidateSidebar__info__l {
@@ -68,10 +68,9 @@
   display: flex;
   align-items: center;
   margin-top: 20px;
-
 }
 
- .arrow__left {
+.arrow__left {
   position: relative;
   width: 30px;
   height: 30px;

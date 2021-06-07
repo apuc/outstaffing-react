@@ -1,37 +1,47 @@
 .search {
   margin-top: 73px;
 }
-  .search__title {
-    font-family: 'GT Eesti Pro Display';
-    font-size: 2.4em;
-    font-weight: 500;
-    font-style: normal;
-    letter-spacing: normal;
-    line-height: normal;
-    text-align: center;
-    margin-bottom: 40px;
-  }
+.search__title {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 2.4em;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  text-align: center;
+  margin-bottom: 40px;
+}
 
+.search__box {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 575.98px) {
   .search__box {
-    display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
   }
+}
 
+.search__box > button {
+  color: white;
+  width: 131px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Muller';
+  font-size: 1.6em;
+  letter-spacing: 0.8px;
+  text-align: center;
+  background-color: #73c141;
+}
+
+@media (max-width: 575.98px) {
   .search__box > button {
-    color: white;
-    width: 131px;
-    height: 40px;
-    border-radius: 10px;
-    border: none;
-    font-family: 'Muller Extra Bold';
-    font-size: 1.8em;
-    font-style: normal;
-    letter-spacing: normal;
-    text-align: center;
-    background-color: #73c141;
-    font-weight: 600;
+    margin-top: 40px;
   }
-
+}
 
 .select {
   width: 85%;
