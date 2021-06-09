@@ -64,6 +64,12 @@
   }
 }
 
+@media (max-width: 346px) {
+  .description__title {
+    font-size: 2.6em;
+  }
+}
+
 .description__text {
   font-family: 'GT Eesti Pro Display';
   font-size: 1.7em;
