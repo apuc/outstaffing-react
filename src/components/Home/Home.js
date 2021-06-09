@@ -9,6 +9,7 @@ export const candidatesList = [
   {
     id: 1,
     name: 'Frontend',
+    header: 'Фронтенд',
     img: front,
     tags: 'JavaScript · Html · Css · Vue.js · ReactJS · Angular · MobX',
   },
@@ -16,12 +17,14 @@ export const candidatesList = [
   {
     id: 2,
     name: 'Backend',
+    header: 'Бэкенд',
     img: back,
     tags: 'Node.js · Express · Php · Ruby on Rails · Python · Wordpress · Java',
   },
   {
     id: 3,
     name: 'Design',
+    header: 'Дизайн',
     img: design,
     tags: 'Figma · Avocode · PhotoShop · Xara · Pinegrow · Macaw · KompoZer',
   },
@@ -56,6 +59,7 @@ const Home = () => {
   const [candidates, setCandidates] = useState([]);
 
   const [selectedTab, setSelectedTab] = useState('');
+  // const [active, setActive] = useState(false);
 
   useEffect(() => {
     setTabs(tabsList);
@@ -64,6 +68,11 @@ const Home = () => {
 
   const handleBlockClick = (name) => {
     setSelectedTab(name);
+    // const screenWidth = window.screen.width;
+
+    // if (screenWidth < 576) {
+    //   setActive(true);
+    // }
   };
 
   return (

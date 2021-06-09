@@ -20,7 +20,22 @@ const Candidate = () => {
 
   const currentCandidate = candidatesList.find((el) => el.id === Number(candidateId));
 
-  const { name, img } = currentCandidate;
+  const { name, img, header } = currentCandidate;
+
+  console.log(currentCandidate);
+
+  let classes;
+
+  console.log(classes);
+
+  if (name === 'Backend') {
+    classes = style.back;
+    console.log(classes);
+  } else if (name === 'Design') {
+    classes = style.des;
+  } else if (name === 'Frontend') {
+    classes = style.front;
+  }
 
   return (
     <section className={style.candidate}>
@@ -47,19 +62,20 @@ const Candidate = () => {
                 </div>
               </div>
 
-              <div className="icon">
-                <img src={img} alt="" />
+              <div className={style.icon}>
+                <h3>{header}</h3>
+                <img className={classes} src={img} alt="" />
               </div>
             </div>
           </div>
         </div>
         <div className={style.candidate__main}>
           <div className="row">
-            <div className="col-4">
+            <div className="col-12 col-xl-4">
               <Sidebar />
             </div>
 
-            <div className="col-8">
+            <div className="col-12 col-xl-8">
               <div className={style.candidate__main__description}>
                 <h2>{name} разработчик, Middle</h2>
                 <img src={rectangle} alt="" />

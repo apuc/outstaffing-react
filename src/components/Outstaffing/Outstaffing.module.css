@@ -49,7 +49,6 @@
   min-width: 260px;
   min-height: 120px;
   cursor: pointer;
-  /* border: 2px solid #cdeaba; */
   background-color: #f9f9f9;
   border-radius: 20px;
   position: relative;
@@ -100,6 +99,39 @@
 .des {
   top: 24%;
   left: -9%;
+}
+
+@media (max-width: 575.98px) {
+  .mobile__none {
+    display: none;
+  }
+}
+
+.mobile__block {
+  display: block;
+  animation: fadeInFromNone 0.5s ease-out;
+}
+
+@media (max-width: 575.98px) {
+  @keyframes fadeInFromNone {
+    0% {
+      display: none;
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+
+    10% {
+      display: block;
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+
+    100% {
+      display: block;
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
 }
 
 .outstaffing__box > div > ul {

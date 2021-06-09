@@ -3,14 +3,14 @@ import style from './Outstaffing.module.css';
 
 const OutstaffingBlock = ({ data = {}, onClick, onTabBarClick, selected }) => {
   const { img, text, tags, name, header } = data;
-  let clas;
+  let classes;
 
   if (name === 'Backend') {
-    clas = style.back;
+    classes = style.back;
   } else if (name === 'Design') {
-    clas = style.des;
+    classes = style.des;
   } else if (name === 'Frontend') {
-    clas = style.front;
+    classes = style.front;
   }
 
   return (
@@ -20,9 +20,9 @@ const OutstaffingBlock = ({ data = {}, onClick, onTabBarClick, selected }) => {
         onClick={() => onTabBarClick(name)}
       >
         <h3>{header}</h3>
-        <img className={clas} src={img} alt="img" />
+        <img className={classes} src={img} alt="img" />
       </div>
-      <div>
+      <div className={`${selected ? style.mobile__block : style.mobile__none}`}>
         <p>{text}</p>
         {tags && (
           <ul className={style.items}>
