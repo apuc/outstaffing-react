@@ -37,6 +37,12 @@
   background-color: #73c141;
 }
 
+.search__box > button:hover {
+  background: rgba(0, 0, 0, 0);
+  color: #73c141;
+  box-shadow: inset 0 0 0 3px #73c141;
+}
+
 @media (max-width: 575.98px) {
   .search__box > button {
     margin-top: 40px;

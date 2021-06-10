@@ -23,7 +23,7 @@ const OutstaffingBlock = ({ data = {}, onClick, onTabBarClick, selected }) => {
         <img className={classes} src={img} alt="img" />
       </div>
       <div className={`${selected ? style.mobile__block : style.mobile__none}`}>
-        <p>{text}</p>
+        <p className={style.outstaffing__box__text}>{text}</p>
         {tags && (
           <ul className={style.items}>
             {tags.map((item) => (

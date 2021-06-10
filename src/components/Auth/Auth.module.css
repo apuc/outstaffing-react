@@ -1,26 +1,214 @@
 .auth {
-  display: grid;
-  place-items: center;
-  height: 100vh;
-  background-color: #f2f2f2;
-
+  height: 1600px;
 }
 
-.auth__container {
+.auth__box {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-bottom: 154px;
+}
+
+.auth__title {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 5.3em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 77.81px;
+  text-align: left;
+  margin-top: 254px;
+}
+
+.auth__title > span {
+  font-family: 'GT Eesti Pro Display';
+  color: #52b709;
+  font-style: normal;
+  letter-spacing: 0.56px;
+  line-height: normal;
+}
+
+.auth__partners {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 65px;
+}
+
+.auth__partners > img {
+  width: 6px;
+  height: 6px;
+  margin-left: 120px;
+}
+
+.auth__partners > span {
+  color: #18586e;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.6em;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 16.81px;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.auth__form {
   display: flex;
   flex-direction: column;
 }
 
-.auth__container > img {
-  object-fit: contain;
-  height: 200px;
+.auth__form > label {
+  color: #48802d;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 2.4em;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 16.81px;
+  text-align: left;
+  margin-bottom: 20px;
+  margin-left: 45px;
 }
 
-.auth__btn {
-  width: 180px;
-  height: 40px;
-  border: 2px solid gray;
-  border-radius: 100px;
-  font-size: 1.6em;
-  margin: 0 auto;
+.auth__form > input {
+  width: 366px;
+  height: 75px;
+  box-shadow: 0 0 59px rgba(44, 44, 44, 0.05);
+  border-radius: 37px;
+  border: 1px solid #c4c4c4;
+  background-color: #ffffff;
+  margin-bottom: 60px;
+  color: #a6a6a6;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 2.2em;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  text-align: left;
+  padding-left: 45px;
+  outline: none;
+}
+
+.form__btn {
+  width: 290px;
+  height: 75px;
+  box-shadow: 6px 5px 20px rgba(82, 151, 34, 0.21);
+  border-radius: 38px;
+  background-color: #ffffff;
+  background-image: linear-gradient(to top, #6aaf5c 0%, #52b709 100%),
+    linear-gradient(
+      36deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.16) 47%,
+      rgba(255, 255, 255, 0.17) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  border: none;
+  color: #ffffff;
+  font-family: 'Muller';
+  font-size: 2.2em;
+  letter-spacing: normal;
+  line-height: 71.88px;
+  text-align: center;
+}
+
+.auth__arrow {
+  margin-top: 360px;
+}
+
+.auth__info {
+  background-color: #e1fccf;
+  margin-top: 140px;
+  width: 310px;
+  padding-top: 30px;
+  position: relative;
+  padding-bottom: 160px;
+}
+
+.auth__info__box {
+  display: flex;
+  align-items: center;
+}
+
+.auth__info__box > img {
+  width: 165px;
+  height: 165px;
+  margin-left: -84px;
+  margin-right: 30px;
+}
+
+.auth__info__box > h3 {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 2em;
+  font-weight: 100;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 36px;
+  text-align: left;
+  position: absolute;
+  right: -14px;
+}
+
+.auth__info__container {
+  display: flex;
+  position: relative;
+}
+
+.auth__info__img {
+  display: flex;
+  flex-direction: column;
+  margin-left: 55px;
+  margin-top: 28px;
+}
+
+.auth__info__img > div > img {
+  margin-bottom: 40px;
+}
+
+.specialists {
+  margin-left: 26px;
+}
+
+.info__list {
+  list-style: none;
+  margin-top: 110px;
+  position: absolute;
+  right: -116px;
+}
+
+.info__list__item {
+  color: #1f1f1f;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 4em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 56.95px;
+  text-align: left;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+.img__text {
+  position: absolute;
+  right: -68px;
+  bottom: -84px;
+}
+
+.auth__footer__left > img {
+  margin-right: 38px;
+}
+
+.auth__footer__left > span {
+  color: #18586e;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 16.81px;
+  text-align: left;
 }

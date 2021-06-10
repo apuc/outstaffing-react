@@ -60,6 +60,12 @@
   margin-bottom: 120px;
 }
 
+.candidateSidebar__info__btn:hover {
+  background: rgba(0, 0, 0, 0);
+  color: #73c141;
+  box-shadow: inset 0 0 0 3px #73c141;
+}
+
 .candidateSidebar__info__l {
   font-family: 'GT Eesti Pro Display';
   font-size: 1.8em;

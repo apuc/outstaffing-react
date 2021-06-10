@@ -87,6 +87,12 @@
   margin-bottom: 0;
 }
 
+@media (max-width: 575.98px) {
+  .outstaffing__box__text {
+    display: none;
+  }
+}
+
 .front {
   left: -5%;
 }

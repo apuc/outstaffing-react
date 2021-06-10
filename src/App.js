@@ -8,7 +8,7 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const CandidatePage = lazy(() => import('./pages/CandidatePage'));
 
 const App = () => {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
     const auth = localStorage.getItem('auth');
