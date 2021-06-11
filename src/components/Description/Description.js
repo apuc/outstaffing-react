@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Description.module.css';
-import photo from '../../images/medium_male.png';
+import dog from '../../images/dog.jpg';
 import rectangle from '../../images/rectangle_secondPage.png';
 import arrowLeft from '../../images/arrow_left.png';
 import arrowRight from '../../images/arrow_right.png';
@@ -14,7 +14,7 @@ const Description = ({ candidatesListArr }) => {
           {candidatesListArr.map((el) => (
             <div className="row" key={el.id}>
               <div className="col-2">
-                <img className={style.description__img} src={photo} alt="" />
+                <img className={style.description__img} src={dog} alt="" />
               </div>
               <div className="col-12 col-xl-6">
                 <h3 className={style.description__title}>{el.name} разработчик, Middle</h3>

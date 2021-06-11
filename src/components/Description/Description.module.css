@@ -13,6 +13,9 @@
 .description__img {
   margin-left: 40px;
   margin-top: 16px;
+  width: 118px;
+  height: 118px;
+  border-radius: 100px;
 }
 
 @media (max-width: 575.98px) {

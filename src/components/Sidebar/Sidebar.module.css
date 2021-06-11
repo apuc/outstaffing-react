@@ -22,6 +22,7 @@
 .candidateSidebar__info > img {
   width: 180px;
   height: 180px;
+  border-radius: 100px;
 }
 
 .candidateSidebar__info__e {
