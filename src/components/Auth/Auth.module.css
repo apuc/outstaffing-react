@@ -198,11 +198,16 @@
   bottom: -84px;
 }
 
-.auth__footer__left > img {
-  margin-right: 38px;
+.auth__footer__left {
+  display: flex;
+  align-items: center;
 }
 
-.auth__footer__left > span {
+.footer__left__sp {
+  padding: 0 180px 0 34px;
+}
+
+.auth__footer__left > div > span {
   color: #18586e;
   font-family: 'GT Eesti Pro Display';
   font-size: 16px;
@@ -211,4 +216,39 @@
   letter-spacing: normal;
   line-height: 16.81px;
   text-align: left;
+}
+
+.auth__footer__icon {
+  text-align: end;
+}
+
+.auth__footer__icon > img {
+  margin-left: 20px;
+}
+
+.auth__footer__right {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.phone {
+  color: #003b65;
+  font-family: 'Cera Pro';
+  font-size: 21px;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 25px;
+  text-align: left;
+}
+
+.workingHours {
+  color: #003b65;
+  font-family: 'Cera Pro';
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
 }

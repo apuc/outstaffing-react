@@ -7,6 +7,8 @@ import cross from '../../images/cross.png';
 import specialists from '../../images/specialists.png';
 import text from '../../images/Body_Text.png';
 import align from '../../images/align-left.png';
+import phone from '../../images/phone.png';
+import telegram from '../../images/telegram.png';
 
 const Auth = ({ setAuthed }) => {
   return (
@@ -72,19 +74,31 @@ const Auth = ({ setAuthed }) => {
         </div>
 
         <div className="row">
-          <div className="col-xl-8">
+          <div className="col-xl-7">
             <div className={style.auth__footer__left}>
-              <img src={align} alt="" />
-              <span>
-                © Адвего — биржа контента №1. Копирайтинг, рерайтинг, переводы, работа на дому: поставщик уникального
-                контента. 2021{' '}
-              </span>
+              <div className={style.footer__left__img}>
+                <img src={align} alt="" />
+              </div>
+              <div className={style.footer__left__sp}>
+                <span>
+                  © Адвего — биржа контента №1. Копирайтинг, рерайтинг, переводы, работа на дому: поставщик уникального
+                  контента. 2021{' '}
+                </span>
+              </div>
             </div>
           </div>
 
-          <div className="col-xl-4">
+          <div className="col-xl-2">
+            <div className={style.auth__footer__icon}>
+              <img src={phone} alt="" />
+              <img src={telegram} alt="" />
+            </div>
+          </div>
+
+          <div className="col-xl-3">
             <div className={style.auth__footer__right}>
-              <h2>Hello</h2>
+              <p className={style.phone}>+7 495 156 78 98</p>
+              <p className={style.workingHours}>Будни с 9:00 до 21:00</p>
             </div>
           </div>
         </div>
@@ -94,17 +108,3 @@ const Auth = ({ setAuthed }) => {
 };
 
 export default Auth;
-
-// {
-//   /* <div className={style.auth__container}>
-// <img src="https://www.google.com/gmail/about/static/images/logo-gmail.png?cache=1adba63" alt="" />
-// <button
-//   className={style.auth__btn}
-//   onClick={() => {
-//     setAuthed(true);
-//   }}
-// >
-//   Log in
-// </button>
-// </div> */
-// }
