@@ -31,7 +31,7 @@ const Auth = ({ setAuthed }) => {
                 <label htmlFor="password">Пароль:</label>
                 <input id="password" type="password" placeholder="Пароль" />
 
-                <button className={style.form__btn} type="submit">
+                <button className={style.form__btn} type="submit" onClick={() => setAuthed(true)}>
                   Войти
                 </button>
               </form>
