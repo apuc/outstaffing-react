@@ -63,6 +63,10 @@ const Home = () => {
   useEffect(() => {
     setTabs(tabsList);
     setCandidates(candidatesList);
+
+    fetch('https://guild.craft-group.xyz/api/skills/skills-on-main-page')
+      .then((res) => res.json())
+      .then((resJson) => console.log(resJson));
   }, []);
 
   const handleBlockClick = (name) => {
