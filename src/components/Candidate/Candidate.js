@@ -16,17 +16,12 @@ const Candidate = () => {
   const history = useHistory();
 
   const { id: candidateId } = useParams();
-  console.log('candidateId', candidateId);
 
   const currentCandidate = candidatesList.find((el) => el.id === Number(candidateId));
 
   const { name, img, header } = currentCandidate;
 
-  console.log(currentCandidate);
-
   let classes;
-
-  console.log(classes);
 
   if (name === 'Backend') {
     classes = style.back;
@@ -95,10 +90,6 @@ const Candidate = () => {
           </div>
         </div>
       </div>
-
-      {/* <h1>
-        Candidate name: <span>{currentCandidate.name}</span>
-      </h1> */}
     </section>
   );
 };

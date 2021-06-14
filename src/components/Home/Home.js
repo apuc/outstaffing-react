@@ -59,7 +59,6 @@ const Home = () => {
   const [candidates, setCandidates] = useState([]);
 
   const [selectedTab, setSelectedTab] = useState('');
-  // const [active, setActive] = useState(false);
 
   useEffect(() => {
     setTabs(tabsList);
@@ -68,11 +67,6 @@ const Home = () => {
 
   const handleBlockClick = (name) => {
     setSelectedTab(name);
-    // const screenWidth = window.screen.width;
-
-    // if (screenWidth < 576) {
-    //   setActive(true);
-    // }
   };
 
   return (
