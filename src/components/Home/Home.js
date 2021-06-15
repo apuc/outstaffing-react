@@ -36,27 +36,25 @@ const tabsList = [
     img: front,
     text: '# Популярный стек',
     header: 'Фронтенд',
-    tags: ['Vue.js', 'ReactJS', 'Angular', 'JavaScript', 'Html', 'Css', 'MobX'],
   },
   {
     name: 'Backend',
     img: back,
     text: '# Популярный стек',
     header: 'Бэкенд',
-    tags: ['Node.js', 'Express', 'Php', 'Ruby on Rails', 'Python', 'Wordpress', ' Java'],
   },
   {
     name: 'Design',
     img: design,
     text: '# Популярный стек',
     header: 'Дизайн',
-    tags: ['Figma', 'Avocode', 'PhotoShop', 'Xara', 'Pinegrow', 'Macaw', 'KompoZer'],
   },
 ];
 
 const Home = () => {
   const [tabs, setTabs] = useState([]);
   const [candidates, setCandidates] = useState([]);
+  const [tags, setTags] = useState([]);
 
   const [selectedTab, setSelectedTab] = useState('');
 
@@ -65,8 +63,21 @@ const Home = () => {
     setCandidates(candidatesList);
 
     fetch('https://guild.craft-group.xyz/api/skills/skills-on-main-page')
-      .then((res) => res.json())
-      .then((resJson) => console.log(resJson));
+      .then((response) => response.json())
+      .then((res) => {
+        const keys = Object.keys(res);
+        const values = Object.values(res);
+
+        console.log(values);
+
+        const tempTags = values.map((item, index) =>
+          item.map((tag) => {
+            return { id: tag.id, value: tag.tags, name: keys[index] };
+          })
+        );
+
+        setTags(tempTags);
+      });
   }, []);
 
   const handleBlockClick = (name) => {
@@ -75,7 +86,7 @@ const Home = () => {
 
   return (
     <>
-      <Outstaffing onhandleTabBar={(name) => handleBlockClick(name)} selected={selectedTab} tabs={tabs} />
+      <Outstaffing onhandleTabBar={(name) => handleBlockClick(name)} selected={selectedTab} tabs={tabs} tags={tags} />
       <Description
         candidatesListArr={selectedTab ? candidates.filter((item) => item.name === selectedTab) : candidates}
       />

@@ -18,11 +18,9 @@ const TagSelect = ({ selectedItems, tagSubmit, options, setSelectedItems }) => {
                   name="tags"
                   className={style.select}
                   classNamePrefix={style.select}
-                  options={options
-                    .flatMap((el) => el.tags)
-                    .map((item) => {
-                      return { value: item, label: item };
-                    })}
+                  options={options.flat().map((item) => {
+                    return { value: item.value, label: item.value };
+                  })}
                 />
                 <button onClick={tagSubmit} type="submit">
                   Поиск

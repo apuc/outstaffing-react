@@ -1,17 +1,20 @@
 import React from 'react';
 import style from './Outstaffing.module.css';
 
-const OutstaffingBlock = ({ data = {}, onClick, onTabBarClick, selected }) => {
-  const { img, text, tags, name, header } = data;
+const OutstaffingBlock = ({ dataTags = [], data = {}, onClick, onTabBarClick, selected }) => {
+  const { header, img, text, name } = data;
+
   let classes;
 
-  if (name === 'Backend') {
-    classes = style.back;
-  } else if (name === 'Design') {
-    classes = style.des;
-  } else if (name === 'Frontend') {
-    classes = style.front;
-  }
+  dataTags.forEach((el) => {
+    if (el.name === 'skills_back') {
+      classes = style.back;
+    } else if (el.name === 'skills_design') {
+      classes = style.des;
+    } else if (el.name === 'skills_front') {
+      classes = style.front;
+    }
+  });
 
   return (
     <div className={style.outstaffing__box}>
@@ -24,11 +27,11 @@ const OutstaffingBlock = ({ data = {}, onClick, onTabBarClick, selected }) => {
       </div>
       <div className={`${selected ? style.mobile__block : style.mobile__none}`}>
         <p className={style.outstaffing__box__text}>{text}</p>
-        {tags && (
+        {dataTags && (
           <ul className={style.items}>
-            {tags.map((item) => (
-              <li key={item} onClick={() => onClick(item)}>
-                {item}
+            {dataTags.map((item) => (
+              <li key={item.id} onClick={() => onClick(item.value)}>
+                {item.value}
               </li>
             ))}
           </ul>

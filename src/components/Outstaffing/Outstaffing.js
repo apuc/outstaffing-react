@@ -3,16 +3,13 @@ import style from './Outstaffing.module.css';
 import OutstaffingBlock from './OutstaffingBlock';
 import TagSelect from '../Select/TagSelect';
 
-const Outstaffing = ({ onhandleTabBar, selected, tabs }) => {
+const Outstaffing = ({ onhandleTabBar, selected, tabs, tags }) => {
   const [selectedItems, setSelectedItems] = useState([]);
 
   const handleBlockClick = (item) => {
     if (!selectedItems.find((el) => item === el.value)) {
       setSelectedItems([...selectedItems, { value: item, label: item }]);
     }
-    // else {
-    // setSelectedItems(selectedItems.filter((el) => item !== el.value));
-    // }
   };
 
   const handleSubmit = () => {
@@ -41,6 +38,7 @@ const Outstaffing = ({ onhandleTabBar, selected, tabs }) => {
             <div className="col-12 col-xl-4">
               <OutstaffingBlock
                 data={tabs.find((item) => item.name === 'Frontend')}
+                dataTags={tags.flat().filter((tag) => tag.name === 'skills_front')}
                 onClick={(item) => handleBlockClick(item)}
                 onTabBarClick={(name) => onhandleTabBar(name)}
                 selected={selected === 'Frontend'}
@@ -49,6 +47,7 @@ const Outstaffing = ({ onhandleTabBar, selected, tabs }) => {
             <div className="col-12 col-xl-4">
               <OutstaffingBlock
                 data={tabs.find((item) => item.name === 'Backend')}
+                dataTags={tags.flat().filter((tag) => tag.name === 'skills_back')}
                 onClick={(item) => handleBlockClick(item)}
                 onTabBarClick={(name) => onhandleTabBar(name)}
                 selected={selected === 'Backend'}
@@ -57,6 +56,7 @@ const Outstaffing = ({ onhandleTabBar, selected, tabs }) => {
             <div className="col-12 col-xl-4">
               <OutstaffingBlock
                 data={tabs.find((item) => item.name === 'Design')}
+                dataTags={tags.flat().filter((tag) => tag.name === 'skills_design')}
                 onClick={(item) => handleBlockClick(item)}
                 onTabBarClick={(name) => onhandleTabBar(name)}
                 selected={selected === 'Design'}
@@ -66,7 +66,7 @@ const Outstaffing = ({ onhandleTabBar, selected, tabs }) => {
         </div>
       </section>
       <TagSelect
-        options={tabs}
+        options={tags}
         selectedItems={selectedItems}
         tagSubmit={handleSubmit}
         setSelectedItems={setSelectedItems}
