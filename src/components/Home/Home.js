@@ -68,8 +68,6 @@ const Home = () => {
         const keys = Object.keys(res);
         const values = Object.values(res);
 
-        console.log(values);
-
         const tempTags = values.map((item, index) =>
           item.map((tag) => {
             return { id: tag.id, value: tag.tags, name: keys[index] };

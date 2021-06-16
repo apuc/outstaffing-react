@@ -1,21 +1,16 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './fonts/stylesheet.css';
 
-const AuthPage = lazy(() => import('./pages/AuthPage'));
+// const AuthPageForDevelopers = lazy(() => import('./pages/AuthPageForDevelopers'));
+// const AuthPageForPartners = lazy(() => import('./pages/AuthPageForPartners'));
 const HomePage = lazy(() => import('./pages/HomePage'));
 const CandidatePage = lazy(() => import('./pages/CandidatePage'));
+const CalendarPage = lazy(() => import('./pages/CalendarPage'));
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
-
-  useEffect(() => {
-    const auth = localStorage.getItem('auth');
-    if (auth === 'true') {
-      setIsAuth(true);
-    }
-  }, []);
 
   return (
     <Router>
@@ -34,7 +29,9 @@ const App = () => {
           </Switch>
         ) : (
           <Route path="/" exact>
-            <AuthPage setAuth={setIsAuth} />
+            <CalendarPage />
+            {/* <AuthPageForDevelopers setAuth={setIsAuth} /> */}
+            {/* <AuthPageForPartners setAuth={setIsAuth} /> */}
           </Route>
         )}
       </Suspense>

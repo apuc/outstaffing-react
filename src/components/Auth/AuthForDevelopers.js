@@ -1,10 +1,10 @@
 import React from 'react';
-import style from './Auth.module.css';
+import style from './AuthForDevelopers.module.css';
 import ellipse from '../../images/ellipse.png';
 import arrow from '../../images/arrow__login_page.png';
 import authImg from '../../images/auth_img.png';
 import cross from '../../images/cross.png';
-import specialists from '../../images/specialists.png';
+// import specialists from '../../images/specialists.png';
 import text from '../../images/Body_Text.png';
 import align from '../../images/align-left.png';
 import phone from '../../images/phone.png';
@@ -12,24 +12,24 @@ import telegram from '../../images/telegram.png';
 import vector from '../../images/Vector_Smart_Object.png';
 import vectorBlack from '../../images/Vector_Smart_Object_black.png';
 
-const Auth = ({ setAuthed }) => {
+const AuthForDevelopers = ({ setAuthed }) => {
   return (
-    <section className={style.auth}>
-      <div className={style.auth__background}>
+    <section className={style.developers}>
+      <div className={style.developers__background}>
         <img className={style.vector} src={vector} alt="" />
         <img className={style.vectorBlack} src={vectorBlack} alt="" />
         <div className="container">
           <div className="row">
             <div className="col-12 col-xl-6">
-              <div className={style.auth__box}>
-                <h2 className={style.auth__title}>
+              <div className={style.developers__box}>
+                <h2 className={style.developers__title}>
                   Войти в <span>систему</span>
                 </h2>
-                <div className={style.auth__partners}>
+                <div className={style.developers__partners}>
                   <img src={ellipse} alt="" />
-                  <span>Для партнеров</span>
+                  <span>Для разработчиков</span>
                 </div>
-                <form className={style.auth__form}>
+                <form className={style.developers__form}>
                   <label htmlFor="login">Ваш логин:</label>
                   <input id="login" type="text" placeholder="Логин" />
 
@@ -43,11 +43,11 @@ const Auth = ({ setAuthed }) => {
               </div>
             </div>
             <div className="col-xl-2">
-              <img className={style.auth__arrow} src={arrow} alt="" />
+              <img className={style.developers__arrow} src={arrow} alt="" />
             </div>
             <div className="col-12 col-xl-4">
-              <div className={style.auth__info}>
-                <div className={style.auth__info__box}>
+              <div className={style.developers__info}>
+                <div className={style.developers__info__box}>
                   <img src={authImg} alt="" />
                   <h3>
                     Управление
@@ -55,22 +55,20 @@ const Auth = ({ setAuthed }) => {
                   </h3>
                 </div>
 
-                <div className={style.auth__info__container}>
-                  <div className={style.auth__info__img}>
+                <div className={style.developers__info__container}>
+                  <div className={style.developers__info__img}>
                     <div>
                       <img className="cross" src={cross} alt="" />
                     </div>
                     <div>
-                      <img className={style.specialists} src={specialists} alt="" />
+                      {/* <img className={style.specialists} src={specialists} alt="" /> */}
+                      <p className={style.specialists}>20 Специалистов</p>
                     </div>
                   </div>
 
                   <ul className={style.info__list}>
                     <li className={style.info__list__item}>Рабочее пространство</li>
-                    <li className={style.info__list__item}>Управления задачами</li>
-                    {/* <li className={style.info__list__item}>Python</li>
-                    <li className={style.info__list__item}>Vue.js</li>
-                    <li className={style.info__list__item}>React. JS</li> */}
+                    <li className={style.info__list__item}>Управление задачами</li>
                   </ul>
                 </div>
 
@@ -81,7 +79,7 @@ const Auth = ({ setAuthed }) => {
 
           <div className="row">
             <div className="col-12 col-xl-7">
-              <div className={style.auth__footer__left}>
+              <div className={style.developers__footer__left}>
                 <div className={style.footer__left__img}>
                   <img src={align} alt="" />
                 </div>
@@ -95,14 +93,14 @@ const Auth = ({ setAuthed }) => {
             </div>
 
             <div className="col-4 col-xl-2">
-              <div className={style.auth__footer__icon}>
+              <div className={style.developers__footer__icon}>
                 <img src={phone} alt="" />
                 <img src={telegram} alt="" />
               </div>
             </div>
 
             <div className="col-8 col-xl-3">
-              <div className={style.auth__footer__right}>
+              <div className={style.developers__footer__right}>
                 <p className={style.phone}>+7 495 156 78 98</p>
                 <p className={style.workingHours}>Будни с 9:00 до 21:00</p>
               </div>
@@ -114,4 +112,4 @@ const Auth = ({ setAuthed }) => {
   );
 };
 
-export default Auth;
+export default AuthForDevelopers;
