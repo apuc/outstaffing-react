@@ -1,6 +1,8 @@
 import React from 'react';
 import style from './Calendar.module.css';
 import calendarMale from '../../images/medium_male.png';
+import rectangle from '../../images/rectangle_secondPage.png';
+import CalendarComponent from './CalendarComponent';
 
 const Calendar = () => {
   return (
@@ -8,15 +10,31 @@ const Calendar = () => {
       <div className="container">
         <div className="row">
           <h2 className={style.calendar__title}>
-            Добрый день, <span>Александр!</span>
+            Добрый день, <span>Александр !</span>
           </h2>
-          <div className="col-xl-12">
+          <div className="col-xl-12 d-flex justify-content-between align-items-center">
             <div className={style.calendarHeader__info}>
               <img className={style.calendarHeader__info__img} src={calendarMale} alt="img" />
-              <h3 className={style.calendarHeader__info__name}>header</h3>
+              <h3 className={style.calendarHeader__info__name}>
+                Александр <br /> Комов
+              </h3>
             </div>
-            <div className={style.calendarHeader__title}></div>
-            <div className={style.calendarHeader__btn}></div>
+            <div className={style.calendarHeader__title}>
+              <h3 className={style.calendarHeader__title__text}>Frontend разработчик, Middle</h3>
+              <img className={style.calendarHeader__title__img} src={rectangle} alt="img" />
+            </div>
+            <div className={style.calendarHeader__btn}>
+              <button>Заполнить отчет за день</button>
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-12">
+            <CalendarComponent />
+            <p className={style.calendarFooter__text}>
+              Июнь : <span> 60 часов </span>
+            </p>
           </div>
         </div>
       </div>
