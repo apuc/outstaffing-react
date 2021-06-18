@@ -6,11 +6,9 @@ export default function calendarHelper(value) {
 
   const calendar = [];
 
-  console.log('calendar', calendar);
-
   while (day.isBefore(endDay, 'day')) {
     calendar.push(
-      Array(7)
+      Array(1)
         .fill(0)
         .map(() => day.add(1, 'day').clone())
     );

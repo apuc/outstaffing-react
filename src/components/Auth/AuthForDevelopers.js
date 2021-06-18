@@ -4,7 +4,6 @@ import ellipse from '../../images/ellipse.png';
 import arrow from '../../images/arrow__login_page.png';
 import authImg from '../../images/auth_img.png';
 import cross from '../../images/cross.png';
-// import specialists from '../../images/specialists.png';
 import text from '../../images/Body_Text.png';
 import align from '../../images/align-left.png';
 import phone from '../../images/phone.png';

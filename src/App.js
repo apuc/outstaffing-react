@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './fonts/stylesheet.css';
 
-// const AuthPageForDevelopers = lazy(() => import('./pages/AuthPageForDevelopers'));
+const AuthPageForDevelopers = lazy(() => import('./pages/AuthPageForDevelopers'));
 // const AuthPageForPartners = lazy(() => import('./pages/AuthPageForPartners'));
 const HomePage = lazy(() => import('./pages/HomePage'));
 const CandidatePage = lazy(() => import('./pages/CandidatePage'));
@@ -23,14 +23,16 @@ const App = () => {
             <Route path="/candidate/:id">
               <CandidatePage />
             </Route>
+            <Route path="/calendar">
+              <CalendarPage />
+            </Route>
             <Route>
               <div>Not found page</div>
             </Route>
           </Switch>
         ) : (
           <Route path="/" exact>
-            <CalendarPage />
-            {/* <AuthPageForDevelopers setAuth={setIsAuth} /> */}
+            <AuthPageForDevelopers setAuth={setIsAuth} />
             {/* <AuthPageForPartners setAuth={setIsAuth} /> */}
           </Route>
         )}

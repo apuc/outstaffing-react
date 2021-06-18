@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import style from './CalendarComponent.module.css';
 import ellipse from '../../images/ellipse.png';
 import rectangle from '../../images/rectangle__calendar.png';
+import calendarIcon from '../../images/calendar_icon.png';
 import moment from 'moment';
-import calendarHelper from './calendarHelper';
 import 'moment/locale/ru';
+import calendarHelper from './calendarHelper';
 
 const CalendarComponent = () => {
   const [value, setValue] = useState(moment());
@@ -14,38 +15,23 @@ const CalendarComponent = () => {
     setCalendar(calendarHelper(value));
   }, [value]);
 
-  function isSelected(day) {
-    return value.isSame(day, 'day');
+  function beforeToday(day) {
+    return day.isBefore(new Date(), 'day');
   }
 
-  // function beforeToday(day) {
-  //   return day.isBefore(new Date(), 'day');
-  // }
+  function isToday(day) {
+    return day.isSame(new Date(), 'day');
+  }
 
-  // function isToday(day) {
-  //   return day.isSame(new Date(), 'day');
-  // }
-  // const month = [
-  //   'January',
-  //   'February',
-  //   'March',
-  //   'April',
-  //   'May',
-  //   'June',
-  //   'July',
-  //   'August',
-  //   'September',
-  //   'October',
-  //   'November',
-  //   'December',
-  // ];
+  function dayStyles(day) {
+    if (beforeToday(day)) return `${style.before}`;
+    if (isToday(day)) return `${style.today}`;
+    if (day.day() === 6 || day.day() === 0) return `${style.selected}`;
+    return '';
+  }
 
   function currentMonth(day) {
-    return day.format('MMMM');
-  }
-
-  function currentDay(day) {
-    return day.format('D');
+    return day.format('D MMMM');
   }
 
   function prevMonth() {
@@ -55,12 +41,6 @@ const CalendarComponent = () => {
   function nextMonth() {
     return value.clone().add(1, 'month');
   }
-
-  function thisMonth() {
-    return value.isSame(new Date(), 'month');
-  }
-
-  console.log(thisMonth());
 
   //////////////////////////////////////////////////////////////////////////
 
@@ -96,8 +76,15 @@ const CalendarComponent = () => {
         <div className={style.CalendarComponent__form}>
           {calendar.map((week) =>
             week.map((day) => (
-              <button onClick={() => setValue(day)} key={day} className={`${isSelected(day) ? style.selected : ''}`}>
-                {currentDay(day)} {currentMonth(day)}
+              <button
+                onClick={() => setValue(day)}
+                key={day}
+                className={dayStyles(day)}
+                name={day.format('dddd')}
+                id="btn"
+              >
+                <img className={style.calendarIcon} src={calendarIcon} alt="" />
+                {currentMonth(day)}
               </button>
             ))
           )}

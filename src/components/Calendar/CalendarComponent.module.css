@@ -84,9 +84,29 @@
   border: 1px solid #c4c4c4;
   background-color: #ffffff;
   margin-top: 20px;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.2em;
+  font-weight: 100;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  text-align: center;
+}
+
+.calendarIcon {
+  margin-right: 10px;
+  margin-top: -4px;
+}
+
+.before {
+  opacity: 0.2;
+}
+
+.today {
+  font-weight: bold !important;
+  border: 1px solid #398208 !important;
 }
 
 .selected {
-  font-weight: bold;
-  border: 1px solid #398208 !important;
+  background-color: yellow !important;
 }

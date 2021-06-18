@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import dogBig from '../../images/dog.jpg';
 import arrowLeft from '../../images/arrow_left.png';
 import arrowRight from '../../images/arrow_right.png';
@@ -11,7 +12,9 @@ const Sidebar = () => {
         <img src={dogBig} alt="" />
         <p className={style.candidateSidebar__info__e}>Опыт работы</p>
         <p className={style.candidateSidebar__info__y}>4+ лет</p>
-        <button className={style.candidateSidebar__info__btn}>Выбрать к собеседованию</button>
+        <Link to={`/calendar`}>
+          <button className={style.candidateSidebar__info__btn}>Выбрать к собеседованию</button>
+        </Link>
         <p className={style.candidateSidebar__info__l}>Посмотреть ещё</p>
       </div>
 
