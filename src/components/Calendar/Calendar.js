@@ -12,7 +12,7 @@ const Calendar = () => {
           <h2 className={style.calendar__title}>
             Добрый день, <span>Александр !</span>
           </h2>
-          <div className="col-xl-12 d-flex justify-content-between align-items-center">
+          <div className="col-12 col-xl-12 d-flex justify-content-between align-items-center flex-column flex-sm-row">
             <div className={style.calendarHeader__info}>
               <img className={style.calendarHeader__info__img} src={calendarMale} alt="img" />
               <h3 className={style.calendarHeader__info__name}>
@@ -30,7 +30,7 @@ const Calendar = () => {
         </div>
 
         <div className="row">
-          <div className="col-12">
+          <div className="col-12 col-xl-12">
             <CalendarComponent />
             <p className={style.calendarFooter__text}>
               Июнь : <span> 60 часов </span>

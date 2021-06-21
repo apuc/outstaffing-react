@@ -10,7 +10,7 @@ const CandidatePage = lazy(() => import('./pages/CandidatePage'));
 const CalendarPage = lazy(() => import('./pages/CalendarPage'));
 
 const App = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
 
   return (
     <Router>

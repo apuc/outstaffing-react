@@ -8,18 +8,31 @@
   padding-bottom: 94px;
 }
 
+@media (max-width: 575.98px) {
+  .CalendarComponent {
+    margin-bottom: 40px;
+    padding: 28px 0 48px 0;
+  }
+}
+
 .CalendarComponent__header {
   display: flex;
 }
 
 .CalendarComponent__header > h3 {
   font-family: 'GT Eesti Pro Display';
-  font-size: 25px;
+  font-size: 2.5em;
   font-weight: 400;
   font-style: normal;
   letter-spacing: normal;
   line-height: 30px;
   text-align: left;
+}
+
+@media (max-width: 575.98px) {
+  .CalendarComponent__header > h3 {
+    font-size: 1.6em;
+  }
 }
 
 .CalendarComponent__header__box {
@@ -48,6 +61,12 @@
 
 .CalendarComponent__rectangle {
   margin: 36px 0;
+}
+
+@media (max-width: 575.98px) {
+  .CalendarComponent__rectangle {
+    margin: 24px 0;
+  }
 }
 
 .CalendarComponent__rectangle > img {
@@ -93,9 +112,113 @@
   text-align: center;
 }
 
+@media (max-width: 575.98px) {
+  .CalendarComponent__form > button {
+    width: 72px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 560.98px) {
+  .CalendarComponent__form > button {
+    width: 70px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 540.98px) {
+  .CalendarComponent__form > button {
+    width: 68px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 520.98px) {
+  .CalendarComponent__form > button {
+    width: 66px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 500.98px) {
+  .CalendarComponent__form > button {
+    width: 64px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .CalendarComponent__form > button {
+    width: 60px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 460.98px) {
+  .CalendarComponent__form > button {
+    width: 56px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 440.98px) {
+  .CalendarComponent__form > button {
+    width: 52px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 428.98px) {
+  .CalendarComponent__form > button {
+    width: 50px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 414.98px) {
+  .CalendarComponent__form > button {
+    width: 49px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 395.98px) {
+  .CalendarComponent__form > button {
+    width: 46px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 350.98px) {
+  .CalendarComponent__form > button {
+    width: 44px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 349.98px) {
+  .CalendarComponent__form > button {
+    width: 42px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 346.98px) {
+  .CalendarComponent__form > button {
+    width: 40px;
+    height: 40px;
+  }
+}
+
 .calendarIcon {
   margin-right: 10px;
   margin-top: -4px;
+}
+
+@media (max-width: 575.98px) {
+  .calendarIcon {
+    display: none;
+  }
 }
 
 .before {
