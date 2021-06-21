@@ -1,3 +1,7 @@
+.calendar {
+  margin-bottom: 40px;
+}
+
 .calendar__title {
   color: #282828;
   font-family: 'GT Eesti Pro Display';
@@ -80,7 +84,7 @@
   .calendarHeader__info {
     width: 74%;
     height: 94px;
-    margin-top: 142px;
+    margin-top: 40px;
     margin-bottom: 40px;
   }
 }
@@ -89,7 +93,7 @@
   .calendarHeader__info {
     width: 84%;
     height: 94px;
-    margin-top: 112px;
+    margin-top: 20px;
   }
 }
 
@@ -124,6 +128,36 @@
   transform: translate(-50%, -50%);
 }
 
+@media (max-width: 575.98px) {
+  .calendarHeader__title {
+    margin-left: 100px;
+  }
+}
+
+@media (max-width: 505.98px) {
+  .calendarHeader__title {
+    margin-left: 80px;
+  }
+}
+
+@media (max-width: 455.98px) {
+  .calendarHeader__title {
+    margin-left: 60px;
+  }
+}
+
+@media (max-width: 375.98px) {
+  .calendarHeader__title {
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 348.98px) {
+  .calendarHeader__title {
+    margin-left: 0;
+  }
+}
+
 .calendarHeader__title__text {
   font-family: 'GT Eesti Pro Display';
   font-size: 2.7em;
@@ -136,9 +170,6 @@
 
 @media (max-width: 575.98px) {
   .calendarHeader__title__text {
-    position: absolute;
-    top: 0;
-    left: 10%;
     font-size: 4.4em;
   }
 }
@@ -157,7 +188,7 @@
 
 @media (max-width: 524.98px) {
   .calendarHeader__title__text {
-    font-size: 3.8em;
+    font-size: 3.6em;
   }
 }
 
@@ -191,11 +222,16 @@
   }
 }
 
+@media (max-width: 325.98px) {
+  .calendarHeader__title__text {
+    font-size: 2.7em;
+  }
+}
+
 @media (max-width: 575.98px) {
   .calendarHeader__title__img {
-    position: absolute;
-    bottom: -40px;
-    left: 20%;
+    width: 60%;
+    margin: 30px 0;
   }
 }
 
@@ -217,7 +253,7 @@
   }
 }
 
-.calendarHeader__btn > button {
+.calendarHeader__btn {
   width: 280px;
   height: 62px;
   box-shadow: 6px 5px 20px rgba(82, 151, 34, 0.21);
@@ -236,7 +272,6 @@
   font-family: 'Muller';
   font-size: 1.6em;
   letter-spacing: normal;
-  line-height: 71.88px;
   text-align: center;
 }
 

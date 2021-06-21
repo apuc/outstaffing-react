@@ -51,7 +51,7 @@ const tabsList = [
   },
 ];
 
-const Home = () => {
+const Home = ({ onTestFunc }) => {
   const [tabs, setTabs] = useState([]);
   const [candidates, setCandidates] = useState([]);
   const [tags, setTags] = useState([]);

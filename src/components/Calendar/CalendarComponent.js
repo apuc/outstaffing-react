@@ -42,8 +42,6 @@ const CalendarComponent = () => {
     return value.clone().add(1, 'month');
   }
 
-  //////////////////////////////////////////////////////////////////////////
-
   return (
     <div className={style.CalendarComponent}>
       <div className={style.CalendarComponent__header}>
@@ -64,13 +62,13 @@ const CalendarComponent = () => {
 
       <div className={style.CalendarComponent__body}>
         <div>
-          <p>ПН</p>
-          <p>ВТ</p>
-          <p>СР</p>
-          <p>ЧТ</p>
-          <p>ПТ</p>
-          <p>СБ</p>
-          <p>ВС</p>
+          <p>Пн</p>
+          <p>Вт</p>
+          <p>Ср</p>
+          <p>Чт</p>
+          <p>Пт</p>
+          <p>Сб</p>
+          <p>Вс</p>
         </div>
 
         <div className={style.CalendarComponent__form}>

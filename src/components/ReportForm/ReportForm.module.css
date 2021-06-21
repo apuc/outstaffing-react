@@ -1,0 +1,73 @@
+.reportForm__headerTitle {
+  margin-top: 76px;
+}
+
+.reportForm__headerTitle > h2 {
+  color: #282828;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 3.3em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 48.74px;
+  text-align: left;
+}
+
+.reportForm__headerTitle > h3 {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 2.1em;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 30px;
+  text-align: left;
+  margin-top: 52px;
+  margin-bottom: 35px;
+}
+
+.reportForm__headerImg {
+  width: 280px;
+  height: 42px;
+  box-shadow: 0 0 59px rgba(44, 44, 44, 0.05);
+  border-radius: 5px;
+  border: 1px solid #398208;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 13px;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  text-align: left;
+}
+
+.reportForm__headerImg > img {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.reportForm__tasks {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.reportForm__tasks > img {
+  width: 6px;
+  height: 6px;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.reportForm__tasks > span {
+  color: #18586e;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 2em;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 16.81px;
+  text-align: left;
+}

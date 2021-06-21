@@ -8,6 +8,7 @@ const AuthPageForDevelopers = lazy(() => import('./pages/AuthPageForDevelopers')
 const HomePage = lazy(() => import('./pages/HomePage'));
 const CandidatePage = lazy(() => import('./pages/CandidatePage'));
 const CalendarPage = lazy(() => import('./pages/CalendarPage'));
+const ReportPage = lazy(() => import('./pages/ReportFormPage.js'));
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(true);
@@ -25,6 +26,9 @@ const App = () => {
             </Route>
             <Route path="/calendar">
               <CalendarPage />
+            </Route>
+            <Route path="/report">
+              <ReportPage />
             </Route>
             <Route>
               <div>Not found page</div>

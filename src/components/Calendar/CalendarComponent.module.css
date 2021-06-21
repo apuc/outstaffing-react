@@ -1,4 +1,5 @@
 .CalendarComponent {
+  position: relative;
   margin-top: 80px;
   margin-bottom: 60px;
   background-color: #f9f9f9;
@@ -31,7 +32,9 @@
 
 @media (max-width: 575.98px) {
   .CalendarComponent__header > h3 {
-    font-size: 1.6em;
+    position: absolute;
+    top: -10%;
+    left: 25%;
   }
 }
 
@@ -39,6 +42,12 @@
   display: flex;
   align-items: center;
   margin-left: 40px;
+}
+
+@media (max-width: 575.98px) {
+  .CalendarComponent__header__box {
+    margin-left: 20px;
+  }
 }
 
 .CalendarComponent__header__box > img {
@@ -222,7 +231,7 @@
 }
 
 .before {
-  opacity: 0.2;
+  background-color: #f0f7e0 !important;
 }
 
 .today {
@@ -231,5 +240,5 @@
 }
 
 .selected {
-  background-color: yellow !important;
+  background-color: #f9f9c3 !important;
 }

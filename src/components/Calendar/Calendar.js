@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import style from './Calendar.module.css';
 import calendarMale from '../../images/medium_male.png';
 import rectangle from '../../images/rectangle_secondPage.png';
@@ -23,8 +24,10 @@ const Calendar = () => {
               <h3 className={style.calendarHeader__title__text}>Frontend разработчик, Middle</h3>
               <img className={style.calendarHeader__title__img} src={rectangle} alt="img" />
             </div>
-            <div className={style.calendarHeader__btn}>
-              <button>Заполнить отчет за день</button>
+            <div>
+              <Link to="/report">
+                <button className={style.calendarHeader__btn}>Заполнить отчет за день</button>
+              </Link>
             </div>
           </div>
         </div>
