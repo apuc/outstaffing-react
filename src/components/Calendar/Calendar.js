@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import style from './Calendar.module.css';
 import calendarMale from '../../images/medium_male.png';
 import rectangle from '../../images/rectangle_secondPage.png';
 import CalendarComponent from './CalendarComponent';
+import { currentMonth } from './calendarHelper';
 
 const Calendar = () => {
+  const [month, setMonth] = useState('');
+
+  useEffect(() => {
+    setMonth(currentMonth);
+  }, [month]);
+
   return (
     <section className={style.calendar}>
       <div className="container">
@@ -36,7 +43,7 @@ const Calendar = () => {
           <div className="col-12 col-xl-12">
             <CalendarComponent />
             <p className={style.calendarFooter__text}>
-              Июнь : <span> 60 часов </span>
+              {month} : <span> 60 часов </span>
             </p>
           </div>
         </div>

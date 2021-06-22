@@ -1,8 +1,8 @@
-.reportForm__headerTitle {
+.reportForm__blockTitle {
   margin-top: 76px;
 }
 
-.reportForm__headerTitle > h2 {
+.reportForm__blockTitle > h2 {
   color: #282828;
   font-family: 'GT Eesti Pro Display';
   font-size: 3.3em;
@@ -13,7 +13,7 @@
   text-align: left;
 }
 
-.reportForm__headerTitle > h3 {
+.reportForm__blockTitle > h3 {
   font-family: 'GT Eesti Pro Display';
   font-size: 2.1em;
   font-weight: 400;
@@ -25,7 +25,7 @@
   margin-bottom: 35px;
 }
 
-.reportForm__headerImg {
+.reportForm__blockImg {
   width: 280px;
   height: 42px;
   box-shadow: 0 0 59px rgba(44, 44, 44, 0.05);
@@ -43,7 +43,7 @@
   text-align: left;
 }
 
-.reportForm__headerImg > img {
+.reportForm__blockImg > img {
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -70,4 +70,170 @@
   letter-spacing: normal;
   line-height: 16.81px;
   text-align: left;
+}
+
+.reportForm__text {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.reportForm__text > p {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.3em;
+  font-weight: 100;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  text-align: left;
+  margin-bottom: 26px;
+}
+
+.text1 {
+  margin-left: 20px;
+}
+
+.text2 {
+  margin-right: 86px;
+}
+
+.reportForm__form {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 14px;
+  margin-bottom: 28px;
+}
+
+.reportForm__form > span {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 2em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  position: absolute;
+  left: 0;
+  bottom: 7px;
+}
+
+.input__text,
+.input__number {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+/* .input__text > label,
+.input__number > label {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.3em;
+  font-weight: 100;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  text-align: left;
+  margin-bottom: 26px;
+} */
+
+/* .input__text > label {
+  margin-left: -13px;
+} */
+
+.input__text > input {
+  width: 460px;
+  height: 42px;
+  box-shadow: 0 0 59px rgba(44, 44, 44, 0.05);
+  border-radius: 5px;
+  border: 1px solid #c4c4c4;
+  background-color: #ffffff;
+  outline: none;
+  font-size: 1.8em;
+}
+
+.input__number > input {
+  width: 141px;
+  height: 42px;
+  box-shadow: 0 0 59px rgba(44, 44, 44, 0.05);
+  border-radius: 5px;
+  border: 1px solid #c4c4c4;
+  background-color: #ffffff;
+  outline: none;
+  font-size: 1.8em;
+}
+
+.reportForm__form > img {
+  margin-top: 5px;
+  width: 23px;
+  height: 23px;
+}
+
+.reportForm__formAdd {
+  margin-left: 28px;
+}
+
+.reportForm__formAdd > span {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.3em;
+  font-weight: 100;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.reportForm__inptuBox > input {
+  margin-left: 10px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  width: 460px;
+  height: 42px;
+  box-shadow: 0 0 59px rgba(44, 44, 44, 0.05);
+  border-radius: 5px;
+  border: 1px solid #c4c4c4;
+  background-color: #ffffff;
+}
+
+.reportForm__footer {
+  display: flex;
+  align-items: center;
+}
+
+.reportForm__footer__btn {
+  width: 166px;
+  height: 62px;
+  box-shadow: 6px 5px 20px rgba(82, 151, 34, 0.21);
+  border-radius: 31px;
+  background-color: #ffffff;
+  background-image: linear-gradient(to top, #6aaf5c 0%, #52b709 100%),
+    linear-gradient(
+      36deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.16) 47%,
+      rgba(255, 255, 255, 0.17) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  color: #ffffff;
+  font-family: 'Muller';
+  font-size: 1.6em;
+  letter-spacing: normal;
+  text-align: center;
+  border: none;
+}
+
+.reportForm__footer__text {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.9em;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 22.38px;
+  text-align: left;
+  margin-left: 40px;
+  margin-bottom: 0;
+}
+
+.reportForm__footer__text > span {
+  font-weight: 100;
 }

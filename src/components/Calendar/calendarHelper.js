@@ -1,4 +1,7 @@
-export default function calendarHelper(value) {
+import moment from 'moment';
+import 'moment/locale/ru';
+
+export function calendarHelper(value) {
   const startDay = value.clone().startOf('month').startOf('week').startOf('day');
   const endDay = value.clone().endOf('month').endOf('week');
 
@@ -15,4 +18,18 @@ export default function calendarHelper(value) {
   }
 
   return calendar;
+}
+
+export function currentMonth() {
+  const currentMonth = moment().format('MMMM');
+
+  return currentMonth.charAt(0).toUpperCase() + currentMonth.slice(1);
+}
+
+// export function currentMonthAndDay(day) {
+//   return day.format('D MMMM');
+// }
+
+export function currentMonthAndDay() {
+  return moment().format('D MMMM');
 }

@@ -5,7 +5,7 @@ import rectangle from '../../images/rectangle__calendar.png';
 import calendarIcon from '../../images/calendar_icon.png';
 import moment from 'moment';
 import 'moment/locale/ru';
-import calendarHelper from './calendarHelper';
+import { calendarHelper, currentMonthAndDay } from './calendarHelper';
 
 const CalendarComponent = () => {
   const [value, setValue] = useState(moment());
@@ -28,10 +28,6 @@ const CalendarComponent = () => {
     if (isToday(day)) return `${style.today}`;
     if (day.day() === 6 || day.day() === 0) return `${style.selected}`;
     return '';
-  }
-
-  function currentMonth(day) {
-    return day.format('D MMMM');
   }
 
   function prevMonth() {
@@ -82,7 +78,7 @@ const CalendarComponent = () => {
                 id="btn"
               >
                 <img className={style.calendarIcon} src={calendarIcon} alt="" />
-                {currentMonth(day)}
+                {currentMonthAndDay()}
               </button>
             ))
           )}

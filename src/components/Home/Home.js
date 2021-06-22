@@ -65,7 +65,9 @@ const Home = ({ onTestFunc }) => {
     fetch('https://guild.craft-group.xyz/api/skills/skills-on-main-page')
       .then((response) => response.json())
       .then((res) => {
+        console.log('RES', res);
         const keys = Object.keys(res);
+
         const values = Object.values(res);
 
         const tempTags = values.map((item, index) =>
