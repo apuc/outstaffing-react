@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import style from './ReportForm.module.css';
 import calendarIcon from '../../images/calendar_icon.png';
 import ellipse from '../../images/ellipse.png';
 import remove from '../../images/remove.png';
 import addIcon from '../../images/addIcon.png';
 import { currentMonthAndDay } from '../Calendar/calendarHelper';
+import InputsComponent from '../InputsComponent/InputsComponent';
 
 const ReportForm = () => {
-  let count = 1;
+  const [inputs, setInputs] = useState([1]);
 
-  const [formId, setFormId] = useState([count]);
+  const addInput = () => {
+    const lastElement = inputs[inputs.length - 1];
 
-  console.log('CCCCCCCCCC', count);
+    setInputs((prev) => [...prev, lastElement + 1]);
+  };
 
-  const addId = () => {
-    count++;
+  const deleteInput = (id) => {
+    setInputs((prev) => prev.filter((el) => el !== id));
   };
 
   return (
@@ -45,32 +48,9 @@ const ReportForm = () => {
               <p className={style.text1}>Краткое описание задачи</p>
               <p className={style.text2}>Количество часов</p>
             </div>
-
-            {formId.map((id) => (
-              <form id={id} key={id} className={style.reportForm__form}>
-                <span>{id}.</span>
-                <div className={style.input__text}>
-                  <input name="text" type="text" />
-                </div>
-                <div className={style.input__number}>
-                  <input name="number" type="number" />
-                </div>
-                <img src={remove} alt="" />
-              </form>
-            ))}
-            {/* <form id="1" className={style.reportForm__form}>
-              <span>1.</span>
-              <div className={style.input__text}>
-                <input name="text" type="text" />
-              </div>
-              <div className={style.input__number}>
-                <input name="number" type="number" />
-              </div>
-              <img src={remove} alt="" />
-            </form> */}
-
+            <InputsComponent deleteInput={deleteInput} inputsArr={inputs} remove={remove} style={style} />
             <div className={style.reportForm__formAdd}>
-              <img onClick={() => addId()} src={addIcon} alt="" />
+              <img onClick={addInput} src={addIcon} alt="" />
               <span>Добавить еще </span>
             </div>
           </div>
