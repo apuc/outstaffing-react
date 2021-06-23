@@ -48,7 +48,7 @@ const ReportForm = () => {
               <p className={style.text1}>Краткое описание задачи</p>
               <p className={style.text2}>Количество часов</p>
             </div>
-            <InputsComponent deleteInput={deleteInput} inputsArr={inputs} remove={remove} style={style} />
+            <InputsComponent deleteInput={deleteInput} inputsArr={inputs} remove={remove} />
             <div className={style.reportForm__formAdd}>
               <img onClick={addInput} src={addIcon} alt="" />
               <span>Добавить еще </span>

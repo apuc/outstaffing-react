@@ -1,6 +1,7 @@
 import React from 'react';
+import style from './InputsComponent.module.css';
 
-const InputsComponent = ({ inputsArr, deleteInput, remove, style }) =>
+const InputsComponent = ({ inputsArr, deleteInput, remove }) =>
   inputsArr.map((input) => (
     <form id={input} key={input} className={style.reportForm__form}>
       <span>{input}.</span>
