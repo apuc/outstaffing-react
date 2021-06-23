@@ -4,7 +4,7 @@ import calendarIcon from '../../images/calendar_icon.png';
 import ellipse from '../../images/ellipse.png';
 import remove from '../../images/remove.png';
 import addIcon from '../../images/addIcon.png';
-import { currentMonthAndDay } from '../Calendar/calendarHelper';
+import { currentMonthAndDayReportPage } from '../Calendar/calendarHelper';
 import InputsComponent from '../InputsComponent/InputsComponent';
 
 const ReportForm = () => {
@@ -32,7 +32,7 @@ const ReportForm = () => {
               </div>
               <div className={style.reportForm__blockImg}>
                 <img className={style.calendarIcon} src={calendarIcon} alt="" />
-                {currentMonthAndDay()}
+                {currentMonthAndDayReportPage()}
               </div>
               <div className={style.reportForm__tasks}>
                 <img src={ellipse} alt="" />

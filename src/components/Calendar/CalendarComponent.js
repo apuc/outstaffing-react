@@ -78,7 +78,7 @@ const CalendarComponent = () => {
                 id="btn"
               >
                 <img className={style.calendarIcon} src={calendarIcon} alt="" />
-                {currentMonthAndDay()}
+                {currentMonthAndDay(day)}
               </button>
             ))
           )}

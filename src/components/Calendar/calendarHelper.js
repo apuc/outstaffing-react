@@ -26,10 +26,10 @@ export function currentMonth() {
   return currentMonth.charAt(0).toUpperCase() + currentMonth.slice(1);
 }
 
-// export function currentMonthAndDay(day) {
-//   return day.format('D MMMM');
-// }
+export function currentMonthAndDay(day) {
+  return day.format('D MMMM');
+}
 
-export function currentMonthAndDay() {
+export function currentMonthAndDayReportPage() {
   return moment().format('D MMMM');
 }
