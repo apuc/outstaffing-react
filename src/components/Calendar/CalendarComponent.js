@@ -35,8 +35,15 @@ const CalendarComponent = () => {
   }
 
   function nextMonth() {
-    return value.clone().add(1, 'month');
+    return value.clone().subtract(2, 'month');
   }
+
+  const prevMonthFirst = () => {
+    return moment().subtract(1, 'month').format('MMMM');
+  };
+  const prevMonthSecond = () => {
+    return moment().subtract(2, 'month').format('MMMM');
+  };
 
   return (
     <div className={style.CalendarComponent}>
@@ -44,11 +51,11 @@ const CalendarComponent = () => {
         <h3>Мои отчеты</h3>
         <div className={style.CalendarComponent__header__box}>
           <img src={ellipse} alt="" />
-          <span onClick={() => setValue(prevMonth())}>Май</span>
+          <span onClick={() => setValue(prevMonth())}>{prevMonthFirst()}</span>
         </div>
         <div className={style.CalendarComponent__header__box}>
           <img src={ellipse} alt="" />
-          <span onClick={() => setValue(nextMonth())}>Апрель</span>
+          <span onClick={() => setValue(nextMonth())}>{prevMonthSecond()}</span>
         </div>
       </div>
 
