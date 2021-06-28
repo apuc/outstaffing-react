@@ -122,6 +122,10 @@
   border-radius: 5px;
   border: 1px solid #c4c4c4;
   background-color: #ffffff;
+  font-size: 1.8em;
+  padding-left: 20px;
+  padding-right: 20px;
+  outline: none;
 }
 
 .reportForm__footer {

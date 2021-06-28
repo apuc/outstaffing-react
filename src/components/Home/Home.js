@@ -4,6 +4,7 @@ import Description from '../Description/Description';
 import front from '../../images/front_end.png';
 import back from '../../images/back_end.png';
 import design from '../../images/design.png';
+// import { fetchProfile } from '../../server/server';
 
 export const candidatesList = [
   {
@@ -58,6 +59,15 @@ const Home = () => {
 
   const [selectedTab, setSelectedTab] = useState('');
 
+  // useEffect(() => {
+  //   setTabs(tabsList);
+  //   setCandidates(candidatesList);
+
+  //   fetchProfile('https://guild.craft-group.xyz/api/profile')
+  //     .then((profileArr) => setProfiles(profileArr))
+  //     .catch((e) => console.log(e));
+  // }, []);
+
   useEffect(() => {
     setTabs(tabsList);
     setCandidates(candidatesList);
@@ -65,7 +75,6 @@ const Home = () => {
     fetch('https://guild.craft-group.xyz/api/skills/skills-on-main-page')
       .then((response) => response.json())
       .then((res) => {
-        console.log('RES', res);
         const keys = Object.keys(res);
 
         const values = Object.values(res);
