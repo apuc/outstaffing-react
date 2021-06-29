@@ -137,7 +137,7 @@
 }
 
 .description__sp {
-  display: block;
+  /* display: block; */
   font-family: 'GT Eesti Pro Display';
   font-size: 1.7em;
   font-weight: 400;
@@ -146,6 +146,7 @@
   text-align: left;
   line-height: 36px;
   margin-top: 20px;
+  margin-left: 10px;
 }
 
 @media (max-width: 575.98px) {

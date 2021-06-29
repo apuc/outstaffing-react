@@ -12,6 +12,11 @@ const ReportPage = lazy(() => import('./pages/ReportFormPage.js'));
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(true);
+  const [candidates, setCandidates] = useState([]);
+
+  const getCandidate = (candidateArr) => {
+    setCandidates(candidateArr);
+  };
 
   return (
     <Router>
@@ -19,10 +24,10 @@ const App = () => {
         {isAuth ? (
           <Switch>
             <Route path="/" exact>
-              <HomePage />
+              <HomePage getCandidate={getCandidate} />
             </Route>
             <Route path="/candidate/:id">
-              <CandidatePage />
+              <CandidatePage candidatesArr={candidates} />
             </Route>
             <Route path="/calendar">
               <CalendarPage />

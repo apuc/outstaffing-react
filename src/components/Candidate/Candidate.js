@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import style from './Candidate.module.css';
-import { candidatesList } from '../Home/Home';
 import arrow from '../../images/right-arrow.png';
 import rectangle from '../../images/rectangle_secondPage.png';
 import Sidebar from '../Sidebar/Sidebar';
@@ -12,23 +11,23 @@ import SectionFour from './sections/SectionFour';
 import SectionFive from './sections/SectionFive';
 import SectionSkills from './sections/SectionSkills';
 
-const Candidate = () => {
+const Candidate = ({ candidatesArr }) => {
   const history = useHistory();
 
   const { id: candidateId } = useParams();
 
-  const currentCandidate = candidatesList.find((el) => el.id === Number(candidateId));
+  const currentCandidate = candidatesArr.find((el) => Number(el.id) === Number(candidateId));
 
-  const { name, img, header } = currentCandidate;
+  const { name, skillsName, img } = currentCandidate;
 
   let classes;
 
-  if (name === 'Backend') {
+  if (skillsName === 'Backend') {
     classes = style.back;
     console.log(classes);
-  } else if (name === 'Design') {
+  } else if (skillsName === 'Design') {
     classes = style.des;
-  } else if (name === 'Frontend') {
+  } else if (skillsName === 'Frontend') {
     classes = style.front;
   }
 
@@ -58,7 +57,7 @@ const Candidate = () => {
               </div>
 
               <div className={style.icon}>
-                <h3>{header}</h3>
+                <h3>{skillsName}</h3>
                 <img className={classes} src={img} alt="" />
               </div>
             </div>
@@ -72,7 +71,7 @@ const Candidate = () => {
 
             <div className="col-12 col-xl-8">
               <div className={style.candidate__main__description}>
-                <h2>{name} разработчик, Middle</h2>
+                <h2>{name}</h2>
                 <img src={rectangle} alt="" />
                 <p># Описание опыта</p>
                 <SectionOne />

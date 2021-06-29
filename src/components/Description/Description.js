@@ -6,7 +6,7 @@ import arrowLeft from '../../images/arrow_left.png';
 import arrowRight from '../../images/arrow_right.png';
 import { Link } from 'react-router-dom';
 
-const Description = ({ candidatesListArr }) => {
+const Description = ({ candidatesListArr, getCandidate, onLoadMore }) => {
   return (
     <section className={style.description}>
       <div className="container">
@@ -17,7 +17,9 @@ const Description = ({ candidatesListArr }) => {
                 <img className={style.description__img} src={dog} alt="" />
               </div>
               <div className="col-12 col-xl-6">
-                <h3 className={style.description__title}>{el.name} разработчик, Middle</h3>
+                <h3 className={style.description__title}>
+                  {el.name} - {el.skillsName}
+                </h3>
                 <p className={style.description__text}>
                   - 10 лет пишу приложения под IOS, отлично владею Objective-C и Swift.
                 </p>
@@ -25,13 +27,17 @@ const Description = ({ candidatesListArr }) => {
                 <p className={style.description__text}>- 3 года преподаю в IOS-школе Сбера</p>
               </div>
               <div className="col-12 col-xl-4">
-                <Link to={`/candidate/${el.id}`}>
+                <Link to={`/candidate/${el.id}`} onClick={() => getCandidate(candidatesListArr)}>
                   <button className={style.description__button}>Подробное резюме</button>
                 </Link>
               </div>
               <div className="col-xl-2"></div>
               <div className="col-12 col-xl-6">
-                <span className={style.description__sp}> {el.tags}</span>
+                {el.skills.map((e) => (
+                  <span key={e.id} className={style.description__sp}>
+                    {e.skill.name}
+                  </span>
+                ))}
                 <img className={style.description__rectangle} src={rectangle} alt="" />
               </div>
               <div className="col-xl-4"></div>
@@ -43,7 +49,7 @@ const Description = ({ candidatesListArr }) => {
           <div className="col-12">
             <div className={style.description__footer}>
               <div className={style.description__footer__btn}>
-                <button>Загрузить еще</button>
+                <button onClick={() => onLoadMore(3)}>Загрузить еще</button>
               </div>
               <div className={style.description__footer__box}>
                 <div className={style.arrow__left}>

@@ -4,32 +4,7 @@ import Description from '../Description/Description';
 import front from '../../images/front_end.png';
 import back from '../../images/back_end.png';
 import design from '../../images/design.png';
-// import { fetchProfile } from '../../server/server';
-
-export const candidatesList = [
-  {
-    id: 1,
-    name: 'Frontend',
-    header: 'Фронтенд',
-    img: front,
-    tags: 'JavaScript · Html · Css · Vue.js · ReactJS · Angular · MobX',
-  },
-
-  {
-    id: 2,
-    name: 'Backend',
-    header: 'Бэкенд',
-    img: back,
-    tags: 'Node.js · Express · Php · Ruby on Rails · Python · Wordpress · Java',
-  },
-  {
-    id: 3,
-    name: 'Design',
-    header: 'Дизайн',
-    img: design,
-    tags: 'Figma · Avocode · PhotoShop · Xara · Pinegrow · Macaw · KompoZer',
-  },
-];
+import { fetchProfile, fetchSkills } from '../../server/server';
 
 const tabsList = [
   {
@@ -52,42 +27,72 @@ const tabsList = [
   },
 ];
 
-const Home = () => {
+const Home = ({ getCandidate }) => {
   const [tabs, setTabs] = useState([]);
-  const [candidates, setCandidates] = useState([]);
   const [tags, setTags] = useState([]);
-
+  const [profiles, setProfiles] = useState([]);
   const [selectedTab, setSelectedTab] = useState('');
-
-  // useEffect(() => {
-  //   setTabs(tabsList);
-  //   setCandidates(candidatesList);
-
-  //   fetchProfile('https://guild.craft-group.xyz/api/profile')
-  //     .then((profileArr) => setProfiles(profileArr))
-  //     .catch((e) => console.log(e));
-  // }, []);
+  const [countArr, setCountArr] = useState(0);
+  const [candidatesArray, setCandidatesArray] = useState([]);
 
   useEffect(() => {
     setTabs(tabsList);
-    setCandidates(candidatesList);
 
-    fetch('https://guild.craft-group.xyz/api/skills/skills-on-main-page')
-      .then((response) => response.json())
-      .then((res) => {
-        const keys = Object.keys(res);
-
-        const values = Object.values(res);
-
-        const tempTags = values.map((item, index) =>
-          item.map((tag) => {
-            return { id: tag.id, value: tag.tags, name: keys[index] };
-          })
-        );
-
-        setTags(tempTags);
-      });
+    fetchProfile('https://guild.craft-group.xyz/api/profile')
+      .then((profileArr) => setProfiles(profileArr))
+      .catch((e) => console.log(e));
   }, []);
+
+  useEffect(() => {
+    if (profiles.length) {
+      setCandidatesArray(
+        profiles.map((profile) => {
+          let skillsName = '';
+          let img;
+
+          if (Number(profile.position_id) === 1) {
+            skillsName = 'Frontend';
+            img = front;
+          } else if (Number(profile.position_id) === 2) {
+            skillsName = 'Backend';
+            img = back;
+          } else if (Number(profile.position_id) === 3) {
+            skillsName = 'Marketer';
+            img = design;
+          }
+
+          return {
+            id: profile.id,
+            profileId: profile.position_id,
+            name: profile.fio,
+            skills: profile.skillValues,
+            skillsName: skillsName,
+            img: img,
+          };
+        })
+      );
+    }
+  }, [profiles]);
+
+  useEffect(() => {
+    fetchSkills('https://guild.craft-group.xyz/api/skills/skills-on-main-page').then((skills) => {
+      const keys = Object.keys(skills);
+      const values = Object.values(skills);
+
+      const tempTags = values.map((value, index) =>
+        value.map((val) => {
+          return { id: val.id, value: val.tags, name: keys[index] };
+        })
+      );
+      setTags(tempTags);
+    });
+  }, []);
+
+  const shorthandArray = candidatesArray.slice(countArr, 2);
+
+  const loadMore = (count) => {
+    setCountArr((prev) => prev + count);
+  };
 
   const handleBlockClick = (name) => {
     setSelectedTab(name);
@@ -97,7 +102,11 @@ const Home = () => {
     <>
       <Outstaffing onhandleTabBar={(name) => handleBlockClick(name)} selected={selectedTab} tabs={tabs} tags={tags} />
       <Description
-        candidatesListArr={selectedTab ? candidates.filter((item) => item.name === selectedTab) : candidates}
+        candidatesListArr={
+          selectedTab ? candidatesArray.filter((item) => item.skillsName === selectedTab) : shorthandArray
+        }
+        getCandidate={getCandidate}
+        onLoadMore={loadMore}
       />
     </>
   );

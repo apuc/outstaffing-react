@@ -17,7 +17,9 @@ const ReportForm = () => {
   };
 
   const deleteInput = (id) => {
-    setInputs((prev) => prev.filter((el) => el !== id));
+    if (id !== 1) {
+      setInputs((prev) => prev.filter((el) => el !== id));
+    }
   };
 
   return (
