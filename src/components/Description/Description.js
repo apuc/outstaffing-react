@@ -49,7 +49,7 @@ const Description = ({ candidatesListArr, getCandidate, onLoadMore }) => {
           <div className="col-12">
             <div className={style.description__footer}>
               <div className={style.description__footer__btn}>
-                <button onClick={() => onLoadMore(3)}>Загрузить еще</button>
+                <button onClick={() => onLoadMore(2)}>Загрузить еще</button>
               </div>
               <div className={style.description__footer__box}>
                 <div className={style.arrow__left}>

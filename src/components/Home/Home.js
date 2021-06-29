@@ -32,7 +32,7 @@ const Home = ({ getCandidate }) => {
   const [tags, setTags] = useState([]);
   const [profiles, setProfiles] = useState([]);
   const [selectedTab, setSelectedTab] = useState('');
-  const [countArr, setCountArr] = useState(0);
+  const [countArr, setCountArr] = useState(2);
   const [candidatesArray, setCandidatesArray] = useState([]);
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const Home = ({ getCandidate }) => {
     });
   }, []);
 
-  const shorthandArray = candidatesArray.slice(countArr, 2);
+  const shorthandArray = candidatesArray.slice(0, countArr);
 
   const loadMore = (count) => {
     setCountArr((prev) => prev + count);
