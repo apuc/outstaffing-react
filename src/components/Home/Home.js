@@ -1,80 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Outstaffing from '../Outstaffing/Outstaffing';
 import Description from '../Description/Description';
 import front from '../../images/front_end.png';
 import back from '../../images/back_end.png';
 import design from '../../images/design.png';
 import { fetchProfile, fetchSkills } from '../../server/server';
-
-const tabsList = [
-  {
-    name: 'Frontend',
-    img: front,
-    text: '# Популярный стек',
-    header: 'Фронтенд',
-  },
-  {
-    name: 'Backend',
-    img: back,
-    text: '# Популярный стек',
-    header: 'Бэкенд',
-  },
-  {
-    name: 'Design',
-    img: design,
-    text: '# Популярный стек',
-    header: 'Дизайн',
-  },
-];
+import { profiles, selectProfiles, tags, candidates, selectCandidates, selectTab } from '../../redux/outstaffingSlice';
 
 const Home = ({ getCandidate }) => {
-  const [tabs, setTabs] = useState([]);
-  const [tags, setTags] = useState([]);
-  const [profiles, setProfiles] = useState([]);
-  const [selectedTab, setSelectedTab] = useState('');
-  const [countArr, setCountArr] = useState(2);
-  const [candidatesArray, setCandidatesArray] = useState([]);
+  const [count, setCount] = useState(2);
+
+  const dispatch = useDispatch();
+  const profilesArr = useSelector(selectProfiles);
+  const candidatesArr = useSelector(selectCandidates);
+  const selectedTab = useSelector(selectTab);
 
   useEffect(() => {
-    setTabs(tabsList);
-
     fetchProfile('https://guild.craft-group.xyz/api/profile')
-      .then((profileArr) => setProfiles(profileArr))
+      .then((profileArr) => dispatch(profiles(profileArr)))
       .catch((e) => console.log(e));
-  }, []);
 
-  useEffect(() => {
-    if (profiles.length) {
-      setCandidatesArray(
-        profiles.map((profile) => {
-          let skillsName = '';
-          let img;
-
-          if (Number(profile.position_id) === 1) {
-            skillsName = 'Frontend';
-            img = front;
-          } else if (Number(profile.position_id) === 2) {
-            skillsName = 'Backend';
-            img = back;
-          } else if (Number(profile.position_id) === 3) {
-            skillsName = 'Marketer';
-            img = design;
-          }
-
-          return {
-            id: profile.id,
-            profileId: profile.position_id,
-            name: profile.fio,
-            skills: profile.skillValues,
-            skillsName: skillsName,
-            img: img,
-          };
-        })
-      );
-    }
-  }, [profiles]);
-
-  useEffect(() => {
     fetchSkills('https://guild.craft-group.xyz/api/skills/skills-on-main-page').then((skills) => {
       const keys = Object.keys(skills);
       const values = Object.values(skills);
@@ -84,26 +30,58 @@ const Home = ({ getCandidate }) => {
           return { id: val.id, value: val.tags, name: keys[index] };
         })
       );
-      setTags(tempTags);
+      dispatch(tags(tempTags));
     });
-  }, []);
+  }, [dispatch]);
 
-  const shorthandArray = candidatesArray.slice(0, countArr);
+  useEffect(() => {
+    dispatch(
+      candidates(
+        profilesArr.map((profile) => {
+          let skillsName = '';
+          let img;
+          let header;
+
+          if (Number(profile.position_id) === 1) {
+            skillsName = 'Frontend';
+            img = front;
+            header = 'Фронтенд';
+          } else if (Number(profile.position_id) === 2) {
+            skillsName = 'Backend';
+            img = back;
+            header = 'Бэкенд';
+          } else if (Number(profile.position_id) === 3) {
+            skillsName = 'Marketer';
+            img = design;
+            header = 'Дизайн';
+          }
+
+          return {
+            id: profile.id,
+            profileId: profile.position_id,
+            name: profile.fio,
+            skills: profile.skillValues,
+            skillsName,
+            img,
+            header,
+          };
+        })
+      )
+    );
+  }, [profilesArr, dispatch]);
+
+  const shorthandArray = candidatesArr.slice(0, count);
 
   const loadMore = (count) => {
-    setCountArr((prev) => prev + count);
-  };
-
-  const handleBlockClick = (name) => {
-    setSelectedTab(name);
+    setCount((prev) => prev + count);
   };
 
   return (
     <>
-      <Outstaffing onhandleTabBar={(name) => handleBlockClick(name)} selected={selectedTab} tabs={tabs} tags={tags} />
+      <Outstaffing selected={selectedTab} candidatesArray={candidatesArr} />
       <Description
         candidatesListArr={
-          selectedTab ? candidatesArray.filter((item) => item.skillsName === selectedTab) : shorthandArray
+          selectedTab ? candidatesArr.filter((item) => item.skillsName === selectedTab) : shorthandArray
         }
         getCandidate={getCandidate}
         onLoadMore={loadMore}

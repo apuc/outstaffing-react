@@ -11,7 +11,7 @@ import SectionFour from './sections/SectionFour';
 import SectionFive from './sections/SectionFive';
 import SectionSkills from './sections/SectionSkills';
 
-const Candidate = ({ candidatesArr }) => {
+const Candidate = ({ candidatesArr, getCandidateForCalendar }) => {
   const history = useHistory();
 
   const { id: candidateId } = useParams();
@@ -66,7 +66,7 @@ const Candidate = ({ candidatesArr }) => {
         <div className={style.candidate__main}>
           <div className="row">
             <div className="col-12 col-xl-4">
-              <Sidebar />
+              <Sidebar getCandidateForCalendar={getCandidateForCalendar} currentCandidateObj={currentCandidate} />
             </div>
 
             <div className="col-12 col-xl-8">

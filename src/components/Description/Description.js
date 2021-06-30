@@ -17,9 +17,7 @@ const Description = ({ candidatesListArr, getCandidate, onLoadMore }) => {
                 <img className={style.description__img} src={dog} alt="" />
               </div>
               <div className="col-12 col-xl-6">
-                <h3 className={style.description__title}>
-                  {el.name} - {el.skillsName}
-                </h3>
+                <h3 className={style.description__title}>{el.header} разработчик</h3>
                 <p className={style.description__text}>
                   - 10 лет пишу приложения под IOS, отлично владею Objective-C и Swift.
                 </p>

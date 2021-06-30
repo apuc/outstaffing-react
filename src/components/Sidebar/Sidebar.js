@@ -5,14 +5,14 @@ import arrowLeft from '../../images/arrow_left.png';
 import arrowRight from '../../images/arrow_right.png';
 import style from './Sidebar.module.css';
 
-const Sidebar = () => {
+const Sidebar = ({ getCandidateForCalendar, currentCandidateObj }) => {
   return (
     <div className={style.candidateSidebar}>
       <div className={style.candidateSidebar__info}>
         <img src={dogBig} alt="" />
         <p className={style.candidateSidebar__info__e}>Опыт работы</p>
         <p className={style.candidateSidebar__info__y}>4+ лет</p>
-        <Link to={`/calendar`}>
+        <Link to={`/calendar`} onClick={() => getCandidateForCalendar(currentCandidateObj)}>
           <button className={style.candidateSidebar__info__btn}>Выбрать к собеседованию</button>
         </Link>
         <p className={style.candidateSidebar__info__l}>Посмотреть ещё</p>

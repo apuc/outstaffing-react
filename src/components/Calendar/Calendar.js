@@ -6,12 +6,16 @@ import rectangle from '../../images/rectangle_secondPage.png';
 import CalendarComponent from './CalendarComponent';
 import { currentMonth } from './calendarHelper';
 
-const Calendar = () => {
+const Calendar = ({ candidateForCalendar }) => {
   const [month, setMonth] = useState('');
 
   useEffect(() => {
     setMonth(currentMonth);
   }, [month]);
+
+  const { name, skillsName } = candidateForCalendar;
+
+  const abbreviatedName = name.substring(0, name.lastIndexOf(' '));
 
   return (
     <section className={style.calendar}>
@@ -23,12 +27,10 @@ const Calendar = () => {
           <div className="col-12 col-xl-12 d-flex justify-content-between align-items-center flex-column flex-sm-row">
             <div className={style.calendarHeader__info}>
               <img className={style.calendarHeader__info__img} src={calendarMale} alt="img" />
-              <h3 className={style.calendarHeader__info__name}>
-                Александр <br /> Комов
-              </h3>
+              <h3 className={style.calendarHeader__info__name}>{abbreviatedName}</h3>
             </div>
             <div className={style.calendarHeader__title}>
-              <h3 className={style.calendarHeader__title__text}>Frontend разработчик, Middle</h3>
+              <h3 className={style.calendarHeader__title__text}>{skillsName} разработчик</h3>
               <img className={style.calendarHeader__title__img} src={rectangle} alt="img" />
             </div>
             <div>

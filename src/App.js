@@ -13,9 +13,15 @@ const ReportPage = lazy(() => import('./pages/ReportFormPage.js'));
 const App = () => {
   const [isAuth, setIsAuth] = useState(true);
   const [candidates, setCandidates] = useState([]);
+  const [candidateForCalendar, setCandidateForCalendar] = useState([]);
 
   const getCandidate = (candidateArr) => {
+    console.log('candidateArr ', candidateArr);
     setCandidates(candidateArr);
+  };
+
+  const getCandidateForCalendar = (candidate) => {
+    setCandidateForCalendar(candidate);
   };
 
   return (
@@ -27,10 +33,10 @@ const App = () => {
               <HomePage getCandidate={getCandidate} />
             </Route>
             <Route path="/candidate/:id">
-              <CandidatePage candidatesArr={candidates} />
+              <CandidatePage candidatesArr={candidates} getCandidateForCalendar={getCandidateForCalendar} />
             </Route>
             <Route path="/calendar">
-              <CalendarPage />
+              <CalendarPage candidateForCalendar={candidateForCalendar} />
             </Route>
             <Route path="/report">
               <ReportPage />

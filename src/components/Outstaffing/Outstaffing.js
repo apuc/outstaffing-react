@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import style from './Outstaffing.module.css';
 import OutstaffingBlock from './OutstaffingBlock';
 import TagSelect from '../Select/TagSelect';
+import { selectTags } from '../../redux/outstaffingSlice';
 
-const Outstaffing = ({ onhandleTabBar, selected, tabs, tags }) => {
+const Outstaffing = ({ selected, candidatesArray }) => {
   const [selectedItems, setSelectedItems] = useState([]);
 
+  const tagsArr = useSelector(selectTags);
+
   const handleBlockClick = (item) => {
+    console.log('item ', item);
     if (!selectedItems.find((el) => item === el.value)) {
       setSelectedItems([...selectedItems, { value: item, label: item }]);
     }
@@ -37,28 +42,25 @@ const Outstaffing = ({ onhandleTabBar, selected, tabs, tags }) => {
           <div className="row">
             <div className="col-12 col-xl-4">
               <OutstaffingBlock
-                data={tabs.find((item) => item.name === 'Frontend')}
-                dataTags={tags.flat().filter((tag) => tag.name === 'skills_front')}
+                data={candidatesArray.find((item) => item.skillsName === 'Frontend')}
+                dataTags={tagsArr.flat().filter((tag) => tag.name === 'skills_front')}
                 onClick={(item) => handleBlockClick(item)}
-                onTabBarClick={(name) => onhandleTabBar(name)}
                 selected={selected === 'Frontend'}
               />
             </div>
             <div className="col-12 col-xl-4">
               <OutstaffingBlock
-                data={tabs.find((item) => item.name === 'Backend')}
-                dataTags={tags.flat().filter((tag) => tag.name === 'skills_back')}
+                data={candidatesArray.find((item) => item.skillsName === 'Backend')}
+                dataTags={tagsArr.flat().filter((tag) => tag.name === 'skills_back')}
                 onClick={(item) => handleBlockClick(item)}
-                onTabBarClick={(name) => onhandleTabBar(name)}
                 selected={selected === 'Backend'}
               />
             </div>
             <div className="col-12 col-xl-4">
               <OutstaffingBlock
-                data={tabs.find((item) => item.name === 'Design')}
-                dataTags={tags.flat().filter((tag) => tag.name === 'skills_design')}
+                data={candidatesArray.find((item) => item.skillsName === 'Marketer')}
+                dataTags={tagsArr.flat().filter((tag) => tag.name === 'skills_design')}
                 onClick={(item) => handleBlockClick(item)}
-                onTabBarClick={(name) => onhandleTabBar(name)}
                 selected={selected === 'Design'}
               />
             </div>
@@ -66,7 +68,7 @@ const Outstaffing = ({ onhandleTabBar, selected, tabs, tags }) => {
         </div>
       </section>
       <TagSelect
-        options={tags}
+        options={tagsArr}
         selectedItems={selectedItems}
         tagSubmit={handleSubmit}
         setSelectedItems={setSelectedItems}
