@@ -24,8 +24,8 @@ export const outstaffingSlice = createSlice({
     selectedTab: (state, action) => {
       state.selectedTab = action.payload;
     },
-    selectedItem: (state, action) => {
-      state.selectedItem = action.payload;
+    selectedItems: (state, action) => {
+      state.selectedItems = action.payload;
     },
   },
 });

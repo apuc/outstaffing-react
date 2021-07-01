@@ -1,8 +1,24 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
 import style from './TagSelect.module.css';
+import { selectedItems, selectItems, selectTags } from '../../redux/outstaffingSlice';
 
-const TagSelect = ({ selectedItems, tagSubmit, options, setSelectedItems }) => {
+const TagSelect = () => {
+  const dispatch = useDispatch();
+
+  const itemsArr = useSelector(selectItems);
+
+  const tagsArr = useSelector(selectTags);
+
+  const handleSubmit = () => {
+    const filterItems = JSON.stringify(itemsArr.map((item) => item.value));
+
+    alert(`Back-end: ${filterItems}`);
+
+    dispatch(selectedItems([]));
+  };
+
   return (
     <>
       <section className={style.search}>
@@ -12,17 +28,17 @@ const TagSelect = ({ selectedItems, tagSubmit, options, setSelectedItems }) => {
               <h2 className={style.search__title}>Найти специалиста по навыкам</h2>
               <div className={style.search__box}>
                 <Select
-                  value={selectedItems}
-                  onChange={(value) => setSelectedItems(value)}
+                  value={itemsArr}
+                  onChange={(value) => dispatch(selectedItems(value))}
                   isMulti
                   name="tags"
                   className={style.select}
                   classNamePrefix={style.select}
-                  options={options.flat().map((item) => {
+                  options={tagsArr.flat().map((item) => {
                     return { value: item.value, label: item.value };
                   })}
                 />
-                <button onClick={tagSubmit} type="submit">
+                <button onClick={handleSubmit} type="submit">
                   Поиск
                 </button>
               </div>

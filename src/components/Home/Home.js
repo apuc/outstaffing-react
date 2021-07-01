@@ -53,7 +53,7 @@ const Home = ({ getCandidate }) => {
           } else if (Number(profile.position_id) === 3) {
             skillsName = 'Marketer';
             img = design;
-            header = 'Дизайн';
+            header = 'Маркетинг';
           }
 
           return {
@@ -78,7 +78,7 @@ const Home = ({ getCandidate }) => {
 
   return (
     <>
-      <Outstaffing selected={selectedTab} candidatesArray={candidatesArr} />
+      <Outstaffing />
       <Description
         candidatesListArr={
           selectedTab ? candidatesArr.filter((item) => item.skillsName === selectedTab) : shorthandArray
