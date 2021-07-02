@@ -2,22 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Outstaffing from '../Outstaffing/Outstaffing';
 import Description from '../Description/Description';
+import { fetchProfile, fetchSkills } from '../../server/server';
 import front from '../../images/front_end.png';
 import back from '../../images/back_end.png';
 import design from '../../images/design.png';
-import { fetchProfile, fetchSkills } from '../../server/server';
 import { profiles, selectProfiles, tags, candidates, selectCandidates, selectTab } from '../../redux/outstaffingSlice';
 
-const Home = ({ getCandidate }) => {
-  const [count, setCount] = useState(2);
+const Home = () => {
+  const [index, setIndex] = useState(2);
 
   const dispatch = useDispatch();
   const profilesArr = useSelector(selectProfiles);
+
   const candidatesArr = useSelector(selectCandidates);
+
   const selectedTab = useSelector(selectTab);
 
   useEffect(() => {
-    fetchProfile('https://guild.craft-group.xyz/api/profile')
+    fetchProfile(`https://guild.craft-group.xyz/api/profile?limit=`, index)
       .then((profileArr) => dispatch(profiles(profileArr)))
       .catch((e) => console.log(e));
 
@@ -32,28 +34,25 @@ const Home = ({ getCandidate }) => {
       );
       dispatch(tags(tempTags));
     });
-  }, [dispatch]);
+  }, [dispatch, index]);
 
   useEffect(() => {
     dispatch(
       candidates(
         profilesArr.map((profile) => {
           let skillsName = '';
-          let img;
           let header;
+          let img;
 
           if (Number(profile.position_id) === 1) {
             skillsName = 'Frontend';
             img = front;
-            header = 'Фронтенд';
           } else if (Number(profile.position_id) === 2) {
             skillsName = 'Backend';
             img = back;
-            header = 'Бэкенд';
           } else if (Number(profile.position_id) === 3) {
             skillsName = 'Marketer';
             img = design;
-            header = 'Маркетинг';
           }
 
           return {
@@ -61,19 +60,18 @@ const Home = ({ getCandidate }) => {
             profileId: profile.position_id,
             name: profile.fio,
             skills: profile.skillValues,
+            level: profile.level,
             skillsName,
-            img,
             header,
+            img,
           };
         })
       )
     );
   }, [profilesArr, dispatch]);
 
-  const shorthandArray = candidatesArr.slice(0, count);
-
   const loadMore = (count) => {
-    setCount((prev) => prev + count);
+    setIndex((prev) => prev + count);
   };
 
   return (
@@ -81,9 +79,8 @@ const Home = ({ getCandidate }) => {
       <Outstaffing />
       <Description
         candidatesListArr={
-          selectedTab ? candidatesArr.filter((item) => item.skillsName === selectedTab) : shorthandArray
+          selectedTab ? candidatesArr.filter((item) => item.skillsName === selectedTab) : candidatesArr
         }
-        getCandidate={getCandidate}
         onLoadMore={loadMore}
       />
     </>

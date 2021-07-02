@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCurrentCandidate } from '../../redux/outstaffingSlice';
 import { Link } from 'react-router-dom';
 import style from './Calendar.module.css';
 import calendarMale from '../../images/medium_male.png';
@@ -6,7 +8,9 @@ import rectangle from '../../images/rectangle_secondPage.png';
 import CalendarComponent from './CalendarComponent';
 import { currentMonth } from './calendarHelper';
 
-const Calendar = ({ candidateForCalendar }) => {
+const Calendar = () => {
+  const candidateForCalendar = useSelector(selectCurrentCandidate);
+
   const [month, setMonth] = useState('');
 
   useEffect(() => {

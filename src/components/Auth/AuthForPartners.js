@@ -1,10 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { auth } from '../../redux/outstaffingSlice';
 import style from './AuthForPartners.module.css';
 import ellipse from '../../images/ellipse.png';
 import arrow from '../../images/arrow__login_page.png';
 import medium from '../../images/medium_male_big.png';
 import cross from '../../images/cross.png';
-// import specialists from '../../images/specialists.png';
 import text from '../../images/Body_Text.png';
 import align from '../../images/align-left.png';
 import phone from '../../images/phone.png';
@@ -12,7 +13,9 @@ import telegram from '../../images/telegram.png';
 import vector from '../../images/Vector_Smart_Object.png';
 import vectorBlack from '../../images/Vector_Smart_Object_black.png';
 
-const AuthForPartners = ({ setAuthed }) => {
+const AuthForPartners = () => {
+  const dispatch = useDispatch();
+
   return (
     <section className={style.partners}>
       <div className={style.partners__background}>
@@ -36,7 +39,7 @@ const AuthForPartners = ({ setAuthed }) => {
                   <label htmlFor="password">Пароль:</label>
                   <input id="password" type="password" placeholder="Пароль" />
 
-                  <button className={style.form__btn} type="submit" onClick={() => setAuthed(true)}>
+                  <button className={style.form__btn} type="submit" onClick={() => dispatch(auth(true))}>
                     Войти
                   </button>
                 </form>

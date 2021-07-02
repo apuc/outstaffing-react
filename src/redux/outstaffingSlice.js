@@ -4,8 +4,10 @@ const initialState = {
   tags: [],
   profiles: [],
   candidates: [],
-  selectedTab: '',
   selectedItems: [],
+  selectedTab: '',
+  currentCandidate: {},
+  auth: true,
 };
 
 export const outstaffingSlice = createSlice({
@@ -27,15 +29,24 @@ export const outstaffingSlice = createSlice({
     selectedItems: (state, action) => {
       state.selectedItems = action.payload;
     },
+    currentCandidate: (state, action) => {
+      state.currentCandidate = action.payload;
+    },
+    auth: (state, action) => {
+      state.auth = action.payload;
+    },
   },
 });
 
-export const { tags, profiles, candidates, selectedTab, selectedItems } = outstaffingSlice.actions;
+export const { tags, profiles, candidates, selectedTab, selectedItems, auth, currentCandidate } =
+  outstaffingSlice.actions;
 
 export const selectProfiles = (state) => state.outstaffing.profiles;
 export const selectTags = (state) => state.outstaffing.tags;
 export const selectCandidates = (state) => state.outstaffing.candidates;
 export const selectTab = (state) => state.outstaffing.selectedTab;
 export const selectItems = (state) => state.outstaffing.selectedItems;
+export const selectCurrentCandidate = (state) => state.outstaffing.currentCandidate;
+export const selectAuth = (state) => state.outstaffing.auth;
 
 export default outstaffingSlice.reducer;

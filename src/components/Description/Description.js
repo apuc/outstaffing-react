@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './Description.module.css';
 import dog from '../../images/dog.jpg';
 import rectangle from '../../images/rectangle_secondPage.png';
-import arrowLeft from '../../images/arrow_left.png';
-import arrowRight from '../../images/arrow_right.png';
 import { Link } from 'react-router-dom';
+import { LEVELS } from '../constants/constants';
 
-const Description = ({ candidatesListArr, getCandidate, onLoadMore }) => {
+const Description = ({ candidatesListArr, onLoadMore }) => {
+  const [text, setText] = useState([]);
+
   return (
     <section className={style.description}>
       <div className="container">
@@ -17,15 +18,24 @@ const Description = ({ candidatesListArr, getCandidate, onLoadMore }) => {
                 <img className={style.description__img} src={dog} alt="" />
               </div>
               <div className="col-12 col-xl-6">
-                <h3 className={style.description__title}>{el.header} разработчик</h3>
-                <p className={style.description__text}>
-                  - 10 лет пишу приложения под IOS, отлично владею Objective-C и Swift.
-                </p>
-                <p className={style.description__text}>- 5 лет руковожу командами мобильной разработки.</p>
-                <p className={style.description__text}>- 3 года преподаю в IOS-школе Сбера</p>
+                <h3 className={style.description__title}>
+                  {el.skillsName} разработчик, {LEVELS[el.level]}
+                </h3>
+
+                {text.length > 0 ? (
+                  <>
+                    <p className={style.description__text}>
+                      - 10 лет пишу приложения под IOS, отлично владею Objective-C и Swift.
+                    </p>
+                    <p className={style.description__text}>- 5 лет руковожу командами мобильной разработки.</p>
+                    <p className={style.description__text}>- 3 года преподаю в IOS-школе Сбера</p>
+                  </>
+                ) : (
+                  <p className={style.description__textSecondary}>Описание отсутствует</p>
+                )}
               </div>
               <div className="col-12 col-xl-4">
-                <Link to={`/candidate/${el.id}`} onClick={() => getCandidate(candidatesListArr)}>
+                <Link to={`/candidate/${el.id}`}>
                   <button className={style.description__button}>Подробное резюме</button>
                 </Link>
               </div>
@@ -49,7 +59,7 @@ const Description = ({ candidatesListArr, getCandidate, onLoadMore }) => {
               <div className={style.description__footer__btn}>
                 <button onClick={() => onLoadMore(2)}>Загрузить еще</button>
               </div>
-              <div className={style.description__footer__box}>
+              {/* <div className={style.description__footer__box}>
                 <div className={style.arrow__left}>
                   <img src={arrowLeft} alt="" />
                 </div>
@@ -57,7 +67,7 @@ const Description = ({ candidatesListArr, getCandidate, onLoadMore }) => {
                 <div className={style.arrow__right}>
                   <img src={arrowRight} alt="" />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

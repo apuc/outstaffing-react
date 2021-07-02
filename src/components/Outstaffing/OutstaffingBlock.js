@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectedTab, selectItems, selectedItems } from '../../redux/outstaffingSlice';
 import style from './Outstaffing.module.css';
 
-const OutstaffingBlock = ({ dataTags = [], data = {}, selected }) => {
+const OutstaffingBlock = ({ dataTags = [], data = {}, selected, img, header }) => {
   const dispatch = useDispatch();
 
   const itemsArr = useSelector(selectItems);
 
-  const { header, img, skillsName } = data;
+  const { skillsName } = data;
 
   const handleBlockClick = (item) => {
     if (!itemsArr.find((el) => item === el.value)) {

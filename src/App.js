@@ -1,7 +1,9 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './fonts/stylesheet.css';
+import { selectAuth } from './redux/outstaffingSlice';
 
 const AuthPageForDevelopers = lazy(() => import('./pages/AuthPageForDevelopers'));
 // const AuthPageForPartners = lazy(() => import('./pages/AuthPageForPartners'));
@@ -11,18 +13,13 @@ const CalendarPage = lazy(() => import('./pages/CalendarPage'));
 const ReportPage = lazy(() => import('./pages/ReportFormPage.js'));
 
 const App = () => {
-  const [isAuth, setIsAuth] = useState(true);
-  const [candidates, setCandidates] = useState([]);
-  const [candidateForCalendar, setCandidateForCalendar] = useState([]);
+  const isAuth = useSelector(selectAuth);
+  // const [candidateForCalendar, setCandidateForCalendar] = useState([]);
 
-  const getCandidate = (candidateArr) => {
-    console.log('candidateArr ', candidateArr);
-    setCandidates(candidateArr);
-  };
-
-  const getCandidateForCalendar = (candidate) => {
-    setCandidateForCalendar(candidate);
-  };
+  // const getCandidateForCalendar = (candidate) => {
+  //   console.log('candidate ', candidate);
+  //   setCandidateForCalendar(candidate);
+  // };
 
   return (
     <Router>
@@ -30,13 +27,13 @@ const App = () => {
         {isAuth ? (
           <Switch>
             <Route path="/" exact>
-              <HomePage getCandidate={getCandidate} />
+              <HomePage />
             </Route>
             <Route path="/candidate/:id">
-              <CandidatePage candidatesArr={candidates} getCandidateForCalendar={getCandidateForCalendar} />
+              <CandidatePage />
             </Route>
             <Route path="/calendar">
-              <CalendarPage candidateForCalendar={candidateForCalendar} />
+              <CalendarPage />
             </Route>
             <Route path="/report">
               <ReportPage />
@@ -47,8 +44,8 @@ const App = () => {
           </Switch>
         ) : (
           <Route path="/" exact>
-            <AuthPageForDevelopers setAuth={setIsAuth} />
-            {/* <AuthPageForPartners setAuth={setIsAuth} /> */}
+            {/* <AuthPageForPartners /> */}
+            <AuthPageForDevelopers />
           </Route>
         )}
       </Suspense>

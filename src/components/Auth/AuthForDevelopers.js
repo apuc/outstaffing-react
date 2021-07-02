@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { auth } from '../../redux/outstaffingSlice';
 import style from './AuthForDevelopers.module.css';
 import ellipse from '../../images/ellipse.png';
 import arrow from '../../images/arrow__login_page.png';
@@ -11,7 +13,8 @@ import telegram from '../../images/telegram.png';
 import vector from '../../images/Vector_Smart_Object.png';
 import vectorBlack from '../../images/Vector_Smart_Object_black.png';
 
-const AuthForDevelopers = ({ setAuthed }) => {
+const AuthForDevelopers = () => {
+  const dispatch = useDispatch();
   return (
     <section className={style.developers}>
       <div className={style.developers__background}>
@@ -35,7 +38,7 @@ const AuthForDevelopers = ({ setAuthed }) => {
                   <label htmlFor="password">Пароль:</label>
                   <input id="password" type="password" placeholder="Пароль" />
 
-                  <button className={style.form__btn} type="submit" onClick={() => setAuthed(true)}>
+                  <button className={style.form__btn} type="submit" onClick={() => dispatch(auth(true))}>
                     Войти
                   </button>
                 </form>

@@ -84,6 +84,17 @@
   line-height: 28px;
 }
 
+.description__textSecondary {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.7em;
+  font-weight: 100;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 24px;
+  text-align: left;
+  line-height: 28px;
+}
+
 @media (max-width: 575.98px) {
   .description__text {
     margin-left: 20px;
