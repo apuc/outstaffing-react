@@ -66,13 +66,13 @@ const Candidate = () => {
         <div className={style.candidate__main}>
           <div className="row">
             <div className="col-12 col-xl-4">
-              <Sidebar  />
+              <Sidebar />
             </div>
             <div className="col-12 col-xl-8">
               <div className={style.candidate__main__description}>
                 <h2>{name}</h2>
                 <img src={rectangle} alt="" />
-                <p># Описание опыта</p>
+                <p className={style.hashtag}># Описание опыта</p>
                 <div className={style.SectionOne}>
                   <h3>SVM - сервис выездных менеджеров для банка ПСБ</h3>
                   <p>
@@ -84,7 +84,7 @@ const Candidate = () => {
                   </p>
                   <h4>Senior PHP/JS Developer</h4>
                 </div>
-                <p># Средства и инструменты:</p>
+                <p className={style.hashtag}># Средства и инструменты:</p>
                 <div className={style.SectionTwo}>
                   <p>
                     - Разработал и внедрил веб приложения, а также программное обеспечение с использованием Node.js,
@@ -97,7 +97,7 @@ const Candidate = () => {
                     всех основных компонентов и внедрения новой архетиктуры. - Разработал персональное APIs.
                   </p>
                 </div>
-                <p># Описание опыта</p>
+                <p className={style.hashtag}># Описание опыта</p>
                 <div className={style.SectionThree}>
                   <h3>Multitur - личный кабинет для сервиса поиска/подбора отелей</h3>
                   <p>
@@ -105,13 +105,13 @@ const Candidate = () => {
                   </p>
                   <h4>Senior PHP/JS Developer</h4>
                 </div>
-                <p># Средства и инструменты:</p>
                 <div className={style.SectionFour}>
+                  <p className={style.hashtag}># Средства и инструменты:</p>
                   <p>Backend - REST API на PHP 7.1 с использованием фреймворка Laravel 5.8</p>
                   <p>Frontend - Vue.js</p>
                   <p>БД - MYSQL</p>
                 </div>
-                <p># Функционал:</p>
+                <p className={style.hashtag}># Функционал:</p>
                 <>
                   <div className={style.SectionFive}>
                     <p>Регистрации/авторизации;</p>

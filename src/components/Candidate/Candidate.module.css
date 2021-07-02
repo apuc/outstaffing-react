@@ -87,7 +87,6 @@
 .icon {
   min-width: 260px;
   min-height: 120px;
-  cursor: pointer;
   background-color: #f9f9f9;
   border-radius: 20px;
   position: relative;
@@ -95,10 +94,10 @@
 
 .icon > h3 {
   position: absolute;
-  right: 25%;
+  right: 20%;
   top: 40%;
   font-family: 'GT Eesti Pro Display';
-  font-size: 18px;
+  font-size: 1.8em;
   font-weight: 400;
   font-style: normal;
   letter-spacing: normal;

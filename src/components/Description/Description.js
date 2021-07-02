@@ -31,7 +31,7 @@ const Description = ({ candidatesListArr, onLoadMore }) => {
                     <p className={style.description__text}>- 3 года преподаю в IOS-школе Сбера</p>
                   </>
                 ) : (
-                  <p className={style.description__textSecondary}>Описание отсутствует</p>
+                  <p className={style.description__textSecondary}>Описание отсутствует...</p>
                 )}
               </div>
               <div className="col-12 col-xl-4">
