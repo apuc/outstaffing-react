@@ -73,15 +73,19 @@
   }
 }
 
-.description__text {
+.description__text > p {
   font-family: 'GT Eesti Pro Display';
-  font-size: 1.7em;
+  font-size: 1.6em;
   font-weight: 100;
   font-style: normal;
   letter-spacing: normal;
   line-height: 24px;
   text-align: left;
   line-height: 28px;
+}
+
+.description__text > p:first-child {
+  font-size: 1.8em;
 }
 
 .description__textSecondary {
@@ -148,7 +152,6 @@
 }
 
 .description__sp {
-  /* display: block; */
   font-family: 'GT Eesti Pro Display';
   font-size: 1.7em;
   font-weight: 400;
@@ -224,35 +227,4 @@
   letter-spacing: normal;
   text-align: center;
   margin: 0 10px;
-}
-.arrow__left {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  border-radius: 20px;
-  background-color: #f6f6f6;
-  cursor: pointer;
-}
-
-.arrow__left > img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.arrow__right {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  border-radius: 20px;
-  background-color: #74be4d;
-  cursor: pointer;
-}
-
-.arrow__right > img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

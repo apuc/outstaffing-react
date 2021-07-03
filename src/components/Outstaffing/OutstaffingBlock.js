@@ -10,9 +10,9 @@ const OutstaffingBlock = ({ dataTags = [], data = {}, selected, img, header }) =
 
   const { skillsName } = data;
 
-  const handleBlockClick = (item) => {
+  const handleBlockClick = (item, id) => {
     if (!itemsArr.find((el) => item === el.value)) {
-      dispatch(selectedItems([...itemsArr, { value: item, label: item }]));
+      dispatch(selectedItems([...itemsArr, { id, value: item, label: item }]));
     }
   };
 
@@ -42,7 +42,7 @@ const OutstaffingBlock = ({ dataTags = [], data = {}, selected, img, header }) =
         {dataTags && (
           <ul className={style.items}>
             {dataTags.map((item) => (
-              <li key={item.id} onClick={() => handleBlockClick(item.value)}>
+              <li key={item.id} onClick={() => handleBlockClick(item.value, item.id)}>
                 {item.value}
               </li>
             ))}

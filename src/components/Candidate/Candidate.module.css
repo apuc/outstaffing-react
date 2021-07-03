@@ -340,3 +340,23 @@
   text-align: left;
   margin-left: 20px;
 }
+
+.candidate__text > p {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.6em;
+  font-weight: 100;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+.candidate__textSecondary {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.6em;
+  font-weight: 100;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 24px;
+  text-align: left;
+  line-height: 28px;
+}

@@ -52,7 +52,7 @@ const Outstaffing = () => {
                 dataTags={tagsArr.flat().filter((tag) => tag.name === 'skills_design')}
                 selected={selected === 'Marketer'}
                 img={design}
-                header="Маркетинг"
+                header="Дизайн"
               />
             </div>
           </div>

@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
 import style from './TagSelect.module.css';
-import { selectedItems, selectItems, selectTags } from '../../redux/outstaffingSlice';
+import { selectedItems, selectItems, selectTags, filteredCandidates } from '../../redux/outstaffingSlice';
+import { fetchItemsForId } from '../../server/server';
 
 const TagSelect = () => {
   const dispatch = useDispatch();
@@ -12,9 +13,11 @@ const TagSelect = () => {
   const tagsArr = useSelector(selectTags);
 
   const handleSubmit = () => {
-    const filterItems = JSON.stringify(itemsArr.map((item) => item.value));
+    const filterItemsId = itemsArr.map((item) => item.id).join();
 
-    alert(`Back-end: ${filterItems}`);
+    fetchItemsForId('https://guild.craft-group.xyz/api/profile?skills=', filterItemsId).then((el) =>
+      dispatch(filteredCandidates(el))
+    );
 
     dispatch(selectedItems([]));
   };
@@ -35,7 +38,7 @@ const TagSelect = () => {
                   className={style.select}
                   classNamePrefix={style.select}
                   options={tagsArr.flat().map((item) => {
-                    return { value: item.value, label: item.value };
+                    return { id: item.id, value: item.value, label: item.value };
                   })}
                 />
                 <button onClick={handleSubmit} type="submit">

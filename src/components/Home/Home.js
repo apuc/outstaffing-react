@@ -6,7 +6,8 @@ import { fetchProfile, fetchSkills } from '../../server/server';
 import front from '../../images/front_end.png';
 import back from '../../images/back_end.png';
 import design from '../../images/design.png';
-import { profiles, selectProfiles, tags, candidates, selectCandidates, selectTab } from '../../redux/outstaffingSlice';
+// import { profiles, selectProfiles, tags, candidates, selectCandidates, selectTab } from '../../redux/outstaffingSlice';
+import { profiles, selectProfiles, tags, candidates } from '../../redux/outstaffingSlice';
 
 const Home = () => {
   const [index, setIndex] = useState(2);
@@ -14,9 +15,9 @@ const Home = () => {
   const dispatch = useDispatch();
   const profilesArr = useSelector(selectProfiles);
 
-  const candidatesArr = useSelector(selectCandidates);
+  // const candidatesArr = useSelector(selectCandidates);
 
-  const selectedTab = useSelector(selectTab);
+  // const selectedTab = useSelector(selectTab);
 
   useEffect(() => {
     fetchProfile(`https://guild.craft-group.xyz/api/profile?limit=`, index)
@@ -61,6 +62,7 @@ const Home = () => {
             name: profile.fio,
             skills: profile.skillValues,
             level: profile.level,
+            text: profile.vc_text,
             skillsName,
             header,
             img,
@@ -77,12 +79,13 @@ const Home = () => {
   return (
     <>
       <Outstaffing />
-      <Description
+      {/* <Description
         candidatesListArr={
           selectedTab ? candidatesArr.filter((item) => item.skillsName === selectedTab) : candidatesArr
         }
         onLoadMore={loadMore}
-      />
+      /> */}
+      <Description onLoadMore={loadMore} />
     </>
   );
 };

@@ -4,6 +4,7 @@ const initialState = {
   tags: [],
   profiles: [],
   candidates: [],
+  filteredCandidates: [],
   selectedItems: [],
   selectedTab: '',
   currentCandidate: {},
@@ -23,6 +24,9 @@ export const outstaffingSlice = createSlice({
     candidates: (state, action) => {
       state.candidates = action.payload;
     },
+    filteredCandidates: (state, action) => {
+      state.filteredCandidates = action.payload;
+    },
     selectedTab: (state, action) => {
       state.selectedTab = action.payload;
     },
@@ -38,12 +42,13 @@ export const outstaffingSlice = createSlice({
   },
 });
 
-export const { tags, profiles, candidates, selectedTab, selectedItems, auth, currentCandidate } =
+export const { tags, profiles, candidates, selectedTab, selectedItems, auth, currentCandidate, filteredCandidates } =
   outstaffingSlice.actions;
 
 export const selectProfiles = (state) => state.outstaffing.profiles;
 export const selectTags = (state) => state.outstaffing.tags;
 export const selectCandidates = (state) => state.outstaffing.candidates;
+export const selectFilteredCandidates = (state) => state.outstaffing.filteredCandidates;
 export const selectTab = (state) => state.outstaffing.selectedTab;
 export const selectItems = (state) => state.outstaffing.selectedItems;
 export const selectCurrentCandidate = (state) => state.outstaffing.currentCandidate;

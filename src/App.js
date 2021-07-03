@@ -11,6 +11,7 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const CandidatePage = lazy(() => import('./pages/CandidatePage'));
 const CalendarPage = lazy(() => import('./pages/CalendarPage'));
 const ReportPage = lazy(() => import('./pages/ReportFormPage.js'));
+const FormPage = lazy(() => import('./pages/FormPage.js'));
 
 const App = () => {
   const isAuth = useSelector(selectAuth);
@@ -34,6 +35,9 @@ const App = () => {
             </Route>
             <Route path="/calendar">
               <CalendarPage />
+            </Route>
+            <Route path="/form">
+              <FormPage />
             </Route>
             <Route path="/report">
               <ReportPage />
