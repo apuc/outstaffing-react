@@ -6,6 +6,7 @@ const Form = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [comment, setСomment] = useState('');
+  const [name, setName] = useState('');
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -31,10 +32,16 @@ const Form = () => {
       comment: comment,
     };
 
-    fetchForm('https://guild.craft-group.xyz/api/profile/add-to-interview', info).then((el) =>
-      el.json().then((e) => console.log('object ', e))
-    );
+    fetchForm('https://guild.craft-group.xyz/api/profile/add-to-interview', info)
+      .then((el) => {
+        return el.json();
+      })
+      .then((e) => {
+        setName(e);
+      });
   };
+
+  console.log('NAME ', name);
 
   return (
     <div className="container">

@@ -48,7 +48,6 @@
 .outstaffing__box__img {
   min-width: 260px;
   min-height: 120px;
-  cursor: pointer;
   background-color: #f9f9f9;
   border-radius: 20px;
   position: relative;
@@ -68,7 +67,6 @@
 }
 
 .outstaffing__box__img > img {
-  cursor: pointer;
   position: absolute;
 }
 

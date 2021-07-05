@@ -2,8 +2,6 @@ export const fetchProfile = async (link, index) => {
   const response = await fetch(`${link}${index}`);
   let data = await response.json();
 
-  console.log('data ', data);
-
   return data;
 };
 
@@ -24,10 +22,10 @@ export const fetchItemsForId = async (link, id) => {
 export const fetchForm = async (link, info) => {
   const response = await fetch(link, {
     method: 'POST',
-    body: JSON.stringify(info),
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify(info),
   });
 
   return response;
