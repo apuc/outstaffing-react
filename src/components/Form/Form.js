@@ -26,18 +26,6 @@ const Form = () => {
     fetchForm('https://guild.craft-group.xyz/api/profile/add-to-interview', formData);
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   fetchForm('https://guild.craft-group.xyz/api/profile/add-to-interview', data)
-  //     .then((el) => {
-  //       return el.json();
-  //     })
-  //     .then((e) => {
-  //       console.log(e);
-  //     });
-  // };
-
   return (
     <div className="container">
       <div className="row">
