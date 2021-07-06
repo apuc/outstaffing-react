@@ -11,7 +11,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchProfile(`https://guild.craft-group.xyz/api/profile?limit=`, index)
+    fetchProfile('https://guild.craft-group.xyz/api/profile?limit=', index)
       .then((profileArr) => dispatch(profiles(profileArr)))
       .catch((e) => console.log(e));
 
