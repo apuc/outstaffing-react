@@ -182,104 +182,14 @@
   margin: 20px 0px;
 }
 
-.SectionOne > h3 {
-  font-family: 'GT Eesti Pro Display';
-  font-size: 2.2em;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: normal;
-  line-height: 36px;
-  text-align: left;
-}
-
-.SectionOne > p {
-  font-family: 'GT Eesti Pro Display';
-  font-size: 1.8em;
-  font-weight: 100;
-  font-style: normal;
-  letter-spacing: normal;
-  line-height: 28px;
-  text-align: left;
-}
-
-.SectionOne > h4 {
-  font-family: 'GT Eesti Pro Display';
-  font-size: 1.8em;
-  font-weight: 700;
-  font-style: normal;
-  letter-spacing: normal;
-  line-height: 36px;
-  text-align: left;
-}
-
-.SectionTwo > p {
-  font-family: 'GT Eesti Pro Display';
-  font-size: 1.8em;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: normal;
-  line-height: 28px;
-  text-align: left;
-}
-
-.SectionThree > h3 {
-  font-family: 'GT Eesti Pro Display';
-  font-size: 2.2em;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: normal;
-  line-height: 36px;
-  text-align: left;
-}
-
-.SectionThree > p {
-  font-family: 'GT Eesti Pro Display';
-  font-size: 1.8em;
-  font-weight: 100;
-  font-style: normal;
-  letter-spacing: normal;
-  line-height: 28px;
-  text-align: left;
-}
-
-.SectionThree > h4 {
-  font-family: 'GT Eesti Pro Display';
-  font-size: 1.8em;
-  font-weight: 700;
-  font-style: normal;
-  letter-spacing: normal;
-  line-height: 36px;
-  text-align: left;
-}
-
-.SectionFour > p {
-  font-family: 'GT Eesti Pro Display';
-  font-size: 1.8em;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: normal;
-  line-height: 18px;
-  text-align: left;
-}
-
-.SectionFive > p {
-  font-family: 'GT Eesti Pro Display';
-  font-size: 1.8em;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: normal;
-  line-height: 16px;
-  text-align: left;
-}
-
 @media (min-width: 576.98px) {
-  .SectionFive__btn {
+  .candidate__btn {
     display: none;
   }
 }
 
 @media (max-width: 575.98px) {
-  .SectionFive__btn {
+  .candidate__btn {
     display: block;
     width: 221px;
     height: 49px;

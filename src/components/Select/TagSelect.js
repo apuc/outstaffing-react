@@ -19,7 +19,7 @@ const TagSelect = () => {
       dispatch(filteredCandidates(el))
     );
 
-    dispatch(selectedItems([]));
+    // dispatch(selectedItems([]));
   };
 
   return (

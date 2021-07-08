@@ -1,7 +1,12 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { currentCandidate, selectCurrentCandidate, selectProfiles } from '../../redux/outstaffingSlice';
+import {
+  currentCandidate,
+  selectCurrentCandidate,
+  selectProfiles,
+  selectFilteredCandidates,
+} from '../../redux/outstaffingSlice';
 import style from './Candidate.module.css';
 import arrow from '../../images/right-arrow.png';
 import rectangle from '../../images/rectangle_secondPage.png';
@@ -18,14 +23,21 @@ const Candidate = () => {
   const dispatch = useDispatch();
 
   const candidatesArr = useSelector(selectProfiles);
+  const filteredCandidates = useSelector(selectFilteredCandidates);
 
-  dispatch(currentCandidate(candidatesArr.find((el) => Number(el.id) === Number(candidateId))));
+  dispatch(
+    currentCandidate(
+      filteredCandidates.length > 0
+        ? filteredCandidates.find((el) => Number(el.id) === Number(candidateId))
+        : candidatesArr.find((el) => Number(el.id) === Number(candidateId))
+    )
+  );
 
   const currentCandidateObj = useSelector(selectCurrentCandidate);
 
   console.log('currentCandidateObj ', currentCandidateObj);
 
-  const { fio: name, position_id, skillValues, vc_text: text } = currentCandidateObj;
+  const { position_id, skillValues, vc_text: text } = currentCandidateObj;
 
   let classes;
   let header;
@@ -88,7 +100,6 @@ const Candidate = () => {
             </div>
             <div className="col-12 col-xl-8">
               <div className={style.candidate__main__description}>
-                <h2>{name}</h2>
                 <img src={rectangle} alt="" />
                 <p className={style.hashtag}># Описание опыта</p>
                 {text ? (
@@ -96,7 +107,7 @@ const Candidate = () => {
                 ) : (
                   <p className={style.candidate__textSecondary}>Описание отсутствует...</p>
                 )}
-                <button type="submit" className={style.SectionFive__btn}>
+                <button type="submit" className={style.candidate__btn}>
                   Выбрать к собеседованию
                 </button>
                 <SectionSkills skillsArr={skillValues} />

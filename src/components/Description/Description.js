@@ -3,7 +3,7 @@ import style from './Description.module.css';
 import dog from '../../images/dog.jpg';
 import rectangle from '../../images/rectangle_secondPage.png';
 import { Link } from 'react-router-dom';
-import { LEVELS } from '../constants/constants';
+import { LEVELS, SKILLS } from '../constants/constants';
 import { selectProfiles, selectFilteredCandidates } from '../../redux/outstaffingSlice';
 import { useSelector } from 'react-redux';
 
@@ -27,7 +27,7 @@ const Description = ({ onLoadMore }) => {
                   </div>
                   <div className="col-12 col-xl-6">
                     <h3 className={style.description__title}>
-                      {el.fio} разработчик, {LEVELS[el.level]}
+                      {SKILLS[el.position_id]}, {LEVELS[el.level]}
                     </h3>
 
                     {el.vc_text ? (
@@ -60,7 +60,7 @@ const Description = ({ onLoadMore }) => {
                   </div>
                   <div className="col-12 col-xl-6">
                     <h3 className={style.description__title}>
-                      {el.fio} разработчик, {LEVELS[el.level]}
+                      {SKILLS[el.position_id]}, {LEVELS[el.level]}
                     </h3>
 
                     {el.vc_text ? (
