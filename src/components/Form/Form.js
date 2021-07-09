@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import style from './Form.module.css';
 import { fetchForm } from '../../server/server';
+import arrow from '../../images/right-arrow.png';
+import { useHistory } from 'react-router-dom';
+import { selectPath } from '../../redux/outstaffingSlice';
+import { useSelector } from 'react-redux';
 
 const Form = () => {
   const [data, setData] = useState({
@@ -8,6 +12,9 @@ const Form = () => {
     phone: '',
     comment: '',
   });
+
+  const history = useHistory();
+  const prevPath = useSelector(selectPath);
 
   const handleChange = (e) => {
     const newData = { ...data };
@@ -30,6 +37,14 @@ const Form = () => {
     <div className="container">
       <div className="row">
         <div className="col-sm-12">
+          <div className={style.form__arrow} onClick={() => history.replace(prevPath)}>
+            <div className={style.form__arrow__img}>
+              <img src={arrow} alt="" />
+            </div>
+            <div className={style.form__arrow__sp}>
+              <span>Вернуться к кандидату</span>
+            </div>
+          </div>
           <form className={style.form} id="test">
             <label htmlFor="email">Емейл:</label>
             <input

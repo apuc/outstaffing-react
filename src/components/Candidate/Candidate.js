@@ -18,6 +18,7 @@ import design from '../../images/design.png';
 
 const Candidate = () => {
   const history = useHistory();
+
   const { id: candidateId } = useParams();
 
   const dispatch = useDispatch();
@@ -34,8 +35,6 @@ const Candidate = () => {
   );
 
   const currentCandidateObj = useSelector(selectCurrentCandidate);
-
-  console.log('currentCandidateObj ', currentCandidateObj);
 
   const { position_id, skillValues, vc_text: text } = currentCandidateObj;
 

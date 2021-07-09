@@ -82,3 +82,38 @@
   line-height: 71.88px;
   text-align: center;
 }
+
+.form__arrow {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 80px;
+}
+
+@media (max-width: 575.98px) {
+  .form__arrow {
+    margin-bottom: 40px;
+  }
+}
+
+.form__arrow__img > img {
+  cursor: pointer;
+}
+
+.form__arrow__sp > span {
+  margin-left: 40px;
+  margin-right: 120px;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.8em;
+  font-weight: 100;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 36px;
+  text-align: left;
+}
+
+@media (max-width: 575.98px) {
+  .form__arrow__sp > span {
+    margin-right: 0px;
+  }
+}
