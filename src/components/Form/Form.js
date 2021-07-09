@@ -3,8 +3,6 @@ import style from './Form.module.css';
 import { fetchForm } from '../../server/server';
 import arrow from '../../images/right-arrow.png';
 import { useHistory } from 'react-router-dom';
-import { selectPath } from '../../redux/outstaffingSlice';
-import { useSelector } from 'react-redux';
 
 const Form = () => {
   const [data, setData] = useState({
@@ -14,16 +12,19 @@ const Form = () => {
   });
 
   const history = useHistory();
-  const prevPath = useSelector(selectPath);
 
   const handleChange = (e) => {
-    const newData = { ...data };
-    newData[e.target.id] = e.target.value;
-    setData(newData);
+    const { id, value } = e.target;
+
+    setData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('submitData', data);
 
     const formData = new FormData();
     formData.append('email', data.email);
@@ -33,11 +34,17 @@ const Form = () => {
     fetchForm('https://guild.craft-group.xyz/api/profile/add-to-interview', formData);
   };
 
+  const goBack = () => {
+    history.goBack();
+  };
+
+  console.log('data', data);
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-sm-12">
-          <div className={style.form__arrow} onClick={() => history.replace(prevPath)}>
+          <div className={style.form__arrow} onClick={() => goBack()}>
             <div className={style.form__arrow__img}>
               <img src={arrow} alt="" />
             </div>

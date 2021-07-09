@@ -1,12 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  currentCandidate,
-  selectCurrentCandidate,
-  selectProfiles,
-  selectFilteredCandidates,
-} from '../../redux/outstaffingSlice';
+import { currentCandidate, selectCurrentCandidate } from '../../redux/outstaffingSlice';
 import style from './Candidate.module.css';
 import arrow from '../../images/right-arrow.png';
 import rectangle from '../../images/rectangle_secondPage.png';
@@ -15,50 +10,62 @@ import SectionSkills from './SectionSkills';
 import front from '../../images/front_end.png';
 import back from '../../images/back_end.png';
 import design from '../../images/design.png';
+import { fetchItemsForId } from '../../server/server';
 
 const Candidate = () => {
   const history = useHistory();
-
   const { id: candidateId } = useParams();
-
   const dispatch = useDispatch();
 
-  const candidatesArr = useSelector(selectProfiles);
-  const filteredCandidates = useSelector(selectFilteredCandidates);
-
-  dispatch(
-    currentCandidate(
-      filteredCandidates.length > 0
-        ? filteredCandidates.find((el) => Number(el.id) === Number(candidateId))
-        : candidatesArr.find((el) => Number(el.id) === Number(candidateId))
-    )
-  );
+  useEffect(() => {
+    fetchItemsForId('https://guild.craft-group.xyz/api/profile/', Number(candidateId)).then((el) =>
+      dispatch(currentCandidate(el))
+    );
+  }, [dispatch, candidateId]);
 
   const currentCandidateObj = useSelector(selectCurrentCandidate);
 
   const { position_id, skillValues, vc_text: text } = currentCandidateObj;
 
-  let classes;
-  let header;
-  let img;
+  const setStyles = () => {
+    const styles = {
+      classes: '',
+      header: '',
+      img: '',
+    };
 
-  if (Number(position_id) === 1) {
-    classes = style.back;
-    header = 'Backend';
-    img = back;
-  } else if (Number(position_id) === 2) {
-    classes = style.des;
-    header = 'Frontend';
-    img = front;
-  } else if (Number(position_id) === 3) {
-    classes = style.front;
-    header = 'Design';
-    img = design;
-  }
+    switch (Number(position_id)) {
+      case 1: {
+        styles.classes = style.back;
+        styles.header = 'Backend';
+        styles.img = back;
+
+        break;
+      }
+      case 2: {
+        styles.classes = style.des;
+        styles.header = 'Frontend';
+        styles.img = front;
+        break;
+      }
+      case 3: {
+        style.classes = style.front;
+        style.header = 'Design';
+        style.img = design;
+        break;
+      }
+      default:
+        break;
+    }
+
+    return styles;
+  };
 
   function createMarkup(text) {
     return { __html: text.split('</p>').join('</p>') };
   }
+
+  const { header, img, classes } = setStyles();
 
   return (
     <section className={style.candidate}>
