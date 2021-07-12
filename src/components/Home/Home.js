@@ -6,7 +6,7 @@ import { fetchProfile, fetchSkills } from '../../server/server';
 import { profiles, tags } from '../../redux/outstaffingSlice';
 
 const Home = () => {
-  const [index, setIndex] = useState(2);
+  const [index, setIndex] = useState(4);
 
   const dispatch = useDispatch();
 

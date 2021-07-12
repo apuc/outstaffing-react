@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { currentCandidate, selectCurrentCandidate } from '../../redux/outstaffingSlice';
 import style from './Candidate.module.css';
@@ -113,9 +113,11 @@ const Candidate = () => {
                 ) : (
                   <p className={style.candidate__textSecondary}>Описание отсутствует...</p>
                 )}
-                <button type="submit" className={style.candidate__btn}>
-                  Выбрать к собеседованию
-                </button>
+                <Link to={'/form'}>
+                  <button type="submit" className={style.candidate__btn}>
+                    Выбрать к собеседованию
+                  </button>
+                </Link>
                 <SectionSkills skillsArr={skillValues} />
               </div>
             </div>

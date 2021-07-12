@@ -82,6 +82,7 @@
   line-height: 24px;
   text-align: left;
   line-height: 28px;
+  word-wrap: break-word;
 }
 
 .description__text > p:first-child {
@@ -132,10 +133,10 @@
   .description__button {
     width: 220px;
     height: 50px;
-    position: absolute;
-    bottom: -170px;
     z-index: 5;
     margin-left: 85px;
+    margin-top: 40px;
+    margin-bottom: 40px;
   }
 }
 
@@ -151,6 +152,10 @@
   }
 }
 
+.description__spBox {
+  padding: 5px;
+}
+
 .description__sp {
   font-family: 'GT Eesti Pro Display';
   font-size: 1.7em;
@@ -161,6 +166,7 @@
   line-height: 36px;
   margin-top: 20px;
   margin-left: 10px;
+  word-wrap: break-word;
 }
 
 @media (max-width: 575.98px) {

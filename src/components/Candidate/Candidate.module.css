@@ -222,6 +222,7 @@
   margin-top: 60px;
   border-radius: 10px;
   margin-bottom: 60px;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 575.98px) {

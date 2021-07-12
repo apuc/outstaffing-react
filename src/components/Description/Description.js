@@ -43,11 +43,13 @@ const Description = ({ onLoadMore }) => {
                   </div>
                   <div className="col-xl-2"></div>
                   <div className="col-12 col-xl-6">
-                    {el.skillValues.map((e) => (
-                      <span key={e.id} className={style.description__sp}>
-                        {e.skill.name}
-                      </span>
-                    ))}
+                    <div className={style.description__spBox}>
+                      {el.skillValues.map((e) => (
+                        <span key={e.id} className={style.description__sp}>
+                          {e.skill.name}
+                        </span>
+                      ))}
+                    </div>
                     <img className={style.description__rectangle} src={rectangle} alt="" />
                   </div>
                   <div className="col-xl-4"></div>
@@ -76,11 +78,13 @@ const Description = ({ onLoadMore }) => {
                   </div>
                   <div className="col-xl-2"></div>
                   <div className="col-12 col-xl-6">
-                    {el.skillValues.map((e) => (
-                      <span key={e.id} className={style.description__sp}>
-                        {e.skill.name}
-                      </span>
-                    ))}
+                    <div className={style.description__spBox}>
+                      {el.skillValues.map((e) => (
+                        <span key={e.id} className={style.description__sp}>
+                          {e.skill.name}
+                        </span>
+                      ))}
+                    </div>
                     <img className={style.description__rectangle} src={rectangle} alt="" />
                   </div>
                   <div className="col-xl-4"></div>
