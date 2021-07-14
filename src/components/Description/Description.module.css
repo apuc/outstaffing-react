@@ -73,7 +73,7 @@
   }
 }
 
-.description__text > p {
+.description__text {
   font-family: 'GT Eesti Pro Display';
   font-size: 1.6em;
   font-weight: 100;
@@ -85,9 +85,9 @@
   word-wrap: break-word;
 }
 
-.description__text > p:first-child {
+/* .description__text > p:first-child {
   font-size: 1.8em;
-}
+} */
 
 .description__textSecondary {
   font-family: 'GT Eesti Pro Display';

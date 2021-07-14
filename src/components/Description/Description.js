@@ -11,9 +11,9 @@ const Description = ({ onLoadMore }) => {
   const candidatesListArr = useSelector(selectProfiles);
   const filteredListArr = useSelector(selectFilteredCandidates);
 
-  function createMarkup(text) {
-    return { __html: text.split('</p>').slice(0, 3).join('') };
-  }
+  // function createMarkup(text) {
+  //   return { __html: text.split('</p>').slice(0, 3).join('') };
+  // }
 
   return (
     <section className={style.description}>
@@ -30,8 +30,8 @@ const Description = ({ onLoadMore }) => {
                       {SKILLS[el.position_id]}, {LEVELS[el.level]}
                     </h3>
 
-                    {el.vc_text ? (
-                      <div className={style.description__text} dangerouslySetInnerHTML={createMarkup(el.vc_text)}></div>
+                    {el.vc_text_short ? (
+                      <div className={style.description__text}>{el.vc_text_short}</div>
                     ) : (
                       <p className={style.description__textSecondary}>Описание отсутствует...</p>
                     )}
@@ -65,8 +65,8 @@ const Description = ({ onLoadMore }) => {
                       {SKILLS[el.position_id]}, {LEVELS[el.level]}
                     </h3>
 
-                    {el.vc_text ? (
-                      <div className={style.description__text} dangerouslySetInnerHTML={createMarkup(el.vc_text)}></div>
+                    {el.vc_text_short ? (
+                      <div className={style.description__text}>{el.vc_text_short}</div>
                     ) : (
                       <p className={style.description__textSecondary}>Описание отсутствует...</p>
                     )}
