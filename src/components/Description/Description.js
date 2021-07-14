@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Description.module.css';
-import dog from '../../images/dog.jpg';
+import male from '../../images/medium_male.png';
 import rectangle from '../../images/rectangle_secondPage.png';
 import { Link } from 'react-router-dom';
 import { LEVELS, SKILLS } from '../constants/constants';
@@ -23,7 +23,7 @@ const Description = ({ onLoadMore }) => {
             ? filteredListArr.map((el) => (
                 <div className="row" key={el.id}>
                   <div className="col-2">
-                    <img className={style.description__img} src={dog} alt="" />
+                    <img className={style.description__img} src={male} alt="" />
                   </div>
                   <div className="col-12 col-xl-6">
                     <h3 className={style.description__title}>
@@ -58,7 +58,7 @@ const Description = ({ onLoadMore }) => {
             : candidatesListArr.map((el) => (
                 <div className="row" key={el.id}>
                   <div className="col-2">
-                    <img className={style.description__img} src={dog} alt="" />
+                    <img className={style.description__img} src={male} alt="" />
                   </div>
                   <div className="col-12 col-xl-6">
                     <h3 className={style.description__title}>
