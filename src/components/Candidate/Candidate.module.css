@@ -222,7 +222,6 @@
   margin-top: 60px;
   border-radius: 10px;
   margin-bottom: 60px;
-  flex-wrap: wrap;
 }
 
 @media (max-width: 575.98px) {
@@ -241,7 +240,14 @@
   text-align: left;
 }
 
-.SectionSkills > p {
+.SectionSkills > ul {
+  list-style: none;
+  display: flex;
+  padding-left: 0;
+  flex-wrap: wrap;
+}
+
+.SectionSkills > ul > li {
   font-family: 'GT Eesti Pro Display';
   font-size: 1.8em;
   font-weight: 100;

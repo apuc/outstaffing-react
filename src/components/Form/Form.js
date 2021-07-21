@@ -24,7 +24,6 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('submitData', data);
 
     const formData = new FormData();
     formData.append('email', data.email);
@@ -37,8 +36,6 @@ const Form = () => {
   const goBack = () => {
     history.goBack();
   };
-
-  console.log('data', data);
 
   return (
     <div className="container">

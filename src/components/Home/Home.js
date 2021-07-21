@@ -11,9 +11,9 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchProfile('https://guild.craft-group.xyz/api/profile?limit=', index)
-      .then((profileArr) => dispatch(profiles(profileArr)))
-      .catch((e) => console.log(e));
+    fetchProfile('https://guild.craft-group.xyz/api/profile?limit=', index).then((profileArr) =>
+      dispatch(profiles(profileArr))
+    );
 
     fetchSkills('https://guild.craft-group.xyz/api/skills/skills-on-main-page').then((skills) => {
       const keys = Object.keys(skills);

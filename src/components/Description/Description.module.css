@@ -85,10 +85,6 @@
   word-wrap: break-word;
 }
 
-/* .description__text > p:first-child {
-  font-size: 1.8em;
-} */
-
 .description__textSecondary {
   font-family: 'GT Eesti Pro Display';
   font-size: 1.7em;
@@ -152,11 +148,14 @@
   }
 }
 
-.description__spBox {
+.description__list {
   padding: 5px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.description__sp {
+.description__list__item {
   font-family: 'GT Eesti Pro Display';
   font-size: 1.7em;
   font-weight: 400;
@@ -164,13 +163,12 @@
   letter-spacing: normal;
   text-align: left;
   line-height: 36px;
-  margin-top: 20px;
   margin-left: 10px;
   word-wrap: break-word;
 }
 
 @media (max-width: 575.98px) {
-  .description__sp {
+  .description__list__item {
     font-size: 1.5em;
     text-align: center;
     margin-bottom: 120px;

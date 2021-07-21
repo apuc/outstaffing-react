@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './Description.module.css';
 import male from '../../images/medium_male.png';
 import rectangle from '../../images/rectangle_secondPage.png';
@@ -6,14 +6,16 @@ import { Link } from 'react-router-dom';
 import { LEVELS, SKILLS } from '../constants/constants';
 import { selectProfiles, selectFilteredCandidates } from '../../redux/outstaffingSlice';
 import { useSelector } from 'react-redux';
+import { fetchProfile } from '../../server/server';
 
 const Description = ({ onLoadMore }) => {
   const candidatesListArr = useSelector(selectProfiles);
   const filteredListArr = useSelector(selectFilteredCandidates);
+  const [allCandidates, getAllCandidates] = useState([]);
 
-  // function createMarkup(text) {
-  //   return { __html: text.split('</p>').slice(0, 3).join('') };
-  // }
+  useEffect(() => {
+    fetchProfile('https://guild.craft-group.xyz/api/profile?limit=', 1000).then((p) => getAllCandidates(p));
+  }, []);
 
   return (
     <section className={style.description}>
@@ -43,13 +45,13 @@ const Description = ({ onLoadMore }) => {
                   </div>
                   <div className="col-xl-2"></div>
                   <div className="col-12 col-xl-6">
-                    <div className={style.description__spBox}>
+                    <ul className={style.description__list}>
                       {el.skillValues.map((e) => (
-                        <span key={e.id} className={style.description__sp}>
+                        <li key={e.id} className={style.description__list__item}>
                           {e.skill.name}
-                        </span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                     <img className={style.description__rectangle} src={rectangle} alt="" />
                   </div>
                   <div className="col-xl-4"></div>
@@ -78,13 +80,13 @@ const Description = ({ onLoadMore }) => {
                   </div>
                   <div className="col-xl-2"></div>
                   <div className="col-12 col-xl-6">
-                    <div className={style.description__spBox}>
+                    <ul className={style.description__list}>
                       {el.skillValues.map((e) => (
-                        <span key={e.id} className={style.description__sp}>
+                        <li key={e.id} className={style.description__list__item}>
                           {e.skill.name}
-                        </span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                     <img className={style.description__rectangle} src={rectangle} alt="" />
                   </div>
                   <div className="col-xl-4"></div>
@@ -96,7 +98,9 @@ const Description = ({ onLoadMore }) => {
           <div className="col-12">
             <div className={style.description__footer}>
               <div className={style.description__footer__btn}>
-                <button onClick={() => onLoadMore(2)}>Загрузить еще</button>
+                {candidatesListArr.length !== allCandidates.length && filteredListArr.length === 0 ? (
+                  <button onClick={() => onLoadMore(2)}>Загрузить еще</button>
+                ) : null}
               </div>
             </div>
           </div>

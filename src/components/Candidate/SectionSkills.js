@@ -5,7 +5,7 @@ const SectionSkills = ({ skillsArr }) => {
   return (
     <div className={style.SectionSkills}>
       <h3>Навыки:</h3>
-      {skillsArr && skillsArr.map((skills) => <p key={skills.id}>{skills.skill.name}</p>)}
+      <ul>{skillsArr && skillsArr.map((skills) => <li key={skills.id}>{skills.skill.name}</li>)}</ul>
     </div>
   );
 };
