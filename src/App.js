@@ -4,20 +4,17 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './fonts/stylesheet.css'
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 
-const AuthPageForDevelopers = lazy(() =>
-  import('./pages/AuthPageForDevelopers')
-)
-const AuthPageForPartners = lazy(() => import('./pages/AuthPageForPartners'))
-const HomePage = lazy(() => import('./pages/HomePage'))
-const CandidatePage = lazy(() => import('./pages/CandidatePage'))
-const CalendarPage = lazy(() => import('./pages/CalendarPage'))
-const ReportPage = lazy(() => import('./pages/ReportFormPage.js'))
-const FormPage = lazy(() => import('./pages/FormPage.js'))
+import AuthPageForDevelopers from './pages/AuthPageForDevelopers';
+import AuthPageForPartners from './pages/AuthPageForPartners';
+import HomePage from './pages/HomePage';
+import CandidatePage from './pages/CandidatePage';
+import CalendarPage from'./pages/CalendarPage';
+import ReportPage from './pages/ReportFormPage.js';
+import FormPage from './pages/FormPage.js';
 
 const App = () => {
   return (
     <Router>
-      <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <Route path='/auth' exact>
             {/* <AuthPageForPartners /> */}
@@ -32,7 +29,6 @@ const App = () => {
             <div>Page not found</div>
           </Route>
         </Switch>
-      </Suspense>
     </Router>
   )
 }
