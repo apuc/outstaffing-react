@@ -19,7 +19,7 @@ const Calendar = () => {
 
   const { name, skillsName } = candidateForCalendar;
 
-  const abbreviatedName = name.substring(0, name.lastIndexOf(' '));
+  const abbreviatedName = name && name.substring(0, name.lastIndexOf(' '));
 
   return (
     <section className={style.calendar}>
