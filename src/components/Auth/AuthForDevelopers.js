@@ -25,8 +25,6 @@ const AuthForDevelopers = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  console.log('i', isAuth)
-
   if(isAuth) {
     return <Redirect to='/' />
   }

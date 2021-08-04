@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { auth } from '../../redux/outstaffingSlice';
 import style from './AuthForPartners.module.css';
@@ -12,9 +12,22 @@ import phone from '../../images/phone.png';
 import telegram from '../../images/telegram.png';
 import vector from '../../images/Vector_Smart_Object.png';
 import vectorBlack from '../../images/Vector_Smart_Object_black.png';
+import { fetchAuth } from '../../server/server'
+
+import { useSelector } from 'react-redux'
+import { selectAuth } from '../../redux/outstaffingSlice';
+import { Redirect } from 'react-router-dom';
 
 const AuthForPartners = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const isAuth = useSelector(selectAuth)
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  if(isAuth) {
+    return <Redirect to='/' />
+  }
 
   return (
     <section className={style.partners}>
@@ -34,12 +47,27 @@ const AuthForPartners = () => {
                 </div>
                 <form className={style.partners__form}>
                   <label htmlFor="login">Ваш логин:</label>
-                  <input id="login" type="text" placeholder="Логин" />
+                  <input id="login" type="text" placeholder="Логин"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
 
                   <label htmlFor="password">Пароль:</label>
-                  <input id="password" type="password" placeholder="Пароль" />
+                  <input id="password" type="password" placeholder="Пароль" 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
 
-                  <button className={style.form__btn} type="submit" onClick={() => dispatch(auth(true))}>
+                  <button className={style.form__btn} 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      fetchAuth({
+                        username,
+                        password,
+                        dispatch: ()=> dispatch(auth(true))
+                      })
+                    }
+                  }>
                     Войти
                   </button>
                 </form>

@@ -3,7 +3,7 @@ export const fetchProfile = async (link, index) => {
     const response = await fetch(`${link}${index}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
-        'Origin': `${baseURL}`,
+        'Origin': `${process.env.REACT_APP_BASE_URL}`,
       }
     })
     let data = await response.json()
@@ -17,7 +17,7 @@ export const fetchSkills = async (link) => {
     const response = await fetch(link, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
-        'Origin': `${baseURL}`,
+        'Origin': `${process.env.REACT_APP_BASE_URL}`,
       }
     })
     let data = await response.json()
@@ -31,7 +31,7 @@ export const fetchItemsForId = async (link, id) => {
     const response = await fetch(`${link}${id}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
-        'Origin': `${baseURL}`,
+        'Origin': `${process.env.REACT_APP_BASE_URL}`,
       }
     })
     let data = await response.json()
@@ -46,7 +46,7 @@ export const fetchForm = async (link, info) => {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
-        'Origin': `${baseURL}`,
+        'Origin': `${process.env.REACT_APP_BASE_URL}`,
         'Content-Type': 'multipart/form-data'
       },
       body: info
