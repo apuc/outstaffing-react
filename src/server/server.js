@@ -2,7 +2,8 @@ export const fetchProfile = async (link, index) => {
   try {
     const response = await fetch(`${link}${index}`, {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Origin': `${baseURL}`,
       }
     })
     let data = await response.json()
@@ -15,7 +16,8 @@ export const fetchSkills = async (link) => {
   try {
     const response = await fetch(link, {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Origin': `${baseURL}`,
       }
     })
     let data = await response.json()
@@ -28,7 +30,8 @@ export const fetchItemsForId = async (link, id) => {
   try {
     const response = await fetch(`${link}${id}`, {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Origin': `${baseURL}`,
       }
     })
     let data = await response.json()
@@ -43,6 +46,7 @@ export const fetchForm = async (link, info) => {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Origin': `${baseURL}`,
         'Content-Type': 'multipart/form-data'
       },
       body: info
