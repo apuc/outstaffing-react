@@ -6,7 +6,7 @@ const initialState = {
   filteredCandidates: [],
   selectedItems: [],
   currentCandidate: {},
-  auth: true,
+  auth: false,
 };
 
 export const outstaffingSlice = createSlice({
