@@ -14,11 +14,22 @@ import vector from '../../images/Vector_Smart_Object.png'
 import vectorBlack from '../../images/Vector_Smart_Object_black.png'
 import { fetchAuth } from '../../server/server'
 
+import { useSelector } from 'react-redux'
+import { selectAuth } from '../../redux/outstaffingSlice';
+import { Redirect } from 'react-router-dom';
+
 const AuthForDevelopers = () => {
   const dispatch = useDispatch()
+  const isAuth = useSelector(selectAuth)
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+
+  console.log('i', isAuth)
+
+  if(isAuth) {
+    return <Redirect to='/' />
+  }
 
   return (
     <section className={style.developers}>
@@ -57,14 +68,14 @@ const AuthForDevelopers = () => {
 
                   <button
                     className={style.form__btn}
-                    type='submit'
-                    onClick={() => 
+                    onClick={(e) => {
+                      e.preventDefault();
                       fetchAuth({
                         username,
                         password,
                         dispatch: ()=> dispatch(auth(true))
                       })
-                    }
+                    }}
                   >
                     Войти
                   </button>
