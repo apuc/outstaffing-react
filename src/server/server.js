@@ -1,6 +1,10 @@
 export const fetchProfile = async (link, index) => {
   try {
-    const response = await fetch(`${link}${index}`)
+    const response = await fetch(`${link}${index}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+      }
+    })
     let data = await response.json()
 
     return data
@@ -9,7 +13,11 @@ export const fetchProfile = async (link, index) => {
 
 export const fetchSkills = async (link) => {
   try {
-    const response = await fetch(link)
+    const response = await fetch(link, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+      }
+    })
     let data = await response.json()
 
     return data
@@ -18,7 +26,11 @@ export const fetchSkills = async (link) => {
 
 export const fetchItemsForId = async (link, id) => {
   try {
-    const response = await fetch(`${link}${id}`)
+    const response = await fetch(`${link}${id}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+      }
+    })
     let data = await response.json()
 
     return data
@@ -30,6 +42,7 @@ export const fetchForm = async (link, info) => {
     const response = await fetch(link, {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
         'Content-Type': 'multipart/form-data'
       },
       body: info
@@ -40,14 +53,16 @@ export const fetchForm = async (link, info) => {
 }
 
 export const fetchAuth = async ({ username, password, dispatch }) => {
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const apiURL = process.env.REACT_APP_API_URL;
   try {
     const response = await fetch(
-      'https://guild.craft-group.xyz/api/user/login',
+      `${apiURL}/api/user/login`,
       {
         method: 'POST',
-        mode: 'cors',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Origin': `${baseURL}`,
         },
         body: JSON.stringify({
           username,
