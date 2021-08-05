@@ -30,7 +30,7 @@ const Form = () => {
     formData.append('phone', data.phone);
     formData.append('comment', data.comment);
 
-    fetchForm('https://guild.craft-group.xyz/api/profile/add-to-interview', formData);
+    fetchForm(`${process.env.REACT_APP_API_URL}/api/profile/add-to-interview`, formData);
   };
 
   const goBack = () => {

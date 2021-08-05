@@ -16,7 +16,7 @@ import { fetchAuth } from '../../server/server'
 
 import { useSelector } from 'react-redux'
 import { selectAuth } from '../../redux/outstaffingSlice';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 const AuthForPartners = () => {
   const dispatch = useDispatch()
@@ -69,6 +69,10 @@ const AuthForPartners = () => {
                     }
                   }>
                     Войти
+                  </button>
+
+                  <button className={`${style.form__btn} ${style.auth__link}`}>
+                    <Link to='/authdev'>Для разработчиков</Link>
                   </button>
                 </form>
               </div>

@@ -11,11 +11,11 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchProfile('https://guild.craft-group.xyz/api/profile?limit=', index).then((profileArr) =>
+    fetchProfile(`${process.env.REACT_APP_API_URL}/api/profile?limit=`, index).then((profileArr) =>
       dispatch(profiles(profileArr))
     );
 
-    fetchSkills('https://guild.craft-group.xyz/api/skills/skills-on-main-page').then((skills) => {
+    fetchSkills(`${process.env.REACT_APP_API_URL}/api/skills/skills-on-main-page`).then((skills) => {
       const keys = Object.keys(skills);
       const values = Object.values(skills);
 

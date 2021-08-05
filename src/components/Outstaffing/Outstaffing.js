@@ -28,7 +28,7 @@ const Outstaffing = () => {
           <div className="row">
             <div className="col-12 col-xl-4">
               <OutstaffingBlock
-                dataTags={tagsArr.flat().filter((tag) => tag.name === 'skills_front')}
+                dataTags={tagsArr && tagsArr.flat().filter((tag) => tag.name === 'skills_front')}
                 img={front}
                 header="Фронтенд"
               />

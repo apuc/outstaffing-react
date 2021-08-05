@@ -15,7 +15,7 @@ const TagSelect = () => {
   const handleSubmit = () => {
     const filterItemsId = itemsArr.map((item) => item.id).join();
 
-    fetchItemsForId(`https://guild.craft-group.xyz/api/profile?skills=`, filterItemsId).then((el) =>
+    fetchItemsForId(`${process.env.REACT_APP_API_URL}/api/profile?skills=`, filterItemsId).then((el) =>
       dispatch(filteredCandidates(el))
     );
 
