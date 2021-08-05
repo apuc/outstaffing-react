@@ -2,7 +2,6 @@ export const fetchProfile = async (link, index) => {
   try {
     const response = await fetch(`${link}${index}`, {
       method: 'GET',
-      mode: 'no-cors',
       headers: {
         'Access-Control-Request-Headers': 'authorization',
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
@@ -19,7 +18,6 @@ export const fetchSkills = async (link) => {
   try {
     const response = await fetch(link, {
       method: 'GET',
-      mode: 'no-cors',
       headers: {
         'Access-Control-Request-Headers': 'authorization',
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
@@ -37,7 +35,6 @@ export const fetchItemsForId = async (link, id) => {
   try {
     const response = await fetch(`${link}${id}`, {
       method: 'GET',
-      mode: 'no-cors',
       headers: {
         'Access-Control-Request-Headers': 'authorization',
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
@@ -54,7 +51,6 @@ export const fetchForm = async (link, info) => {
   try {
     const response = await fetch(link, {
       method: 'POST',
-      mode: 'no-cors',
       headers: {
         'Access-Control-Request-Headers': 'authorization',
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
