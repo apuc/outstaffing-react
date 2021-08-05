@@ -18,7 +18,7 @@ const Candidate = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchItemsForId('https://guild.craft-group.xyz/api/profile/', Number(candidateId)).then((el) =>
+    fetchItemsForId(`${process.env.REACT_APP_API_URL}/api/profile/`, Number(candidateId)).then((el) =>
       dispatch(currentCandidate(el))
     );
   }, [dispatch, candidateId]);

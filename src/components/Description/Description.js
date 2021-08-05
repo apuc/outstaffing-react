@@ -14,7 +14,7 @@ const Description = ({ onLoadMore }) => {
   const [allCandidates, getAllCandidates] = useState([]);
 
   useEffect(() => {
-    fetchProfile('https://guild.craft-group.xyz/api/profile?limit=', 1000).then((p) => getAllCandidates(p));
+    fetchProfile(`${process.env.REACT_APP_API_URL}/api/profile?limit=`, 1000).then((p) => getAllCandidates(p));
   }, []);
 
   return (

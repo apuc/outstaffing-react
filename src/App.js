@@ -16,18 +16,18 @@ const App = () => {
   return (
     <Router>
         <Switch>
-          <Route path='/auth' exact>
-            {/* <AuthPageForPartners /> */}
+          <Route path='/authdev' exact>
             <AuthPageForDevelopers />
+          </Route>
+          <Route path='/auth' exact>
+            <AuthPageForPartners />
           </Route>
           <ProtectedRoute path='/' exact component={HomePage} />
           <ProtectedRoute path='/candidate/:id' component={CandidatePage} />
           <ProtectedRoute path='/calendar' component={CalendarPage} />
           <ProtectedRoute path='/form' component={FormPage} />
           <ProtectedRoute path='/report' component={ReportPage} />
-          <Route>
-            <div>Page not found</div>
-          </Route>
+          <ProtectedRoute component={()=><div>Page not found</div>} />
         </Switch>
     </Router>
   )
