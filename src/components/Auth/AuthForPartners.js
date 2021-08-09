@@ -67,14 +67,14 @@ const AuthForPartners = () => {
                     onClick={!isLoading ? (e) => {
                       e.preventDefault();
                       dispatch(loading(true))
-                      // fetchAuth({
-                      //   username,
-                      //   password,
-                      //   dispatch: ()=> {
-                      //     dispatch(auth(true))
-                      //     dispatch(loading(false))
-                      //   }
-                      // })
+                      fetchAuth({
+                        username,
+                        password,
+                        dispatch: ()=> {
+                          dispatch(auth(true))
+                          dispatch(loading(false))
+                        }
+                      })
                     } : ()=>{}}
                   >
                   { isLoading ? <Loader /> : 'Войти' }
