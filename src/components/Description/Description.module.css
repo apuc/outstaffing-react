@@ -53,6 +53,10 @@
   margin-bottom: 10px;
 }
 
+.description__title {
+  color: #333;
+}
+
 @media (max-width: 575.98px) {
   .description__title {
     text-align: center;

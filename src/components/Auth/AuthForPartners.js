@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { auth } from '../../redux/outstaffingSlice';
+import { loading } from '../../redux/loaderSlice'
 import style from './AuthForPartners.module.css';
 import ellipse from '../../images/ellipse.png';
 import arrow from '../../images/arrow__login_page.png';
@@ -16,12 +17,15 @@ import { fetchAuth } from '../../server/server'
 
 import { useSelector } from 'react-redux'
 import { selectAuth } from '../../redux/outstaffingSlice';
+import { selectIsLoading } from '../../redux/loaderSlice';
 import { Redirect, Link } from 'react-router-dom';
+import { Loader } from '../Loader/Loader'
 
 const AuthForPartners = () => {
   const dispatch = useDispatch()
   const isAuth = useSelector(selectAuth)
-
+  const isLoading = useSelector(selectIsLoading)
+console.log('iL',isLoading);
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -58,20 +62,25 @@ const AuthForPartners = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
 
-                  <button className={style.form__btn} 
-                    onClick={(e) => {
+                  <button
+                    className={style.form__btn}
+                    onClick={!isLoading ? (e) => {
                       e.preventDefault();
+                      dispatch(loading(true))
                       fetchAuth({
                         username,
                         password,
-                        dispatch: ()=> dispatch(auth(true))
+                        dispatch: ()=> {
+                          dispatch(auth(true))
+                          dispatch(loading(false))
+                        }
                       })
-                    }
-                  }>
-                    Войти
+                    } : ()=>{}}
+                  >
+                  { isLoading ? <Loader /> : 'Войти' }
                   </button>
 
-                  <button className={`${style.form__btn} ${style.auth__link}`}>
+                  <button className={`${style.form__btn__dev} ${style.auth__link}`}>
                     <Link to='/authdev'>Для разработчиков</Link>
                   </button>
                 </form>

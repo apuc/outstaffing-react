@@ -29,7 +29,9 @@ const Description = ({ onLoadMore }) => {
                   </div>
                   <div className="col-12 col-xl-6">
                     <h3 className={style.description__title}>
-                      {SKILLS[el.position_id]}, {LEVELS[el.level]}
+                      <Link to={`/candidate/${el.id}`}>
+                        {SKILLS[el.position_id]}, {LEVELS[el.level]}
+                      </Link>
                     </h3>
 
                     {el.vc_text_short ? (
@@ -64,7 +66,9 @@ const Description = ({ onLoadMore }) => {
                   </div>
                   <div className="col-12 col-xl-6">
                     <h3 className={style.description__title}>
-                      {SKILLS[el.position_id]}, {LEVELS[el.level]}
+                      <Link to={`/candidate/${el.id}`}>
+                        {SKILLS[el.position_id]}, {LEVELS[el.level]}
+                      </Link>
                     </h3>
 
                     {el.vc_text_short ? (
