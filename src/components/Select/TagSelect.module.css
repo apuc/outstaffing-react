@@ -70,3 +70,7 @@
   font-size: 1.6em !important;
   color: gray !important;
 }
+
+.search__submit:hover .loader path {
+    fill: #6aaf5c;
+}

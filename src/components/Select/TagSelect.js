@@ -1,12 +1,15 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
+import { Loader } from '../Loader/Loader';
 import style from './TagSelect.module.css';
 import { selectedItems, selectItems, selectTags, filteredCandidates } from '../../redux/outstaffingSlice';
 import { fetchItemsForId } from '../../server/server';
+import { selectIsLoading } from '../../redux/loaderSlice';
 
 const TagSelect = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading)
 
   const itemsArr = useSelector(selectItems);
 
@@ -41,8 +44,8 @@ const TagSelect = () => {
                     return { id: item.id, value: item.value, label: item.value };
                   })}
                 />
-                <button onClick={handleSubmit} type="submit">
-                  Поиск
+                <button onClick={handleSubmit} type="submit" className={style.search__submit}>
+                { isLoading ? <Loader /> : 'Поиск' }
                 </button>
               </div>
             </div>
