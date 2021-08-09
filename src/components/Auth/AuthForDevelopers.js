@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../redux/outstaffingSlice'
+import { loading } from '../../redux/loaderSlice'
 import style from './AuthForDevelopers.module.css'
 import ellipse from '../../images/ellipse.png'
 import arrow from '../../images/arrow__login_page.png'
@@ -14,13 +15,15 @@ import vector from '../../images/Vector_Smart_Object.png'
 import vectorBlack from '../../images/Vector_Smart_Object_black.png'
 import { fetchAuth } from '../../server/server'
 
-import { useSelector } from 'react-redux'
 import { selectAuth } from '../../redux/outstaffingSlice';
+import { selectIsLoading } from '../../redux/loaderSlice';
 import { Redirect, Link } from 'react-router-dom';
+import { Loader } from '../Loader/Loader'
 
 const AuthForDevelopers = () => {
   const dispatch = useDispatch()
   const isAuth = useSelector(selectAuth)
+  const isLoading = useSelector(selectIsLoading)
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -66,19 +69,23 @@ const AuthForDevelopers = () => {
 
                   <button
                     className={style.form__btn}
-                    onClick={(e) => {
+                    onClick={!isLoading ? (e) => {
                       e.preventDefault();
+                      dispatch(loading(true))
                       fetchAuth({
                         username,
                         password,
-                        dispatch: ()=> dispatch(auth(true))
+                        dispatch: ()=> {
+                          dispatch(auth(true))
+                          dispatch(loading(false))
+                        }
                       })
-                    }}
+                    } : ()=>{}}
                   >
-                    Войти
+                  { isLoading ? <Loader /> : 'Войти' }
                   </button>
 
-                  <button className={`${style.form__btn} ${style.auth__link}`}>
+                  <button className={`${style.form__btn__partners} ${style.auth__link}`}>
                     <Link to='/auth'>Для партнёров</Link>
                   </button>
                 </form>

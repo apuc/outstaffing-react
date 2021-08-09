@@ -153,6 +153,32 @@
   letter-spacing: normal;
   line-height: 71.88px;
   text-align: center;
+  border: 2px solid #6aaf5c;
+}
+
+.form__btn:hover {
+  background-image: none;
+  background-color: #ffffff;
+  border: 2px solid #6aaf5c;
+  color: #6aaf5c !important;
+  transition: .3s;
+}
+
+.form__btn__partners {
+  width: 288px;
+  height: 75px;
+  border-radius: 38px;
+  background-color: #ffffff;
+  border: 2px solid #6aaf5c;
+  font-family: 'Muller';
+  font-size: 2em;
+  letter-spacing: normal;
+  line-height: 71.88px;
+  text-align: center;
+}
+
+.form__btn__partners a {
+  color: #6aaf5c !important;
 }
 
 @media (max-width: 575.98px) {
