@@ -3,9 +3,9 @@ export const fetchProfile = async (link, index) => {
     const response = await fetch(`${link}${index}`, {
       method: 'GET',
       headers: {
-        'Access-Control-Request-Headers': 'authorization',
+        // 'Access-Control-Request-Headers': 'authorization',
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
-        'Origin': `${process.env.REACT_APP_BASE_URL}`,
+        // 'Origin': `${process.env.REACT_APP_BASE_URL}`,
       }
     })
     let data = await response.json()
@@ -19,9 +19,9 @@ export const fetchSkills = async (link) => {
     const response = await fetch(link, {
       method: 'GET',
       headers: {
-        'Access-Control-Request-Headers': 'authorization',
+        // 'Access-Control-Request-Headers': 'authorization',
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
-        'Origin': `${process.env.REACT_APP_BASE_URL}`,
+        // 'Origin': `${process.env.REACT_APP_BASE_URL}`,
       }
     })
     let data = await response.json()
@@ -36,9 +36,9 @@ export const fetchItemsForId = async (link, id) => {
     const response = await fetch(`${link}${id}`, {
       method: 'GET',
       headers: {
-        'Access-Control-Request-Headers': 'authorization',
+        // 'Access-Control-Request-Headers': 'authorization',
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
-        'Origin': `${process.env.REACT_APP_BASE_URL}`,
+        // 'Origin': `${process.env.REACT_APP_BASE_URL}`,
       }
     })
     let data = await response.json()
@@ -52,9 +52,9 @@ export const fetchForm = async (link, info) => {
     const response = await fetch(link, {
       method: 'POST',
       headers: {
-        'Access-Control-Request-Headers': 'authorization',
+        // 'Access-Control-Request-Headers': 'authorization',
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
-        'Origin': `${process.env.REACT_APP_BASE_URL}`,
+        // 'Origin': `${process.env.REACT_APP_BASE_URL}`,
         'Content-Type': 'multipart/form-data'
       },
       body: info
@@ -74,7 +74,7 @@ export const fetchAuth = async ({ username, password, dispatch }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Origin': `${baseURL}`,
+          // 'Origin': `${baseURL}`,
         },
         body: JSON.stringify({
           username,
