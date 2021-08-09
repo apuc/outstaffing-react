@@ -156,6 +156,10 @@
   border: 2px solid #6aaf5c;
 }
 
+.form__btn:hover .loader * {
+  fill: #6aaf5c;
+}
+
 .form__btn:hover {
   background-image: none;
   background-color: #ffffff;

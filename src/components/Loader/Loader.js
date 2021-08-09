@@ -1,4 +1,6 @@
 import SVGLoader from "react-loader-spinner";
+import './loader.css'
+
 export const Loader = () => {
     return (
         <div className='loader'>
@@ -7,7 +9,6 @@ export const Loader = () => {
                 color="#fff"
                 height={50}
                 width={50}
-                timeout={3000}
             />
         </div>
     );

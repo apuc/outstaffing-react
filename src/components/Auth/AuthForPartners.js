@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { auth } from '../../redux/outstaffingSlice';
-import { loading } from '../../redux/loaderSlice'
+import { loading } from '../../redux/loaderSlice';
 import style from './AuthForPartners.module.css';
 import ellipse from '../../images/ellipse.png';
 import arrow from '../../images/arrow__login_page.png';
@@ -25,7 +25,7 @@ const AuthForPartners = () => {
   const dispatch = useDispatch()
   const isAuth = useSelector(selectAuth)
   const isLoading = useSelector(selectIsLoading)
-console.log('iL',isLoading);
+  
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -67,14 +67,14 @@ console.log('iL',isLoading);
                     onClick={!isLoading ? (e) => {
                       e.preventDefault();
                       dispatch(loading(true))
-                      fetchAuth({
-                        username,
-                        password,
-                        dispatch: ()=> {
-                          dispatch(auth(true))
-                          dispatch(loading(false))
-                        }
-                      })
+                      // fetchAuth({
+                      //   username,
+                      //   password,
+                      //   dispatch: ()=> {
+                      //     dispatch(auth(true))
+                      //     dispatch(loading(false))
+                      //   }
+                      // })
                     } : ()=>{}}
                   >
                   { isLoading ? <Loader /> : 'Войти' }
