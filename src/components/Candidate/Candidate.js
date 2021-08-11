@@ -102,7 +102,7 @@ const Candidate = () => {
         <div className={style.candidate__main}>
           <div className="row">
             <div className="col-12 col-xl-4">
-              <Sidebar />
+              <Sidebar candidate={currentCandidateObj}  />
             </div>
             <div className="col-12 col-xl-8">
               <div className={style.candidate__main__description}>
