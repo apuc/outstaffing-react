@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   tags: [],
   profiles: [],
-  filteredCandidates: [],
+  filteredCandidates:null,
   selectedItems: [],
   currentCandidate: {},
   auth: false,
