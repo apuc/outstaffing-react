@@ -111,7 +111,9 @@ const Candidate = () => {
                 {text ? (
                   <div className={style.candidate__text} dangerouslySetInnerHTML={createMarkup(text)}></div>
                 ) : (
-                  <p className={style.candidate__textSecondary}>Описание отсутствует...</p>
+                  <p className={style.candidate__textSecondary}>
+                    {currentCandidateObj.vc_text ? currentCandidateObj.vc_text : 'Описание отсутствует...' }
+                  </p>
                 )}
                 <Link to={'/form'}>
                   <button type="submit" className={style.candidate__btn}>
