@@ -18,8 +18,6 @@ const Description = ({ onLoadMore }) => {
     fetchProfile(`${process.env.REACT_APP_API_URL}/api/profile?limit=`, 1000).then((p) => getAllCandidates(p));
   }, []);
 
-  console.log('render',filteredListArr, itemsArr)
-
   if(!filteredListArr) {
     return (
       <section className={style.description}>
@@ -33,7 +31,7 @@ const Description = ({ onLoadMore }) => {
                 </div>
                 <div className="col-12 col-xl-6">
                   <h3 className={style.description__title}>
-                    {SKILLS[el.position_id]}, {LEVELS[el.level]}
+                    {el.specification} {SKILLS[el.position_id]}, {LEVELS[el.level]}
                   </h3>
 
                   {el.vc_text_short ? (
@@ -80,7 +78,7 @@ const Description = ({ onLoadMore }) => {
                   </div>
                   <div className="col-12 col-xl-6">
                     <h3 className={style.description__title}>
-                      {SKILLS[el.position_id]}, {LEVELS[el.level]}
+                      {el.specification} {SKILLS[el.position_id]}, {LEVELS[el.level]}
                     </h3>
 
                     {el.vc_text_short ? (

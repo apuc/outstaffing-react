@@ -20,6 +20,11 @@ import { selectIsLoading } from '../../redux/loaderSlice';
 import { Redirect, Link } from 'react-router-dom';
 import { Loader } from '../Loader/Loader'
 
+import { withSwalInstance } from 'sweetalert2-react';
+import swal from 'sweetalert2';
+ 
+const SweetAlert = withSwalInstance(swal);
+
 const AuthForDevelopers = () => {
   const dispatch = useDispatch()
   const isAuth = useSelector(selectAuth)
@@ -27,6 +32,7 @@ const AuthForDevelopers = () => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState(null);
 
   if(isAuth) {
     return <Redirect to='/' />
@@ -67,6 +73,17 @@ const AuthForDevelopers = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
 
+                  
+
+                  { error && <div className={style.form__error}>
+                    <SweetAlert
+                      show={!!error}
+                      title="Ошибка"
+                      text={error}
+                      onConfirm={() => setError(null)}
+                    />
+                  </div> }
+
                   <div className={style.form__buttons}>
                     <button
                       className={style.form__btn}
@@ -78,6 +95,10 @@ const AuthForDevelopers = () => {
                           password,
                           dispatch: ()=> {
                             dispatch(auth(true))
+                            dispatch(loading(false))
+                          },
+                          catchError: () => {
+                            setError('Некорректные данные для входа')
                             dispatch(loading(false))
                           }
                         })

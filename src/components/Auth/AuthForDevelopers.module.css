@@ -182,7 +182,7 @@
   background-color: #ffffff;
   border: 2px solid #6aaf5c;
   font-family: 'Muller';
-  font-size: 2em;
+  font-size: 1.8em;
   letter-spacing: normal;
   line-height: 71.88px;
   text-align: center;
@@ -191,6 +191,12 @@
 .form__btn__partners a {
   color: #6aaf5c !important;
 }
+
+/* .form__error {
+  font-size: 16px;
+  color: #b21;
+  margin-left: 45px;
+} */
 
 @media (max-width: 575.98px) {
   .form__btn {
