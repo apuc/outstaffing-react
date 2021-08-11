@@ -132,8 +132,14 @@
   outline: none;
 }
 
+.form__buttons {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
 .form__btn {
-  width: 288px;
+  width: 268px;
   height: 75px;
   box-shadow: 6px 5px 20px rgba(82, 151, 34, 0.21);
   border-radius: 38px;
@@ -154,6 +160,7 @@
   line-height: 71.88px;
   text-align: center;
   border: 2px solid #6aaf5c;
+  margin-right: 1.5rem;
 }
 
 .form__btn:hover {
@@ -166,7 +173,7 @@
 
 
 .form__btn__dev {
-  width: 288px;
+  width: 268px;
   height: 75px;
   border-radius: 38px;
   background-color: #ffffff;
@@ -430,7 +437,6 @@
 
 .auth__link {
   display: block;
-  margin-top: 1.3rem;
 }
 
 .auth__link a {

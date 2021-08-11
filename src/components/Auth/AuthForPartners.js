@@ -62,6 +62,7 @@ const AuthForPartners = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
 
+                  <div className={style.form__buttons}>
                   <button
                     className={style.form__btn}
                     onClick={!isLoading ? (e) => {
@@ -83,6 +84,7 @@ const AuthForPartners = () => {
                   <button className={`${style.form__btn__dev} ${style.auth__link}`}>
                     <Link to='/authdev'>Для разработчиков</Link>
                   </button>
+                  </div>
                 </form>
               </div>
             </div>

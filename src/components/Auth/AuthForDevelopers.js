@@ -67,27 +67,30 @@ const AuthForDevelopers = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
 
-                  <button
-                    className={style.form__btn}
-                    onClick={!isLoading ? (e) => {
-                      e.preventDefault();
-                      dispatch(loading(true))
-                      fetchAuth({
-                        username,
-                        password,
-                        dispatch: ()=> {
-                          dispatch(auth(true))
-                          dispatch(loading(false))
-                        }
-                      })
-                    } : ()=>{}}
-                  >
-                  { isLoading ? <Loader /> : 'Войти' }
-                  </button>
+                  <div className={style.form__buttons}>
+                    <button
+                      className={style.form__btn}
+                      onClick={!isLoading ? (e) => {
+                        e.preventDefault();
+                        dispatch(loading(true))
+                        fetchAuth({
+                          username,
+                          password,
+                          dispatch: ()=> {
+                            dispatch(auth(true))
+                            dispatch(loading(false))
+                          }
+                        })
+                      } : ()=>{}}
+                    >
+                    { isLoading ? <Loader /> : 'Войти' }
+                    </button>
 
-                  <button className={`${style.form__btn__partners} ${style.auth__link}`}>
-                    <Link to='/auth'>Для партнёров</Link>
-                  </button>
+                    <button className={`${style.form__btn__partners} ${style.auth__link}`}>
+                      <Link to='/auth'>Для партнёров</Link>
+                    </button>
+                  </div>
+
                 </form>
               </div>
             </div>
