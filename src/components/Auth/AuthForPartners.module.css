@@ -189,6 +189,13 @@
   color: #6aaf5c !important;
 }
 
+.form__error {
+  font-size: 16px;
+  color: #b21;
+  margin-left: 45px;
+  margin-bottom: 16px;
+}
+
 @media (max-width: 575.98px) {
   .form__btn {
     margin: 0 auto;

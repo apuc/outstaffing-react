@@ -64,7 +64,7 @@ export const fetchForm = async (link, info) => {
   } catch (error) {}
 }
 
-export const fetchAuth = async ({ username, password, dispatch }) => {
+export const fetchAuth = async ({ username, password, dispatch, catchError }) => {
   const baseURL = process.env.REACT_APP_BASE_URL;
   const apiURL = process.env.REACT_APP_API_URL;
   try {
@@ -84,6 +84,7 @@ export const fetchAuth = async ({ username, password, dispatch }) => {
     )
 
     if(!response.ok) {
+      catchError();
       return response.statusText;
     }
 

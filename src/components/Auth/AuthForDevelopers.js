@@ -27,6 +27,7 @@ const AuthForDevelopers = () => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState(null);
 
   if(isAuth) {
     return <Redirect to='/' />
@@ -67,6 +68,10 @@ const AuthForDevelopers = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
 
+                  { error && <div className={style.form__error}>
+                    {error}
+                  </div> }
+
                   <div className={style.form__buttons}>
                     <button
                       className={style.form__btn}
@@ -78,6 +83,10 @@ const AuthForDevelopers = () => {
                           password,
                           dispatch: ()=> {
                             dispatch(auth(true))
+                            dispatch(loading(false))
+                          },
+                          catchError: () => {
+                            setError('Некорректные данные')
                             dispatch(loading(false))
                           }
                         })
