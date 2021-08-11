@@ -30,3 +30,10 @@
     box-shadow: 3px 2px 5px rgba(82, 151, 34, 0.21);
     transition: .3s;
 }
+
+@media (max-width: 1198px) {
+    .logout-button {
+        top: 16px;
+    }
+  }
+  
