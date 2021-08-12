@@ -61,6 +61,16 @@ const Description = ({ onLoadMore }) => {
             ))}
           </div>
   
+          <div className="row">
+          <div className="col-12">
+            <div className={style.description__footer}>
+              <div className={style.description__footer__btn}>
+                  <button onClick={() => onLoadMore(2)}>Загрузить еще</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         </div>
       </section>
     );
