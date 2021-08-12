@@ -11,7 +11,7 @@ const handlePositionClick = ({dispatch, positionId}) => {
   );
 };
 
-const OutstaffingBlock = ({ dataTags = [], selected, img, header, positionId }) => {
+const OutstaffingBlock = ({ dataTags = [], selected, img, header, positionId, isSelected, onSelect }) => {
   console.log('p', positionId)
   const dispatch = useDispatch();
 
@@ -36,7 +36,7 @@ const OutstaffingBlock = ({ dataTags = [], selected, img, header, positionId }) 
   });
 
   return (
-    <div className={style.outstaffing__box}>
+    <div className={`${style.outstaffing__box} ${isSelected?style.outstaffing__box__selected:''}`} onClick={()=>onSelect(positionId)}>
       <div className={`${style.outstaffing__box__img} ${selected ? style.border : ''}`} onClick={()=>handlePositionClick({dispatch, positionId})}>
         <h3>{header}</h3>
         <img className={classes} src={img} alt="img" />

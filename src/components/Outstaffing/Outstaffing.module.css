@@ -1,3 +1,8 @@
+.outstaffing__box__selected .outstaffing__box__img {
+  background-color: #52b70999;
+  color: #f9f9f9;
+}
+
 .outstaffing__title {
   margin-top: 60px;
 }

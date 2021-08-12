@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import style from './Outstaffing.module.css';
 import OutstaffingBlock from './OutstaffingBlock';
@@ -9,6 +9,7 @@ import back from '../../images/back_end.png';
 import design from '../../images/design.png';
 
 const Outstaffing = () => {
+  const [selectedPositionId, setSelectedPositionId] = useState(null);
   const tagsArr = useSelector(selectTags);
 
   return (
@@ -32,6 +33,8 @@ const Outstaffing = () => {
                 img={front}
                 header="Фронтенд"
                 positionId='2'
+                isSelected={selectedPositionId==='2'}
+                onSelect={id=>setSelectedPositionId(id)}
               />
             </div>
             <div className="col-12 col-xl-4">
@@ -40,6 +43,8 @@ const Outstaffing = () => {
                 img={back}
                 header="Бэкенд"
                 positionId='1'
+                isSelected={selectedPositionId==='1'}
+                onSelect={id=>setSelectedPositionId(id)}
               />
             </div>
             <div className="col-12 col-xl-4">
@@ -48,6 +53,8 @@ const Outstaffing = () => {
                 img={design}
                 header="Дизайн"
                 positionId='5'
+                isSelected={selectedPositionId==='5'}
+                onSelect={id=>setSelectedPositionId(id)}
               />
             </div>
           </div>
