@@ -13,7 +13,8 @@ import ReportPage from './pages/ReportFormPage.js';
 import FormPage from './pages/FormPage.js';
 
 const App = () => {
-  return (
+  return (<>
+    <h1>IT Аутстаффинг в России</h1>
     <Router>
         <Switch>
           <Route path='/authdev' exact>
@@ -30,6 +31,7 @@ const App = () => {
           <ProtectedRoute component={()=><div>Page not found</div>} />
         </Switch>
     </Router>
+    </>
   )
 }
 

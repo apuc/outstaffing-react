@@ -31,6 +31,7 @@ const Outstaffing = () => {
                 dataTags={tagsArr && tagsArr.flat().filter((tag) => tag.name === 'skills_front')}
                 img={front}
                 header="Фронтенд"
+                positionId='2'
               />
             </div>
             <div className="col-12 col-xl-4">
@@ -38,6 +39,7 @@ const Outstaffing = () => {
                 dataTags={tagsArr.flat().filter((tag) => tag.name === 'skills_back')}
                 img={back}
                 header="Бэкенд"
+                positionId='1'
               />
             </div>
             <div className="col-12 col-xl-4">
@@ -45,6 +47,7 @@ const Outstaffing = () => {
                 dataTags={tagsArr.flat().filter((tag) => tag.name === 'skills_design')}
                 img={design}
                 header="Дизайн"
+                positionId='5'
               />
             </div>
           </div>
