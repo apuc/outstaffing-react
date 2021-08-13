@@ -8,9 +8,21 @@ import front from '../../images/front_end.png';
 import back from '../../images/back_end.png';
 import design from '../../images/design.png';
 
+
+
+const createSelectPositionHandler = ({ selectedPositionId, setSelectedPositionId }) => id => {
+  if(id===selectedPositionId) {
+    setSelectedPositionId(null)
+  } else {
+    setSelectedPositionId(id);
+  }
+}
+
 const Outstaffing = () => {
   const [selectedPositionId, setSelectedPositionId] = useState(null);
   const tagsArr = useSelector(selectTags);
+
+  const onSelectPosition = createSelectPositionHandler({ selectedPositionId, setSelectedPositionId });
 
   return (
     <>
@@ -34,7 +46,7 @@ const Outstaffing = () => {
                 header="Фронтенд"
                 positionId='2'
                 isSelected={selectedPositionId==='2'}
-                onSelect={id=>setSelectedPositionId(id)}
+                onSelect={id=>onSelectPosition(id)}
               />
             </div>
             <div className="col-12 col-xl-4">
@@ -44,7 +56,7 @@ const Outstaffing = () => {
                 header="Бэкенд"
                 positionId='1'
                 isSelected={selectedPositionId==='1'}
-                onSelect={id=>setSelectedPositionId(id)}
+                onSelect={id=>onSelectPosition(id)}
               />
             </div>
             <div className="col-12 col-xl-4">
@@ -54,7 +66,7 @@ const Outstaffing = () => {
                 header="Дизайн"
                 positionId='5'
                 isSelected={selectedPositionId==='5'}
-                onSelect={id=>setSelectedPositionId(id)}
+                onSelect={id=>onSelectPosition(id)}
               />
             </div>
           </div>
