@@ -21,7 +21,7 @@ const handlePositionClick = ({dispatch, positionId, isSelected}) => {
 };
 
 const OutstaffingBlock = ({ dataTags = [], selected, img, header, positionId, isSelected, onSelect }) => {
-  console.log('p', positionId)
+  
   const dispatch = useDispatch();
 
   const itemsArr = useSelector(selectItems);

@@ -318,9 +318,31 @@
 
 @font-face {
   font-family: 'Muller';
-  src: url('muller_extrabold_demo.woff2') format('woff2'), url('muller_extrabold_demo.woff') format('woff'),
-    url('muller_extrabold_demo.ttf') format('truetype');
-  font-weight: bold;
+  src: local('Muller Bold'), local('Muller-Bold'),
+      url('MullerBold.woff2') format('woff2'),
+      url('MullerBold.woff') format('woff'),
+      url('MullerBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Muller';
+  src: local('Muller Regular'), local('Muller-Regular'),
+      url('MullerRegular.woff2') format('woff2'),
+      url('MullerRegular.woff') format('woff'),
+      url('MullerRegular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Muller';
+  src: local('Muller Light'), local('Muller-Light'),
+      url('MullerLight.woff2') format('woff2'),
+      url('MullerLight.woff') format('woff'),
+      url('MullerLight.ttf') format('truetype');
+  font-weight: 300;
   font-style: normal;
 }
 

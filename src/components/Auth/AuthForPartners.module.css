@@ -155,6 +155,7 @@
   border: none;
   color: #ffffff;
   font-family: 'Muller';
+  font-weight: bold;
   font-size: 2.2em;
   letter-spacing: normal;
   line-height: 71.88px;
@@ -179,7 +180,8 @@
   background-color: #ffffff;
   border: 2px solid #6aaf5c;
   font-family: 'Muller';
-  font-size: 1.8em;
+  font-size: 2em;
+  font-weight: 300;
   letter-spacing: normal;
   line-height: 71.88px;
   text-align: center;
