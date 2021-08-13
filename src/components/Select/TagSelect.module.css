@@ -71,6 +71,10 @@
   color: gray !important;
 }
 
+.search__submit {
+  font-weight: bold;
+}
+
 .search__submit:hover .loader path {
     fill: #6aaf5c;
 }
