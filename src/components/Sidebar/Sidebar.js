@@ -19,7 +19,7 @@ const Sidebar = ({ candidate }) => {
   return (
     <div className={style.candidateSidebar}>
       <div className={style.candidateSidebar__info}>
-        <img src={maleBig} alt="" />
+        <img src={`${process.env.REACT_APP_BASE_URL}${candidate.photo}`} alt="" />
         { candidate && candidate.years_of_exp && <>
           <p className={style.candidateSidebar__info__e}>Опыт работы</p>
           <p className={style.candidateSidebar__info__y}>{getYearsString(candidate.years_of_exp)}</p>

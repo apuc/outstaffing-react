@@ -17,7 +17,7 @@ const Calendar = () => {
     setMonth(currentMonth);
   }, [month]);
 
-  const { name, skillsName } = candidateForCalendar;
+  const { name, skillsName, photo } = candidateForCalendar;
 
   const abbreviatedName = name && name.substring(0, name.lastIndexOf(' '));
 
@@ -30,7 +30,7 @@ const Calendar = () => {
           </h2>
           <div className="col-12 col-xl-12 d-flex justify-content-between align-items-center flex-column flex-sm-row">
             <div className={style.calendarHeader__info}>
-              <img className={style.calendarHeader__info__img} src={calendarMale} alt="img" />
+              <img className={style.calendarHeader__info__img} src={`${process.env.REACT_APP_BASE_URL}${photo}`} alt="img" />
               <h3 className={style.calendarHeader__info__name}>{abbreviatedName}</h3>
             </div>
             <div className={style.calendarHeader__title}>
