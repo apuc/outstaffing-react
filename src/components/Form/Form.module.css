@@ -59,6 +59,10 @@
   outline: none;
 }
 
+textarea {
+  resize: none;
+}
+
 .form__btn {
   width: 288px;
   height: 75px;
@@ -116,3 +120,4 @@
     margin-right: 0px;
   }
 }
+

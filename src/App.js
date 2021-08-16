@@ -24,9 +24,9 @@ const App = () => {
             <AuthPageForPartners />
           </Route>
           <ProtectedRoute path='/' exact component={HomePage} />
-          <ProtectedRoute path='/candidate/:id' component={CandidatePage} />
+          <ProtectedRoute exact path='/candidate/:id' component={CandidatePage} />
           <ProtectedRoute path='/calendar' component={CalendarPage} />
-          <ProtectedRoute path='/form' component={FormPage} />
+          <ProtectedRoute exact path='/candidate/:id/form' component={FormPage} />
           <ProtectedRoute path='/report' component={ReportPage} />
           <ProtectedRoute component={()=><div>Page not found</div>} />
         </Switch>
