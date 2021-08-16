@@ -27,7 +27,7 @@ const Description = ({ onLoadMore }) => {
             candidatesListArr.map((el) => (
               <div className="row" key={el.id}>
                 <div className="col-2">
-                  <img className={style.description__img} src={el.photo}} alt="" />
+                  <img className={style.description__img} src={el.photo} alt="" />
                 </div>
                 <div className="col-12 col-xl-6">
                   <h3 className={style.description__title}>
