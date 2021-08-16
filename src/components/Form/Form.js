@@ -64,7 +64,7 @@ const Form = () => {
             <input
               onChange={handleChange}
               id="phone"
-              type="number"
+              type="text"
               name="Phone"
               placeholder="Телефон"
               value={data.phone}
