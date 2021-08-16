@@ -1,0 +1,15 @@
+.react-tel-input {
+    width: min-content !important;
+    margin-bottom: 60px;
+}
+
+.react-tel-input .form-control {
+    padding: 30px 30px 30px 48px;
+    border-radius: 37px;
+    width: 332px;
+}
+
+.react-tel-input .flag-dropdown {
+    border-top-left-radius: 37px;
+    border-bottom-left-radius: 37px;
+}

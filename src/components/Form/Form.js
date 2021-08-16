@@ -2,9 +2,19 @@ import React, { useState } from 'react';
 import style from './Form.module.css';
 import { fetchForm } from '../../server/server';
 import arrow from '../../images/right-arrow.png';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams, Redirect } from 'react-router-dom';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+import './form.css';
+
+import { withSwalInstance } from 'sweetalert2-react';
+import swal from 'sweetalert2';
+ 
+const SweetAlert = withSwalInstance(swal);
 
 const Form = () => {
+  const urlParams = useParams();
+  const [status, setStatus] = useState(null);
   const [data, setData] = useState({
     email: '',
     phone: '',
@@ -26,19 +36,32 @@ const Form = () => {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append('profile_id', urlParams.id);
     formData.append('email', data.email);
     formData.append('phone', data.phone);
     formData.append('comment', data.comment);
 
-    fetchForm(`${process.env.REACT_APP_API_URL}/api/profile/add-to-interview`, formData);
+    fetchForm(`${process.env.REACT_APP_API_URL}/api/profile/add-to-interview`, {
+      profile_id: urlParams.id,
+      ...data,
+    }).then( (res)=>  res.json()
+      .then( resJSON => setStatus(resJSON))
+    )
   };
 
   const goBack = () => {
     history.goBack();
   };
 
+  console.log('s',status)
+
   return (
     <div className="container">
+      {status && <SweetAlert
+        show={!!status}
+        text={status.errors ? status.errors[Object.keys(status.errors)[0]] : 'Форма отправлена'}
+        onConfirm={status.errors ? () => {setStatus(null);} : () => {setStatus(null); history.push(`/candidate/${urlParams.id}`)}}
+      />}
       <div className="row">
         <div className="col-sm-12">
           <div className={style.form__arrow} onClick={() => goBack()}>
@@ -61,14 +84,21 @@ const Form = () => {
             />
 
             <label htmlFor="phone">Номер телефона:</label>
-            <input
+            <PhoneInput
+              id="phone"
+              name="Phone"
+              country={'ru'}
+              value={data.phone}
+              onChange={e=>handleChange({target: {value:e, id: 'phone' }})}
+            />
+            {/* <input
               onChange={handleChange}
               id="phone"
               type="text"
               name="Phone"
               placeholder="Телефон"
               value={data.phone}
-            />
+            /> */}
 
             <textarea
               onChange={handleChange}

@@ -24,7 +24,7 @@ const Sidebar = ({ candidate }) => {
           <p className={style.candidateSidebar__info__e}>Опыт работы</p>
           <p className={style.candidateSidebar__info__y}>{getYearsString(candidate.years_of_exp)}</p>
         </> }
-        <Link to={`/form`}>
+                <Link to={`/candidate/${candidate.id}/form`}>
           <button className={style.candidateSidebar__info__btn}>Выбрать к собеседованию</button>
         </Link>
       </div>

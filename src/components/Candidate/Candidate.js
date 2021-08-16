@@ -115,7 +115,7 @@ const Candidate = () => {
                     {currentCandidateObj.vc_text ? currentCandidateObj.vc_text : 'Описание отсутствует...' }
                   </p>
                 )}
-                <Link to={'/form'}>
+                <Link to={`/candidate/${currentCandidateObj.id}/form`}>
                   <button type="submit" className={style.candidate__btn}>
                     Выбрать к собеседованию
                   </button>

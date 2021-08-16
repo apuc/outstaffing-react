@@ -55,9 +55,9 @@ export const fetchForm = async (link, info) => {
         // 'Access-Control-Request-Headers': 'authorization',
         'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
         // 'Origin': `${process.env.REACT_APP_BASE_URL}`,
-        'Content-Type': 'multipart/form-data'
+          'Content-Type': 'application/json',
       },
-      body: info
+      body: JSON.stringify(info)
     })
 
     return response
