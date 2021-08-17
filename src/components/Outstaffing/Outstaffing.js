@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import style from './Outstaffing.module.css';
 import OutstaffingBlock from './OutstaffingBlock';
 import TagSelect from '../Select/TagSelect';
-import { selectTags } from '../../redux/outstaffingSlice';
+import { selectTags, getPositionId, setPositionId } from '../../redux/outstaffingSlice';
 import front from '../../images/front_end.png';
 import back from '../../images/back_end.png';
 import design from '../../images/design.png';
 
 
 
-const createSelectPositionHandler = ({ selectedPositionId, setSelectedPositionId }) => id => {
-  if(id===selectedPositionId) {
-    setSelectedPositionId(null)
+const createSelectPositionHandler = ({ positionId, setPositionId, dispatch }) => id => {
+  if(id===positionId) {
+    dispatch(setPositionId(null));
   } else {
-    setSelectedPositionId(id);
+    dispatch(setPositionId(id));
   }
 }
 
 const Outstaffing = () => {
-  const [selectedPositionId, setSelectedPositionId] = useState(null);
+  const dispatch = useDispatch();
+  const positionId = useSelector(getPositionId)
   const tagsArr = useSelector(selectTags);
 
-  const onSelectPosition = createSelectPositionHandler({ selectedPositionId, setSelectedPositionId });
-
+  const onSelectPosition = createSelectPositionHandler({ positionId, setPositionId, dispatch });
   return (
     <>
       <section className={style.outstaffing}>
@@ -45,7 +45,7 @@ const Outstaffing = () => {
                 img={front}
                 header="Фронтенд"
                 positionId='2'
-                isSelected={selectedPositionId==='2'}
+                isSelected={positionId==='2'}
                 onSelect={id=>onSelectPosition(id)}
               />
             </div>
@@ -55,7 +55,7 @@ const Outstaffing = () => {
                 img={back}
                 header="Бэкенд"
                 positionId='1'
-                isSelected={selectedPositionId==='1'}
+                isSelected={positionId==='1'}
                 onSelect={id=>onSelectPosition(id)}
               />
             </div>
@@ -65,7 +65,7 @@ const Outstaffing = () => {
                 img={design}
                 header="Дизайн"
                 positionId='5'
-                isSelected={selectedPositionId==='5'}
+                isSelected={positionId==='5'}
                 onSelect={id=>onSelectPosition(id)}
               />
             </div>

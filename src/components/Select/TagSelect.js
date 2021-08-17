@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
 import { Loader } from '../Loader/Loader';
 import style from './TagSelect.module.css';
-import { selectedItems, selectItems, selectTags, filteredCandidates } from '../../redux/outstaffingSlice';
+import { selectedItems, selectItems, selectTags, filteredCandidates, setPositionId } from '../../redux/outstaffingSlice';
 import { fetchItemsForId } from '../../server/server';
 import { selectIsLoading } from '../../redux/loaderSlice';
 
@@ -15,7 +15,9 @@ const TagSelect = () => {
 
   const tagsArr = useSelector(selectTags);
 
-  const handleSubmit = () => {
+  const handleSubmit = ({ dispatch }) => {
+
+    dispatch(setPositionId(null));
     const filterItemsId = itemsArr.map((item) => item.id).join();
 
     fetchItemsForId(`${process.env.REACT_APP_API_URL}/api/profile?skills=`, filterItemsId).then((el) =>
@@ -44,7 +46,7 @@ const TagSelect = () => {
                     return { id: item.id, value: item.value, label: item.value };
                   })}
                 />
-                <button onClick={handleSubmit} type="submit" className={style.search__submit}>
+                <button onClick={()=>handleSubmit({dispatch})} type="submit" className={style.search__submit}>
                 { isLoading ? <Loader /> : 'Поиск' }
                 </button>
               </div>
