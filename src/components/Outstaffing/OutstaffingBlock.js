@@ -23,7 +23,6 @@ const handlePositionClick = ({dispatch, positionId, isSelected, onSelect}) => {
     }
     );
   }
-
 };
 
 const OutstaffingBlock = ({ dataTags = [], selected, img, header, positionId, isSelected, onSelect }) => {

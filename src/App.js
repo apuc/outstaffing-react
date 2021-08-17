@@ -23,7 +23,7 @@ const App = () => {
           <Route path='/auth' exact>
             <AuthPageForPartners />
           </Route>
-          <ProtectedRoute path='/' exact component={HomePage} />
+          <ProtectedRoute exact path='/' component={HomePage} />
           <ProtectedRoute exact path='/candidate/:id' component={CandidatePage} />
           <ProtectedRoute path='/calendar' component={CalendarPage} />
           <ProtectedRoute exact path='/candidate/:id/form' component={FormPage} />
