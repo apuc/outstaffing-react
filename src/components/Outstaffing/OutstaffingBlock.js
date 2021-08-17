@@ -6,15 +6,21 @@ import style from './Outstaffing.module.css';
 
 import { fetchProfile } from '../../server/server';
 
-const handlePositionClick = ({dispatch, positionId, isSelected}) => {
+const handlePositionClick = ({dispatch, positionId, isSelected, onSelect}) => {
 
   if(isSelected) {
-    fetchProfile(`${process.env.REACT_APP_API_URL}/api/profile?limit=`, 4).then((profileArr) =>
-      dispatch(filteredCandidates(profileArr))
+    fetchProfile(`${process.env.REACT_APP_API_URL}/api/profile?limit=`, 4).then((profileArr) => {
+      dispatch(filteredCandidates(profileArr));
+      dispatch(selectedItems([]));
+      onSelect(positionId);
+    }
     );
   } else {
-    fetchItemsForId(`${process.env.REACT_APP_API_URL}/api/profile?position_id=`, positionId).then((el) =>
-      dispatch(filteredCandidates(el))
+    fetchItemsForId(`${process.env.REACT_APP_API_URL}/api/profile?position_id=`, positionId).then((el) => {
+      dispatch(filteredCandidates(el));
+      dispatch(selectedItems([]));
+      onSelect(positionId);
+    }
     );
   }
 
@@ -45,8 +51,8 @@ const OutstaffingBlock = ({ dataTags = [], selected, img, header, positionId, is
   });
 
   return (
-    <div className={`${style.outstaffing__box} ${isSelected?style.outstaffing__box__selected:''}`} onClick={()=>onSelect(positionId)}>
-      <div className={`${style.outstaffing__box__img} ${selected ? style.border : ''}`} onClick={()=>handlePositionClick({dispatch, positionId, isSelected})}>
+    <div className={`${style.outstaffing__box} ${isSelected?style.outstaffing__box__selected:''}`} >
+      <div className={`${style.outstaffing__box__img} ${selected ? style.border : ''}`} onClick={()=>handlePositionClick({dispatch, positionId, isSelected, onSelect})}>
         <h3>{header}</h3>
         <img className={classes} src={img} alt="img" />
       </div>

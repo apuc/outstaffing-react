@@ -7,6 +7,7 @@ const initialState = {
   selectedItems: [],
   currentCandidate: {},
   auth: false,
+  positionId: null,
 };
 
 export const outstaffingSlice = createSlice({
@@ -31,10 +32,13 @@ export const outstaffingSlice = createSlice({
     auth: (state, action) => {
       state.auth = action.payload;
     },
+    setPositionId: (state, action) => {
+      state.positionId = action.payload;
+    },
   },
 });
 
-export const { tags, profiles, selectedItems, auth, currentCandidate, filteredCandidates } = outstaffingSlice.actions;
+export const { tags, profiles, selectedItems, auth, currentCandidate, filteredCandidates, setPositionId } = outstaffingSlice.actions;
 
 export const selectProfiles = (state) => state.outstaffing.profiles;
 export const selectTags = (state) => state.outstaffing.tags;
@@ -42,5 +46,6 @@ export const selectFilteredCandidates = (state) => state.outstaffing.filteredCan
 export const selectItems = (state) => state.outstaffing.selectedItems;
 export const selectCurrentCandidate = (state) => state.outstaffing.currentCandidate;
 export const selectAuth = (state) => state.outstaffing.auth;
+export const getPositionId = (state) => state.outstaffing.positionId;
 
 export default outstaffingSlice.reducer;
