@@ -22,14 +22,3 @@ h1 {
   display: none;
 }
 
-footer {
-  padding: 0 5rem;
-}
-
-footer>div {
-  border-top: 2px solid #73c141;
-  padding: 1rem;
-  font-family: 'Muller';
-  font-weight: 300;
-  font-size: 1.2em;
-}
