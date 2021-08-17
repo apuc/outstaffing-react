@@ -8,7 +8,12 @@ import './index.css';
 
 ReactDOM.render(
   <Provider store={store}>
+    <>
     <App />
+    <footer>
+      <div>2021 © Outstaffing</div>
+    </footer>
+    </>
   </Provider>,
   document.getElementById('root')
 );
