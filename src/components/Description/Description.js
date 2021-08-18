@@ -7,8 +7,9 @@ import { LEVELS, SKILLS } from '../constants/constants';
 import { selectProfiles, selectFilteredCandidates, selectItems } from '../../redux/outstaffingSlice';
 import { useSelector } from 'react-redux';
 import { fetchProfile } from '../../server/server';
+import { Loader } from '../Loader/Loader';
 
-const Description = ({ onLoadMore }) => {
+const Description = ({ onLoadMore, isLoadingMore }) => {
   const candidatesListArr = useSelector(selectProfiles);
   const itemsArr = useSelector(selectItems);
   const filteredListArr = useSelector(selectFilteredCandidates);
@@ -65,7 +66,10 @@ const Description = ({ onLoadMore }) => {
           <div className="col-12">
             <div className={style.description__footer}>
               <div className={style.description__footer__btn}>
-                  <button onClick={() => onLoadMore(2)}>Загрузить еще</button>
+                  <button onClick={() => onLoadMore(2)}>
+                  {
+                  isLoadingMore ? <Loader width={40} height={40} /> : 'Загрузить еще'
+                  } </button>
               </div>
             </div>
           </div>
