@@ -4,6 +4,7 @@ import Outstaffing from '../Outstaffing/Outstaffing';
 import Description from '../Description/Description';
 import { fetchProfile, fetchSkills } from '../../server/server';
 import { profiles, tags } from '../../redux/outstaffingSlice';
+import { Footer } from '../Footer/Footer';
 
 const Home = () => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -39,6 +40,7 @@ const Home = () => {
     <>
       <Outstaffing />
       <Description onLoadMore={loadMore} isLoadingMore={isLoadingMore} />
+      <Footer />
     </>
   );
 };

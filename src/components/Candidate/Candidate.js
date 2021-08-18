@@ -10,6 +10,7 @@ import front from '../../images/front_end.png';
 import back from '../../images/back_end.png';
 import design from '../../images/design.png';
 import { fetchItemsForId } from '../../server/server';
+import { Footer } from '../Footer/Footer';
 
 import './candidate.css';
 
@@ -129,6 +130,7 @@ const Candidate = () => {
             </div>
           </div>
         </div>
+        <Footer />
     </div>
   );
 };

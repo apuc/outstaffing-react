@@ -281,3 +281,7 @@
 .candidate + .logout-button{
   top: 80px !important;
 }
+
+.candidate footer {
+  margin-top: 2.5rem !important;
+}

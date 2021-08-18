@@ -1,11 +1,94 @@
 footer {
-    padding: 2rem 5rem;
-  }
+  margin-top: -3rem;
+}
   
-footer>div {
-    border-top: 2px solid #73c141;
-    padding: 1rem;
+footer .copyright {
+    padding: 1rem 1rem 1rem 5.6rem;
     font-family: 'Muller';
     font-weight: 300;
     font-size: 1.2em;
+}
+
+.footer__left {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 575.98px) {
+  .footer__left {
+    margin-top: 120px;
+  }
+}
+
+.footer__description {
+  padding: 0 100px 0 34px;
+}
+
+@media (max-width: 575.98px) {
+  .footer__description {
+    padding: 0;
+    margin-left: 10px;
+  }
+}
+
+.footer__left > div > span {
+  color: #18586e;
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.6em;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 16.81px;
+  text-align: left;
+}
+
+@media (max-width: 575.98px) {
+  .footer__left > div > span {
+    font-size: 1.2em;
+  }
+}
+
+.footer__icon {
+  text-align: end;
+}
+
+.footer__icon > img {
+  margin-left: 20px;
+}
+
+@media (max-width: 575.98px) {
+  .footer__icon > img {
+    margin-left: 10px;
+  }
+}
+
+.footer__right {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+@media (max-width: 575.98px) {
+  .footer__right {
+    margin-bottom: 20px;
+  }
+}
+.footer__phone {
+  color: #003b65;
+  font-family: 'CeraPro';
+  font-size: 2.1em;
+  letter-spacing: normal;
+  line-height: 25px;
+  text-align: left;
+}
+
+.footer__working-hours {
+  color: #003b65;
+  font-family: 'CeraPro';
+  font-size: 1.2em;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-left: 24px;
 }

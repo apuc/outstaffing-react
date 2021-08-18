@@ -293,3 +293,7 @@
   letter-spacing: normal;
   line-height: normal;
 }
+
+.calendar footer {
+  margin-top: 2rem !important;
+}
