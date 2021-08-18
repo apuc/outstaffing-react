@@ -154,7 +154,7 @@
 }
 
 .description__list {
-  padding: 5px;
+  padding: 0;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -168,7 +168,7 @@
   letter-spacing: normal;
   text-align: left;
   line-height: 36px;
-  margin-left: 10px;
+  margin-right: 10px;
   word-wrap: break-word;
 }
 

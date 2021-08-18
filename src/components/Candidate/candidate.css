@@ -277,3 +277,7 @@
   text-align: left;
   line-height: 28px;
 }
+
+.candidate + .logout-button{
+  top: 80px !important;
+}

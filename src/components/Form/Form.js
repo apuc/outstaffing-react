@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import style from './Form.module.css';
 import { fetchForm } from '../../server/server';
-import arrow from '../../images/right-arrow.png';
 import { useHistory, useParams, Redirect } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
@@ -49,14 +48,12 @@ const Form = () => {
     )
   };
 
-  const goBack = () => {
-    history.goBack();
-  };
+
 
   console.log('s',status)
 
   return (
-    <div className="container">
+    <>
       {status && <SweetAlert
         show={!!status}
         text={status.errors ? status.errors[Object.keys(status.errors)[0]] : 'Форма отправлена'}
@@ -64,14 +61,6 @@ const Form = () => {
       />}
       <div className="row">
         <div className="col-sm-12">
-          <div className={style.form__arrow} onClick={() => goBack()}>
-            <div className={style.form__arrow__img}>
-              <img src={arrow} alt="" />
-            </div>
-            <div className={style.form__arrow__sp}>
-              <span>Вернуться к кандидату</span>
-            </div>
-          </div>
           <form className={style.form} id="test">
             <label htmlFor="email">Емейл:</label>
             <input
@@ -116,7 +105,7 @@ const Form = () => {
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
