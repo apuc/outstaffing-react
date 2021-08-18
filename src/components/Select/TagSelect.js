@@ -1,28 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
 import { Loader } from '../Loader/Loader';
 import style from './TagSelect.module.css';
 import { selectedItems, selectItems, selectTags, filteredCandidates, setPositionId } from '../../redux/outstaffingSlice';
 import { fetchItemsForId } from '../../server/server';
-import { selectIsLoading } from '../../redux/loaderSlice';
 
 const TagSelect = () => {
+  const [searchLoading, setSearchLoading] = useState(false);
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading)
 
   const itemsArr = useSelector(selectItems);
 
   const tagsArr = useSelector(selectTags);
 
-  const handleSubmit = ({ dispatch }) => {
+  const handleSubmit = ({ dispatch, setSearchLoading }) => {
+    setSearchLoading(true)
 
     dispatch(setPositionId(null));
     const filterItemsId = itemsArr.map((item) => item.id).join();
 
-    fetchItemsForId(`${process.env.REACT_APP_API_URL}/api/profile?skills=`, filterItemsId).then((el) =>
+    fetchItemsForId(`${process.env.REACT_APP_API_URL}/api/profile?skills=`, filterItemsId).then((el) => {
       dispatch(filteredCandidates(el))
-    );
+      setSearchLoading(false)
+    });
 
     // dispatch(selectedItems([]));
   };
@@ -45,8 +46,8 @@ const TagSelect = () => {
                     return { id: item.id, value: item.value, label: item.value };
                   })}
                 />
-                <button onClick={()=>handleSubmit({dispatch})} type="submit" className={style.search__submit}>
-                { isLoading ? <Loader /> : 'Поиск' }
+                <button onClick={()=>handleSubmit({dispatch, setSearchLoading})} type="submit" className={style.search__submit}>
+                { searchLoading ? <Loader width={30} height={30} /> : 'Поиск' }
                 </button>
               </div>
             </div>

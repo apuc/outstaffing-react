@@ -6,14 +6,17 @@ import { fetchProfile, fetchSkills } from '../../server/server';
 import { profiles, tags } from '../../redux/outstaffingSlice';
 
 const Home = () => {
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [index, setIndex] = useState(4);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchProfile(`${process.env.REACT_APP_API_URL}/api/profile?limit=`, index).then((profileArr) =>
-      dispatch(profiles(profileArr))
-    );
+    setIsLoadingMore(true);
+    fetchProfile(`${process.env.REACT_APP_API_URL}/api/profile?limit=`, index).then((profileArr) => {
+      dispatch(profiles(profileArr));
+      setIsLoadingMore(false);
+    });
 
     fetchSkills(`${process.env.REACT_APP_API_URL}/api/skills/skills-on-main-page`).then((skills) => {
       const keys = Object.keys(skills);
@@ -35,7 +38,7 @@ const Home = () => {
   return (
     <>
       <Outstaffing />
-      <Description onLoadMore={loadMore} />
+      <Description onLoadMore={loadMore} isLoadingMore={isLoadingMore} />
     </>
   );
 };
