@@ -27,7 +27,6 @@ const Outstaffing = () => {
   return (
     <>
       <section className={style.outstaffing}>
-        <div className="container">
           <div className="row">
             <div className="col-12">
               <div className={style.outstaffing__title}>
@@ -43,7 +42,7 @@ const Outstaffing = () => {
               <OutstaffingBlock
                 dataTags={tagsArr && tagsArr.flat().filter((tag) => tag.name === 'skills_front')}
                 img={front}
-                header="Фронтенд"
+                header="Frontend"
                 positionId='2'
                 isSelected={positionId==='2'}
                 onSelect={id=>onSelectPosition(id)}
@@ -53,7 +52,7 @@ const Outstaffing = () => {
               <OutstaffingBlock
                 dataTags={tagsArr.flat().filter((tag) => tag.name === 'skills_back')}
                 img={back}
-                header="Бэкенд"
+                header="Backend"
                 positionId='1'
                 isSelected={positionId==='1'}
                 onSelect={id=>onSelectPosition(id)}
@@ -70,7 +69,6 @@ const Outstaffing = () => {
               />
             </div>
           </div>
-        </div>
       </section>
       <TagSelect />
     </>

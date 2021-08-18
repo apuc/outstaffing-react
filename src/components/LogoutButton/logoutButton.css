@@ -1,5 +1,5 @@
 .logout-button {
-    position: fixed;
+    position: absolute;
     top: 70px;
     right: 2.5rem;
     z-index: 100;

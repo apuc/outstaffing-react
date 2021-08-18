@@ -24,7 +24,6 @@ const ReportForm = () => {
 
   return (
     <section className="reportForm">
-      <div className="container">
         <div className="row">
           <div className="col-xl-12">
             <div className={style.reportForm__block}>
@@ -87,7 +86,6 @@ const ReportForm = () => {
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 };

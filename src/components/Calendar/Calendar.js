@@ -23,7 +23,6 @@ const Calendar = () => {
 
   return (
     <section className={style.calendar}>
-      <div className="container">
         <div className="row">
           <h2 className={style.calendar__title}>
             Добрый день, <span>Александр !</span>
@@ -53,7 +52,6 @@ const Calendar = () => {
             </p>
           </div>
         </div>
-      </div>
     </section>
   );
 };

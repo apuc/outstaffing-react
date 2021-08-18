@@ -30,7 +30,6 @@ const TagSelect = () => {
   return (
     <>
       <section className={style.search}>
-        <div className="container">
           <div className="row">
             <div className="col-12">
               <h2 className={style.search__title}>Найти специалиста по навыкам</h2>
@@ -52,7 +51,6 @@ const TagSelect = () => {
               </div>
             </div>
           </div>
-        </div>
       </section>
     </>
   );

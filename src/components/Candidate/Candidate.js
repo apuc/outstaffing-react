@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useHistory, useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { currentCandidate, selectCurrentCandidate } from '../../redux/outstaffingSlice';
-import style from './Candidate.module.css';
 import arrow from '../../images/right-arrow.png';
 import rectangle from '../../images/rectangle_secondPage.png';
 import Sidebar from '../Sidebar/Sidebar';
@@ -12,10 +11,16 @@ import back from '../../images/back_end.png';
 import design from '../../images/design.png';
 import { fetchItemsForId } from '../../server/server';
 
+import './candidate.css';
+
 const Candidate = () => {
   const history = useHistory();
   const { id: candidateId } = useParams();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   useEffect(() => {
     fetchItemsForId(`${process.env.REACT_APP_API_URL}/api/profile/`, Number(candidateId)).then((el) =>
@@ -36,22 +41,22 @@ const Candidate = () => {
 
     switch (Number(position_id)) {
       case 1: {
-        styles.classes = style.back;
+        styles.classes = 'back';
         styles.header = 'Backend';
         styles.img = back;
 
         break;
       }
       case 2: {
-        styles.classes = style.des;
+        styles.classes = 'des';
         styles.header = 'Frontend';
         styles.img = front;
         break;
       }
       case 3: {
-        style.classes = style.front;
-        style.header = 'Design';
-        style.img = design;
+        styles.classes = 'front';
+        styles.header = 'Design';
+        styles.img = design;
         break;
       }
       default:
@@ -68,11 +73,10 @@ const Candidate = () => {
   const { header, img, classes } = setStyles();
 
   return (
-    <section className={style.candidate}>
-      <div className="container">
+    <div className='candidate'>
         <div className="row">
           <div className="col-12">
-            <div className={style.candidate__title}>
+            <div className='candidate__title'>
               <h2>
                 <span>Аутстаффинг</span> it-персонала
               </h2>
@@ -82,41 +86,41 @@ const Candidate = () => {
 
         <div className="row">
           <div className="col-12">
-            <div className={style.candidate__header}>
-              <div className={style.arrow} onClick={() => history.push('/')}>
-                <div className={style.arrow__img}>
+            <div className='candidate__header'>
+              <div className='arrow' onClick={() => history.push('/')}>
+                <div className='arrow__img'>
                   <img src={arrow} alt="" />
                 </div>
-                <div className={style.arrow__sp}>
+                <div className='arrow__sp'>
                   <span>Вернуться к списку</span>
                 </div>
               </div>
 
-              <div className={style.icon}>
+              <div className='icon'>
                 <h3>{header}</h3>
                 <img className={classes} src={img} alt="" />
               </div>
             </div>
           </div>
         </div>
-        <div className={style.candidate__main}>
+        <div className='candidate__main'>
           <div className="row">
             <div className="col-12 col-xl-4">
               <Sidebar candidate={currentCandidateObj}  />
             </div>
             <div className="col-12 col-xl-8">
-              <div className={style.candidate__main__description}>
+              <div className='candidate__main__description'>
                 <img src={rectangle} alt="" />
-                <p className={style.hashtag}># Описание опыта</p>
+                <p className='hashtag'># Описание опыта</p>
                 {text ? (
-                  <div className={style.candidate__text} dangerouslySetInnerHTML={createMarkup(text)}></div>
+                  <div className='candidate__text' dangerouslySetInnerHTML={createMarkup(text)}></div>
                 ) : (
-                  <p className={style.candidate__textSecondary}>
+                  <p className='candidate__textSecondary'>
                     {currentCandidateObj.vc_text ? currentCandidateObj.vc_text : 'Описание отсутствует...' }
                   </p>
                 )}
                 <Link to={`/candidate/${currentCandidateObj.id}/form`}>
-                  <button type="submit" className={style.candidate__btn}>
+                  <button type="submit" className='candidate__btn'>
                     Выбрать к собеседованию
                   </button>
                 </Link>
@@ -125,8 +129,7 @@ const Candidate = () => {
             </div>
           </div>
         </div>
-      </div>
-    </section>
+    </div>
   );
 };
 

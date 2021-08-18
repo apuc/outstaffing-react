@@ -1,0 +1,126 @@
+.form-page {
+    &__arrow {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 80px;
+        margin-left: -32px;
+
+        &-img {
+            cursor: pointer;
+        }
+    }
+
+    &__candidate {
+        margin-top: 60px;
+        margin-left: 48px;
+        display: flex;
+    }
+
+    &__back-to-candidate {
+        margin-left: 40px;
+        margin-right: 120px;
+        font-family: 'GT Eesti Pro Display';
+        font-size: 1.8em;
+        font-weight: 100;
+        line-height: 36px;
+    }
+
+    &__avatar {
+        img {
+            width: 61px;
+            height: 61px;
+        }
+        margin-right: 16px;
+    }
+
+    &__position {
+        color: #000000;
+        font-family: "GT Eesti Pro Display";
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 36px;
+    }
+
+    &__selected {
+        span {
+            color: #000000;
+            font-family: "GT Eesti Pro Display";
+            font-size: 10px;
+            font-weight: 300;
+            line-height: 22.38px;
+        }
+
+        img {
+            width: 152px;
+            margin-right: 18px;
+        }
+    }
+
+    &__interview {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__form {
+        width: 45%;
+    }
+
+    &__separator {
+        width: 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__line {
+        width: 3px;
+        height: 135px;
+        background-color: #e4f1f6;
+        margin-bottom: 26px;
+    }
+
+    &__option {
+        color: #000000;
+        font-family: "GT Eesti Pro Display";
+        font-size: 18px;
+        font-weight: 400;
+        font-style: normal;
+        letter-spacing: normal;
+        line-height: 36px;
+        text-align: center;
+        font-style: normal;
+        letter-spacing: normal;
+        line-height: normal;
+    }
+    
+    &__telegram {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &-text {
+            width: 225px;
+            color: #000000;
+            font-family: "GT Eesti Pro Display";
+            font-size: 18px;
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: normal;
+            line-height: 33px;
+            text-align: center;
+            font-style: normal;
+            letter-spacing: normal;
+            margin-bottom: 29px;
+        }
+    }
+}
+
+.form-page + .logout-button{
+    top: 0px !important;
+    right: 2.5rem;
+}
