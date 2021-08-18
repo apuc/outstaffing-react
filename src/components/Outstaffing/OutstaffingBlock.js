@@ -1,4 +1,5 @@
 import React from 'react';
+import OutsideClickHandler from 'react-outside-click-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectItems, selectedItems, filteredCandidates } from '../../redux/outstaffingSlice';
 import { fetchItemsForId } from '../../server/server';
@@ -50,6 +51,11 @@ const OutstaffingBlock = ({ dataTags = [], selected, img, header, positionId, is
   });
 
   return (
+    <OutsideClickHandler
+      onOutsideClick={() => {
+        isSelected && onSelect(null)
+      }}
+    >
     <div className={`${style.outstaffing__box} ${isSelected?style.outstaffing__box__selected:''}`} >
       <div className={`${style.outstaffing__box__img} ${selected ? style.border : ''}`} onClick={()=>handlePositionClick({dispatch, positionId, isSelected, onSelect})}>
         <h3>{header}</h3>
@@ -68,6 +74,7 @@ const OutstaffingBlock = ({ dataTags = [], selected, img, header, positionId, is
         )}
       </div>
     </div>
+    </OutsideClickHandler>
   );
 };
 

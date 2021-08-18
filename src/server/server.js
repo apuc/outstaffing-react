@@ -1,4 +1,6 @@
-export const fetchProfile = async (link, index) => {
+import { withAuthRedirect } from "./authRedirect"
+
+export const fetchProfile = withAuthRedirect(async (link, index) => {
   try {
     const response = await fetch(`${link}${index}`, {
       method: 'GET',
@@ -12,9 +14,9 @@ export const fetchProfile = async (link, index) => {
 
     return data
   } catch (error) {}
-}
+})
 
-export const fetchSkills = async (link) => {
+export const fetchSkills = withAuthRedirect(async (link) => {
   try {
     const response = await fetch(link, {
       method: 'GET',
@@ -28,9 +30,9 @@ export const fetchSkills = async (link) => {
 
     return data
   } catch (error) {}
-}
+})
 
-export const fetchItemsForId = async (link, id) => {
+export const fetchItemsForId = withAuthRedirect(async (link, id) => {
   console.log(`Bearer ${localStorage.getItem('auth_token')}`);
   try {
     const response = await fetch(`${link}${id}`, {
@@ -45,9 +47,9 @@ export const fetchItemsForId = async (link, id) => {
 
     return data
   } catch (error) {}
-}
+})
 
-export const fetchForm = async (link, info) => {
+export const fetchForm = withAuthRedirect(async (link, info) => {
   try {
     const response = await fetch(link, {
       method: 'POST',
@@ -62,7 +64,7 @@ export const fetchForm = async (link, info) => {
 
     return response
   } catch (error) {}
-}
+})
 
 export const fetchAuth = async ({ username, password, dispatch, catchError }) => {
   const baseURL = process.env.REACT_APP_BASE_URL;
