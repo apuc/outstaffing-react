@@ -5,6 +5,7 @@
         align-items: center;
         margin-top: 80px;
         margin-left: -32px;
+        cursor: pointer;
 
         &-img {
             cursor: pointer;
@@ -97,7 +98,7 @@
     }
     
     &__telegram {
-        width: 45%;
+        width: 35%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -127,4 +128,49 @@
 
 .form-page footer {
     margin-top: 2.5rem !important;
+}
+
+@media (max-width: 991px) {
+    .form-page {
+        &__separator {
+            width: 20%
+        }
+
+        &__telegram {
+            width: 25%;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .form-page {
+        &__interview {
+            flex-direction: column;
+
+            form {
+                margin-top: 48px;
+            }
+        }
+
+        &__separator {
+            display: none;
+        }
+
+        &__telegram {
+            margin-top: 5rem;
+            margin-bottom: 2rem;
+        }
+
+        &__arrow-img {
+            display: none;
+        }
+
+        form label {
+            line-height: initial;
+        }
+
+        &__selected img {
+            width: 100px;
+        }
+    }
 }
