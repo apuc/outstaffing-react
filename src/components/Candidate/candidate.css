@@ -41,12 +41,27 @@
   margin-left: 60px;
 }
 
+@media (max-width: 768px) {
+  .candidate__header {
+    flex-direction: column;
+  }
+
+  .candidate__header .arrow {
+    margin-left: 60px;
+    margin-bottom: 40px;
+  }
+}
+
 @media (max-width: 575.98px) {
   .candidate__header {
     display: flex;
     flex-direction: column;
     margin-left: 0;
     margin-top: 40px;
+  }
+
+  .candidate__header .arrow {
+    margin-left: 0;
   }
 }
 
@@ -284,4 +299,10 @@
 
 .candidate footer {
   margin-top: 2.5rem !important;
+}
+
+@media (max-width: 1199px) {
+  .candidate + .logout-button {
+      top: 16px !important;
+  }
 }

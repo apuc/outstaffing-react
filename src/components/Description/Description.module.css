@@ -6,12 +6,11 @@
 .description__wrapper {
   border: 1px solid #efefef;
   background-color: #fdfdfd;
-  padding-top: 60px;
+  padding: 60px 40px 0 40px;
   border-bottom: none;
   position: relative;
 }
 .description__img {
-  margin-left: 40px;
   margin-top: 16px;
   width: 118px;
   height: 118px;
@@ -21,24 +20,8 @@
 @media (max-width: 575.98px) {
   .description__img {
     position: absolute;
-    top: 90px;
-    left: 90px;
-  }
-}
-
-@media (max-width: 375.98px) {
-  .description__img {
-    position: absolute;
-    top: 90px;
-    left: 90px;
-  }
-}
-
-@media (max-width: 340.98px) {
-  .description__img {
-    position: absolute;
-    top: 90px;
-    left: 60px;
+    top: 80px;
+    left: 0;
   }
 }
 
@@ -60,7 +43,7 @@
 @media (max-width: 575.98px) {
   .description__title {
     text-align: center;
-    margin-bottom: 190px;
+    margin-bottom: 170px;
     font-size: 3em;
   }
 }
@@ -176,7 +159,7 @@
   .description__list__item {
     font-size: 1.5em;
     text-align: center;
-    margin-bottom: 120px;
+    margin-bottom: 0;
   }
 }
 
@@ -188,6 +171,7 @@
 @media (max-width: 575.98px) {
   .description__rectangle {
     width: 80%;
+    margin: 50px auto 80px auto;
   }
 }
 
@@ -215,6 +199,14 @@
 }
 
 @media (max-width: 575.98px) {
+  .description {
+    margin-bottom: 16px;
+  }
+
+  .description__footer {
+    margin-top: 0;
+  }
+
   .description__footer__btn > button {
     width: 160px;
     margin-right: 10px;
@@ -236,4 +228,10 @@
   letter-spacing: normal;
   text-align: center;
   margin: 0 10px;
+}
+
+@media (max-width: 1199px) {
+  .description__button {
+    margin: 1.5rem 0;
+  }
 }
