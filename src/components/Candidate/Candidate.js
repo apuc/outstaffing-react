@@ -10,6 +10,7 @@ import front from '../../images/front_end.png';
 import back from '../../images/back_end.png';
 import design from '../../images/design.png';
 import { fetchItemsForId } from '../../server/server';
+import { Footer } from '../Footer/Footer';
 
 import './candidate.css';
 
@@ -119,16 +120,17 @@ const Candidate = () => {
                     {currentCandidateObj.vc_text ? currentCandidateObj.vc_text : 'Описание отсутствует...' }
                   </p>
                 )}
-                <Link to={`/candidate/${currentCandidateObj.id}/form`}>
+                {/* <Link to={`/candidate/${currentCandidateObj.id}/form`}>
                   <button type="submit" className='candidate__btn'>
                     Выбрать к собеседованию
                   </button>
-                </Link>
+                </Link> */}
                 <SectionSkills skillsArr={skillValues} />
               </div>
             </div>
           </div>
         </div>
+        <Footer />
     </div>
   );
 };

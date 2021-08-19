@@ -7,6 +7,7 @@ import calendarMale from '../../images/medium_male.png';
 import rectangle from '../../images/rectangle_secondPage.png';
 import CalendarComponent from './CalendarComponent';
 import { currentMonth } from './calendarHelper';
+import { Footer } from '../Footer/Footer';
 
 const Calendar = () => {
   const candidateForCalendar = useSelector(selectCurrentCandidate);
@@ -52,6 +53,7 @@ const Calendar = () => {
             </p>
           </div>
         </div>
+        <Footer />
     </section>
   );
 };

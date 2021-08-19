@@ -162,3 +162,13 @@
   list-style: none;
   cursor: pointer;
 }
+
+@media (max-width: 1199px) {
+  .outstaffing__box {
+      margin-top: 0;
+  }
+
+  .outstaffing__box>div {
+    margin-top: 32px;
+  }
+}

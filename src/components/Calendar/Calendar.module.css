@@ -19,7 +19,7 @@
   .calendar__title {
     font-size: 5em;
     text-align: center;
-    margin: 40px 0;
+    margin: 60px 0 40px 0;
   }
 }
 
@@ -292,4 +292,8 @@
   font-style: normal;
   letter-spacing: normal;
   line-height: normal;
+}
+
+.calendar footer {
+  margin-top: 2rem !important;
 }

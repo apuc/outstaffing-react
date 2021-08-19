@@ -1,5 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectAuth } from './redux/outstaffingSlice';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './fonts/stylesheet.css'
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
@@ -12,7 +14,8 @@ import CalendarPage from'./pages/CalendarPage';
 import ReportPage from './pages/ReportFormPage.js';
 import FormPage from './pages/FormPage.js';
 
-const App = () => {
+const App = (props) => {
+  const isAuth = useSelector(selectAuth)
   return (<>
     <h1>IT Аутстаффинг в России</h1>
     <Router>

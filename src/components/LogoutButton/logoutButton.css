@@ -31,9 +31,9 @@
     transition: .3s;
 }
 
-@media (max-width: 1198px) {
+@media (max-width: 1199px) {
     .logout-button {
-        top: 16px;
+        top: 16px !important;
     }
-  }
+}
   

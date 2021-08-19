@@ -7,6 +7,7 @@ import { WithLogout } from '../hoc/withLogout';
 import Form from '../components/Form/Form';
 import { LEVELS, SKILLS } from '../components/constants/constants';
 import { fetchItemsForId } from '../server/server';
+import { Footer } from '../components/Footer/Footer';
 
 import arrow from '../images/right-arrow.png';
 import rectangle from '../images/rectangle_secondPage.png';
@@ -70,6 +71,7 @@ const FormPage = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
         </WithLogout>
     )

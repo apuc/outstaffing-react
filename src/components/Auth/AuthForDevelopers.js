@@ -8,9 +8,6 @@ import arrow from '../../images/arrow__login_page.png'
 import authImg from '../../images/auth_img.png'
 import cross from '../../images/cross.png'
 import text from '../../images/Body_Text.png'
-import align from '../../images/align-left.png'
-import phone from '../../images/phone.png'
-import telegram from '../../images/telegram.png'
 import vector from '../../images/Vector_Smart_Object.png'
 import vectorBlack from '../../images/Vector_Smart_Object_black.png'
 import { fetchAuth } from '../../server/server'
@@ -22,6 +19,7 @@ import { Loader } from '../Loader/Loader'
 
 import { withSwalInstance } from 'sweetalert2-react';
 import swal from 'sweetalert2';
+import { Footer } from '../Footer/Footer'
  
 const SweetAlert = withSwalInstance(swal);
 
@@ -153,36 +151,7 @@ const AuthForDevelopers = () => {
               </div>
             </div>
           </div>
-
-          <div className='row'>
-            <div className='col-12 col-xl-7'>
-              <div className={style.developers__footer__left}>
-                <div className={style.footer__left__img}>
-                  <img src={align} alt='' />
-                </div>
-                <div className={style.footer__left__sp}>
-                  <span>
-                    Подберем и документально оформим IT-специалистов, после чего передадим исполнителей под ваше руководство. 
-                    Вы получаете полное управление над сотрудниками, имея возможность контролировать и заменять IT штат.{' '}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className='col-4 col-xl-2'>
-              <div className={style.developers__footer__icon}>
-                <img src={phone} alt='' />
-                <img src={telegram} alt='' />
-              </div>
-            </div>
-
-            <div className='col-8 col-xl-3'>
-              <div className={style.developers__footer__right}>
-                <p className={style.phone}>+7 495 156 78 98</p>
-                <p className={style.workingHours}>Будни с 9:00 до 21:00</p>
-              </div>
-            </div>
-          </div>
+          <Footer />
         </div>
       </div>
     </section>
