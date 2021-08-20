@@ -37,7 +37,7 @@ const App = (props) => {
         </Switch>
     </Router>
     
-    <YMInitializer 
+    {/* <YMInitializer 
       accounts={[84188125]} 
       options={{
         clickmap:true,
@@ -46,7 +46,7 @@ const App = (props) => {
         webvisor:true
         }} 
       version="2" 
-    />
+    /> */}
     </>
   )
 }
