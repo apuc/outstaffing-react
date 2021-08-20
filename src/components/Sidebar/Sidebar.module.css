@@ -142,4 +142,8 @@
     display: flex;
     flex-direction: column;
   }
+
+  .candidateSidebar__info__e, .candidateSidebar__info__y {
+    width: 180px;
+  }
 }

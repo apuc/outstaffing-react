@@ -180,9 +180,10 @@
 
 @media (max-width: 575.98px) {
   .candidate__main__description > img {
-    width: 50%;
+    /* width: 50%;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto; */
+    display: none;
   }
 }
 

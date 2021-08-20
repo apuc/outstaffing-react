@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './fonts/stylesheet.css'
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 
+import { YMInitializer } from 'react-yandex-metrika';
+
 import AuthPageForDevelopers from './pages/AuthPageForDevelopers';
 import AuthPageForPartners from './pages/AuthPageForPartners';
 import HomePage from './pages/HomePage';
@@ -34,8 +36,20 @@ const App = (props) => {
           <ProtectedRoute component={()=><div>Page not found</div>} />
         </Switch>
     </Router>
+    
+    <YMInitializer 
+      accounts={[84188125]} 
+      options={{
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+        }} 
+      version="2" 
+    />
     </>
   )
 }
+
 
 export default App
