@@ -84,7 +84,6 @@
 }
 
 @media (max-width: 575.98px) {
-  .candidateSidebar__info__btn,
   .candidateSidebar__info__l,
   .candidateSidebar__arrows {
     display: none;

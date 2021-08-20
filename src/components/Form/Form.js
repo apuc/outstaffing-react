@@ -8,10 +8,14 @@ import './form.css';
 
 import { withSwalInstance } from 'sweetalert2-react';
 import swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
+import { getRole } from '../../redux/roleSlice';
  
 const SweetAlert = withSwalInstance(swal);
 
 const Form = () => {
+  const history = useHistory();
+  const role = useSelector(getRole);
   const urlParams = useParams();
   const [status, setStatus] = useState(null);
   const [data, setData] = useState({
@@ -19,8 +23,6 @@ const Form = () => {
     phone: '',
     comment: '',
   });
-
-  const history = useHistory();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -40,10 +42,10 @@ const Form = () => {
     formData.append('phone', data.phone);
     formData.append('comment', data.comment);
 
-    fetchForm(`${process.env.REACT_APP_API_URL}/api/profile/add-to-interview`, {
+    fetchForm({ link: `${process.env.REACT_APP_API_URL}/api/profile/add-to-interview`, index: {
       profile_id: urlParams.id,
       ...data,
-    }).then( (res)=>  res.json()
+    }, history, role }).then( (res)=>  res.json()
       .then( resJSON => setStatus(resJSON))
     )
   };
