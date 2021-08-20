@@ -6,18 +6,19 @@ import { fetchItemsForId } from '../../server/server';
 import style from './Outstaffing.module.css';
 
 import { fetchProfile } from '../../server/server';
+import { useHistory } from 'react-router-dom';
+import { getRole } from '../../redux/roleSlice';
 
-const handlePositionClick = ({dispatch, positionId, isSelected, onSelect}) => {
-
+const handlePositionClick = ({dispatch, positionId, isSelected, onSelect, history, role}) => {
   if(isSelected) {
-    fetchProfile(`${process.env.REACT_APP_API_URL}/api/profile?limit=`, 4).then((profileArr) => {
+    fetchProfile({ link: `${process.env.REACT_APP_API_URL}/api/profile?limit=`, index: 4, history, role }).then((profileArr) => {
       dispatch(filteredCandidates(profileArr));
       dispatch(selectedItems([]));
       onSelect(positionId);
     }
     );
   } else {
-    fetchItemsForId(`${process.env.REACT_APP_API_URL}/api/profile?position_id=`, positionId).then((el) => {
+    fetchItemsForId({ link: `${process.env.REACT_APP_API_URL}/api/profile?position_id=`, index: positionId, history, role, }).then((el) => {
       dispatch(filteredCandidates(el));
       dispatch(selectedItems([]));
       onSelect(positionId);
@@ -27,7 +28,9 @@ const handlePositionClick = ({dispatch, positionId, isSelected, onSelect}) => {
 };
 
 const OutstaffingBlock = ({ dataTags = [], selected, img, header, positionId, isSelected, onSelect }) => {
-  
+  const history = useHistory();
+  const role = useSelector(getRole);
+
   const dispatch = useDispatch();
 
   const itemsArr = useSelector(selectItems);
@@ -57,7 +60,7 @@ const OutstaffingBlock = ({ dataTags = [], selected, img, header, positionId, is
       }}
     >
     <div className={`${style.outstaffing__box} ${isSelected?style.outstaffing__box__selected:''}`} >
-      <div className={`${style.outstaffing__box__img} ${selected ? style.border : ''}`} onClick={()=>handlePositionClick({dispatch, positionId, isSelected, onSelect})}>
+      <div className={`${style.outstaffing__box__img} ${selected ? style.border : ''}`} onClick={()=>handlePositionClick({dispatch, positionId, isSelected, onSelect, history, role})}>
         <h3>{header}</h3>
         <img className={classes} src={img} alt="img" />
       </div>

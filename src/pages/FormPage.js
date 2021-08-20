@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams, } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import { currentCandidate, selectCurrentCandidate } from '../redux/outstaffingSlice';
 import SVG from 'react-inlinesvg';
 import { WithLogout } from '../hoc/withLogout';
@@ -14,6 +14,7 @@ import rectangle from '../images/rectangle_secondPage.png';
 import telegramIcon from '../images/telegram-icon.svg';
 
 import './formPage.scss';
+import { getRole } from '../redux/roleSlice';
 
 const goBack = (history) => {
     history.goBack();
@@ -23,10 +24,11 @@ const FormPage = () => {
     const params = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
-    const candidate = useSelector(selectCurrentCandidate)
+    const candidate = useSelector(selectCurrentCandidate);
+    const role = useSelector(getRole);
 
     if(!candidate.id) {
-        fetchItemsForId(`${process.env.REACT_APP_API_URL}/api/profile/`, Number(params.id)).then((el) =>
+        fetchItemsForId({ link: `${process.env.REACT_APP_API_URL}/api/profile/`, index: Number(params.id), history, role, }).then((el) =>
             dispatch(currentCandidate(el))
         );
     }
@@ -67,7 +69,7 @@ const FormPage = () => {
                 <div className='form-page__telegram'>
                     <div className='form-page__telegram-text'>Заявка на собеседование через телеграм</div>
                     <div className='form-page__telegram-icon'>
-                        <SVG src={telegramIcon} />
+                       <a href='https://t.me/st0kir' target='_blank'><SVG src={telegramIcon} /></a>
                     </div>
                 </div>
             </div>

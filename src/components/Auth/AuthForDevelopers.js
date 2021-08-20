@@ -14,6 +14,7 @@ import { fetchAuth } from '../../server/server'
 
 import { selectAuth } from '../../redux/outstaffingSlice';
 import { selectIsLoading } from '../../redux/loaderSlice';
+import { setRole } from '../../redux/roleSlice';
 import { Redirect, Link } from 'react-router-dom';
 import { Loader } from '../Loader/Loader'
 
@@ -69,9 +70,7 @@ const AuthForDevelopers = () => {
                     placeholder='Пароль'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                  />
-
-                  
+                  />                  
 
                   { error && <div className={style.form__error}>
                     <SweetAlert
@@ -94,6 +93,7 @@ const AuthForDevelopers = () => {
                           dispatch: ()=> {
                             dispatch(auth(true))
                             dispatch(loading(false))
+                            dispatch(setRole('ROLE_DEV'))
                           },
                           catchError: () => {
                             setError('Некорректные данные для входа')

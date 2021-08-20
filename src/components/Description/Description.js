@@ -2,21 +2,24 @@ import React, { useEffect, useState } from 'react';
 import style from './Description.module.css';
 import male from '../../images/medium_male.png';
 import rectangle from '../../images/rectangle_secondPage.png';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { LEVELS, SKILLS } from '../constants/constants';
 import { selectProfiles, selectFilteredCandidates, selectItems } from '../../redux/outstaffingSlice';
 import { useSelector } from 'react-redux';
 import { fetchProfile } from '../../server/server';
 import { Loader } from '../Loader/Loader';
+import { getRole } from '../../redux/roleSlice';
 
 const Description = ({ onLoadMore, isLoadingMore }) => {
+  const history = useHistory();
+  const role = useSelector(getRole)
   const candidatesListArr = useSelector(selectProfiles);
   const itemsArr = useSelector(selectItems);
   const filteredListArr = useSelector(selectFilteredCandidates);
   const [allCandidates, getAllCandidates] = useState([]);
 
   useEffect(() => {
-    fetchProfile(`${process.env.REACT_APP_API_URL}/api/profile?limit=`, 1000).then((p) => getAllCandidates(p));
+    fetchProfile({ link: `${process.env.REACT_APP_API_URL}/api/profile?limit=`, index: 1000, history, role }).then((p) => getAllCandidates(p));
   }, []);
 
   if(!filteredListArr) {

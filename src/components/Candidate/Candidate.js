@@ -13,18 +13,20 @@ import { fetchItemsForId } from '../../server/server';
 import { Footer } from '../Footer/Footer';
 
 import './candidate.css';
+import { getRole } from '../../redux/roleSlice';
 
 const Candidate = () => {
   const history = useHistory();
   const { id: candidateId } = useParams();
   const dispatch = useDispatch();
+  const role = useSelector(getRole);
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   useEffect(() => {
-    fetchItemsForId(`${process.env.REACT_APP_API_URL}/api/profile/`, Number(candidateId)).then((el) =>
+    fetchItemsForId({ link: `${process.env.REACT_APP_API_URL}/api/profile/`, index:Number(candidateId), history, role }).then((el) =>
       dispatch(currentCandidate(el))
     );
   }, [dispatch, candidateId]);

@@ -18,6 +18,7 @@ import { fetchAuth } from '../../server/server'
 import { useSelector } from 'react-redux'
 import { selectAuth } from '../../redux/outstaffingSlice';
 import { selectIsLoading } from '../../redux/loaderSlice';
+import { setRole } from '../../redux/roleSlice';
 import { Redirect, Link } from 'react-router-dom';
 import { Loader } from '../Loader/Loader'
 
@@ -90,6 +91,7 @@ const AuthForPartners = () => {
                         dispatch: ()=> {
                           dispatch(auth(true))
                           dispatch(loading(false))
+                          dispatch(setRole('ROLE_PARTNER'))
                         },
                         catchError: () => {
                           setError('Некорректные данные для входа')
