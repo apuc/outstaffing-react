@@ -11,6 +11,7 @@ import { Loader } from '../Loader/Loader';
 import { getRole } from '../../redux/roleSlice';
 
 const Description = ({ onLoadMore, isLoadingMore }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const history = useHistory();
   const role = useSelector(getRole)
   const candidatesListArr = useSelector(selectProfiles);
@@ -19,7 +20,10 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
   const [allCandidates, getAllCandidates] = useState([]);
 
   useEffect(() => {
-    fetchProfile({ link: `${process.env.REACT_APP_API_URL}/api/profile?limit=`, index: 1000, history, role }).then((p) => getAllCandidates(p));
+    fetchProfile({ link: `${process.env.REACT_APP_API_URL}/api/profile?limit=`, index: 1000, history, role }).then((p) => {
+      getAllCandidates(p);
+      setIsLoaded(true);
+    });
   }, []);
 
   if(!filteredListArr) {
@@ -28,7 +32,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
         <div className="container">
           <div className={style.description__wrapper}>
           {
-            candidatesListArr.map((el) => (
+            candidatesListArr.length > 0 ? candidatesListArr.map((el) => (
               <div className="row" key={el.id}>
                 <div className="col-2">
                   <img className={style.description__img} src={el.photo} alt="" />
@@ -62,7 +66,9 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
                 </div>
                 <div className="col-xl-4"></div>
               </div>
-            ))}
+            )) : <div className={style.description__empty}>{
+              isLoaded ? 'В данный момент в категории нет свободных специалистов' : 'Загрузка...'
+            }</div>}
           </div>
   
           <div className="row">
@@ -87,7 +93,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
     <section className={style.description}>
       <div className="container">
         <div className={style.description__wrapper}>
-          {filteredListArr
+          {filteredListArr && filteredListArr.length > 0
             ? filteredListArr.map((el) => (
                 <div className="row" key={el.id}>
                   <div className="col-2">
@@ -123,7 +129,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
                   <div className="col-xl-4"></div>
                 </div>
               ))
-            : filteredListArr.length && filteredListArr.length === 0 && <></> }
+            : <div className={style.description__empty}>В данный момент в категории нет свободных специалистов</div> }
         </div>
 
         <div className="row">

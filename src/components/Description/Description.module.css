@@ -3,6 +3,16 @@
   margin-bottom: 120px;
 }
 
+.description__empty {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 2.4em;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  text-align: center;
+}
+
 .description__wrapper {
   border: 1px solid #efefef;
   background-color: #fdfdfd;
