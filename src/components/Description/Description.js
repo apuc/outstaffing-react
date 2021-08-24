@@ -4,13 +4,14 @@ import male from '../../images/medium_male.png';
 import rectangle from '../../images/rectangle_secondPage.png';
 import { Link, useHistory } from 'react-router-dom';
 import { LEVELS, SKILLS } from '../constants/constants';
-import { selectProfiles, selectFilteredCandidates, selectItems } from '../../redux/outstaffingSlice';
-import { useSelector } from 'react-redux';
+import { selectProfiles, selectFilteredCandidates, selectItems, auth } from '../../redux/outstaffingSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import { fetchProfile } from '../../server/server';
 import { Loader } from '../Loader/Loader';
 import { getRole } from '../../redux/roleSlice';
 
 const Description = ({ onLoadMore, isLoadingMore }) => {
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const history = useHistory();
   const role = useSelector(getRole)
@@ -20,7 +21,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
   const [allCandidates, getAllCandidates] = useState([]);
 
   useEffect(() => {
-    fetchProfile({ link: `${process.env.REACT_APP_API_URL}/api/profile?limit=`, index: 1000, history, role }).then((p) => {
+    fetchProfile({ link: `${process.env.REACT_APP_API_URL}/api/profile?limit=`, index: 1000, history, role, logout: dispatch(auth(false)) }).then((p) => {
       getAllCandidates(p);
       setIsLoaded(true);
     });
@@ -32,7 +33,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
         <div className="container">
           <div className={style.description__wrapper}>
           {
-            candidatesListArr.length > 0 ? candidatesListArr.map((el) => (
+            candidatesListArr && candidatesListArr.length > 0 ? candidatesListArr.map((el) => (
               <div className="row" key={el.id}>
                 <div className="col-2">
                   <img className={style.description__img} src={el.photo} alt="" />

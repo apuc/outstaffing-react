@@ -13,7 +13,9 @@ export const fetchProfile = withAuthRedirect(async (link, index) => {
     let data = await response.json()
 
     return data
-  } catch (error) {}
+  } catch (error) {
+    console.log('Query error', error)
+  }
 })
 
 export const fetchSkills = withAuthRedirect(async (link) => {
@@ -29,7 +31,9 @@ export const fetchSkills = withAuthRedirect(async (link) => {
     let data = await response.json()
 
     return data
-  } catch (error) {}
+  } catch (error) {
+    console.log('Query error', error)
+  }
 })
 
 export const fetchItemsForId = withAuthRedirect(async (link, id) => {
@@ -46,7 +50,9 @@ export const fetchItemsForId = withAuthRedirect(async (link, id) => {
     let data = await response.json()
 
     return data
-  } catch (error) {}
+  } catch (error) {
+    console.log('Query error', error)
+  }
 })
 
 export const fetchForm = withAuthRedirect(async (link, info) => {
@@ -63,7 +69,9 @@ export const fetchForm = withAuthRedirect(async (link, info) => {
     })
 
     return response
-  } catch (error) {}
+  } catch (error) {
+    console.log('Query error', error)
+  }
 })
 
 export const fetchAuth = async ({ username, password, dispatch, catchError }) => {

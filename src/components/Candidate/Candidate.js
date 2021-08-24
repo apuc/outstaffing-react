@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { currentCandidate, selectCurrentCandidate } from '../../redux/outstaffingSlice';
+import { currentCandidate, selectCurrentCandidate, auth } from '../../redux/outstaffingSlice';
 import arrow from '../../images/right-arrow.png';
 import rectangle from '../../images/rectangle_secondPage.png';
 import Sidebar from '../Sidebar/Sidebar';
@@ -26,7 +26,7 @@ const Candidate = () => {
   }, [])
 
   useEffect(() => {
-    fetchItemsForId({ link: `${process.env.REACT_APP_API_URL}/api/profile/`, index:Number(candidateId), history, role }).then((el) =>
+    fetchItemsForId({ link: `${process.env.REACT_APP_API_URL}/api/profile/`, index:Number(candidateId), history, role, logout: dispatch(auth(false)) }).then((el) =>
       dispatch(currentCandidate(el))
     );
   }, [dispatch, candidateId]);
