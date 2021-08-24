@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, Link } from 'react-router-dom';
-import { currentCandidate, selectCurrentCandidate } from '../redux/outstaffingSlice';
+import { currentCandidate, selectCurrentCandidate, auth } from '../redux/outstaffingSlice';
 import SVG from 'react-inlinesvg';
 import { WithLogout } from '../hoc/withLogout';
 import Form from '../components/Form/Form';
@@ -28,7 +28,7 @@ const FormPage = () => {
     const role = useSelector(getRole);
 
     if(!candidate.id) {
-        fetchItemsForId({ link: `${process.env.REACT_APP_API_URL}/api/profile/`, index: Number(params.id), history, role, }).then((el) =>
+        fetchItemsForId({ link: `${process.env.REACT_APP_API_URL}/api/profile/`, index: Number(params.id), history, role, logout: dispatch(auth(false))  }).then((el) =>
             dispatch(currentCandidate(el))
         );
     }

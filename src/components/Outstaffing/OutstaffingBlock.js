@@ -1,7 +1,7 @@
 import React from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectItems, selectedItems, filteredCandidates } from '../../redux/outstaffingSlice';
+import { selectItems, selectedItems, filteredCandidates, auth } from '../../redux/outstaffingSlice';
 import { fetchItemsForId } from '../../server/server';
 import style from './Outstaffing.module.css';
 
@@ -11,14 +11,14 @@ import { getRole } from '../../redux/roleSlice';
 
 const handlePositionClick = ({dispatch, positionId, isSelected, onSelect, history, role}) => {
   if(isSelected) {
-    fetchProfile({ link: `${process.env.REACT_APP_API_URL}/api/profile?limit=`, index: 4, history, role }).then((profileArr) => {
+    fetchProfile({ link: `${process.env.REACT_APP_API_URL}/api/profile?limit=`, index: 4, history, role, logout: dispatch(auth(false))  }).then((profileArr) => {
       dispatch(filteredCandidates(profileArr));
       dispatch(selectedItems([]));
       onSelect(positionId);
     }
     );
   } else {
-    fetchItemsForId({ link: `${process.env.REACT_APP_API_URL}/api/profile?position_id=`, index: positionId, history, role, }).then((el) => {
+    fetchItemsForId({ link: `${process.env.REACT_APP_API_URL}/api/profile?position_id=`, index: positionId, history, role, logout: dispatch(auth(false))  }).then((el) => {
       dispatch(filteredCandidates(el));
       dispatch(selectedItems([]));
       onSelect(positionId);

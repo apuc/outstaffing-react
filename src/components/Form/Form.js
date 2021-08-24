@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import style from './Form.module.css';
 import { fetchForm } from '../../server/server';
+import { auth } from '../../redux/outstaffingSlice';
 import { useHistory, useParams, Redirect } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
@@ -8,12 +9,13 @@ import './form.css';
 
 import { withSwalInstance } from 'sweetalert2-react';
 import swal from 'sweetalert2';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getRole } from '../../redux/roleSlice';
  
 const SweetAlert = withSwalInstance(swal);
 
 const Form = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const role = useSelector(getRole);
   const urlParams = useParams();
@@ -45,7 +47,7 @@ const Form = () => {
     fetchForm({ link: `${process.env.REACT_APP_API_URL}/api/profile/add-to-interview`, index: {
       profile_id: urlParams.id,
       ...data,
-    }, history, role }).then( (res)=>  res.json()
+    }, history, role, logout: dispatch(auth(false))  }).then( (res)=>  res.json()
       .then( resJSON => setStatus(resJSON))
     )
   };

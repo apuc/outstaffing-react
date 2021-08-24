@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
 import { Loader } from '../Loader/Loader';
 import style from './TagSelect.module.css';
-import { selectedItems, selectItems, selectTags, filteredCandidates, setPositionId } from '../../redux/outstaffingSlice';
+import { selectedItems, selectItems, selectTags, filteredCandidates, setPositionId, auth } from '../../redux/outstaffingSlice';
 import { fetchItemsForId } from '../../server/server';
 import { useHistory } from 'react-router-dom';
 import { getRole } from '../../redux/roleSlice';
@@ -24,7 +24,7 @@ const TagSelect = () => {
     dispatch(setPositionId(null));
     const filterItemsId = itemsArr.map((item) => item.id).join();
 
-    fetchItemsForId({ link: `${process.env.REACT_APP_API_URL}/api/profile?skills=`, index: filterItemsId, history, role, }).then((el) => {
+    fetchItemsForId({ link: `${process.env.REACT_APP_API_URL}/api/profile?skills=`, index: filterItemsId, history, role, logout: dispatch(auth(false))  }).then((el) => {
       dispatch(filteredCandidates(el))
       setSearchLoading(false)
     });

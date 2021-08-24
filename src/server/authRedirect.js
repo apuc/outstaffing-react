@@ -1,15 +1,17 @@
-export const withAuthRedirect = actionCall => ({link, index, history, role}) => {
+export const withAuthRedirect = actionCall => ({link, index, history, role, logout}) => {
     return actionCall(link, index)
         .then(res => {
             if(res.status && res.status == 401) {
                 localStorage.clear();
-                history.push(role === 'ROLE_DEV' ? '/authdev' : '/auth') 
+                logout();
+                history.push(role === 'ROLE_DEV' ? '/authdev' : '/auth') ;
             }
 
             return res;
         })
         .catch(err => { 
-            localStorage.clear(); 
+            localStorage.clear();
+            logout();
             history.push(role === 'ROLE_DEV' ? '/authdev' : '/auth');
         })
 }

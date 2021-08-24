@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Outstaffing from '../Outstaffing/Outstaffing';
 import Description from '../Description/Description';
 import { fetchProfile, fetchSkills } from '../../server/server';
-import { profiles, tags } from '../../redux/outstaffingSlice';
+import { profiles, tags, auth } from '../../redux/outstaffingSlice';
 import { getRole } from '../../redux/roleSlice';
 import { Footer } from '../Footer/Footer';
 import { useHistory } from 'react-router-dom';
@@ -18,12 +18,13 @@ const Home = () => {
 
   useEffect(() => {
     setIsLoadingMore(true);
-    fetchProfile({ link:`${process.env.REACT_APP_API_URL}/api/profile?limit=`, index, history, role}).then((profileArr) => {
+    fetchProfile({ link:`${process.env.REACT_APP_API_URL}/api/profile?limit=`, index, history, role, logout: dispatch(auth(false)) }).then((profileArr) => {
       dispatch(profiles(profileArr));
       setIsLoadingMore(false);
     });
 
-    fetchSkills({ link: `${process.env.REACT_APP_API_URL}/api/skills/skills-on-main-page`, history, role}).then((skills) => {
+    fetchSkills({ link: `${process.env.REACT_APP_API_URL}/api/skills/skills-on-main-page`, history, role, logout: dispatch(auth(false)) }).then((skills) => {
+      if(!skills) { return [] }
       const keys = Object.keys(skills);
       const values = Object.values(skills);
 
