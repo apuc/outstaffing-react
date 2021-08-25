@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, Link } from 'react-router-dom';
 import { currentCandidate, selectCurrentCandidate, auth } from '../redux/outstaffingSlice';
