@@ -9,7 +9,7 @@
     top: 50px;
     left: 0;
     width: 140px;
-    height: 60px;
+    min-height: 70px;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -17,6 +17,22 @@
     align-items: center;
     display: none;
     text-align: left;
+    border-bottom: 3px solid #52b709;
+    border-left: 3px solid #52b709;
+  }
+
+  &__title {
+    color: #18586e;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__description {
+    color: #18586e;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
   }
 
   &__icon {
