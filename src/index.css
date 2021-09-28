@@ -25,3 +25,11 @@ h1 {
 .container {
   position: relative !important;
 }
+
+@media (max-width: 568px) {
+  .col-xs-12 {
+    width: 100% !important;
+    max-width: 100%;
+    flex: initial;
+  }
+}
