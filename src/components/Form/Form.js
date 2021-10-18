@@ -3,6 +3,7 @@ import style from './Form.module.css';
 import { fetchForm } from '../../server/server';
 import { auth } from '../../redux/outstaffingSlice';
 import { useHistory, useParams, Redirect } from 'react-router-dom';
+import { Loader } from '../Loader/Loader';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import './form.css';
@@ -25,6 +26,7 @@ const Form = () => {
     phone: '',
     comment: '',
   });
+  const [isFetching, setIsFetching] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -38,6 +40,7 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    setIsFetching(true)
     const formData = new FormData();
     formData.append('profile_id', urlParams.id);
     formData.append('email', data.email);
@@ -48,13 +51,12 @@ const Form = () => {
       profile_id: urlParams.id,
       ...data,
     }, history, role, logout: dispatch(auth(false))  }).then( (res)=>  res.json()
-      .then( resJSON => setStatus(resJSON))
+      .then( resJSON => {
+        setStatus(resJSON);
+        setIsFetching(false);
+      })
     )
   };
-
-
-
-  console.log('s',status)
 
   return (
     <>
@@ -104,7 +106,7 @@ const Form = () => {
             ></textarea>
 
             <button onClick={handleSubmit} className={style.form__btn} type="submit">
-              Отправить
+            { isFetching ? <Loader /> : 'Отправить' }
             </button>
           </form>
         </div>

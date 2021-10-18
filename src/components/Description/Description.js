@@ -35,7 +35,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
           {
             candidatesListArr && candidatesListArr.length > 0 ? candidatesListArr.map((el) => (
               <div className="row" key={el.id}>
-                <div className="col-2">
+                <div className="col-2 col-xs-12">
                   <img className={style.description__img} src={el.photo} alt="" />
                 </div>
                 <div className="col-12 col-xl-6">
