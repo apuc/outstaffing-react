@@ -36,7 +36,7 @@ const App = (props) => {
             path='/candidate/:id'
             component={CandidatePage}
           />
-          <ProtectedRoute path='/calendar' component={CalendarPage} />
+          <ProtectedRoute path='/:userId/calendar' component={CalendarPage} />
           <ProtectedRoute
             exact
             path='/candidate/:id/form'

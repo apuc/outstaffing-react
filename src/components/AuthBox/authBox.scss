@@ -1,0 +1,196 @@
+.auth-box {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-bottom: 194px;
+
+  &__header {
+
+    font-family: "GT Eesti Pro Display";
+    font-size: 5.3em;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 77.81px;
+    text-align: left;
+    margin-top: 164px;
+
+    span {
+      color: #52b709;
+      letter-spacing: .56px;
+      line-height: normal;
+    }
+  }
+
+  &__sign-in {
+    font-family: 'GT Eesti Pro Display';
+    font-size: 5.3em;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 77.81px;
+    text-align: left;
+    margin-top: 164px;
+
+    span {
+      font-family: 'GT Eesti Pro Display';
+      color: #52b709;
+      font-style: normal;
+      letter-spacing: 0.56px;
+      line-height: normal;
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 65px;
+
+    span {
+      color: #18586e;
+      font-family: 'GT Eesti Pro Display';
+      font-size: 1.6em;
+      font-weight: 500;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: 16.81px;
+      text-align: left;
+      margin-left: 10px;
+    }
+
+    img {
+      width: 6px;
+      height: 6px;
+      margin-left: 120px;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      color: #48802d;
+      font-family: 'GT Eesti Pro Display';
+      font-size: 2.4em;
+      font-weight: 500;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: 16.81px;
+      text-align: left;
+      margin-bottom: 20px;
+      margin-left: 45px;
+    }
+
+    input {
+      max-width: 366px;
+      height: 75px;
+      box-shadow: 0 0 59px rgba(44, 44, 44, 0.05);
+      border-radius: 37px;
+      border: 1px solid #c4c4c4;
+      background-color: #ffffff;
+      margin-bottom: 60px;
+      color: #a6a6a6;
+      font-family: 'GT Eesti Pro Display';
+      font-size: 2.2em;
+      font-weight: 300;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: normal;
+      text-align: left;
+      padding-left: 45px;
+      outline: none;
+    }
+
+    &-buttons {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+    }
+
+    &-btn {
+      width: 268px;
+      height: 75px;
+      box-shadow: 6px 5px 20px rgba(82, 151, 34, 0.21);
+      border-radius: 38px;
+      background-color: #ffffff;
+      background-image: linear-gradient(to top, #6aaf5c 0%, #52b709 100%),
+        linear-gradient(
+          36deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.16) 47%,
+          rgba(255, 255, 255, 0.17) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+      border: none;
+      color: #ffffff;
+      font-family: 'Muller';
+      font-weight: 500;
+      font-size: 2.2em;
+      font-weight: bold;
+      letter-spacing: normal;
+      line-height: 71.88px;
+      text-align: center;
+      border: 2px solid #6aaf5c;
+      margin-right: 1.5rem;
+
+      &:hover {
+        background-image: none;
+        background-color: #ffffff;
+        border: 2px solid #6aaf5c;
+        color: #6aaf5c !important;
+        transition: 0.3s;
+
+        .loader * {
+          fill: #6aaf5c;
+        }
+      }
+
+      &--role {
+        width: 268px;
+        height: 75px;
+        border-radius: 38px;
+        background-color: #ffffff;
+        border: 2px solid #6aaf5c;
+        font-family: 'Muller';
+        font-size: 2em;
+        font-weight: 300;
+        letter-spacing: normal;
+        line-height: 71.88px;
+        text-align: center;
+        border: 2px solid #6aaf5c;
+        margin-right: 1.5rem;
+
+        a {
+          color: #6aaf5c !important;
+        }
+      }
+
+      .loader * {
+        fill: #fff !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .auth-box {
+    margin-bottom: 44px;
+
+    &__sign-in {
+      text-align: center;
+      margin-top: 44px;
+    }
+
+    &__form-buttons {
+      margin: 0 auto;
+      flex-direction: column;
+
+      &>* {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+}

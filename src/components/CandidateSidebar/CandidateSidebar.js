@@ -2,8 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Achievement } from '../Achievement/Achievement'
 
+import { LEVELS, SKILLS } from '../constants/constants'
+
 import maleBig from '../../images/medium_male_big.png'
-import './sidebar.scss'
+import './candidateSidebar.scss'
 
 const getYearsString = (years) => {
   let yearsString
@@ -19,26 +21,31 @@ const getYearsString = (years) => {
   return `${years} ${yearsString}`
 }
 
-const Sidebar = ({ candidate }) => {
-  console.log('c', candidate)
+const CandidateSidebar = ({ candidate, position }) => {
   return (
-    <div className='candidateSidebar'>
-      <div className='candidateSidebar__info'>
+    <div className='candidate-sidebar'>
+      <div className='candidate-sidebar__info'>
+        <div className='candidate-sidebar__position'>
+          <h2>
+            {candidate.specification} {SKILLS[candidate.position_id]},{' '}
+            {LEVELS[candidate.level]}{' '}
+          </h2>
+        </div>
         <img src={candidate.photo} alt='' />
         {candidate && candidate.years_of_exp && (
           <>
-            <p className='candidateSidebar__experience-title'>Опыт работы</p>
-            <p className='candidateSidebar__experience'>
+            <p className='candidate-sidebar__experience-title'>Опыт работы</p>
+            <p className='candidate-sidebar__experience'>
               {getYearsString(candidate.years_of_exp)}
             </p>
           </>
         )}
         <Link to={`/candidate/${candidate.id}/form`}>
-          <button className='candidateSidebar__select'>
+          <button className='candidate-sidebar__select'>
             Выбрать к собеседованию
           </button>
         </Link>
-        <div className='candidateSidebar__achievements'>
+        <div className='candidate-sidebar__achievements'>
           {candidate &&
             candidate.achievements &&
             candidate.achievements.map((item) => {
@@ -50,4 +57,4 @@ const Sidebar = ({ candidate }) => {
   )
 }
 
-export default Sidebar
+export default CandidateSidebar

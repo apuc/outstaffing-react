@@ -9,9 +9,9 @@
     &-text {
       margin-left: 3.1rem;
       color: #000000;
-      font-family: 'GT Eesti Pro Display - Thin';
+      font-family: 'GT Eesti Pro Display';
       font-size: 18px;
-      font-weight: 400;
+      font-weight: 300;
       letter-spacing: normal;
       line-height: 36px;
       text-align: left;
@@ -40,6 +40,37 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
+
+      &--prev {
+        transform: rotateZ(180deg);
+      }
+
+      &--actual {
+        width: 125px;
+        height: 42px;
+        box-shadow: 0 0 59px rgba(44, 44, 44, 0.05);
+        border-radius: 5px;
+        border: 1px solid #c4c4c4;
+        background-color: #f0f7e0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: 0 65px;
+
+        p {
+          margin-left: 10px;
+          margin-bottom: 0;
+          color: #000000;
+          font-family: "GT Eesti Pro Display";
+          font-size: 13px;
+          font-weight: 300;
+          font-style: normal;
+          letter-spacing: normal;
+          line-height: normal;
+        }
+      }
     }
 
     button {
@@ -47,7 +78,7 @@
       outline: none;
       width: 31px;
       height: 31px;
-      background-color: #f6f6f6;
+      background-color: #54b611;
       border-radius: 50%;
       display: flex;
       justify-content: center;

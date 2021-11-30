@@ -1,61 +1,92 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectCurrentCandidate } from '../../redux/outstaffingSlice';
-import { Link } from 'react-router-dom';
-import style from './Calendar.module.css';
-import calendarMale from '../../images/medium_male.png';
-import rectangle from '../../images/rectangle_secondPage.png';
-import CalendarComponent from './CalendarComponent';
-import { currentMonth } from './calendarHelper';
-import { Footer } from '../Footer/Footer';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCurrentCandidate, auth } from '../../redux/outstaffingSlice'
+import { Link, useHistory, useParams } from 'react-router-dom'
+import calendarMale from '../../images/medium_male.png'
+import rectangle from '../../images/rectangle_secondPage.png'
+import CalendarComponent from './CalendarComponent'
+import { currentMonth } from './calendarHelper'
+import { Footer } from '../Footer/Footer'
+
+import { fetchReportList } from '../../server/server'
+import { getRole } from '../../redux/roleSlice'
+
+import './calendar.scss'
+
+const getDateParamString = ({ paramName, value }) => {
+  return value ? `${paramName}=${value}` : ''
+}
 
 const Calendar = () => {
-  const candidateForCalendar = useSelector(selectCurrentCandidate);
+  const dispatch = useDispatch()
+  const candidateForCalendar = useSelector(selectCurrentCandidate)
+  const role = useSelector(getRole)
+  const { userId } = useParams()
+  const [month, setMonth] = useState('')
+  const [fromDate, setFromDate] = useState(null)
+  const [toDate, setToDate] = useState(null)
 
-  const [month, setMonth] = useState('');
+  const history = useHistory()
 
   useEffect(() => {
-    setMonth(currentMonth);
-  }, [month]);
+    fetchReportList({
+      link: `${
+        process.env.REACT_APP_API_URL
+      }/api/reports/index?user_id=${userId}${getDateParamString({
+        paramName: 'fromDate',
+        value: fromDate
+      })}${getDateParamString({
+        paramName: 'toDate',
+        value: toDate
+      })}`,
+      history,
+      role,
+      logout: () => dispatch(auth(false))
+    })
+  }, [])
 
-  const { name, skillsName, photo } = candidateForCalendar;
+  useEffect(() => {
+    setMonth(currentMonth)
+  }, [month])
 
-  const abbreviatedName = name && name.substring(0, name.lastIndexOf(' '));
+  const { name, skillsName, photo } = candidateForCalendar
+
+  const abbreviatedName = name && name.substring(0, name.lastIndexOf(' '))
 
   return (
-    <section className={style.calendar}>
-        <div className="row">
-          <h2 className={style.calendar__title}>
-            Добрый день, <span>Александр !</span>
-          </h2>
-          <div className="col-12 col-xl-12 d-flex justify-content-between align-items-center flex-column flex-sm-row">
-            <div className={style.calendarHeader__info}>
-              <img className={style.calendarHeader__info__img} src={photo} alt="img" />
-              <h3 className={style.calendarHeader__info__name}>{abbreviatedName}</h3>
-            </div>
-            <div className={style.calendarHeader__title}>
-              <h3 className={style.calendarHeader__title__text}>{skillsName} разработчик</h3>
-              <img className={style.calendarHeader__title__img} src={rectangle} alt="img" />
-            </div>
-            <div>
-              <Link to="/report">
-                <button className={style.calendarHeader__btn}>Заполнить отчет за день</button>
-              </Link>
-            </div>
+    <section className='calendar'>
+      <div className='row'>
+        <h2 className='calendar__profile'>
+          Добрый день, <span>Александр !</span>
+        </h2>
+        <div className='col-12 col-xl-12 d-flex justify-content-between align-items-center flex-column flex-sm-row'>
+          <div className='calendar__info'>
+            <img className='calendar__info-img' src={photo} alt='img' />
+            <h3 className='calendar__info-name'>{abbreviatedName}</h3>
+          </div>
+          <div className='calendar__title'>
+            <h3 className='calendar__title-text'>{skillsName} разработчик</h3>
+            <img className='calendar__title-img' src={rectangle} alt='img' />
+          </div>
+          <div>
+            <Link to='/report'>
+              <button className='calendar__btn'>Заполнить отчет за день</button>
+            </Link>
           </div>
         </div>
+      </div>
 
-        <div className="row">
-          <div className="col-12 col-xl-12">
-            <CalendarComponent />
-            <p className={style.calendarFooter__text}>
-              {month} : <span> 60 часов </span>
-            </p>
-          </div>
+      <div className='row'>
+        <div className='col-12 col-xl-12'>
+          <CalendarComponent />
+          <p className='calendar__hours'>
+            {month} : <span> 60 часов </span>
+          </p>
         </div>
-        <Footer />
+      </div>
+      <Footer />
     </section>
-  );
-};
+  )
+}
 
-export default Calendar;
+export default Calendar
