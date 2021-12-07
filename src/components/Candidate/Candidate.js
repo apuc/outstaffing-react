@@ -31,7 +31,7 @@ const Candidate = () => {
 
   useEffect(() => {
     fetchGet({
-      link: `${process.env.REACT_APP_API_URL}/api/profile/`,
+      link: `${process.env.REACT_APP_API_URL}/api/profile/${candidateId}`,
       params: Number(candidateId),
       history,
       role,
@@ -82,7 +82,7 @@ const Candidate = () => {
   }
 
   const { header, img, classes } = setStyles()
-
+  
   return (
     <div className='candidate'>
       <div className='row'>

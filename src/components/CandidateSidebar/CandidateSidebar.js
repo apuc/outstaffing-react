@@ -45,6 +45,11 @@ const CandidateSidebar = ({ candidate, position }) => {
             Выбрать к собеседованию
           </button>
         </Link>
+        <Link to={`/${candidate.id}/calendar`}>
+          <button className='candidate-sidebar__select'>
+            Отчёты
+          </button>
+        </Link>
         <div className='candidate-sidebar__achievements'>
           {candidate &&
             candidate.achievements &&

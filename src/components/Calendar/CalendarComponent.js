@@ -4,11 +4,11 @@ import rectangle from '../../images/rectangle__calendar.png'
 import calendarIcon from '../../images/calendar_icon.png'
 import moment from 'moment'
 import 'moment/locale/ru'
-import { calendarHelper, currentMonthAndDay } from './calendarHelper'
+import { calendarHelper, currentMonthAndDay, } from './calendarHelper'
 
 import './calendarComponent.scss'
 
-const CalendarComponent = () => {
+const CalendarComponent = ({ onSelect }) => {
   const [value, setValue] = useState(moment())
   const [calendar, setCalendar] = useState([])
 
@@ -36,14 +36,7 @@ const CalendarComponent = () => {
   }
 
   function nextMonth() {
-    return value.clone().subtract(2, 'month')
-  }
-
-  const prevMonthFirst = () => {
-    return moment().subtract(1, 'month').format('MMMM')
-  }
-  const prevMonthSecond = () => {
-    return moment().subtract(2, 'month').format('MMMM')
+    return value.clone().add(1, 'month');
   }
 
   return (
@@ -52,11 +45,11 @@ const CalendarComponent = () => {
         <h3>Мои отчеты</h3>
         <div className='calendar-component__header-box'>
           <img src={ellipse} alt='' />
-          <span onClick={() => setValue(prevMonth())}>{prevMonthFirst()}</span>
+          <span onClick={() => setValue(prevMonth())}>{prevMonth().format('MMMM')}</span>
         </div>
         <div className='calendar-component__header-box'>
           <img src={ellipse} alt='' />
-          <span onClick={() => setValue(nextMonth())}>{prevMonthSecond()}</span>
+          <span onClick={() => setValue(nextMonth())}>{nextMonth().format('MMMM')}</span>
         </div>
       </div>
 
@@ -79,7 +72,7 @@ const CalendarComponent = () => {
           {calendar.map((week) =>
             week.map((day) => (
               <button
-                onClick={() => setValue(day)}
+                onClick={() => { setValue(day); onSelect(day) }}
                 key={day}
                 className={dayStyles(day)}
                 name={day.format('dddd')}

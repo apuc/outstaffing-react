@@ -17,7 +17,7 @@ const getDateParamString = ({ paramName, value }) => {
   return value ? `${paramName}=${value}` : ''
 }
 
-const Calendar = () => {
+const Calendar = ({ onSelect }) => {
   const dispatch = useDispatch()
   const candidateForCalendar = useSelector(selectCurrentCandidate)
   const role = useSelector(getRole)
@@ -28,22 +28,22 @@ const Calendar = () => {
 
   const history = useHistory()
 
-  useEffect(() => {
-    fetchReportList({
-      link: `${
-        process.env.REACT_APP_API_URL
-      }/api/reports/index?user_id=${userId}${getDateParamString({
-        paramName: 'fromDate',
-        value: fromDate
-      })}${getDateParamString({
-        paramName: 'toDate',
-        value: toDate
-      })}`,
-      history,
-      role,
-      logout: () => dispatch(auth(false))
-    })
-  }, [])
+  // useEffect(() => {
+  //   fetchReportList({
+  //     link: `${
+  //       process.env.REACT_APP_API_URL
+  //     }/api/reports/index?user_id=${userId}${getDateParamString({
+  //       paramName: 'fromDate',
+  //       value: fromDate
+  //     })}${getDateParamString({
+  //       paramName: 'toDate',
+  //       value: toDate
+  //     })}`,
+  //     history,
+  //     role,
+  //     logout: () => {}
+  //   })
+  // }, [])
 
   useEffect(() => {
     setMonth(currentMonth)
@@ -78,7 +78,7 @@ const Calendar = () => {
 
       <div className='row'>
         <div className='col-12 col-xl-12'>
-          <CalendarComponent />
+          <CalendarComponent onSelect={onSelect} />
           <p className='calendar__hours'>
             {month} : <span> 60 часов </span>
           </p>
