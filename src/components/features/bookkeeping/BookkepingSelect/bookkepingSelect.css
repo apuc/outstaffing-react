@@ -1,0 +1,24 @@
+.bookkeping-select__selected{
+    width: 358px;
+    height: 33px;
+    background-color: #54b611;
+    border-radius: 17px;
+    font-family: 'GT Eesti Pro Display';
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 400;
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    text-transform: lowercase;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    }
+    
+@media (max-width: 380px) {
+  .bookkeping-select__selected {
+    width: 280px;
+  }
+}

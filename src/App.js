@@ -16,6 +16,11 @@ import CalendarPage from './pages/CalendarPage'
 import ReportPage from './pages/ReportFormPage.js'
 import FormPage from './pages/FormPage.js'
 import SingleReportPage from './pages/SingleReportPage'
+import Bookkeping from './pages/Bookkeeping'
+import { TaxPage } from "./pages/TaxPage"
+import { MoneyPage } from "./pages/MoneyPage"
+import { ActPage } from "./pages/ActPage"
+import { ContractPage } from "./pages/ContractPage"
 
 const App = (props) => {
   const isAuth = useSelector(selectAuth)
@@ -44,6 +49,11 @@ const App = (props) => {
           />
           <ProtectedRoute exact path='/report' component={ReportPage} />
           <ProtectedRoute path='/report/:id' component={SingleReportPage} />
+          <ProtectedRoute exact path='/documents' component={Bookkeping} />
+          <ProtectedRoute exact path='/tax' component={TaxPage} />
+          <ProtectedRoute exact path='/money' component={MoneyPage} />
+          <ProtectedRoute exact path='/documents/act' component={ActPage} />
+          <ProtectedRoute exact path='/documents/contract' component={ContractPage} />
           <ProtectedRoute component={() => <div>Page not found</div>} />
         </Switch>
       </Router>

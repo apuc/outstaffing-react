@@ -1,0 +1,54 @@
+.title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 135px;  
+}
+
+.title h1 {
+    font-family: 'GT Eesti Pro Display';
+    font-weight: 700;
+    font-size: 53px;
+    letter-spacing: 0.56px;
+    display: block;
+}
+
+.title span {
+    color: #52b709;
+}
+
+.size {
+    width: 1230px;
+    margin: 0 auto;
+}
+
+.main-content {
+    display: flex;
+    margin-bottom: 300px;
+    position: relative;
+    top: 90px;
+}
+
+@media (max-width: 1240px) {
+    .main-content {
+        display: grid;
+        top: 30px;
+    }
+    .size {
+        width: 100%;
+    }
+    .title {
+        text-align: center;
+    }
+}
+
+@media (max-width: 450px) {
+    .title  h1{
+        font-size: 40px;
+        letter-spacing: 0.27px;
+    }
+
+    .content__info-title h2 {
+        font-size: 20px;
+    }
+}

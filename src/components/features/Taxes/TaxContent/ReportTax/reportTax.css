@@ -1,0 +1,30 @@
+
+.period-column__item {
+    display: flex;
+    width: 258px;
+    height: 112px;
+    border-radius: 20px;
+    background-color: #f9f9f9;
+    margin-bottom: 40px;
+}
+
+.period-item__img {
+    width: 50%;
+    position: relative;
+    left: -11%;
+    top: 18%;
+}
+
+.period-item__name {
+    width: 50%;    
+    margin: auto 0;
+    font-family: 'GT Eesti Pro Display';
+    font-weight: 400;
+    font-size: 18px;
+    margin-left: 15px;
+}
+
+.period-item__name span {
+    font-family: 'GT Eesti Pro Display';
+    font-weight: 300;
+}

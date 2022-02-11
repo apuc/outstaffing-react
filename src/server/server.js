@@ -49,11 +49,12 @@ export const fetchAuth = async ({
 
     response.json().then((resJSON) => {
       localStorage.setItem('auth_token', resJSON.access_token)
+      localStorage.setItem('id', resJSON.id)
       localStorage.setItem(
         'access_token_expired_at',
         resJSON.access_token_expired_at
       )
-      dispatch()
+      dispatch(resJSON)
     })
   } catch (error) {
     console.error('Error occured: ', error)

@@ -1,0 +1,111 @@
+.example__bills {
+    width: 605px;
+    height: 229px;
+    border-radius: 10px;
+    border: 1px solid #69bf2c;
+    margin-top: 15px;
+}
+
+.example__part-first {
+    display: grid;
+    align-content: center;
+    padding-left: 44px;
+    height: 50%;
+}
+
+.example-info__item {
+    display: flex;
+    padding-bottom: 21px;
+}
+
+.example-item__amount {
+    font-size: 18px;
+    font-family: 'GT Eesti Pro Display';
+    font-weight: 400;
+}
+
+.example-item__number {
+    font-size: 18px;
+    font-family: 'GT Eesti Pro Display';
+    font-weight: 400;
+}
+
+.example__part-second {
+    display: flex;
+    align-items: center;
+    padding-left: 44px;
+    border-radius: 0 0 20px;
+    border: 1px solid #efefef;
+    background-color: rgb(249, 249, 249, 0.87);
+    height: 50%;
+}
+
+.example__total span {
+    font-family: 'GT Eesti Pro Display';
+    font-weight: 300;
+    font-size: 18px;
+    padding-right: 15px;
+}
+
+.example__total {
+    font-size: 25px;
+    font-family: 'GT Eesti Pro Display';
+}
+
+.example__info-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'GT Eesti Pro Display';
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    border-radius: 10px;
+    max-height: 40px;
+    width: 131px;
+    height: 40px;
+    margin-left: 70px;
+}
+
+.example__info-status--completed {
+    background-color: #70a9e4;
+}
+
+@media (max-width: 700px) {
+    .example__bills {
+        width: 480px;
+    }
+}
+
+
+@media (max-width: 500px) {
+    .example__bills {
+        width: 300px;
+    }
+
+    .example__info-status {
+        font-size: 12px;
+        margin-right: 10px;
+        width: 105px;
+    }
+
+    .example-info__item {
+        padding: 10px;
+    }
+
+    .example-item__amount {
+        font-size: 12px;
+    }
+    .example-item__number {
+        font-size: 12px;
+    }
+
+    .example__total {
+        font-size: 12px;
+        display: grid;
+    }
+
+    .example__total span {
+        font-size: 14px;
+    }
+}
