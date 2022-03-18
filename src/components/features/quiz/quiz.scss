@@ -1,0 +1,402 @@
+@use 'sass:math'; 
+@import 'functions.scss';
+
+$maxWidthContainer: 1123;
+
+._container{
+    max-width: 1123px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.quiz-text{
+    font-size: 20px;
+    font-weight: 400;       
+    line-height: math.div(30, 20); 
+}
+.title{
+    color: #282828;
+    font-family: "GT Eesti Pro Display";
+    font-size: 33px;
+    font-weight: 700;
+    line-height: math.div(48, 33);
+    letter-spacing: 0.56px;
+}
+.subtitle{
+    color: #373936;
+    font-family: "GT Eesti Pro Display";
+    font-size: 20px;
+    font-weight: 400;
+    line-height: math.div(25, 20);
+}
+.quiz-btn{
+    display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 6px 5px 20px rgba(82, 151, 34, 0.21);
+        border-radius: 23px;
+        color: #ffffff;
+        outline: none;
+        border: 2px solid #52b709;
+        background: #52b709;
+        transition: 0 all ease 0.8s;
+        padding: 14px 38px;
+        line-height: 1;
+        font-family: "Muller Extra Bold";
+        font-weight: 400;
+        font-size: 16px;
+        text-decoration: none;
+        &:hover{
+            text-decoration: none;
+            color: #52b709;
+            background: #fff;
+        }
+        &_dark-green{
+            background-color: #1a310c;
+            border: 2px solid #1a310c;
+            &:hover{
+                text-decoration: none;
+                color: #1a310c;
+                background: #fff;
+            } 
+        }
+        &_restriction{
+            max-width: 131px;
+        }
+}
+.quiz-title_h3{
+    color: #000000;
+    font-family: "GT Eesti Pro Display";
+    font-size: 25px;
+    font-weight: 400;
+    line-height: math.div(30, 25);  
+}
+//=============================================
+.header-quiz{
+    @include adaptiv-value("padding-top", 48, 30, 1);
+    @include adaptiv-value("padding-bottom", 85, 30, 1);
+    &__container{
+        max-width: $maxWidthContainer+px;
+        margin: 0 auto;
+        padding: 0 10px;
+    }
+    &__title-main{
+        font-family: "GT Eesti Pro Display";
+        font-size: 24px;
+        font-weight: bold;
+        @include adaptiv-value("margin-bottom", 80, 30, 1);
+    }
+    &__body{
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 30px;
+        margin-bottom: 39px;
+    }
+    &__body_interjacent{
+        align-items: center;
+    }
+    &__description{
+        max-width: 576px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    &__avatar{
+        position: relative;
+        display: block;
+        flex: 0 0 133px;
+        min-height: 133px;
+        margin-right: 31px;
+        img{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            top: 0;
+            left: 0;
+        }
+    }
+    &__name-user{
+        color: #000000;
+        font-family: "GT Eesti Pro Display";
+        font-size: 16px;
+        font-weight: 400;        
+        line-height: math.div(30, 20);  
+        margin-right: 70px;     
+    }
+    &__title{
+        color: #000000;
+        font-family: "GT Eesti Pro Display";
+        @include adaptiv-value("font-size", 25, 16, 1);  
+        font-weight: 700;       
+        line-height: math.div(36, 25); 
+        position: relative;
+
+        &::before{
+            position: absolute;
+            content: "";
+            width: prc(316, 370);
+            height: 5px;
+            border-radius: 3px;
+            background-color: #54b611;
+            bottom: -26px;
+        }      
+    }
+}
+.my-tests{
+    font-family: "GT Eesti Pro Display";
+    // @include adaptiv-value("padding-top", 85, 30, 1);
+    // @include adaptiv-value("padding-bottom", 85, 30, 1);
+    &__container{
+        max-width: $maxWidthContainer+px;
+        margin: 0 auto;
+        padding: 0 10px;
+    }
+    &__title{
+        color: #000000;
+        font-size: 25px;
+        font-weight: 400;       
+        line-height: math.div(30, 25);  
+        @include adaptiv-value("margin-bottom", 80, 30, 1);  
+    }
+    &__items{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 0 -41px -42px;
+    }
+}
+
+.item-test{
+    flex: 0 1 50%;
+    padding: 0 41px;
+    margin: 0 0 42px 0;
+    @media (max-width: 760px) {
+        flex: 0 1 100%;
+    }
+    &__name-test{
+        color: #373936;  
+        margin-bottom: 29px; 
+      
+    }
+    .active{
+        color: #54b611;
+    }
+    &__body{
+        
+    }
+}
+.test-data{
+    display: flex;
+    align-items: center;
+    
+    &__calendar{
+        padding: 13px 21px;
+        box-shadow: 0 0 59px rgba(44, 44, 44, 0.05);
+        border-radius: 5px;
+        border: 1px solid #c4c4c4;
+        background-color: #f0f7e0;
+        font-weight: 400;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        margin-right: 17px;
+        img{
+            display: block;
+            margin-right: 11px;
+        }
+
+    }
+    &__hr{
+        width: 28px;
+        height: 5px;
+        border-radius: 3px;
+        background-color: #54b611;
+        margin-right: 26px;
+    }
+    &__select{
+        max-width: 131px;
+    }
+}
+
+.progressbar{
+    max-width: $maxWidthContainer+px;
+    margin: 0 auto;
+    padding: 0 10px;
+    &__body{
+        display: flex;
+        align-items: center;
+    }
+    &__value{
+        flex: 0 0 39px;
+        height: 39px;
+        background-color: #5cb42b;
+        border-radius: 50%;
+        color: #fff;
+        letter-spacing: 1.1px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // flex: 1 1 auto;
+        margin-right: 19px;
+    }
+    &__strip{
+        flex: 1 1 auto;
+        height: 19px;      
+        
+        div{
+            border-radius: 10px;
+            height: 100%;
+            background-color: #5cb42b;
+        }
+    }
+}
+
+.task{
+    @include adaptiv-value("padding-top", 35, 10, 1);
+    &__container{
+        max-width: $maxWidthContainer+px;
+        margin: 0 auto;
+        padding: 0 10px;
+    }
+    &__title{        
+        margin-bottom: 39px;   
+    }
+    &__form{
+     
+    }
+
+}
+
+.form-task{
+    &__field{
+        padding: 10px 15px;
+        font-size: 17px;
+        font-family: 'GT Eesti Pro Display';
+        letter-spacing: 0.3px;
+        outline: none;
+        border: 1px solid #52b709;
+        width: 100%;
+        resize: vertical;
+    }
+    &__check {
+        padding: 0;
+        height: initial;
+        width: initial;
+        margin-bottom: 0;
+        display: none;
+        cursor: pointer; 
+    }
+    &__buttons{
+        display: flex;
+        gap: 56px;
+        flex-wrap: wrap;
+        align-items: center;
+        @include adaptiv-value("margin-top", 60, 30, 1);  
+    }
+}
+
+.form-task__group{
+    display: block;
+    
+    margin-bottom: 15px;
+   
+    label {
+        color: #373936;
+        font-family: "GT Eesti Pro Display";
+        font-size: 18px;
+        font-weight: 300;
+        line-height: math.div(28,18);
+        position: relative;
+        cursor: pointer;
+        &:before {
+            content:'';
+            -webkit-appearance: none;
+            background-color: transparent;
+            border: 2px solid #52b709;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+            padding: 11px;
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+            cursor: pointer;
+            margin-right: 30px;
+          }
+      }
+      input[type="radio"] + label:before{
+          border-radius: 50%;
+      }
+      input:checked + label:before{
+          background: #52b709;
+      }
+      input:checked + label:after {
+
+        content: "";
+        display: block;
+        position: absolute;
+        top: 6px;
+        left: 9px;
+        width: 7px;
+        height: 14px;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+  }
+
+.instruction{
+    &__container{
+        max-width: $maxWidthContainer+px;
+        margin: 0 auto;
+        padding: 0 10px;
+    }
+    &__title{
+        @include adaptiv-value("margin-bottom", 62, 20, 1);
+    }
+    &__text{
+        color: #373936;
+        font-family: "GT Eesti Pro Display";
+        font-size: 18px;
+        font-weight: 300;
+        line-height: math.div(28, 18);  
+        @include adaptiv-value("margin-bottom", 50, 20, 1);   
+        span{
+            color: #54b611;
+            font-weight: 700;
+        }
+        &_info{
+            margin-bottom: 0;
+        }
+    }
+    &__info{
+        display: flex;
+        gap: 24px;
+        align-items: center;
+    }
+    &__icon{
+        width: 36px;
+        height: 33px;
+    }
+    &__btn{
+        margin-bottom: 34px;
+    }
+}
+
+.result{
+   font-family: "GT Eesti Pro Display";
+    &__body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    &__text{
+        font-size: 24px;
+        font-weight: bold;
+    }
+    &__score{
+        color: #5cb42b;
+    }
+}
