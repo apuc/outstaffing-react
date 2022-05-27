@@ -1,3 +1,4 @@
+@use 'sass:math'; 
 .candidate {
   &__title {
     margin-top: 60px;
@@ -290,4 +291,86 @@
 
 .candidate + .logout-button {
   top: 80px !important;
+}
+
+
+.candidate__works{ 
+  @media (min-width: 576px) {
+    padding: 0 0 45px 0;
+  }
+}
+.works__body{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px -30px;
+}
+.item-works{
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+  margin: 0 0 30px 0;
+  flex: 0 1 50%;
+  position: relative;
+
+  @media (max-width: 761px) {
+    flex: 0 1 100%;
+  }
+
+  &__body{
+    padding: 17px;
+    border: 2px solid #54b611;
+    border-radius: 10px;
+
+    &::before{
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: 25px;
+      height: 5px;
+      width: 29px;
+      border-radius: 3px;
+      background-color: #54b611;
+    }
+  }
+
+  &__link{
+    color: #0350dc;
+    font-family: "GT Eesti Pro Display";
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: math.div(36,16);
+    text-decoration: underline;
+    display: block;
+    margin-bottom: 17px;
+  }
+  &__text{
+    margin-bottom: 37px;
+    color: #000000;
+    font-family: "GT Eesti Pro Display - Thin";
+    font-size: 12px;
+    font-weight: 400;
+    line-height: math.div(18,12);
+  }
+  &__mark{
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    column-gap: 7px;
+    line-height: math.div(36,13);
+
+    &::before{
+      border-radius: 50%;
+      content: "";
+      width: 13px;
+      height: 13px;
+      background-color: #73c141;
+    }
+    &_yellow{
+      &::before{    
+      background-color: #e09f14;
+    }      
+  } 
+    
+  }
 }

@@ -1,10 +1,11 @@
-import React, { Suspense, lazy } from 'react'
+import React, { Suspense, lazy, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectAuth } from './redux/outstaffingSlice'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './fonts/stylesheet.css'
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute'
+
 
 import { YMInitializer } from 'react-yandex-metrika'
 
@@ -16,6 +17,13 @@ import CalendarPage from './pages/CalendarPage'
 import ReportPage from './pages/ReportFormPage.js'
 import FormPage from './pages/FormPage.js'
 import SingleReportPage from './pages/SingleReportPage'
+import { Highlighter } from './pages/CodeSnippetPage'
+import { QuizPage } from './pages/quiz/QuizPage'
+import { InterjacentPage } from './pages/quiz/InterjacentPage'
+import { QuizTestPage } from './pages/quiz/QuizTestPage'
+import { Instruction } from './components/features/quiz/Instructions'
+import { InstructionPage } from './pages/quiz/InstructionPage'
+import {ResultPage} from "./pages/quiz/ResultPage";
 
 const App = (props) => {
   const isAuth = useSelector(selectAuth)
@@ -44,6 +52,11 @@ const App = (props) => {
           />
           <ProtectedRoute exact path='/report' component={ReportPage} />
           <ProtectedRoute path='/report/:id' component={SingleReportPage} />
+          <ProtectedRoute path='/quiz' component={QuizPage} />
+          <ProtectedRoute path='/quiz-interjacent' component={InterjacentPage} />
+          <ProtectedRoute path='/quiz-test' component={QuizTestPage} />
+          <ProtectedRoute path='/quiz-instruction' component={InstructionPage} />
+          <ProtectedRoute path='/quiz-result' component={ResultPage} />
           <ProtectedRoute component={() => <div>Page not found</div>} />
         </Switch>
       </Router>
@@ -63,3 +76,5 @@ const App = (props) => {
 }
 
 export default App
+
+

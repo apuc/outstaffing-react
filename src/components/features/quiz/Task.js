@@ -29,8 +29,6 @@ export const TaskQuiz = () => {
    const id = localStorage.getItem('id');
    const [questions, setQuestions] = useState([])
 
-   console.log("render task");
-
    useEffect(async () => {
       const response = await fetchGet({
            link: `${process.env.REACT_APP_API_URL}/api/question/get-questions?uuid=${dataTest.uuid}`,
@@ -50,12 +48,12 @@ export const TaskQuiz = () => {
       if (checkedValues.length || inputValue) {
          switch (questions[index].question_type_id) {
             case '3':
-               // await dispatch(fetchUserAnswersMany(checkedValues))
+               await dispatch(fetchUserAnswersMany(checkedValues))
                break;
             case '2':
             case '1':
             case '4':
-               //   await dispatch(fetchUserAnswerOne(checkedValues))
+               await dispatch(fetchUserAnswerOne(checkedValues))
                break;
             default:
                break;
@@ -70,7 +68,7 @@ export const TaskQuiz = () => {
             setInputValue('')
          } else {
             history.push(`/quiz-result`)
-            // alert("Тест пройден!")
+            alert("Тест пройден!")
          }
 
       } else {
@@ -133,7 +131,6 @@ export const TaskQuiz = () => {
                                answer={answer}
                              />
                            ))
-
                       }
                       <div className="form-task__buttons">
                          {questions.length !== index + 1 &&

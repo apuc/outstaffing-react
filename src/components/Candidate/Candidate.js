@@ -18,12 +18,15 @@ import { Footer } from '../Footer/Footer'
 
 import './candidate.scss'
 import { getRole } from '../../redux/roleSlice'
+import { CodeSnippetlighter } from '../../pages/CodeSnippetPage'
+import { useState } from 'react'
 
 const Candidate = () => {
   const history = useHistory()
   const { id: candidateId } = useParams()
   const dispatch = useDispatch()
   const role = useSelector(getRole)
+  const [activeSnippet, setActiveSnippet] = useState(true)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -117,8 +120,11 @@ const Candidate = () => {
       <div className='candidate__main'>
         <div className='row'>
           <div className='col-12 col-xl-4'>
-            <Sidebar candidate={currentCandidateObj} position />
+            <Sidebar candidate={currentCandidateObj} position activeSnippet={activeSnippet} setActiveSnippet={setActiveSnippet}/>
           </div>
+          {
+            activeSnippet ?
+            (
           <div className='col-12 col-xl-8'>
             <div className='candidate__main-description'>
               <img src={rectangle} alt='' />
@@ -141,8 +147,44 @@ const Candidate = () => {
                   </button>
                 </Link> */}
               <SkillSection skillsArr={skillValues} />
+              
+            </div>
+          </div> 
+            ) :
+            (
+          // <div className="col-12 col-xl-8">
+          //   <CodeSnippetlighter />
+          // </div>
+          <div className="col-12 col-xl-8">
+            <div className="candidate__works works">
+              <div className="works__body">
+                <div className="works__item item-works">
+                  <div className="item-works__body">
+                    <Link to="/" className="item-works__link">Vuetifyis.com</Link>
+                    <div className="item-works__text">Forked from peluprvi/vuetifyjs.com <br /> Vuetifyjs.com documentation</div>
+                    <div className="item-works__mark">Angular</div>
+                  </div>                    
+                </div>
+                <div className="works__item item-works">
+                  <div className="item-works__body">
+                    <Link to="/" className="item-works__link">Vuetifyis.com</Link>
+                    <div className="item-works__text">Forked from peluprvi/vuetifyjs.com <br /> Vuetifyjs.com documentation</div>
+                    <div className="item-works__mark">Angular</div>
+                  </div>                    
+                </div>
+                <div className="works__item item-works">
+                  <div className="item-works__body">
+                    <Link to="/" className="item-works__link">Vuetifyis.com</Link>
+                    <div className="item-works__text">Forked from peluprvi/vuetifyjs.com <br /> Vuetifyjs.com documentation</div>
+                    <div className="item-works__mark item-works__mark_yellow">Laravel</div>
+                  </div>                    
+                </div>
+              </div>
             </div>
           </div>
+            )
+          }          
+      
         </div>
       </div>
       <Footer />

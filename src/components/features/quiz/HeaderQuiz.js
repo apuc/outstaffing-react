@@ -25,8 +25,6 @@ export const HeaderQuiz = ({header}) => {
       })
    }, [dispatch])
 
-   console.log('render header quiz')
-
    return (
      <div className="header-quiz">
         <div className="header-quiz__container">

@@ -8,7 +8,7 @@ export const withAuthRedirect =
       .then((res) => {
         if (res.status && res.status == 401) {
           localStorage.clear()
-          logout()
+          logout && logout()
           history.push(role === 'ROLE_DEV' ? '/authdev' : '/auth')
         }
 
@@ -16,7 +16,7 @@ export const withAuthRedirect =
       })
       .catch((err) => {
         localStorage.clear()
-        logout()
+        logout && logout()
         history.push(role === 'ROLE_DEV' ? '/authdev' : '/auth')
       })
   }

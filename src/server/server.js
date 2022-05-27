@@ -49,6 +49,7 @@ export const fetchAuth = async ({
 
     response.json().then((resJSON) => {
       localStorage.setItem('auth_token', resJSON.access_token)
+      localStorage.setItem('id', resJSON.id)
       localStorage.setItem(
         'access_token_expired_at',
         resJSON.access_token_expired_at
@@ -104,7 +105,8 @@ export const fetchPost = withAuthRedirect(async (link, body) => {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
         'Content-Type': 'application/json',
-        Origin: `http://localhost`
+        //Origin: `http://localhost:3000`
+        Origin: `${process.env.REACT_APP_BASE_URL}`,
       },
       body: JSON.stringify(body)
     })

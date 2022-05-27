@@ -6,6 +6,9 @@ import { LEVELS, SKILLS } from '../constants/constants'
 
 import maleBig from '../../images/medium_male_big.png'
 import './candidateSidebar.scss'
+import { Highlighter } from '../../App'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 const getYearsString = (years) => {
   let yearsString
@@ -21,7 +24,12 @@ const getYearsString = (years) => {
   return `${years} ${yearsString}`
 }
 
-const CandidateSidebar = ({ candidate, position }) => {
+const CandidateSidebar = ({ candidate, position, setActiveSnippet, activeSnippet }) => {
+  
+  const showSnippet = () => {
+    setActiveSnippet((prev)=>!prev)
+  }
+
   return (
     <div className='candidate-sidebar'>
       <div className='candidate-sidebar__info'>
@@ -50,13 +58,22 @@ const CandidateSidebar = ({ candidate, position }) => {
             Отчёты
           </button>
         </Link>
+        {/* <Link to={`/candidate/${candidate.id}/code`}> */}
+          <button 
+          className='candidate-sidebar__select'
+          onClick={showSnippet}
+          >
+            {activeSnippet ? "Показать": "Скрыть"}
+          </button>
+        {/* </Link> */}
         <div className='candidate-sidebar__achievements'>
           {candidate &&
             candidate.achievements &&
             candidate.achievements.map((item) => {
-              return <Achievement achievement={item.achievement} />
+              return <Achievement key={item.id} achievement={item.achievement} />
             })}
         </div>
+        
       </div>
     </div>
   )
