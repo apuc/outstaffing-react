@@ -48,12 +48,12 @@ export const TaskQuiz = () => {
       if (checkedValues.length || inputValue) {
          switch (questions[index].question_type_id) {
             case '3':
-               await dispatch(fetchUserAnswersMany(checkedValues))
+               dispatch(fetchUserAnswersMany(checkedValues))
                break;
             case '2':
             case '1':
             case '4':
-               await dispatch(fetchUserAnswerOne(checkedValues))
+               dispatch(fetchUserAnswerOne(checkedValues))
                break;
             default:
                break;

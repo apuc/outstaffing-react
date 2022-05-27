@@ -47,7 +47,7 @@ const Form = () => {
     formData.append('comment', data.comment)
 
     fetchPost({
-      link: `${process.env.REACT_APP_API_URL}/api/profile/add-to-interview`,
+      link: `${process.env.REACT_APP_API_URL}/api/interview-request/create-interview-request`,
       params: {
         profile_id: urlParams.id,
         ...data

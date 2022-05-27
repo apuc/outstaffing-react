@@ -18,7 +18,7 @@ export const setUserInfo = createAsyncThunk(
   async (id) => {
      try{
         const response = await fetchGet({
-             link: `${process.env.REACT_APP_API_URL}/api/user-card/get-user-card?user_id=${id}`,
+             link: `${process.env.REACT_APP_API_URL}/api/profile/get-main-data?user_id=${id}`,
              Origin: `${process.env.REACT_APP_BASE_URL}`,
           }
         )
