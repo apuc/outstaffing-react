@@ -54,7 +54,7 @@ export const fetchAuth = async ({
         'access_token_expired_at',
         resJSON.access_token_expired_at
       )
-      dispatch()
+      dispatch(resJSON)
     })
   } catch (error) {
     console.error('Error occured: ', error)

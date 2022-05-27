@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { auth } from '../../redux/outstaffingSlice'
+import { auth, setUserInfo } from '../../redux/outstaffingSlice'
 import { loading } from '../../redux/loaderSlice'
 import ellipse from '../../images/ellipse.png'
+
 
 import { Loader } from '../Loader/Loader'
 
@@ -74,8 +75,9 @@ export const AuthBox = ({ title, roleChangeLink }) => {
                     fetchAuth({
                       username,
                       password,
-                      dispatch: () => {
+                      dispatch: (resJSON) => {
                         dispatch(auth(true))
+                        dispatch(setUserInfo(resJSON))
                         dispatch(loading(false))
                         dispatch(setRole('ROLE_PARTNER'))
                       },

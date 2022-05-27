@@ -17,6 +17,7 @@ import CalendarPage from './pages/CalendarPage'
 import ReportPage from './pages/ReportFormPage.js'
 import FormPage from './pages/FormPage.js'
 import SingleReportPage from './pages/SingleReportPage'
+<<<<<<< HEAD
 import { Highlighter } from './pages/CodeSnippetPage'
 import { QuizPage } from './pages/quiz/QuizPage'
 import { InterjacentPage } from './pages/quiz/InterjacentPage'
@@ -24,6 +25,13 @@ import { QuizTestPage } from './pages/quiz/QuizTestPage'
 import { Instruction } from './components/features/quiz/Instructions'
 import { InstructionPage } from './pages/quiz/InstructionPage'
 import {ResultPage} from "./pages/quiz/ResultPage";
+=======
+import Bookkeping from './pages/Bookkeeping'
+import { TaxPage } from "./pages/TaxPage"
+import { MoneyPage } from "./pages/MoneyPage"
+import { ActPage } from "./pages/ActPage"
+import { ContractPage } from "./pages/ContractPage"
+>>>>>>> documents
 
 const App = (props) => {
   const isAuth = useSelector(selectAuth)
@@ -52,11 +60,19 @@ const App = (props) => {
           />
           <ProtectedRoute exact path='/report' component={ReportPage} />
           <ProtectedRoute path='/report/:id' component={SingleReportPage} />
+<<<<<<< HEAD
           <ProtectedRoute path='/quiz' component={QuizPage} />
           <ProtectedRoute path='/quiz-interjacent' component={InterjacentPage} />
           <ProtectedRoute path='/quiz-test' component={QuizTestPage} />
           <ProtectedRoute path='/quiz-instruction' component={InstructionPage} />
           <ProtectedRoute path='/quiz-result' component={ResultPage} />
+=======
+          <ProtectedRoute exact path='/documents' component={Bookkeping} />
+          <ProtectedRoute exact path='/tax' component={TaxPage} />
+          <ProtectedRoute exact path='/money' component={MoneyPage} />
+          <ProtectedRoute exact path='/documents/act' component={ActPage} />
+          <ProtectedRoute exact path='/documents/contract' component={ContractPage} />
+>>>>>>> documents
           <ProtectedRoute component={() => <div>Page not found</div>} />
         </Switch>
       </Router>

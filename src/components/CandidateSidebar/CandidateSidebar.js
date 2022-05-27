@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Achievement } from '../Achievement/Achievement'
 
@@ -9,6 +10,9 @@ import './candidateSidebar.scss'
 import { Highlighter } from '../../App'
 import { useState } from 'react'
 import { useEffect } from 'react'
+
+import { selectUserInfo } from '../../redux/outstaffingSlice'
+import { isRejected } from '@reduxjs/toolkit'
 
 const getYearsString = (years) => {
   let yearsString
@@ -24,12 +28,17 @@ const getYearsString = (years) => {
   return `${years} ${yearsString}`
 }
 
+<<<<<<< HEAD
 const CandidateSidebar = ({ candidate, position, setActiveSnippet, activeSnippet }) => {
   
   const showSnippet = () => {
     setActiveSnippet((prev)=>!prev)
   }
 
+=======
+const CandidateSidebar = ({ candidate, position }) => {
+  const userId = localStorage.getItem('id') 
+>>>>>>> documents
   return (
     <div className='candidate-sidebar'>
       <div className='candidate-sidebar__info'>
@@ -53,10 +62,11 @@ const CandidateSidebar = ({ candidate, position, setActiveSnippet, activeSnippet
             Выбрать к собеседованию
           </button>
         </Link>
-        <Link to={`/${candidate.id}/calendar`}>
+        {userId && candidate.id === userId && (<Link to={`/${candidate.id}/calendar`}>
           <button className='candidate-sidebar__select'>
             Отчёты
           </button>
+<<<<<<< HEAD
         </Link>
         {/* <Link to={`/candidate/${candidate.id}/code`}> */}
           <button 
@@ -71,6 +81,14 @@ const CandidateSidebar = ({ candidate, position, setActiveSnippet, activeSnippet
             candidate.achievements &&
             candidate.achievements.map((item) => {
               return <Achievement key={item.id} achievement={item.achievement} />
+=======
+        </Link>)}
+        <div className='candidate-sidebar__achievements'>
+          {candidate &&
+            candidate.achievements &&
+            candidate.achievements.map((item, index) => {
+              return <Achievement achievement={item.achievement} key={index}/>
+>>>>>>> documents
             })}
         </div>
         

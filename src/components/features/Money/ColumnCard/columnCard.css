@@ -1,0 +1,73 @@
+.content-column-item {
+    display: grid;
+    margin: 0 auto;
+    width: 349px;
+    height: 135px;
+    border-radius: 20px;
+    background-color: #f9f9f9;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 15px;
+}
+
+.content-column-item__info {
+    display: flex;
+}
+
+.content-column-item__title {
+    font-family: 'GT Eesti Pro Display';
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 36px;
+}
+
+.content-column-item__date {
+    font-family: 'GT Eesti Pro Display';
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 36px;
+    color: #59b522;
+    padding-left: 55px;
+}
+
+.item-time {
+    padding-left: 17px;
+}
+
+.content-column-item__amount {
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 'GT Eesti Pro Display';
+}
+
+.content-column-item__card {
+    display: flex;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 36px;
+    font-family: 'GT Eesti Pro Display';
+}
+
+.content-column-item__balance {
+    display: flex;
+}
+
+.item__balance-name {
+    font-family: 'GT Eesti Pro Display';
+    font-size: 12px;
+    line-height: 36px;
+    font-weight: 300;
+}
+
+.item__balance-now {
+    font-family: 'GT Eesti Pro Display';
+    font-size: 12px;
+    line-height: 36px;
+    font-weight: 300;
+}
+
+@media (max-width: 430px) {
+    .content-column-item__title {
+        font-size: 8px;
+    }
+}

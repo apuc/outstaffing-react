@@ -1,0 +1,13 @@
+.bookkeping-Input {
+    display: flex;
+    width: 358px;
+    height: 33px;
+    border-radius: 17px;
+    background-color: #f9f9f9;
+    border: none;
+    outline: none;
+    padding-left: 25px;
+    font-family: 'GT Eesti Pro Display';
+    font-weight: 300;
+    font-size: 18px;
+}

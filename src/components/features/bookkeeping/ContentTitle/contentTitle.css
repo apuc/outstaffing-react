@@ -1,0 +1,31 @@
+.content__info-title h2 {
+    font-family: 'GT Eesti Pro Display';
+    font-weight: 700;
+    font-size: 25px;
+    color: #000000;
+}
+
+.content__info-title h2:after {
+    content: "";
+    display: flex;
+    width: 315px;
+    height: 5px;
+    border-radius: 3px;
+    background-color: #54b611;
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+
+.content__description h2 {
+    font-family: 'GT Eesti Pro Display';
+    font-weight: 300;
+    font-size: 12px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 450px) {
+    .content__info-title h2:after {
+        width: 200px;
+    }
+}
+
