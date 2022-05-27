@@ -1,0 +1,176 @@
+.candidate-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid whitesmoke;
+  border-bottom: none !important;
+  position: sticky;
+  top: 80px;
+
+  &__position {
+    margin-bottom: 1rem;
+    h2 {
+      font-size: 3rem !important;
+      font-family: 'GT Eesti Pro Display';
+      font-size: 2.6em;
+      font-weight: 700;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: 36px;
+    }
+  }
+
+  &__achievements {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0 1rem;
+    margin-bottom: 80px;
+  }
+
+  &__info {
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .candidate-sidebar__info {
+    margin-top: 30px;
+    align-items: center;
+  }
+}
+
+.candidate-sidebar__info > img {
+  width: 180px;
+  height: 180px;
+  border-radius: 100px;
+}
+
+.candidate-sidebar__experience-title {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.8em;
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 36px;
+  margin-top: 20px;
+}
+
+.candidate-sidebar__experience {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 3em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+}
+
+.candidate-sidebar__select {
+  width: 280px;
+  height: 60px;
+  border-radius: 100px;
+  border: none;
+  background-color: #73c141;
+  color: #ffffff;
+  font-family: 'Muller';
+  font-size: 1.6em;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.candidate-sidebar__select:hover {
+  background: rgba(0, 0, 0, 0);
+  color: #73c141;
+  box-shadow: inset 0 0 0 3px #73c141;
+}
+
+.candidate-sidebar__info__l {
+  font-family: 'GT Eesti Pro Display';
+  font-size: 1.8em;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 36px;
+  text-align: center;
+}
+
+.candidateS-sidebar__arrows {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 575.98px) {
+  .candidate-sidebar__info__l,
+  .candidate-sidebar__arrows {
+    display: none;
+  }
+}
+
+.candidate-sidebar__arrow--left {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  background-color: #f6f6f6;
+}
+
+.candidate-sidebar__arrow--left > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.candidate-sidebar__arrows-sp {
+  color: #705fa3;
+  font-family: 'Circe';
+  font-size: 1.3em;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: center;
+  margin: 0 10px;
+}
+
+.candidate-sidebar__arrow--right {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  background-color: #74be4d;
+}
+
+.candidate-sidebar__arrow--right > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 1199px) {
+  .candidate-sidebar {
+    flex-direction: row;
+    padding-left: 16px;
+  }
+
+  .candidate-sidebar__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .candidate-sidebar__info__e,
+  .candidate-sidebar__info__y {
+    width: 180px;
+  }
+}

@@ -1,0 +1,252 @@
+.description {
+  margin-top: 40px;
+  margin-bottom: 120px;
+
+  &__title {
+    font-family: 'GT Eesti Pro Display';
+    font-size: 2.6em;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 36px;
+    text-align: left;
+    margin-bottom: 10px;
+
+    a {
+      color: #333;
+    }
+  }
+
+  &__empty {
+    font-family: 'GT Eesti Pro Display';
+    font-size: 2.4em;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: center;
+  }
+
+  &____wrapper {
+    border: 1px solid #efefef;
+    background-color: #fdfdfd;
+    padding: 60px 40px 0 40px;
+    border-bottom: none;
+    position: relative;
+  }
+
+  &__img {
+    margin-top: 16px;
+    width: 118px;
+    height: 118px;
+    border-radius: 100px;
+  }
+
+  &__text {
+    font-family: 'GT Eesti Pro Display';
+    font-size: 1.6em;
+    font-weight: 100;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 24px;
+    text-align: left;
+    line-height: 28px;
+    word-wrap: break-word;
+
+    &-secondary {
+      font-family: 'GT Eesti Pro Display';
+      font-size: 1.7em;
+      font-weight: 100;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: 24px;
+      text-align: left;
+      line-height: 28px;
+    }
+  }
+
+  &__button {
+    width: 280px;
+    height: 60px;
+    border-radius: 100px;
+    background-color: #73c141;
+    border: none;
+    color: #ffffff;
+    font-family: 'Muller';
+    font-weight: bold;
+    font-size: 1.6em;
+    line-height: normal;
+    letter-spacing: 0.8px;
+    text-align: center;
+    margin-top: 74px;
+    margin-left: 30px;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0);
+      color: #73c141;
+      box-shadow: inset 0 0 0 3px #73c141;
+    }
+  }
+
+  &__list {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+
+    &-item {
+      font-family: 'GT Eesti Pro Display';
+      font-size: 1.7em;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: normal;
+      text-align: left;
+      line-height: 36px;
+      margin-right: 10px;
+      word-wrap: break-word;
+    }
+  }
+
+  &__rectangle {
+    display: block;
+    margin: 50px auto;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+
+    &-btn {
+      button {
+        width: 200px;
+        height: 48px;
+        border-radius: 100px;
+        border: 1px solid #73c141;
+        background-color: white;
+        margin-right: 60px;
+        color: #a0a0a0;
+        font-family: 'GT Eesti Pro Display';
+        font-size: 1.8em;
+        font-weight: 400;
+        font-style: normal;
+        letter-spacing: 0.6px;
+        line-height: normal;
+        text-align: center;
+      }
+    }
+
+    &-box {
+      display: flex;
+      align-items: center;
+    }
+
+    &-sp {
+      color: #705fa3;
+      font-family: Circe;
+      font-size: 1.3em;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: normal;
+      text-align: center;
+      margin: 0 10px;
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .description {
+    margin-bottom: 16px;
+
+    &__wrapper {
+      padding: 35px 40px 0 40px;
+    }
+
+    &__title {
+      text-align: center;
+      margin-bottom: 170px;
+      font-size: 3em;
+    }
+
+    &__text {
+      margin-left: 20px;
+      font-size: 1.6em;
+    }
+
+    &__img {
+      position: absolute;
+      top: 100px;
+      left: calc(50% - 60px);
+    }
+
+    &__button {
+      width: 220px;
+      height: 50px;
+      z-index: 5;
+      margin-left: 85px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    &__list {
+      &-item {
+        font-size: 1.5em;
+        text-align: center;
+        margin-bottom: 0;
+      }
+    }
+
+    &__rectangle {
+      width: 80%;
+      margin: 50px auto 80px auto;
+    }
+
+    &__footer {
+      margin-top: 0;
+
+      &-btn {
+        button {
+          width: 160px;
+          margin-right: 10px;
+          font-size: 1.6em;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1199px) {
+  .description {
+    &__button {
+      margin: 1.5rem 0;
+    }
+  }
+}
+
+@media (max-width: 376px) {
+  .description {
+    &__title {
+      font-size: 2.8em;
+    }
+
+    &__button {
+      margin-left: 60px;
+    }
+  }
+}
+
+@media (max-width: 346px) {
+  .description {
+    &__title {
+      font-size: 2.6em;
+    }
+  }
+}
+
+@media (max-width: 325.98px) {
+  .description {
+    &__button {
+      margin-left: 30px;
+    }
+  }
+}

@@ -4,11 +4,12 @@ import arrowLeft from '../images/right-arrow.png'
 
 import SVG from 'react-inlinesvg'
 
-import prevDateArrowIcon from '../images/prevDateArrow.svg'
-import nextDateArrowIcon from '../images/nextDateArrow.svg'
+import dateArrowIcon from '../images/dateArrow.svg'
+import calendarIcon from '../images/calendar.svg'
+
+import { TaskItem } from '../components/TaskItem/TaskItem'
 
 import './singleReportPage.scss'
-import { TaskItem } from '../components/TaskItem/TaskItem'
 
 const tasks = [
   {
@@ -41,16 +42,16 @@ const SingleReportPage = () => {
           <div className='single-report-page__title-date'>
             <div className='single-report-page__title-date--prev'>
               <button>
-                <SVG src={prevDateArrowIcon} />
+                <SVG src={dateArrowIcon} />
               </button>
             </div>
             <div className='single-report-page__title-date--actual'>
-              <img src='' />
-              <p></p>
+              <SVG src={calendarIcon} />
+              <p>15 июня</p>
             </div>
             <div className='single-report-page__title-date--next single-report-page__title-date--enabled'>
               <button>
-                <SVG src={nextDateArrowIcon} />
+                <SVG src={dateArrowIcon} />
               </button>
             </div>
           </div>

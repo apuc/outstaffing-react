@@ -1,0 +1,301 @@
+.calendar {
+  margin-bottom: 40px;
+
+  &__profile {
+    color: #282828;
+    font-family: 'GT Eesti Pro Display';
+    font-size: 3.4em;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 48.74px;
+    text-align: left;
+    margin-top: 80px;
+    margin-bottom: 60px;
+
+    span {
+      color: #52b709;
+      font-style: normal;
+      letter-spacing: 0.56px;
+      line-height: normal;
+    }
+  }
+
+  &__info {
+    background-color: #f9f9f9;
+    display: flex;
+    position: relative;
+    width: 24%;
+    height: 112px;
+
+    &-name {
+      font-family: 'GT Eesti Pro Display';
+      font-size: 2em;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: 30px;
+      text-align: left;
+      position: absolute;
+      top: 50%;
+      left: 68%;
+      transform: translate(-50%, -50%);
+    }
+
+    &-img {
+      position: absolute;
+      width: 132px;
+      height: 132px;
+      left: -40px;
+      top: -10px;
+    }
+  }
+
+  &__title {
+    &-text {
+      font-family: 'GT Eesti Pro Display';
+      font-size: 2.7em;
+      font-weight: 700;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: 36px;
+      text-align: left;
+    }
+  }
+
+  &__btn {
+    width: 280px;
+    height: 62px;
+    box-shadow: 6px 5px 20px rgba(82, 151, 34, 0.21);
+    border-radius: 31px;
+    background-color: #ffffff;
+    background-image: linear-gradient(to top, #6aaf5c 0%, #52b709 100%),
+      linear-gradient(
+        36deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.16) 47%,
+        rgba(255, 255, 255, 0.17) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    border: none;
+    color: #ffffff;
+    font-family: 'Muller';
+    font-size: 1.6em;
+    letter-spacing: normal;
+    text-align: center;
+  }
+
+  &__hours {
+    font-family: 'GT Eesti Pro Display';
+    font-size: 2.2em;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 30px;
+    text-align: left;
+    margin-left: 68px;
+
+    span {
+      font-family: 'GT Eesti Pro Display';
+      font-weight: 100;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: normal;
+    }
+  }
+
+  footer {
+    margin-top: 2rem !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .calendar__profile {
+    font-size: 5em;
+    text-align: center;
+    margin: 60px 0 40px 0;
+  }
+}
+
+@media (max-width: 560.98px) {
+  .calendar__profile {
+    font-size: 4.8em;
+  }
+}
+
+@media (max-width: 540.98px) {
+  .calendar__profile {
+    font-size: 4.6em;
+  }
+}
+
+@media (max-width: 520.98px) {
+  .calendar__profile {
+    font-size: 4.4em;
+  }
+}
+
+@media (max-width: 486.98px) {
+  .calendar__profile {
+    font-size: 4.2em;
+  }
+}
+
+@media (max-width: 466.98px) {
+  .calendar__profile {
+    font-size: 4em;
+  }
+}
+
+@media (max-width: 446.98px) {
+  .calendar__profile {
+    font-size: 3.8em;
+  }
+}
+
+@media (max-width: 425.98px) {
+  .calendar__profile {
+    font-size: 3.6em;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .calendar__info {
+    width: 74%;
+    height: 94px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 375.98px) {
+  .calendar__info {
+    width: 84%;
+    height: 94px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .calendar__info-img {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    left: 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .calendar__title {
+    margin-left: 100px;
+  }
+}
+
+@media (max-width: 505.98px) {
+  .calendarHeader__title {
+    margin-left: 80px;
+  }
+}
+
+@media (max-width: 455.98px) {
+  .calendar__title {
+    margin-left: 60px;
+  }
+}
+
+@media (max-width: 375.98px) {
+  .calendar__title {
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 348.98px) {
+  .calendar__title {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .calendar__title-text {
+    font-size: 4.4em;
+  }
+}
+
+@media (max-width: 564.98px) {
+  .calendar__title-text {
+    font-size: 4.2em;
+  }
+}
+
+@media (max-width: 544.98px) {
+  .calendar__title-text {
+    font-size: 4em;
+  }
+}
+
+@media (max-width: 524.98px) {
+  .calendar__title-text {
+    font-size: 3.6em;
+  }
+}
+
+@media (max-width: 504.98px) {
+  .calendar__title-text {
+    font-size: 3.6em;
+  }
+}
+
+@media (max-width: 484.98px) {
+  .calendar__title-text {
+    font-size: 3.4em;
+  }
+}
+
+@media (max-width: 464.98px) {
+  .calendar__title-text {
+    font-size: 3.2em;
+  }
+}
+
+@media (max-width: 444.98px) {
+  .calendar__title-text {
+    font-size: 3em;
+  }
+}
+
+@media (max-width: 375.98px) {
+  .calendar__title-text {
+    font-size: 2.7em;
+  }
+}
+
+@media (max-width: 325.98px) {
+  .calendar__title-text {
+    font-size: 2.7em;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .calendar__title-img {
+    width: 60%;
+    margin: 30px 0;
+  }
+}
+
+@media (max-width: 525.98px) {
+  .calendar__title-img {
+    left: 15%;
+  }
+}
+
+@media (max-width: 414.98px) {
+  .calendar__title-img {
+    left: 10%;
+  }
+}
+
+@media (max-width: 375.98px) {
+  .calendar__title-img {
+    left: 5%;
+  }
+}
