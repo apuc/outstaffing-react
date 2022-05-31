@@ -25,7 +25,6 @@ export const fetchAuth = async ({
   dispatch,
   catchError
 }) => {
-  const baseURL = process.env.REACT_APP_BASE_URL
   const apiURL = process.env.REACT_APP_API_URL
   try {
     const response = await fetch(`${apiURL}/api/user/login`, {
@@ -33,7 +32,7 @@ export const fetchAuth = async ({
       mode: 'cors',
       headers: {
         'Access-Control-Request-Headers': 'authorization',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
         // Origin: `http://localhost`
       },
       body: JSON.stringify({
@@ -98,7 +97,7 @@ export const fetchGet = withAuthRedirect(async (link) => {
 })
 
 export const fetchPost = withAuthRedirect(async (link, body) => {
-  console.log('i',body)
+  console.log('i', body)
   try {
     const response = await fetch(link, {
       method: 'POST',
@@ -106,7 +105,7 @@ export const fetchPost = withAuthRedirect(async (link, body) => {
         Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
         'Content-Type': 'application/json',
         //Origin: `http://localhost:3000`
-        Origin: `${process.env.REACT_APP_BASE_URL}`,
+        Origin: `${process.env.REACT_APP_BASE_URL}`
       },
       body: JSON.stringify(body)
     })

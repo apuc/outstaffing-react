@@ -6,7 +6,7 @@ export const withAuthRedirect =
       : link
     return actionCall(linkWithParams, body)
       .then((res) => {
-        if (res.status && res.status == 401) {
+        if (res.status && res.status === 401) {
           localStorage.clear()
           logout && logout()
           history.push(role === 'ROLE_DEV' ? '/authdev' : '/auth')
