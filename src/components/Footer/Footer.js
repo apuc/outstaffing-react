@@ -1,4 +1,5 @@
 import React from 'react'
+
 import align from '../../images/align-left.png'
 import phone from '../../images/phone.png'
 import telegram from '../../images/telegram.png'
@@ -40,7 +41,9 @@ export const Footer = () => {
             </div>
           </div>
         </div>
-        <div className='footer__copyright'>2021 © Outstaffing</div>
+        <div className='footer__copyright'>
+          {new Date().getFullYear()} © Outstaffing
+        </div>
       </footer>
     </div>
   )

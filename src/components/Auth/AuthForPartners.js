@@ -30,7 +30,11 @@ const AuthForPartners = () => {
           <div className='row'>
             <div className='col-12 col-xl-6'>
               <div className='auth-partners__box'>
-                <AuthBox title='Для партнёров' roleChangeLink='/authdev' />
+                <AuthBox
+                  title='Для партнёров'
+                  altTitle='Для разработчиков'
+                  roleChangeLink='/authdev'
+                />
               </div>
             </div>
             <div className='col-xl-2'>

@@ -5,8 +5,7 @@
   margin-bottom: 194px;
 
   &__header {
-
-    font-family: "GT Eesti Pro Display";
+    font-family: 'GT Eesti Pro Display';
     font-size: 5.3em;
     font-weight: 700;
     font-style: normal;
@@ -17,7 +16,7 @@
 
     span {
       color: #52b709;
-      letter-spacing: .56px;
+      letter-spacing: 0.56px;
       line-height: normal;
     }
   }
@@ -177,7 +176,47 @@
 
 @media (max-width: 575.98px) {
   .auth-box {
-    margin-bottom: 44px;
+    margin-bottom: 0px;
+
+    &__header {
+      margin-top: 50px;
+      line-height: 20px;
+    }
+
+    &__title {
+      margin-top: 5px;
+      margin-bottom: 35px;
+    }
+
+    &__form {
+      label {
+        margin-left: 20px;
+        margin-bottom: 10px;
+        font-size: 1.6em;
+      }
+
+      input {
+        margin-bottom: 20px;
+        height: 45px;
+        border-radius: 22.5px;
+        padding-left: 22px;
+      }
+
+      &-btn {
+        width: 200px;
+        height: 45px;
+        border-radius: 22.5px;
+        line-height: 0px;
+
+        &--role {
+          width: 200px;
+          height: 45px;
+          border-radius: 22.5px;
+          line-height: 0px;
+          font-size: 1.6em;
+        }
+      }
+    }
 
     &__sign-in {
       text-align: center;
@@ -188,8 +227,9 @@
       margin: 0 auto;
       flex-direction: column;
 
-      &>* {
+      & > * {
         margin-bottom: 1.5rem;
+        margin-right: 0;
       }
     }
   }

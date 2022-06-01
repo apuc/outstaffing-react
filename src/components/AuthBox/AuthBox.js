@@ -6,7 +6,6 @@ import { auth, setUserInfo } from '../../redux/outstaffingSlice'
 import { loading } from '../../redux/loaderSlice'
 import ellipse from '../../images/ellipse.png'
 
-
 import { Loader } from '../Loader/Loader'
 
 import { fetchAuth } from '../../server/server'
@@ -19,12 +18,15 @@ import { withSwalInstance } from 'sweetalert2-react'
 import swal from 'sweetalert2'
 const SweetAlert = withSwalInstance(swal)
 
-export const AuthBox = ({ title, roleChangeLink }) => {
+export const AuthBox = ({ title, altTitle, roleChangeLink }) => {
   const dispatch = useDispatch()
+
   const isLoading = useSelector(selectIsLoading)
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
+
   return (
     <div className='auth-box'>
       <h2 className='auth-box__header'>
@@ -93,8 +95,8 @@ export const AuthBox = ({ title, roleChangeLink }) => {
             {isLoading ? <Loader /> : 'Войти'}
           </button>
 
-          <button className='auth-box__form-btn--role auth-box__auth-link' >
-            <Link to={roleChangeLink}>Для разработчиков</Link>
+          <button className='auth-box__form-btn--role auth-box__auth-link'>
+            <Link to={roleChangeLink}>{altTitle}</Link>
           </button>
         </div>
       </form>

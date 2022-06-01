@@ -1,20 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { AuthBox } from '../AuthBox/AuthBox'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { auth } from '../../redux/outstaffingSlice'
-import { loading } from '../../redux/loaderSlice'
-import ellipse from '../../images/ellipse.png'
+import { useSelector } from 'react-redux'
 import arrow from '../../images/arrow__login_page.png'
 import authImg from '../../images/auth_img.png'
 import cross from '../../images/cross.png'
 import text from '../../images/Body_Text.png'
 import vector from '../../images/Vector_Smart_Object.png'
-import vectorBlack from '../../images/Vector_Smart_Object_black.png'
 
 import { selectAuth } from '../../redux/outstaffingSlice'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { Footer } from '../Footer/Footer'
 
 import './authForDevelopers.scss'
@@ -39,7 +35,11 @@ const AuthForDevelopers = () => {
           <div className='row'>
             <div className='col-12 col-xl-6'>
               <div className='auth-developers__box'>
-                <AuthBox title='Для разработчиков' roleChangeLink='/auth' />
+                <AuthBox
+                  title='Для разработчиков'
+                  altTitle='Для партнёров'
+                  roleChangeLink='/auth'
+                />
               </div>
             </div>
             <div className='col-xl-2'>
