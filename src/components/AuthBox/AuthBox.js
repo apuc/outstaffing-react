@@ -95,9 +95,11 @@ export const AuthBox = ({ title, altTitle, roleChangeLink }) => {
             {isLoading ? <Loader /> : 'Войти'}
           </button>
 
-          <button className='auth-box__form-btn--role auth-box__auth-link'>
-            <Link to={roleChangeLink}>{altTitle}</Link>
-          </button>
+          <Link to={roleChangeLink}>
+            <button className='auth-box__form-btn--role auth-box__auth-link'>
+              {altTitle}
+            </button>
+          </Link>
         </div>
       </form>
     </div>

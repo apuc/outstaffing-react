@@ -112,12 +112,7 @@
   flex-direction: column;
   text-align: center;
   margin-top: 28px;
-}
-
-@media (max-width: 575.98px) {
-  .auth-partners__info-img {
-    margin-left: -48px;
-  }
+  margin-left: -40px;
 }
 
 .auth-partners__info-img > div > img {
@@ -144,7 +139,7 @@
   list-style: none;
   margin-top: 110px;
   position: absolute;
-  right: -120px;
+  right: -70px;
 }
 
 @media (max-width: 575.98px) {

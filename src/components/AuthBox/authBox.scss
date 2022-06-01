@@ -50,7 +50,7 @@
     span {
       color: #18586e;
       font-family: 'GT Eesti Pro Display';
-      font-size: 1.6em;
+      font-size: 2em;
       font-weight: 500;
       font-style: normal;
       letter-spacing: normal;
@@ -161,10 +161,7 @@
         text-align: center;
         border: 2px solid #6aaf5c;
         margin-right: 1.5rem;
-
-        a {
-          color: #6aaf5c !important;
-        }
+        color: #6aaf5c !important;
       }
 
       .loader * {

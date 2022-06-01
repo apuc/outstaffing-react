@@ -70,7 +70,9 @@ const AuthForDevelopers = () => {
 
                   <ul className='auth-developers__info-list'>
                     <li className='auth-developers__info-item'>
-                      Рабочее пространство
+                      Рабочее
+                      <br />
+                      пространство
                     </li>
                     <li className='auth-info__list-item'>
                       Управление задачами
