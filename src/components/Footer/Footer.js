@@ -36,7 +36,9 @@ export const Footer = () => {
 
           <div className='col-8 col-xl-3'>
             <div className='footer__right'>
-              <p className='footer__phone'>+7 495 156 78 98</p>
+              <a href='tel:+7 495 156-78-98' className='footer__phone'>
+                +7 495 156 78 98
+              </a>
               <p className='footer__hours'>Будни с 9:00 до 21:00</p>
             </div>
           </div>
