@@ -1,4 +1,4 @@
-@use 'sass:math'; 
+@use 'sass:math';
 @import 'functions.scss';
 
 $maxWidthContainer: 1123;
@@ -11,8 +11,8 @@ $maxWidthContainer: 1123;
 
 .quiz-text{
     font-size: 20px;
-    font-weight: 400;       
-    line-height: math.div(30, 20); 
+    font-weight: 400;
+    line-height: math.div(30, 20);
 }
 .title{
     color: #282828;
@@ -58,7 +58,7 @@ $maxWidthContainer: 1123;
                 text-decoration: none;
                 color: #1a310c;
                 background: #fff;
-            } 
+            }
         }
         &_restriction{
             max-width: 131px;
@@ -69,9 +69,17 @@ $maxWidthContainer: 1123;
     font-family: "GT Eesti Pro Display";
     font-size: 25px;
     font-weight: 400;
-    line-height: math.div(30, 25);  
+    line-height: math.div(30, 25);
 }
 //=============================================
+
+.error-msg {
+    text-align: center;
+    font-size: 25px;
+    color: red;
+    font-weight: 500;
+}
+
 .header-quiz{
     @include adaptiv-value("padding-top", 48, 30, 1);
     @include adaptiv-value("padding-bottom", 85, 30, 1);
@@ -120,16 +128,16 @@ $maxWidthContainer: 1123;
         color: #000000;
         font-family: "GT Eesti Pro Display";
         font-size: 16px;
-        font-weight: 400;        
-        line-height: math.div(30, 20);  
-        margin-right: 70px;     
+        font-weight: 400;
+        line-height: math.div(30, 20);
+        margin-right: 70px;
     }
     &__title{
         color: #000000;
         font-family: "GT Eesti Pro Display";
-        @include adaptiv-value("font-size", 25, 16, 1);  
-        font-weight: 700;       
-        line-height: math.div(36, 25); 
+        @include adaptiv-value("font-size", 25, 16, 1);
+        font-weight: 700;
+        line-height: math.div(36, 25);
         position: relative;
 
         &::before{
@@ -140,7 +148,7 @@ $maxWidthContainer: 1123;
             border-radius: 3px;
             background-color: #54b611;
             bottom: -26px;
-        }      
+        }
     }
 }
 .my-tests{
@@ -155,9 +163,9 @@ $maxWidthContainer: 1123;
     &__title{
         color: #000000;
         font-size: 25px;
-        font-weight: 400;       
-        line-height: math.div(30, 25);  
-        @include adaptiv-value("margin-bottom", 80, 30, 1);  
+        font-weight: 400;
+        line-height: math.div(30, 25);
+        @include adaptiv-value("margin-bottom", 80, 30, 1);
     }
     &__items{
         display: flex;
@@ -175,21 +183,21 @@ $maxWidthContainer: 1123;
         flex: 0 1 100%;
     }
     &__name-test{
-        color: #373936;  
-        margin-bottom: 29px; 
-      
+        color: #373936;
+        margin-bottom: 29px;
+
     }
     .active{
         color: #54b611;
     }
     &__body{
-        
+
     }
 }
 .test-data{
     display: flex;
     align-items: center;
-    
+
     &__calendar{
         padding: 13px 21px;
         box-shadow: 0 0 59px rgba(44, 44, 44, 0.05);
@@ -243,8 +251,8 @@ $maxWidthContainer: 1123;
     }
     &__strip{
         flex: 1 1 auto;
-        height: 19px;      
-        
+        height: 19px;
+
         div{
             border-radius: 10px;
             height: 100%;
@@ -260,11 +268,11 @@ $maxWidthContainer: 1123;
         margin: 0 auto;
         padding: 0 10px;
     }
-    &__title{        
-        margin-bottom: 39px;   
+    &__title{
+        margin-bottom: 39px;
     }
     &__form{
-     
+
     }
 
 }
@@ -286,22 +294,22 @@ $maxWidthContainer: 1123;
         width: initial;
         margin-bottom: 0;
         display: none;
-        cursor: pointer; 
+        cursor: pointer;
     }
     &__buttons{
         display: flex;
         gap: 56px;
         flex-wrap: wrap;
         align-items: center;
-        @include adaptiv-value("margin-top", 60, 30, 1);  
+        @include adaptiv-value("margin-top", 60, 30, 1);
     }
 }
 
 .form-task__group{
     display: block;
-    
+
     margin-bottom: 15px;
-   
+
     label {
         color: #373936;
         font-family: "GT Eesti Pro Display";
@@ -359,8 +367,8 @@ $maxWidthContainer: 1123;
         font-family: "GT Eesti Pro Display";
         font-size: 18px;
         font-weight: 300;
-        line-height: math.div(28, 18);  
-        @include adaptiv-value("margin-bottom", 50, 20, 1);   
+        line-height: math.div(28, 18);
+        @include adaptiv-value("margin-bottom", 50, 20, 1);
         span{
             color: #54b611;
             font-weight: 700;
