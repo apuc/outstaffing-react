@@ -264,6 +264,14 @@
         font-weight: 100;
       }
     }
+
+    &-done {
+      margin-bottom: 0;
+      font-size: 18px;
+      color: green;
+      font-weight: 500;
+      margin-left: 20px;
+    }
   }
 
   &__form {
