@@ -10,7 +10,6 @@ export const HeaderQuiz = ({header}) => {
    const dispatch = useDispatch()
    const userId = localStorage.getItem('id');
    const userInfo = useSelector(selectUserInfo);
-   console.log(userInfo)
 
    useEffect(() => {
       dispatch(setUserInfo(userId))
