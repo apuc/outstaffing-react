@@ -26,8 +26,9 @@ const ReportForm = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const role = useSelector(getRole)
-  
+
   const [isFetching, setIsFetching] = useState(false)
+  const [reportSuccess, setReportSuccess] = useState(false)
 
   const [inputs, setInputs] = useState([ { task: '', hours_spent: '', minutes_spent: 0 } ]);
   const [troublesInputValue, setTroublesInputValue] = useState('');
@@ -37,8 +38,10 @@ const ReportForm = () => {
     setInputs((prev) => [...prev, { task: '', hours_spent: '', minutes_spent: 0 }])
   }
 
+  const totalHours = inputs.reduce((a,b) => a + b.hours_spent, 0)
+
   const deleteInput = (indexRemove) => {
-    if (indexRemove !== 1) {
+    if (indexRemove !== 0) {
       setInputs((prev) => prev.filter((el, index) => index !== indexRemove))
     }
   }
@@ -152,6 +155,10 @@ const ReportForm = () => {
                 logout: () => dispatch(auth(false))
               }).then((res) =>
                 res.json().then((resJSON) => {
+                  if(res.status === 200) {
+                    setReportSuccess(true)
+                    setTimeout(()=> setReportSuccess(false),2000)
+                  }
                   setInputs( () => [] )
                   setTroublesInputValue('');
                   setScheduledInputValue('');
@@ -163,8 +170,11 @@ const ReportForm = () => {
               {isFetching ? <Loader /> : 'Отправить'}
             </button>
             <p className='report-form__footer-text'>
-              Всего за день : <span>60 часов</span>
+              Всего за день : <span>{totalHours} часов</span>
             </p>
+            {reportSuccess &&
+              <p className='report-form__footer-done'>Отчет отправлен</p>
+            }
           </div>
         </div>
       </div>
