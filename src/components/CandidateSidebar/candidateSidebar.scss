@@ -9,10 +9,10 @@
 
   &__position {
     margin-bottom: 1rem;
+
     h2 {
-      font-size: 3rem !important;
-      font-family: 'GT Eesti Pro Display';
-      font-size: 2.6em;
+      font-size: 3rem;
+      font-family: 'GT Eesti Pro Display', sans-serif;
       font-weight: 700;
       font-style: normal;
       letter-spacing: normal;
@@ -34,7 +34,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
   }
 }
@@ -53,7 +53,7 @@
 }
 
 .candidate-sidebar__experience-title {
-  font-family: 'GT Eesti Pro Display';
+  font-family: 'GT Eesti Pro Display', sans-serif;
   font-size: 1.8em;
   font-weight: normal;
   font-style: normal;
@@ -63,7 +63,7 @@
 }
 
 .candidate-sidebar__experience {
-  font-family: 'GT Eesti Pro Display';
+  font-family: 'GT Eesti Pro Display', sans-serif;
   font-size: 3em;
   font-weight: 700;
   font-style: normal;
@@ -78,7 +78,7 @@
   border: none;
   background-color: #73c141;
   color: #ffffff;
-  font-family: 'Muller';
+  font-family: 'Muller', sans-serif;
   font-size: 1.6em;
   font-style: normal;
   letter-spacing: normal;
@@ -95,7 +95,7 @@
 }
 
 .candidate-sidebar__info__l {
-  font-family: 'GT Eesti Pro Display';
+  font-family: 'GT Eesti Pro Display', sans-serif;
   font-size: 1.8em;
   font-weight: 600;
   font-style: normal;
@@ -134,7 +134,7 @@
 
 .candidate-sidebar__arrows-sp {
   color: #705fa3;
-  font-family: 'Circe';
+  font-family: 'Circe', sans-serif;
   font-size: 1.3em;
   font-weight: 400;
   font-style: normal;
