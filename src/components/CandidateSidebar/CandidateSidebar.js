@@ -1,21 +1,13 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Achievement } from '../Achievement/Achievement'
 
 import { LEVELS, SKILLS } from '../constants/constants'
 
-import maleBig from '../../images/medium_male_big.png'
 import './candidateSidebar.scss'
-import { Highlighter } from '../../App'
-import { useState } from 'react'
-import { useEffect } from 'react'
-
-import { selectUserInfo } from '../../redux/outstaffingSlice'
-import { isRejected } from '@reduxjs/toolkit'
 
 const getYearsString = (years) => {
-  let yearsString
+  let yearsString;
   if (years % 10 === 1) {
     yearsString = 'год'
   } else if (years === 11 || years === 12 || years === 13 || years === 14) {
@@ -26,13 +18,13 @@ const getYearsString = (years) => {
     yearsString = 'лет'
   }
   return `${years} ${yearsString}`
-}
+};
 
-const CandidateSidebar = ({ candidate, position, setActiveSnippet, activeSnippet }) => {
-  const userId = localStorage.getItem('id') 
+const CandidateSidebar = ({ candidate, setActiveSnippet, activeSnippet }) => {
+  const userId = localStorage.getItem('id') ;
   const showSnippet = () => {
     setActiveSnippet((prev)=>!prev)
-  }
+  };
 
   return (
     <div className='candidate-sidebar'>
@@ -65,7 +57,7 @@ const CandidateSidebar = ({ candidate, position, setActiveSnippet, activeSnippet
           </button>
         </Link>
         {/* <Link to={`/candidate/${candidate.id}/code`}> */}
-          <button 
+          <button
           className='candidate-sidebar__select'
           onClick={showSnippet}
           >
@@ -83,6 +75,6 @@ const CandidateSidebar = ({ candidate, position, setActiveSnippet, activeSnippet
       </div>
     </div>
   )
-}
+};
 
 export default CandidateSidebar

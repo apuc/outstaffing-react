@@ -8,4 +8,4 @@ export const WithLogout = (props) => {
             <LogoutButton />
         </div>
     )
-}
+};

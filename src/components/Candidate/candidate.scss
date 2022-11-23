@@ -6,7 +6,7 @@
     h2 {
       text-align: center;
       color: #52b709;
-      font-family: 'GT Eesti Pro Display';
+      font-family: 'GT Eesti Pro Display', sans-serif;
       font-size: 5em;
       font-weight: 700;
       font-style: normal;
@@ -25,8 +25,8 @@
   &__header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-top: 120px;
-    margin-left: 60px;
   }
 
   &__main {
@@ -36,7 +36,7 @@
       padding-left: 16px;
 
       h2 {
-        font-family: 'GT Eesti Pro Display';
+        font-family: 'GT Eesti Pro Display', sans-serif;
         font-size: 2.8em;
         font-weight: 700;
         font-style: normal;
@@ -46,21 +46,21 @@
       }
 
       p {
-        font-family: 'GT Eesti Pro Display';
+        font-family: 'GT Eesti Pro Display', sans-serif;
         font-size: 1.2em;
         font-weight: 300;
         font-style: normal;
         letter-spacing: normal;
         line-height: 36px;
         text-align: left;
-        margin: 20px 0px;
+        margin: 20px 0;
       }
     }
   }
 
   &__text {
     p {
-      font-family: 'GT Eesti Pro Display';
+      font-family: 'GT Eesti Pro Display', sans-serif;
       font-size: 1.6em;
       font-weight: 100;
       font-style: normal;
@@ -69,12 +69,11 @@
     }
 
     &-secondary {
-      font-family: 'GT Eesti Pro Display';
+      font-family: 'GT Eesti Pro Display', sans-serif;
       font-size: 1.6em;
       font-weight: 100;
       font-style: normal;
       letter-spacing: normal;
-      line-height: 24px;
       text-align: left;
       line-height: 28px;
     }
@@ -95,7 +94,7 @@
       position: absolute;
       right: 20%;
       top: 40%;
-      font-family: 'GT Eesti Pro Display';
+      font-family: 'GT Eesti Pro Display', sans-serif;
       font-size: 1.8em;
       font-weight: 400;
       font-style: normal;
@@ -109,6 +108,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+    &-img {
+      margin-right: 10px;
+    }
+    &-sp {
+      font-size: 14px;
+    }
   }
 
   footer {
@@ -138,7 +144,7 @@
         span {
           margin-left: 40px;
           margin-right: 120px;
-          font-family: 'GT Eesti Pro Display';
+          font-family: 'GT Eesti Pro Display', sans-serif;
           font-size: 1.8em;
           font-weight: 100;
           font-style: normal;
@@ -216,10 +222,9 @@
           rgba(255, 255, 255, 0) 100%
         );
       color: #ffffff;
-      font-family: 'Muller';
+      font-family: 'Muller', sans-serif;
       font-size: 1.3em;
       letter-spacing: normal;
-      text-align: left;
       border: none;
       text-align: center;
       margin: 28px auto;
@@ -230,7 +235,7 @@
 
       &-sp {
         span {
-          margin-right: 0px;
+          margin-right: 0;
         }
       }
     }
@@ -335,7 +340,7 @@
 
   &__link{
     color: #0350dc;
-    font-family: "GT Eesti Pro Display";
+    font-family: "GT Eesti Pro Display", sans-serif;
     font-size: 16px;
     font-weight: 400;
     letter-spacing: normal;
@@ -347,7 +352,7 @@
   &__text{
     margin-bottom: 37px;
     color: #000000;
-    font-family: "GT Eesti Pro Display - Thin";
+    font-family: "GT Eesti Pro Display - Thin", sans-serif;
     font-size: 12px;
     font-weight: 400;
     line-height: math.div(18,12);
