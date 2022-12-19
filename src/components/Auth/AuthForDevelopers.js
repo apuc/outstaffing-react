@@ -19,7 +19,7 @@ const AuthForDevelopers = () => {
   const isAuth = useSelector(selectAuth)
 
   if (isAuth) {
-    return <Redirect to='/' />
+    return <Redirect to='/report' />
   }
 
   return (
