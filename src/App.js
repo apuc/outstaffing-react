@@ -11,6 +11,7 @@ import HomePage from './pages/HomePage'
 import CandidatePage from './pages/CandidatePage'
 import CalendarPage from './pages/CalendarPage'
 import ReportPage from './pages/ReportFormPage.js'
+import ProfileCalendarPage from './pages/ProfileCalendarPage.js'
 import FormPage from './pages/FormPage.js'
 import SingleReportPage from './pages/SingleReportPage'
 import { QuizPage } from './pages/quiz/QuizPage'
@@ -18,6 +19,7 @@ import { InterjacentPage } from './pages/quiz/InterjacentPage'
 import { QuizTestPage } from './pages/quiz/QuizTestPage'
 import { InstructionPage } from './pages/quiz/InstructionPage'
 import { ResultPage } from './pages/quiz/ResultPage'
+import { Profile } from './pages/Profile.js'
 
 const App = () => {
   return (
@@ -45,6 +47,7 @@ const App = () => {
           />
           <ProtectedRoute exact path='/report' component={ReportPage} />
           <ProtectedRoute path='/report/:id' component={SingleReportPage} />
+          <ProtectedRoute path='/ProfileCalendar' component={ProfileCalendarPage} />
           <ProtectedRoute path='/quiz' component={QuizPage} />
           <ProtectedRoute
             path='/quiz-interjacent'
@@ -55,6 +58,7 @@ const App = () => {
             path='/quiz-instruction'
             component={InstructionPage}
           />
+          <ProtectedRoute path='/profile' component={Profile} />
           <ProtectedRoute path='/quiz-result' component={ResultPage} />
           <ProtectedRoute component={() => <div>Page not found</div>} />
         </Switch>

@@ -1,30 +1,35 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchPost } from '../../server/server'
-import { useHistory, useParams, Redirect } from 'react-router-dom'
+import {useHistory, useParams, Redirect, Link} from 'react-router-dom'
 import { Loader } from '../Loader/Loader'
-import { auth } from '../../redux/outstaffingSlice'
+import {auth} from '../../redux/outstaffingSlice'
+import { getReportDate } from '../../redux/reportSlice'
 import { getRole } from '../../redux/roleSlice'
 import calendarIcon from '../../images/calendar_icon.png'
 import ellipse from '../../images/ellipse.png'
 import remove from '../../images/remove.png'
 import addIcon from '../../images/addIcon.png'
-import { currentMonthAndDayReportPage } from '../Calendar/calendarHelper'
-
+import { currentMonthAndDay, getReports } from '../Calendar/calendarHelper'
 import './reportForm.scss'
+import arrow from "../../images/right-arrow.png";
 
-const getCreatedDate = () => {
-  const date = new Date();
-  const dd = String(date.getDate()).padStart(2, '0')
-  const mm = String(date.getMonth() + 1).padStart(2, '0')
-  const yyyy = date.getFullYear()
-
-  return `${yyyy}-${mm}-${dd}`
+const getCreatedDate = (day) => {
+  if (day) {
+    return `${new Date(day).getFullYear()}-${new Date(day).getMonth() + 1}-${new Date(day).getDate()}`
+  } else {
+    const date = new Date();
+    const dd = String(date.getDate()).padStart(2, '0')
+    const mm = String(date.getMonth() + 1).padStart(2, '0')
+    const yyyy = date.getFullYear()
+    return `${yyyy}-${mm}-${dd}`
+  }
 }
 
 const ReportForm = () => {
   const dispatch = useDispatch()
   const history = useHistory()
+  const reportDate = useSelector(getReportDate)
   const role = useSelector(getRole)
 
   const [isFetching, setIsFetching] = useState(false)
@@ -49,7 +54,10 @@ const ReportForm = () => {
   return (
     <section className='report-form'>
       <div className='row'>
-        <div className='col-xl-12'>
+        <div className='col-xl-12 report__head'>
+          <Link className='calendar__back' to={`/ProfileCalendar`}>
+            <div><img src={arrow} alt=''/>Вернуться назад</div>
+          </Link>
           <div className='report-form__block'>
             <div className='report-form__block-title'>
               <h2>Добавить отчет</h2>
@@ -61,7 +69,8 @@ const ReportForm = () => {
                 src={calendarIcon}
                 alt=''
               />
-              {currentMonthAndDayReportPage()}
+              {/*{currentMonthAndDayReportPage()}*/}
+              {reportDate ? currentMonthAndDay(reportDate) : getCreatedDate()}
             </div>
             <div className='report-form__task-list'>
               <img src={ellipse} alt='' />
@@ -149,7 +158,7 @@ const ReportForm = () => {
                   tasks: inputs,
                   difficulties: troublesInputValue,
                   tomorrow: scheduledInputValue,
-                  created_at: getCreatedDate(),
+                  created_at: getCreatedDate(reportDate),
                   status: 1,
                 },
                 logout: () => dispatch(auth(false))

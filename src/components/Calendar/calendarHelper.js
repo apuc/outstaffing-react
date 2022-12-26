@@ -20,6 +20,16 @@ export function calendarHelper(value) {
   return calendar;
 }
 
+export function getReports(value) {
+  const startDay = value.clone().startOf('month').startOf('week').startOf('day');
+  const reportsStart = `${new Date(startDay).getFullYear()}-${new Date(startDay).getMonth() + 1}-${new Date(startDay).getDate()}`
+  const endDay = value.clone().endOf('month').endOf('week');
+  const reportsEnd = `${new Date(endDay).getFullYear()}-${new Date(endDay).getMonth() + 1}-${new Date(endDay).getDate()}`
+  const getReports = `fromDate=${reportsStart}&toDate=${reportsEnd}`
+
+  return getReports;
+}
+
 export function currentMonth() {
   const currentMonth = moment().format('MMMM');
 

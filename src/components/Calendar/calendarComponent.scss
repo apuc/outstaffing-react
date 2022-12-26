@@ -57,7 +57,7 @@
   &__body {
     div {
       display: grid;
-      
+
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
       p {
@@ -250,7 +250,11 @@
 }
 
 .before {
-  background-color: #f0f7e0 !important;
+  background-color: #e5f9b6 !important;
+}
+
+.pass {
+  background-color: #f7d7c9 !important;
 }
 
 .today {

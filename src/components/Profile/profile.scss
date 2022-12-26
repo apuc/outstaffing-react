@@ -1,0 +1,98 @@
+.profile {
+
+  &__container {
+    max-width: 1140px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &Header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 60px;
+
+    &__title {
+      text-align: center;
+      font-family: "GT Eesti Pro Display", sans-serif;
+      font-size: 5em;
+      font-weight: 700;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: 77.81px;
+
+      span {
+        color: #52b709;
+      }
+    }
+
+    .logout-button {
+      top: auto;
+    }
+  }
+
+  &__content {
+    display: flex;
+    margin-top: 20px;
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-left: 45px;
+    }
+  }
+
+  &__sideBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 2px solid whitesmoke;
+    max-width: 34%;
+    row-gap: 12px;
+
+    &__position {
+      font-size: 3rem;
+      font-family: "GT Eesti Pro Display", sans-serif;
+      font-weight: 700;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: 36px;
+      text-align: center;
+    }
+
+    &__experience {
+      font-family: "GT Eesti Pro Display", sans-serif;
+      font-size: 18px;
+      font-weight: normal;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: 36px;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+
+      span {
+        font-size: 30px;
+        font-weight: 700;
+        text-align: center;
+      }
+    }
+
+    &-name {
+      font-size: 30px;
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+
+  &__avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 100px;
+  }
+}
