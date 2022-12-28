@@ -6,6 +6,9 @@ import {
   selectCurrentCandidate,
   auth
 } from '../../redux/outstaffingSlice'
+import {getRole} from '../../redux/roleSlice'
+import {useState} from 'react'
+import {createMarkup} from "../../helper";
 import arrow from '../../images/right-arrow.png'
 import rectangle from '../../images/rectangle_secondPage.png'
 import Sidebar from '../CandidateSidebar/CandidateSidebar'
@@ -17,8 +20,6 @@ import {fetchGet} from '../../server/server'
 import {Footer} from '../Footer/Footer'
 
 import './candidate.scss'
-import {getRole} from '../../redux/roleSlice'
-import {useState} from 'react'
 
 const Candidate = () => {
   const history = useHistory();
@@ -78,10 +79,6 @@ const Candidate = () => {
 
     return styles
   };
-
-  function createMarkup(text) {
-    return {__html: text.split('</p>').join('</p>')}
-  }
 
   const {header, img, classes} = setStyles();
 

@@ -49,6 +49,7 @@ export const fetchAuth = async ({
     response.json().then((resJSON) => {
       localStorage.setItem('auth_token', resJSON.access_token)
       localStorage.setItem('id', resJSON.id)
+      localStorage.setItem('cardId', resJSON.card_id)
       localStorage.setItem(
         'access_token_expired_at',
         resJSON.access_token_expired_at
