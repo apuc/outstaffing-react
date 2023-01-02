@@ -256,6 +256,14 @@
         border-radius: 12px;
         padding: 35px 30px 30px 45px;
 
+        @media (max-width: 825px) {
+          width: 100%;
+        }
+
+        @media (max-width: 470px) {
+          padding: 15px;
+        }
+
         &__info {
           display: flex;
           flex-direction: column;
@@ -291,6 +299,10 @@
             padding-left: 10px;
             column-gap: 25px;
 
+            @media (max-width: 470px) {
+              margin-top: 0;
+            }
+
             span {
               background: #D4F123;
               border-radius: 12px;
@@ -311,7 +323,7 @@
         &__link {
           border-radius: 50%;
           background: #DDEEC6;
-          width: 48px;
+          min-width: 48px;
           height: 48px;
           cursor: pointer;
           display: flex;
