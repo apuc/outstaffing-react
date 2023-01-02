@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { ProfileHeader } from "../components/Profile/ProfileHeader";
-import { getProfileInfo } from "../redux/outstaffingSlice";
+import {getProfileInfo} from "../redux/outstaffingSlice";
 import { useSelector } from "react-redux";
 import {transformHtml} from "../helper";
 import { Footer } from '../components/Footer/Footer'
@@ -10,10 +10,19 @@ import rightArrow from "../images/arrowRight.png"
 import gitImgItem from "../images/gitItemImg.png"
 
 import './../components/Profile/profile.scss'
+import {fetchGet} from "../server/server";
 
 export const Profile = () => {
     const profileInfo = useSelector(getProfileInfo)
     const [openGit, setOpenGit] = useState(false);
+    const [gitInfo, setGitInfo] = useState([])
+    useEffect(() => {
+        fetchGet({
+            link: `${process.env.REACT_APP_API_URL}/api/profile/portfolio-projects?card_id=${localStorage.getItem('cardId')}`,
+        }).then((responseGit) => {
+            setGitInfo(responseGit)
+        })
+    }, [])
     return(
         <div className='profile'>
             <ProfileHeader/>
@@ -60,78 +69,27 @@ export const Profile = () => {
                             <button>Редактировать раздел</button>
                         </div>
                         <div className='profile__sectionGitItems'>
-                            <div className='profile__sectionGitItem gitItem'>
-                                <div className='gitItem__info'>
-                                    <div className='gitItem__info__about'>
-                                        <img src={gitImgItem} alt='gitImg' />
-                                        <div className='gitItem__info__name'>
-                                            <h4>cybershop-api</h4>
-                                            <p>Реактивная социальная сеть</p>
+                            {gitInfo.length && gitInfo.map((itemGit) => {
+                                return <div key={itemGit.id} className='profile__sectionGitItem gitItem'>
+                                            <div className='gitItem__info'>
+                                                <div className='gitItem__info__about'>
+                                                    <img src={gitImgItem} alt='gitImg' />
+                                                    <div className='gitItem__info__name'>
+                                                        <h4>{itemGit.title}</h4>
+                                                        <p>{itemGit.description}</p>
+                                                    </div>
+                                                </div>
+                                                <div className='gitItem__info__specification'>
+                                                    <span></span>
+                                                    <p>{itemGit.main_stack}</p>
+                                                </div>
+                                            </div>
+                                            <a className='gitItem__link' href={itemGit.link} target="_blank">
+                                                <img src={rightArrow} alt='arrowRight' />
+                                            </a>
                                         </div>
-                                    </div>
-                                    <div className='gitItem__info__specification'>
-                                        <span></span>
-                                        <p>JavaScript</p>
-                                    </div>
-                                </div>
-                                <a className='gitItem__link'>
-                                    <img src={rightArrow} alt='arrowRight' />
-                                </a>
-                            </div>
-                            <div className='profile__sectionGitItem gitItem'>
-                                <div className='gitItem__info'>
-                                    <div className='gitItem__info__about'>
-                                        <img src={gitImgItem} alt='gitImg' />
-                                        <div className='gitItem__info__name'>
-                                            <h4>cybershop-api</h4>
-                                            <p>Реактивная социальная сеть</p>
-                                        </div>
-                                    </div>
-                                    <div className='gitItem__info__specification'>
-                                        <span></span>
-                                        <p>JavaScript</p>
-                                    </div>
-                                </div>
-                                <a className='gitItem__link'>
-                                    <img src={rightArrow} alt='arrowRight' />
-                                </a>
-                            </div>
-                            <div className='profile__sectionGitItem gitItem'>
-                                <div className='gitItem__info'>
-                                    <div className='gitItem__info__about'>
-                                        <img src={gitImgItem} alt='gitImg' />
-                                        <div className='gitItem__info__name'>
-                                            <h4>cybershop-api</h4>
-                                            <p>Реактивная социальная сеть</p>
-                                        </div>
-                                    </div>
-                                    <div className='gitItem__info__specification'>
-                                        <span></span>
-                                        <p>JavaScript</p>
-                                    </div>
-                                </div>
-                                <a className='gitItem__link'>
-                                    <img src={rightArrow} alt='arrowRight' />
-                                </a>
-                            </div>
-                            <div className='profile__sectionGitItem gitItem'>
-                                <div className='gitItem__info'>
-                                    <div className='gitItem__info__about'>
-                                        <img src={gitImgItem} alt='gitImg' />
-                                        <div className='gitItem__info__name'>
-                                            <h4>cybershop-api</h4>
-                                            <p>Реактивная социальная сеть</p>
-                                        </div>
-                                    </div>
-                                    <div className='gitItem__info__specification'>
-                                        <span></span>
-                                        <p>JavaScript</p>
-                                    </div>
-                                </div>
-                                <a className='gitItem__link'>
-                                    <img src={rightArrow} alt='arrowRight' />
-                                </a>
-                            </div>
+                                })
+                            }
                         </div>
                     </div>
                 }

@@ -10,7 +10,6 @@ import './profileHeader.scss'
 
 export const ProfileHeader = () => {
     const [isLoggingOut, setIsLoggingOut] = useState(false);
-    const [gitInfo, setGitInfo] = useState([])
     const dispatch = useDispatch();
     const userRole = useSelector(getRole);
     const profileInfo = useSelector(getProfileInfo)
@@ -21,11 +20,6 @@ export const ProfileHeader = () => {
             link: `${process.env.REACT_APP_API_URL}/api/profile/${localStorage.getItem('cardId')}`,
         }).then((profileInfo) => {
             dispatch(setProfileInfo(profileInfo))
-        })
-        fetchGet({
-            link: `${process.env.REACT_APP_API_URL}/api/profile/portfolio-projects?card_id=${localStorage.getItem('cardId')}`,
-        }).then((responseGit) => {
-            setGitInfo(responseGit)
         })
     }, [])
     return(

@@ -150,7 +150,7 @@
       font-size: 18px;
       line-height: 32px;
 
-      @media (max-width: 420px) {
+      @media (max-width: 660px) {
         line-height: 20px;
       }
     }
@@ -166,6 +166,7 @@
       font-weight: 500;
       font-size: 14px;
       line-height: 32px;
+      white-space: nowrap;
 
       @media (max-width: 520px) {
         font-size: 12px;
@@ -270,6 +271,10 @@
           max-width: 350px;
           width: 100%;
 
+          @media (max-width: 825px) {
+            max-width: 100%;
+          }
+
           &__about {
             display: flex;
             align-items: center;
@@ -289,6 +294,30 @@
               font-size: 16px;
               line-height: 32px;
               margin-bottom: 0;
+              white-space: nowrap;
+              max-width: 300px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+
+              @media (max-width: 1040px) {
+                max-width: 250px;
+              }
+
+              @media (max-width: 890px) {
+                max-width: 200px;
+              }
+
+              @media (max-width: 825px) {
+                max-width: 500px;
+              }
+
+              @media (max-width: 720px) {
+                max-width: 250px;
+              }
+
+              @media (max-width: 470px) {
+                max-width: 200px;
+              }
             }
           }
 
