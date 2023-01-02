@@ -52,18 +52,38 @@
     align-items: center;
     padding: 0 130px 0 45px;
     justify-content: space-between;
+
+    @media (max-width: 930px) {
+      padding: 0 40px;
+    }
+
+    @media (max-width: 690px) {
+      padding: 0 20px;
+      min-height: 80px;
+    }
   }
 
   &__person {
     display: flex;
     align-items: center;
     column-gap: 45px;
+
+    @media (max-width: 690px) {
+      column-gap: 20px;
+    }
   }
 
   &__avatar {
     width: 88px;
     height: 88px;
     border-radius: 100px;
+
+    @media (max-width: 690px) {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+    }
   }
 
   &__name {
@@ -71,6 +91,12 @@
     font-size: 16px;
     line-height: 32px;
     position: relative;
+
+    @media (max-width: 690px) {
+      font-size: 14px;
+      margin-right: 10px;
+      line-height: 15px;
+    }
 
     &:after {
       content: '';
@@ -94,6 +120,10 @@
     line-height: 32px;
     color: white;
     border: none;
+
+    @media (max-width: 690px) {
+      width: 120px;
+    }
   }
 
   &__skills {
@@ -111,27 +141,47 @@
     padding: 0 35px 0 50px;
     justify-content: space-between;
 
+    @media (max-width: 550px) {
+      padding: 0 15px;
+    }
+
     h3 {
       font-style: normal;
       font-size: 18px;
       line-height: 32px;
+
+      @media (max-width: 420px) {
+        line-height: 20px;
+      }
     }
 
     button {
       background: #FFFFFF;
       border-radius: 44px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
       border: none;
-      min-width: 190px;
       height: 42px;
       font-weight: 500;
       font-size: 14px;
       line-height: 32px;
+
+      @media (max-width: 520px) {
+        font-size: 12px;
+        padding: 10px;
+        white-space: nowrap;
+      }
     }
   }
 
   .skills__section {
     &__items {
       padding: 25px 35px 25px 50px;
+
+      @media (max-width: 550px) {
+        padding: 15px 15px 20px;
+      }
 
       &__wrapper {
         max-width: 630px;
@@ -164,6 +214,10 @@
 
       &__content {
         padding: 15px 35px 15px 50px;
+
+        @media (max-width: 550px) {
+          padding: 15px 15px 20px;
+        }
 
         h2 {
           font-weight: 700;
@@ -269,8 +323,11 @@
   }
 
   .container {
-    max-width: 1160px;
-    padding: 0 10px;
-    margin-top: 70px;
-  }
+       max-width: 1160px;
+       margin-top: 70px;
+
+      @media (max-width: 570px) {
+        margin-top: 0;
+      }
+     }
 }

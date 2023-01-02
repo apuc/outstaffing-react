@@ -57,6 +57,14 @@
       line-height: 32px;
       color: #807777 !important;
     }
+
+    @media (max-width: 800px) {
+      column-gap: 15px;
+
+      a {
+        font-size: 12px;
+      }
+    }
   }
 
   &__personalInfo {
@@ -72,6 +80,10 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+
+      @media (max-width: 600px) {
+        display: none;
+      }
     }
 
     &Avatar {

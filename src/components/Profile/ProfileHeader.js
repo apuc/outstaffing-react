@@ -3,7 +3,7 @@ import {auth, getProfileInfo, setProfileInfo} from "../../redux/outstaffingSlice
 import {useDispatch, useSelector} from "react-redux";
 import {Loader} from '../Loader/Loader'
 import {getRole} from "../../redux/roleSlice";
-import {useHistory} from "react-router-dom";
+import {useHistory, NavLink} from "react-router-dom";
 import {fetchGet} from "../../server/server";
 
 import './profileHeader.scss'
@@ -42,8 +42,8 @@ export const ProfileHeader = () => {
             <div className='profileHeader__info'>
                 <div className='profileHeader__container'>
                     <nav className='profileHeader__nav'>
-                        <a className='active'>Резюме</a>
-                        <a>Отчетность</a>
+                        <NavLink to={'/profile'}>Резюме</NavLink>
+                        <NavLink to={'/profileCalendar'}>Отчетность</NavLink>
                         <a>Трекер</a>
                         <a>Выплаты</a>
                         <a>Настройки</a>
