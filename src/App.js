@@ -20,6 +20,7 @@ import { QuizTestPage } from './pages/quiz/QuizTestPage'
 import { InstructionPage } from './pages/quiz/InstructionPage'
 import { ResultPage } from './pages/quiz/ResultPage'
 import { Profile } from './pages/Profile.js'
+import { Summary } from './pages/Summary'
 
 const App = () => {
   return (
@@ -59,6 +60,7 @@ const App = () => {
             component={InstructionPage}
           />
           <ProtectedRoute path='/profile' component={Profile} />
+          <ProtectedRoute path='/summary' component={Summary} />
           <ProtectedRoute path='/quiz-result' component={ResultPage} />
           <ProtectedRoute component={() => <div>Page not found</div>} />
         </Switch>

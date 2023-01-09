@@ -26,7 +26,7 @@ export const Profile = () => {
     return(
         <div className='profile'>
             <ProfileHeader/>
-            <div className='profile__container'>
+            <div className='container'>
                 <div className='profile__content'>
                     <h2 className='profile__title'>Ваше резюме {openGit &&  <span>- Git</span>}</h2>
                     {openGit && <div className='profile__back' onClick={() => setOpenGit(false)}>
