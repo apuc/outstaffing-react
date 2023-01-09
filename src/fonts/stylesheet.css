@@ -353,3 +353,44 @@
   font-weight: bold;
   font-style: normal;
 }
+
+
+@font-face {
+  font-family: 'LabGrotesque';
+  src: url('LabGrotesque-Regular.eot');
+  src: local('LabGrotesque-Regular'), local('LabGrotesque-Regular'),
+  url('LabGrotesque-Regular.eot?#iefix') format('embedded-opentype'),
+  url('LabGrotesque-Regular.woff2') format('woff2'), url('LabGrotesque-Regular.woff') format('woff'),
+  url('LabGrotesque-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'LabGrotesque';
+  src: url('LabGrotesque-Medium.eot');
+  src: local('LabGrotesque-Medium'), local('LabGrotesque-Medium'),
+  url('LabGrotesque-Medium.eot?#iefix') format('embedded-opentype'),
+  url('LabGrotesque-Medium.woff2') format('woff2'), url('LabGrotesque-Medium.woff') format('woff'),
+  url('LabGrotesque-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'LabGrotesque';
+  src: url('LabGrotesque-Bold.eot');
+  src: local('LabGrotesque-Bold'), local('LabGrotesque-Bold'),
+  url('LabGrotesque-Bold.eot?#iefix') format('embedded-opentype'),
+  url('LabGrotesque-Bold.woff2') format('woff2'), url('LabGrotesque-Bold.woff') format('woff'),
+  url('LabGrotesque-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'LabGrotesque';
+  src: url('LabGrotesque-Light.eot');
+  src: local('LabGrotesque-Light'), local('LabGrotesque-Light'),
+  url('LabGrotesque-Light.eot?#iefix') format('embedded-opentype'),
+  url('LabGrotesque-Light.woff2') format('woff2'), url('LabGrotesque-Light.woff') format('woff'),
+  url('LabGrotesque-Light.ttf') format('truetype');
+  font-weight: 300;
+}

@@ -1,9 +1,9 @@
 .calendar {
   margin-bottom: 40px;
+  font-family: 'LabGrotesque', sans-serif;
 
   &__profile {
     color: #282828;
-    font-family: 'GT Eesti Pro Display';
     font-size: 3.4em;
     font-weight: 700;
     font-style: normal;
@@ -29,7 +29,6 @@
     height: 112px;
 
     &-name {
-      font-family: 'GT Eesti Pro Display';
       font-size: 2em;
       font-weight: 400;
       font-style: normal;
@@ -53,7 +52,6 @@
 
   &__title {
     &-text {
-      font-family: 'GT Eesti Pro Display';
       font-size: 2.7em;
       font-weight: 700;
       font-style: normal;
@@ -86,7 +84,6 @@
   }
 
   &__hours {
-    font-family: 'GT Eesti Pro Display';
     font-size: 2.2em;
     font-weight: 600;
     font-style: normal;
@@ -96,7 +93,6 @@
     margin-left: 68px;
 
     span {
-      font-family: 'GT Eesti Pro Display';
       font-weight: 100;
       font-style: normal;
       letter-spacing: normal;

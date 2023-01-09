@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from "react-redux";
 import {getProfileInfo} from "../redux/outstaffingSlice";
 import {ProfileHeader} from "../components/Profile/ProfileHeader";
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Footer} from "../components/Footer/Footer";
 
 import reportsIcon from "../images/reports.png"
@@ -15,7 +15,7 @@ import rightArrow from "../images/arrowRight.png"
 import '../components/Profile/profile.scss'
 
 export const Profile = () => {
-    const profileInfo = useSelector(getProfileInfo)
+    const profileInfo = useSelector(getProfileInfo);
     return(
         <div className='profile'>
             <ProfileHeader/>
@@ -23,74 +23,74 @@ export const Profile = () => {
                 <h2 className='profile__title'>Добрый день, <span>{profileInfo.fio}</span></h2>
                 <div className='summary__info'>
                     <div className='summary__person'>
-                        <img src={profileInfo.photo} className='summary__avatar' />
+                        <img src={profileInfo.photo} className='summary__avatar'  alt='avatar'/>
                         <p className='summary__name'>{profileInfo.fio} {profileInfo.specification}</p>
                     </div>
                 </div>
                 <div className='profile__items'>
-                    <NavLink to={'/ProfileCalendar'} className='item'>
+                    <Link to={'/ProfileCalendar'} className='item'>
                         <div className='item__about'>
-                            <img src={reportsIcon} />
+                            <img src={reportsIcon}  alt='report'/>
                             <h3>Ваша отчетность</h3>
                         </div>
                         <div className='item__info'>
                             <p><span>У вас 122 часа</span><br/> отработанных в этом месяце</p>
                             <div className='item__infoLink'>
-                                <img src={rightArrow} />
+                                <img src={rightArrow}  alt='arrow'/>
                             </div>
                         </div>
-                    </NavLink>
-                    <NavLink to={'/summary'} className='item'>
+                    </Link>
+                    <Link to={'/summary'} className='item'>
                         <div className='item__about'>
-                            <img src={summaryIcon} />
+                            <img src={summaryIcon}  alt='summary'/>
                             <h3>Данные и резюме</h3>
                         </div>
                         <div className='item__info'>
                             <p>Ваше резюме<br/><span>заполнено</span></p>
                             <div className='item__infoLink'>
-                                <img src={rightArrow} />
+                                <img src={rightArrow}  alt='arrow'/>
                             </div>
                         </div>
-                    </NavLink>
-                    <NavLink to={'/profile'} className='item'>
+                    </Link>
+                    <Link to={'/profile'} className='item'>
                         <div className='item__about'>
-                            <img src={timerIcon} />
+                            <img src={timerIcon} alt='timer'/>
                             <h3>Трекер времени</h3>
                         </div>
                         <div className='item__info'>
                             <p>Сколько времени занимает<br/> выполнение задач</p>
                             <div className='item__infoLink'>
-                                <img src={rightArrow} />
+                                <img src={rightArrow} alt='arrow'/>
                             </div>
                         </div>
-                    </NavLink>
-                    <NavLink to={'/profile'} className='item'>
+                    </Link>
+                    <Link to={'/profile'} className='item'>
                         <div className='item__about'>
-                            <img src={paymentIcon} />
+                            <img src={paymentIcon} alt='payment'/>
                             <h3>Выплаты</h3>
                         </div>
                         <div className='item__info'>
                             <p>У вас <span>подтвержден</span><br/> статус самозанятого</p>
                             <div className='item__infoLink'>
-                                <img src={rightArrow} />
+                                <img src={rightArrow} alt='arrow'/>
                             </div>
                         </div>
-                    </NavLink>
-                    <NavLink to={'/profile'} className='item'>
+                    </Link>
+                    <Link to={'/profile'} className='item'>
                         <div className='item__about'>
-                            <img src={settingIcon} />
+                            <img src={settingIcon} alt='settings'/>
                             <h3>Настройки аккаунта</h3>
                         </div>
                         <div className='item__info'>
                             <p>Перейдите чтобы начать<br/> редактирование</p>
                             <div className='item__infoLink'>
-                                <img src={rightArrow} />
+                                <img src={rightArrow} alt='arrow'/>
                             </div>
                         </div>
-                    </NavLink>
+                    </Link>
                 </div>
             </div>
             <Footer/>
         </div>
     )
-}
+};
