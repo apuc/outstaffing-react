@@ -42,8 +42,8 @@ export const ProfileHeader = () => {
             <div className='profileHeader__info'>
                 <div className='profileHeader__container'>
                     <nav className='profileHeader__nav'>
-                        <NavLink to={'/profile'}>Резюме</NavLink>
-                        <NavLink to={'/profileCalendar'}>Отчетность</NavLink>
+                        <NavLink to={'/summary'}>Резюме</NavLink>
+                        <NavLink to={'/profile'}>Отчетность</NavLink>
                         <a>Трекер</a>
                         <a>Выплаты</a>
                         <a>Настройки</a>

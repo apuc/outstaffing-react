@@ -1,96 +1,101 @@
-import React from 'react';
-import {useSelector} from "react-redux";
+import React, {useEffect, useState} from 'react';
+import { ProfileHeader } from "../components/Profile/ProfileHeader";
 import {getProfileInfo} from "../redux/outstaffingSlice";
-import {ProfileHeader} from "../components/Profile/ProfileHeader";
-import {NavLink} from "react-router-dom";
-import {Footer} from "../components/Footer/Footer";
+import { useSelector } from "react-redux";
+import {transformHtml} from "../helper";
+import { Footer } from '../components/Footer/Footer'
 
-import reportsIcon from "../images/reports.png"
-import summaryIcon from "../images/summaryIcon.png"
-import timerIcon from "../images/timerIcon.png"
-import paymentIcon from "../images/paymentIcon.png"
-import settingIcon from "../images/settingIcon.png"
+import arrow from "../images/right-arrow.png";
 import rightArrow from "../images/arrowRight.png"
+import gitImgItem from "../images/gitItemImg.png"
 
-import './../components/Profile/summary.scss'
+import '../components/Profile/summary.scss'
+import {fetchGet} from "../server/server";
 
 export const Summary = () => {
     const profileInfo = useSelector(getProfileInfo)
+    const [openGit, setOpenGit] = useState(false);
+    const [gitInfo, setGitInfo] = useState([])
+    useEffect(() => {
+        fetchGet({
+            link: `${process.env.REACT_APP_API_URL}/api/profile/portfolio-projects?card_id=${localStorage.getItem('cardId')}`,
+        }).then((responseGit) => {
+            setGitInfo(responseGit)
+        })
+    }, [])
     return(
         <div className='summary'>
             <ProfileHeader/>
             <div className='container'>
-                <h2 className='summary__title'>Добрый день, <span>{profileInfo.fio}</span></h2>
-                <div className='summary__info'>
-                    <div className='profile__person'>
-                        <img src={profileInfo.photo} className='profile__avatar' />
-                        <p className='profile__name'>{profileInfo.fio} {profileInfo.specification}</p>
+                <div className='summary__content'>
+                    <h2 className='summary__title'>Ваше резюме {openGit &&  <span>- Git</span>}</h2>
+                    {openGit && <div className='summary__back' onClick={() => setOpenGit(false)}>
+                        <img src={arrow} alt='arrow'/>
+                        <p>Вернуться</p>
+                    </div>}
+                    <div className='summary__info'>
+                        <div className='summary__person'>
+                            <img src={profileInfo.photo} className='summary__avatar' />
+                            <p className='summary__name'>{profileInfo.fio} {profileInfo.specification}</p>
+                        </div>
+                        {!openGit &&
+                        <button className='summary__git' onClick={()=> setOpenGit(true)}>Git</button>
+                        }
                     </div>
                 </div>
-                <div className='summary__items'>
-                    <NavLink to={'/profile'} className='item'>
-                        <div className='item__about'>
-                            <img src={reportsIcon} />
-                            <h3>Ваша отчетность</h3>
+                {!openGit &&
+                    <div className='summary__skills skills__section'>
+                        <div className='summary__sections__head'>
+                            <h3>Основной стек</h3>
+                            <button>Редактировать раздел</button>
                         </div>
-                        <div className='item__info'>
-                            <p><span>У вас 122 часа</span><br/> отработанных в этом месяце</p>
-                            <div className='item__infoLink'>
-                                <img src={rightArrow} />
+                        <div className='skills__section__items'>
+                            <div className='skills__section__items__wrapper'>
+                                {profileInfo.skillValues && profileInfo.skillValues.map((skill) => {
+                                    return <span key={skill.id} className='skill_item'>{skill.skill.name}</span>
+                                })}
                             </div>
                         </div>
-                    </NavLink>
-                    <NavLink to={'/profile'} className='item'>
-                        <div className='item__about'>
-                            <img src={summaryIcon} />
-                            <h3>Данные и резюме</h3>
+                    </div>
+                }
+                {profileInfo.vc_text && !openGit &&
+                    <div className='summary__experience' dangerouslySetInnerHTML={transformHtml(profileInfo.vc_text)}>
+                    </div>
+                }
+                {openGit &&
+                    <div className='summary__sectionGit'>
+                        <div className='summary__sections__head'>
+                            <h3>Страница портфолио кода разработчика</h3>
+                            <button>Редактировать раздел</button>
                         </div>
-                        <div className='item__info'>
-                            <p>Ваше резюме<br/><span>заполнено</span></p>
-                            <div className='item__infoLink'>
-                                <img src={rightArrow} />
-                            </div>
+                        <div className='summary__sectionGitItems'>
+                            {gitInfo.length && gitInfo.map((itemGit) => {
+                                return <div key={itemGit.id} className='summary__sectionGitItem gitItem'>
+                                            <div className='gitItem__info'>
+                                                <div className='gitItem__info__about'>
+                                                    <img src={gitImgItem} alt='gitImg' />
+                                                    <div className='gitItem__info__name'>
+                                                        <h4>{itemGit.title}</h4>
+                                                        <p>{itemGit.description}</p>
+                                                    </div>
+                                                </div>
+                                                <div className='gitItem__info__specification'>
+                                                    <span></span>
+                                                    <p>{itemGit.main_stack}</p>
+                                                </div>
+                                            </div>
+                                            <a className='gitItem__link' href={itemGit.link} target="_blank">
+                                                <img src={rightArrow} alt='arrowRight' />
+                                            </a>
+                                        </div>
+                                })
+                            }
                         </div>
-                    </NavLink>
-                    <NavLink to={'/profile'} className='item'>
-                        <div className='item__about'>
-                            <img src={timerIcon} />
-                            <h3>Трекер времени</h3>
-                        </div>
-                        <div className='item__info'>
-                            <p>Сколько времени занимает<br/> выполнение задач</p>
-                            <div className='item__infoLink'>
-                                <img src={rightArrow} />
-                            </div>
-                        </div>
-                    </NavLink>
-                    <NavLink to={'/profile'} className='item'>
-                        <div className='item__about'>
-                            <img src={paymentIcon} />
-                            <h3>Выплаты</h3>
-                        </div>
-                        <div className='item__info'>
-                            <p>У вас <span>подтвержден</span><br/> статус самозанятого</p>
-                            <div className='item__infoLink'>
-                                <img src={rightArrow} />
-                            </div>
-                        </div>
-                    </NavLink>
-                    <NavLink to={'/profile'} className='item'>
-                        <div className='item__about'>
-                            <img src={settingIcon} />
-                            <h3>Настройки аккаунта</h3>
-                        </div>
-                        <div className='item__info'>
-                            <p>Перейдите чтобы начать<br/> редактирование</p>
-                            <div className='item__infoLink'>
-                                <img src={rightArrow} />
-                            </div>
-                        </div>
-                    </NavLink>
-                </div>
+                    </div>
+                }
             </div>
             <Footer/>
         </div>
     )
 }
+
