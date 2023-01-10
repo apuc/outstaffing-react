@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useParams, Link } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import {
   currentCandidate,
   selectCurrentCandidate,
@@ -22,14 +22,14 @@ import { getRole } from '../redux/roleSlice'
 
 const goBack = (history) => {
   history.goBack()
-}
+};
 
 const FormPage = () => {
-  const params = useParams()
-  const history = useHistory()
-  const dispatch = useDispatch()
-  const candidate = useSelector(selectCurrentCandidate)
-  const role = useSelector(getRole)
+  const params = useParams();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const candidate = useSelector(selectCurrentCandidate);
+  const role = useSelector(getRole);
 
   if (!candidate.id) {
     fetchGet({
@@ -56,7 +56,7 @@ const FormPage = () => {
         </div>
         <div className='form-page__candidate'>
           <div className='form-page__avatar'>
-            <img src={candidate.photo} />
+            <img src={candidate.photo} alt='candidate avatar'/>
           </div>
           <div className='form-page__candidate-info'>
             <div className='form-page__position'>
@@ -66,7 +66,7 @@ const FormPage = () => {
               </span>
             </div>
             <div className='form-page__selected'>
-              <img src={rectangle} />
+              <img src={rectangle} alt='rectangle'/>
               <span>Выбранный кандидат</span>
             </div>
           </div>
@@ -84,7 +84,7 @@ const FormPage = () => {
               Заявка на собеседование через телеграм
             </div>
             <div className='form-page__telegram-icon'>
-              <a href='https://t.me/st0kir' target='_blank'>
+              <a href='https://t.me/st0kir' target='_blank' rel="noreferrer">
                 <SVG src={telegramIcon} />
               </a>
             </div>
@@ -94,6 +94,6 @@ const FormPage = () => {
       </div>
     </WithLogout>
   )
-}
+};
 
 export default FormPage

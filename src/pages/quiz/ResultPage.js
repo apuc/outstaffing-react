@@ -1,4 +1,4 @@
-import {Link, Redirect} from "react-router-dom"
+import {Redirect} from "react-router-dom"
 import {HeaderPageTestsQuiz} from "../../components/features/quiz/HeaderPageTests"
 import {Results} from "../../components/features/quiz/Results";
 import {useSelector} from "react-redux";
@@ -20,4 +20,4 @@ export const ResultPage = () => {
         <Results/>
      </>
    )
-}
+};

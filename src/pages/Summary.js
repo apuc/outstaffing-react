@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import { ProfileHeader } from "../components/Profile/ProfileHeader";
+import {ProfileHeader} from "../components/Profile/ProfileHeader";
 import {getProfileInfo} from "../redux/outstaffingSlice";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 import {transformHtml} from "../helper";
-import { Footer } from '../components/Footer/Footer'
+import {Footer} from '../components/Footer/Footer'
 
 import arrow from "../images/right-arrow.png";
 import rightArrow from "../images/arrowRight.png"
@@ -13,16 +13,16 @@ import '../components/Profile/summary.scss'
 import {fetchGet} from "../server/server";
 
 export const Summary = () => {
-    const profileInfo = useSelector(getProfileInfo)
+    const profileInfo = useSelector(getProfileInfo);
     const [openGit, setOpenGit] = useState(false);
-    const [gitInfo, setGitInfo] = useState([])
+    const [gitInfo, setGitInfo] = useState([]);
     useEffect(() => {
         fetchGet({
             link: `${process.env.REACT_APP_API_URL}/api/profile/portfolio-projects?card_id=${localStorage.getItem('cardId')}`,
         }).then((responseGit) => {
             setGitInfo(responseGit)
         })
-    }, [])
+    }, []);
     return(
         <div className='summary'>
             <ProfileHeader/>
@@ -35,7 +35,7 @@ export const Summary = () => {
                     </div>}
                     <div className='summary__info'>
                         <div className='summary__person'>
-                            <img src={profileInfo.photo} className='summary__avatar' />
+                            <img src={profileInfo.photo} className='summary__avatar' alt='avatar'/>
                             <p className='summary__name'>{profileInfo.fio} {profileInfo.specification}</p>
                         </div>
                         {!openGit &&
@@ -80,11 +80,11 @@ export const Summary = () => {
                                                     </div>
                                                 </div>
                                                 <div className='gitItem__info__specification'>
-                                                    <span></span>
+                                                    <span className='gitItem__lineSkill'/>
                                                     <p>{itemGit.main_stack}</p>
                                                 </div>
                                             </div>
-                                            <a className='gitItem__link' href={itemGit.link} target="_blank">
+                                            <a className='gitItem__link' href={itemGit.link} target="_blank" rel="noreferrer">
                                                 <img src={rightArrow} alt='arrowRight' />
                                             </a>
                                         </div>
@@ -97,5 +97,5 @@ export const Summary = () => {
             <Footer/>
         </div>
     )
-}
+};
 
