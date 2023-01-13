@@ -1,59 +1,62 @@
-import React, {useEffect} from 'react'
-import {useHistory} from "react-router"
-import {CodeSnippetlighter} from '../../../pages/CodeSnippetPage'
-import './quiz.scss'
-import {useDispatch} from 'react-redux'
-import {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import { useNavigate} from "react-router-dom"
+import {useSelector, useDispatch} from 'react-redux'
+
 import {
    fetchGetAnswers,
    selectAnswer,
    selectedTest
 } from '../../../redux/quizSlice'
-import {useSelector} from 'react-redux'
+
 import {Progressbar} from './ProgressbarQuiz'
-import {fetchUserAnswersMany, fetchUserAnswerOne} from './../../../redux/quizSlice'
 import {GetOptionTask} from './GetOptionTask'
+
+import {fetchUserAnswersMany, fetchUserAnswerOne} from './../../../redux/quizSlice'
+
 import {fetchGet} from "../../../server/server";
 
+import './quiz.scss'
 
 export const TaskQuiz = () => {
 
-   const history = useHistory();
-   const dispatch = useDispatch()
-   const listAnswers = useSelector(selectAnswer)
-   const dataTest = useSelector(selectedTest)
-   const [index, setIndex] = useState(0);
-   const [checkedValues, setCheckedValues] = useState([])
-   const [stripValue, setStripValue] = useState(0);
-   const [inputValue, setInputValue] = useState('')
-   const id = localStorage.getItem('id');
-   const [questions, setQuestions] = useState([])
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
 
-   useEffect(async () => {
-      const response = await fetchGet({
+   const listAnswers = useSelector(selectAnswer);
+   const dataTest = useSelector(selectedTest);
+
+   const [index, setIndex] = useState(0);
+   const [checkedValues, setCheckedValues] = useState([]);
+   const [stripValue, setStripValue] = useState(0);
+   const [inputValue, setInputValue] = useState('');
+   const [questions, setQuestions] = useState([]);
+
+   const id = localStorage.getItem('id');
+
+   useEffect( () => {
+      const response = fetchGet({
            link: `${process.env.REACT_APP_API_URL}/api/question/get-questions?uuid=${dataTest.uuid}`,
            Origin: `${process.env.REACT_APP_BASE_URL}`,
         }
-      )
-      setQuestions(response)
-      dispatch(fetchGetAnswers(response[0].id))
+      );
+      setQuestions(response);
+      dispatch(fetchGetAnswers(response[0].id));
       setStripValue((+index + 1) * 100 / response.length)
-   }, [dispatch])
-
+   }, [dispatch]);
 
    const nextQuestion = async (e) => {
-      e.preventDefault()
+      e.preventDefault();
 
       //Проверка на валидацию ответов
       if (checkedValues.length || inputValue) {
          switch (questions[index].question_type_id) {
             case '3':
-               dispatch(fetchUserAnswersMany(checkedValues))
+               dispatch(fetchUserAnswersMany(checkedValues));
                break;
             case '2':
             case '1':
             case '4':
-               dispatch(fetchUserAnswerOne(checkedValues))
+               dispatch(fetchUserAnswerOne(checkedValues));
                break;
             default:
                break;
@@ -61,20 +64,20 @@ export const TaskQuiz = () => {
 
          //Проверка на существование следующего запроса
          if (index < questions.length - 1) {
-            await dispatch(fetchGetAnswers(questions[index + 1].id))
-            setIndex(prev => prev >= questions.length - 1 ? prev : prev + 1)
-            setStripValue((prev => prev + (100 / questions.length)))
+            await dispatch(fetchGetAnswers(questions[index + 1].id));
+            setIndex(prev => prev >= questions.length - 1 ? prev : prev + 1);
+            setStripValue((prev => prev + (100 / questions.length)));
             setCheckedValues([]);
             setInputValue('')
          } else {
-            history.push(`/quiz-result`)
+            navigate(`/quiz-result`);
             alert("Тест пройден!")
          }
 
       } else {
          alert("Вы не ответили на вопрос")
       }
-   }
+   };
 
    const handleChange = (e) => {
       const checked = e.target.checked;
@@ -86,8 +89,8 @@ export const TaskQuiz = () => {
                  question_id: questions[index].id,
                  response_body: e.target.value
               }]) :
-              setCheckedValues(prev => [...prev.filter(item => item.response_body !== e.target.value)])
-            break
+              setCheckedValues(prev => [...prev.filter(item => item.response_body !== e.target.value)]);
+            break;
          case '1':
          case '2':
          case '4':
@@ -146,4 +149,4 @@ export const TaskQuiz = () => {
         </div>
      </React.StrictMode>
    )
-}
+};

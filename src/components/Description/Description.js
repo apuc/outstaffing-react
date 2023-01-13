@@ -1,43 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import male from '../../images/medium_male.png'
 import rectangle from '../../images/rectangle_secondPage.png'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { LEVELS, SKILLS } from '../constants/constants'
 import {
   selectProfiles,
   selectFilteredCandidates,
   selectItems,
-  auth
 } from '../../redux/outstaffingSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchGet } from '../../server/server'
+
 import { Loader } from '../Loader/Loader'
 import { getRole } from '../../redux/roleSlice'
 
 import './description.scss'
+import {useRequest} from "../../hooks/useRequest";
 
 const Description = ({ onLoadMore, isLoadingMore }) => {
-  const dispatch = useDispatch()
-  const [isLoaded, setIsLoaded] = useState(false)
-  const history = useHistory()
-  const role = useSelector(getRole)
-  const candidatesListArr = useSelector(selectProfiles)
-  const itemsArr = useSelector(selectItems)
-  const filteredListArr = useSelector(selectFilteredCandidates)
-  const [allCandidates, getAllCandidates] = useState([])
+  const dispatch = useDispatch();
+  const {apiRequest} = useRequest();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const role = useSelector(getRole);
+  const candidatesListArr = useSelector(selectProfiles);
+  const itemsArr = useSelector(selectItems);
+  const filteredListArr = useSelector(selectFilteredCandidates);
+  const [allCandidates, getAllCandidates] = useState([]);
 
-  useEffect(() => {
-    fetchGet({
-      link: `${process.env.REACT_APP_API_URL}/api/profile?limit=`,
-      params: 1000,
-      history,
-      role,
-      logout: () => dispatch(auth(false))
-    }).then((p) => {
-      getAllCandidates(p)
-      setIsLoaded(true)
-    })
-  }, [])
+  // useEffect(() => {
+  //   apiRequest('/profile?limit=',{
+  //     params: 1000,
+  //
+  //     role,
+  //     logout: () => dispatch(auth(false))
+    // }).then((p) => {
+    //   getAllCandidates(p);
+    //   setIsLoaded(true)
+    // })
+  // }, []);
 
   if (!filteredListArr) {
     return (
@@ -242,6 +241,6 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
       </div>
     </section>
   )
-}
+};
 
 export default Description

@@ -12,38 +12,37 @@ import {
   auth
 } from '../../redux/outstaffingSlice'
 import { fetchGet } from '../../server/server'
-import { useHistory } from 'react-router-dom'
+
 import { getRole } from '../../redux/roleSlice'
 
 const TagSelect = () => {
-  const history = useHistory
-  const role = useSelector(getRole)
-  const [searchLoading, setSearchLoading] = useState(false)
-  const dispatch = useDispatch()
 
-  const itemsArr = useSelector(selectItems)
+  const role = useSelector(getRole);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  const tagsArr = useSelector(selectTags)
+  const itemsArr = useSelector(selectItems);
+
+  const tagsArr = useSelector(selectTags);
 
   const handleSubmit = ({ dispatch, setSearchLoading }) => {
-    setSearchLoading(true)
+    setSearchLoading(true);
 
-    dispatch(setPositionId(null))
-    const filterItemsId = itemsArr.map((item) => item.id).join()
+    dispatch(setPositionId(null));
+    const filterItemsId = itemsArr.map((item) => item.id).join();
 
     fetchGet({
       link: `${process.env.REACT_APP_API_URL}/api/profile?skills=`,
       params: filterItemsId,
-      history,
       role,
       logout: () => dispatch(auth(false))
     }).then((el) => {
-      dispatch(filteredCandidates(el))
+      dispatch(filteredCandidates(el));
       setSearchLoading(false)
     })
 
     // dispatch(selectedItems([]));
-  }
+  };
 
   return (
     <>
@@ -85,6 +84,6 @@ const TagSelect = () => {
       </section>
     </>
   )
-}
+};
 
 export default TagSelect

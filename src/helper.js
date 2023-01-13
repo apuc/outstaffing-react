@@ -18,3 +18,20 @@ export function transformHtml(text) {
   );
   return {__html: finalHtml.join('')}
 }
+//
+// export const setToken = () => {
+//   const url = new URL(window.location.href);
+//   const urlT = url.searchParams.get("token");
+//   urlT ? sessionStorage.setItem('token', 'Bearer ' + urlT) : '';
+//   const tParam = urlT || sessionStorage.getItem('token');
+//   return tParam ? {"Authorization": tParam} : false
+//
+// };
+
+export const getToken = () => {
+  const tParam =  `Bearer ${localStorage.getItem('auth_token')}`
+
+  return tParam ? {Authorization: tParam} : {};
+};
+
+export const urlHasParams = (url) => url.indexOf('?') > 0 ? `${url}&${window.location.search.substr(1)}` : `${url}${window.location.search}`;

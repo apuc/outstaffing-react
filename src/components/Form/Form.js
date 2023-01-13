@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { fetchPost } from '../../server/server'
 import { auth } from '../../redux/outstaffingSlice'
-import { useHistory, useParams, Redirect } from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 import { Loader } from '../Loader/Loader'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
@@ -16,7 +16,7 @@ const SweetAlert = withSwalInstance(swal)
 
 const Form = () => {
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
   const role = useSelector(getRole)
   const urlParams = useParams()
   const [status, setStatus] = useState(null)
@@ -52,7 +52,7 @@ const Form = () => {
         profile_id: urlParams.id,
         ...data
       },
-      history,
+
       role,
       logout: () => dispatch(auth(false))
     }).then((res) =>
@@ -79,8 +79,8 @@ const Form = () => {
                   setStatus(null)
                 }
               : () => {
-                  setStatus(null)
-                  history.push(`/candidate/${urlParams.id}`)
+                  setStatus(null);
+                  navigate(`/candidate/${urlParams.id}`)
                 }
           }
         />

@@ -1,16 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {ProfileHeader} from "../components/Profile/ProfileHeader";
-import {getProfileInfo} from "../redux/outstaffingSlice";
+import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
+import {getProfileInfo} from "../../redux/outstaffingSlice";
 import {useSelector} from "react-redux";
-import {transformHtml} from "../helper";
-import {Footer} from '../components/Footer/Footer'
+import {transformHtml} from "../../helper";
+import {Footer} from '../../components/Footer/Footer'
 
-import arrow from "../images/right-arrow.png";
-import rightArrow from "../images/arrowRight.png"
-import gitImgItem from "../images/gitItemImg.png"
+import arrow from "../../images/right-arrow.png";
+import rightArrow from "../../images/arrowRight.png"
+import gitImgItem from "../../images/gitItemImg.png"
 
-import '../components/Profile/summary.scss'
-import {fetchGet} from "../server/server";
+import {fetchGet} from "../../server/server";
+
+import './summary.scss'
+
+
 
 export const Summary = () => {
     const profileInfo = useSelector(getProfileInfo);

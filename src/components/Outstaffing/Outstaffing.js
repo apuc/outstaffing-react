@@ -21,18 +21,18 @@ const createSelectPositionHandler =
     } else {
       dispatch(setPositionId(id))
     }
-  }
+  };
 
 const Outstaffing = () => {
-  const dispatch = useDispatch()
-  const positionId = useSelector(getPositionId)
-  const tagsArr = useSelector(selectTags)
+  const dispatch = useDispatch();
+  const positionId = useSelector(getPositionId);
+  const tagsArr = useSelector(selectTags);
 
   const onSelectPosition = createSelectPositionHandler({
     positionId,
     setPositionId,
     dispatch
-  })
+  });
   return (
     <>
       <section className='outstaffing'>
@@ -91,6 +91,6 @@ const Outstaffing = () => {
       <TagSelect />
     </>
   )
-}
+};
 
 export default Outstaffing

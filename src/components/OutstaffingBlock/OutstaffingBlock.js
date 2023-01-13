@@ -9,7 +9,7 @@ import {
 } from '../../redux/outstaffingSlice'
 
 import { fetchGet } from '../../server/server'
-import { useHistory } from 'react-router-dom'
+
 import { getRole } from '../../redux/roleSlice'
 
 import './outstaffingBlock.scss'
@@ -19,35 +19,32 @@ const handlePositionClick = ({
   positionId,
   isSelected,
   onSelect,
-  history,
   role
 }) => {
   if (isSelected) {
     fetchGet({
       link: `${process.env.REACT_APP_API_URL}/api/profile?limit=`,
       params: 4,
-      history,
       role,
       logout: () => dispatch(auth(false))
     }).then((profileArr) => {
-      dispatch(filteredCandidates(profileArr))
-      dispatch(selectedItems([]))
+      dispatch(filteredCandidates(profileArr));
+      dispatch(selectedItems([]));
       onSelect(positionId)
     })
   } else {
     fetchGet({
       link: `${process.env.REACT_APP_API_URL}/api/profile?position_id=`,
       params: positionId,
-      history,
       role,
       logout: () => dispatch(auth(false))
     }).then((el) => {
-      dispatch(filteredCandidates(el))
-      dispatch(selectedItems([]))
+      dispatch(filteredCandidates(el));
+      dispatch(selectedItems([]));
       onSelect(positionId)
     })
   }
-}
+};
 
 const OutstaffingBlock = ({
   dataTags = [],
@@ -58,20 +55,20 @@ const OutstaffingBlock = ({
   isSelected,
   onSelect
 }) => {
-  const history = useHistory()
-  const role = useSelector(getRole)
 
-  const dispatch = useDispatch()
+  const role = useSelector(getRole);
 
-  const itemsArr = useSelector(selectItems)
+  const dispatch = useDispatch();
+
+  const itemsArr = useSelector(selectItems);
 
   const handleBlockClick = (item, id) => {
     if (!itemsArr.find((el) => item === el.value)) {
       dispatch(selectedItems([...itemsArr, { id, value: item, label: item }]))
     }
-  }
+  };
 
-  let classes
+  let classes;
 
   dataTags.forEach((el) => {
     if (el.name === 'skills_back') {
@@ -81,7 +78,7 @@ const OutstaffingBlock = ({
     } else if (el.name === 'skills_front') {
       classes = 'front'
     }
-  })
+  });
 
   return (
     <OutsideClickHandler
@@ -104,7 +101,6 @@ const OutstaffingBlock = ({
               positionId,
               isSelected,
               onSelect,
-              history,
               role
             })
           }
@@ -136,6 +132,6 @@ const OutstaffingBlock = ({
       </div>
     </OutsideClickHandler>
   )
-}
+};
 
 export default OutstaffingBlock

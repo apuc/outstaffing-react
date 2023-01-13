@@ -5,20 +5,20 @@ import {fetchGet} from "../../../server/server";
 
 
 export const Results = () => {
-   const result = useSelector(selectResult)
-   const test = useSelector(selectedTest)
-   const [maxScore, setMaxScore] = useState('')
-   const dispatch = useDispatch()
+   const result = useSelector(selectResult);
+   const test = useSelector(selectedTest);
+   const [maxScore, setMaxScore] = useState('');
+   const dispatch = useDispatch();
 
    useEffect(async () => {
-      dispatch(fetchResultTest(test.uuid))
+      dispatch(fetchResultTest(test.uuid));
       const response = await fetchGet({
            link: `${process.env.REACT_APP_API_URL}/api/user-questionnaire/get-points-number?user_questionnaire_uuid=${test.uuid}`,
            Origin: `${process.env.REACT_APP_BASE_URL}`,
         }
-      )
+      );
       setMaxScore(response.sum_point)
-   }, [])
+   }, []);
 
    return (
      <div className={'result _container'}>

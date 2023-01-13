@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {useHistory, useParams, Link} from 'react-router-dom'
+import {useParams, Link, useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import {
   currentCandidate,
@@ -22,8 +22,8 @@ import {Footer} from '../Footer/Footer'
 import './candidate.scss'
 
 const Candidate = () => {
-  const history = useHistory();
   const {id: candidateId} = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const role = useSelector(getRole);
   const [activeSnippet, setActiveSnippet] = useState(true);
@@ -36,7 +36,6 @@ const Candidate = () => {
     fetchGet({
       link: `${process.env.REACT_APP_API_URL}/api/profile/${candidateId}`,
       params: Number(candidateId),
-      history,
       role,
       logout: () => dispatch(auth(false))
     }).then((el) => dispatch(currentCandidate(el)))
@@ -97,7 +96,7 @@ const Candidate = () => {
         <div className='row'>
           <div className='col-12 candidate__header'>
 
-            <div className='candidate__arrow' onClick={() => history.push('/')}>
+            <div className='candidate__arrow' onClick={() => navigate('/')}>
               <div className='candidate__arrow-img'>
                 <img src={arrow} alt=''/>
               </div>

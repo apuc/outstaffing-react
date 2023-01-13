@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AuthBox } from '../AuthBox/AuthBox'
+import { AuthBox } from '../../components/AuthBox/AuthBox'
 
 import { useSelector } from 'react-redux'
 import arrow from '../../images/arrow__login_page.png'
@@ -10,16 +10,18 @@ import text from '../../images/Body_Text.png'
 import vector from '../../images/Vector_Smart_Object.png'
 
 import { selectAuth } from '../../redux/outstaffingSlice'
-import { Redirect } from 'react-router-dom'
-import { Footer } from '../Footer/Footer'
+import { useNavigate} from 'react-router-dom'
+import { Footer } from '../../components/Footer/Footer'
 
 import './authForDevelopers.scss'
 
 const AuthForDevelopers = () => {
-  const isAuth = useSelector(selectAuth)
+
+  const isAuth = useSelector(selectAuth);
+  let navigate = useNavigate();
 
   if (isAuth) {
-    return <Redirect to='/profile' />
+    navigate('/profile')
   }
 
   return (
@@ -89,6 +91,6 @@ const AuthForDevelopers = () => {
       </div>
     </section>
   )
-}
+};
 
 export default AuthForDevelopers

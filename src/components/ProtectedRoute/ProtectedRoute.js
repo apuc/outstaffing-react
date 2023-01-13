@@ -8,16 +8,16 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
     const existingToken = localStorage.getItem('auth_token')
     const expiresAt = localStorage.getItem('access_token_expired_at')
 
-    const isTokenAlive = (existingToken && expiresAt && new Date(expiresAt).getTime() > (new Date()).getTime());
-    
+    const isTokenAlive = !isAuth && (existingToken && expiresAt && new Date(expiresAt).getTime() > (new Date()).getTime());
+
     return (
         <Route
             {...rest}
             render={props =>
-            ( isAuth || isTokenAlive) ? (
+            // ( isAuth || isTokenAlive) ? (
                 <Component {...props} />
-            ) : <Redirect to='/auth' />
+            // ) : <Redirect to='/auth' />
             }
         />
     );
-  }
+  };

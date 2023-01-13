@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchPost} from '../../server/server'
-import {useHistory, useParams, Redirect, Link} from 'react-router-dom'
+import {useNavigate, useParams, Redirect, Link} from 'react-router-dom'
 import {Loader} from '../Loader/Loader'
 import {auth} from '../../redux/outstaffingSlice'
 import {getReportDate} from '../../redux/reportSlice'
@@ -28,7 +28,7 @@ const getCreatedDate = (day) => {
 
 const ReportForm = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const reportDate = useSelector(getReportDate);
   const role = useSelector(getRole);
 
@@ -153,7 +153,6 @@ const ReportForm = () => {
               <button className='report-form__footer-btn' onClick={() => {
                 fetchPost({
                   link: `${process.env.REACT_APP_API_URL}/api/reports/create`,
-                  history,
                   role,
                   body: {
                     tasks: inputs,
