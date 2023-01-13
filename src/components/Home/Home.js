@@ -26,7 +26,7 @@ const Home = () => {
     setIsLoadingMore(true);
     apiRequest('/profile',{
       //Корс блокирует все фильтры в гет параметрах
-      // params: {"get-document-list": 1000},
+      params: {"offset": 1000},
       role,
       // logout: () => dispatch(auth(false))
     }).then((profileArr) => {
