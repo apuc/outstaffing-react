@@ -49,6 +49,12 @@
       border-radius: 12px;
       text-decoration: none;
       cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        box-shadow: 6px 5px 20px rgb(87 98 80 / 21%);
+        transform: scale(1.02);
+      }
 
       @media (max-width: 1175px) {
         width: 48%;

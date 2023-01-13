@@ -9,6 +9,7 @@ import moment from "moment";
 import rectangle from '../../images/rectangle_secondPage.png'
 import {currentMonth, getReports} from '../Calendar/calendarHelper'
 import {ProfileCalendarComponent} from "./ProfileCalendarComponent";
+import { ProfileHeader } from "../Profile/ProfileHeader";
 import { Footer } from '../Footer/Footer'
 
 import './profileCalendar.scss'
@@ -48,42 +49,29 @@ export const ProfileCalendar = () => {
     }, [month])
 
     return (
-        <section className='calendar'>
-            <div className='profile__calendar'>
-                <Link className='calendar__back' to={`/profile`}>
-                    <div><img src={arrow} alt=''/>Вернуться назад</div>
-                </Link>
-                <h2 className='calendar__profile'>
-                    Добрый день, <span>{profileInfo.fio}</span>
-                </h2>
-                <div className='col-12 col-xl-12 d-flex justify-content-between align-items-center flex-column flex-sm-row'>
-                    <div className='calendar__info'>
-                        <img className='calendar__info-img' src={profileInfo.photo} alt='img' />
-                        <h3 className='calendar__info-name'>{}</h3>
+        <div className='calendar'>
+            <ProfileHeader/>
+            <div className='container'>
+                <h2 className='summary__title'>Ваши отчеты</h2>
+                <div className='summary__info'>
+                    <div className='summary__person'>
+                        <img src={profileInfo.photo} className='summary__avatar'  alt='avatar'/>
+                        <p className='summary__name'>{profileInfo.fio} {profileInfo.specification}</p>
                     </div>
-                    <div className='calendar__title'>
-                        <h3 className='calendar__title-text'>{profileInfo.position_name}</h3>
-                        <img className='calendar__title-img' src={rectangle} alt='img' />
-                    </div>
-                    <div>
-                        <Link to='/report'>
-                            <button className='calendar__btn' onClick={() => {
-                                dispatch(setReportDate(value))
-                            }}>Заполнить отчет за день</button>
-                        </Link>
-                    </div>
+                    <Link to='/profile/report'>
+                        <button className="calendar__btn">Заполнить отчет за день</button>
+                    </Link>
                 </div>
-            </div>
-
-            <div className='row'>
-                <div className='col-12 col-xl-12'>
-                    <ProfileCalendarComponent reportsDates={reports} />
-                    <p className='calendar__hours'>
-                        {month} : <span> {totalHours} часов </span>
-                    </p>
+                <div className='row'>
+                    <div className='col-12 col-xl-12'>
+                        <ProfileCalendarComponent reportsDates={reports} />
+                        <p className='calendar__hours'>
+                            {month} : <span> {totalHours} часов </span>
+                        </p>
+                    </div>
                 </div>
             </div>
             <Footer />
-        </section>
+        </div>
     )
 };

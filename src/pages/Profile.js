@@ -28,7 +28,7 @@ export const Profile = () => {
                     </div>
                 </div>
                 <div className='profile__items'>
-                    <Link to={'/ProfileCalendar'} className='item'>
+                    <Link to={'/profile/profilecalendar'} className='item'>
                         <div className='item__about'>
                             <img src={reportsIcon}  alt='report'/>
                             <h3>Ваша отчетность</h3>

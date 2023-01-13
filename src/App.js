@@ -46,9 +46,9 @@ const App = () => {
             path='/candidate/:id/form'
             component={FormPage}
           />
-          <ProtectedRoute exact path='/report' component={ReportPage} />
+          <ProtectedRoute exact path='/profile/report' component={ReportPage} />
           <ProtectedRoute path='/report/:id' component={SingleReportPage} />
-          <ProtectedRoute path='/ProfileCalendar' component={ProfileCalendarPage} />
+          <ProtectedRoute path='/profile/profilecalendar' component={ProfileCalendarPage} />
           <ProtectedRoute path='/quiz' component={QuizPage} />
           <ProtectedRoute
             path='/quiz-interjacent'

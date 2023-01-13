@@ -85,7 +85,7 @@ export const ProfileCalendarComponent = ({reportsDates}) => {
                 <div className='calendar-component__form'>
                     {calendar.map((week) =>
                         week.map((day) => (
-                            <Link to='/report'>
+                            <Link to='/profile/report' key={day}>
                                 <button
                                     onClick={() => {
                                         dispatch(setReportDate(day))

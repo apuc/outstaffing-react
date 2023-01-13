@@ -57,6 +57,11 @@
       font-size: 18px;
       line-height: 32px;
       color: #807777 !important;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: #261a1a !important;
+      }
     }
 
     @media (max-width: 800px) {
