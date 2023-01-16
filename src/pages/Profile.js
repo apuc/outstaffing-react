@@ -34,7 +34,7 @@ export const Profile = () => {
                             <h3>Ваша отчетность</h3>
                         </div>
                         <div className='item__info'>
-                            <p><span>У вас 122 часа</span><br/> отработанных в этом месяце</p>
+                            <p><span></span>Отработанных в этом месяце</p>
                             <div className='item__infoLink'>
                                 <img src={rightArrow}  alt='arrow'/>
                             </div>
