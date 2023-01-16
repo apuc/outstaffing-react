@@ -45,7 +45,7 @@ const Home = () => {
       );
       dispatch(tags(tempTags))
     })
-    console.log(1)
+
   }, [index]);
 
   const loadMore = (count) => {
