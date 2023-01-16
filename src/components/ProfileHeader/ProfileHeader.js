@@ -25,7 +25,7 @@ export const ProfileHeader = () => {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
-    apiRequest(`/api/profile/${localStorage.getItem('cardId')}`)
+    apiRequest(`/profile/${localStorage.getItem('cardId')}`)
         .then((profileInfo) =>
             dispatch(setProfileInfo(profileInfo))
         );

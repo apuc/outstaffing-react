@@ -33,7 +33,7 @@ const FormPage = () => {
   };
 
   if (!candidate.id) {
-    apiRequest('/api/profile', {
+    apiRequest('/profile', {
       params: Number(params.id)
     })
         .then((el) => dispatch(currentCandidate(el)))
