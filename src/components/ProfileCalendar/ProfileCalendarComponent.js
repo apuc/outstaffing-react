@@ -49,10 +49,10 @@ export const ProfileCalendarComponent = ({reportsDates}) => {
     function correctRoute(day) {
         for (const date of reportsDates) {
             if (`${new Date(day).getFullYear()}-${correctDay(new Date(day).getMonth() + 1)}-${correctDay(new Date(day).getDate())}` === date.date) {
-                return `/view/report`
+                return `../../view/report`
             }
         }
-        return '/profile/report'
+        return '../../report'
     }
 
     // function prevMonth() {
@@ -104,7 +104,7 @@ export const ProfileCalendarComponent = ({reportsDates}) => {
                                     name={day.format('dddd')}
                                     id='btn'
                                 >
-                                    <Link to={() => correctRoute(day)}>
+                                    <Link to={correctRoute(day)}>
                                         <img className={'calendar__icon'} src={calendarIcon} alt='' />
                                         {currentMonthAndDay(day)}
                                     </Link>

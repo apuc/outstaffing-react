@@ -54,7 +54,6 @@ const App = () => {
               <Route index element={<Profile/>}/>
               <Route exact path='calendar' element={<ProfileCalendarPage/>}/>
               <Route exact path='summary' element={<Summary/>}/>
-              <Route exact path='calendar' element={ProfileCalendarPage} />
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace/>}/>
