@@ -92,6 +92,11 @@
       letter-spacing: normal;
       line-height: normal;
       text-align: center;
+
+      a {
+        text-decoration: none;
+        color: #000000;
+      }
     }
   }
 }
@@ -262,4 +267,8 @@
 
 .selected {
   background-color: #f9f9c3 !important;
+}
+
+.block {
+  pointer-events: none;
 }

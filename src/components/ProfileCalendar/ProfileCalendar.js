@@ -49,7 +49,7 @@ export const ProfileCalendar = () => {
     }, [month])
 
     return (
-        <div className='calendar'>
+        <div className='profile__calendar'>
             <ProfileHeader/>
             <div className='container'>
                 <h2 className='summary__title'>Ваши отчеты</h2>

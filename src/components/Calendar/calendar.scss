@@ -64,7 +64,6 @@
   &__btn {
     width: 280px;
     height: 62px;
-    box-shadow: 6px 5px 20px rgba(82, 151, 34, 0.21);
     border-radius: 31px;
     background-color: #ffffff;
     background-image: linear-gradient(to top, #6aaf5c 0%, #52b709 100%),
@@ -81,6 +80,12 @@
     font-size: 1.6em;
     letter-spacing: normal;
     text-align: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 6px 5px 20px rgb(87 98 80 / 21%);
+      transform: scale(1.02);
+    }
   }
 
   &__hours {

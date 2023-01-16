@@ -22,6 +22,24 @@
 
   .report__head {
     margin-top: 20px;
+
+    a {
+      display: flex;
+      align-items: center;
+      grid-column-gap: 30px;
+      column-gap: 30px;
+      margin-top: 20px;
+      cursor: pointer;
+      text-decoration: none;
+
+      p {
+        margin-bottom: 0;
+        font-size: 14px;
+        line-height: 32px;
+        font-weight: 500;
+        color: black;
+      }
+    }
   }
 
   &__block-title {

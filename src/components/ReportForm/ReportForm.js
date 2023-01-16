@@ -61,7 +61,7 @@ const ReportForm = () => {
           <div>
             <div className='report__head'>
               <Link className='calendar__back' to={`/profile/profilecalendar`}>
-                <div><img src={arrow} alt=''/>Вернуться</div>
+                <img src={arrow} alt=''/><p>Вернуться</p>
               </Link>
             </div>
           </div>
