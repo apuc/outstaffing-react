@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+
 import OutstaffingBlock from '../OutstaffingBlock/OutstaffingBlock'
 import TagSelect from '../Select/TagSelect'
-import {
-  selectTags,
-  getPositionId,
-  setPositionId
-} from '../../redux/outstaffingSlice'
+
+import {  selectTags,  getPositionId,  setPositionId} from '../../redux/outstaffingSlice'
+
 import front from '../../images/front_end.png'
 import back from '../../images/back_end.png'
 import design from '../../images/design.png'

@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import { getProfileInfo } from '../../redux/outstaffingSlice'
-import { setReportDate } from '../../redux/reportSlice';
-import arrow from "../../images/right-arrow.png";
+import {useSelector} from 'react-redux'
+
 import { Link } from 'react-router-dom'
 import moment from "moment";
-import rectangle from '../../images/rectangle_secondPage.png'
+
 import {currentMonth, getReports} from '../Calendar/calendarHelper'
 import {ProfileCalendarComponent} from "./ProfileCalendarComponent";
-import { ProfileHeader } from "../Profile/ProfileHeader";
 import { Footer } from '../Footer/Footer'
+import {ProfileHeader} from "../ProfileHeader/ProfileHeader";
+
+import {useRequest} from "../../hooks/useRequest";
+import { getProfileInfo } from '../../redux/outstaffingSlice'
 
 import './profileCalendar.scss'
-import {useRequest} from "../../hooks/useRequest";
 export const ProfileCalendar = () => {
-    const dispatch = useDispatch();
     const profileInfo = useSelector(getProfileInfo);
     const [month, setMonth] = useState('');
     const [reports, setReports] = useState([]);

@@ -8,12 +8,11 @@ import ellipse from '../../images/ellipse.png'
 import remove from '../../images/remove.png'
 import addIcon from '../../images/addIcon.png'
 import {currentMonthAndDay} from '../Calendar/calendarHelper'
-import {currentMonthAndDay, getReports} from '../Calendar/calendarHelper'
-import {ProfileHeader} from "../Profile/ProfileHeader";
 import {Footer} from "../Footer/Footer";
 import './reportForm.scss'
 import arrow from "../../images/right-arrow.png";
 import {useRequest} from "../../hooks/useRequest";
+import {ProfileHeader} from "../ProfileHeader/ProfileHeader";
 
 const getCreatedDate = (day) => {
   if (day) {

@@ -1,42 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import {useSelector} from 'react-redux'
+import {Link} from 'react-router-dom'
+
+import {Loader} from '../Loader/Loader'
+
+import {LEVELS, SKILLS} from '../../constants/constants'
+import {selectProfiles, selectFilteredCandidates,} from '../../redux/outstaffingSlice'
+
 import male from '../../images/medium_male.png'
 import rectangle from '../../images/rectangle_secondPage.png'
-import { Link } from 'react-router-dom'
-import { LEVELS, SKILLS } from '../../constants/constants'
-import {
-  selectProfiles,
-  selectFilteredCandidates,
-  selectItems,
-} from '../../redux/outstaffingSlice'
-import { useSelector, useDispatch } from 'react-redux'
-
-import { Loader } from '../Loader/Loader'
-import { getRole } from '../../redux/roleSlice'
 
 import './description.scss'
-import {useRequest} from "../../hooks/useRequest";
 
 const Description = ({ onLoadMore, isLoadingMore }) => {
-  const dispatch = useDispatch();
-  const {apiRequest} = useRequest();
-  const [isLoaded, setIsLoaded] = useState(false);
-  const role = useSelector(getRole);
-  const candidatesListArr = useSelector(selectProfiles);
-  const itemsArr = useSelector(selectItems);
-  const filteredListArr = useSelector(selectFilteredCandidates);
-  const [allCandidates, getAllCandidates] = useState([]);
 
-  // useEffect(() => {
-  //   apiRequest('/profile?limit=',{
-  //     params: 1000,
-  //
-  //     role,
-  //     logout: () => dispatch(auth(false))
-    // }).then((p) => {
-    //   getAllCandidates(p);
-    //   setIsLoaded(true)
-    // })
-  // }, []);
+  const candidatesListArr = useSelector(selectProfiles);
+  const filteredListArr = useSelector(selectFilteredCandidates);
 
   if (!filteredListArr) {
     return (
@@ -94,7 +73,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
               ))
             ) : (
               <div className='description__empty'>
-                {isLoaded
+                {isLoadingMore
                   ? 'В данный момент в категории нет свободных специалистов'
                   : 'Загрузка...'}
               </div>
@@ -228,9 +207,8 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
           <div className='col-12'>
             <div className='description__footer'>
               <div className='description__footer-btn'>
-                {allCandidates &&
+                {
                 candidatesListArr &&
-                candidatesListArr.length !== allCandidates.length &&
                 filteredListArr.length === 0 ? (
                   <button onClick={() => onLoadMore(2)}>Загрузить еще</button>
                 ) : null}

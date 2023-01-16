@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-import avatar from './../../../images/medium_male.png'
+import React from 'react'
 import './quiz.scss'
 
 export const Progressbar = ({indexQuestion, width}) => {
@@ -15,4 +14,4 @@ export const Progressbar = ({indexQuestion, width}) => {
           </div>
       </div>
     )
-}
+};

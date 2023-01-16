@@ -22,7 +22,7 @@ export const Summary = () => {
   useEffect(() => {
     apiRequest(`/profile/portfolio-projects?card_id=${localStorage.getItem('cardId')}`)
         .then(responseGit => setGitInfo(responseGit))
-  }, [apiRequest]);
+  }, []);
   return (
       <div className='summary'>
         <ProfileHeader/>

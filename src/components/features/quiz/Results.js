@@ -11,12 +11,12 @@ export const Results = () => {
   const dispatch = useDispatch();
   const {apiRequest} = useRequest();
 
-  useEffect(async () => {
+  useEffect(() => {
     dispatch(fetchResultTest(test.uuid));
     apiRequest(`/user-questionnaire/get-points-number?user_questionnaire_uuid=${test.uuid}`)
         .then((res) => setMaxScore(res.sum_point));
 
-  }, []);
+  }, [apiRequest, dispatch, test]);
 
   return (
       <div className={'result _container'}>

@@ -1,31 +1,30 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useParams, Link, useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import {
-  currentCandidate,
-  selectCurrentCandidate,
-} from '../../redux/outstaffingSlice'
-import {getRole} from '../../redux/roleSlice'
-import {useState} from 'react'
+
+import SkillSection from '../SkillSection/SkillSection'
+import Sidebar from '../CandidateSidebar/CandidateSidebar'
+import {Footer} from '../Footer/Footer'
+
+import {currentCandidate, selectCurrentCandidate,} from '../../redux/outstaffingSlice'
+
+import {useRequest} from "../../hooks/useRequest";
 import {createMarkup} from "../../helper";
+
 import arrow from '../../images/right-arrow.png'
 import rectangle from '../../images/rectangle_secondPage.png'
-import Sidebar from '../CandidateSidebar/CandidateSidebar'
-import SkillSection from '../SkillSection/SkillSection'
 import front from '../../images/front_end.png'
 import back from '../../images/back_end.png'
 import design from '../../images/design.png'
 
-import {Footer} from '../Footer/Footer'
-
 import './candidate.scss'
-import {useRequest} from "../../hooks/useRequest";
+
 
 const Candidate = () => {
   const {id: candidateId} = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const role = useSelector(getRole);
+
   const [activeSnippet, setActiveSnippet] = useState(true);
 
   const {apiRequest} = useRequest();
@@ -35,7 +34,7 @@ const Candidate = () => {
   }, []);
 
   useEffect(() => {
-    apiRequest(`/profile/${candidateId}`,{
+    apiRequest(`/profile/${candidateId}`, {
       params: Number(candidateId),
     }).then((el) => dispatch(currentCandidate(el)))
   }, [dispatch, candidateId]);
@@ -136,20 +135,13 @@ const Candidate = () => {
                                     : 'Описание отсутствует...'}
                               </p>
                           )}
-                          {/* <Link to={`/candidate/${currentCandidateObj.id}/form`}>
-                  <button type="submit" className='candidate__btn'>
-                    Выбрать к собеседованию
-                  </button>
-                </Link> */}
+
                           <SkillSection skillsArr={skillValues}/>
 
                         </div>
                       </div>
                   ) :
                   (
-                      // <div className="col-12 col-xl-8">
-                      //   <CodeSnippetlighter />
-                      // </div>
                       <div className="col-12 col-xl-8">
                         <div className="candidate__works works">
                           <div className="works__body">

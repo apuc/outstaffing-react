@@ -1,16 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 
 import Outstaffing from '../Outstaffing/Outstaffing'
 import Description from '../Description/Description'
 import {Footer} from '../Footer/Footer'
 
-
-import {profiles, tags, auth} from '../../redux/outstaffingSlice'
-import {getRole} from '../../redux/roleSlice'
+import {profiles, tags} from '../../redux/outstaffingSlice'
 
 import {useRequest} from "../../hooks/useRequest";
-
 
 
 const Home = () => {
@@ -48,7 +45,8 @@ const Home = () => {
       );
       dispatch(tags(tempTags))
     })
-  }, [dispatch, index]);
+    console.log(1)
+  }, [index]);
 
   const loadMore = (count) => {
     setIndex((prev) => prev + count)

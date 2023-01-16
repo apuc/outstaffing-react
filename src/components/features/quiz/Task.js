@@ -38,7 +38,7 @@ export const TaskQuiz = () => {
           dispatch(fetchGetAnswers(response[0].id));
           setStripValue((+index + 1) * 100 / response.length)
         })
-  }, [dispatch, apiRequest]);
+  }, [dispatch]);
 
   const nextQuestion = async (e) => {
     e.preventDefault();
