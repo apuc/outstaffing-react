@@ -121,6 +121,12 @@
     line-height: 32px;
     color: white;
     border: none;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 6px 5px 20px rgb(87 98 80 / 21%);
+      transform: scale(1.02);
+    }
 
     @media (max-width: 690px) {
       width: 120px;
@@ -257,6 +263,12 @@
         background: #FFFFFF;
         border-radius: 12px;
         padding: 35px 30px 30px 45px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          box-shadow: 6px 5px 20px rgb(87 98 80 / 21%);
+          transform: scale(1.02);
+        }
 
         @media (max-width: 825px) {
           width: 100%;

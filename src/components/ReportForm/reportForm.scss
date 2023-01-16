@@ -1,14 +1,51 @@
 .report-form {
+  background: #F1F1F1;
+  height: 100%;
+  min-height: 100vh;
+  font-family: "LabGrotesque", sans-serif;
+
+  .container {
+    max-width: 1160px;
+    margin-top: 23px;
+
+    @media (max-width: 570px) {
+      margin-top: 0;
+    }
+  }
+
+  &__content {
+    background: #FFFFFF;
+    border-radius: 12px;
+    margin: 25px 0 80px;
+    padding: 50px 40px;
+  }
 
   .report__head {
     margin-top: 20px;
+
+    a {
+      display: flex;
+      align-items: center;
+      grid-column-gap: 30px;
+      column-gap: 30px;
+      margin-top: 20px;
+      cursor: pointer;
+      text-decoration: none;
+
+      p {
+        margin-bottom: 0;
+        font-size: 14px;
+        line-height: 32px;
+        font-weight: 500;
+        color: black;
+      }
+    }
   }
 
   &__block-title {
-    margin-top: 15px;
 
     h2 {
-      color: #282828;
+      color: #52B709;
       font-family: 'GT Eesti Pro Display';
       font-size: 3.3em;
       font-weight: 700;

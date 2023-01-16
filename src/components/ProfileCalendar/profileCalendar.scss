@@ -1,5 +1,21 @@
-.calendar {
-  font-family: 'LabGrotesque', sans-serif;
+.profile__calendar {
+  background: #F1F1F1;
+  height: 100%;
+  min-height: 100vh;
+  font-family: "LabGrotesque", sans-serif;
+
+  .container {
+    max-width: 1160px;
+    margin-top: 23px;
+
+    @media (max-width: 570px) {
+      margin-top: 0;
+    }
+  }
+
+  .summary__info {
+    padding-right: 25px;
+  }
   .profile__calendar {
     margin-top: 20px;
   }
@@ -16,5 +32,12 @@
 
   &__profile {
     margin-top: 42px;
+  }
+
+  &__btn {
+    transition: all 0.3s ease;
+    &:hover {
+      transform: scale(1.02);
+    }
   }
 }

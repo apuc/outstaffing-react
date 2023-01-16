@@ -44,16 +44,17 @@ const App = () => {
 
             <Route exact path='quiz'>
               <Route index element={<QuizPage/>}/>
-              <Route path='interjacent' element={<InterjacentPage/>}/>
-              <Route path='test' element={<QuizTestPage/>}/>
-              <Route path='instruction' element={<InstructionPage/>}/>
-              <Route path='result' element={<ResultPage/>}/>
+              <Route exact path='interjacent' element={<InterjacentPage/>}/>
+              <Route exact path='test' element={<QuizTestPage/>}/>
+              <Route exact path='instruction' element={<InstructionPage/>}/>
+              <Route exact path='result' element={<ResultPage/>}/>
             </Route>
 
             <Route exact path='profile'>
               <Route index element={<Profile/>}/>
               <Route exact path='calendar' element={<ProfileCalendarPage/>}/>
               <Route exact path='summary' element={<Summary/>}/>
+              <Route exact path='calendar' element={ProfileCalendarPage} />
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace/>}/>

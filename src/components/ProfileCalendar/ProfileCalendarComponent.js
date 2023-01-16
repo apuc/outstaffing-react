@@ -28,21 +28,31 @@ export const ProfileCalendarComponent = ({reportsDates}) => {
         return day.isSame(new Date(), 'day')
     }
 
+    function correctDay(day) {
+        if (day < 10) {
+            return `0${day}`
+        } return day
+    }
+
     function dayStyles(day) {
-        if (value < day) return ``
-        if (day.day() === 6 || day.day() === 0) return `selected`
-        function correctDay(day) {
-            if (day < 10) {
-                return `0${day}`
-            } return day
-        }
+        if (value < day) return `block`
         for (const date of reportsDates) {
-            if (`${new Date(day).getFullYear()}-${new Date(day).getMonth() + 1}-${correctDay(new Date(day).getDate())}` === date.date) {
+            if (`${new Date(day).getFullYear()}-${correctDay(new Date(day).getMonth() + 1)}-${correctDay(new Date(day).getDate())}` === date.date) {
                 return `before`
             }
         }
+        if (day.day() === 6 || day.day() === 0) return `selected`
         if (isToday(day)) return `today`
         return 'pass'
+    }
+
+    function correctRoute(day) {
+        for (const date of reportsDates) {
+            if (`${new Date(day).getFullYear()}-${correctDay(new Date(day).getMonth() + 1)}-${correctDay(new Date(day).getDate())}` === date.date) {
+                return `/view/report`
+            }
+        }
+        return '/profile/report'
     }
 
     // function prevMonth() {
@@ -85,7 +95,6 @@ export const ProfileCalendarComponent = ({reportsDates}) => {
                 <div className='calendar-component__form'>
                     {calendar.map((week) =>
                         week.map((day) => (
-                            <Link to='/report'>
                                 <button
                                     onClick={() => {
                                         dispatch(setReportDate(day))
@@ -95,10 +104,11 @@ export const ProfileCalendarComponent = ({reportsDates}) => {
                                     name={day.format('dddd')}
                                     id='btn'
                                 >
-                                    <img className={'calendar__icon'} src={calendarIcon} alt='' />
-                                    {currentMonthAndDay(day)}
+                                    <Link to={() => correctRoute(day)}>
+                                        <img className={'calendar__icon'} src={calendarIcon} alt='' />
+                                        {currentMonthAndDay(day)}
+                                    </Link>
                                 </button>
-                            </Link>
                         ))
                     )}
                 </div>
