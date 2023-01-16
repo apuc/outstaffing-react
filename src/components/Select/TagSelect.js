@@ -1,90 +1,87 @@
-import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, {useState} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import Select from 'react-select'
-import { Loader } from '../Loader/Loader'
-import style from './TagSelect.module.css'
+import {Loader} from '../Loader/Loader'
+import {useRequest} from "../../hooks/useRequest";
 import {
   selectedItems,
   selectItems,
   selectTags,
   filteredCandidates,
-  setPositionId,
-  auth
+  setPositionId
 } from '../../redux/outstaffingSlice'
-import { fetchGet } from '../../server/server'
-import { useHistory } from 'react-router-dom'
-import { getRole } from '../../redux/roleSlice'
+
+import style from './TagSelect.module.css'
+
 
 const TagSelect = () => {
-  const history = useHistory
-  const role = useSelector(getRole)
-  const [searchLoading, setSearchLoading] = useState(false)
-  const dispatch = useDispatch()
 
-  const itemsArr = useSelector(selectItems)
+  const [searchLoading, setSearchLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  const tagsArr = useSelector(selectTags)
+  const {apiRequest} = useRequest();
 
-  const handleSubmit = ({ dispatch, setSearchLoading }) => {
-    setSearchLoading(true)
+  const itemsArr = useSelector(selectItems);
+  const tagsArr = useSelector(selectTags);
 
-    dispatch(setPositionId(null))
-    const filterItemsId = itemsArr.map((item) => item.id).join()
+  const handleSubmit = ({dispatch, setSearchLoading}) => {
+    setSearchLoading(true);
 
-    fetchGet({
-      link: `${process.env.REACT_APP_API_URL}/api/profile?skills=`,
-      params: filterItemsId,
-      history,
-      role,
-      logout: () => dispatch(auth(false))
+    dispatch(setPositionId(null));
+    const filterItemsId = itemsArr.map((item) => item.id).join();
+    const params = filterItemsId ?  {skill: filterItemsId} : '';
+
+
+    apiRequest('/profile', {
+      params: {...params, limit: 1000},
     }).then((el) => {
-      dispatch(filteredCandidates(el))
+      dispatch(filteredCandidates(el));
       setSearchLoading(false)
     })
 
     // dispatch(selectedItems([]));
-  }
+  };
 
   return (
-    <>
-      <section className={style.search}>
-        <div className='row'>
-          <div className='col-12'>
-            <h2 className={style.search__title}>
-              Найти специалиста по навыкам
-            </h2>
-            <div className={style.search__box}>
-              <Select
-                value={itemsArr}
-                onChange={(value) => dispatch(selectedItems(value))}
-                isMulti
-                name='tags'
-                className={style.select}
-                classNamePrefix={style.select}
-                options={
-                  tagsArr &&
-                  tagsArr.flat().map((item) => {
-                    return {
-                      id: item.id,
-                      value: item.value,
-                      label: item.value
+      <>
+        <section className={style.search}>
+          <div className='row'>
+            <div className='col-12'>
+              <h2 className={style.search__title}>
+                Найти специалиста по навыкам
+              </h2>
+              <div className={style.search__box}>
+                <Select
+                    value={itemsArr}
+                    onChange={(value) => {console.log(value) ;return dispatch(selectedItems(value))}}
+                    isMulti
+                    name='tags'
+                    className={style.select}
+                    classNamePrefix={style.select}
+                    options={
+                      tagsArr &&
+                      tagsArr.flat().map((item) => {
+                        return {
+                          id: item.id,
+                          value: item.value,
+                          label: item.value
+                        }
+                      })
                     }
-                  })
-                }
-              />
-              <button
-                onClick={() => handleSubmit({ dispatch, setSearchLoading })}
-                type='submit'
-                className={style.search__submit}
-              >
-                {searchLoading ? <Loader width={30} height={30} /> : 'Поиск'}
-              </button>
+                />
+                <button
+                    onClick={() => handleSubmit({dispatch, setSearchLoading})}
+                    type='submit'
+                    className={style.search__submit}
+                >
+                  {searchLoading ? <Loader width={30} height={30}/> : 'Поиск'}
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </>
+        </section>
+      </>
   )
-}
+};
 
 export default TagSelect

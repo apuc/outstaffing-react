@@ -1,18 +1,19 @@
 .calendar-component {
   position: relative;
-  margin-top: 80px;
+  margin-top: 30px;
   margin-bottom: 60px;
   background-color: #f9f9f9;
   padding-left: 68px;
   padding-right: 54px;
   padding-top: 48px;
   padding-bottom: 94px;
+  font-family: 'LabGrotesque', sans-serif;
 
   &__header {
     display: flex;
 
     h3 {
-      font-family: 'GT Eesti Pro Display';
+
       font-size: 2.5em;
       font-weight: 400;
       font-style: normal;
@@ -33,7 +34,6 @@
 
       span {
         color: #18586e;
-        font-family: 'GT Eesti Pro Display';
         font-size: 1.6em;
         font-weight: 500;
         font-style: normal;
@@ -57,12 +57,11 @@
   &__body {
     div {
       display: grid;
-      
+
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
       p {
         color: #398208;
-        font-family: 'GT Eesti Pro Display';
         font-size: 25px;
         font-weight: 400;
         font-style: normal;
@@ -87,13 +86,17 @@
       border: 1px solid #c4c4c4;
       background-color: #ffffff;
       margin-top: 20px;
-      font-family: 'GT Eesti Pro Display';
       font-size: 1.2em;
       font-weight: 100;
       font-style: normal;
       letter-spacing: normal;
       line-height: normal;
       text-align: center;
+
+      a {
+        text-decoration: none;
+        color: #000000;
+      }
     }
   }
 }
@@ -250,7 +253,11 @@
 }
 
 .before {
-  background-color: #f0f7e0 !important;
+  background-color: #e5f9b6 !important;
+}
+
+.pass {
+  background-color: #f7d7c9 !important;
 }
 
 .today {
@@ -260,4 +267,8 @@
 
 .selected {
   background-color: #f9f9c3 !important;
+}
+
+.block {
+  pointer-events: none;
 }

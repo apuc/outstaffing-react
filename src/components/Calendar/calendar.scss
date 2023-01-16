@@ -1,9 +1,9 @@
 .calendar {
   margin-bottom: 40px;
+  font-family: 'LabGrotesque', sans-serif;
 
   &__profile {
     color: #282828;
-    font-family: 'GT Eesti Pro Display';
     font-size: 3.4em;
     font-weight: 700;
     font-style: normal;
@@ -29,7 +29,6 @@
     height: 112px;
 
     &-name {
-      font-family: 'GT Eesti Pro Display';
       font-size: 2em;
       font-weight: 400;
       font-style: normal;
@@ -53,7 +52,6 @@
 
   &__title {
     &-text {
-      font-family: 'GT Eesti Pro Display';
       font-size: 2.7em;
       font-weight: 700;
       font-style: normal;
@@ -66,7 +64,6 @@
   &__btn {
     width: 280px;
     height: 62px;
-    box-shadow: 6px 5px 20px rgba(82, 151, 34, 0.21);
     border-radius: 31px;
     background-color: #ffffff;
     background-image: linear-gradient(to top, #6aaf5c 0%, #52b709 100%),
@@ -83,10 +80,15 @@
     font-size: 1.6em;
     letter-spacing: normal;
     text-align: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 6px 5px 20px rgb(87 98 80 / 21%);
+      transform: scale(1.02);
+    }
   }
 
   &__hours {
-    font-family: 'GT Eesti Pro Display';
     font-size: 2.2em;
     font-weight: 600;
     font-style: normal;
@@ -96,7 +98,6 @@
     margin-left: 68px;
 
     span {
-      font-family: 'GT Eesti Pro Display';
       font-weight: 100;
       font-style: normal;
       letter-spacing: normal;

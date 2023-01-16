@@ -1,2 +1,2 @@
-REACT_APP_API_URL = https://dev.itguild.info
-REACT_APP_BASE_URL = https://dev.itguild.info
+REACT_APP_API_URL = https://dev.itguild.info/api
+REACT_APP_BASE_URL = https://dev.itguild.info/api

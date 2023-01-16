@@ -7,18 +7,19 @@ import vector from '../../images/Vector_Smart_Object.png'
 import vectorBlack from '../../images/Vector_Smart_Object_black.png'
 import { useSelector } from 'react-redux'
 import { selectAuth } from '../../redux/outstaffingSlice'
-import { Redirect } from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 
-import { Footer } from '../Footer/Footer'
-import { AuthBox } from '../AuthBox/AuthBox'
+import { Footer } from '../../components/Footer/Footer'
+import { AuthBox } from '../../components/AuthBox/AuthBox'
 
 import './authForPartners.scss'
 
 const AuthForPartners = () => {
-  const isAuth = useSelector(selectAuth)
+  const isAuth = useSelector(selectAuth);
+  let navigate = useNavigate();
 
   if (isAuth) {
-    return <Redirect to='/' />
+    navigate('/')
   }
 
   return (
@@ -81,6 +82,6 @@ const AuthForPartners = () => {
       </div>
     </section>
   )
-}
+};
 
 export default AuthForPartners

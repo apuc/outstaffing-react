@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Achievement } from '../Achievement/Achievement'
 
-import { LEVELS, SKILLS } from '../constants/constants'
+import { LEVELS, SKILLS } from '../../constants/constants'
 
 import './candidateSidebar.scss'
 

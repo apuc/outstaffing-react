@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {fetchGet, fetchPost} from './../server/server'
+import {fetchGet} from './../server/server'
 import axios from "axios";
 
 
@@ -17,17 +17,16 @@ export const setUserInfo = createAsyncThunk(
   'userInfo',
   async (id) => {
      try{
-        const response = await fetchGet({
-             link: `${process.env.REACT_APP_API_URL}/api/profile/get-main-data?user_id=${id}`,
-             Origin: `${process.env.REACT_APP_BASE_URL}`,
-          }
+       return await fetchGet({
+              link: `${process.env.REACT_APP_API_URL}/api/profile/get-main-data?user_id=${id}`,
+              Origin: `${process.env.REACT_APP_BASE_URL}`,
+            }
         )
-        return response
      }catch (e) {
         console.log(e)
      }
   }
-)
+);
 
 export const fetchUserAnswersMany = createAsyncThunk(
   'answersUserMany',
@@ -38,13 +37,13 @@ export const fetchUserAnswersMany = createAsyncThunk(
              headers: {
                 Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
              }
-          })
+          });
         return response.data
      }catch (e) {
         console.log(e)
      }
   }
-)
+);
 export const fetchUserAnswerOne = createAsyncThunk(
   'answersUserOne',
   async (checkedValues) => {
@@ -54,55 +53,43 @@ export const fetchUserAnswerOne = createAsyncThunk(
              headers: {
                 Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
              }
-          })
+          });
         return response.data
      }catch (e) {
         console.log(e)
      }
   }
-)
+);
 export const fetchGetAnswers = createAsyncThunk(
   'answers',
   async (question_id) => {
-     const resp = await fetchGet({
-          link: `${process.env.REACT_APP_API_URL}/api/answer/get-answers?question_id=${question_id}`,
-          Origin: `${process.env.REACT_APP_BASE_URL}`,
-       }
+    return await fetchGet({
+           link: `${process.env.REACT_APP_API_URL}/api/answer/get-answers?question_id=${question_id}`,
+           Origin: `${process.env.REACT_APP_BASE_URL}`,
+         }
      )
-     return resp
   }
-)
-// export const fetchGetQuestion = createAsyncThunk(
-//   'questions',
-//   async (uuid) => {
-//      const resp = await fetchGet({
-//           link: `${process.env.REACT_APP_API_URL}/api/question/get-questions?uuid=${uuid}`,
-//           Origin: `${process.env.REACT_APP_BASE_URL}`,
-//        }
-//      )
-//      return resp
-//   }
-// )
+);
+
 export const fetchResultTest = createAsyncThunk(
   'result',
   async (uuid) => {
-     const resp = await fetchGet({
-          link: `${process.env.REACT_APP_API_URL}/api/user-questionnaire/questionnaire-completed?user_questionnaire_uuid=${uuid}`,
-          Origin: `${process.env.REACT_APP_BASE_URL}`,
-       }
+    return await fetchGet({
+           link: `${process.env.REACT_APP_API_URL}/api/user-questionnaire/questionnaire-completed?user_questionnaire_uuid=${uuid}`,
+           Origin: `${process.env.REACT_APP_BASE_URL}`,
+         }
      )
-     return resp
 
   }
-)
+);
 
 export const quizSlice = createSlice({
    name: 'quiz',
    initialState,
    reducers: {
       setQuestionnairesList: (state, action) => {
-         state.dataQuestionnairesOfUser = action.payload
-         state.passedTests = action.payload.filter(item=>item.status === 2)
+         state.dataQuestionnairesOfUser = action.payload;
+         state.passedTests = action.payload.filter(item => item.status === 2)
       },
       setSelectedTest: (state, action) => {
          state.selectedTest = action.payload
@@ -123,11 +110,10 @@ export const quizSlice = createSlice({
 
 export const {setQuestionnairesList, setSelectedTest} = quizSlice.actions;
 
-// export const selectQuestions = (state) => state.quiz.questions;
+
 export const selectAnswer = (state) => state.quiz.answer;
 export const selectQuestionnairesOfUser = (state) => state.quiz.dataQuestionnairesOfUser;
 export const selectResult = (state) => state.quiz.result;
-export const selectIsLoading = (state) => state.quiz.isLoading;
 export const selectedTest = (state) => state.quiz.selectedTest;
 export const selectPassedTests = (state) => state.quiz.passedTests;
 export const selectUserInfo = (state) => state.quiz.userInfo;

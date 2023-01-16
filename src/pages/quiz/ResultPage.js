@@ -1,4 +1,4 @@
-import {Link, Redirect} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import {HeaderPageTestsQuiz} from "../../components/features/quiz/HeaderPageTests"
 import {Results} from "../../components/features/quiz/Results";
 import {useSelector} from "react-redux";
@@ -8,16 +8,17 @@ import React from "react";
 
 export const ResultPage = () => {
 
-   const test = useSelector(selectedTest)
+  const test = useSelector(selectedTest)
 
-   if (!test) {
-      return <Redirect to={'/quiz'}/>
-   }
+  let navigate = useNavigate();
+  if (!test) {
+    navigate('/quiz')
+  }
 
-   return (
-     <>
+  return (
+      <>
         <HeaderPageTestsQuiz isVisibilityButton={false}/>
         <Results/>
-     </>
-   )
-}
+      </>
+  )
+};

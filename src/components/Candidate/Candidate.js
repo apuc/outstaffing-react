@@ -1,43 +1,41 @@
-import React, {useEffect} from 'react'
-import {useHistory, useParams, Link} from 'react-router-dom'
+import React, {useEffect, useState} from 'react'
+import {useParams, Link, useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import {
-  currentCandidate,
-  selectCurrentCandidate,
-  auth
-} from '../../redux/outstaffingSlice'
+
+import SkillSection from '../SkillSection/SkillSection'
+import Sidebar from '../CandidateSidebar/CandidateSidebar'
+import {Footer} from '../Footer/Footer'
+
+import {currentCandidate, selectCurrentCandidate,} from '../../redux/outstaffingSlice'
+
+import {useRequest} from "../../hooks/useRequest";
+import {createMarkup} from "../../helper";
+
 import arrow from '../../images/right-arrow.png'
 import rectangle from '../../images/rectangle_secondPage.png'
-import Sidebar from '../CandidateSidebar/CandidateSidebar'
-import SkillSection from '../SkillSection/SkillSection'
 import front from '../../images/front_end.png'
 import back from '../../images/back_end.png'
 import design from '../../images/design.png'
-import {fetchGet} from '../../server/server'
-import {Footer} from '../Footer/Footer'
 
 import './candidate.scss'
-import {getRole} from '../../redux/roleSlice'
-import {useState} from 'react'
+
 
 const Candidate = () => {
-  const history = useHistory();
   const {id: candidateId} = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const role = useSelector(getRole);
+
   const [activeSnippet, setActiveSnippet] = useState(true);
+
+  const {apiRequest} = useRequest();
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, []);
 
   useEffect(() => {
-    fetchGet({
-      link: `${process.env.REACT_APP_API_URL}/api/profile/${candidateId}`,
+    apiRequest(`/profile/${candidateId}`, {
       params: Number(candidateId),
-      history,
-      role,
-      logout: () => dispatch(auth(false))
     }).then((el) => dispatch(currentCandidate(el)))
   }, [dispatch, candidateId]);
 
@@ -79,10 +77,6 @@ const Candidate = () => {
     return styles
   };
 
-  function createMarkup(text) {
-    return {__html: text.split('</p>').join('</p>')}
-  }
-
   const {header, img, classes} = setStyles();
 
   return (
@@ -100,7 +94,7 @@ const Candidate = () => {
         <div className='row'>
           <div className='col-12 candidate__header'>
 
-            <div className='candidate__arrow' onClick={() => history.push('/')}>
+            <div className='candidate__arrow' onClick={() => navigate('/')}>
               <div className='candidate__arrow-img'>
                 <img src={arrow} alt=''/>
               </div>
@@ -141,20 +135,13 @@ const Candidate = () => {
                                     : 'Описание отсутствует...'}
                               </p>
                           )}
-                          {/* <Link to={`/candidate/${currentCandidateObj.id}/form`}>
-                  <button type="submit" className='candidate__btn'>
-                    Выбрать к собеседованию
-                  </button>
-                </Link> */}
+
                           <SkillSection skillsArr={skillValues}/>
 
                         </div>
                       </div>
                   ) :
                   (
-                      // <div className="col-12 col-xl-8">
-                      //   <CodeSnippetlighter />
-                      // </div>
                       <div className="col-12 col-xl-8">
                         <div className="candidate__works works">
                           <div className="works__body">

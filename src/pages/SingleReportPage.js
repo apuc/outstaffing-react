@@ -22,7 +22,7 @@ const tasks = [
     text: 'Задача «83 – Навигационная система – Поиск по почтовому индексу – Добавить экран поиска по почтовому индексу» не может быть завершена, т.к. работа над задачей «82 – Навигационная система – Разработать модуль поиска по почтовому индексу» ещё не начата',
     hours: 3
   }
-]
+];
 
 const SingleReportPage = () => {
   return (
@@ -30,7 +30,7 @@ const SingleReportPage = () => {
       <div className='single-report-page'>
         <div className='single-report-page__back'>
           <div className='single-report-page__back-arrow'>
-            <img src={arrowLeft} />
+            <img src={arrowLeft} alt='arrowLeft'/>
           </div>
           <div className='single-report-page__back-text'>
             Вернуться к списку
@@ -103,6 +103,6 @@ const SingleReportPage = () => {
       </div>
     </WithLogout>
   )
-}
+};
 
 export default SingleReportPage

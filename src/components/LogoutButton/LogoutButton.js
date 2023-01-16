@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {Loader} from '../Loader/Loader'
 import {auth} from '../../redux/outstaffingSlice'
@@ -11,7 +11,7 @@ export const LogoutButton = () => {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const dispatch = useDispatch();
   const userRole = useSelector(getRole);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
       <div className='logout-button'>
@@ -21,7 +21,7 @@ export const LogoutButton = () => {
               localStorage.clear();
               dispatch(auth(false));
               setIsLoggingOut(false);
-              history.push(userRole === 'ROLE_DEV' ? '/authdev' : '/auth')
+              navigate(userRole === 'ROLE_DEV' ? '/authdev' : '/auth')
             }}
         >
           {isLoggingOut ? <Loader/> : 'Выйти'}{' '}
