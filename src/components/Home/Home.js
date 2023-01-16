@@ -12,33 +12,27 @@ import {getRole} from '../../redux/roleSlice'
 import {useRequest} from "../../hooks/useRequest";
 
 
+
 const Home = () => {
 
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [index, setIndex] = useState(4);
 
   const dispatch = useDispatch();
-  const role = useSelector(getRole);
 
   const {apiRequest} = useRequest();
 
   useEffect(() => {
     setIsLoadingMore(true);
-    apiRequest('/profile',{
-      //Корс блокирует все фильтры в гет параметрах
-      params: {"offset": 1000},
-      role,
-      // logout: () => dispatch(auth(false))
+    apiRequest('/profile', {
+      params: {limit: 1000},
     }).then((profileArr) => {
 
       dispatch(profiles(profileArr));
       setIsLoadingMore(false)
     });
 
-    apiRequest('/skills/skills-on-main-page',{
-
-      role,
-      // logout: () => dispatch(auth(false))
+    apiRequest('/skills/skills-on-main-page', {
     }).then((skills) => {
       if (!skills) {
         return []

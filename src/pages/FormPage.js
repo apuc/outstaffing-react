@@ -4,13 +4,11 @@ import {useParams, useNavigate} from 'react-router-dom'
 import {
   currentCandidate,
   selectCurrentCandidate,
-  auth
 } from '../redux/outstaffingSlice'
 import SVG from 'react-inlinesvg'
 import {WithLogout} from '../hoc/withLogout'
 import Form from '../components/Form/Form'
 import {LEVELS, SKILLS} from '../components/constants/constants'
-import {fetchGet} from '../server/server'
 import {Footer} from '../components/Footer/Footer'
 
 import arrow from '../images/right-arrow.png'
@@ -18,7 +16,7 @@ import rectangle from '../images/rectangle_secondPage.png'
 import telegramIcon from '../images/telegram-icon.svg'
 
 import './formPage.scss'
-import {getRole} from '../redux/roleSlice'
+import {useRequest} from "../hooks/useRequest";
 
 
 const FormPage = () => {
@@ -26,20 +24,19 @@ const FormPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const candidate = useSelector(selectCurrentCandidate);
-  const role = useSelector(getRole);
+
+
+  const {apiRequest} = useRequest();
 
   const goBack = () => {
     navigate(-1)
   };
 
   if (!candidate.id) {
-    fetchGet({
-      link: `${process.env.REACT_APP_API_URL}/api/profile/`,
-      params: Number(params.id),
-      navigate,
-      role,
-      logout: () => dispatch(auth(false))
-    }).then((el) => dispatch(currentCandidate(el)))
+    apiRequest('/api/profile', {
+      params: Number(params.id)
+    })
+        .then((el) => dispatch(currentCandidate(el)))
   }
 
   return (

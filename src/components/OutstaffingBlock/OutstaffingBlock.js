@@ -1,43 +1,38 @@
 import React from 'react'
 import OutsideClickHandler from 'react-outside-click-handler'
-import { useDispatch, useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {
   selectItems,
   selectedItems,
   filteredCandidates,
-  auth
 } from '../../redux/outstaffingSlice'
 
-import { fetchGet } from '../../server/server'
-
-import { getRole } from '../../redux/roleSlice'
+import {useRequest} from "../../hooks/useRequest";
 
 import './outstaffingBlock.scss'
 
-const handlePositionClick = ({
-  dispatch,
-  positionId,
-  isSelected,
-  onSelect,
-  role
-}) => {
+
+const handlePositionClick = (
+    {
+      dispatch,
+      positionId,
+      isSelected,
+      onSelect,
+      apiRequest
+    }) => {
   if (isSelected) {
-    fetchGet({
-      link: `${process.env.REACT_APP_API_URL}/api/profile?limit=`,
-      params: 4,
-      role,
-      logout: () => dispatch(auth(false))
+    apiRequest('/profile', {
+      params: {limit: 1000},
     }).then((profileArr) => {
       dispatch(filteredCandidates(profileArr));
       dispatch(selectedItems([]));
       onSelect(positionId)
     })
   } else {
-    fetchGet({
-      link: `${process.env.REACT_APP_API_URL}/api/profile?position_id=`,
-      params: positionId,
-      role,
-      logout: () => dispatch(auth(false))
+    apiRequest('/profile', {
+      params: {
+        limit: '1000',
+        position_id: positionId},
     }).then((el) => {
       dispatch(filteredCandidates(el));
       dispatch(selectedItems([]));
@@ -46,25 +41,27 @@ const handlePositionClick = ({
   }
 };
 
-const OutstaffingBlock = ({
-  dataTags = [],
-  selected,
-  img,
-  header,
-  positionId,
-  isSelected,
-  onSelect
-}) => {
+const OutstaffingBlock = (
+    {
+      dataTags = [],
+      selected,
+      img,
+      header,
+      positionId,
+      isSelected,
+      onSelect
+    }) => {
 
-  const role = useSelector(getRole);
 
   const dispatch = useDispatch();
 
   const itemsArr = useSelector(selectItems);
 
+  const {apiRequest} = useRequest();
+
   const handleBlockClick = (item, id) => {
     if (!itemsArr.find((el) => item === el.value)) {
-      dispatch(selectedItems([...itemsArr, { id, value: item, label: item }]))
+      dispatch(selectedItems([...itemsArr, {id, value: item, label: item}]))
     }
   };
 
@@ -81,56 +78,56 @@ const OutstaffingBlock = ({
   });
 
   return (
-    <OutsideClickHandler
-      onOutsideClick={() => {
-        isSelected && onSelect(null)
-      }}
-    >
-      <div
-        className={`outstaffing-block${
-          isSelected ? ' outstaffing-block__selected' : ''
-        }`}
+      <OutsideClickHandler
+          onOutsideClick={() => {
+            isSelected && onSelect(null)
+          }}
       >
         <div
-          className={`outstaffing-block__img ${
-            selected ? ' outstaffing-block__border' : ''
-          }`}
-          onClick={() =>
-            handlePositionClick({
-              dispatch,
-              positionId,
-              isSelected,
-              onSelect,
-              role
-            })
-          }
+            className={`outstaffing-block${
+                isSelected ? ' outstaffing-block__selected' : ''
+            }`}
         >
-          <h3>{header}</h3>
-          <img className={classes} src={img} alt='img' />
+          <div
+              className={`outstaffing-block__img ${
+                  selected ? ' outstaffing-block__border' : ''
+              }`}
+              onClick={() =>
+                  handlePositionClick({
+                    dispatch,
+                    positionId,
+                    isSelected,
+                    onSelect,
+                    apiRequest
+                  })
+              }
+          >
+            <h3>{header}</h3>
+            <img className={classes} src={img} alt='img'/>
+          </div>
+          <div
+              className={`${
+                  selected
+                      ? 'outstaffing-block__mobile--block'
+                      : 'outstaffing-block__mobile--none'
+              }`}
+          >
+            <p className='outstaffing-block__text'># Популярный стек</p>
+            {dataTags && (
+                <ul className='outstaffing-block__items'>
+                  {dataTags.map((item) => (
+                      <li
+                          key={item.id}
+                          onClick={() => handleBlockClick(item.value, item.id)}
+                      >
+                        {item.value}
+                      </li>
+                  ))}
+                </ul>
+            )}
+          </div>
         </div>
-        <div
-          className={`${
-            selected
-              ? 'outstaffing-block__mobile--block'
-              : 'outstaffing-block__mobile--none'
-          }`}
-        >
-          <p className='outstaffing-block__text'># Популярный стек</p>
-          {dataTags && (
-            <ul className='outstaffing-block__items'>
-              {dataTags.map((item) => (
-                <li
-                  key={item.id}
-                  onClick={() => handleBlockClick(item.value, item.id)}
-                >
-                  {item.value}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </div>
-    </OutsideClickHandler>
+      </OutsideClickHandler>
   )
 };
 

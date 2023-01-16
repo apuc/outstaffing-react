@@ -5,23 +5,26 @@ import './quiz.scss'
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {selectedTest} from "../../../redux/quizSlice";
-import {fetchGet} from "../../../server/server";
+
+import {useRequest} from "../../../hooks/useRequest";
 
 export const Instruction = () => {
 
-   const [countQuestions, setCountQuestions] = useState(null)
-   const test = useSelector(selectedTest)
+   const [countQuestions, setCountQuestions] = useState(null);
+   const test = useSelector(selectedTest);
 
-   useEffect(async () => {
+  const {apiRequest} = useRequest();
 
-      const response = await fetchGet({
-           link: `${process.env.REACT_APP_API_URL}/api/user-questionnaire/get-question-number?user_questionnaire_uuid=${test.uuid}`,
-           Origin: `${process.env.REACT_APP_BASE_URL}`,
-        }
-      )
-      setCountQuestions(response.question_number)
+   useEffect( () => {
 
-   }, [])
+     apiRequest('/user-questionnaire/get-question-number', {
+           params: {user_questionnaire_uuid: test.uuid},
+
+         }
+     ).then((res)=> setCountQuestions(res.question_number))
+
+
+   }, []);
 
    return (
      <div className="instruction">
@@ -49,5 +52,5 @@ export const Instruction = () => {
         </div>
      </div>
    )
-}
+};
 

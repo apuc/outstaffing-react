@@ -1,7 +1,5 @@
-import React from "react";
 import axios from 'axios';
 import {getToken, urlHasParams} from "../helper";
-import {useNavigate} from "react-router";
 import {useLogout} from "./useLogout";
 
 
@@ -38,7 +36,6 @@ export const useRequest = () => {
         })
         .then(response => new Promise(resolve => {
           if (response.data.redirect || response.status === 401) {
-            console.log(response, 'LOGUTATAT')
             logout()
           }
           return resolve(response)

@@ -4,7 +4,6 @@ import {useSelector, useDispatch} from 'react-redux'
 import {
   currentCandidate,
   selectCurrentCandidate,
-  auth
 } from '../../redux/outstaffingSlice'
 import {getRole} from '../../redux/roleSlice'
 import {useState} from 'react'
@@ -16,10 +15,11 @@ import SkillSection from '../SkillSection/SkillSection'
 import front from '../../images/front_end.png'
 import back from '../../images/back_end.png'
 import design from '../../images/design.png'
-import {fetchGet} from '../../server/server'
+
 import {Footer} from '../Footer/Footer'
 
 import './candidate.scss'
+import {useRequest} from "../../hooks/useRequest";
 
 const Candidate = () => {
   const {id: candidateId} = useParams();
@@ -28,16 +28,15 @@ const Candidate = () => {
   const role = useSelector(getRole);
   const [activeSnippet, setActiveSnippet] = useState(true);
 
+  const {apiRequest} = useRequest();
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, []);
 
   useEffect(() => {
-    fetchGet({
-      link: `${process.env.REACT_APP_API_URL}/api/profile/${candidateId}`,
+    apiRequest(`/profile/${candidateId}`,{
       params: Number(candidateId),
-      role,
-      logout: () => dispatch(auth(false))
     }).then((el) => dispatch(currentCandidate(el)))
   }, [dispatch, candidateId]);
 

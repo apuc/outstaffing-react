@@ -28,7 +28,6 @@ const getCreatedDate = (day) => {
 
 const ReportForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const reportDate = useSelector(getReportDate);
   const role = useSelector(getRole);
 
