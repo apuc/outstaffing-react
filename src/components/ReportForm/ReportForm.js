@@ -1,18 +1,24 @@
 import React, {useState} from 'react'
 import {useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
+
 import {Loader} from '../Loader/Loader'
+import {currentMonthAndDay} from '../Calendar/calendarHelper'
+import {Footer} from "../Footer/Footer";
+import {ProfileHeader} from "../ProfileHeader/ProfileHeader";
+
+import {useRequest} from "../../hooks/useRequest";
+
 import {getReportDate} from '../../redux/reportSlice'
+
 import calendarIcon from '../../images/calendar_icon.png'
 import ellipse from '../../images/ellipse.png'
 import remove from '../../images/remove.png'
 import addIcon from '../../images/addIcon.png'
-import {currentMonthAndDay} from '../Calendar/calendarHelper'
-import {Footer} from "../Footer/Footer";
-import './reportForm.scss'
 import arrow from "../../images/right-arrow.png";
-import {useRequest} from "../../hooks/useRequest";
-import {ProfileHeader} from "../ProfileHeader/ProfileHeader";
+
+import './reportForm.scss'
+
 
 const getCreatedDate = (day) => {
   if (day) {
