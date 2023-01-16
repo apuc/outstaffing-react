@@ -70,17 +70,7 @@ export const fetchGetAnswers = createAsyncThunk(
      )
   }
 );
-// export const fetchGetQuestion = createAsyncThunk(
-//   'questions',
-//   async (uuid) => {
-//      const resp = await fetchGet({
-//           link: `${process.env.REACT_APP_API_URL}/api/question/get-questions?uuid=${uuid}`,
-//           Origin: `${process.env.REACT_APP_BASE_URL}`,
-//        }
-//      )
-//      return resp
-//   }
-// )
+
 export const fetchResultTest = createAsyncThunk(
   'result',
   async (uuid) => {
@@ -99,7 +89,7 @@ export const quizSlice = createSlice({
    reducers: {
       setQuestionnairesList: (state, action) => {
          state.dataQuestionnairesOfUser = action.payload;
-         state.passedTests = action.payload.filter(item=>item.status === 2)
+         state.passedTests = action.payload.filter(item => item.status === 2)
       },
       setSelectedTest: (state, action) => {
          state.selectedTest = action.payload

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import male from '../../images/medium_male.png'
 import rectangle from '../../images/rectangle_secondPage.png'
 import { Link } from 'react-router-dom'
-import { LEVELS, SKILLS } from '../constants/constants'
+import { LEVELS, SKILLS } from '../../constants/constants'
 import {
   selectProfiles,
   selectFilteredCandidates,

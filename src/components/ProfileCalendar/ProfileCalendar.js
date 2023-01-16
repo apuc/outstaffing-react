@@ -18,13 +18,12 @@ export const ProfileCalendar = () => {
     const [month, setMonth] = useState('');
     const [reports, setReports] = useState([]);
     const [totalHours, setTotalHours] = useState(0);
-    const [value, setValue] = useState(moment());
     const [requestDates, setRequestDates] = useState('');
 
     const {apiRequest} = useRequest();
 
     useEffect(() => {
-        setRequestDates(getReports(value))
+        setRequestDates(getReports(moment()))
     });
 
     useEffect(async () => {
@@ -69,7 +68,7 @@ export const ProfileCalendar = () => {
                     <div>
                         <Link to='/report'>
                             <button className='calendar__btn' onClick={() => {
-                                dispatch(setReportDate(value))
+                                dispatch(setReportDate(moment()))
                             }}>Заполнить отчет за день</button>
                         </Link>
                     </div>

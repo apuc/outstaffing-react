@@ -2,20 +2,15 @@ import React, {useEffect, useState} from 'react'
 import {useNavigate} from "react-router-dom"
 import {useSelector, useDispatch} from 'react-redux'
 
-import {
-  fetchGetAnswers,
-  selectAnswer,
-  selectedTest
-} from '../../../redux/quizSlice'
-
+import {useRequest} from "../../../hooks/useRequest";
 import {Progressbar} from './ProgressbarQuiz'
 import {GetOptionTask} from './GetOptionTask'
 
-import {fetchUserAnswersMany, fetchUserAnswerOne} from './../../../redux/quizSlice'
-
+import {
+  fetchUserAnswersMany, fetchUserAnswerOne, fetchGetAnswers, selectAnswer, selectedTest
+} from './../../../redux/quizSlice'
 
 import './quiz.scss'
-import {useRequest} from "../../../hooks/useRequest";
 
 export const TaskQuiz = () => {
 
@@ -38,11 +33,12 @@ export const TaskQuiz = () => {
   useEffect(() => {
     apiRequest(`/question/get-questions?uuid=${dataTest.uuid}`)
         .then((response) => {
+          console.log(response)
           setQuestions(response);
           dispatch(fetchGetAnswers(response[0].id));
           setStripValue((+index + 1) * 100 / response.length)
         })
-  }, [dispatch]);
+  }, [dispatch, apiRequest]);
 
   const nextQuestion = async (e) => {
     e.preventDefault();
@@ -70,7 +66,7 @@ export const TaskQuiz = () => {
         setCheckedValues([]);
         setInputValue('')
       } else {
-        navigate(`/quiz-result`);
+        navigate(`/quiz/result`);
         alert("Тест пройден!")
       }
 

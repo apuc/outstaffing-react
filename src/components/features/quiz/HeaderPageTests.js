@@ -6,7 +6,7 @@ import {selectedTest, selectUserInfo} from "../../../redux/quizSlice";
 
 export const HeaderPageTestsQuiz = ({isVisibilityButton}) => {
 
-   const test = useSelector(selectedTest)
+   const test = useSelector(selectedTest);
    const userInfo = useSelector(selectUserInfo);
 
    return (
@@ -23,8 +23,8 @@ export const HeaderPageTestsQuiz = ({isVisibilityButton}) => {
               </div>
            </div>
            {isVisibilityButton &&
-           <Link to={'/quiz-instruction'} className='quiz-btn quiz-btn_restriction'>Пройти</Link>}
+           <Link to={'/quiz/instruction'} className='quiz-btn quiz-btn_restriction'>Пройти</Link>}
         </div>
      </div>
    )
-}
+};

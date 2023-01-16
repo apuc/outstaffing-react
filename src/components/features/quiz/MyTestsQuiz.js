@@ -7,7 +7,7 @@ import {setSelectedTest} from "../../../redux/quizSlice";
 export const MyTestsQuiz = ({listTests}) => {
 
   const formationEndingOfScore = (score) => {
-     const lastNumber = score % 10
+     const lastNumber = score % 10;
      if(score === 11 ||score === 12 ||score === 13 ||score === 14 ){
         return 'баллов'
      }else if(lastNumber === 2 || lastNumber === 3 || lastNumber === 4 ){
@@ -17,10 +17,10 @@ export const MyTestsQuiz = ({listTests}) => {
      }else{
         return 'баллов'
      }
-  }
+  };
 
-   const dispatch = useDispatch()
-   const recordSelectedTest = (item) => dispatch(setSelectedTest(item))
+   const dispatch = useDispatch();
+   const recordSelectedTest = (item) => dispatch(setSelectedTest(item));
 
    return (
      <div className="my-tests">
@@ -35,10 +35,10 @@ export const MyTestsQuiz = ({listTests}) => {
                              {item.questionnaire_title}
                           </h3>
                           <div className="item-test__body test-data">
-                             <Link to={'/quiz-interjacent'} className='quiz-btn'
+                             <Link to={'/quiz/interjacent'} className='quiz-btn'
                                    onClick={() => recordSelectedTest(item)}>Пройти</Link>
                           </div>
-                       </article>
+                       </article>;
                     case 2:
                        return <article className="my-tests__item item-test" key={item.questionnaire_title}>
                           <h3 className="item-test__name-test">
@@ -52,7 +52,7 @@ export const MyTestsQuiz = ({listTests}) => {
                              <div className="test-data__hr"></div>
                              <div className="test-data__score quiz-text">{item.score} {formationEndingOfScore(item.score)}</div>
                           </div>
-                       </article>
+                       </article>;
                     case 3:
                        return <article className="my-tests__item item-test" key={item.questionnaire_title}>
                           <h3 className="item-test__name-test">
@@ -61,7 +61,7 @@ export const MyTestsQuiz = ({listTests}) => {
                           <div className="item-test__body test-data">
                              <div className='quiz-btn'>На проверке</div>
                           </div>
-                       </article>
+                       </article>;
                     default:
                        break
                  }
@@ -70,4 +70,4 @@ export const MyTestsQuiz = ({listTests}) => {
         </div>
      </div>
    )
-}
+};

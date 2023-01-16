@@ -42,19 +42,19 @@ const App = () => {
             <Route exact path='/report' element={<ReportPage/>}/>
             <Route path='/report/:id' element={<SingleReportPage/>}/>
 
-            <Route path='/quiz' element={<QuizPage/>}/>
-            <Route path='/quiz-interjacent' element={<InterjacentPage/>}/>
-            <Route path='/quiz-test' element={<QuizTestPage/>}/>
-            <Route path='/quiz-instruction' element={<InstructionPage/>}/>
-            <Route path='/quiz-result' element={<ResultPage/>}/>
+            <Route exact path='quiz'>
+              <Route index element={<QuizPage/>}/>
+              <Route path='interjacent' element={<InterjacentPage/>}/>
+              <Route path='test' element={<QuizTestPage/>}/>
+              <Route path='instruction' element={<InstructionPage/>}/>
+              <Route path='result' element={<ResultPage/>}/>
+            </Route>
 
-            <Route exact path='/profile' element={<Profile/>}>
+            <Route exact path='profile'>
+              <Route index element={<Profile/>}/>
               <Route exact path='calendar' element={<ProfileCalendarPage/>}/>
               <Route exact path='summary' element={<Summary/>}/>
             </Route>
-
-            {/*<Route component={() => <div>Page not found</div>} />*/}
-            {/*<Route path='*' component={() => <div>Page not found</div>}/>*/}
 
             <Route path="*" element={<Navigate to="/" replace/>}/>
           </Routes>

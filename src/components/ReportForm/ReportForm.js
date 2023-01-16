@@ -1,18 +1,16 @@
 import React, {useState} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
-import {fetchPost} from '../../server/server'
-import {useNavigate, useParams, Redirect, Link} from 'react-router-dom'
+import {useSelector} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {Loader} from '../Loader/Loader'
-import {auth} from '../../redux/outstaffingSlice'
 import {getReportDate} from '../../redux/reportSlice'
-import {getRole} from '../../redux/roleSlice'
 import calendarIcon from '../../images/calendar_icon.png'
 import ellipse from '../../images/ellipse.png'
 import remove from '../../images/remove.png'
 import addIcon from '../../images/addIcon.png'
-import {currentMonthAndDay, getReports} from '../Calendar/calendarHelper'
+import {currentMonthAndDay} from '../Calendar/calendarHelper'
 import './reportForm.scss'
 import arrow from "../../images/right-arrow.png";
+import {useRequest} from "../../hooks/useRequest";
 
 const getCreatedDate = (day) => {
   if (day) {
@@ -27,10 +25,9 @@ const getCreatedDate = (day) => {
 };
 
 const ReportForm = () => {
-  const dispatch = useDispatch();
   const reportDate = useSelector(getReportDate);
-  const role = useSelector(getRole);
 
+  const {apiRequest} = useRequest();
   const [isFetching, setIsFetching] = useState(false);
   const [reportSuccess, setReportSuccess] = useState(false);
 
@@ -48,6 +45,29 @@ const ReportForm = () => {
     if (indexRemove !== 0) {
       setInputs((prev) => prev.filter((el, index) => index !== indexRemove))
     }
+  };
+
+  const handler = () => {
+    apiRequest('/reports/create', {
+      method: 'POST',
+      body: {
+        tasks: inputs,
+        difficulties: troublesInputValue,
+        tomorrow: scheduledInputValue,
+        created_at: getCreatedDate(reportDate),
+        status: 1,
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        setReportSuccess(true);
+        setTimeout(() => setReportSuccess(false), 2000)
+      }
+      setInputs(() => []);
+      setTroublesInputValue('');
+      setScheduledInputValue('');
+      setIsFetching(false);
+      setInputs(() => [{task: '', hours_spent: '', minutes_spent: 0}]);
+    })
   };
 
   return (
@@ -149,32 +169,7 @@ const ReportForm = () => {
         <div className='row'>
           <div className='col-12'>
             <div className='report-form__footer'>
-              <button className='report-form__footer-btn' onClick={() => {
-                fetchPost({
-                  link: `${process.env.REACT_APP_API_URL}/api/reports/create`,
-                  role,
-                  body: {
-                    tasks: inputs,
-                    difficulties: troublesInputValue,
-                    tomorrow: scheduledInputValue,
-                    created_at: getCreatedDate(reportDate),
-                    status: 1,
-                  },
-                  logout: () => dispatch(auth(false))
-                }).then((res) =>
-                    res.json().then((resJSON) => {
-                      if (res.status === 200) {
-                        setReportSuccess(true);
-                        setTimeout(() => setReportSuccess(false), 2000)
-                      }
-                      setInputs(() => []);
-                      setTroublesInputValue('');
-                      setScheduledInputValue('');
-                      setIsFetching(false);
-                      setInputs(() => [{task: '', hours_spent: '', minutes_spent: 0}]);
-                    })
-                )
-              }}>
+              <button className='report-form__footer-btn' onClick={() => handler()}>
                 {isFetching ? <Loader/> : 'Отправить'}
               </button>
               <p className='report-form__footer-text'>

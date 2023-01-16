@@ -8,7 +8,7 @@ import {
 import SVG from 'react-inlinesvg'
 import {WithLogout} from '../hoc/withLogout'
 import Form from '../components/Form/Form'
-import {LEVELS, SKILLS} from '../components/constants/constants'
+import {LEVELS, SKILLS} from '../constants/constants'
 import {Footer} from '../components/Footer/Footer'
 
 import arrow from '../images/right-arrow.png'

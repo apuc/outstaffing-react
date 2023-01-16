@@ -32,7 +32,7 @@ export const Profile = () => {
             </div>
           </div>
           <div className='profile__items'>
-            <Link to={'/calendar'} className='item'>
+            <Link to={'/profile/calendar'} className='item'>
               <div className='item__about'>
                 <img src={reportsIcon} alt='report'/>
                 <h3>Ваша отчетность</h3>
@@ -44,7 +44,7 @@ export const Profile = () => {
                 </div>
               </div>
             </Link>
-            <Link to={'/summary'} className='item'>
+            <Link to={'/profile/summary'} className='item'>
               <div className='item__about'>
                 <img src={summaryIcon} alt='summary'/>
                 <h3>Данные и резюме</h3>

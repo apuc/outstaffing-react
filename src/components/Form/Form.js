@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { fetchPost } from '../../server/server'
-import { auth } from '../../redux/outstaffingSlice'
 import {useParams, useNavigate} from 'react-router-dom'
 import { Loader } from '../Loader/Loader'
 import PhoneInput from 'react-phone-input-2'
@@ -9,59 +7,57 @@ import './form.scss'
 
 import { withSwalInstance } from 'sweetalert2-react'
 import swal from 'sweetalert2'
-import { useSelector, useDispatch } from 'react-redux'
-import { getRole } from '../../redux/roleSlice'
+import {useRequest} from "../../hooks/useRequest";
 
-const SweetAlert = withSwalInstance(swal)
+
+const SweetAlert = withSwalInstance(swal);
 
 const Form = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const role = useSelector(getRole)
-  const urlParams = useParams()
-  const [status, setStatus] = useState(null)
+
+  const navigate = useNavigate();
+
+  const urlParams = useParams();
+  const [status, setStatus] = useState(null);
   const [data, setData] = useState({
     email: '',
     phone: '',
     comment: ''
-  })
-  const [isFetching, setIsFetching] = useState(false)
+  });
+  const [isFetching, setIsFetching] = useState(false);
+
+  const {apiRequest} = useRequest();
 
   const handleChange = (e) => {
-    const { id, value } = e.target
+    const { id, value } = e.target;
 
     setData((prev) => ({
       ...prev,
       [id]: value
     }))
-  }
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    setIsFetching(true)
-    const formData = new FormData()
-    formData.append('profile_id', urlParams.id)
-    formData.append('email', data.email)
-    formData.append('phone', data.phone)
-    formData.append('comment', data.comment)
+    setIsFetching(true);
+    const formData = new FormData();
+    formData.append('profile_id', urlParams.id);
+    formData.append('email', data.email);
+    formData.append('phone', data.phone);
+    formData.append('comment', data.comment);
 
-    fetchPost({
-      link: `${process.env.REACT_APP_API_URL}/api/interview-request/create-interview-request`,
+    apiRequest('/interview-request/create-interview-request',{
+      method: 'POST',
       params: {
         profile_id: urlParams.id,
         ...data
-      },
-
-      role,
-      logout: () => dispatch(auth(false))
-    }).then((res) =>
-      res.json().then((resJSON) => {
-        setStatus(resJSON)
-        setIsFetching(false)
-      })
+      }
+    }).then((res) => {
+          setStatus(res);
+          setIsFetching(false)
+        }
     )
-  }
+  };
 
   return (
     <>
@@ -135,6 +131,6 @@ const Form = () => {
       </div>
     </>
   )
-}
+};
 
 export default Form

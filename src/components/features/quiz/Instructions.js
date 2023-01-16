@@ -1,5 +1,4 @@
 import {Link} from 'react-router-dom'
-import {CodeSnippetlighter} from '../../../pages/CodeSnippetPage'
 import comment from './../../../images/comment.jpg'
 import './quiz.scss'
 import {useEffect, useState} from "react";
@@ -19,7 +18,6 @@ export const Instruction = () => {
 
      apiRequest('/user-questionnaire/get-question-number', {
            params: {user_questionnaire_uuid: test.uuid},
-
          }
      ).then((res)=> setCountQuestions(res.question_number))
 
@@ -39,7 +37,7 @@ export const Instruction = () => {
                    e
                    lit, sed do eiusmod tempo
                 </div>
-                <Link to="/quiz-test" className='instruction__btn quiz-btn quiz-btn_restriction'>Далее</Link>
+                <Link to="/quiz/test" className='instruction__btn quiz-btn quiz-btn_restriction'>Далее</Link>
                 <div className="instruction__info">
                    <div className="instruction__icon">
                       <img src={comment} alt=""/>
