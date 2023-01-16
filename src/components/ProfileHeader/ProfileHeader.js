@@ -53,11 +53,11 @@ export const ProfileHeader = () => {
         <div className='profileHeader__info'>
           <div className='profileHeader__container'>
             <nav className='profileHeader__nav'>
-              <NavLink to={'/summary'}>Резюме</NavLink>
-              <NavLink to={'/profile'}>Отчетность</NavLink>
-              <NavLink to={'/profile'}>Трекер</NavLink>
-              <NavLink to={'/profile'}>Выплаты</NavLink>
-              <NavLink to={'/profile'}>Настройки</NavLink>
+              <NavLink end to={'/profile/summary'}>Резюме</NavLink>
+              <NavLink end to={'/profile'}>Отчетность</NavLink>
+              <NavLink end to={'/'}>Трекер</NavLink>
+              <NavLink end to={'/'}>Выплаты</NavLink>
+              <NavLink end to={'/'}>Настройки</NavLink>
             </nav>
 
             <div className='profileHeader__personalInfo'>

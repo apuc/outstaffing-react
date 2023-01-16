@@ -59,7 +59,7 @@ export const ProfileCalendar = () => {
                         <img src={profileInfo.photo} className='summary__avatar'  alt='avatar'/>
                         <p className='summary__name'>{profileInfo.fio} {profileInfo.specification}</p>
                     </div>
-                    <Link to='/profile/report'>
+                    <Link to='/report'>
                         <button className="calendar__btn">Заполнить отчет за день</button>
                     </Link>
                 </div>

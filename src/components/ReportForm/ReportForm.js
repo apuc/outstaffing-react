@@ -85,7 +85,7 @@ const ReportForm = () => {
           <h2 className='summary__title'>Ваши отчеты - <span>добавить отчет</span></h2>
           <div>
             <div className='report__head'>
-              <Link className='calendar__back' to={`/profile/profilecalendar`}>
+              <Link className='calendar__back' to={`/profile/calendar`}>
                 <img src={arrow} alt=''/><p>Вернуться</p>
               </Link>
             </div>
