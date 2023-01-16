@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 import { Link } from 'react-router-dom'
 import moment from "moment";
@@ -11,11 +11,12 @@ import {ProfileHeader} from "../ProfileHeader/ProfileHeader";
 
 import {useRequest} from "../../hooks/useRequest";
 import { getProfileInfo } from '../../redux/outstaffingSlice'
+import {setReportDate} from "../../redux/reportSlice";
 
 import './profileCalendar.scss'
 
-
 export const ProfileCalendar = () => {
+    const dispatch = useDispatch();
     const profileInfo = useSelector(getProfileInfo);
     const [month, setMonth] = useState('');
     const [reports, setReports] = useState([]);
@@ -60,7 +61,9 @@ export const ProfileCalendar = () => {
                         <p className='summary__name'>{profileInfo.fio} {profileInfo.specification}</p>
                     </div>
                     <Link to='/report'>
-                        <button className="calendar__btn">Заполнить отчет за день</button>
+                        <button className="calendar__btn" onClick={() => {
+                            dispatch(setReportDate(''))
+                        }}>Заполнить отчет за день</button>
                     </Link>
                 </div>
                 <div className='row'>
