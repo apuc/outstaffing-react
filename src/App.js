@@ -4,13 +4,13 @@ import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom
 
 import AuthForPartners from "./pages/AuthForPartners/AuthForPartners";
 import AuthForDevelopers from "./pages/AuthForDevelopers/AuthForDevelopers";
-import HomePage from './pages/HomePage'
+import Home from "./components/Home/Home";
 import CandidatePage from './pages/CandidatePage'
-import CalendarPage from './pages/CalendarPage'
-import ReportPage from './pages/ReportFormPage.js'
-import ProfileCalendarPage from './pages/ProfileCalendarPage.js'
-import FormPage from './pages/FormPage.js'
-import SingleReportPage from './pages/SingleReportPage'
+import Calendar from "./components/Calendar/Calendar";
+import ReportForm from "./components/ReportForm/ReportForm";
+import {ProfileCalendar} from "./components/ProfileCalendar/ProfileCalendar";
+import FormPage from './pages/FormPage/FormPage.js'
+import SingleReportPage from './pages/SingleReportPage/SingleReportPage'
 import {QuizPage} from './pages/quiz/QuizPage'
 import {InterjacentPage} from './pages/quiz/InterjacentPage'
 import {QuizTestPage} from './pages/quiz/QuizTestPage'
@@ -23,23 +23,24 @@ import './fonts/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
+
 const App = () => {
   return (
       <>
-        <h1>IT Аутстаффинг в России</h1>
         <Router>
 
           <Routes>
-            <Route exact path='/' element={<HomePage/>}/>
+
+            <Route exact path='/' element={<Home/>}/>
 
             <Route exact path='/authdev' element={<AuthForDevelopers/>}/>
             <Route exact path='/auth' element={<AuthForPartners/>}/>
 
             <Route exact path='/candidate/:id' element={<CandidatePage/>}/>
             <Route exact path='/candidate/:id/form' element={<FormPage/>}/>
-            <Route path='/:userId/calendar' element={<CalendarPage/>}/>
+            <Route path='/:userId/calendar' element={<Calendar/>}/>
 
-            <Route exact path='/report' element={<ReportPage/>}/>
+            <Route exact path='/report' element={<ReportForm/>}/>
             <Route path='/report/:id' element={<SingleReportPage/>}/>
 
             <Route exact path='quiz'>
@@ -52,7 +53,7 @@ const App = () => {
 
             <Route exact path='profile'>
               <Route index element={<Profile/>}/>
-              <Route exact path='calendar' element={<ProfileCalendarPage/>}/>
+              <Route exact path='calendar' element={<ProfileCalendar/>}/>
               <Route exact path='summary' element={<Summary/>}/>
             </Route>
 

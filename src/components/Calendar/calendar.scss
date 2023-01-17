@@ -2,6 +2,17 @@
   margin-bottom: 40px;
   font-family: 'LabGrotesque', sans-serif;
 
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    h2 {
+      flex: 1;
+    }
+  }
+
   &__profile {
     color: #282828;
     font-size: 3.4em;
@@ -45,8 +56,6 @@
       position: absolute;
       width: 132px;
       height: 132px;
-      left: -40px;
-      top: -10px;
     }
   }
 

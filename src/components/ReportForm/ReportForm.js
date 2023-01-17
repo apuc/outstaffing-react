@@ -58,7 +58,7 @@ const ReportForm = () => {
   const handler = () => {
     apiRequest('/reports/create', {
       method: 'POST',
-      body: {
+      data: {
         tasks: inputs,
         difficulties: troublesInputValue,
         tomorrow: scheduledInputValue,

@@ -22,7 +22,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
       <section className='description'>
         <div className='container'>
           <div className='description__wrapper'>
-            {candidatesListArr && candidatesListArr.length > 0 ? (
+            {candidatesListArr && Array.isArray(candidatesListArr) && candidatesListArr.length > 0 ? (
               candidatesListArr.map((el) => (
                 <div className='row' key={el.id}>
                   <div className='col-2 col-xs-12'>
@@ -56,7 +56,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
                   <div className='col-xl-2'></div>
                   <div className='col-12 col-xl-6'>
                     <ul className='description__list'>
-                      {el.skillValues.map((e) => (
+                      {Array.isArray(el?.skillValues) && el.skillValues.map((e) => (
                         <li key={e.id} className='description__list-item'>
                           {e.skill.name}
                         </li>
@@ -104,7 +104,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
     <section className='description'>
       <div className='container'>
         <div className='description__wrapper'>
-          {filteredListArr && filteredListArr.length > 0
+          {filteredListArr && Array.isArray(filteredListArr) && filteredListArr.length > 0
             ? filteredListArr.map((el) => (
                 <div className='row' key={el.id}>
                   <div className='col-2'>
@@ -139,7 +139,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
                   <div className='col-xl-2'></div>
                   <div className='col-12 col-xl-6'>
                     <ul className='description__list'>
-                      {el.skillValues.map((e) => (
+                      {Array.isArray(el?.skillValues) &&  el.skillValues?.map((e) => (
                         <li key={e.id} className='description__list-item'>
                           {e.skill.name}
                         </li>
@@ -155,7 +155,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
                 </div>
               ))
             : /* : <div className={style.description__empty}>В данный момент в категории нет свободных специалистов</div> } */
-              candidatesListArr &&
+              candidatesListArr && Array.isArray(candidatesListArr) &&
               candidatesListArr.map((el) => (
                 <div className='row' key={el.id}>
                   <div className='col-2'>
@@ -186,7 +186,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
                   <div className='col-xl-2'></div>
                   <div className='col-12 col-xl-6'>
                     <ul className='description__list'>
-                      {el.skillValues.map((e) => (
+                      {Array.isArray(el?.skillValues) && el.skillValues?.map((e) => (
                         <li key={e.id} className='description__list-item'>
                           {e.skill.name}
                         </li>
@@ -207,8 +207,7 @@ const Description = ({ onLoadMore, isLoadingMore }) => {
           <div className='col-12'>
             <div className='description__footer'>
               <div className='description__footer-btn'>
-                {
-                candidatesListArr &&
+                {candidatesListArr &&
                 filteredListArr.length === 0 ? (
                   <button onClick={() => onLoadMore(2)}>Загрузить еще</button>
                 ) : null}

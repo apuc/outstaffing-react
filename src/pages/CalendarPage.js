@@ -4,8 +4,8 @@ import { WithLogout } from '../hoc/withLogout';
 import Calendar from '../components/Calendar/Calendar';
 
 const CalendarPage = () => {
-  const navigate = useNavigate();
-  return <WithLogout><Calendar onSelect={() => { navigate('/report/0') }} /></WithLogout>;
+
+  return <WithLogout><Calendar onSelect={} /></WithLogout>;
 };
 
 export default CalendarPage;
