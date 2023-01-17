@@ -14,18 +14,17 @@ export const LogoutButton = () => {
   const navigate = useNavigate();
 
   return (
-      <div className='logout-button'>
-        <button
-            onClick={() => {
-              setIsLoggingOut(true);
-              localStorage.clear();
-              dispatch(auth(false));
-              setIsLoggingOut(false);
-              navigate(userRole === 'ROLE_DEV' ? '/authdev' : '/auth')
-            }}
-        >
-          {isLoggingOut ? <Loader/> : 'Выйти'}{' '}
-        </button>
-      </div>
+      <button
+          className='logout-button'
+          onClick={() => {
+            setIsLoggingOut(true);
+            localStorage.clear();
+            dispatch(auth(false));
+            setIsLoggingOut(false);
+            navigate(userRole === 'ROLE_DEV' ? '/authdev' : '/auth')
+          }}
+      >
+        {isLoggingOut ? <Loader/> : 'Выйти'}
+      </button>
   )
 };

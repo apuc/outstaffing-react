@@ -1,15 +1,14 @@
 .single-report-page {
-  padding-top: 4.6rem;
-
+  padding: 4.6rem 20px 0;
+  font-family: 'GT Eesti Pro Display', sans-serif;
   &__back {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-
+    cursor: pointer;
     &-text {
       margin-left: 3.1rem;
       color: #000000;
-      font-family: 'GT Eesti Pro Display';
       font-size: 18px;
       font-weight: 300;
       letter-spacing: normal;
@@ -26,7 +25,6 @@
 
     &-text {
       color: #282828;
-      font-family: 'GT Eesti Pro Display';
       font-size: 33px;
       font-weight: 700;
       line-height: 48.74px;
@@ -52,7 +50,6 @@
         border-radius: 5px;
         border: 1px solid #c4c4c4;
         background-color: #f0f7e0;
-
         display: flex;
         justify-content: center;
         align-items: center;
@@ -63,7 +60,6 @@
           margin-left: 10px;
           margin-bottom: 0;
           color: #000000;
-          font-family: "GT Eesti Pro Display";
           font-size: 13px;
           font-weight: 300;
           font-style: normal;
@@ -104,7 +100,6 @@
       align-items: center;
       h3 {
         color: #18586e;
-        font-family: 'GT Eesti Pro Display';
         font-size: 20px;
         font-weight: 500;
         letter-spacing: normal;
@@ -117,7 +112,6 @@
       margin-top: 2.4rem;
       width: 580px;
       color: #000000;
-      font-family: 'GT Eesti Pro Display';
       font-size: 15px;
       font-weight: 400;
       letter-spacing: normal;

@@ -1,15 +1,17 @@
 import React from 'react'
-import { WithLogout } from '../hoc/withLogout'
-import arrowLeft from '../images/right-arrow.png'
+import { WithLogout } from '../../hoc/withLogout'
+import arrowLeft from '../../images/right-arrow.png'
 
 import SVG from 'react-inlinesvg'
 
-import dateArrowIcon from '../images/dateArrow.svg'
-import calendarIcon from '../images/calendar.svg'
+import dateArrowIcon from '../../images/dateArrow.svg'
+import calendarIcon from '../../images/calendar.svg'
 
-import { TaskItem } from '../components/TaskItem/TaskItem'
+import { TaskItem } from '../../components/TaskItem/TaskItem'
 
 import './singleReportPage.scss'
+import {useNavigate} from "react-router";
+import {LogoutButton} from "../../components/LogoutButton/LogoutButton";
 
 const tasks = [
   {
@@ -25,10 +27,13 @@ const tasks = [
 ];
 
 const SingleReportPage = () => {
+
+  const navigate= useNavigate();
+
   return (
-    <WithLogout>
+
       <div className='single-report-page'>
-        <div className='single-report-page__back'>
+        <div onClick={()=> {navigate(-1)}} className='single-report-page__back'>
           <div className='single-report-page__back-arrow'>
             <img src={arrowLeft} alt='arrowLeft'/>
           </div>
@@ -100,8 +105,9 @@ const SingleReportPage = () => {
             <div className='single-report-page__hours-text'></div>
           </div>
         </div>
+        <LogoutButton />
       </div>
-    </WithLogout>
+
   )
 };
 

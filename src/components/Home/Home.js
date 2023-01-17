@@ -8,6 +8,7 @@ import {Footer} from '../Footer/Footer'
 import {profiles, tags} from '../../redux/outstaffingSlice'
 
 import {useRequest} from "../../hooks/useRequest";
+import {LogoutButton} from "../LogoutButton/LogoutButton";
 
 
 const Home = () => {
@@ -53,11 +54,12 @@ const Home = () => {
   };
 
   return (
-      <>
+      <div className='container'>
+
         <Outstaffing/>
         <Description onLoadMore={loadMore} isLoadingMore={isLoadingMore}/>
         <Footer/>
-      </>
+      </div>
   )
 };
 

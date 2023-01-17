@@ -1,40 +1,27 @@
 .logout-button {
-  position: absolute;
-  top: 70px;
-  right: 2.5rem;
-  z-index: 100;
 
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    width: 131px;
-    height: 40px;
-    border-radius: 10px;
-    font-family: 'Muller';
-    font-size: 1.6em;
-    letter-spacing: 0.8px;
-    background-color: #6aaf5c;
-    color: #ffffff;
-    border: 3px solid #6aaf5c;
-    font-family: 'Muller';
-    text-align: center;
-  }
+  position: relative;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  width: 131px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 1.6em;
+  letter-spacing: 0.8px;
+  background-color: #6aaf5c;
+  color: #ffffff;
+  border: 3px solid #6aaf5c;
+  font-family: 'Muller', sans-serif;
+  text-align: center;
 
   &:hover {
-    button {
-      background-color: #ffffff;
-      color: #6aaf5c;
-      border: 3px solid #6aaf5c;
-      box-shadow: 3px 2px 5px rgba(82, 151, 34, 0.21);
-      transition: 0.3s;
-    }
-  }
-}
-
-@media (max-width: 1199px) {
-  .logout-button {
-    top: 16px !important;
+    background-color: #ffffff;
+    color: #6aaf5c;
+    border: 3px solid #6aaf5c;
+    box-shadow: 3px 2px 5px rgba(82, 151, 34, 0.21);
+    transition: 0.3s;
   }
 }
