@@ -1,21 +1,23 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {withSwalInstance} from 'sweetalert2-react'
 import swal from 'sweetalert2'
 
 import {Loader} from '../Loader/Loader'
+import ErrorBoundary from "../../hoc/ErrorBoundary";
 
-import {auth, setUserInfo} from '../../redux/outstaffingSlice'
+import {auth, selectAuth, setUserInfo} from '../../redux/outstaffingSlice'
 import {loading} from '../../redux/loaderSlice'
 import {setRole} from '../../redux/roleSlice'
 
 import {selectIsLoading} from '../../redux/loaderSlice'
 
+import {useRequest} from "../../hooks/useRequest";
+
 import ellipse from '../../images/ellipse.png'
 
 import './authBox.scss'
-import {useRequest} from "../../hooks/useRequest";
 
 
 const SweetAlert = withSwalInstance(swal);
@@ -23,13 +25,20 @@ const SweetAlert = withSwalInstance(swal);
 export const AuthBox = ({title, altTitle, roleChangeLink}) => {
   const dispatch = useDispatch();
 
-  const {apiRequest} = useRequest();
+  const navigate = useNavigate();
 
+  const isAuth = useSelector(selectAuth);
   const isLoading = useSelector(selectIsLoading);
+
+  const {apiRequest} = useRequest();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+
+  if (isAuth) {
+    navigate('/')
+  }
 
   const submitHandler = () => {
 
@@ -97,12 +106,14 @@ export const AuthBox = ({title, altTitle, roleChangeLink}) => {
 
           {error && (
               <div className='auth-box__form-error'>
-                <SweetAlert
-                    show={!!error}
-                    title='Ошибка'
-                    text={error}
-                    onConfirm={() => setError(null)}
-                />
+                <ErrorBoundary>
+                  <SweetAlert
+                      show={!!error}
+                      title='Ошибка'
+                      text={error}
+                      onConfirm={() => setError(null)}
+                  />
+                </ErrorBoundary>
               </div>
           )}
 
@@ -124,6 +135,7 @@ export const AuthBox = ({title, altTitle, roleChangeLink}) => {
             </Link>
           </div>
         </form>
+
       </div>
   )
 };

@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 
 import OutstaffingBlock from '../OutstaffingBlock/OutstaffingBlock'
 import TagSelect from '../Select/TagSelect'
+import {Header} from "../Header/Header";
 
 import {selectTags, getPositionId, setPositionId} from '../../redux/outstaffingSlice'
 
@@ -11,7 +12,8 @@ import back from '../../images/back_end.png'
 import design from '../../images/design.png'
 
 import './outstaffing.scss'
-import {LogoutButton} from "../LogoutButton/LogoutButton";
+
+
 
 const createSelectPositionHandler =
     ({positionId, setPositionId, dispatch}) =>
@@ -36,12 +38,6 @@ const Outstaffing = () => {
   return (
       <>
         <section className='outstaffing'>
-          <div className='outstaffing__title'>
-            <h2>
-              <span>Аутстаффинг</span> it-персонала
-            </h2>
-            <LogoutButton/>
-          </div>
           <div className='row'>
             <div className='col-12 col-xl-4'>
               <OutstaffingBlock

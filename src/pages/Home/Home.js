@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 
-import Outstaffing from '../Outstaffing/Outstaffing'
-import Description from '../Description/Description'
-import {Footer} from '../Footer/Footer'
+import Outstaffing from '../../components/Outstaffing/Outstaffing'
+import Description from '../../components/Description/Description'
+import {Footer} from '../../components/Footer/Footer'
 
 import {profiles, tags} from '../../redux/outstaffingSlice'
 
 import {useRequest} from "../../hooks/useRequest";
-import {LogoutButton} from "../LogoutButton/LogoutButton";
+import {LogoutButton} from "../../components/LogoutButton/LogoutButton";
+import {Header} from "../../components/Header/Header";
 
 
 const Home = () => {
@@ -30,8 +31,7 @@ const Home = () => {
       setIsLoadingMore(false)
     });
 
-    apiRequest('/skills/skills-on-main-page', {
-    }).then((skills) => {
+    apiRequest('/skills/skills-on-main-page', {}).then((skills) => {
       if (!skills) {
         return []
       }
@@ -54,12 +54,14 @@ const Home = () => {
   };
 
   return (
-      <div className='container'>
-
-        <Outstaffing/>
-        <Description onLoadMore={loadMore} isLoadingMore={isLoadingMore}/>
-        <Footer/>
-      </div>
+      <>
+        <Header/>
+        <div className='container'>
+          <Outstaffing/>
+          <Description onLoadMore={loadMore} isLoadingMore={isLoadingMore}/>
+          <Footer/>
+        </div>
+      </>
   )
 };
 
