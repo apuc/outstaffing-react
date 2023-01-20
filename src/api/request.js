@@ -31,7 +31,7 @@ export const apiRequest = (url, {
       })
       .then(response => new Promise(resolve => {
         if (response.data.redirect || response.status === 401) {
-          window.location.reduce('/');
+          window.location.replace('/');
           localStorage.clear();
           // dispatch(auth(false));
         }

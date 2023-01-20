@@ -11,7 +11,7 @@ import {
   setPositionId
 } from '../../redux/outstaffingSlice'
 
-import style from './TagSelect.css'
+import './TagSelect.css'
 
 
 const TagSelect = () => {
@@ -43,20 +43,20 @@ const TagSelect = () => {
 
   return (
       <>
-        <section className={style?.search}>
+        <section className='search'>
           <div className='row'>
             <div className='col-12'>
-              <h2 className={style?.search__title}>
+              <h2 className='search__title'>
                 Найти специалиста по навыкам
               </h2>
-              <div className={style?.search__box}>
+              <div className='search__box'>
                 <Select
                     value={itemsArr}
-                    onChange={(value) => {console.log(value) ;return dispatch(selectedItems(value))}}
+                    onChange={(value) => dispatch(selectedItems(value))}
                     isMulti
                     name='tags'
-                    className={style?.select}
-                    classNamePrefix={style?.select}
+                    className='select'
+                    classNamePrefix='select'
                     options={
                       tagsArr &&
                       tagsArr.flat().map((item) => {
@@ -71,7 +71,7 @@ const TagSelect = () => {
                 <button
                     onClick={() => handleSubmit({dispatch, setSearchLoading})}
                     type='submit'
-                    className={style?.search__submit}
+                    className='search__submit'
                 >
                   {searchLoading ? <Loader width={30} height={30}/> : 'Поиск'}
                 </button>
