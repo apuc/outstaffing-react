@@ -11,7 +11,7 @@ import {
   setPositionId
 } from '../../redux/outstaffingSlice'
 
-import style from './TagSelect.module.css'
+import style from './TagSelect.css'
 
 
 const TagSelect = () => {
