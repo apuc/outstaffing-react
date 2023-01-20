@@ -7,7 +7,7 @@ import {
   filteredCandidates,
 } from '../../redux/outstaffingSlice'
 
-import {useRequest} from "../../hooks/useRequest";
+import {apiRequest} from "../../api/request";
 
 import './outstaffingBlock.scss'
 
@@ -57,7 +57,6 @@ const OutstaffingBlock = (
 
   const itemsArr = useSelector(selectItems);
 
-  const {apiRequest} = useRequest();
 
   const handleBlockClick = (item, id) => {
     if (!itemsArr.find((el) => item === el.value)) {

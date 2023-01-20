@@ -8,7 +8,7 @@ import {Footer} from '../Footer/Footer'
 
 import {currentCandidate, selectCurrentCandidate,} from '../../redux/outstaffingSlice'
 
-import {useRequest} from "../../hooks/useRequest";
+import {apiRequest} from "../../api/request";
 import {createMarkup} from "../../helper";
 
 import arrow from '../../images/right-arrow.png'
@@ -33,7 +33,7 @@ const Candidate = () => {
 
   const [activeSnippet, setActiveSnippet] = useState(true);
 
-  const {apiRequest} = useRequest();
+
 
   useEffect(() => {
     window.scrollTo(0, 0)

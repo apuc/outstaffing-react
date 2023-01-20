@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchResultTest, selectedTest, selectResult} from "../../../redux/quizSlice";
-import {useRequest} from "../../../hooks/useRequest";
+import {useRequest} from "../../../HOOks/useRequest";
+import {apiRequest} from "../../../api/request";
 
 
 export const Results = () => {
@@ -9,7 +10,6 @@ export const Results = () => {
   const test = useSelector(selectedTest);
   const [maxScore, setMaxScore] = useState('');
   const dispatch = useDispatch();
-  const {apiRequest} = useRequest();
 
   useEffect(() => {
     dispatch(fetchResultTest(test.uuid));

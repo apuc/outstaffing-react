@@ -7,9 +7,10 @@ import {Footer} from '../../components/Footer/Footer'
 
 import {profiles, tags} from '../../redux/outstaffingSlice'
 
-import {useRequest} from "../../hooks/useRequest";
+import {useRequest} from "../../HOOks/useRequest";
 import {LogoutButton} from "../../components/LogoutButton/LogoutButton";
 import {Header} from "../../components/Header/Header";
+import {apiRequest} from "../../api/request";
 
 
 const Home = () => {
@@ -18,8 +19,6 @@ const Home = () => {
   const [index, setIndex] = useState(4);
 
   const dispatch = useDispatch();
-
-  const {apiRequest} = useRequest();
 
   useEffect(() => {
     setIsLoadingMore(true);

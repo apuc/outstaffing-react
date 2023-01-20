@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import Select from 'react-select'
 import {Loader} from '../Loader/Loader'
-import {useRequest} from "../../hooks/useRequest";
+import {apiRequest} from "../../api/request";
 import {
   selectedItems,
   selectItems,
@@ -19,7 +19,6 @@ const TagSelect = () => {
   const [searchLoading, setSearchLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const {apiRequest} = useRequest();
 
   const itemsArr = useSelector(selectItems);
   const tagsArr = useSelector(selectTags);

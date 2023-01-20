@@ -3,8 +3,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useParams, useNavigate} from 'react-router-dom'
 import SVG from 'react-inlinesvg'
 
-import {useRequest} from "../../hooks/useRequest";
-import {WithLogout} from '../../hoc/withLogout'
+import {useRequest} from "../../HOOks/useRequest";
+import {WithLogout} from '../../HOC/withLogout'
 
 import Form from '../../components/Form/Form'
 import {Footer} from '../../components/Footer/Footer'
@@ -18,6 +18,7 @@ import {LEVELS, SKILLS} from '../../constants/constants'
 import {currentCandidate, selectCurrentCandidate} from '../../redux/outstaffingSlice'
 
 import './formPage.scss'
+import {apiRequest} from "../../api/request";
 
 
 
@@ -29,7 +30,6 @@ const FormPage = () => {
   const candidate = useSelector(selectCurrentCandidate);
 
 
-  const {apiRequest} = useRequest();
 
   const goBack = () => {
     navigate(-1)

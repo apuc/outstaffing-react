@@ -35,3 +35,6 @@ export const getToken = () => {
 };
 
 export const urlHasParams = (url) => url.indexOf('?') > 0 ? `${url}&${window.location.search.substr(1)}` : `${url}${window.location.search}`;
+
+
+export const urlForLocal = (url) => process.env.NODE_ENV === 'development' ? `https://itguild.info${url}` : url;

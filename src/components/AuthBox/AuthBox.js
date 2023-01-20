@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {withSwalInstance} from 'sweetalert2-react'
 import swal from 'sweetalert2'
 
 import {Loader} from '../Loader/Loader'
-import ErrorBoundary from "../../hoc/ErrorBoundary";
+import ErrorBoundary from "../../HOC/ErrorBoundary";
 
 import {auth, selectAuth, setUserInfo} from '../../redux/outstaffingSlice'
 import {loading} from '../../redux/loaderSlice'
@@ -13,7 +13,7 @@ import {setRole} from '../../redux/roleSlice'
 
 import {selectIsLoading} from '../../redux/loaderSlice'
 
-import {useRequest} from "../../hooks/useRequest";
+import {apiRequest} from "../../api/request";
 
 import ellipse from '../../images/ellipse.png'
 
@@ -30,7 +30,6 @@ export const AuthBox = ({title, altTitle, roleChangeLink}) => {
   const isAuth = useSelector(selectAuth);
   const isLoading = useSelector(selectIsLoading);
 
-  const {apiRequest} = useRequest();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -39,6 +38,12 @@ export const AuthBox = ({title, altTitle, roleChangeLink}) => {
   if (isAuth) {
     navigate('/')
   }
+
+  useEffect(()=> {
+    if (!localStorage.getItem('auth_token')) {
+      dispatch(auth(false))
+    }
+  }, []);
 
   const submitHandler = () => {
 

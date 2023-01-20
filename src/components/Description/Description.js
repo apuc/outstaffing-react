@@ -3,10 +3,12 @@ import {useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 import {Loader} from '../Loader/Loader'
-import ErrorBoundary from "../../hoc/ErrorBoundary";
+import ErrorBoundary from "../../HOC/ErrorBoundary";
 
 import {LEVELS, SKILLS} from '../../constants/constants'
 import {selectProfiles, selectFilteredCandidates,} from '../../redux/outstaffingSlice'
+
+import {urlForLocal} from '../../helper'
 
 import male from '../../images/medium_male.png'
 import rectangle from '../../images/rectangle_secondPage.png'
@@ -20,6 +22,7 @@ const Description = ({onLoadMore, isLoadingMore}) => {
   const filteredListArr = useSelector(selectFilteredCandidates);
 
 
+
   if (!filteredListArr) {
     return (
         <section className='description'>
@@ -30,7 +33,7 @@ const Description = ({onLoadMore, isLoadingMore}) => {
                     candidatesListArr.map((el) => (
                         <div className='row' key={el.id}>
                           <div className='col-2 col-xs-12'>
-                            <img className='description__img' src={el.photo} alt=''/>
+                            <img className='description__img' src={urlForLocal(el.photo)} alt=''/>
                           </div>
                           <div className='col-12 col-xl-6'>
                             <h3 className='description__title'>
@@ -114,7 +117,7 @@ const Description = ({onLoadMore, isLoadingMore}) => {
                   ? filteredListArr.map((el) => (
                       <div className='row' key={el.id}>
                         <div className='col-2'>
-                          <img className='description__img' src={el.photo} alt=''/>
+                          <img className='description__img' src={()=>urlForLocal(el?.photo)} alt=''/>
                         </div>
                         <div className='col-12 col-xl-6'>
                           <h3 className='description__title'>

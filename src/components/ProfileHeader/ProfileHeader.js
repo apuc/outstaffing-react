@@ -3,21 +3,21 @@ import {useNavigate, NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
 import {Loader} from '../Loader/Loader'
-
+import {apiRequest} from "../../api/request";
 import {auth, getProfileInfo, setProfileInfo} from "../../redux/outstaffingSlice";
 import {getRole} from "../../redux/roleSlice";
 
-
+import {urlForLocal} from "../../helper";
 
 import './profileHeader.scss'
-import {useRequest} from "../../hooks/useRequest";
+
+
 
 
 export const ProfileHeader = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const {apiRequest} = useRequest();
 
   const userRole = useSelector(getRole);
   const profileInfo = useSelector(getProfileInfo);
@@ -61,8 +61,8 @@ export const ProfileHeader = () => {
             </nav>
 
             <div className='profileHeader__personalInfo'>
-              <h3 className='profileHeader__personalInfoName'>{profileInfo.fio}</h3>
-              <img src={profileInfo.photo} className='profileHeader__personalInfoAvatar' alt='avatar'/>
+              <h3 className='profileHeader__personalInfoName'>{profileInfo?.fio}</h3>
+              <img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : ""} className='profileHeader__personalInfoAvatar' alt='avatar'/>
             </div>
           </div>
         </div>

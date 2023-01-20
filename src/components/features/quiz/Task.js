@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useNavigate} from "react-router-dom"
 import {useSelector, useDispatch} from 'react-redux'
 
-import {useRequest} from "../../../hooks/useRequest";
+import {useRequest} from "../../../HOOks/useRequest";
 import {Progressbar} from './ProgressbarQuiz'
 import {GetOptionTask} from './GetOptionTask'
 
@@ -11,6 +11,7 @@ import {
 } from './../../../redux/quizSlice'
 
 import './quiz.scss'
+import {apiRequest} from "../../../api/request";
 
 export const TaskQuiz = () => {
 
@@ -26,7 +27,6 @@ export const TaskQuiz = () => {
   const [inputValue, setInputValue] = useState('');
   const [questions, setQuestions] = useState([]);
 
-  const {apiRequest} = useRequest();
 
   const id = localStorage.getItem('id');
 

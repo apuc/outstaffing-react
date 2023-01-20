@@ -6,9 +6,9 @@ import {BookkeepingFormField} from "../BookkeepingFormField/BookkeepingFormField
 import {BookkepingSelect} from '../BookkepingSelect/BookkepingSelect';
 import {BookkepingInput} from '../BookkepingInput/BookkepingInput';
 
-import {useRequest} from "../../../../hooks/useRequest";
 
 import "./actContent.css"
+import {apiRequest} from "../../../../api/request";
 
 export const ActContent = () => {
 
@@ -16,7 +16,6 @@ export const ActContent = () => {
   const [selectedTemplate, setSelectedTemplate] = useState();
   const [templatedFields, setTemplatedFields] = useState([]);
 
-  const {apiRequest} = useRequest();
 
   useEffect(() => {
     apiRequest('/template/get-template-list')

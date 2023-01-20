@@ -5,7 +5,6 @@ import {BookkeepingFormField} from "../BookkeepingFormField/BookkeepingFormField
 import {BookkepingSelect} from '../BookkepingSelect/BookkepingSelect';
 import {BookkepingInput} from '../BookkepingInput/BookkepingInput';
 import {Link} from "react-router-dom"
-import {useRequest} from "../../../../hooks/useRequest";
 
 export const ContractContent = () => {
 
@@ -13,7 +12,6 @@ export const ContractContent = () => {
   const [selectedTemplate, setSelectedTemplate] = useState();
   const [templatedFields, setTemplatedFields] = useState([]);
 
-  const {apiRequest} = useRequest();
 
   useEffect(() => {
     apiRequest(`/document/get-document-list`)

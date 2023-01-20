@@ -7,7 +7,7 @@ import './form.scss'
 
 import { withSwalInstance } from 'sweetalert2-react'
 import swal from 'sweetalert2'
-import {useRequest} from "../../hooks/useRequest";
+import {apiRequest} from "../../api/request";
 
 
 const SweetAlert = withSwalInstance(swal);
@@ -25,7 +25,6 @@ const Form = () => {
   });
   const [isFetching, setIsFetching] = useState(false);
 
-  const {apiRequest} = useRequest();
 
   const handleChange = (e) => {
     const { id, value } = e.target;

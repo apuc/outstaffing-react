@@ -7,11 +7,14 @@ import {Footer} from "../../components/Footer/Footer";
 
 import {getProfileInfo} from "../../redux/outstaffingSlice";
 
+import {urlForLocal} from "../../helper";
+
 import reportsIcon from "../../images/reports.png"
 import summaryIcon from "../../images/summaryIcon.png"
 import timerIcon from "../../images/timerIcon.png"
 import paymentIcon from "../../images/paymentIcon.png"
 import settingIcon from "../../images/settingIcon.png"
+
 import rightArrow from "../../images/arrowRight.png"
 
 import './profile.scss'
@@ -27,7 +30,7 @@ export const Profile = () => {
           <h2 className='profile__title'>Добрый день, <span>{profileInfo.fio}</span></h2>
           <div className='summary__info'>
             <div className='summary__person'>
-              <img src={profileInfo.photo} className='summary__avatar' alt='avatar'/>
+              <img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : ''} className='summary__avatar' alt='avatar'/>
               <p className='summary__name'>{profileInfo.fio} {profileInfo.specification}</p>
             </div>
           </div>

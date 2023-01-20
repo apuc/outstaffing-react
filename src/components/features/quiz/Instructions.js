@@ -5,14 +5,14 @@ import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {selectedTest} from "../../../redux/quizSlice";
 
-import {useRequest} from "../../../hooks/useRequest";
+import {useRequest} from "../../../HOOks/useRequest";
+import {apiRequest} from "../../../api/request";
 
 export const Instruction = () => {
 
    const [countQuestions, setCountQuestions] = useState(null);
    const test = useSelector(selectedTest);
 
-  const {apiRequest} = useRequest();
 
    useEffect( () => {
 
