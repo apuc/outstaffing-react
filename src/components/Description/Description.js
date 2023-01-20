@@ -33,7 +33,7 @@ const Description = ({onLoadMore, isLoadingMore}) => {
                     candidatesListArr.map((el) => (
                         <div className='row' key={el.id}>
                           <div className='col-2 col-xs-12'>
-                            <img className='description__img' src={urlForLocal(el.photo)} alt=''/>
+                            {el.photo && <img className='description__img' src={urlForLocal(el.photo)} alt=''/>}
                           </div>
                           <div className='col-12 col-xl-6'>
                             <h3 className='description__title'>
