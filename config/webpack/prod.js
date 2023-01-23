@@ -21,7 +21,7 @@ module.exports = merge(common, {
         filename: 'js/[name].[hash:8].bundle.js',
         publicPath: '/',
         // assetModuleFilename: '[hash][ext][query]'
-        assetModuleFilename: './media/[hash][ext][query]'
+        assetModuleFilename: '/media/[hash][ext][query]'
     },
     module: {
         rules: [
