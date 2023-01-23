@@ -3,13 +3,12 @@ import {useSelector, useDispatch} from 'react-redux'
 
 import OutstaffingBlock from '../OutstaffingBlock/OutstaffingBlock'
 import TagSelect from '../Select/TagSelect'
-import {Header} from "../Header/Header";
 
 import {selectTags, getPositionId, setPositionId} from '../../redux/outstaffingSlice'
 
-import front from '../../images/front_end.png'
-import back from '../../images/back_end.png'
-import design from '../../images/design.png'
+import front from './images/front_end.png'
+import back from './images/back_end.png'
+import design from './images/design.png'
 
 import './outstaffing.scss'
 

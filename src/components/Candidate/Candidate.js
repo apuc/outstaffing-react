@@ -13,9 +13,9 @@ import {createMarkup} from "../../helper";
 
 import arrow from '../../images/right-arrow.png'
 import rectangle from '../../images/rectangle_secondPage.png'
-import front from '../../images/front_end.png'
-import back from '../../images/back_end.png'
-import design from '../../images/design.png'
+import front from '../Outstaffing/images/front_end.png'
+import back from '../Outstaffing/images/back_end.png'
+import design from '../Outstaffing/images/design.png'
 
 import './candidate.scss'
 import {LogoutButton} from "../LogoutButton/LogoutButton";
