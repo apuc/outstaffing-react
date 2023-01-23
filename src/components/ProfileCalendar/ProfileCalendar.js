@@ -33,14 +33,16 @@ export const ProfileCalendar = () => {
         if (!requestDates) {
             return
         }
-        apiRequest(`/reports/reports-by-date?${requestDates}&user_id=${localStorage.getItem('id')}`)
+        apiRequest(`/reports/reports-by-date?${requestDates}&user_card_id=${localStorage.getItem('cardId')}`)
             .then((reports) => {
                 let spendTime = 0;
-                reports.map((report) => {
-                    if (report.spendTime) {
-                        spendTime += Number(report.spendTime)
-                    }
-                });
+                for (const report of reports) {
+                    report.task.map((task) => {
+                        if(task.hours_spent) {
+                            spendTime += Number(task.hours_spent)
+                        }
+                    })
+                }
                 setTotalHours(spendTime);
                 setReports(reports)
             })

@@ -37,7 +37,7 @@ export const ProfileCalendarComponent = ({reportsDates}) => {
     function dayStyles(day) {
         if (value < day) return `block`
         for (const date of reportsDates) {
-            if (`${new Date(day).getFullYear()}-${correctDay(new Date(day).getMonth() + 1)}-${correctDay(new Date(day).getDate())}` === date.date) {
+            if (`${new Date(day).getFullYear()}-${correctDay(new Date(day).getMonth() + 1)}-${correctDay(new Date(day).getDate())}` === date.created_at) {
                 return `before`
             }
         }
@@ -48,8 +48,8 @@ export const ProfileCalendarComponent = ({reportsDates}) => {
 
     function correctRoute(day) {
         for (const date of reportsDates) {
-            if (`${new Date(day).getFullYear()}-${correctDay(new Date(day).getMonth() + 1)}-${correctDay(new Date(day).getDate())}` === date.date) {
-                return `../../view/report`
+            if (`${new Date(day).getFullYear()}-${correctDay(new Date(day).getMonth() + 1)}-${correctDay(new Date(day).getDate())}` === date.created_at) {
+                return `../view`
             }
         }
         return '../../report'
