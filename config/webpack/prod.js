@@ -38,8 +38,8 @@ module.exports = merge(common, {
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
-                // type: 'asset/resource'
-                type: 'asset'
+                type: 'asset/resource'
+                // type: 'asset'
             },
 
         ]
