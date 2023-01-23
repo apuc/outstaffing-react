@@ -67,7 +67,6 @@ export const ViewReport = () => {
 
     function nextDay() {
         reportDay.setDate(reportDay.getDate() + 1);
-        getCreatedDate(reportDay)
         getReportFromDate(getCreatedDate(reportDay))
     }
 
@@ -102,7 +101,7 @@ export const ViewReport = () => {
                         <img src={arrowSwitchDate} alt='arrow'/>
                     </div>
                     <p>{getCreatedDate(reportDay)}</p>
-                    <div className={`viewReport__switchDate__next switchDate ${getCreatedDate(currentDay) === getCreatedDate(reportDay) || getCreatedDate(currentDay) < getCreatedDate(reportDay) ? 'disable' : ''}`} onClick={() => nextDay()}>
+                    <div className={`viewReport__switchDate__next switchDate ${getCreatedDate(currentDay) === getCreatedDate(reportDay) ? 'disable' : ''}`} onClick={() => nextDay()}>
                         <img src={arrowSwitchDate} alt='arrow'/>
                     </div>
                 </div>
