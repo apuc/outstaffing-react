@@ -16,6 +16,15 @@
   .summary__info {
     padding-right: 25px;
   }
+
+  .loader {
+    margin: 20px 0 50px;
+    &:hover {
+      path {
+        fill: #ffffff;
+      }
+    }
+  }
   .profile__calendar {
     margin-top: 20px;
   }
