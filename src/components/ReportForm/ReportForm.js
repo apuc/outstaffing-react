@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useSelector} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 import {Loader} from '../Loader/Loader'
 import {currentMonthAndDay} from '../Calendar/calendarHelper'
@@ -33,11 +33,12 @@ const getCreatedDate = (day) => {
 };
 
 const ReportForm = () => {
+  const navigate= useNavigate();
   const reportDate = useSelector(getReportDate);
 
   const {apiRequest} = useRequest();
   const [isFetching, setIsFetching] = useState(false);
-  const [reportSuccess, setReportSuccess] = useState(false);
+  const [reportSuccess, setReportSuccess] = useState('');
 
   const [inputs, setInputs] = useState([{task: '', hours_spent: '', minutes_spent: 0}]);
   const [troublesInputValue, setTroublesInputValue] = useState('');
@@ -56,6 +57,11 @@ const ReportForm = () => {
   };
 
   const handler = () => {
+    if(!inputs[0].task) {
+      setReportSuccess('Заполните задачи');
+      setTimeout(() => setReportSuccess(''), 1000)
+      return
+    }
     apiRequest('/reports/create', {
       method: 'POST',
       data: {
@@ -66,10 +72,11 @@ const ReportForm = () => {
         status: 1,
       },
     }).then((res) => {
-      if (res.status === 200) {
-        setReportSuccess(true);
-        setTimeout(() => setReportSuccess(false), 2000)
-      }
+      setReportSuccess('Отчет отправлен');
+      setTimeout(() => {
+        setReportSuccess('')
+        navigate('/profile/calendar');
+      }, 1000)
       setInputs(() => []);
       setTroublesInputValue('');
       setScheduledInputValue('');
@@ -189,7 +196,7 @@ const ReportForm = () => {
                 Всего за день : <span>{totalHours} часов</span>
               </p>
               {reportSuccess &&
-              <p className='report-form__footer-done'>Отчет отправлен</p>
+              <p className={`report-form__footer-done ${reportSuccess === 'Заполните задачи' ? 'errorText' : ''}`}>{reportSuccess}</p>
               }
             </div>
           </div>

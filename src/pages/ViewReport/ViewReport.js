@@ -3,8 +3,9 @@ import {Link} from "react-router-dom";
 import {useRequest} from "../../hooks/useRequest";
 import {useSelector} from "react-redux";
 import {getReportDate} from "../../redux/reportSlice";
-import {currentMonthAndDay} from "../../components/Calendar/calendarHelper";
+import SVG from 'react-inlinesvg'
 
+import {Loader} from "../../components/Loader/Loader"
 import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {Footer} from "../../components/Footer/Footer";
 
@@ -32,10 +33,12 @@ export const ViewReport = () => {
     const [difficulties, setDifficulties] = useState([])
     const [tomorrowTask, setTomorrowTask] = useState([])
     const [totalHours, setTotalHours] = useState(0);
-    const [reportDay, setReportDay] = useState(new Date (getCreatedDate(reportDate)))
-    const [currentDay, setCurrentDay] = useState(new Date ())
+    const [reportDay] = useState(new Date (getCreatedDate(reportDate)))
+    const [currentDay] = useState(new Date ())
+    const [loader, setLoader] = useState(false)
 
     function getReportFromDate(day) {
+        setLoader(true)
         setTaskText([])
         setDifficulties([])
         setTomorrowTask([])
@@ -62,6 +65,7 @@ export const ViewReport = () => {
                     })
                 }
                 setTotalHours(spendTime)
+                setLoader(false)
             })
     }
 
@@ -98,14 +102,17 @@ export const ViewReport = () => {
                 </div>
                 <div className='viewReport__switchDate'>
                     <div className='viewReport__switchDate__prev switchDate' onClick={() => previousDay()}>
-                        <img src={arrowSwitchDate} alt='arrow'/>
+                        <SVG src={arrowSwitchDate}/>
                     </div>
                     <p>{getCreatedDate(reportDay)}</p>
                     <div className={`viewReport__switchDate__next switchDate ${getCreatedDate(currentDay) === getCreatedDate(reportDay) ? 'disable' : ''}`} onClick={() => nextDay()}>
-                        <img src={arrowSwitchDate} alt='arrow'/>
+                        <SVG src={arrowSwitchDate}/>
                     </div>
                 </div>
-                {taskText.length ?
+                {loader &&
+                    <Loader width={75} height={75}/>
+                }
+                {Boolean(taskText.length) &&
                     <div className='viewReport__content'>
                         <div className='table__container'>
                             <table className='viewReport__done'>
@@ -155,7 +162,8 @@ export const ViewReport = () => {
                             </div>
                         }
                     </div>
-                    :
+                }
+                {!Boolean(taskText.length) && !loader &&
                     <div className='viewReport__noTask'>
                         <p>В этот день вы <span>не заполняли</span> отчет</p>
                     </div>

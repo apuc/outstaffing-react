@@ -148,6 +148,14 @@
     opacity: 0.5;
   }
 
+  .loader {
+    &:hover {
+      path {
+        fill: #ffffff;
+      }
+    }
+  }
+
   .table__container {
     margin: 0 -28px;
     overflow: hidden;
