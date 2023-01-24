@@ -136,6 +136,10 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
+
+      img {
+        margin-left: 3px;
+      }
     }
 
     &__prev {
@@ -145,7 +149,7 @@
 
   .disable {
     pointer-events: none;
-    opacity: 0.5;
+    opacity: 0.3;
   }
 
   .loader {

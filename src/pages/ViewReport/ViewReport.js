@@ -10,7 +10,7 @@ import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {Footer} from "../../components/Footer/Footer";
 
 import arrow from "../../images/right-arrow.png";
-import arrowSwitchDate from "../../images/arrowViewReport.svg";
+import arrowSwitchDate from "../../images/arrowViewReport.png";
 
 import './viewReport.scss'
 
@@ -102,11 +102,11 @@ export const ViewReport = () => {
                 </div>
                 <div className='viewReport__switchDate'>
                     <div className='viewReport__switchDate__prev switchDate' onClick={() => previousDay()}>
-                        <SVG src={arrowSwitchDate}/>
+                        <img src={arrowSwitchDate} alt='arrow'/>
                     </div>
                     <p>{getCreatedDate(reportDay)}</p>
                     <div className={`viewReport__switchDate__next switchDate ${getCreatedDate(currentDay) === getCreatedDate(reportDay) ? 'disable' : ''}`} onClick={() => nextDay()}>
-                        <SVG src={arrowSwitchDate}/>
+                        <img src={arrowSwitchDate} alt='arrow'/>
                     </div>
                 </div>
                 {loader &&
