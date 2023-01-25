@@ -18,6 +18,7 @@ import {currentCandidate, selectCurrentCandidate} from '../../redux/outstaffingS
 
 import './formPage.scss'
 import {apiRequest} from "../../api/request";
+import {LogoutButton} from "../../components/LogoutButton/LogoutButton";
 
 
 
@@ -42,7 +43,9 @@ const FormPage = () => {
   }
 
   return (
-      <WithLogout>
+    <div className='container'>
+
+
         <div className='form-page'>
           <div className='form-page__back'>
             <div className='form-page__arrow' onClick={goBack}>
@@ -53,6 +56,7 @@ const FormPage = () => {
                 <span>Вернуться к кандидату</span>
               </div>
             </div>
+            <LogoutButton />
           </div>
           <div className='form-page__candidate'>
             <div className='form-page__avatar'>
@@ -92,7 +96,7 @@ const FormPage = () => {
           </div>
           <Footer/>
         </div>
-      </WithLogout>
+    </div>
   )
 };
 

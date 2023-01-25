@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from "react-router-dom";
-import {useRequest} from "../../hooks/useRequest";
+
 import {useSelector} from "react-redux";
 import {getReportDate} from "../../redux/reportSlice";
-import SVG from 'react-inlinesvg'
 
 import {Loader} from "../../components/Loader/Loader"
 import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
@@ -13,6 +12,7 @@ import arrow from "../../images/right-arrow.png";
 import arrowSwitchDate from "../../images/arrowViewReport.png";
 
 import './viewReport.scss'
+import {apiRequest} from "../../api/request";
 
 export const ViewReport = () => {
     const getCreatedDate = (day) => {
@@ -26,25 +26,24 @@ export const ViewReport = () => {
             return `${yyyy}-${mm}-${dd}`
         }
     };
-    const {apiRequest} = useRequest();
     const reportDate = useSelector(getReportDate);
 
     const [taskText, setTaskText] = useState([]);
-    const [difficulties, setDifficulties] = useState([])
-    const [tomorrowTask, setTomorrowTask] = useState([])
+    const [difficulties, setDifficulties] = useState([]);
+    const [tomorrowTask, setTomorrowTask] = useState([]);
     const [totalHours, setTotalHours] = useState(0);
-    const [reportDay] = useState(new Date (getCreatedDate(reportDate)))
-    const [currentDay] = useState(new Date ())
-    const [loader, setLoader] = useState(false)
+    const [reportDay] = useState(new Date (getCreatedDate(reportDate)));
+    const [currentDay] = useState(new Date ());
+    const [loader, setLoader] = useState(false);
 
     function getReportFromDate(day) {
-        setLoader(true)
-        setTaskText([])
-        setDifficulties([])
-        setTomorrowTask([])
+        setLoader(true);
+        setTaskText([]);
+        setDifficulties([]);
+        setTomorrowTask([]);
         apiRequest(`reports/find-by-date?user_card_id=${localStorage.getItem('cardId')}&date=${day}`)
             .then(res => {
-                let spendTime = 0
+                let spendTime = 0;
                 for (const item of res) {
                     if(item.difficulties) {
                         setDifficulties(prevArray => [...prevArray, item.difficulties])
@@ -57,14 +56,14 @@ export const ViewReport = () => {
                             hours: task.hours_spent,
                             task: task.task,
                             id: task.id
-                        }
+                        };
                         if(task.hours_spent) {
                             spendTime += Number(task.hours_spent)
                         }
                         setTaskText(prevArray => [...prevArray, taskInfo])
                     })
                 }
-                setTotalHours(spendTime)
+                setTotalHours(spendTime);
                 setLoader(false)
             })
     }
