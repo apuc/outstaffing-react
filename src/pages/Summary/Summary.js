@@ -67,7 +67,7 @@ export const Summary = () => {
               <button>Редактировать раздел</button>
             </div>
             <div className='summary__sectionGitItems'>
-              {gitInfo.length && gitInfo.map((itemGit) => {
+              {Boolean(gitInfo.length) && gitInfo.map((itemGit) => {
                 return <div key={itemGit.id} className='summary__sectionGitItem gitItem'>
                   <div className='gitItem__info'>
                     <div className='gitItem__info__about'>

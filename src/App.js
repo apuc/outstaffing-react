@@ -18,6 +18,7 @@ import {InstructionPage} from './pages/quiz/InstructionPage'
 import {ResultPage} from './pages/quiz/ResultPage'
 import {Profile} from './pages/Profile/Profile.js'
 import {Summary} from './pages/Summary/Summary'
+import {ViewReport} from './pages/ViewReport/ViewReport'
 
 import './fonts/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -56,6 +57,7 @@ const App = () => {
               <Route index element={<Profile/>}/>
               <Route exact path='calendar' element={<ProfileCalendar/>}/>
               <Route exact path='summary' element={<Summary/>}/>
+              <Route exact path='view' element={<ViewReport/>}/>
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace/>}/>
