@@ -2,7 +2,7 @@
   margin-top: 73px;
 }
 .search__title {
-  font-family: 'GT Eesti Pro Display';
+  font-family: 'GT Eesti Pro Display', sans-serif;
   font-size: 2.4em;
   font-weight: 500;
   font-style: normal;
@@ -30,7 +30,7 @@
   height: 40px;
   border-radius: 10px;
   border: none;
-  font-family: 'Muller';
+  font-family: 'Muller', sans-serif;
   font-size: 1.6em;
   letter-spacing: 0.8px;
   text-align: center;

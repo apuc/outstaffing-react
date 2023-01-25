@@ -7,7 +7,7 @@ import {currentMonthAndDay} from '../Calendar/calendarHelper'
 import {Footer} from "../Footer/Footer";
 import {ProfileHeader} from "../ProfileHeader/ProfileHeader";
 
-import {useRequest} from "../../hooks/useRequest";
+import {apiRequest} from "../../api/request";
 
 import {getReportDate} from '../../redux/reportSlice'
 
@@ -36,7 +36,6 @@ const ReportForm = () => {
   const navigate= useNavigate();
   const reportDate = useSelector(getReportDate);
 
-  const {apiRequest} = useRequest();
   const [isFetching, setIsFetching] = useState(false);
   const [reportSuccess, setReportSuccess] = useState('');
 

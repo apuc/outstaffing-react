@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useParams, useNavigate} from 'react-router-dom'
 import SVG from 'react-inlinesvg'
 
-import {useRequest} from "../../hooks/useRequest";
 import {WithLogout} from '../../hoc/withLogout'
 
 import Form from '../../components/Form/Form'
@@ -18,6 +17,8 @@ import {LEVELS, SKILLS} from '../../constants/constants'
 import {currentCandidate, selectCurrentCandidate} from '../../redux/outstaffingSlice'
 
 import './formPage.scss'
+import {apiRequest} from "../../api/request";
+import {LogoutButton} from "../../components/LogoutButton/LogoutButton";
 
 
 
@@ -29,7 +30,6 @@ const FormPage = () => {
   const candidate = useSelector(selectCurrentCandidate);
 
 
-  const {apiRequest} = useRequest();
 
   const goBack = () => {
     navigate(-1)
@@ -43,7 +43,9 @@ const FormPage = () => {
   }
 
   return (
-      <WithLogout>
+    <div className='container'>
+
+
         <div className='form-page'>
           <div className='form-page__back'>
             <div className='form-page__arrow' onClick={goBack}>
@@ -54,6 +56,7 @@ const FormPage = () => {
                 <span>Вернуться к кандидату</span>
               </div>
             </div>
+            <LogoutButton />
           </div>
           <div className='form-page__candidate'>
             <div className='form-page__avatar'>
@@ -93,7 +96,7 @@ const FormPage = () => {
           </div>
           <Footer/>
         </div>
-      </WithLogout>
+    </div>
   )
 };
 

@@ -4,8 +4,8 @@ import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom
 
 import AuthForPartners from "./pages/AuthForPartners/AuthForPartners";
 import AuthForDevelopers from "./pages/AuthForDevelopers/AuthForDevelopers";
-import Home from "./components/Home/Home";
-import CandidatePage from './pages/CandidatePage'
+import Home from "./pages/Home/Home";
+import Candidate from "./components/Candidate/Candidate";
 import Calendar from "./components/Calendar/Calendar";
 import ReportForm from "./components/ReportForm/ReportForm";
 import {ProfileCalendar} from "./components/ProfileCalendar/ProfileCalendar";
@@ -25,6 +25,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 
+
 const App = () => {
   return (
       <>
@@ -37,7 +38,7 @@ const App = () => {
             <Route exact path='/authdev' element={<AuthForDevelopers/>}/>
             <Route exact path='/auth' element={<AuthForPartners/>}/>
 
-            <Route exact path='/candidate/:id' element={<CandidatePage/>}/>
+            <Route exact path='/candidate/:id' element={<Candidate/>}/>
             <Route exact path='/candidate/:id/form' element={<FormPage/>}/>
             <Route path='/:userId/calendar' element={<Calendar/>}/>
 

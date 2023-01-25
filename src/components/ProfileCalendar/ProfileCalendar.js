@@ -10,11 +10,14 @@ import {Loader} from "../Loader/Loader";
 import {ProfileHeader} from "../ProfileHeader/ProfileHeader";
 import { Footer } from '../Footer/Footer'
 
-import {useRequest} from "../../hooks/useRequest";
+import {urlForLocal} from "../../helper";
+
+import {apiRequest} from "../../api/request";
 import { getProfileInfo } from '../../redux/outstaffingSlice'
 import {setReportDate} from "../../redux/reportSlice";
 
 import './profileCalendar.scss'
+
 
 export const ProfileCalendar = () => {
     const dispatch = useDispatch();
@@ -25,13 +28,12 @@ export const ProfileCalendar = () => {
     const [requestDates, setRequestDates] = useState('');
     const [loader, setLoader] = useState(false)
 
-    const {apiRequest} = useRequest();
 
     useEffect(() => {
         setRequestDates(getReports(moment()))
-    });
+    },[]);
 
-    useEffect(async () => {
+    useEffect( () => {
         setLoader(true)
         if (!requestDates) {
             return
@@ -63,7 +65,7 @@ export const ProfileCalendar = () => {
                 <h2 className='summary__title'>Ваши отчеты</h2>
                 <div className='summary__info'>
                     <div className='summary__person'>
-                        <img src={profileInfo.photo} className='summary__avatar'  alt='avatar'/>
+                        <img src={urlForLocal(profileInfo.photo)} className='summary__avatar'  alt='avatar'/>
                         <p className='summary__name'>{profileInfo.fio} {profileInfo.specification}</p>
                     </div>
                     <Link to='/report'>

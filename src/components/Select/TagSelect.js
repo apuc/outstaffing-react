@@ -2,16 +2,16 @@ import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import Select from 'react-select'
 import {Loader} from '../Loader/Loader'
-import {useRequest} from "../../hooks/useRequest";
+import {apiRequest} from "../../api/request";
 import {
   selectedItems,
   selectItems,
   selectTags,
-  filteredCandidates,
+  profiles,
   setPositionId
 } from '../../redux/outstaffingSlice'
 
-import style from './TagSelect.module.css'
+import './TagSelect.css'
 
 
 const TagSelect = () => {
@@ -19,7 +19,6 @@ const TagSelect = () => {
   const [searchLoading, setSearchLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const {apiRequest} = useRequest();
 
   const itemsArr = useSelector(selectItems);
   const tagsArr = useSelector(selectTags);
@@ -34,8 +33,8 @@ const TagSelect = () => {
 
     apiRequest('/profile', {
       params: {...params, limit: 1000},
-    }).then((el) => {
-      dispatch(filteredCandidates(el));
+    }).then((res) => {
+      dispatch(profiles(res));
       setSearchLoading(false)
     })
 
@@ -44,20 +43,20 @@ const TagSelect = () => {
 
   return (
       <>
-        <section className={style.search}>
+        <section className='search'>
           <div className='row'>
             <div className='col-12'>
-              <h2 className={style.search__title}>
+              <h2 className='search__title'>
                 Найти специалиста по навыкам
               </h2>
-              <div className={style.search__box}>
+              <div className='search__box'>
                 <Select
                     value={itemsArr}
-                    onChange={(value) => {console.log(value) ;return dispatch(selectedItems(value))}}
+                    onChange={(value) => dispatch(selectedItems(value))}
                     isMulti
                     name='tags'
-                    className={style.select}
-                    classNamePrefix={style.select}
+                    className='select'
+                    classNamePrefix='select'
                     options={
                       tagsArr &&
                       tagsArr.flat().map((item) => {
@@ -72,7 +71,7 @@ const TagSelect = () => {
                 <button
                     onClick={() => handleSubmit({dispatch, setSearchLoading})}
                     type='submit'
-                    className={style.search__submit}
+                    className='search__submit'
                 >
                   {searchLoading ? <Loader width={30} height={30}/> : 'Поиск'}
                 </button>

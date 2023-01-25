@@ -3,22 +3,20 @@ import {useSelector} from "react-redux";
 import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {getProfileInfo} from "../../redux/outstaffingSlice";
 import {Footer} from '../../components/Footer/Footer'
-import {transformHtml} from "../../helper";
-
-import {useRequest} from "../../hooks/useRequest";
+import {transformHtml, urlForLocal} from "../../helper";
 
 import arrow from "../../images/right-arrow.png";
 import rightArrow from "../../images/arrowRight.png"
 import gitImgItem from "../../images/gitItemImg.png"
 
 import './summary.scss'
+import {apiRequest} from "../../api/request";
 
 export const Summary = () => {
   const profileInfo = useSelector(getProfileInfo);
   const [openGit, setOpenGit] = useState(false);
   const [gitInfo, setGitInfo] = useState([]);
 
-  const {apiRequest} = useRequest();
   useEffect(() => {
     apiRequest(`/profile/portfolio-projects?card_id=${localStorage.getItem('cardId')}`)
         .then(responseGit => setGitInfo(responseGit))
@@ -35,7 +33,7 @@ export const Summary = () => {
             </div>}
             <div className='summary__info'>
               <div className='summary__person'>
-                <img src={profileInfo.photo} className='summary__avatar' alt='avatar'/>
+                <img src={urlForLocal(profileInfo.photo)} className='summary__avatar' alt='avatar'/>
                 <p className='summary__name'>{profileInfo.fio} {profileInfo.specification}</p>
               </div>
               {!openGit &&

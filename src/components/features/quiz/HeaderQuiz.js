@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {selectUserInfo, setQuestionnairesList, setUserInfo} from "../../../redux/quizSlice";
-import {useRequest} from "../../../hooks/useRequest";
 import './quiz.scss'
+import {apiRequest} from "../../../api/request";
 
 export const HeaderQuiz = ({header}) => {
 
@@ -10,7 +10,6 @@ export const HeaderQuiz = ({header}) => {
   const userId = localStorage.getItem('id');
   const userInfo = useSelector(selectUserInfo);
 
-  const {apiRequest} = useRequest();
 
   useEffect(() => {
     dispatch(setUserInfo(userId))

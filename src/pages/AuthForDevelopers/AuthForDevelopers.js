@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 import { AuthBox } from '../../components/AuthBox/AuthBox'
 
@@ -8,6 +8,7 @@ import authImg from '../../images/auth_img.png'
 import cross from '../../images/cross.png'
 import text from '../../images/Body_Text.png'
 import vector from '../../images/Vector_Smart_Object.png'
+import vectorBlack from '../../images/Vector_Smart_Object_black.png'
 
 import { selectAuth } from '../../redux/outstaffingSlice'
 import { useNavigate} from 'react-router-dom'
@@ -19,10 +20,14 @@ const AuthForDevelopers = () => {
 
   const isAuth = useSelector(selectAuth);
   let navigate = useNavigate();
+  const getToken = localStorage.getItem('auth_token')
 
-  if (isAuth) {
-    navigate('/profile')
-  }
+  useEffect(()=> {
+    if (isAuth || getToken) {
+      navigate('/profile')
+    }
+  }, [getToken]);
+
 
   return (
     <section className='auth-developers'>
@@ -30,7 +35,7 @@ const AuthForDevelopers = () => {
         <img className='auth-developers__vector' src={vector} alt='' />
         <img
           className='auth-developers__vector-black'
-          src={'./images/Vector_Smart_Object_black.png'}
+          src={vectorBlack}
           alt=''
         />
         <div className='container'>

@@ -1,26 +1,6 @@
 @use 'sass:math'; 
 .candidate {
-  &__title {
-    margin-top: 60px;
 
-    h2 {
-      text-align: center;
-      color: #52b709;
-      font-family: 'GT Eesti Pro Display', sans-serif;
-      font-size: 5em;
-      font-weight: 700;
-      font-style: normal;
-      letter-spacing: normal;
-      line-height: 77.81px;
-
-      span {
-        color: #282828;
-        font-style: normal;
-        letter-spacing: 0.56px;
-        line-height: normal;
-      }
-    }
-  }
 
   &__header {
     display: flex;

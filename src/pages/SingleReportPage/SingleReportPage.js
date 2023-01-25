@@ -1,5 +1,4 @@
 import React from 'react'
-import { WithLogout } from '../../hoc/withLogout'
 import arrowLeft from '../../images/right-arrow.png'
 
 import SVG from 'react-inlinesvg'

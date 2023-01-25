@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import arrow from '../../images/arrow__login_page.png'
 import medium from '../../images/medium_male_big.png'
 import cross from '../../images/cross.png'
@@ -18,9 +18,14 @@ const AuthForPartners = () => {
   const isAuth = useSelector(selectAuth);
   let navigate = useNavigate();
 
-  if (isAuth) {
-    navigate('/')
-  }
+  const getToken = localStorage.getItem('auth_token')
+
+  useEffect(()=> {
+    if (isAuth || getToken) {
+      navigate('/')
+    }
+  }, [getToken]);
+
 
   return (
     <section className='auth-partners'>
