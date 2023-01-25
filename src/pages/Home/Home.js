@@ -7,8 +7,6 @@ import {Footer} from '../../components/Footer/Footer'
 
 import {profiles, tags} from '../../redux/outstaffingSlice'
 
-import {useRequest} from "../../HOOks/useRequest";
-import {LogoutButton} from "../../components/LogoutButton/LogoutButton";
 import {Header} from "../../components/Header/Header";
 import {apiRequest} from "../../api/request";
 

@@ -12,6 +12,7 @@ import {selectCurrentCandidate} from '../../redux/outstaffingSlice'
 import rectangle from '../../images/rectangle_secondPage.png'
 
 import './calendar.scss'
+import {urlForLocal} from "../../helper";
 
 
 const Calendar = () => {
@@ -42,7 +43,7 @@ const Calendar = () => {
             </div>
             <div className='col-12 col-xl-12 d-flex justify-content-between align-items-center flex-column flex-sm-row'>
               <div className='calendar__info'>
-                <img className='calendar__info-img' src={photo} alt='img'/>
+                {photo && <img className='calendar__info-img' src={urlForLocal(photo)} alt='img'/>}
                 <h3 className='calendar__info-name'>{abbreviatedName}</h3>
               </div>
               <div className='calendar__title'>

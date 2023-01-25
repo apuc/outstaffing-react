@@ -5,7 +5,6 @@ import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {selectedTest} from "../../../redux/quizSlice";
 
-import {useRequest} from "../../../HOOks/useRequest";
 import {apiRequest} from "../../../api/request";
 
 export const Instruction = () => {

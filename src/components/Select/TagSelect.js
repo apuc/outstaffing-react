@@ -7,7 +7,7 @@ import {
   selectedItems,
   selectItems,
   selectTags,
-  filteredCandidates,
+  profiles,
   setPositionId
 } from '../../redux/outstaffingSlice'
 
@@ -33,8 +33,8 @@ const TagSelect = () => {
 
     apiRequest('/profile', {
       params: {...params, limit: 1000},
-    }).then((el) => {
-      dispatch(filteredCandidates(el));
+    }).then((res) => {
+      dispatch(profiles(res));
       setSearchLoading(false)
     })
 

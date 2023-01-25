@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {
   selectItems,
   selectedItems,
-  filteredCandidates,
+   profiles,
 } from '../../redux/outstaffingSlice'
 
 import {apiRequest} from "../../api/request";
@@ -22,9 +22,11 @@ const handlePositionClick = (
     }) => {
   if (isSelected) {
     apiRequest('/profile', {
-      params: {limit: 1000},
+      params: {
+        limit: 1000
+      },
     }).then((profileArr) => {
-      dispatch(filteredCandidates(profileArr));
+      dispatch(profiles(profileArr));
       dispatch(selectedItems([]));
       onSelect(positionId)
     })
@@ -32,9 +34,10 @@ const handlePositionClick = (
     apiRequest('/profile', {
       params: {
         limit: '1000',
-        position_id: positionId},
-    }).then((el) => {
-      dispatch(filteredCandidates(el));
+        position_id: positionId
+      },
+    }).then((res) => {
+      dispatch(profiles(res));
       dispatch(selectedItems([]));
       onSelect(positionId)
     })

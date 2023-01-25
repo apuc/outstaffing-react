@@ -5,7 +5,7 @@ import {withSwalInstance} from 'sweetalert2-react'
 import swal from 'sweetalert2'
 
 import {Loader} from '../Loader/Loader'
-import ErrorBoundary from "../../HOC/ErrorBoundary";
+import ErrorBoundary from "../../hoc/ErrorBoundary";
 
 import {auth, selectAuth, setUserInfo} from '../../redux/outstaffingSlice'
 import {loading} from '../../redux/loaderSlice'
@@ -19,20 +19,19 @@ import ellipse from '../../images/ellipse.png'
 
 import './authBox.scss'
 
+const {useRef} = require("react");
+
 
 const SweetAlert = withSwalInstance(swal);
 
 export const AuthBox = ({title, altTitle, roleChangeLink}) => {
   const dispatch = useDispatch();
-
+  const ref = useRef();
   const navigate = useNavigate();
 
   const isAuth = useSelector(selectAuth);
   const isLoading = useSelector(selectIsLoading);
 
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
   if (isAuth) {
@@ -47,15 +46,13 @@ export const AuthBox = ({title, altTitle, roleChangeLink}) => {
 
   const submitHandler = () => {
 
+    let formData = new FormData(ref.current)
     if (!isLoading) {
       dispatch(loading(true));
       apiRequest('/user/login',
           {
             method: 'POST',
-            data: JSON.stringify({
-              username,
-              password
-            })
+            data: formData
           }).then((res) => {
 
         if (!res.access_token) {
@@ -90,23 +87,21 @@ export const AuthBox = ({title, altTitle, roleChangeLink}) => {
           <img src={ellipse} alt=''/>
           <span>{title}</span>
         </div>
-        <form className='auth-box__form'>
+        <form ref={ref} className='auth-box__form'>
           <label htmlFor='login'>Ваш логин:</label>
           <input
               id='login'
               type='text'
+              name='username'
               placeholder='Логин'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
           />
 
           <label htmlFor='password'>Пароль:</label>
           <input
               id='password'
               type='password'
+              name='password'
               placeholder='Пароль'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
           />
 
           {error && (

@@ -5,8 +5,6 @@ import {getProfileInfo} from "../../redux/outstaffingSlice";
 import {Footer} from '../../components/Footer/Footer'
 import {transformHtml, urlForLocal} from "../../helper";
 
-import {useRequest} from "../../HOOks/useRequest";
-
 import arrow from "../../images/right-arrow.png";
 import rightArrow from "../../images/arrowRight.png"
 import gitImgItem from "../../images/gitItemImg.png"

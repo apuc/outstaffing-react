@@ -3,8 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useParams, useNavigate} from 'react-router-dom'
 import SVG from 'react-inlinesvg'
 
-import {useRequest} from "../../HOOks/useRequest";
-import {WithLogout} from '../../HOC/withLogout'
+import {WithLogout} from '../../hoc/withLogout'
 
 import Form from '../../components/Form/Form'
 import {Footer} from '../../components/Footer/Footer'

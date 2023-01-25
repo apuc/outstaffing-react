@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchResultTest, selectedTest, selectResult} from "../../../redux/quizSlice";
-import {useRequest} from "../../../HOOks/useRequest";
 import {apiRequest} from "../../../api/request";
 
 

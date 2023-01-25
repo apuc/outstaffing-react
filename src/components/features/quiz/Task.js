@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import {useNavigate} from "react-router-dom"
 import {useSelector, useDispatch} from 'react-redux'
 
-import {useRequest} from "../../../HOOks/useRequest";
 import {Progressbar} from './ProgressbarQuiz'
 import {GetOptionTask} from './GetOptionTask'
 

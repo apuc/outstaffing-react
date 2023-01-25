@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 import { AuthBox } from '../../components/AuthBox/AuthBox'
 
@@ -20,10 +20,14 @@ const AuthForDevelopers = () => {
 
   const isAuth = useSelector(selectAuth);
   let navigate = useNavigate();
+  const getToken = localStorage.getItem('auth_token')
 
-  if (isAuth) {
-    navigate('/profile')
-  }
+  useEffect(()=> {
+    if (isAuth || getToken) {
+      navigate('/profile')
+    }
+  }, [getToken]);
+
 
   return (
     <section className='auth-developers'>
