@@ -1,111 +1,71 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {fetchGet} from './../server/server'
-import axios from "axios";
+
+import {apiRequest} from "../api/request";
 
 
 const initialState = {
-   // questions: [],
-   answer: [],
-   result: null,
-   isLoading: false,
-   dataQuestionnairesOfUser: [],
-   passedTests: [],
-   selectedTest: null,
-   userInfo: null
+  // questions: [],
+  answer: [],
+  result: null,
+  isLoading: false,
+  dataQuestionnairesOfUser: [],
+  passedTests: [],
+  selectedTest: null,
+  userInfo: null
 };
 export const setUserInfo = createAsyncThunk(
-  'userInfo',
-  async (id) => {
-     try{
-       return await fetchGet({
-              link: `${process.env.REACT_APP_API_URL}/api/profile/get-main-data?user_id=${id}`,
-              Origin: `${process.env.REACT_APP_BASE_URL}`,
-            }
-        )
-     }catch (e) {
-        console.log(e)
-     }
-  }
+    'userInfo',
+    (id) =>
+        apiRequest(`/profile/get-main-data?user_id=${id}`)
 );
 
 export const fetchUserAnswersMany = createAsyncThunk(
-  'answersUserMany',
-  async (checkedValues) => {
-     try{
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/user-response/set-responses`,
-          {"userResponses": checkedValues}, {
-             headers: {
-                Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
-             }
-          });
-        return response.data
-     }catch (e) {
-        console.log(e)
-     }
-  }
+    'answersUserMany',
+    (checkedValues) =>
+        apiRequest('/user-response/set-responses', {method: 'POST', data: {"userResponses": checkedValues}})
 );
+
 export const fetchUserAnswerOne = createAsyncThunk(
-  'answersUserOne',
-  async (checkedValues) => {
-     try{
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/user-response/set-response`,
-          checkedValues[0], {
-             headers: {
-                Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
-             }
-          });
-        return response.data
-     }catch (e) {
-        console.log(e)
-     }
-  }
+    'answersUserOne',
+    (checkedValues) =>
+        apiRequest('/user-response/set-response', {method: 'POST', data: checkedValues[0]})
 );
+
 export const fetchGetAnswers = createAsyncThunk(
-  'answers',
-  async (question_id) => {
-    return await fetchGet({
-           link: `${process.env.REACT_APP_API_URL}/api/answer/get-answers?question_id=${question_id}`,
-           Origin: `${process.env.REACT_APP_BASE_URL}`,
-         }
-     )
-  }
+    'answers',
+    (question_id) =>
+        apiRequest(`/answer/get-answers?question_id=${question_id}`)
 );
 
 export const fetchResultTest = createAsyncThunk(
-  'result',
-  async (uuid) => {
-    return await fetchGet({
-           link: `${process.env.REACT_APP_API_URL}/api/user-questionnaire/questionnaire-completed?user_questionnaire_uuid=${uuid}`,
-           Origin: `${process.env.REACT_APP_BASE_URL}`,
-         }
-     )
-
-  }
+    'result',
+    (uuid) =>
+        apiRequest(`/user-questionnaire/questionnaire-completed?user_questionnaire_uuid=${uuid}`)
 );
 
 export const quizSlice = createSlice({
-   name: 'quiz',
-   initialState,
-   reducers: {
-      setQuestionnairesList: (state, action) => {
-         state.dataQuestionnairesOfUser = action.payload;
-         state.passedTests = action.payload.filter(item => item.status === 2)
-      },
-      setSelectedTest: (state, action) => {
-         state.selectedTest = action.payload
-      },
-   },
-   extraReducers: {
-      [setUserInfo.fulfilled]: (state, action) => {
-         state.userInfo = action.payload;
-      },
-      [fetchGetAnswers.fulfilled]: (state, action) => {
-         state.answer = action.payload;
-      },
-      [fetchResultTest.fulfilled]: (state, action) => {
-         state.result = action.payload;
-      },
-   },
+  name: 'quiz',
+  initialState,
+  reducers: {
+    setQuestionnairesList: (state, action) => {
+      state.dataQuestionnairesOfUser = action.payload;
+      state.passedTests = action.payload.filter(item => item.status === 2)
+    },
+    setSelectedTest: (state, action) => {
+      state.selectedTest = action.payload
+    },
+  },
+  extraReducers: {
+    [setUserInfo.fulfilled]: (state, action) => {
+      state.userInfo = action.payload;
+    },
+    [fetchGetAnswers.fulfilled]: (state, action) => {
+      state.answer = action.payload;
+    },
+    [fetchResultTest.fulfilled]: (state, action) => {
+      state.result = action.payload;
+    },
+  },
 });
 
 export const {setQuestionnairesList, setSelectedTest} = quizSlice.actions;

@@ -1,8 +1,9 @@
 import {Link} from 'react-router-dom'
 import calendarImage from './../../../images/calendar.svg'
-import './quiz.scss'
 import {useDispatch} from "react-redux";
 import {setSelectedTest} from "../../../redux/quizSlice";
+import {urlForLocal} from "../../../helper";
+import './quiz.scss'
 
 export const MyTestsQuiz = ({listTests}) => {
 
@@ -46,7 +47,7 @@ export const MyTestsQuiz = ({listTests}) => {
                           </h3>
                           <div className="item-test__body test-data">
                              <div className="test-data__calendar ">
-                                <img src={calendarImage} alt=""/>
+                                <img src={urlForLocal(calendarImage)} alt=""/>
                                 {item.testing_date}
                              </div>
                              <div className="test-data__hr"></div>

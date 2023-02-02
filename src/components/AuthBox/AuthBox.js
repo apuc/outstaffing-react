@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {withSwalInstance} from 'sweetalert2-react'
-import swal from 'sweetalert2'
 
 import {Loader} from '../Loader/Loader'
 import ErrorBoundary from "../../hoc/ErrorBoundary";
@@ -10,7 +8,6 @@ import ErrorBoundary from "../../hoc/ErrorBoundary";
 import {auth, selectAuth, setUserInfo} from '../../redux/outstaffingSlice'
 import {loading} from '../../redux/loaderSlice'
 import {setRole} from '../../redux/roleSlice'
-
 import {selectIsLoading} from '../../redux/loaderSlice'
 
 import {apiRequest} from "../../api/request";
@@ -19,12 +16,14 @@ import ellipse from '../../images/ellipse.png'
 
 import './authBox.scss'
 
-const {useRef} = require("react");
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
+const SweetAlert = withReactContent(Swal);
 
-const SweetAlert = withSwalInstance(swal);
 
 export const AuthBox = ({title, altTitle, roleChangeLink}) => {
+
   const dispatch = useDispatch();
   const ref = useRef();
   const navigate = useNavigate();
@@ -34,19 +33,32 @@ export const AuthBox = ({title, altTitle, roleChangeLink}) => {
 
   const [error, setError] = useState(null);
 
-  if (isAuth) {
-    navigate('/')
-  }
+  const handleModalError = (error) => {
+    SweetAlert.fire({
+      title: 'Ошибка',
+      text: error
+    });
 
-  useEffect(()=> {
+    setError(null)
+
+  };
+
+  useEffect(() => {
     if (!localStorage.getItem('auth_token')) {
       dispatch(auth(false))
     }
   }, []);
 
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/')
+    }
+  });
+
+
   const submitHandler = () => {
 
-    let formData = new FormData(ref.current)
+    let formData = new FormData(ref.current);
     if (!isLoading) {
       dispatch(loading(true));
       apiRequest('/user/login',
@@ -107,12 +119,17 @@ export const AuthBox = ({title, altTitle, roleChangeLink}) => {
           {error && (
               <div className='auth-box__form-error'>
                 <ErrorBoundary>
-                  <SweetAlert
-                      show={!!error}
-                      title='Ошибка'
-                      text={error}
-                      onConfirm={() => setError(null)}
-                  />
+
+
+                  {
+                    handleModalError(error)
+                  }
+                  {/*<SweetAlert*/}
+                  {/*    show={!!error}*/}
+                  {/*    title='Ошибка'*/}
+                  {/*    text={error}*/}
+                  {/*    onConfirm={() => setError(null)}*/}
+                  {/*/>*/}
                 </ErrorBoundary>
               </div>
           )}
