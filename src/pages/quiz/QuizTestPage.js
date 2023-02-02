@@ -3,15 +3,18 @@ import {HeaderPageTestsQuiz} from '../../components/features/quiz/HeaderPageTest
 import {TaskQuiz} from '../../components/features/quiz/Task'
 import {useSelector} from "react-redux";
 import {selectedTest} from "../../redux/quizSlice";
-import React from "react";
+import React, {useEffect} from "react";
 
 export const QuizTestPage = () => {
-  let navigate = useNavigate()
-  const test = useSelector(selectedTest)
+  let navigate = useNavigate();
+  const test = useSelector(selectedTest);
 
-  if (!test) {
-     navigate('/quiz')
-  }
+  useEffect(() => {
+    if (!test) {
+      navigate('/quiz')
+    }
+  }, []);
+
   return (
       <>
         <HeaderPageTestsQuiz isVisibilityButton={false}/>

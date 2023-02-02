@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {selectUserInfo, setQuestionnairesList, setUserInfo} from "../../../redux/quizSlice";
-import './quiz.scss'
 import {apiRequest} from "../../../api/request";
+import {urlForLocal} from "../../../helper";
+import './quiz.scss'
 
 export const HeaderQuiz = ({header}) => {
 
@@ -13,12 +14,12 @@ export const HeaderQuiz = ({header}) => {
 
   useEffect(() => {
     dispatch(setUserInfo(userId))
-  }, [dispatch]);
+  }, [userId, dispatch]);
 
   useEffect(() => {
     apiRequest(`/user-questionnaire/questionnaires-list?user_id=${userId}`)
         .then(res => dispatch(setQuestionnairesList(res)))
-  }, [dispatch]);
+  }, [userId, dispatch]);
 
   return (
       <div>
@@ -30,7 +31,7 @@ export const HeaderQuiz = ({header}) => {
                       {header && <h2 className={'header-quiz__title-main'}>Добрый день, {userInfo.fio}</h2>}
                       <div className="header-quiz__body header-quiz__body_interjacent">
                         <div className="header-quiz__avatar">
-                          <img src={userInfo.photo} alt={userInfo.photo}/>
+                          <img src={urlForLocal(userInfo.photo)} alt={userInfo.photo}/>
                         </div>
                         <div className="header-quiz__name-user">{userInfo.fio}</div>
                         <div className="header-quiz__title">{userInfo.position_name}</div>

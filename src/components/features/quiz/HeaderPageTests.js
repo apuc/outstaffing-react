@@ -2,6 +2,7 @@ import {Link} from 'react-router-dom'
 import './quiz.scss'
 import {useSelector} from "react-redux";
 import {selectedTest, selectUserInfo} from "../../../redux/quizSlice";
+import {urlForLocal} from "../../../helper";
 
 
 export const HeaderPageTestsQuiz = ({isVisibilityButton}) => {
@@ -14,7 +15,7 @@ export const HeaderPageTestsQuiz = ({isVisibilityButton}) => {
         <div className="header-quiz__container">
            <div className="header-quiz__body">
               <div className="header-quiz__avatar">
-                 {userInfo.photo && <img src={userInfo.photo} alt={userInfo.photo}/>}
+                 {userInfo.photo && <img src={urlForLocal(userInfo.photo)} alt={userInfo.photo}/>}
               </div>
               <div className="header-quiz__description">
                  <div className="header-quiz__title-test title">{test.questionnaire_title}</div>

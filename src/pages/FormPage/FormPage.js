@@ -1,12 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams, useNavigate} from 'react-router-dom'
 import SVG from 'react-inlinesvg'
 
-import {WithLogout} from '../../hoc/withLogout'
-
 import Form from '../../components/Form/Form'
 import {Footer} from '../../components/Footer/Footer'
+import {LogoutButton} from "../../components/LogoutButton/LogoutButton";
+
 
 import arrow from '../../images/right-arrow.png'
 import rectangle from '../../images/rectangle_secondPage.png'
@@ -16,12 +16,10 @@ import {LEVELS, SKILLS} from '../../constants/constants'
 
 import {currentCandidate, selectCurrentCandidate} from '../../redux/outstaffingSlice'
 
-import './formPage.scss'
 import {apiRequest} from "../../api/request";
-import {LogoutButton} from "../../components/LogoutButton/LogoutButton";
+import {urlForLocal} from "../../helper";
 
-
-
+import './formPage.scss'
 
 const FormPage = () => {
   const params = useParams();
@@ -29,23 +27,22 @@ const FormPage = () => {
   const dispatch = useDispatch();
   const candidate = useSelector(selectCurrentCandidate);
 
-
-
   const goBack = () => {
     navigate(-1)
   };
 
-  if (!candidate.id) {
-    apiRequest('/profile', {
-      params: Number(params.id)
-    })
-        .then((el) => dispatch(currentCandidate(el)))
-  }
+  useEffect(()=> {
+    if (!candidate.id) {
+      apiRequest('/profile', {
+        params: Number(params.id)
+      })
+          .then((el) => dispatch(currentCandidate(el)))
+    }
+  }, []);
+
 
   return (
     <div className='container'>
-
-
         <div className='form-page'>
           <div className='form-page__back'>
             <div className='form-page__arrow' onClick={goBack}>
@@ -60,7 +57,7 @@ const FormPage = () => {
           </div>
           <div className='form-page__candidate'>
             <div className='form-page__avatar'>
-              <img src={candidate.photo} alt='candidate avatar'/>
+              {candidate.photo && <img src={urlForLocal(candidate.photo)} alt='candidate avatar'/>}
             </div>
             <div className='form-page__candidate-info'>
               <div className='form-page__position'>
