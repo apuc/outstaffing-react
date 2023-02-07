@@ -346,6 +346,53 @@
       height: 23px;
     }
   }
+
+  .datePicker {
+    visibility: hidden;
+    height: 0;
+    padding: 0;
+    width: 0;
+    position: absolute;
+  }
+
+  .react-datepicker {
+    border: 1px solid #398208;
+  }
+
+  .react-datepicker-popper {
+    top: -15px !important;
+  }
+
+  .react-datepicker__current-month {
+    font-size: 14px;
+    font-family: "LabGrotesque", sans-serif;
+    text-transform: capitalize;
+  }
+
+  .react-datepicker__header {
+    padding: 5px 0 10px;
+    border-bottom: 1px solid #398208;
+  }
+
+  .react-datepicker__day {
+    font-size: 14px;
+    width: 35px;
+    font-family: "LabGrotesque", sans-serif;
+  }
+
+  .react-datepicker__day-name {
+    font-size: 14px;
+    width: 35px;
+    font-family: "LabGrotesque", sans-serif;
+  }
+
+  .react-datepicker__triangle {
+    left: -15px !important;
+
+    &:before {
+      border-bottom-color: #398208 !important;
+    }
+  }
 }
 
 @media (max-width: 575.98px) {
