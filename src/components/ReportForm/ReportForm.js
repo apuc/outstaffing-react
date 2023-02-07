@@ -1,6 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
 import {Link, useNavigate} from 'react-router-dom'
+import DatePicker, { registerLocale } from "react-datepicker"
+import ru from "date-fns/locale/ru"
+registerLocale("ru", ru);
 
 import {Loader} from '../Loader/Loader'
 import {currentMonthAndDay} from '../Calendar/calendarHelper'
@@ -18,26 +21,32 @@ import addIcon from '../../images/addIcon.png'
 import arrow from "../../images/right-arrow.png";
 
 import './reportForm.scss'
-
-
-const getCreatedDate = (day) => {
-  if (day) {
-    return `${new Date(day).getFullYear()}-${new Date(day).getMonth() + 1}-${new Date(day).getDate()}`
-  } else {
-    const date = new Date();
-    const dd = String(date.getDate()).padStart(2, '0');
-    const mm = String(date.getMonth() + 1).padStart(2, '0');
-    const yyyy = date.getFullYear();
-    return `${yyyy}-${mm}-${dd}`
-  }
-};
+import "react-datepicker/dist/react-datepicker.css";
 
 const ReportForm = () => {
   const navigate= useNavigate();
   const reportDate = useSelector(getReportDate);
 
+  const getCreatedDate = (day) => {
+    if (day) {
+      return `${new Date(day).getFullYear()}-${new Date(day).getMonth() + 1}-${new Date(day).getDate()}`
+    } else {
+      const date = new Date();
+      const dd = String(date.getDate()).padStart(2, '0');
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const yyyy = date.getFullYear();
+      return `${yyyy}-${mm}-${dd}`
+    }
+  };
+
+  useEffect(() => {
+    initListeners()
+  }, [])
+
   const [isFetching, setIsFetching] = useState(false);
   const [reportSuccess, setReportSuccess] = useState('');
+  const [startDate, setStartDate] = useState(reportDate ? new Date (reportDate._d) : new Date());
+  const [datePickerOpen, setDatePickerOpen] = useState(false);
 
   const [inputs, setInputs] = useState([{task: '', hours_spent: '', minutes_spent: 0}]);
   const [troublesInputValue, setTroublesInputValue] = useState('');
@@ -46,6 +55,18 @@ const ReportForm = () => {
   const addInput = () => {
     setInputs((prev) => [...prev, {task: '', hours_spent: '', minutes_spent: 0}])
   };
+
+  const initListeners = () => {
+    document.addEventListener('click', closeByClickingOut)
+  }
+
+  const closeByClickingOut = (event) => {
+    const path = event.path || (event.composedPath && event.composedPath())
+
+    if (event && !path.find((div) => div.classList && (div.classList.contains('report-form__block-img') || div.classList.contains('react-datepicker-popper')))) {
+      setDatePickerOpen(false)
+    }
+  }
 
   const totalHours = inputs.reduce((a, b) => a + b.hours_spent, 0);
 
@@ -67,7 +88,7 @@ const ReportForm = () => {
         tasks: inputs,
         difficulties: troublesInputValue,
         tomorrow: scheduledInputValue,
-        created_at: getCreatedDate(reportDate),
+        created_at: getCreatedDate(startDate),
         status: 1,
       },
     }).then((res) => {
@@ -103,15 +124,24 @@ const ReportForm = () => {
                 <h2>Добавление отчета за день</h2>
                 <h3>Дата заполнения отчета:</h3>
               </div>
-              <div className='report-form__block-img'>
+              <div className='report-form__block-img' onClick={() => setDatePickerOpen(true)}>
                 <img
                     className='report-form__calendar-icon'
                     src={calendarIcon}
                     alt=''
                 />
-                {/*{currentMonthAndDayReportPage()}*/}
-                {reportDate ? currentMonthAndDay(reportDate) : getCreatedDate()}
+                {getCreatedDate(startDate)}
               </div>
+              <DatePicker
+                  className='datePicker'
+                  open={datePickerOpen}
+                  locale="ru"
+                  selected={startDate}
+                  onChange={(date) => {
+                    setDatePickerOpen(false)
+                    setStartDate(date)
+                  }}
+              />
               <div className='report-form__task-list'>
                 <img src={ellipse} alt=''/>
                 <span>Какие задачи были выполнены?</span>
