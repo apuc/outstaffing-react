@@ -14,23 +14,28 @@ import {urlForLocal} from "../../helper";
 
 import {apiRequest} from "../../api/request";
 import { getProfileInfo } from '../../redux/outstaffingSlice'
-import {setReportDate} from "../../redux/reportSlice";
+import {getRequestDates, setReportDate, setRequestDate} from "../../redux/reportSlice";
 
+import 'moment/locale/ru'
 import './profileCalendar.scss'
 
 
 export const ProfileCalendar = () => {
     const dispatch = useDispatch();
-    const profileInfo = useSelector(getProfileInfo);
+    const profileInfo = useSelector(getProfileInfo)
+    const requestDates = useSelector(getRequestDates)
     const [month, setMonth] = useState('');
+    const [value, setValue] = useState(moment())
     const [reports, setReports] = useState([]);
     const [totalHours, setTotalHours] = useState(0);
-    const [requestDates, setRequestDates] = useState('');
-    const [loader, setLoader] = useState(false)
+    const [loader, setLoader] = useState(true)
 
+    function setValueHandler (value) {
+        setValue(value)
+    }
 
     useEffect(() => {
-        setRequestDates(getReports(moment()))
+        dispatch(setRequestDate(getReports(moment())))
     },[]);
 
     useEffect( () => {
@@ -79,7 +84,7 @@ export const ProfileCalendar = () => {
                     :
                     <div className='row'>
                         <div className='col-12 col-xl-12'>
-                            <ProfileCalendarComponent reportsDates={reports} />
+                            <ProfileCalendarComponent setValueHandler={setValueHandler} value={value} reports={reports} />
                             <p className='calendar__hours'>
                                 {month} : <span> {totalHours} часов </span>
                             </p>
