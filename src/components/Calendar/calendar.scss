@@ -95,6 +95,18 @@
       box-shadow: 6px 5px 20px rgb(87 98 80 / 21%);
       transform: scale(1.02);
     }
+
+    @media (max-width: 800px) {
+      width: auto;
+      height: auto;
+      padding: 15px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 590px) {
+      padding: 8px;
+      font-size: 12px;
+    }
   }
 
   &__hours {
@@ -104,7 +116,8 @@
     letter-spacing: normal;
     line-height: 30px;
     text-align: left;
-    margin-left: 68px;
+    margin: 50px 0 0;
+    text-transform: capitalize;
 
     span {
       font-weight: 100;

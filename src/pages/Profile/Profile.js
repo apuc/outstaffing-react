@@ -31,7 +31,7 @@ export const Profile = () => {
           <div className='summary__info'>
             <div className='summary__person'>
               <img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : ''} className='summary__avatar' alt='avatar'/>
-              <p className='summary__name'>{profileInfo.fio} {profileInfo.specification}</p>
+              <p className='summary__name'>{profileInfo.fio}, {profileInfo.specification} разработчик</p>
             </div>
           </div>
           <div className='profile__items'>

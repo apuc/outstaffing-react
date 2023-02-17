@@ -71,6 +71,10 @@
         font-size: 12px;
       }
     }
+
+    @media (max-width: 450px) {
+      column-gap: 8px;
+    }
   }
 
   &__personalInfo {

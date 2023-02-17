@@ -19,6 +19,9 @@ import {ResultPage} from './pages/quiz/ResultPage'
 import {Profile} from './pages/Profile/Profile.js'
 import {Summary} from './pages/Summary/Summary'
 import {ViewReport} from './pages/ViewReport/ViewReport'
+import {Tracker} from './pages/Tracker/Tracker'
+import {Payouts} from './pages/Payouts/Payouts'
+import {Settings} from './pages/Settings/Settings'
 
 import './fonts/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -58,6 +61,9 @@ const App = () => {
               <Route exact path='calendar' element={<ProfileCalendar/>}/>
               <Route exact path='summary' element={<Summary/>}/>
               <Route exact path='view' element={<ViewReport/>}/>
+              <Route exact path='tracker' element={<Tracker/>}/>
+              <Route exact path='payouts' element={<Payouts/>}/>
+              <Route exact path='settings' element={<Settings/>}/>
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace/>}/>
