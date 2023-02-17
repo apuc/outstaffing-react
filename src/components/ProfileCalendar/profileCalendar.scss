@@ -15,6 +15,10 @@
 
   .summary__info {
     padding-right: 25px;
+
+    @media (max-width: 500px) {
+      padding-right: 5px;
+    }
   }
 
   .loader {

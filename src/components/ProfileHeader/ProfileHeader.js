@@ -55,14 +55,16 @@ export const ProfileHeader = () => {
             <nav className='profileHeader__nav'>
               <NavLink end to={'/profile/summary'}>Резюме</NavLink>
               <NavLink end to={'/profile'}>Отчетность</NavLink>
-              <NavLink end to={'/'}>Трекер</NavLink>
-              <NavLink end to={'/'}>Выплаты</NavLink>
-              <NavLink end to={'/'}>Настройки</NavLink>
+              <NavLink end to={'/profile/tracker'}>Трекер</NavLink>
+              <NavLink end to={'/profile/payouts'}>Выплаты</NavLink>
+              <NavLink end to={'/profile/settings'}>Настройки</NavLink>
             </nav>
 
             <div className='profileHeader__personalInfo'>
               <h3 className='profileHeader__personalInfoName'>{profileInfo?.fio}</h3>
-              <img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : ""} className='profileHeader__personalInfoAvatar' alt='avatar'/>
+              <NavLink end to={'/profile'}>
+                <img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : ""} className='profileHeader__personalInfoAvatar' alt='avatar'/>
+              </NavLink>
             </div>
           </div>
         </div>
