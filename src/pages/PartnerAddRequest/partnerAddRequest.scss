@@ -1,0 +1,228 @@
+.partnerAddRequest {
+  background: #F1F1F1;
+  height: 100%;
+  min-height: 100vh;
+  font-family: 'LabGrotesque', sans-serif;
+
+  .container {
+    max-width: 1160px;
+    margin-top: 23px;
+
+    @media (max-width: 570px) {
+      margin-top: 0;
+    }
+  }
+
+  &__title {
+    color: #000000;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 32px
+  }
+
+  &__section {
+    margin-top: 25px;
+    display: flex;
+    column-gap: 30px;
+
+    @media (max-width: 1020px) {
+      flex-direction: column;
+      row-gap: 22px;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 22px;
+
+    @media (max-width: 1020px) {
+      order: 2;
+    }
+  }
+
+  .form__block {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 25px 95px 30px 55px;
+    min-width: 600px;
+    width: 100%;
+
+    @media (max-width: 750px) {
+      padding: 15px 50px 15px 30px;
+      min-width: auto;
+    }
+
+    &__title {
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      color: #5B6871;
+      margin-bottom: 35px;
+    }
+
+    &__section {
+      margin-bottom: 35px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      h3 {
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: #000000;
+        margin-bottom: 10px;
+      }
+
+      &__input {
+        background: #EFF2F7;
+        border-radius: 8px;
+        padding: 8px 12px;
+        margin-bottom: 35px;
+
+        @media (max-width: 1020px) {
+          max-width: 500px;
+        }
+
+        input {
+          background: none;
+          border: none;
+          color: #000000;
+          font-weight: 400;
+          font-size: 15px;
+          line-height: 18px;
+          outline: none;
+        }
+      }
+
+      &__selects {
+        display: flex;
+        column-gap: 32px;
+        justify-content: space-between;
+
+        @media (max-width: 1020px) {
+          justify-content: normal;
+        }
+
+        @media (max-width: 515px) {
+          flex-direction: column;
+          row-gap: 20px;
+        }
+      }
+
+      &__select {
+        padding: 8px 15px 9px 12px;
+        background: #EFF2F7;
+        border-radius: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 202px;
+        width: 100%;
+
+        span {
+          color: #000000;
+          font-weight: 400;
+          font-size: 15px;
+          line-height: 18px;
+        }
+      }
+
+      textarea {
+        background: #EFF2F7;
+        border-radius: 8px;
+        width: 100%;
+        border: none;
+        height: 100px;
+        resize: none;
+        outline: none;
+        padding: 5px;
+        color: #000000;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+
+        @media (max-width: 1020px) {
+          max-width: 500px;
+        }
+      }
+    }
+
+    &__buttons {
+      display: flex;
+      margin-top: 50px;
+
+      button {
+        max-width: 150px;
+        width: 100%;
+        height: 40px;
+      }
+    }
+
+    &__cancel {
+      border: 0.5px solid #8DC63F;
+      border-radius: 44px;
+      color: #6F6F6F;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 32px;
+      background: none;
+      margin-right: 23px;
+    }
+
+    &__save {
+      background: #52B709;
+      border-radius: 44px;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 32px;
+      border: none;
+    }
+  }
+
+  footer {
+    margin-top: 70px;
+  }
+
+  &__info {
+    background: #FFFFFF;
+    border-radius: 12px;
+    width: 100%;
+    padding: 90px 48px 200px 62px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 140px;
+
+    @media (max-width: 1020px) {
+      order: 1;
+      padding: 20px;
+      flex-direction: row;
+      column-gap: 50px;
+    }
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+      row-gap: 20px;
+    }
+
+    &__block {
+      h4 {
+        color: #5B6871;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+      }
+
+      p {
+        color: #000000;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+      }
+    }
+  }
+}

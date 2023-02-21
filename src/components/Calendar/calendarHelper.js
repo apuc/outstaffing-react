@@ -53,7 +53,8 @@ export function currentMonthAndDay(day) {
 }
 
 export function getCorrectDate(day) {
-  return `${new Date(day).getDate()}-${new Date(day).getMonth() + 1}-${new Date(day).getFullYear()}`
+  const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+  return `${new Date(day).getDate()} ${months[new Date(day).getMonth()]} ${new Date(day).getFullYear()} года`
 };
 
 export function currentMonthAndDayReportPage() {

@@ -31,7 +31,7 @@ export const Summary = () => {
               <img src={arrow} alt='arrow'/>
               <p>Вернуться</p>
             </div>}
-            <div className='summary__info'>
+            <div className={openGit ? 'summary__info openGit' : 'summary__info'}>
               <div className='summary__person'>
                 <img src={urlForLocal(profileInfo.photo)} className='summary__avatar' alt='avatar'/>
                 <p className='summary__name'>{profileInfo.fio}, {profileInfo.specification} разработчик</p>
@@ -57,7 +57,15 @@ export const Summary = () => {
           </div>
           }
           {profileInfo.vc_text && !openGit &&
-          <div className='summary__experience' dangerouslySetInnerHTML={transformHtml(profileInfo.vc_text)}>
+          <div className='summary__experience'>
+            <div className='experience__block'>
+              <div className="summary__sections__head">
+                  <h3>Описание опыта работы</h3>
+                  <button>Редактировать раздел</button>
+              </div>
+              <div className="experience__content" dangerouslySetInnerHTML={{__html:profileInfo.vc_text}}>
+              </div>
+            </div>
           </div>
           }
           {openGit &&

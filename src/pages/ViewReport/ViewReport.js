@@ -112,15 +112,15 @@ export const ViewReport = () => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {taskText.length && taskText.map((task) => {
+                                {taskText.length && taskText.map((task, index) => {
                                     return <tr key={task.id}>
                                                 <td>
-                                                    <p>{task.task}</p>
+                                                    <p>{index + 1}. {task.task}</p>
                                                 </td>
                                                 <td>
                                                     <div className='viewReport__done__hours__item'>
                                                         <span>{task.hours}</span>
-                                                        <p>часа на задачу</p>
+                                                        <p className='hours'>часов на задачу</p>
                                                     </div>
                                                 </td>
                                             </tr>
