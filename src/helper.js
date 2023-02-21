@@ -3,7 +3,7 @@ export function createMarkup(text) {
 }
 
 export function transformHtml(text) {
-  let startHtml = {__html: text.split('<h4> || <h3> || <h2> || <h1>').join('<br><h2>').split('<br>')};
+  let startHtml = {__html: text.split('<h3> || <h2>').join('<br><h2>').split('<br>')};
   startHtml = startHtml.__html.filter((el) =>
       el !== null && el !== "" || el === 0
   );

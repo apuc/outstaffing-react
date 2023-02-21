@@ -22,6 +22,8 @@ import {ViewReport} from './pages/ViewReport/ViewReport'
 import {Tracker} from './pages/Tracker/Tracker'
 import {Payouts} from './pages/Payouts/Payouts'
 import {Settings} from './pages/Settings/Settings'
+import {PartnerRequests} from './pages/PartnerRequests/PartnerRequests'
+import {PartnerAddRequest} from './pages/PartnerAddRequest/PartnerAddRequest'
 
 import './fonts/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -64,6 +66,8 @@ const App = () => {
               <Route exact path='tracker' element={<Tracker/>}/>
               <Route exact path='payouts' element={<Payouts/>}/>
               <Route exact path='settings' element={<Settings/>}/>
+              <Route exact path='requests' element={<PartnerRequests/>}/>
+              <Route exact path='add-request' element={<PartnerAddRequest/>}/>
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace/>}/>

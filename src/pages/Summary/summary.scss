@@ -55,7 +55,7 @@
     justify-content: space-between;
 
     @media (max-width: 930px) {
-      padding: 0 40px;
+      padding: 0 25px;
     }
 
     @media (max-width: 690px) {
@@ -73,7 +73,7 @@
     align-items: center;
     column-gap: 45px;
 
-    @media (max-width: 690px) {
+    @media (max-width: 825px) {
       column-gap: 20px;
     }
 
@@ -95,6 +95,16 @@
     }
   }
 
+  .openGit {
+    .summary__name {
+      max-width: none;
+
+      @media (max-width: 490px) {
+        max-width: 280px;
+      }
+    }
+  }
+
   &__name {
     font-weight: 500;
     font-size: 16px;
@@ -102,12 +112,12 @@
     position: relative;
     white-space: nowrap;
 
-    @media (max-width: 915px) {
-      max-width: 220px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
+    //@media (max-width: 915px) {
+    //  max-width: 220px;
+    //  overflow: hidden;
+    //  white-space: nowrap;
+    //  text-overflow: ellipsis;
+    //}
 
     @media (max-width: 690px) {
       font-size: 14px;
@@ -115,8 +125,8 @@
       line-height: 15px;
     }
 
-    @media (max-width: 640px) {
-      max-width: 180px;
+    @media (max-width: 550px) {
+      max-width: 200px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -124,7 +134,7 @@
     }
 
     @media (max-width: 450px) {
-      max-width: 120px;
+      max-width: 150px;
     }
 
     &:after {
@@ -267,6 +277,11 @@
           font-size: 16px;
           line-height: 32px;
           margin-bottom: 0;
+        }
+
+        a:hover {
+          text-decoration: none;
+          color: #007bff;
         }
       }
     }

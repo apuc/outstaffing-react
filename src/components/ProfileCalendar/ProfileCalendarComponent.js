@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import ellipse from '../../images/ellipse.png'
+import arrow from '../../images/arrowCalendar.png'
 import rectangle from '../../images/rectangle__calendar.png'
 import calendarIcon from '../../images/calendar_icon.png'
 import moment from 'moment'
@@ -68,27 +68,27 @@ export const ProfileCalendarComponent = React.memo(({value, setValueHandler, rep
         <div className='calendar-component'>
             <div className='calendar-component__header'>
                 <h3>Мои отчеты</h3>
-                <div className='calendar-component__header-box'>
-                    <img src={ellipse} alt='' />
-                    <span onClick={() => {
-                        setValueHandler(prevMonth())
-                        dispatch(setRequestDate(getReports(prevMonth())))
-                    }}>
+                <div className='calendar-component__header-box' onClick={() => {
+                    setValueHandler(prevMonth())
+                    dispatch(setRequestDate(getReports(prevMonth())))
+                }}>
+                    <img src={arrow} alt='' />
+                    <span>
                         {prevMonth().format('MMMM')}
                     </span>
                 </div>
                 <div className='calendar-component__header-box'>
                     <span>{value.format('YYYY')}</span>
                 </div>
-                <div className='calendar-component__header-box'>
-                    <img src={ellipse} alt='' />
-                    <span onClick={() => {
-                        setValueHandler(nextMonth())
-                        dispatch(setRequestDate(getReports(nextMonth())))
+                <div className='calendar-component__header-box' onClick={() => {
+                    setValueHandler(nextMonth())
+                    dispatch(setRequestDate(getReports(nextMonth())))
 
-                    }}>
+                }}>
+                    <span>
                         {nextMonth().format('MMMM')}
                     </span>
+                    <img src={arrow} alt='' />
                 </div>
             </div>
 

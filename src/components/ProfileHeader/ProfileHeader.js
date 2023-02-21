@@ -21,6 +21,45 @@ export const ProfileHeader = () => {
 
   const userRole = useSelector(getRole);
   const profileInfo = useSelector(getProfileInfo);
+  const [user] = useState('developer')
+  const [navInfo] = useState({
+    developer: [
+      {
+        path: '/summary',
+        name: 'Резюме'
+      },
+      {
+        path: '/calendar',
+        name: 'Отчетность'
+      },
+      {
+        path: '/tracker',
+        name: 'Трекер'
+      },
+      {
+        path: '/payouts',
+        name: 'Выплаты'
+      },
+      {
+        path: '/settings',
+        name: 'Настройки'
+      },
+    ],
+    partner: [
+      {
+        path: '/employees',
+        name: 'Сотрудники'
+      },
+      {
+        path: '',
+        name: 'Отчетность'
+      },
+      {
+        path: '/requests',
+        name: 'Запросы'
+      },
+    ]
+  })
 
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
@@ -44,7 +83,14 @@ export const ProfileHeader = () => {
       <header className='profileHeader'>
         <div className='profileHeader__head'>
           <div className='profileHeader__container'>
-            <h2 className='profileHeader__title'>itguild.<span>для разработчиков</span></h2>
+            <h2 className='profileHeader__title'>itguild.
+              <span>
+                {user === 'developer' ?
+                  'для разработчиков' :
+                  'для партнеров'
+                }
+              </span>
+            </h2>
             <button onClick={handler} className='profileHeader__logout'>
               {isLoggingOut ? <Loader/> : 'Выйти'}
             </button>
@@ -53,15 +99,20 @@ export const ProfileHeader = () => {
         <div className='profileHeader__info'>
           <div className='profileHeader__container'>
             <nav className='profileHeader__nav'>
-              <NavLink end to={'/profile/summary'}>Резюме</NavLink>
-              <NavLink end to={'/profile'}>Отчетность</NavLink>
-              <NavLink end to={'/profile/tracker'}>Трекер</NavLink>
-              <NavLink end to={'/profile/payouts'}>Выплаты</NavLink>
-              <NavLink end to={'/profile/settings'}>Настройки</NavLink>
+              {
+                navInfo[user].map((link, index) => {
+                  return <NavLink key={index} end to={`/profile${link.path}`}>{link.name}</NavLink>
+                })
+              }
             </nav>
 
             <div className='profileHeader__personalInfo'>
-              <h3 className='profileHeader__personalInfoName'>{profileInfo?.fio}</h3>
+              <h3 className='profileHeader__personalInfoName'>
+                {user === 'developer' ?
+                    profileInfo?.fio :
+                    ''
+                }
+              </h3>
               <NavLink end to={'/profile'}>
                 <img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : ""} className='profileHeader__personalInfoAvatar' alt='avatar'/>
               </NavLink>

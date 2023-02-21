@@ -53,4 +53,22 @@
       transform: scale(1.02);
     }
   }
+
+  .summary__info {
+    @media (max-width: 800px) {
+      .summary__name {
+        margin: 0;
+        max-width: 220px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .summary__name {
+        max-width: 150px;
+      }
+    }
+  }
 }

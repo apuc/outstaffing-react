@@ -60,13 +60,11 @@ const ReportForm = () => {
   const totalHours = inputs.reduce((a, b) => a + b.hours_spent, 0);
 
   const deleteInput = (indexRemove) => {
-    if (indexRemove !== 0) {
-      setInputs((prev) => prev.filter((el, index) => index !== indexRemove))
-    }
+    setInputs((prev) => prev.filter((el, index) => index !== indexRemove))
   };
 
   const handler = () => {
-    if(!inputs[0].task) {
+    if(!inputs[0].task || !inputs[0].hours_spent) {
       setReportSuccess('Заполните задачи');
       setTimeout(() => setReportSuccess(''), 1000)
       return
