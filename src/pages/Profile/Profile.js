@@ -22,7 +22,7 @@ import './profile.scss'
 export const Profile = () => {
 
   const profileInfo = useSelector(getProfileInfo);
-  const [user] = useState('developer')
+  const [user] = useState('partner')
   const [profileItemsInfo] = useState({
     developer: [
       {

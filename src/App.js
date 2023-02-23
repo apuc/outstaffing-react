@@ -24,6 +24,7 @@ import {Payouts} from './pages/Payouts/Payouts'
 import {Settings} from './pages/Settings/Settings'
 import {PartnerRequests} from './pages/PartnerRequests/PartnerRequests'
 import {PartnerAddRequest} from './pages/PartnerAddRequest/PartnerAddRequest'
+import {PartnerBid} from './pages/PartnerBid/PartnerBid'
 
 import './fonts/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -68,6 +69,7 @@ const App = () => {
               <Route exact path='settings' element={<Settings/>}/>
               <Route exact path='requests' element={<PartnerRequests/>}/>
               <Route exact path='add-request' element={<PartnerAddRequest/>}/>
+              <Route exact path='bid' element={<PartnerBid/>}/>
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace/>}/>

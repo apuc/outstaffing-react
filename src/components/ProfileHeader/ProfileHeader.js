@@ -21,7 +21,7 @@ export const ProfileHeader = () => {
 
   const userRole = useSelector(getRole);
   const profileInfo = useSelector(getProfileInfo);
-  const [user] = useState('developer')
+  const [user] = useState('partner')
   const [navInfo] = useState({
     developer: [
       {

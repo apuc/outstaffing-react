@@ -34,7 +34,7 @@ export const PartnerRequests = () => {
                     <div className='partnerRequests__section__items'>
                         {
                             items.map((item, index) => {
-                                return <Link key={index} to={''} className='partnerRequests__section__item'>
+                                return <Link key={index} to={'/profile/bid'} className='partnerRequests__section__item'>
                                             <p className='partnerRequests__section__item__name'>
                                                 {item.name}
                                             </p>
