@@ -21,7 +21,7 @@ export const ProfileHeader = () => {
 
   const userRole = useSelector(getRole);
   const profileInfo = useSelector(getProfileInfo);
-  const [user] = useState('partner')
+  const [user] = useState(localStorage.getItem('role_status') === '18' ? 'partner' : 'developer')
   const [navInfo] = useState({
     developer: [
       {

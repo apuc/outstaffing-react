@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {useParams, useNavigate} from 'react-router-dom'
+import {useParams, useNavigate, Navigate} from 'react-router-dom'
 import SVG from 'react-inlinesvg'
 
 import Form from '../../components/Form/Form'
@@ -22,6 +22,9 @@ import {urlForLocal} from "../../helper";
 import './formPage.scss'
 
 const FormPage = () => {
+  if(localStorage.getItem('role_status') !== '18') {
+    return <Navigate to="/profile" replace/>
+  }
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();

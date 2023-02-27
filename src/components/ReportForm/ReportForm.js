@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, Navigate, useNavigate} from 'react-router-dom'
 import DatePicker, { registerLocale } from "react-datepicker"
 import {getCorrectDate, getCreatedDate} from '../Calendar/calendarHelper'
 import ru from "date-fns/locale/ru"
 registerLocale("ru", ru);
 
 import {Loader} from '../Loader/Loader'
-import {currentMonthAndDay} from '../Calendar/calendarHelper'
 import {Footer} from "../Footer/Footer";
 import {ProfileHeader} from "../ProfileHeader/ProfileHeader";
+import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 
 import {apiRequest} from "../../api/request";
 
@@ -25,6 +25,9 @@ import './reportForm.scss'
 import "react-datepicker/dist/react-datepicker.css";
 
 const ReportForm = () => {
+  if(localStorage.getItem('role_status') === '18') {
+    return <Navigate to="/profile" replace/>
+  }
   const navigate= useNavigate();
   const reportDate = useSelector(getReportDate);
 
@@ -96,6 +99,10 @@ const ReportForm = () => {
       <section className='report-form'>
         <ProfileHeader/>
         <div className='container'>
+          <ProfileBreadcrumbs links={[{name: 'Главная', link: '/profile'},
+            {name: 'Ваша отчетность', link: '/profile/calendar'},
+            {name: 'Страница добавления нового отчета', link: '/report'}]}
+          />
           <h2 className='summary__title'>Ваши отчеты - <span>добавить отчет</span></h2>
           <div>
             <div className='report__head'>

@@ -9,9 +9,13 @@ import {profiles, tags} from '../../redux/outstaffingSlice'
 
 import {Header} from "../../components/Header/Header";
 import {apiRequest} from "../../api/request";
+import {Navigate} from "react-router-dom";
 
 
 const Home = () => {
+  if(localStorage.getItem('role_status') !== '18') {
+    return <Navigate to="/profile" replace/>
+  }
 
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [index, setIndex] = useState(4);

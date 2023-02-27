@@ -39,8 +39,6 @@ const App = () => {
 
           <Routes>
 
-            <Route exact path='/' element={<Home/>}/>
-
             <Route exact path='/authdev' element={<AuthForDevelopers/>}/>
             <Route exact path='/auth' element={<AuthForPartners/>}/>
 
@@ -61,6 +59,7 @@ const App = () => {
 
             <Route exact path='profile'>
               <Route index element={<Profile/>}/>
+              <Route exact path='employees' element={<Home/>}/>
               <Route exact path='calendar' element={<ProfileCalendar/>}/>
               <Route exact path='summary' element={<Summary/>}/>
               <Route exact path='view' element={<ViewReport/>}/>
@@ -72,7 +71,7 @@ const App = () => {
               <Route exact path='bid' element={<PartnerBid/>}/>
             </Route>
 
-            <Route path="*" element={<Navigate to="/" replace/>}/>
+            <Route path="*" element={<Navigate to="/profile" replace/>}/>
           </Routes>
         </Router>
       </>

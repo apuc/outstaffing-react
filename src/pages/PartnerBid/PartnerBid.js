@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 
 import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
+import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {Footer} from "../../components/Footer/Footer";
 
 import arrowSwitchDate from "../../images/arrowViewReport.png";
@@ -12,6 +13,9 @@ import personImg from "../../images/mokPerson.png"
 import './partnerBid.scss'
 
 export const PartnerBid = () => {
+    if(localStorage.getItem('role_status') !== '18') {
+        return <Navigate to="/profile" replace/>
+    }
     const [mokPersons] = useState([
         {
             name: 'Дмитрий, PHP Back end - разработчик, Middle',
@@ -33,6 +37,12 @@ export const PartnerBid = () => {
         <div className='partnerBid'>
             <ProfileHeader />
             <div className='container'>
+                <ProfileBreadcrumbs links={[
+                    {name: 'Главная', link: '/profile'},
+                    {name: 'Запросы и открытые позиции', link: '/profile/requests'},
+                    {name: 'Просмотр заявки - PHP разработчик', link: '/profile/bid'}
+                ]}
+                />
                 <h2 className='partnerBid__title'>Страница заявки </h2>
                 <div className='partnerBid__qualification'>
                     <h3>PHP разработчик</h3>
@@ -97,8 +107,8 @@ export const PartnerBid = () => {
                         <p>Подходящие сотрудники по запросу</p>
                     </div>
                     <div className='partnerBid__suitable__persons'>
-                        {mokPersons.map((person) => {
-                            return <div className='partnerBid__suitable__person'>
+                        {mokPersons.map((person, index) => {
+                            return <div key={index} className='partnerBid__suitable__person'>
                                         <img src={person.img} alt='avatar' />
                                         <p>{person.name}</p>
                                         <Link className='partnerBid__suitable__person__more' to={person.link}>
