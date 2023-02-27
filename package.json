@@ -48,7 +48,8 @@
     "resolve": "1.18.1",
     "resolve-url-loader": "^3.1.2",
     "semver": "7.3.2",
-    "sweetalert2": "^11.4.8"
+    "sweetalert2": "^11.4.8",
+    "ts-loader": "^9.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",

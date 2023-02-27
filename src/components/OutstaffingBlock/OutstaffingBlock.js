@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {
   selectItems,
   selectedItems,
-   profiles,
+  profiles,
 } from '../../redux/outstaffingSlice'
 
 import {apiRequest} from "../../api/request";
@@ -80,40 +80,22 @@ const OutstaffingBlock = (
   });
 
   return (
-      <OutsideClickHandler
-          onOutsideClick={() => {
-            isSelected && onSelect(null)
-          }}
-      >
-        <div
-            className={`outstaffing-block${
-                isSelected ? ' outstaffing-block__selected' : ''
-            }`}
-        >
-          <div
-              className={`outstaffing-block__img ${
-                  selected ? ' outstaffing-block__border' : ''
-              }`}
-              onClick={() =>
-                  handlePositionClick({
-                    dispatch,
-                    positionId,
-                    isSelected,
-                    onSelect,
-                    apiRequest
-                  })
-              }
-          >
+      <OutsideClickHandler onOutsideClick={() => isSelected && onSelect(null)}>
+        <div className={`outstaffing-block${isSelected ? ' outstaffing-block__selected' : ''}`}>
+          <div className={`outstaffing-block__img ${selected ? ' outstaffing-block__border' : ''}`}
+               onClick={() => handlePositionClick(
+                   {
+                     dispatch,
+                     positionId,
+                     isSelected,
+                     onSelect,
+                     apiRequest
+                   })
+               }>
             <h3>{header}</h3>
             <img className={classes} src={img} alt='img'/>
           </div>
-          <div
-              className={`${
-                  selected
-                      ? 'outstaffing-block__mobile--block'
-                      : 'outstaffing-block__mobile--none'
-              }`}
-          >
+          <div className={`${selected ? 'outstaffing-block__mobile--block' : 'outstaffing-block__mobile--none'}`}          >
             <p className='outstaffing-block__text'># Популярный стек</p>
             {dataTags && (
                 <ul className='outstaffing-block__items'>
