@@ -64,6 +64,9 @@ export const ProfileHeader = () => {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
+    if (localStorage.getItem('role_status') === '18') {
+      return
+    }
     apiRequest(`/profile/${localStorage.getItem('cardId')}`)
         .then((profileInfo) =>
             dispatch(setProfileInfo(profileInfo))
