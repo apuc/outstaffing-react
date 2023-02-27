@@ -6,7 +6,7 @@
   padding-left: 68px;
   padding-right: 54px;
   padding-top: 48px;
-  padding-bottom: 94px;
+  padding-bottom: 40px;
   font-family: 'LabGrotesque', sans-serif;
 
   &__header {
@@ -20,16 +20,27 @@
       letter-spacing: normal;
       line-height: 30px;
       text-align: left;
+
+      @media (max-width: 500px) {
+        font-size: 1.7em;
+      }
     }
 
     &-box {
       display: flex;
       align-items: center;
-      margin-left: 40px;
+      margin-left: 20px;
+      cursor: pointer;
 
       img {
-        width: 6px;
-        height: 6px;
+        margin: 0px 10px;
+        width: 12px;
+        height: 12px;
+
+        &:first-child {
+          transform: rotate(180deg);
+          margin: 0;
+        }
       }
 
       span {
@@ -42,6 +53,10 @@
         text-align: left;
         margin-left: 10px;
         cursor: pointer;
+
+        @media (max-width: 500px) {
+          font-size: 1.2em;
+        }
       }
     }
   }
@@ -79,8 +94,9 @@
 
     button {
       margin: 0 auto;
-      width: 125px;
-      height: 42px;
+      //width: 125px;
+      //height: 42px;
+      padding: 0 5px;
       box-shadow: 0 0 59px rgba(44, 44, 44, 0.05);
       border-radius: 5px;
       border: 1px solid #c4c4c4;
@@ -94,35 +110,67 @@
       text-align: center;
 
       a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 115px;
+        height: 42px;
         text-decoration: none;
         color: #000000;
+
+        img {
+          width: 16px;
+          height: 16px;
+          margin: 0 10px 0 0;
+        }
+
+        @media (max-width: 1200px) {
+          width: 90px;
+          height: 40px;
+        }
+
+        @media (max-width: 968px) {
+          width: 62px;
+          height: 40px;
+          font-size: 10px;
+
+          img {
+            margin-right: 2px;
+          }
+        }
+
+        @media (max-width: 610px) {
+          img {
+            display: none;
+          }
+          width: auto;
+          height: auto;
+        }
+      }
+
+      @media (max-width: 610px) {
+        width: 55px;
+        height: 45px;
+      }
+
+      @media (max-width: 480px) {
+        width: 45px;
+        height: 35px;
       }
     }
   }
 }
-
-@media (max-width: 1200px) {
-  .calendar-component {
-    &__form {
-      button {
-        width: 100px;
-        height: 40px;
-      }
-    }
-  }
-}
-
 @media (max-width: 968px) {
   .calendar-component {
     margin-bottom: 40px;
-    padding: 28px 0 48px 0;
+    padding: 28px 10px 48px 10px;
 
     &__header {
-      h3 {
-        position: absolute;
-        top: -10%;
-        left: 25%;
-      }
+      //h3 {
+      //  position: absolute;
+      //  top: -10%;
+      //  left: 25%;
+      //}
 
       &-box {
         margin-left: 20px;
@@ -132,114 +180,103 @@
     &__rectangle {
       margin: 24px 0;
     }
-
-    &__form {
-      button {
-        width: 72px;
-        height: 40px;
-
-        img {
-          display: none;
-        }
-      }
-    }
   }
 }
 
-@media (max-width: 768px) {
-  .calendar-component__form > button {
-    width: 70px;
-    height: 40px;
+//@media (max-width: 768px) {
+//  .calendar-component__form > button {
+//    width: 70px;
+//    height: 40px;
+//
+//    img {
+//      display: none;
+//    }
+//  }
+//}
 
-    img {
-      display: none;
-    }
-  }
-}
-
-@media (max-width: 540.98px) {
-  .calendar-component__form > button {
-    width: 68px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 520.98px) {
-  .calendar-component__form > button {
-    width: 66px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 500.98px) {
-  .calendar-component__form > button {
-    width: 64px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 480.98px) {
-  .calendar-component__form > button {
-    width: 60px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 460.98px) {
-  .calendar-component__form > button {
-    width: 56px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 440.98px) {
-  .calendar-component__form > button {
-    width: 52px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 428.98px) {
-  .calendar-component__form > button {
-    width: 50px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 414.98px) {
-  .calendar-component__form > button {
-    width: 49px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 395.98px) {
-  .calendar-component__form > button {
-    width: 46px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 350.98px) {
-  .calendar-component__form > button {
-    width: 44px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 349.98px) {
-  .calendar-component__form > button {
-    width: 42px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 346.98px) {
-  .calendar-component__form > button {
-    width: 40px;
-    height: 40px;
-  }
-}
+//@media (max-width: 540.98px) {
+//  .calendar-component__form > button {
+//    width: 68px;
+//    height: 40px;
+//  }
+//}
+//
+//@media (max-width: 520.98px) {
+//  .calendar-component__form > button {
+//    width: 66px;
+//    height: 40px;
+//  }
+//}
+//
+//@media (max-width: 500.98px) {
+//  .calendar-component__form > button {
+//    width: 64px;
+//    height: 40px;
+//  }
+//}
+//
+//@media (max-width: 480.98px) {
+//  .calendar-component__form > button {
+//    width: 60px;
+//    height: 40px;
+//  }
+//}
+//
+//@media (max-width: 460.98px) {
+//  .calendar-component__form > button {
+//    width: 56px;
+//    height: 40px;
+//  }
+//}
+//
+//@media (max-width: 440.98px) {
+//  .calendar-component__form > button {
+//    width: 52px;
+//    height: 40px;
+//  }
+//}
+//
+//@media (max-width: 428.98px) {
+//  .calendar-component__form > button {
+//    width: 50px;
+//    height: 40px;
+//  }
+//}
+//
+//@media (max-width: 414.98px) {
+//  .calendar-component__form > button {
+//    width: 49px;
+//    height: 40px;
+//  }
+//}
+//
+//@media (max-width: 395.98px) {
+//  .calendar-component__form > button {
+//    width: 46px;
+//    height: 40px;
+//  }
+//}
+//
+//@media (max-width: 350.98px) {
+//  .calendar-component__form > button {
+//    width: 44px;
+//    height: 40px;
+//  }
+//}
+//
+//@media (max-width: 349.98px) {
+//  .calendar-component__form > button {
+//    width: 42px;
+//    height: 40px;
+//  }
+//}
+//
+//@media (max-width: 346.98px) {
+//  .calendar-component__form > button {
+//    width: 40px;
+//    height: 40px;
+//  }
+//}
 
 .calendar__icon {
   margin-right: 10px;

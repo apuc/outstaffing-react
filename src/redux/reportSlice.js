@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     dateSelected: '',
-    reportDate: ''
+    reportDate: '',
+    requestDates: ''
 };
 
 export const reportSlice = createSlice({
@@ -15,13 +16,18 @@ export const reportSlice = createSlice({
     setReportDate: (state, action) => {
       state.reportDate = action.payload;
     },
+    setRequestDate: (state, action) => {
+      state.requestDates = action.payload
+    }
   },
 });
 
-export const { dateSelected, setReportDate} = reportSlice.actions;
+export const { dateSelected, setReportDate, setRequestDate} = reportSlice.actions;
 
 export const selectDate = (state) => state.report.dateSelected;
 
 export const getReportDate = (state) => state.report.reportDate;
+
+export const getRequestDates = (state) => state.report.requestDates
 
 export default reportSlice.reducer;

@@ -10,22 +10,12 @@ import {Footer} from "../../components/Footer/Footer";
 
 import arrow from "../../images/right-arrow.png";
 import arrowSwitchDate from "../../images/arrowViewReport.png";
+import {apiRequest} from "../../api/request";
+import {getCorrectDate, getCreatedDate} from '../../components/Calendar/calendarHelper'
 
 import './viewReport.scss'
-import {apiRequest} from "../../api/request";
 
 export const ViewReport = () => {
-    const getCreatedDate = (day) => {
-        if (day) {
-            return `${new Date(day).getFullYear()}-${new Date(day).getMonth() + 1}-${new Date(day).getDate()}`
-        } else {
-            const date = new Date();
-            const dd = String(date.getDate()).padStart(2, '0');
-            const mm = String(date.getMonth() + 1).padStart(2, '0');
-            const yyyy = date.getFullYear();
-            return `${yyyy}-${mm}-${dd}`
-        }
-    };
     const reportDate = useSelector(getReportDate);
 
     const [taskText, setTaskText] = useState([]);
@@ -91,7 +81,7 @@ export const ViewReport = () => {
                         <img src={arrow} alt='arrow'/><p>Вернуться</p>
                     </Link>
                     <div className='viewReport__bar'>
-                        <h3 className='viewReport__bar__date'>{getCreatedDate(reportDay)}</h3>
+                        <h3 className='viewReport__bar__date'>{getCorrectDate(reportDay)}</h3>
                         <p className='viewReport__bar__hours'>Вами потрачено на работу : <span>{totalHours} часов</span></p>
                         {/*<div className='viewReport__bar__progressBar'>*/}
                         {/*    <span></span>*/}
@@ -103,7 +93,7 @@ export const ViewReport = () => {
                     <div className='viewReport__switchDate__prev switchDate' onClick={() => previousDay()}>
                         <img src={arrowSwitchDate} alt='arrow'/>
                     </div>
-                    <p>{getCreatedDate(reportDay)}</p>
+                    <p>{getCorrectDate(reportDay)}</p>
                     <div className={`viewReport__switchDate__next switchDate ${getCreatedDate(currentDay) === getCreatedDate(reportDay) ? 'disable' : ''}`} onClick={() => nextDay()}>
                         <img src={arrowSwitchDate} alt='arrow'/>
                     </div>
@@ -122,15 +112,15 @@ export const ViewReport = () => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {taskText.length && taskText.map((task) => {
+                                {taskText.length && taskText.map((task, index) => {
                                     return <tr key={task.id}>
                                                 <td>
-                                                    <p>{task.task}</p>
+                                                    <p>{index + 1}. {task.task}</p>
                                                 </td>
                                                 <td>
                                                     <div className='viewReport__done__hours__item'>
                                                         <span>{task.hours}</span>
-                                                        <p>часа на задачу</p>
+                                                        <p className='hours'>часов на задачу</p>
                                                     </div>
                                                 </td>
                                             </tr>

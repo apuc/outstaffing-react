@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from 'react'
-// import ellipse from '../../images/ellipse.png'
+import arrow from '../../images/arrowCalendar.png'
 import rectangle from '../../images/rectangle__calendar.png'
 import calendarIcon from '../../images/calendar_icon.png'
 import moment from 'moment'
-import 'moment/locale/ru'
-import { calendarHelper, currentMonthAndDay} from '../Calendar/calendarHelper'
-import { setReportDate } from '../../redux/reportSlice';
+import {calendarHelper, currentMonth, currentMonthAndDay, getReports} from '../Calendar/calendarHelper'
+import {setReportDate, setRequestDate} from '../../redux/reportSlice';
 import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 
+import 'moment/locale/ru'
 import './../Calendar/calendarComponent.scss'
 
-export const ProfileCalendarComponent = ({reportsDates}) => {
+export const ProfileCalendarComponent = React.memo(({value, setValueHandler, reports, totalHours}) => {
     const dispatch = useDispatch();
-    const [value, setValue] = useState(moment())
+    const [currentDay] = useState(moment())
     const [calendar, setCalendar] = useState([])
+    const [month, setMonth] = useState('');
 
     useEffect(() => {
         setCalendar(calendarHelper(value))
     }, [value])
 
-    // function beforeToday(day) {
-    //     return day.isBefore(new Date(), 'day')
-    // }
+    useEffect(() => {
+        setMonth(value.format('MMMM'))
+    }, [month]);
 
     function isToday(day) {
         return day.isSame(new Date(), 'day')
@@ -35,8 +36,8 @@ export const ProfileCalendarComponent = ({reportsDates}) => {
     }
 
     function dayStyles(day) {
-        if (value < day) return `block`
-        for (const date of reportsDates) {
+        if (currentDay < day) return `block`
+        for (const date of reports) {
             if (`${new Date(day).getFullYear()}-${correctDay(new Date(day).getMonth() + 1)}-${correctDay(new Date(day).getDate())}` === date.created_at) {
                 return `before`
             }
@@ -47,7 +48,7 @@ export const ProfileCalendarComponent = ({reportsDates}) => {
     }
 
     function correctRoute(day) {
-        for (const date of reportsDates) {
+        for (const date of reports) {
             if (`${new Date(day).getFullYear()}-${correctDay(new Date(day).getMonth() + 1)}-${correctDay(new Date(day).getDate())}` === date.created_at) {
                 return `../view`
             }
@@ -55,26 +56,40 @@ export const ProfileCalendarComponent = ({reportsDates}) => {
         return '../../report'
     }
 
-    // function prevMonth() {
-    //     return value.clone().subtract(1, 'month')
-    // }
-    //
-    // function nextMonth() {
-    //     return value.clone().add(1, 'month');
-    // }
+    function prevMonth() {
+        return value.clone().subtract(1, 'month')
+    }
+
+    function nextMonth() {
+        return value.clone().add(1, 'month');
+    }
 
     return (
         <div className='calendar-component'>
             <div className='calendar-component__header'>
                 <h3>Мои отчеты</h3>
-                {/*<div className='calendar-component__header-box'>*/}
-                {/*    <img src={ellipse} alt='' />*/}
-                {/*    <span onClick={() => setValue(prevMonth())}>{prevMonth().format('MMMM')}</span>*/}
-                {/*</div>*/}
-                {/*<div className='calendar-component__header-box'>*/}
-                {/*    <img src={ellipse} alt='' />*/}
-                {/*    <span onClick={() => setValue(nextMonth())}>{nextMonth().format('MMMM')}</span>*/}
-                {/*</div>*/}
+                <div className='calendar-component__header-box' onClick={() => {
+                    setValueHandler(prevMonth())
+                    dispatch(setRequestDate(getReports(prevMonth())))
+                }}>
+                    <img src={arrow} alt='' />
+                    <span>
+                        {prevMonth().format('MMMM')}
+                    </span>
+                </div>
+                <div className='calendar-component__header-box'>
+                    <span>{value.format('YYYY')}</span>
+                </div>
+                <div className='calendar-component__header-box' onClick={() => {
+                    setValueHandler(nextMonth())
+                    dispatch(setRequestDate(getReports(nextMonth())))
+
+                }}>
+                    <span>
+                        {nextMonth().format('MMMM')}
+                    </span>
+                    <img src={arrow} alt='' />
+                </div>
             </div>
 
             <div className='calendar-component__rectangle'>
@@ -113,7 +128,10 @@ export const ProfileCalendarComponent = ({reportsDates}) => {
                     )}
                 </div>
             </div>
+            <p className='calendar__hours'>
+                {month} : <span> {totalHours} часов </span>
+            </p>
         </div>
     )
-}
+})
 

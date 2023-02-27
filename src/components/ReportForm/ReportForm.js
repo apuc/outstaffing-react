@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
 import {Link, useNavigate} from 'react-router-dom'
 import DatePicker, { registerLocale } from "react-datepicker"
+import {getCorrectDate, getCreatedDate} from '../Calendar/calendarHelper'
 import ru from "date-fns/locale/ru"
 registerLocale("ru", ru);
 
@@ -26,18 +27,6 @@ import "react-datepicker/dist/react-datepicker.css";
 const ReportForm = () => {
   const navigate= useNavigate();
   const reportDate = useSelector(getReportDate);
-
-  const getCreatedDate = (day) => {
-    if (day) {
-      return `${new Date(day).getFullYear()}-${new Date(day).getMonth() + 1}-${new Date(day).getDate()}`
-    } else {
-      const date = new Date();
-      const dd = String(date.getDate()).padStart(2, '0');
-      const mm = String(date.getMonth() + 1).padStart(2, '0');
-      const yyyy = date.getFullYear();
-      return `${yyyy}-${mm}-${dd}`
-    }
-  };
 
   useEffect(() => {
     initListeners()
@@ -71,13 +60,11 @@ const ReportForm = () => {
   const totalHours = inputs.reduce((a, b) => a + b.hours_spent, 0);
 
   const deleteInput = (indexRemove) => {
-    if (indexRemove !== 0) {
-      setInputs((prev) => prev.filter((el, index) => index !== indexRemove))
-    }
+    setInputs((prev) => prev.filter((el, index) => index !== indexRemove))
   };
 
   const handler = () => {
-    if(!inputs[0].task) {
+    if(!inputs[0].task || !inputs[0].hours_spent) {
       setReportSuccess('Заполните задачи');
       setTimeout(() => setReportSuccess(''), 1000)
       return
@@ -130,7 +117,7 @@ const ReportForm = () => {
                     src={calendarIcon}
                     alt=''
                 />
-                {getCreatedDate(startDate)}
+                {getCorrectDate(startDate)}
               </div>
               <DatePicker
                   className='datePicker'
@@ -184,9 +171,11 @@ const ReportForm = () => {
                                        : input
                                  }))}/>
                         </div>
+                        {index > 0 &&
                         <div className='report-form__task-remove'>
                           <img onClick={() => deleteInput(index)} src={remove} alt=''/>
                         </div>
+                        }
                       </form>
                   )
                 })}
@@ -196,7 +185,6 @@ const ReportForm = () => {
                   <span>Добавить еще </span>
                 </div>
               </div>
-              <div className='col-4'></div>
             </div>
 
         <div className='row'>

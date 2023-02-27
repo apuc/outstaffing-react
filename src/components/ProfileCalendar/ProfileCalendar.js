@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
-import {currentMonth, getReports} from '../Calendar/calendarHelper'
+import {getReports} from '../Calendar/calendarHelper'
 import { Link } from 'react-router-dom'
 import moment from "moment";
 
@@ -14,23 +14,27 @@ import {urlForLocal} from "../../helper";
 
 import {apiRequest} from "../../api/request";
 import { getProfileInfo } from '../../redux/outstaffingSlice'
-import {setReportDate} from "../../redux/reportSlice";
+import {getRequestDates, setReportDate, setRequestDate} from "../../redux/reportSlice";
 
+import 'moment/locale/ru'
 import './profileCalendar.scss'
 
 
 export const ProfileCalendar = () => {
     const dispatch = useDispatch();
-    const profileInfo = useSelector(getProfileInfo);
-    const [month, setMonth] = useState('');
+    const profileInfo = useSelector(getProfileInfo)
+    const requestDates = useSelector(getRequestDates)
+    const [value, setValue] = useState(moment())
     const [reports, setReports] = useState([]);
     const [totalHours, setTotalHours] = useState(0);
-    const [requestDates, setRequestDates] = useState('');
-    const [loader, setLoader] = useState(false)
+    const [loader, setLoader] = useState(true)
 
+    function setValueHandler (value) {
+        setValue(value)
+    }
 
     useEffect(() => {
-        setRequestDates(getReports(moment()))
+        dispatch(setRequestDate(getReports(moment())))
     },[]);
 
     useEffect( () => {
@@ -54,10 +58,6 @@ export const ProfileCalendar = () => {
             })
     }, [requestDates]);
 
-    useEffect(() => {
-        setMonth(currentMonth)
-    }, [month]);
-
     return (
         <div className='profile__calendar'>
             <ProfileHeader/>
@@ -66,7 +66,7 @@ export const ProfileCalendar = () => {
                 <div className='summary__info'>
                     <div className='summary__person'>
                         <img src={urlForLocal(profileInfo.photo)} className='summary__avatar'  alt='avatar'/>
-                        <p className='summary__name'>{profileInfo.fio} {profileInfo.specification}</p>
+                        <p className='summary__name'>{profileInfo.fio}, {profileInfo.specification} разработчик</p>
                     </div>
                     <Link to='/report'>
                         <button className="calendar__btn" onClick={() => {
@@ -79,10 +79,7 @@ export const ProfileCalendar = () => {
                     :
                     <div className='row'>
                         <div className='col-12 col-xl-12'>
-                            <ProfileCalendarComponent reportsDates={reports} />
-                            <p className='calendar__hours'>
-                                {month} : <span> {totalHours} часов </span>
-                            </p>
+                            <ProfileCalendarComponent setValueHandler={setValueHandler} value={value} reports={reports} totalHours={totalHours} />
                         </div>
                     </div>
                 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 
@@ -22,79 +22,114 @@ import './profile.scss'
 export const Profile = () => {
 
   const profileInfo = useSelector(getProfileInfo);
+  const [user] = useState('developer')
+  const [profileItemsInfo] = useState({
+    developer: [
+      {
+        path: '/calendar',
+        img: reportsIcon,
+        title: 'Ваша отчетность',
+        description: '<span></span>Отработанных в этом месяце часов'
+      },
+      {
+        path: '/summary',
+        img: summaryIcon,
+        title: 'Данные и резюме',
+        description: 'Ваше резюме<br/><span>заполнено</span>'
+      },
+      {
+        path: '/tracker',
+        img: timerIcon,
+        title: 'Трекер времени',
+        description: 'Сколько времени занимает<br/> выполнение задач'
+      },
+      {
+        path: '/payouts',
+        img: paymentIcon,
+        title: 'Выплаты',
+        description: 'У вас <span>подтвержден</span><br/> статус самозанятого'
+      },
+      {
+        path: '/settings',
+        img: settingIcon,
+        title: 'Настройки аккаунта',
+        description: 'Перейдите чтобы начать<br/> редактирование'
+      }
+    ],
+    partner: [
+      {
+        path: '/requests',
+        img: reportsIcon,
+        title: 'Запросы и открытые позиции',
+        description: '<span>У вас 2 вакансии<br/></span>открытые от лица компании'
+      },
+      {
+        path: '',
+        img: summaryIcon,
+        title: 'Данные персонала',
+        description: 'Наши специалисты <br/><span>уже работающие у вас</span>'
+      },
+      {
+        path: '/tracker',
+        img: timerIcon,
+        title: 'Трекер времени',
+        description: 'Контроль времени и<br/> выполнение задач'
+      },
+      {
+        path: '',
+        img: paymentIcon,
+        title: 'Договора и отчетность',
+        description: 'Ключевые условия<br/> договора'
+      },
+      {
+        path: '',
+        img: settingIcon,
+        title: 'Настройки аккаунта',
+        description: 'Перейдите чтобы начать<br/> редактирование'
+      }
+    ]
+  })
 
   return (
       <div className='profile'>
         <ProfileHeader/>
         <div className='container'>
-          <h2 className='profile__title'>Добрый день, <span>{profileInfo.fio}</span></h2>
+          <h2 className='profile__title'>
+            {user === 'developer' ?
+                <span><p>Добрый день,&nbsp;</p>{profileInfo.fio}</span>
+                :
+              'ООО НДВ Консалтинг'
+            }
+          </h2>
           <div className='summary__info'>
             <div className='summary__person'>
               <img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : ''} className='summary__avatar' alt='avatar'/>
-              <p className='summary__name'>{profileInfo.fio} {profileInfo.specification}</p>
+              <p className='summary__name'>
+                {user === 'developer' ?
+                    <span>{profileInfo.fio}, {profileInfo.specification} разработчик</span>
+                    :
+                    'ООО НДВ Консалтинг'
+                }
+              </p>
             </div>
           </div>
           <div className='profile__items'>
-            <Link to={'/profile/calendar'} className='item'>
-              <div className='item__about'>
-                <img src={reportsIcon} alt='report'/>
-                <h3>Ваша отчетность</h3>
-              </div>
-              <div className='item__info'>
-                <p><span></span>Отработанных в этом месяце часов</p>
-                <div className='item__infoLink'>
-                  <img src={rightArrow} alt='arrow'/>
-                </div>
-              </div>
-            </Link>
-            <Link to={'/profile/summary'} className='item'>
-              <div className='item__about'>
-                <img src={summaryIcon} alt='summary'/>
-                <h3>Данные и резюме</h3>
-              </div>
-              <div className='item__info'>
-                <p>Ваше резюме<br/><span>заполнено</span></p>
-                <div className='item__infoLink'>
-                  <img src={rightArrow} alt='arrow'/>
-                </div>
-              </div>
-            </Link>
-            <Link to={'/profile'} className='item'>
-              <div className='item__about'>
-                <img src={timerIcon} alt='timer'/>
-                <h3>Трекер времени</h3>
-              </div>
-              <div className='item__info'>
-                <p>Сколько времени занимает<br/> выполнение задач</p>
-                <div className='item__infoLink'>
-                  <img src={rightArrow} alt='arrow'/>
-                </div>
-              </div>
-            </Link>
-            <Link to={'/profile'} className='item'>
-              <div className='item__about'>
-                <img src={paymentIcon} alt='payment'/>
-                <h3>Выплаты</h3>
-              </div>
-              <div className='item__info'>
-                <p>У вас <span>подтвержден</span><br/> статус самозанятого</p>
-                <div className='item__infoLink'>
-                  <img src={rightArrow} alt='arrow'/>
-                </div>
-              </div>
-            </Link>
-            <Link to={'/profile'} className='item'>
-              <div className='item__about'>
-                <img src={settingIcon} alt='settings'/>
-                <h3>Настройки аккаунта</h3>
-              </div>
-              <div className='item__info'>
-                <p>Перейдите чтобы начать<br/> редактирование</p>
-                <div className='item__infoLink'>
-                  <img src={rightArrow} alt='arrow'/>
-                </div>
-              </div>
-            </Link>
+            {
+              profileItemsInfo[user].map((item, index) => {
+                return <Link key={index} to={`/profile${item.path}`} className='item'>
+                          <div className='item__about'>
+                            <img src={item.img} alt='itemImg'/>
+                            <h3>{item.title}</h3>
+                          </div>
+                          <div className='item__info'>
+                            <p dangerouslySetInnerHTML={{__html: item.description}}></p>
+                            <div className='item__infoLink'>
+                              <img src={rightArrow} alt='arrow'/>
+                            </div>
+                          </div>
+                        </Link>
+              })
+            }
           </div>
         </div>
         <Footer/>
