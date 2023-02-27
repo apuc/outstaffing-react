@@ -77,6 +77,7 @@ export const AuthBox = ({title, altTitle, roleChangeLink}) => {
           localStorage.setItem('auth_token', res.access_token);
           localStorage.setItem('id', res.id);
           localStorage.setItem('cardId', res.card_id);
+          localStorage.setItem('role_status', res.status);
           localStorage.setItem(
               'access_token_expired_at',
               res.access_token_expired_at

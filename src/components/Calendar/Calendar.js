@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, Navigate, useNavigate} from 'react-router-dom'
 
 import CalendarComponent from './CalendarComponent'
 import {currentMonth} from './calendarHelper'
@@ -16,6 +16,9 @@ import {urlForLocal} from "../../helper";
 
 
 const Calendar = () => {
+  if(localStorage.getItem('role_status') !== '18') {
+    return <Navigate to="/profile" replace/>
+  }
 
   const candidateForCalendar = useSelector(selectCurrentCandidate);
 

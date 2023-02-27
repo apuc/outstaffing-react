@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
 import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {getProfileInfo} from "../../redux/outstaffingSlice";
+import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {Footer} from '../../components/Footer/Footer'
 import {transformHtml, urlForLocal} from "../../helper";
 
@@ -11,8 +12,12 @@ import gitImgItem from "../../images/gitItemImg.png"
 
 import './summary.scss'
 import {apiRequest} from "../../api/request";
+import {Navigate} from "react-router-dom";
 
 export const Summary = () => {
+    if(localStorage.getItem('role_status') === '18') {
+        return <Navigate to="/profile" replace/>
+    }
   const profileInfo = useSelector(getProfileInfo);
   const [openGit, setOpenGit] = useState(false);
   const [gitInfo, setGitInfo] = useState([]);
@@ -26,6 +31,11 @@ export const Summary = () => {
         <ProfileHeader/>
         <div className='container'>
           <div className='summary__content'>
+              <ProfileBreadcrumbs links={[
+                  {name: 'Главная', link: '/profile'},
+                  {name: 'Данные и резюме', link: '/profile/summary'}
+              ]}
+              />
             <h2 className='summary__title'>Ваше резюме {openGit && <span>- Git</span>}</h2>
             {openGit && <div className='summary__back' onClick={() => setOpenGit(false)}>
               <img src={arrow} alt='arrow'/>

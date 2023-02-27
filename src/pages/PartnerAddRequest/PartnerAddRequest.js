@@ -1,17 +1,28 @@
 import React from 'react';
 
 import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
+import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {Footer} from "../../components/Footer/Footer";
 
 import arrowDown from "../../images/selectArrow.png"
 
 import './partnerAddRequest.scss'
+import {Navigate} from "react-router-dom";
 
 export const PartnerAddRequest = () => {
+    if(localStorage.getItem('role_status') !== '18') {
+        return <Navigate to="/profile" replace/>
+    }
     return (
         <div className='partnerAddRequest'>
             <ProfileHeader />
             <div className='container'>
+                <ProfileBreadcrumbs links={[
+                    {name: 'Главная', link: '/profile'},
+                    {name: 'Запросы и открытые позиции', link: '/profile/requests'},
+                    {name: 'Создание новой заявки', link: '/profile/add-request'}
+                ]}
+                />
                 <h2 className='partnerAddRequest__title'>Страница добавления заявки</h2>
                 <div className='partnerAddRequest__section'>
                     <div className='partnerAddRequest__form'>

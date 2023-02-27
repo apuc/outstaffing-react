@@ -24,6 +24,7 @@ import {Payouts} from './pages/Payouts/Payouts'
 import {Settings} from './pages/Settings/Settings'
 import {PartnerRequests} from './pages/PartnerRequests/PartnerRequests'
 import {PartnerAddRequest} from './pages/PartnerAddRequest/PartnerAddRequest'
+import {PartnerBid} from './pages/PartnerBid/PartnerBid'
 
 import './fonts/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -37,8 +38,6 @@ const App = () => {
         <Router>
 
           <Routes>
-
-            <Route exact path='/' element={<Home/>}/>
 
             <Route exact path='/authdev' element={<AuthForDevelopers/>}/>
             <Route exact path='/auth' element={<AuthForPartners/>}/>
@@ -60,6 +59,7 @@ const App = () => {
 
             <Route exact path='profile'>
               <Route index element={<Profile/>}/>
+              <Route exact path='employees' element={<Home/>}/>
               <Route exact path='calendar' element={<ProfileCalendar/>}/>
               <Route exact path='summary' element={<Summary/>}/>
               <Route exact path='view' element={<ViewReport/>}/>
@@ -68,9 +68,10 @@ const App = () => {
               <Route exact path='settings' element={<Settings/>}/>
               <Route exact path='requests' element={<PartnerRequests/>}/>
               <Route exact path='add-request' element={<PartnerAddRequest/>}/>
+              <Route exact path='bid' element={<PartnerBid/>}/>
             </Route>
 
-            <Route path="*" element={<Navigate to="/" replace/>}/>
+            <Route path="*" element={<Navigate to="/profile" replace/>}/>
           </Routes>
         </Router>
       </>

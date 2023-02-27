@@ -1,0 +1,50 @@
+.profileBreadcrumbs {
+  display: flex;
+  margin-bottom: 12px;
+
+  @media (max-width: 570px) {
+    margin-top: 15px;
+  }
+
+  a {
+    color: #5B6871;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    transition: 0.3s all ease;
+    position: relative;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 525px) {
+      font-size: 10px;
+    }
+
+    @media (max-width: 455px) {
+      font-size: 9px;
+    }
+
+    &:hover {
+      text-decoration: none;
+      color: #000000;
+    }
+
+    &:after {
+      content: '';
+      background-image: url("../../images/BreadcrumbsArrow.png");
+      background-repeat: no-repeat;
+      width: 7px;
+      height:10px;
+      position: absolute;
+      right: -14px;
+    }
+
+    &:last-child {
+      margin-right: 0;
+      &:after {
+        background: none;
+      }
+    }
+  }
+}

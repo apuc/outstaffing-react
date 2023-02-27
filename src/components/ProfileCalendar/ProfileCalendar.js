@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 import {getReports} from '../Calendar/calendarHelper'
-import { Link } from 'react-router-dom'
+import {Link, Navigate} from 'react-router-dom'
 import moment from "moment";
 
 import {ProfileCalendarComponent} from "./ProfileCalendarComponent";
 import {Loader} from "../Loader/Loader";
 import {ProfileHeader} from "../ProfileHeader/ProfileHeader";
+import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import { Footer } from '../Footer/Footer'
 
 import {urlForLocal} from "../../helper";
@@ -21,6 +22,9 @@ import './profileCalendar.scss'
 
 
 export const ProfileCalendar = () => {
+    if(localStorage.getItem('role_status') === '18') {
+        return <Navigate to="/profile" replace/>
+    }
     const dispatch = useDispatch();
     const profileInfo = useSelector(getProfileInfo)
     const requestDates = useSelector(getRequestDates)
@@ -62,6 +66,7 @@ export const ProfileCalendar = () => {
         <div className='profile__calendar'>
             <ProfileHeader/>
             <div className='container'>
+                <ProfileBreadcrumbs links={[{name: 'Главная', link: '/profile'},{name: 'Ваша отчетность', link: '/profile/calendar'}]} />
                 <h2 className='summary__title'>Ваши отчеты</h2>
                 <div className='summary__info'>
                     <div className='summary__person'>

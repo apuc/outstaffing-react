@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 
 import {useSelector} from "react-redux";
 import {getReportDate} from "../../redux/reportSlice";
 
 import {Loader} from "../../components/Loader/Loader"
 import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
+import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {Footer} from "../../components/Footer/Footer";
 
 import arrow from "../../images/right-arrow.png";
@@ -16,6 +17,9 @@ import {getCorrectDate, getCreatedDate} from '../../components/Calendar/calendar
 import './viewReport.scss'
 
 export const ViewReport = () => {
+    if(localStorage.getItem('role_status') === '18') {
+        return <Navigate to="/profile" replace/>
+    }
     const reportDate = useSelector(getReportDate);
 
     const [taskText, setTaskText] = useState([]);
@@ -76,6 +80,10 @@ export const ViewReport = () => {
             <ProfileHeader/>
             <div className='container'>
                 <div className='viewReport__info'>
+                    <ProfileBreadcrumbs links={[{name: 'Главная', link: '/profile'},
+                        {name: 'Ваша отчетность', link: '/profile/calendar'},
+                        {name: 'Просмотр отчета за день', link: '/profile/view'}]}
+                    />
                     <h2 className='viewReport__title'>Ваши отчеты - <span>просмотр отчета за день</span></h2>
                     <Link className='viewReport__back' to={`/profile/calendar`}>
                         <img src={arrow} alt='arrow'/><p>Вернуться</p>

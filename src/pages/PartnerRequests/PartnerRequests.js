@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 
 import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
+import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {Footer} from "../../components/Footer/Footer";
 
 import './partnerRequests.scss'
 
 export const PartnerRequests = () => {
+    if(localStorage.getItem('role_status') !== '18') {
+        return <Navigate to="/profile" replace/>
+    }
     const [items] = useState([
         {
             name: 'PHP разработчик ',
@@ -29,12 +33,17 @@ export const PartnerRequests = () => {
         <div className='partnerRequests'>
             <ProfileHeader />
             <div className='container'>
+                <ProfileBreadcrumbs links={[
+                    {name: 'Главная', link: '/profile'},
+                    {name: 'Запросы и открытые позиции', link: '/profile/requests'}
+                ]}
+                />
                 <h2 className='partnerRequests__title'>Запросы</h2>
                 <div className='partnerRequests__section'>
                     <div className='partnerRequests__section__items'>
                         {
                             items.map((item, index) => {
-                                return <Link key={index} to={''} className='partnerRequests__section__item'>
+                                return <Link key={index} to={'/profile/bid'} className='partnerRequests__section__item'>
                                             <p className='partnerRequests__section__item__name'>
                                                 {item.name}
                                             </p>

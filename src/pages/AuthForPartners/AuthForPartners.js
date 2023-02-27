@@ -22,7 +22,7 @@ const AuthForPartners = () => {
 
   useEffect(()=> {
     if (isAuth || getToken) {
-      navigate('/')
+      navigate('/profile')
     }
   }, [getToken]);
 

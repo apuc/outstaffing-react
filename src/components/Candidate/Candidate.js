@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {useParams, Link, useNavigate} from 'react-router-dom'
+import {useParams, Link, useNavigate, Navigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 
 import SkillSection from '../SkillSection/SkillSection'
@@ -23,6 +23,9 @@ import {Header} from "../Header/Header";
 
 
 const Candidate = () => {
+  if(localStorage.getItem('role_status') !== '18') {
+    return <Navigate to="/profile" replace/>
+  }
   const {id: candidateId} = useParams();
 
   const navigate = useNavigate();
