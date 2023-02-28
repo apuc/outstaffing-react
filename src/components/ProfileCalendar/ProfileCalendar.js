@@ -80,9 +80,11 @@ export const ProfileCalendar = () => {
                     </Link>
                 </div>
                 {loader ?
-                    <Loader height={80}  width={80} />
+                    <div className='loader__wrapper'>
+                        <Loader height={80}  width={80} />
+                    </div>
                     :
-                    <div className='row'>
+                    <div className='row calendar__wrapper'>
                         <div className='col-12 col-xl-12'>
                             <ProfileCalendarComponent setValueHandler={setValueHandler} value={value} reports={reports} totalHours={totalHours} />
                         </div>

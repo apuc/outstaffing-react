@@ -51,7 +51,7 @@
     margin-top: 30px;
     display: flex;
     align-items: center;
-    padding: 0 130px 0 45px;
+    padding: 0 25px 0 45px;
     justify-content: space-between;
 
     @media (max-width: 930px) {
@@ -150,16 +150,16 @@
   }
 
   &__git {
-    background: #52B709;
-    border-radius: 44px;
+    border-radius: 31px;
     width: 177px;
-    height: 50px;
+    height: 62px;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 1.9em;
     line-height: 32px;
     color: white;
     border: none;
     transition: all 0.3s ease;
+    background-image: linear-gradient(to top, #6aaf5c 0%, #52b709 100%), linear-gradient(36deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.16) 47%, rgba(255, 255, 255, 0.17) 50%, rgba(255, 255, 255, 0) 100%);
 
     &:hover {
       box-shadow: 6px 5px 20px rgb(87 98 80 / 21%);
@@ -168,6 +168,7 @@
 
     @media (max-width: 690px) {
       width: 120px;
+      height: 50px;
     }
   }
 
@@ -307,10 +308,12 @@
         border-radius: 12px;
         padding: 35px 30px 30px 45px;
         transition: all 0.3s ease;
+        color: #000000;
 
         &:hover {
           box-shadow: 6px 5px 20px rgb(87 98 80 / 21%);
           transform: scale(1.02);
+          text-decoration: none;
         }
 
         @media (max-width: 825px) {

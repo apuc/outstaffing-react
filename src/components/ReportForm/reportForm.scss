@@ -151,8 +151,7 @@
 
       p {
         font-family: 'GT Eesti Pro Display';
-        font-size: 1.3em;
-        font-weight: 100;
+        font-size: 1.5em;
         font-style: normal;
         letter-spacing: normal;
         line-height: normal;
@@ -168,10 +167,10 @@
       //}
 
       &--hours {
-        margin-left: 330px;
+        margin-left: 310px;
 
         @media (max-width: 810px) {
-          margin-left: 125px;
+          margin-left: 100px;
         }
 
         @media (max-width: 610px) {
@@ -202,6 +201,11 @@
       margin-left: 20px;
 
       &--description {
+
+        .checkTask {
+          border-color: #fc0000;
+        }
+
         input {
           width: 460px;
           height: 42px;
@@ -225,6 +229,14 @@
       }
 
       &--hours {
+        @media (max-width: 610px) {
+          margin-left: 45px;
+        }
+
+        .checkTask {
+          border-color: #fc0000;
+        }
+
         input {
           width: 141px;
           height: 42px;
@@ -257,8 +269,7 @@
 
     span {
       font-family: 'GT Eesti Pro Display';
-      font-size: 1.3em;
-      font-weight: 100;
+      font-size: 1.5em;
       font-style: normal;
       letter-spacing: normal;
       line-height: normal;

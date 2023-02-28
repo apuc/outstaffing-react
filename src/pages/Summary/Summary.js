@@ -60,7 +60,7 @@ export const Summary = () => {
             <div className='skills__section__items'>
               <div className='skills__section__items__wrapper'>
                 {profileInfo.skillValues && profileInfo.skillValues.map((skill) =>
-                    <span key={skill.id} className='skill_item'>{skill.skill.name}</span>
+                    <span key={skill.id} className='skill_item'>{skill.skill.name},</span>
                 )}
               </div>
             </div>
@@ -86,7 +86,7 @@ export const Summary = () => {
             </div>
             <div className='summary__sectionGitItems'>
               {Boolean(gitInfo.length) && gitInfo.map((itemGit) => {
-                return <div key={itemGit.id} className='summary__sectionGitItem gitItem'>
+                return <a href={itemGit.link} target="_blank" rel="noreferrer" key={itemGit.id} className='summary__sectionGitItem gitItem'>
                   <div className='gitItem__info'>
                     <div className='gitItem__info__about'>
                       <img src={gitImgItem} alt='gitImg'/>
@@ -103,7 +103,7 @@ export const Summary = () => {
                   <a className='gitItem__link' href={itemGit.link} target="_blank" rel="noreferrer">
                     <img src={rightArrow} alt='arrowRight'/>
                   </a>
-                </div>
+                </a>
               })
               }
             </div>

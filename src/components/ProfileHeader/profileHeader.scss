@@ -23,9 +23,15 @@
     font-size: 20px;
     line-height: 32px;
     margin-bottom: 0;
+    color: black;
 
     span {
       color: #52B709;
+    }
+
+    &:hover {
+      color: black;
+      text-decoration: none;
     }
   }
 

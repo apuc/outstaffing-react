@@ -12,7 +12,7 @@ import {Footer} from "../../components/Footer/Footer";
 import arrow from "../../images/right-arrow.png";
 import arrowSwitchDate from "../../images/arrowViewReport.png";
 import {apiRequest} from "../../api/request";
-import {getCorrectDate, getCreatedDate} from '../../components/Calendar/calendarHelper'
+import {getCorrectDate, getCreatedDate, hourOfNum} from '../../components/Calendar/calendarHelper'
 
 import './viewReport.scss'
 
@@ -90,7 +90,7 @@ export const ViewReport = () => {
                     </Link>
                     <div className='viewReport__bar'>
                         <h3 className='viewReport__bar__date'>{getCorrectDate(reportDay)}</h3>
-                        <p className='viewReport__bar__hours'>Вами потрачено на работу : <span>{totalHours} часов</span></p>
+                        <p className='viewReport__bar__hours'>Вами потрачено на работу : <span>{totalHours} {hourOfNum(totalHours)}</span></p>
                         {/*<div className='viewReport__bar__progressBar'>*/}
                         {/*    <span></span>*/}
                         {/*</div>*/}
@@ -128,7 +128,7 @@ export const ViewReport = () => {
                                                 <td>
                                                     <div className='viewReport__done__hours__item'>
                                                         <span>{task.hours}</span>
-                                                        <p className='hours'>часов на задачу</p>
+                                                        <p className='hours'>{hourOfNum(task.hours)} на задачу</p>
                                                     </div>
                                                 </td>
                                             </tr>
