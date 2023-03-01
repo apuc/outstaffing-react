@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
 import {Link, Navigate, useNavigate} from 'react-router-dom'
 import DatePicker, { registerLocale } from "react-datepicker"
-import {getCorrectDate, getCreatedDate} from '../Calendar/calendarHelper'
+import {getCorrectDate, getCreatedDate, hourOfNum} from '../Calendar/calendarHelper'
 import ru from "date-fns/locale/ru"
 registerLocale("ru", ru);
 
@@ -67,10 +67,12 @@ const ReportForm = () => {
   };
 
   const handler = () => {
-    if(!inputs[0].task || !inputs[0].hours_spent) {
-      setReportSuccess('Заполните задачи');
-      setTimeout(() => setReportSuccess(''), 1000)
-      return
+    for (let input of inputs) {
+      if(!input.task || !input.hours_spent) {
+        setReportSuccess('Заполните задачи');
+        setTimeout(() => setReportSuccess(''), 2000)
+        return
+      }
     }
     apiRequest('/reports/create', {
       method: 'POST',
@@ -158,7 +160,8 @@ const ReportForm = () => {
                           {index + 1}.
                         </div>
                         <div className='report-form__task-input report-form__task-input--description'>
-                          <input name='text' type='text' onChange={e => setInputs(inputs.map((input, inputIndex) => {
+                          <input value={inputs[index].task} className={!input.task && reportSuccess === 'Заполните задачи' ? 'checkTask' : ''} name='text' type='text'
+                                 onChange={e => setInputs(inputs.map((input, inputIndex) => {
                             return index === inputIndex
                                 ? {
                                   ...input,
@@ -168,7 +171,7 @@ const ReportForm = () => {
                           }))}/>
                         </div>
                         <div className='report-form__task-input report-form__task-input--hours'>
-                          <input name='number' type='number' min='1'
+                          <input value={inputs[index].hours_spent} className={!input.hours_spent && reportSuccess === 'Заполните задачи' ? 'checkTask' : ''} name='number' type='number' min='1'
                                  onChange={e => setInputs(inputs.map((input, inputIndex) => {
                                    return index === inputIndex
                                        ? {
@@ -217,7 +220,7 @@ const ReportForm = () => {
                 {isFetching ? <Loader/> : 'Отправить'}
               </button>
               <p className='report-form__footer-text'>
-                Всего за день : <span>{totalHours} часов</span>
+                Всего за день : <span>{totalHours} {hourOfNum(totalHours)}</span>
               </p>
               {reportSuccess &&
               <p className={`report-form__footer-done ${reportSuccess === 'Заполните задачи' ? 'errorText' : ''}`}>{reportSuccess}</p>

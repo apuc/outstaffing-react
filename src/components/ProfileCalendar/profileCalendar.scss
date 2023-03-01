@@ -21,8 +21,27 @@
     }
   }
 
+  .loader__wrapper {
+    min-height: 719px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 1000px) {
+      min-height: 645px;
+    }
+  }
+
+
+  .calendar__wrapper {
+    min-height: 719px;
+
+    @media (max-width: 1000px) {
+      min-height: auto;
+    }
+  }
+
   .loader {
-    margin: 20px 0 50px;
     &:hover {
       path {
         fill: #ffffff;

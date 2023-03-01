@@ -3,7 +3,7 @@ import arrow from '../../images/arrowCalendar.png'
 import rectangle from '../../images/rectangle__calendar.png'
 import calendarIcon from '../../images/calendar_icon.png'
 import moment from 'moment'
-import {calendarHelper, currentMonth, currentMonthAndDay, getReports} from '../Calendar/calendarHelper'
+import {calendarHelper, currentMonthAndDay, getReports, hourOfNum} from '../Calendar/calendarHelper'
 import {setReportDate, setRequestDate} from '../../redux/reportSlice';
 import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
@@ -67,28 +67,35 @@ export const ProfileCalendarComponent = React.memo(({value, setValueHandler, rep
     return (
         <div className='calendar-component'>
             <div className='calendar-component__header'>
-                <h3>Мои отчеты</h3>
-                <div className='calendar-component__header-box' onClick={() => {
-                    setValueHandler(prevMonth())
-                    dispatch(setRequestDate(getReports(prevMonth())))
-                }}>
-                    <img src={arrow} alt='' />
-                    <span>
-                        {prevMonth().format('MMMM')}
-                    </span>
+                <div className='calendar-component__header-info'>
+                    <h3>Мои отчеты:</h3>
+                    <p className='calendar__hours'>
+                        {month} - <span> {totalHours} {hourOfNum(totalHours)} </span>
+                    </p>
                 </div>
-                <div className='calendar-component__header-box'>
-                    <span>{value.format('YYYY')}</span>
-                </div>
-                <div className='calendar-component__header-box' onClick={() => {
-                    setValueHandler(nextMonth())
-                    dispatch(setRequestDate(getReports(nextMonth())))
+                <div className='calendar-component__header-switcher'>
+                    <div className='calendar-component__header-box' onClick={() => {
+                        setValueHandler(prevMonth())
+                        dispatch(setRequestDate(getReports(prevMonth())))
+                    }}>
+                        <img src={arrow} alt='' />
+                        <span>
+                            {prevMonth().format('MMMM')}
+                        </span>
+                    </div>
+                    <div className='calendar-component__header-box'>
+                        <span>{value.format('YYYY')}</span>
+                    </div>
+                    <div className='calendar-component__header-box' onClick={() => {
+                        setValueHandler(nextMonth())
+                        dispatch(setRequestDate(getReports(nextMonth())))
 
-                }}>
-                    <span>
-                        {nextMonth().format('MMMM')}
-                    </span>
-                    <img src={arrow} alt='' />
+                    }}>
+                        <span>
+                            {nextMonth().format('MMMM')}
+                        </span>
+                        <img src={arrow} alt='' />
+                    </div>
                 </div>
             </div>
 
@@ -128,9 +135,6 @@ export const ProfileCalendarComponent = React.memo(({value, setValueHandler, rep
                     )}
                 </div>
             </div>
-            <p className='calendar__hours'>
-                {month} : <span> {totalHours} часов </span>
-            </p>
         </div>
     )
 })

@@ -60,3 +60,9 @@ export function getCorrectDate(day) {
 export function currentMonthAndDayReportPage() {
   return moment().format('D MMMM');
 }
+
+export function hourOfNum(number) {
+  const hours = [' час', ' часа', ' часов'];
+  const cases = [2, 0, 1, 1, 1, 2];
+  return hours[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+}

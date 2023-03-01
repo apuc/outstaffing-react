@@ -47,16 +47,24 @@ export const ProfileHeader = () => {
     ],
     partner: [
       {
-        path: '/employees',
-        name: 'Сотрудники'
-      },
-      {
-        path: '',
-        name: 'Отчетность'
-      },
-      {
         path: '/requests',
         name: 'Запросы'
+      },
+      {
+        path: '/employees',
+        name: 'Персонал'
+      },
+      {
+        path: '/tracker',
+        name: 'Трекер'
+      },
+      {
+        path: '/payouts',
+        name: 'Договора'
+      },
+      {
+        path: '/settings',
+        name: 'Настройки'
       },
     ]
   })
@@ -86,14 +94,14 @@ export const ProfileHeader = () => {
       <header className='profileHeader'>
         <div className='profileHeader__head'>
           <div className='profileHeader__container'>
-            <h2 className='profileHeader__title'>itguild.
+            <NavLink to={'/profile'} className='profileHeader__title'>itguild.
               <span>
                 {user === 'developer' ?
                   'для разработчиков' :
                   'для партнеров'
                 }
               </span>
-            </h2>
+            </NavLink>
             <button onClick={handler} className='profileHeader__logout'>
               {isLoggingOut ? <Loader/> : 'Выйти'}
             </button>

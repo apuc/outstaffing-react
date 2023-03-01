@@ -64,6 +64,11 @@
     height: 72px;
     justify-content: space-between;
 
+    @media (max-width: 540px) {
+      padding: 10px 15px;
+      height: 60px;
+    }
+
     @media (max-width: 500px) {
       column-gap: 0;
       justify-content: space-between;
@@ -75,18 +80,22 @@
       line-height: 32px;
       color: #000000;
 
-      @media (max-width: 500px) {
+      @media (max-width: 660px) {
         font-size: 16px;
+      }
+
+      @media (max-width: 490px) {
+        font-size: 12px;
       }
     }
 
     &__hours {
       font-weight: 400;
-      font-size: 12px;
+      font-size: 15px;
       line-height: 32px;
       color: #000000;
 
-      @media (max-width: 500px) {
+      @media (max-width: 660px) {
         font-size: 11px;
       }
 
