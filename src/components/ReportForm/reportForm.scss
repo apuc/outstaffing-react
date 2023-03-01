@@ -158,12 +158,15 @@
         text-align: left;
         margin-bottom: 26px;
         white-space: nowrap;
+
+        @media (max-width: 450px) {
+          font-size: 13px;
+        }
       }
     }
 
     &-title {
       //&--description {
-      //  margin-left: 20px;
       //}
 
       &--hours {
@@ -231,6 +234,10 @@
       &--hours {
         @media (max-width: 610px) {
           margin-left: 45px;
+        }
+
+        @media (max-width: 450px) {
+          margin-left: 22px;
         }
 
         .checkTask {
