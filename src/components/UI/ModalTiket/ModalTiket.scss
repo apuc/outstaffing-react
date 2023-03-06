@@ -1,0 +1,36 @@
+.modal-tiket {
+  z-index: 9;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.11);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0);
+
+  .colum {
+    .author {
+    }
+    .content {
+    }
+
+    .workers {
+    }
+  }
+}
+
+.modal-tiket.active {
+  transform: scale(1);
+}
+
+.modal-tiket__content {
+  padding: 20px;
+  width: 700px;
+  height: 400px;
+  background: #ffffff;
+  border: 1px solid #dde2e4;
+  border-radius: 8px;
+}

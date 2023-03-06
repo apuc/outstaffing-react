@@ -1,8 +1,9 @@
 .tracker {
-  background: #F1F1F1;
+  background: #f1f1f1;
   height: 100%;
   min-height: 100vh;
   font-family: "LabGrotesque", sans-serif;
+  position: relative;
 
   .container {
     max-width: 1160px;
@@ -58,7 +59,7 @@
       width: 100%;
 
       &__projects {
-        background: #FFFFFF;
+        background: #ffffff;
         border-radius: 0 12px 12px 12px;
         padding: 26px 24px 40px;
         flex-wrap: wrap;
@@ -69,7 +70,7 @@
 
         .project {
           width: 48%;
-          background: #F1F1F1;
+          background: #f1f1f1;
           border-radius: 12px;
           padding: 17px 26px 16px;
           cursor: pointer;
@@ -88,7 +89,7 @@
             position: relative;
 
             p {
-              color: #6F6F6F;
+              color: #6f6f6f;
               font-weight: 500;
               font-size: 12px;
               line-height: 24px;
@@ -102,25 +103,25 @@
               display: flex;
               align-items: center;
               justify-content: center;
-              background: #DDDDDD;
+              background: #dddddd;
               border-radius: 4px;
               font-weight: 500;
               font-size: 14px;
               line-height: 24px;
-              color: #6F6F6F;
+              color: #6f6f6f;
             }
 
             .add {
-              color: #6F6F6F;
+              color: #6f6f6f;
               font-size: 17px;
               margin: 0 25px 0 auto;
             }
 
             &:after {
-              content: '...';
+              content: "...";
               position: absolute;
               font-size: 17px;
-              color: #6F6F6F;
+              color: #6f6f6f;
               right: 0;
               top: -15%;
             }
@@ -128,7 +129,7 @@
         }
 
         button {
-          background: #52B709;
+          background: #52b709;
           border-radius: 44px;
           max-width: 150px;
           height: 40px;
@@ -137,7 +138,7 @@
           font-weight: 400;
           font-size: 12px;
           line-height: 32px;
-          color: #FFFFFF;
+          color: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;
