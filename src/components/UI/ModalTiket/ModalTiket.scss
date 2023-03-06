@@ -10,16 +10,6 @@
   align-items: center;
   justify-content: center;
   transform: scale(0);
-
-  .colum {
-    .author {
-    }
-    .content {
-    }
-
-    .workers {
-    }
-  }
 }
 
 .modal-tiket.active {
@@ -27,10 +17,45 @@
 }
 
 .modal-tiket__content {
-  padding: 20px;
-  width: 700px;
-  height: 400px;
+  height: 500px;
   background: #ffffff;
   border: 1px solid #dde2e4;
   border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+
+  .author {
+    padding: 25px 0 0 0;
+    border-radius: 8px 0 0 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 76px;
+    background: #fbfbfb;
+
+    a {
+      margin-bottom: 16px;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+
+    .title-project {
+      font-family: "LabGrotesque", sans-serif;
+      margin: 26px 0 0 21px;
+      font-weight: 700;
+      font-size: 16px;
+
+      &__category {
+        margin-right: 17px;
+      }
+    }
+  }
+
+  .workers {
+    width: 300px;
+  }
 }
