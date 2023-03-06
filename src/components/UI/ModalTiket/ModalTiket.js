@@ -38,9 +38,25 @@ export const ModalTiket = ({ active, setActive }) => {
             <img src={category} className="title-project__category"></img>
             Проект: {tiket.name}
           </h3>
-          <div>
-            <h4>{tiket.code}</h4>
-            <div></div>
+          <div className="content__task">
+            <h5>{tiket.code}</h5>
+            <div className="content__description">
+              <p>
+                На многих страницах сайта отсутствуют или некорректно заполнены
+                метатеги Description. Это может негативно повлиять на
+                представление сайта в результатах поиска.Необходимо исправить
+                все страницы где есть ошибки или отсутствует Title и
+                Description.
+              </p>
+              <img src={task}></img>
+              <p>
+                На многих страницах сайта отсутствуют или некорректно заполнены
+                метатеги Description. Это может негативно повлиять на
+                представление сайта в результатах поиска.Необходимо исправить
+                все страницы где есть ошибки или отсутствует Title и
+                Description.
+              </p>
+            </div>
           </div>
         </div>
         <div className="workers">workers</div>
