@@ -56,6 +56,18 @@
     }
 
     &__task {
+      margin-top: 22px;
+      padding: 18px;
+
+      h5 {
+        font-family: "Inter", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 24px;
+
+        color: #1a1919;
+      }
     }
 
     &__description {
@@ -64,11 +76,69 @@
         font-size: 14px;
         line-height: 140%;
         color: #252c32;
+        text-align: justify;
+      }
+
+      .image-task {
+        margin: 0 0 20px 0;
+      }
+    }
+
+    &__communication {
+      display: flex;
+      flex-direction: row;
+      margin: 29px 0 0 -5px;
+
+      .comment {
+        width: 100px;
+        justify-content: space-evenly;
+      }
+
+      .comment,
+      .file {
+        display: flex;
+        align-items: center;
+      }
+
+      .file {
+        justify-content: space-between;
+        margin-left: 20px;
+        width: 70px;
       }
     }
   }
 
   .workers {
+    border-left: 1px solid #f1f1f1;
     width: 300px;
+    padding: 40px;
+
+    span {
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+
+      color: #807777;
+    }
+
+    &__creator {
+      font-size: 14px;
+      line-height: 32px;
+      font-weight: 500;
+      color: #2d4a17;
+    }
+
+    .worker {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 15px;
+
+      p {
+        margin: 0 0 0 11px;
+        font-size: 12px;
+        color: #807777;
+      }
+    }
   }
 }

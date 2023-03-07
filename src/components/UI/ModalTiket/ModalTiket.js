@@ -14,7 +14,20 @@ export const ModalTiket = ({ active, setActive }) => {
     name: "Разработка трекера",
     code: "PR - 2245",
     creator: "Василий Тарасов",
+    descriptions:
+      "На многих страницах сайта отсутствуют или некорректно заполнены метатеги Description. Это может негативно повлиять на представление сайта в результатах поиска.Необходимо исправить все страницы где есть ошибки или отсутствует Title и  Description.",
   });
+
+  const [workers] = useState([
+    {
+      name: "Дмитрий Рогов",
+      avatar: avatarMock2,
+    },
+    {
+      name: "Марина Серова",
+      avatar: avatarMock1,
+    },
+  ]);
 
   return (
     <div
@@ -41,25 +54,44 @@ export const ModalTiket = ({ active, setActive }) => {
           <div className="content__task">
             <h5>{tiket.code}</h5>
             <div className="content__description">
-              <p>
-                На многих страницах сайта отсутствуют или некорректно заполнены
-                метатеги Description. Это может негативно повлиять на
-                представление сайта в результатах поиска.Необходимо исправить
-                все страницы где есть ошибки или отсутствует Title и
-                Description.
+              <p>{tiket.descriptions}</p>
+              <img src={task} className="image-task"></img>
+              <p>{tiket.descriptions}</p>
+            </div>
+            <div className="content__communication">
+              <p className="comment">
+                <img src={comments}></img>
+                <span>{0}</span>
+                Коментариев
               </p>
-              <img src={task}></img>
-              <p>
-                На многих страницах сайта отсутствуют или некорректно заполнены
-                метатеги Description. Это может негативно повлиять на
-                представление сайта в результатах поиска.Необходимо исправить
-                все страницы где есть ошибки или отсутствует Title и
-                Description.
+              <p className="file">
+                <img src={files}></img>
+                <span>{0}</span>
+                Файлов
               </p>
             </div>
           </div>
         </div>
-        <div className="workers">workers</div>
+        <div className="workers">
+          <span>{tiket.code}</span>
+          <p className="workers__creator">Создатель : {tiket.creator}</p>
+          <div>
+            {workers.map((worker) => {
+              return (
+                <div className="worker">
+                  <img src={worker.avatar}></img>
+                  <p>{worker.name}</p>
+                </div>
+              );
+            })}
+          </div>
+          <div>
+            <button>+</button>
+            <span>Добавить участников</span>
+          </div>
+          <div></div>
+          <button>Начать делать</button>
+        </div>
       </div>
     </div>
   );
