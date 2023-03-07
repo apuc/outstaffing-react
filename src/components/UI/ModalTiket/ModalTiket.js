@@ -5,9 +5,9 @@ import creatorMock from "../../../images/avatarMoсkCreator.png";
 import avatarMock1 from "../../../images/avatarMoсk1.png";
 import avatarMock2 from "../../../images/avatarMoсk2.png";
 import category from "../../../images/category.png";
-import comments from "../../../images/comments.png";
+import comments from "../../../images/commentsBoard.svg";
 import watch from "../../../images/watch.png";
-import files from "../../../images/files.png";
+import files from "../../../images/filesBoard.svg";
 import task from "../../../images/tasksMock.png";
 import arrow from "../../../images/arrowStart.png";
 
@@ -88,7 +88,7 @@ export const ModalTiket = ({ active, setActive }) => {
             })}
           </div>
 
-          <div className="add-worker">
+          <div className="add-worker moreItems">
             <button>+</button>
             <span>Добавить участников</span>
           </div>

@@ -134,14 +134,26 @@
       }
 
       button {
+        cursor: pointer;
         background: #8bcc60;
+        border-radius: 44px;
         width: 33px;
         height: 33px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        color: white;
+        font-size: 17px;
       }
     }
 
     .start {
       margin-top: 25px;
+      width: 151px;
+      height: 40px;
+      border: none;
+      color: white;
       background: #1458dd;
       border-radius: 44px;
 
