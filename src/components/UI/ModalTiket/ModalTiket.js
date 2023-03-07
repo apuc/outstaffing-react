@@ -6,8 +6,10 @@ import avatarMock1 from "../../../images/avatarMoсk1.png";
 import avatarMock2 from "../../../images/avatarMoсk2.png";
 import category from "../../../images/category.png";
 import comments from "../../../images/comments.png";
+import watch from "../../../images/watch.png";
 import files from "../../../images/files.png";
 import task from "../../../images/tasksMock.png";
+import arrow from "../../../images/arrowStart.png";
 
 export const ModalTiket = ({ active, setActive }) => {
   const [tiket] = useState({
@@ -85,12 +87,21 @@ export const ModalTiket = ({ active, setActive }) => {
               );
             })}
           </div>
-          <div>
+
+          <div className="add-worker">
             <button>+</button>
             <span>Добавить участников</span>
           </div>
-          <div></div>
-          <button>Начать делать</button>
+
+          <div className="time">
+            <img src={watch}></img>
+            <span>Длительность : </span>
+            <p>{"8:30:22"}</p>
+          </div>
+
+          <button className="start">
+            Начать делать <img src={arrow}></img>
+          </button>
         </div>
       </div>
     </div>
