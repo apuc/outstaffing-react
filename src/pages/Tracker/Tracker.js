@@ -144,7 +144,7 @@ export const Tracker = () => {
                         <div className='tracker__tabs__content'>
                             <div className={toggleTab === 1 ? 'tracker__tabs__content__projects active__content' : 'tracker__tabs__content__projects'}>
                                 {projects.map((project, index) => {
-                                    return <div className='project'>
+                                    return <div className='project' key={index}>
                                                 <h3>{project.name}</h3>
                                                 <div className='project__info'>
                                                     <p>Открытые задачи</p>
