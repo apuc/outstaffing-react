@@ -1,0 +1,25 @@
+.modal-project {
+  z-index: 9;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.11);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0);
+}
+
+.modal-project.active {
+  transform: scale(1);
+}
+
+.modal-project__content {
+  background: #ffffff;
+  border: 1px solid #dde2e4;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+}
