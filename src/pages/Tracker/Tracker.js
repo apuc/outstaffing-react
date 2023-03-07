@@ -79,7 +79,7 @@ export const Tracker = () => {
                     </div>
                   );
                 })}
-                <button onClick={() => setModalActive(true)}>
+                <button>
                   <span>+</span>Создать проект
                 </button>
               </div>
