@@ -70,7 +70,7 @@ export const ProfileCalendarComponent = React.memo(({value, setValueHandler, rep
                 <div className='calendar-component__header-info'>
                     <h3>Мои отчеты:</h3>
                     <p className='calendar__hours'>
-                        {month} - <span> {totalHours} {hourOfNum(totalHours)} </span>
+                        {month} <span> {totalHours} {hourOfNum(totalHours)} </span>
                     </p>
                 </div>
                 <div className='calendar-component__header-switcher'>

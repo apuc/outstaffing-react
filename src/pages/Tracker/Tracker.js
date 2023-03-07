@@ -180,14 +180,14 @@ export const Tracker = () => {
                                     {tabTaskMok.map((section, index) => {
                                             return <div key={index} className={section.tasks.length >= 3 ? 'tasks__board tasks__board__more' : 'tasks__board'}>
                                                         <div className='board__head'>
-                                                            <span>{section.name}</span>
+                                                            <span className={index === 3 ? 'done' : ''}>{section.name}</span>
                                                             <div>
                                                                 <span className='add'>+</span>
                                                                 <span className='more'>...</span>
                                                             </div>
                                                         </div>
                                                         {section.tasks.map((task, index) => {
-                                                            return <div key={index} className='tasks__board__item'>
+                                                            return <div key={index} className='tasks__board__item' draggable="true">
                                                                         <div className='tasks__board__item__title'>
                                                                             <p>{task.task}</p>
                                                                             <span>...</span>
