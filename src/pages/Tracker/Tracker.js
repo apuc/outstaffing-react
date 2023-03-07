@@ -8,7 +8,6 @@ import tasks from "../../images/trackerTasks.svg";
 import archive from "../../images/archiveTracker.svg";
 
 import "./tracker.scss";
-import ModalTiket from "../../components/UI/ModalTiket/ModalTiket";
 
 export const Tracker = () => {
   const [toggleTab, setToggleTab] = useState(1);
@@ -26,9 +25,6 @@ export const Tracker = () => {
       count: 4,
     },
   ]);
-
-  // TODO: тест на готовом элементе(потом перенести в другую вкладку(ЗАДАЧИ))
-  const [modalActive, setModalActive] = useState(false);
 
   const toggleTabs = (index) => {
     setToggleTab(index);
@@ -83,12 +79,9 @@ export const Tracker = () => {
                     </div>
                   );
                 })}
-
-                {/* TODO: убрать потом клик на кнопке и перенести модалку*/}
                 <button onClick={() => setModalActive(true)}>
                   <span>+</span>Создать проект
                 </button>
-                <ModalTiket active={modalActive} setActive={setModalActive} />
               </div>
             </div>
           </div>
