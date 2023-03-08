@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { Footer } from "../../components/Footer/Footer";
 
+import ModalTiket from "../../components/UI/ModalTiket/ModalTiket";
+import ModalProject from "../../components/UI/ModalProject/ModalProject";
+
 import project from "../../images/trackerProject.svg";
 import tasks from "../../images/trackerTasks.svg";
 import archive from "../../images/archiveTracker.svg";
@@ -12,7 +15,6 @@ import commentsBoard from "../../images/commentsBoard.svg";
 import filesBoard from "../../images/filesBoard.svg";
 
 import "./tracker.scss";
-import ModalTiket from "../../components/UI/ModalTiket/ModalTiket";
 
 export const Tracker = () => {
   const [toggleTab, setToggleTab] = useState(1);
@@ -118,6 +120,7 @@ export const Tracker = () => {
   ]);
 
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
+  const [modalActiveProject, setModalActiveProject] = useState(false);
 
   const toggleTabs = (index) => {
     setToggleTab(index);
@@ -172,8 +175,11 @@ export const Tracker = () => {
                     </div>
                   );
                 })}
-
-                <button>
+                <ModalProject
+                  active={modalActiveProject}
+                  setActive={setModalActiveProject}
+                />
+                <button onClick={() => setModalActiveProject(true)}>
                   <span>+</span>Создать проект
                 </button>
               </div>
