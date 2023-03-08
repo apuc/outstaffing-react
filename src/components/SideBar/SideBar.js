@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+
+import arrow from "../../images/sideBarArrow.svg";
+
 import "./sidebar.scss";
 
-export const SideBar = ({ active, setActive }) => {
+export const SideBar = () => {
+  const [active, setActive] = useState(false);
+
+  const toggleBar = () => {};
   return (
-    <div className={active ? "auth-menu active" : "auth-menu"}>
+    <div className="auth-menu">
       <div className="auth-title">
         <div className="text">
-          <h3>МЕНЮ</h3>
-          <div className="burger">
-            <span className="burger__line"></span>
-            <span className="burger__line"></span>
-            <span className="burger__line"></span>
+          <div className="burger" onClick={() => setActive(true)}>
+            <div className="burger__line"></div>
+            <div className="burger__line"></div>
+            <div className="burger__line"></div>
           </div>
+
+          <h3>МЕНЮ</h3>
         </div>
-        <p>2023 © Outstaffing</p>
+        <p className="outstaffing">
+          <img src={arrow}></img>
+          2023 © Outstaffing
+        </p>
       </div>
+      <div className={active ? "auth-body active" : "auth-body"}></div>
     </div>
   );
 };

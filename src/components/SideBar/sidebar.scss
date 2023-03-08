@@ -1,4 +1,5 @@
 .auth-menu {
+  z-index: 99;
   position: absolute;
   top: 0;
   left: 0;
@@ -7,20 +8,62 @@
   background: #e1fccf;
 }
 
-.auth-menu.active {
-}
-
 .auth-title {
-  .text {
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 80%;
 
-  .burger {
-    &__line {
-      width: 35px;
-      height: 5px;
-      background-color: #333;
-      margin: 6px 0;
-      transition: 0.4s;
+  .text {
+    display: flex;
+    flex-direction: column;
+    margin: 40px 0 0 0;
+
+    h3 {
+      transform: rotate(270deg);
+      font-size: 25px;
+      line-height: 32px;
+      text-transform: uppercase;
+      color: #222222;
+    }
+
+    .burger {
+      margin-bottom: 70px;
+
+      &__line {
+        width: 32px;
+        border-radius: 33px;
+        height: 5px;
+        background-color: #333;
+        margin: 5px 0 0 27px;
+        transition: 0.4s;
+      }
     }
   }
+
+  .outstaffing {
+    rotate: 270deg;
+    font-size: 18px;
+    line-height: 32px;
+    width: 200px;
+
+    img {
+      margin-right: 15px;
+    }
+  }
+}
+
+.auth-body {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #e1fccf;
+  width: 0;
+}
+
+.auth-body.active {
+  width: 565px;
 }
