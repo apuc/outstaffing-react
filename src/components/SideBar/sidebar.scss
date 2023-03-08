@@ -1,0 +1,26 @@
+.auth-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 141px;
+  height: 100%;
+  background: #e1fccf;
+}
+
+.auth-menu.active {
+}
+
+.auth-title {
+  .text {
+  }
+
+  .burger {
+    &__line {
+      width: 35px;
+      height: 5px;
+      background-color: #333;
+      margin: 6px 0;
+      transition: 0.4s;
+    }
+  }
+}
