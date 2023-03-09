@@ -78,9 +78,9 @@ export const ModalTiket = ({ active, setActive }) => {
           <span>{tiket.code}</span>
           <p className="workers__creator">Создатель : {tiket.creator}</p>
           <div>
-            {workers.map((worker) => {
+            {workers.map((worker, index) => {
               return (
-                <div className="worker">
+                <div className="worker" key={index}>
                   <img src={worker.avatar}></img>
                   <p>{worker.name}</p>
                 </div>

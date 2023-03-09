@@ -32,7 +32,7 @@ export const Tracker = () => {
       count: 4,
     },
   ]);
-  const [tabTaskMok] = useState([
+  const [tabTaskMok, setTabTaskMok] = useState([
     {
       name: "Открытые",
       tasks: [
@@ -43,6 +43,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
+          id: 1
         },
         {
           task: "PR - 2245",
@@ -51,6 +52,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
+          id: 2
         },
       ],
     },
@@ -64,6 +66,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
+          id: 3
         },
       ],
     },
@@ -77,6 +80,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
+          id: 4
         },
         {
           task: "PR - 2245",
@@ -85,6 +89,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
+          id: 5
         },
         {
           task: "PR - 2245",
@@ -93,6 +98,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
+          id: 6
         },
       ],
     },
@@ -106,6 +112,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
+          id: 7
         },
         {
           task: "PR - 2245",
@@ -114,6 +121,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
+          id: 8
         },
       ],
     },
@@ -121,10 +129,66 @@ export const Tracker = () => {
 
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
   const [modalActiveProject, setModalActiveProject] = useState(false);
+  const [startWrapperIndex, setStartWrapperIndex] = useState(null)
+  const [wrapperHover, setWrapperHover] = useState([false, false, false, false])
 
   const toggleTabs = (index) => {
     setToggleTab(index);
   };
+
+  function dragStartHandler(e, task, wrapperIndex) {
+    setStartWrapperIndex({task: task, index: wrapperIndex})
+    setTimeout(() => {
+      e.target.classList.add('tasks__board__item__hide')
+    },0)
+  }
+
+  function dragEndHandler(e) {
+    setWrapperHover(prevArray => prevArray.map((elem) => {
+      return false
+    }))
+    e.target.classList.remove('tasks__board__item__hide')
+  }
+
+  function dragOverHandler(e) {
+    e.preventDefault()
+  }
+
+  function dragEnterHandler(wrapperIndex) {
+    if (wrapperIndex === startWrapperIndex.index) {
+      return
+    }
+    setWrapperHover(prevArray => prevArray.map((elem, index) => {
+      if (index === wrapperIndex) {
+        return true
+      } else {
+        return false
+      }
+    }))
+  }
+
+  function dragDropHandler(e, wrapperIndex) {
+    e.preventDefault()
+    if (startWrapperIndex.index === wrapperIndex) {
+      return
+    }
+    setWrapperHover(prevArray => prevArray.map((elem) => {
+      return false
+    }))
+    setTabTaskMok(prevArray  => prevArray.map((elem, index) => {
+      if (index === wrapperIndex) {
+        return {...elem, tasks: [...elem.tasks, startWrapperIndex.task]}
+      } else if (index === startWrapperIndex.index) {
+        return {...elem, tasks: elem.tasks.filter((item) => {
+          return item.id !== startWrapperIndex.task.id
+            }
+          )}
+      } else {
+        return elem
+      }
+    }))
+  }
+
   return (
     <div className="tracker">
       <ProfileHeader />
@@ -215,18 +279,17 @@ export const Tracker = () => {
                 />
 
                 <div className="tasks__container">
-                  {tabTaskMok.map((section, index) => {
+                  {tabTaskMok.map((section, wrapperIndex) => {
                     return (
                       <div
-                        key={index}
-                        className={
-                          section.tasks.length >= 3
-                            ? "tasks__board tasks__board__more"
-                            : "tasks__board"
-                        }
+                        key={wrapperIndex}
+                        onDragOver={(e) => dragOverHandler(e)}
+                        onDragEnter={(e) => dragEnterHandler(wrapperIndex)}
+                        onDrop={(e) => dragDropHandler(e, wrapperIndex)}
+                        className={`tasks__board ${section.tasks.length >= 3 ? 'tasks__board__more' : ''} ${wrapperHover[wrapperIndex] ? 'tasks__board__hover' : ''}`}
                       >
                         <div className="board__head">
-                          <span className={index === 3 ? "done" : ""}>
+                          <span className={wrapperIndex === 3 ? "done" : ""}>
                             {section.name}
                           </span>
                           <div>
@@ -239,7 +302,9 @@ export const Tracker = () => {
                             <div
                               key={index}
                               className="tasks__board__item"
-                              draggable="true"
+                              draggable={true}
+                              onDragStart={(e) => dragStartHandler(e, task, wrapperIndex)}
+                              onDragEnd={(e) => dragEndHandler(e)}
                               onClick={() => setModalActiveTicket(true)}
                             >
                               <div className="tasks__board__item__title">
