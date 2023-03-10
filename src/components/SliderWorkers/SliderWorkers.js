@@ -37,6 +37,10 @@ export const SliderWorkers = ({}) => {
     slidesToScroll: 1,
   };
 
+  if (window.innerWidth < 575) {
+    settings.slidesToShow = 1;
+  }
+
   return (
     <div className="slider-workers">
       <div className="container">
@@ -58,6 +62,15 @@ export const SliderWorkers = ({}) => {
             );
           })}
         </Slider>
+
+        <div className="slider-workers__description">
+          <h2>Дополните свою команду опытными ИТ-специалистами</h2>
+          <p>
+            Даём финансовые, юридические и кадровые гарантии, предоставляем SLA
+            и отвечаем за работу команды. Вам не нужно искать, оформлять или
+            увольнять сотрудника — все хлопоты мы берем на себя.
+          </p>
+        </div>
       </div>
     </div>
   );

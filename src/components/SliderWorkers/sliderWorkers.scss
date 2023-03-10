@@ -18,6 +18,22 @@
     }
   }
 
+  &__description {
+    margin-top: 55px;
+
+    h2 {
+      font-size: 18px;
+      line-height: 32px;
+    }
+
+    p {
+      margin: 37px 0 0 0;
+      font-size: 16px;
+      line-height: 22px;
+      color: #000000;
+    }
+  }
+
   .slick-list {
     width: 90%;
     margin: 0 auto;
@@ -86,6 +102,18 @@
     &:focus,
     &:hover {
       background-color: #8ec63f91;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    &__title {
+      flex-direction: column;
+      padding: 120px 0 56px 0;
+      text-align: center;
+
+      h3 {
+        margin: 0;
+      }
     }
   }
 }
