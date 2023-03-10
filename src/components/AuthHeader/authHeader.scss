@@ -1,0 +1,53 @@
+.auth-header {
+  background-color: #f1f1f1;
+
+  &__logo {
+    padding: 0 0 0 160px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+
+    h3 {
+      font-size: 20px;
+      line-height: 32px;
+      color: #000000;
+    }
+  }
+
+  &__navigation {
+    display: flex;
+    align-items: center;
+    height: 66px;
+    width: 100%;
+    background: #ffffff;
+
+    .auth-nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      ul {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+          margin-right: 25px;
+
+          font-size: 18px;
+          line-height: 32px;
+
+          a,
+          a:hover {
+            color: #897676;
+          }
+
+          a:focus {
+            color: #000000;
+          }
+        }
+      }
+    }
+  }
+}

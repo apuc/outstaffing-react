@@ -1,5 +1,7 @@
 import React from "react";
 
+import userIcon from "../../images/userIcon.png";
+
 import "./authHeader.scss";
 
 export const AuthHeader = ({}) => {
@@ -8,7 +10,27 @@ export const AuthHeader = ({}) => {
       <div className="auth-header__logo">
         <h3>itguild.</h3>
       </div>
-      <div className="auth-header__navigation"></div>
+      <div className="auth-header__navigation">
+        <div className="container">
+          <div className="auth-nav">
+            <ul>
+              <li>
+                <a href="#">Главная</a>
+              </li>
+              <li>
+                <a href="#">Кабинет разработчика</a>
+              </li>
+              <li>
+                <a href="#">Школа</a>
+              </li>
+            </ul>
+
+            <a href="#">
+              <img src={userIcon}></img>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

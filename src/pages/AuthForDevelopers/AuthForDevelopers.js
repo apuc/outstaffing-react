@@ -16,6 +16,7 @@ import { Footer } from "../../components/Footer/Footer";
 import SideBar from "../../components/SideBar/SideBar";
 
 import "./authForDevelopers.scss";
+import AuthHeader from "../../components/AuthHeader/AuthHeader";
 
 const AuthForDevelopers = () => {
   const isAuth = useSelector(selectAuth);
@@ -30,6 +31,7 @@ const AuthForDevelopers = () => {
 
   return (
     <section className="auth-developers">
+      <AuthHeader />
       <div className="auth-developers__background">
         <img className="auth-developers__vector" src={vector} alt="" />
         <img
