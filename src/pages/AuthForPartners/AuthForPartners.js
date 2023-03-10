@@ -11,10 +11,11 @@ import { useNavigate } from "react-router-dom";
 
 import { Footer } from "../../components/Footer/Footer";
 import { AuthBox } from "../../components/AuthBox/AuthBox";
-
-import "./authForPartners.scss";
 import SideBar from "../../components/SideBar/SideBar";
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
+import SliderWorkers from "../../components/SliderWorkers/SliderWorkers";
+
+import "./authForPartners.scss";
 
 const AuthForPartners = () => {
   const isAuth = useSelector(selectAuth);
@@ -31,6 +32,7 @@ const AuthForPartners = () => {
   return (
     <section className="auth-partners">
       <AuthHeader />
+      <SliderWorkers />
       <div className="auth-partners__background">
         <img className="auth-partners__vector" src={vector} alt="" />
         <img className="auth-partners__vector-black" src={vectorBlack} alt="" />

@@ -14,9 +14,10 @@ import { selectAuth } from "../../redux/outstaffingSlice";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../../components/Footer/Footer";
 import SideBar from "../../components/SideBar/SideBar";
+import AuthHeader from "../../components/AuthHeader/AuthHeader";
+import SliderWorkers from "../../components/SliderWorkers/SliderWorkers";
 
 import "./authForDevelopers.scss";
-import AuthHeader from "../../components/AuthHeader/AuthHeader";
 
 const AuthForDevelopers = () => {
   const isAuth = useSelector(selectAuth);
@@ -32,6 +33,7 @@ const AuthForDevelopers = () => {
   return (
     <section className="auth-developers">
       <AuthHeader />
+      <SliderWorkers />
       <div className="auth-developers__background">
         <img className="auth-developers__vector" src={vector} alt="" />
         <img
