@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "target": "es5", // компилируем ts код в js код версии ES5
-    "module": "esnext",
-    // для поддержки динамического импорта модулей
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react"
-  }
-}
