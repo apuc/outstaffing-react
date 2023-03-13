@@ -3,6 +3,7 @@ import arrow from "../../images/arrow__login_page.png";
 import medium from "../../images/medium_male_big.png";
 import cross from "../../images/cross.png";
 import text from "../../images/Body_Text.png";
+import arrowBtn from "../../images/arrowRight.png";
 import vector from "../../images/Vector_Smart_Object.png";
 import vectorBlack from "../../images/Vector_Smart_Object_black.png";
 import { useSelector } from "react-redux";
@@ -38,14 +39,19 @@ const AuthForPartners = () => {
         <img className="auth-partners__vector-black" src={vectorBlack} alt="" />
         <div className="container">
           <div className="change-mode">
-            <Link to={"/authdev"}>
-              <button className="change-mode__developers">
-                Для разработчика
-              </button>
-            </Link>
-            <Link to={"/auth"}>
-              <button className="change-mode__partners">Для партнёров!</button>
-            </Link>
+            <div className="change-mode__arrow">
+              <img src={arrowBtn}></img>
+            </div>
+            <div className="buttons">
+              <Link to={"/authdev"}>
+                <button className="change-mode__developers">
+                  Для разработчика
+                </button>
+              </Link>
+              <Link to={"/auth"}>
+                <button className="change-mode__partners">Для партнёров</button>
+              </Link>
+            </div>
           </div>
           <div className="row">
             <div className="col-12 col-xl-6">
