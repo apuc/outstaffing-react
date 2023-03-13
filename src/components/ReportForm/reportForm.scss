@@ -189,6 +189,8 @@
 
       img {
         cursor: pointer;
+        width: 23px;
+        height: 23px;
       }
     }
 
@@ -273,6 +275,21 @@
 
   &__form-add {
     margin-left: 28px;
+    display: flex;
+    align-items: center;
+
+    .addMore {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4CAF50;
+      width: 38px;
+      height: 38px;
+      background: #E8E8E8;
+      margin-bottom: 0;
+      border-radius: 50px;
+      font-size: 32px;
+    }
 
     span {
       font-family: 'GT Eesti Pro Display';

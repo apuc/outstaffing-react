@@ -13,6 +13,7 @@ import avatarTest from "../../images/AvatarTest .png";
 import selectArrow from "../../images/select.svg";
 import commentsBoard from "../../images/commentsBoard.svg";
 import filesBoard from "../../images/filesBoard.svg";
+import search from "../../images/search.svg"
 
 import "./tracker.scss";
 
@@ -35,6 +36,7 @@ export const Tracker = () => {
   const [tabTaskMok, setTabTaskMok] = useState([
     {
       name: "Открытые",
+      open: false,
       tasks: [
         {
           task: "PR - 2245",
@@ -58,6 +60,7 @@ export const Tracker = () => {
     },
     {
       name: "В процессе",
+      open: false,
       tasks: [
         {
           task: "PR - 2245",
@@ -72,6 +75,7 @@ export const Tracker = () => {
     },
     {
       name: "На проверке",
+      open: false,
       tasks: [
         {
           task: "PR - 2245",
@@ -100,10 +104,20 @@ export const Tracker = () => {
           avatarDo: avatarTest,
           id: 6
         },
+        {
+          task: "PR - 2245",
+          description: "Сверстать часть таблицы. Сверстать часть таблицы",
+          comments: 12,
+          files: 0,
+          avatarCreated: avatarTest,
+          avatarDo: avatarTest,
+          id: 9
+        },
       ],
     },
     {
       name: "Готово",
+      open: false,
       tasks: [
         {
           task: "PR - 2245",
@@ -127,6 +141,107 @@ export const Tracker = () => {
     },
   ]);
 
+  const [completeTasks] = useState([
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PK - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PE - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PA - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PB - 2245",
+      description: "Верстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PC - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PD - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+    {
+      name: "PA - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: '07/мар/23',
+      avatarDo: avatarTest,
+    },
+  ])
+
+  const [filterCompleteTasks, setFilterCompleteTasks] = useState(completeTasks)
+
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
   const [modalActiveProject, setModalActiveProject] = useState(false);
   const [startWrapperIndex, setStartWrapperIndex] = useState(null)
@@ -135,6 +250,16 @@ export const Tracker = () => {
   const toggleTabs = (index) => {
     setToggleTab(index);
   };
+
+  function toggleMoreTasks (wrapperIndex) {
+    setTabTaskMok(prevArray => prevArray.map((elem, index) => {
+      if (wrapperIndex === index) {
+        return {...elem, open: !elem.open}
+      } else {
+        return elem
+      }
+    }))
+  }
 
   function dragStartHandler(e, task, wrapperIndex) {
     setStartWrapperIndex({task: task, index: wrapperIndex})
@@ -185,6 +310,17 @@ export const Tracker = () => {
           )}
       } else {
         return elem
+      }
+    }))
+  }
+
+  function filterArchiveTasks(e) {
+    setFilterCompleteTasks(completeTasks.filter((item) => {
+      if (!e.target.value) {
+        return item
+      }
+      if (item.name.toLowerCase().startsWith(e.target.value.toLowerCase()) || item.description.toLowerCase().startsWith(e.target.value.toLowerCase())) {
+        return item
       }
     }))
   }
@@ -298,6 +434,11 @@ export const Tracker = () => {
                           </div>
                         </div>
                         {section.tasks.map((task, index) => {
+                          if (index > 2) {
+                            if (!section.open) {
+                              return
+                            }
+                          }
                           return (
                             <div
                               key={index}
@@ -331,11 +472,41 @@ export const Tracker = () => {
                             </div>
                           );
                         })}
-                        {section.tasks.length >= 3 && (
-                          <span className="moreItems">+</span>
+                        {section.tasks.length > 3 && (
+                          <span className={section.open ? 'lessItems openItems' : 'moreItems openItems'} onClick={() => toggleMoreTasks(wrapperIndex)}>{section.open ? '-' : '+'}</span>
                         )}
                       </div>
                     );
+                  })}
+                </div>
+              </div>
+              <div
+                className={
+                  toggleTab === 3
+                      ? "tracker__tabs__content__archive tasks active__content"
+                      : "tracker__tabs__content__projects"
+                }
+              >
+                <div className='archive__title'>
+                  <h3>Архив:</h3>
+                  <p>{filterCompleteTasks.length} задач(а)</p>
+                  <div className='archive__search'>
+                    <input type='text' onChange={(event) => filterArchiveTasks(event)} />
+                    <img src={search} alt='search' />
+                  </div>
+                </div>
+                <div className='archive__tasksWrapper'>
+                  {filterCompleteTasks.map((task, index) => {
+                    return <div className='archive__completeTask' key={index}>
+                              <div className='archive__completeTask__description'>
+                                <p>{task.description}</p>
+                                <p className='date'>{task.dateComplete}</p>
+                              </div>
+                              <div className='archive__completeTask__info'>
+                                <img src={task.avatarDo} alt='avatar' />
+                                <p>{task.name}</p>
+                              </div>
+                           </div>
                   })}
                 </div>
               </div>

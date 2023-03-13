@@ -18,7 +18,6 @@ import {getReportDate} from '../../redux/reportSlice'
 import calendarIcon from '../../images/calendar_icon.png'
 import ellipse from '../../images/ellipse.png'
 import remove from '../../images/remove.png'
-import addIcon from '../../images/addIcon.png'
 import arrow from "../../images/right-arrow.png";
 
 import './reportForm.scss'
@@ -191,7 +190,7 @@ const ReportForm = () => {
                 })}
 
                 <div className='report-form__form-add'>
-                  <img onClick={addInput} src={addIcon} alt=''/>
+                  <p className='addMore' onClick={addInput}>+</p>
                   <span>Добавить еще </span>
                 </div>
               </div>

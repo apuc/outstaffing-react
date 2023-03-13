@@ -135,7 +135,7 @@ export const ViewReport = () => {
                                 })}
                                 <tr>
                                     <td></td>
-                                    <td><span>Всего: {totalHours} часов</span></td>
+                                    <td><span>Всего: {totalHours} {hourOfNum(totalHours)}</span></td>
                                 </tr>
                                 </tbody>
                             </table>
