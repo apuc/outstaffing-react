@@ -7,7 +7,7 @@ import vector from "../../images/Vector_Smart_Object.png";
 import vectorBlack from "../../images/Vector_Smart_Object_black.png";
 import { useSelector } from "react-redux";
 import { selectAuth } from "../../redux/outstaffingSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Footer } from "../../components/Footer/Footer";
 import { AuthBox } from "../../components/AuthBox/AuthBox";
@@ -37,6 +37,16 @@ const AuthForPartners = () => {
         <img className="auth-partners__vector" src={vector} alt="" />
         <img className="auth-partners__vector-black" src={vectorBlack} alt="" />
         <div className="container">
+          <div className="change-mode">
+            <Link to={"/authdev"}>
+              <button className="change-mode__developers">
+                Для разработчика
+              </button>
+            </Link>
+            <Link to={"/auth"}>
+              <button className="change-mode__partners">Для партнёров!</button>
+            </Link>
+          </div>
           <div className="row">
             <div className="col-12 col-xl-6">
               <div className="auth-partners__box">

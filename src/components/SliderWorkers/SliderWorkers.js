@@ -54,7 +54,7 @@ export const SliderWorkers = ({}) => {
             return (
               <div className="worker">
                 <img src={worker.avatar}></img>
-                <div>
+                <div className="worker-description">
                   <p>{worker.skils}</p>
                   <button className="worker__resume">Подробное резюме</button>
                 </div>
