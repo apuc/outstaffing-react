@@ -21,7 +21,7 @@ import withReactContent from "sweetalert2-react-content";
 
 const SweetAlert = withReactContent(Swal);
 
-export const AuthBox = ({ title, altTitle, roleChangeLink }) => {
+export const AuthBox = ({ title }) => {
   const dispatch = useDispatch();
   const ref = useRef();
   const navigate = useNavigate();
@@ -127,11 +127,13 @@ export const AuthBox = ({ title, altTitle, roleChangeLink }) => {
             {isLoading ? <Loader /> : "Войти"}
           </button>
 
-          <Link to={roleChangeLink}>
-            <button className="auth-box__form-btn--role auth-box__auth-link">
-              {altTitle}
-            </button>
-          </Link>
+          {/* TODO: при клике отправлять на форму/модалку/страницу регистрации */}
+          <button
+            className="auth-box__form-btn--role auth-box__auth-link"
+            onClick={(e) => e.preventDefault()}
+          >
+            Регистрация
+          </button>
         </div>
       </form>
     </div>

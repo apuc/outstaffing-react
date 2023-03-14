@@ -63,11 +63,7 @@ const AuthForDevelopers = () => {
           <div className="row">
             <div className="col-12 col-xl-6">
               <div className="auth-developers__box">
-                <AuthBox
-                  title="Для разработчиков"
-                  altTitle="Для партнёров"
-                  roleChangeLink="/auth"
-                />
+                <AuthBox title="Для разработчиков" />
               </div>
             </div>
             <div className="col-xl-2">
