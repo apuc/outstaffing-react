@@ -40,7 +40,7 @@ const AuthForDevelopers = () => {
         <img
           className="auth-developers__vector-black"
           src={vectorBlack}
-          alt=""
+          alt="#"
         />
         <div className="container">
           <div className="change-mode">
@@ -49,10 +49,14 @@ const AuthForDevelopers = () => {
             </div>
             <div className="buttons">
               <Link to={"/authdev"}>
-                <button className="change-mode__dev">Для разработчика</button>
+                <button className="change-mode__developersForDev">
+                  Для разработчика
+                </button>
               </Link>
               <Link to={"/auth"}>
-                <button className="change-mode__part">Для партнёров</button>
+                <button className="change-mode__partnersForDev">
+                  Для партнёров
+                </button>
               </Link>
             </div>
           </div>

@@ -24,31 +24,31 @@
 }
 
 .change-mode {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-
-  &__part {
-    width: 220px;
-    height: 50px;
+  &__partnersForDev {
     background: #52b7098c;
-    border-radius: 44px;
     color: #2d6505;
-    font-size: 16px;
-    border: none;
     margin-left: -40px;
   }
 
-  &__dev {
+  &__partnersForDev,
+  &__developersForDev {
     width: 220px;
-    position: relative;
     height: 50px;
-    background: #406128;
     border-radius: 44px;
-    color: white;
     font-size: 16px;
     border: none;
+  }
+
+  &__developersForDev {
+    position: relative;
+    background: #406128;
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    &__partnersForDev {
+      margin: 15px 0 0 0;
+    }
   }
 }
 
@@ -58,12 +58,6 @@
     display: none;
   }
 }
-
-/* .form__error {
-  font-size: 16px;
-  color: #b21;
-  margin-left: 45px;
-} */
 
 .auth-developers__arrow {
   margin-top: 360px;

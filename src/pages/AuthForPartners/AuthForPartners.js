@@ -44,15 +44,18 @@ const AuthForPartners = () => {
             </div>
             <div className="buttons">
               <Link to={"/authdev"}>
-                <button className="change-mode__developers">
+                <button className="change-mode__developersForPart">
                   Для разработчика
                 </button>
               </Link>
               <Link to={"/auth"}>
-                <button className="change-mode__partners">Для партнёров</button>
+                <button className="change-mode__partnersForPart">
+                  Для партнёров
+                </button>
               </Link>
             </div>
           </div>
+
           <div className="row">
             <div className="col-12 col-xl-6">
               <div className="auth-partners__box">

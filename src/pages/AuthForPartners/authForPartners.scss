@@ -70,25 +70,36 @@
     }
   }
 
-  &__partners {
-    width: 220px;
-    height: 50px;
+  &__partnersForPart {
     background: #406128;
-    border-radius: 44px;
     color: white;
-    font-size: 16px;
-    border: none;
     margin-left: -40px;
   }
 
-  &__developers {
+  &__partnersForPart,
+  &__developersForPart {
     width: 220px;
     height: 50px;
-    background-color: #52b7098c;
     border-radius: 44px;
-    color: #2d6505;
     font-size: 16px;
     border: none;
+  }
+
+  &__developersForPart {
+    background-color: #52b7098c;
+    color: #2d6505;
+  }
+
+  @media (max-width: 768px) {
+    .buttons {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    &__partnersForPart {
+      margin: 15px 0 0 0;
+    }
   }
 }
 

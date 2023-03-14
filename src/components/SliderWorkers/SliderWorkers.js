@@ -39,6 +39,8 @@ export const SliderWorkers = ({}) => {
 
   if (window.innerWidth < 575) {
     settings.slidesToShow = 1;
+  } else if (window.innerWidth < 1440) {
+    settings.slidesToShow = 2;
   }
 
   return (
