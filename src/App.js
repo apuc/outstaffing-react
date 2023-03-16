@@ -25,6 +25,7 @@ import {Settings} from './pages/Settings/Settings'
 import {PartnerRequests} from './pages/PartnerRequests/PartnerRequests'
 import {PartnerAddRequest} from './pages/PartnerAddRequest/PartnerAddRequest'
 import {PartnerBid} from './pages/PartnerBid/PartnerBid'
+import {PartnerPersonalInfo} from "./pages/PartnerPersonalInfo/PartnerPersonalInfo";
 
 import './fonts/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -59,7 +60,7 @@ const App = () => {
 
             <Route exact path='profile'>
               <Route index element={<Profile/>}/>
-              <Route exact path='employees' element={<Home/>}/>
+              <Route exact path='personals' element={<Home/>}/>
               <Route exact path='calendar' element={<ProfileCalendar/>}/>
               <Route exact path='summary' element={<Summary/>}/>
               <Route exact path='view' element={<ViewReport/>}/>
@@ -69,6 +70,7 @@ const App = () => {
               <Route exact path='requests' element={<PartnerRequests/>}/>
               <Route exact path='add-request' element={<PartnerAddRequest/>}/>
               <Route exact path='bid' element={<PartnerBid/>}/>
+              <Route exact path='employees' element={<PartnerPersonalInfo/>}/>
             </Route>
 
             <Route path="*" element={<Navigate to="/profile" replace/>}/>

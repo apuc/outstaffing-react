@@ -9,6 +9,7 @@ import arrowSwitchDate from "../../images/arrowViewReport.png";
 import backEndImg from "../../images/QualificationInfo.png";
 import middle from "../../images/QualificationInfoMiddle.png";
 import personImg from "../../images/mokPerson.png"
+import deleteBtn from "../../images/deleteBtn.png"
 
 import './partnerBid.scss'
 
@@ -46,6 +47,10 @@ export const PartnerBid = () => {
                 <h2 className='partnerBid__title'>Страница заявки </h2>
                 <div className='partnerBid__qualification'>
                     <h3>PHP разработчик</h3>
+                    <div className='partnerBid__qualification__buttons'>
+                        <button>Редактировать</button>
+                        <img src={deleteBtn} alt='delete' />
+                    </div>
                 </div>
                 <div className='partnerBid__switcher'>
                     <div className='partnerBid__switcher__prev switchDate'>
