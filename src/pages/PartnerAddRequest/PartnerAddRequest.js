@@ -5,9 +5,13 @@ import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBre
 import {Footer} from "../../components/Footer/Footer";
 
 import arrowDown from "../../images/selectArrow.png"
+import processImg from "../../images/partnerAddRequestFirstImg.png"
+import reportImg from "../../images/partnerAddRequestSecondImg.png"
+import documentsImg from "../../images/partnerAddRequestThirdInfo.png"
+
+import {Navigate} from "react-router-dom";
 
 import './partnerAddRequest.scss'
-import {Navigate} from "react-router-dom";
 
 export const PartnerAddRequest = () => {
     if(localStorage.getItem('role_status') !== '18') {
@@ -76,7 +80,10 @@ export const PartnerAddRequest = () => {
                     </div>
                     <div className='partnerAddRequest__info'>
                         <div className='partnerAddRequest__info__block'>
-                            <h4>Процесс:</h4>
+                            <div className='partnerAddRequest__info__block__title'>
+                                <img src={processImg} alt='process' />
+                                <h4>Процесс:</h4>
+                            </div>
                             <p>
                                 При аутстафе мы предоставляем вам
                                 it-специалистов при этом они находятся в
@@ -87,7 +94,10 @@ export const PartnerAddRequest = () => {
                             </p>
                         </div>
                         <div className='partnerAddRequest__info__block'>
-                            <h4>Отчетность:</h4>
+                            <div className='partnerAddRequest__info__block__title'>
+                                <img src={reportImg} alt='reportImg' />
+                                <h4>Отчетность:</h4>
+                            </div>
                             <p>
                                 Вы можете обратиться к специалисту
                                 напрямую.
@@ -98,6 +108,17 @@ export const PartnerAddRequest = () => {
                                 <br/><br/>
                                 Можем выделить руководителя проекта
                                 и тестировщиков.
+                            </p>
+                        </div>
+                        <div className='partnerAddRequest__info__block'>
+                            <div className='partnerAddRequest__info__block__title'>
+                                <img src={documentsImg} alt='documentsImg' />
+                                <h4>Обмен <br/>документами:</h4>
+                            </div>
+                            <p>
+                                В Личном кабинете платформы
+                                получайте отчеты выполненных работ
+                                и счета на согласование и оплату
                             </p>
                         </div>
                     </div>

@@ -192,10 +192,10 @@
     background: #FFFFFF;
     border-radius: 12px;
     width: 100%;
-    padding: 90px 48px 200px 62px;
+    padding: 74px 48px 136px 62px;
     display: flex;
     flex-direction: column;
-    row-gap: 140px;
+    row-gap: 61px;
 
     @media (max-width: 1020px) {
       order: 1;
@@ -210,11 +210,22 @@
     }
 
     &__block {
-      h4 {
-        color: #5B6871;
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 24px;
+      &__title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+
+        img {
+          margin-right: 19px;
+        }
+
+        h4 {
+          color: #5B6871;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 24px;
+          margin-bottom: 0;
+        }
       }
 
       p {
@@ -222,6 +233,13 @@
         font-weight: 400;
         font-size: 15px;
         line-height: 18px;
+        margin-bottom: 0;
+      }
+
+      &:last-child {
+        .partnerAddRequest__info__block__title {
+          margin-bottom: 35px;
+        }
       }
     }
   }

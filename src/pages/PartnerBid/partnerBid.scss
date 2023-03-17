@@ -25,6 +25,9 @@
     border-radius: 12px;
     padding: 20px 37px;
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     h3 {
       color: #000000;
@@ -32,6 +35,31 @@
       font-size: 22px;
       line-height: 32px;
       margin-bottom: 0;
+    }
+
+    &__buttons {
+      display: flex;
+      align-items: center;
+
+      button {
+        max-width: 168px;
+        width: 100%;
+        height: 48px;
+        background: #E1FCCF;
+        border-radius: 44px;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 32px;
+        color: #000000;
+        padding: 8px 24px 10px 32px;
+        border: none;
+      }
+
+      img {
+        width: 44px;
+        height: 44px;
+        margin-left: 21px;
+      }
     }
   }
 
@@ -63,7 +91,7 @@
     p {
       color: #000000;
       font-weight: 400;
-      font-size: 12px;
+      font-size: 15px;
       line-height: 32px;
       margin: 0 100px;
 
