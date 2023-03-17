@@ -59,8 +59,10 @@ export const Summary = () => {
             </div>
             <div className='skills__section__items'>
               <div className='skills__section__items__wrapper'>
-                {profileInfo.skillValues && profileInfo.skillValues.map((skill) =>
-                    <span key={skill.id} className='skill_item'>{skill.skill.name},</span>
+                {profileInfo.skillValues && profileInfo.skillValues.map((skill, index) =>
+                    <span key={skill.id} className='skill_item'>{skill.skill.name}
+                        {profileInfo.skillValues.length > index + 1 && ','}
+                    </span>
                 )}
               </div>
             </div>
