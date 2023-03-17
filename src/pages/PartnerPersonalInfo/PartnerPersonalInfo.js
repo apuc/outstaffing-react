@@ -5,15 +5,15 @@ import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {Footer} from "../../components/Footer/Footer";
 
-import BackEndImg from "../../images/PersonalBackEnd.png"
-import FrontendImg from "../../images/PersonalFrontend.png"
-import ArchitectureImg from "../../images/PersonalArchitecture.png"
-import DesignImg from "../../images/PersonalDesign.png"
-import TestImg from "../../images/PersonalTesters.png"
-import AdminImg from "../../images/PersonalAdmin.png"
-import ManageImg from "../../images/PersonalMng.png"
-import CopyImg from "../../images/PersonalCopy.png"
-import SmmImg from "../../images/PersonalSMM.png"
+import BackEndImg from "./images/personalBackEnd.png"
+import FrontendImg from "./images/PersonalFrontend.png"
+import ArchitectureImg from "./images/PersonalArchitecture.png"
+import DesignImg from "./images/PersonalDesign.png"
+import TestImg from "./images/PersonalTesters.png"
+import AdminImg from "./images/PersonalAdmin.png"
+import ManageImg from "./images/PersonalMng.png"
+import CopyImg from "./images/PersonalCopy.png"
+import SmmImg from "./images/PersonalSMM.png"
 import rightArrow from "../../images/arrowRight.png"
 
 import {Navigate} from "react-router-dom";
