@@ -1,11 +1,13 @@
 .single-report-page {
   padding: 4.6rem 20px 0;
-  font-family: 'GT Eesti Pro Display', sans-serif;
+  font-family: "GT Eesti Pro Display", sans-serif;
+
   &__back {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     cursor: pointer;
+
     &-text {
       margin-left: 3.1rem;
       color: #000000;
