@@ -91,7 +91,7 @@ export const PartnerPersonalInfo = () => {
         },
     ])
     return (
-        <div className="infoPersonal">
+        <div className="personalInfo">
             <ProfileHeader />
             <div className="container">
                 <ProfileBreadcrumbs links={[
@@ -99,10 +99,10 @@ export const PartnerPersonalInfo = () => {
                     {name: 'Данные моего персонала', link: '/profile/employees'},
                 ]}
                 />
-                <h2 className="infoPersonal__title">Данные персонала</h2>
-                <div className="infoPersonal__items">
+                <h2 className="personalInfo__title">Данные персонала</h2>
+                <div className="personalInfo__items">
                     {personalInfoItems.map((item, index) => {
-                        return <Link to={item.link} className={item.available ? "infoPersonal__item item" : "infoPersonal__item item item__disable"}>
+                        return <Link to={item.link} key={index} className={item.available ? "personalInfo__item item" : "personalInfo__item item item__disable"}>
                             <div className="item__title">
                                 <img src={item.img} alt={item.title} />
                                 <h4>{item.title}</h4>

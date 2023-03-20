@@ -59,7 +59,7 @@ export const ProfileHeader = () => {
         name: 'Трекер'
       },
       {
-        path: '/payouts',
+        path: '/treaties',
         name: 'Договора'
       },
       {
