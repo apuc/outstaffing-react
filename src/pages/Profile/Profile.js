@@ -77,13 +77,13 @@ export const Profile = () => {
         description: 'Контроль времени и<br/> выполнение задач'
       },
       {
-        path: '',
+        path: '/treaties',
         img: paymentIcon,
         title: 'Договора и отчетность',
         description: 'Ключевые условия<br/> договора'
       },
       {
-        path: '',
+        path: '/settings',
         img: settingIcon,
         title: 'Настройки аккаунта',
         description: 'Перейдите чтобы начать<br/> редактирование'

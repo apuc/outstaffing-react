@@ -21,11 +21,12 @@ import {Summary} from './pages/Summary/Summary'
 import {ViewReport} from './pages/ViewReport/ViewReport'
 import {Tracker} from './pages/Tracker/Tracker'
 import {Payouts} from './pages/Payouts/Payouts'
-import {Settings} from './pages/Settings/Settings'
+import { PartnerSettings } from "./pages/PartnerSettings/PartnerSettings"
 import {PartnerRequests} from './pages/PartnerRequests/PartnerRequests'
 import {PartnerAddRequest} from './pages/PartnerAddRequest/PartnerAddRequest'
 import {PartnerBid} from './pages/PartnerBid/PartnerBid'
 import {PartnerPersonalInfo} from "./pages/PartnerPersonalInfo/PartnerPersonalInfo";
+import {PartnerTreaties} from "./pages/PartnerTreaties/PartnerTreaties";
 
 import './fonts/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -66,11 +67,12 @@ const App = () => {
               <Route exact path='view' element={<ViewReport/>}/>
               <Route exact path='tracker' element={<Tracker/>}/>
               <Route exact path='payouts' element={<Payouts/>}/>
-              <Route exact path='settings' element={<Settings/>}/>
+              <Route exact path='settings' element={<PartnerSettings/>}/>
               <Route exact path='requests' element={<PartnerRequests/>}/>
               <Route exact path='add-request' element={<PartnerAddRequest/>}/>
               <Route exact path='bid' element={<PartnerBid/>}/>
               <Route exact path='employees' element={<PartnerPersonalInfo/>}/>
+              <Route exact path='treaties' element={<PartnerTreaties/>}/>
             </Route>
 
             <Route path="*" element={<Navigate to="/profile" replace/>}/>
