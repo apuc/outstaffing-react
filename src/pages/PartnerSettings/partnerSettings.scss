@@ -1,5 +1,8 @@
 .settings {
   background: #f1f1f1;
+  height: 100%;
+  min-height: 100vh;
+  font-family: 'LabGrotesque', sans-serif;
 
   &__page {
     max-width: 1160px !important;
