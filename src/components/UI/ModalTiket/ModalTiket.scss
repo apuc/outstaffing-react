@@ -23,20 +23,6 @@
   display: flex;
   flex-direction: row;
 
-  .author {
-    padding: 25px 0 0 0;
-    border-radius: 8px 0 0 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 76px;
-    background: #fbfbfb;
-
-    a {
-      margin-bottom: 16px;
-    }
-  }
-
   .content {
     display: flex;
     flex-direction: column;
@@ -109,9 +95,33 @@
   }
 
   .workers {
+    position: relative;
     border-left: 1px solid #f1f1f1;
     width: 300px;
     padding: 40px;
+
+    .exit {
+      cursor: pointer;
+      position: absolute;
+      top: 22px;
+      right: 31px;
+
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 2px;
+        background: #263238;
+      }
+
+      &:before {
+        transform: rotate(45deg);
+      }
+      &:after {
+        transform: rotate(-45deg);
+      }
+    }
 
     span {
       font-family: "Inter", sans-serif;
@@ -149,6 +159,7 @@
     }
 
     .start {
+      font-size: 12px;
       margin-top: 25px;
       width: 151px;
       height: 40px;

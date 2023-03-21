@@ -40,14 +40,6 @@ export const ModalTiket = ({ active, setActive }) => {
         className="modal-tiket__content"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="author">
-          <a href="#">
-            <img src={creatorMock}></img>
-          </a>
-          <a href="#">
-            <img src={creatorMock}></img>
-          </a>
-        </div>
         <div className="content">
           <h3 className="title-project">
             <img src={category} className="title-project__category"></img>
@@ -75,6 +67,7 @@ export const ModalTiket = ({ active, setActive }) => {
           </div>
         </div>
         <div className="workers">
+          <span className="exit" onClick={() => setActive(false)}></span>
           <span>{tiket.code}</span>
           <p className="workers__creator">Создатель : {tiket.creator}</p>
           <div>
