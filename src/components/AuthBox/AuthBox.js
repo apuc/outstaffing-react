@@ -3,23 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Loader } from "../Loader/Loader";
-import ErrorBoundary from "../../hoc/ErrorBoundary";
 
 import { auth, selectAuth, setUserInfo } from "../../redux/outstaffingSlice";
 import { loading } from "../../redux/loaderSlice";
 import { setRole } from "../../redux/roleSlice";
 import { selectIsLoading } from "../../redux/loaderSlice";
 
+import ModalErrorLogin from "../../components/UI/ModalErrorLogin/ModalErrorLogin";
+
 import { apiRequest } from "../../api/request";
 
 import ellipse from "../../images/ellipse.png";
 
 import "./authBox.scss";
-
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-
-const SweetAlert = withReactContent(Swal);
 
 export const AuthBox = ({ title }) => {
   const dispatch = useDispatch();
@@ -30,15 +26,7 @@ export const AuthBox = ({ title }) => {
   const isLoading = useSelector(selectIsLoading);
 
   const [error, setError] = useState(null);
-
-  const handleModalError = (error) => {
-    SweetAlert.fire({
-      title: "Ошибка",
-      text: error,
-    });
-
-    setError(null);
-  };
+  const [modalError, setModalError] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem("auth_token")) {
@@ -62,6 +50,7 @@ export const AuthBox = ({ title }) => {
       }).then((res) => {
         if (!res.access_token) {
           setError("Некорректные данные для входа");
+          setModalError(true);
           dispatch(loading(false));
         } else {
           localStorage.setItem("auth_token", res.access_token);
@@ -104,15 +93,11 @@ export const AuthBox = ({ title }) => {
 
         {error && (
           <div className="auth-box__form-error">
-            <ErrorBoundary>
-              {handleModalError(error)}
-              {/*<SweetAlert*/}
-              {/*    show={!!error}*/}
-              {/*    title='Ошибка'*/}
-              {/*    text={error}*/}
-              {/*    onConfirm={() => setError(null)}*/}
-              {/*/>*/}
-            </ErrorBoundary>
+            <ModalErrorLogin
+              active={modalError}
+              setActive={setModalError}
+              title={error}
+            />
           </div>
         )}
 
@@ -130,7 +115,9 @@ export const AuthBox = ({ title }) => {
           {/* TODO: при клике отправлять на форму/модалку/страницу регистрации */}
           <button
             className="auth-box__form-btn--role auth-box__auth-link"
-            onClick={(e) => e.preventDefault()}
+            onClick={(e) => {
+              e.preventDefault();
+            }}
           >
             Регистрация
           </button>
