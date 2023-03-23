@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
+import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
 
 import ModalTiket from "../../components/UI/ModalTiket/ModalTiket";
@@ -330,6 +331,11 @@ export const Tracker = () => {
       <ProfileHeader />
       <div className="container">
         <div className="tracker__content">
+          <ProfileBreadcrumbs links={[
+            {name: 'Главная', link: '/profile'},
+            {name: 'Трекер', link: '/profile/tracker'}
+          ]}
+          />
           <h2 className="tracker__title">Трекер</h2>
           <div className="tracker__tabs">
             <div className="tracker__tabs__head">
