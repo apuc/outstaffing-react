@@ -46,14 +46,16 @@
     margin-left: 15px;
 
     img {
-      margin-right: 33px;
+      margin-right: 20px;
+      width: 100px;
+      height: 100px;
     }
 
     p {
       font-size: 15px;
       line-height: 22px;
       color: black;
-      width: 198px;
+      width: 160px;
     }
 
     &__resume {
@@ -66,40 +68,54 @@
       line-height: 32px;
       color: white;
       border: none;
+      transition: 0.5s;
+
+      &:hover {
+        transition: 0.5s;
+        background-color: #52b709a8;
+      }
     }
   }
 
   .slick-next {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
     background-color: #8dc63f;
     width: 44px;
     height: 44px;
     border-radius: 44px;
 
     &:before {
-      content: ">";
-      color: white;
-      font-size: 23px;
+      content: url("../../images/arrowViewReport.svg");
     }
 
-    &:focus,
+    &:focus {
+      background-color: #8dc63f;
+    }
+
     &:hover {
       background-color: #8ec63f91;
     }
   }
 
   .slick-prev {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
     background-color: #8dc63f;
     width: 44px;
     height: 44px;
     border-radius: 44px;
 
     &:before {
-      content: "<";
-      color: white;
-      font-size: 23px;
+      content: url("../../images/ArrovLeftSlider.png");
     }
 
-    &:focus,
+    &:focus {
+      background-color: #8dc63f;
+    }
+
     &:hover {
       background-color: #8ec63f91;
     }
@@ -128,7 +144,6 @@
 
       img {
         margin: 0;
-        width: 50%;
       }
 
       p {
@@ -136,7 +151,7 @@
         text-align: center;
       }
 
-      .worker-description {
+      &-description {
         display: flex;
         flex-direction: column;
         align-items: center;
