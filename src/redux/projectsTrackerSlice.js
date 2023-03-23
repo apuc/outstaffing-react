@@ -21,7 +21,7 @@ export const projectsTrackerSlice = createSlice({
   name: "projectsTracker",
   initialState,
   reducers: {
-    setProject(state, action) {
+    setProject: (state, action) => {
       state.project.push(action.payload);
     },
   },
@@ -29,6 +29,6 @@ export const projectsTrackerSlice = createSlice({
 
 export const { setProject } = projectsTrackerSlice.actions;
 
-export const addProject = (state) => state.projectsTracker.setProject;
+export const getProjects = (state) => state.tracker.project;
 
 export default projectsTrackerSlice.reducer;

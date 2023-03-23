@@ -17,24 +17,24 @@ import search from "../../images/search.svg";
 
 import "./tracker.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { addProject } from "../../redux/projectsTrackerSlice";
+import { getProjects } from "../../redux/projectsTrackerSlice";
 
 export const Tracker = () => {
   const [toggleTab, setToggleTab] = useState(1);
-  const [projects] = useState([
-    {
-      name: "Разработка трекера",
-      count: 4,
-    },
-    {
-      name: "Кинотеатр",
-      count: 4,
-    },
-    {
-      name: "Проект страхование",
-      count: 4,
-    },
-  ]);
+  // const [projects] = useState([
+  //   {
+  //     name: "Разработка трекера",
+  //     count: 4,
+  //   },
+  //   {
+  //     name: "Кинотеатр",
+  //     count: 4,
+  //   },
+  //   {
+  //     name: "Проект страхование",
+  //     count: 4,
+  //   },
+  // ]);
   const [tabTaskMok, setTabTaskMok] = useState([
     {
       name: "Открытые",
@@ -256,8 +256,8 @@ export const Tracker = () => {
     false,
   ]);
 
-  // const projectInfo = useSelector(addProject);
-  // const dispatch = useDispatch();
+  const projects = useSelector(getProjects);
+  const dispatch = useDispatch();
 
   const toggleTabs = (index) => {
     setToggleTab(index);

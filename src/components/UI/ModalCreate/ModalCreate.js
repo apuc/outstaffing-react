@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addProject } from "../../../redux/projectsTrackerSlice";
+import { useDispatch } from "react-redux";
+import {  setProject } from "../../../redux/projectsTrackerSlice";
 
 import "./ModalCreate.scss";
 
 export const ModalCreate = ({ active, setActive, title }) => {
   const [inputValue, setInputValue] = useState("");
-
-  const projectInfo = useSelector(addProject);
   const dispatch = useDispatch();
 
   function createName() {
@@ -15,9 +13,9 @@ export const ModalCreate = ({ active, setActive, title }) => {
       name: inputValue,
       count: 0,
     };
-    dispatch(addProject(newItem));
-    // console.log(newItem);
+    dispatch(setProject(newItem));
     setActive(false);
+    setInputValue("")
   }
 
   return (
