@@ -15,7 +15,6 @@ import "./partnerEmployees.scss"
 export const PartnerEmployees = () => {
     const partnerEmployees = useSelector(getPartnerEmployees);
     if(localStorage.getItem('role_status') !== '18' || !partnerEmployees.length) {
-        console.log(partnerEmployees.length)
         return <Navigate to="/profile/categories" replace/>
     }
     return(
