@@ -47,11 +47,15 @@ export const ProfileHeader = () => {
     ],
     partner: [
       {
+        path: '/',
+        name: 'Каталог'
+      },
+      {
         path: '/requests',
         name: 'Запросы'
       },
       {
-        path: '/employees',
+        path: '/categories',
         name: 'Персонал'
       },
       {

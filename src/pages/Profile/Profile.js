@@ -65,7 +65,7 @@ export const Profile = () => {
         description: '<span>У вас 2 вакансии<br/></span>открытые от лица компании'
       },
       {
-        path: '/employees',
+        path: '/categories',
         img: summaryIcon,
         title: 'Данные персонала',
         description: 'Наши специалисты <br/><span>уже работающие у вас</span>'

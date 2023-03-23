@@ -8,7 +8,9 @@ export const AuthHeader = ({}) => {
   return (
     <div className="auth-header">
       <div className="auth-header__logo">
-        <h3>itguild.</h3>
+        <h3>
+          itguild.<span>аутстафинг ИТ специалистов</span>
+        </h3>
       </div>
       <div className="auth-header__navigation">
         <div className="container">

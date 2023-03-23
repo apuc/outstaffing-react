@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
+import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
 
 import ModalTiket from "../../components/UI/ModalTiket/ModalTiket";
-import ModalProject from "../../components/UI/ModalProject/ModalProject";
+import ModalCreate from "../../components/UI/ModalCreate/ModalCreate";
 
 import project from "../../images/trackerProject.svg";
 import tasks from "../../images/trackerTasks.svg";
@@ -13,26 +14,28 @@ import avatarTest from "../../images/AvatarTest .png";
 import selectArrow from "../../images/select.svg";
 import commentsBoard from "../../images/commentsBoard.svg";
 import filesBoard from "../../images/filesBoard.svg";
-import search from "../../images/search.svg"
+import search from "../../images/search.svg";
 
 import "./tracker.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { getProjects } from "../../redux/projectsTrackerSlice";
 
 export const Tracker = () => {
   const [toggleTab, setToggleTab] = useState(1);
-  const [projects] = useState([
-    {
-      name: "Разработка трекера",
-      count: 4,
-    },
-    {
-      name: "Кинотеатр",
-      count: 4,
-    },
-    {
-      name: "Проект страхование",
-      count: 4,
-    },
-  ]);
+  // const [projects] = useState([
+  //   {
+  //     name: "Разработка трекера",
+  //     count: 4,
+  //   },
+  //   {
+  //     name: "Кинотеатр",
+  //     count: 4,
+  //   },
+  //   {
+  //     name: "Проект страхование",
+  //     count: 4,
+  //   },
+  // ]);
   const [tabTaskMok, setTabTaskMok] = useState([
     {
       name: "Открытые",
@@ -45,7 +48,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
-          id: 1
+          id: 1,
         },
         {
           task: "PR - 2245",
@@ -54,7 +57,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
-          id: 2
+          id: 2,
         },
       ],
     },
@@ -69,7 +72,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
-          id: 3
+          id: 3,
         },
       ],
     },
@@ -84,7 +87,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
-          id: 4
+          id: 4,
         },
         {
           task: "PR - 2245",
@@ -93,7 +96,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
-          id: 5
+          id: 5,
         },
         {
           task: "PR - 2245",
@@ -102,7 +105,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
-          id: 6
+          id: 6,
         },
         {
           task: "PR - 2245",
@@ -111,7 +114,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
-          id: 9
+          id: 9,
         },
       ],
     },
@@ -126,7 +129,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
-          id: 7
+          id: 7,
         },
         {
           task: "PR - 2245",
@@ -135,7 +138,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
-          id: 8
+          id: 8,
         },
       ],
     },
@@ -145,184 +148,217 @@ export const Tracker = () => {
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PK - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PE - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PA - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PB - 2245",
       description: "Верстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PC - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PD - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
     {
       name: "PA - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: '07/мар/23',
+      dateComplete: "07/мар/23",
       avatarDo: avatarTest,
     },
-  ])
+  ]);
 
-  const [filterCompleteTasks, setFilterCompleteTasks] = useState(completeTasks)
+  const [filterCompleteTasks, setFilterCompleteTasks] = useState(completeTasks);
 
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
-  const [modalActiveProject, setModalActiveProject] = useState(false);
-  const [startWrapperIndex, setStartWrapperIndex] = useState(null)
-  const [wrapperHover, setWrapperHover] = useState([false, false, false, false])
+  const [modalCreateProject, setModalCreateProject] = useState(false);
+  const [modalCreateColl, setModalCreateColl] = useState(false);
+
+  const [startWrapperIndex, setStartWrapperIndex] = useState(null);
+  const [wrapperHover, setWrapperHover] = useState([
+    false,
+    false,
+    false,
+    false,
+  ]);
+
+  const projects = useSelector(getProjects);
+  const dispatch = useDispatch();
 
   const toggleTabs = (index) => {
     setToggleTab(index);
   };
 
-  function toggleMoreTasks (wrapperIndex) {
-    setTabTaskMok(prevArray => prevArray.map((elem, index) => {
-      if (wrapperIndex === index) {
-        return {...elem, open: !elem.open}
-      } else {
-        return elem
-      }
-    }))
+  function toggleMoreTasks(wrapperIndex) {
+    setTabTaskMok((prevArray) =>
+      prevArray.map((elem, index) => {
+        if (wrapperIndex === index) {
+          return { ...elem, open: !elem.open };
+        } else {
+          return elem;
+        }
+      })
+    );
   }
 
   function dragStartHandler(e, task, wrapperIndex) {
-    setStartWrapperIndex({task: task, index: wrapperIndex})
+    setStartWrapperIndex({ task: task, index: wrapperIndex });
     setTimeout(() => {
-      e.target.classList.add('tasks__board__item__hide')
-    },0)
+      e.target.classList.add("tasks__board__item__hide");
+    }, 0);
   }
 
   function dragEndHandler(e) {
-    setWrapperHover(prevArray => prevArray.map((elem) => {
-      return false
-    }))
-    e.target.classList.remove('tasks__board__item__hide')
+    setWrapperHover((prevArray) =>
+      prevArray.map((elem) => {
+        return false;
+      })
+    );
+    e.target.classList.remove("tasks__board__item__hide");
   }
 
   function dragOverHandler(e) {
-    e.preventDefault()
+    e.preventDefault();
   }
 
   function dragEnterHandler(wrapperIndex) {
     if (wrapperIndex === startWrapperIndex.index) {
-      return
+      return;
     }
-    setWrapperHover(prevArray => prevArray.map((elem, index) => {
-      if (index === wrapperIndex) {
-        return true
-      } else {
-        return false
-      }
-    }))
+    setWrapperHover((prevArray) =>
+      prevArray.map((elem, index) => {
+        if (index === wrapperIndex) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
   }
 
   function dragDropHandler(e, wrapperIndex) {
-    e.preventDefault()
+    e.preventDefault();
     if (startWrapperIndex.index === wrapperIndex) {
-      return
+      return;
     }
-    setWrapperHover(prevArray => prevArray.map((elem) => {
-      return false
-    }))
-    setTabTaskMok(prevArray  => prevArray.map((elem, index) => {
-      if (index === wrapperIndex) {
-        return {...elem, tasks: [...elem.tasks, startWrapperIndex.task]}
-      } else if (index === startWrapperIndex.index) {
-        return {...elem, tasks: elem.tasks.filter((item) => {
-          return item.id !== startWrapperIndex.task.id
-            }
-          )}
-      } else {
-        return elem
-      }
-    }))
+    setWrapperHover((prevArray) =>
+      prevArray.map((elem) => {
+        return false;
+      })
+    );
+    setTabTaskMok((prevArray) =>
+      prevArray.map((elem, index) => {
+        if (index === wrapperIndex) {
+          return { ...elem, tasks: [...elem.tasks, startWrapperIndex.task] };
+        } else if (index === startWrapperIndex.index) {
+          return {
+            ...elem,
+            tasks: elem.tasks.filter((item) => {
+              return item.id !== startWrapperIndex.task.id;
+            }),
+          };
+        } else {
+          return elem;
+        }
+      })
+    );
   }
 
   function filterArchiveTasks(e) {
-    setFilterCompleteTasks(completeTasks.filter((item) => {
-      if (!e.target.value) {
-        return item
-      }
-      if (item.name.toLowerCase().startsWith(e.target.value.toLowerCase()) || item.description.toLowerCase().startsWith(e.target.value.toLowerCase())) {
-        return item
-      }
-    }))
+    setFilterCompleteTasks(
+      completeTasks.filter((item) => {
+        if (!e.target.value) {
+          return item;
+        }
+        if (
+          item.name.toLowerCase().startsWith(e.target.value.toLowerCase()) ||
+          item.description
+            .toLowerCase()
+            .startsWith(e.target.value.toLowerCase())
+        ) {
+          return item;
+        }
+      })
+    );
+  }
+
+  function createProject() {
+    setModalCreateProject(true);
   }
 
   return (
@@ -330,6 +366,11 @@ export const Tracker = () => {
       <ProfileHeader />
       <div className="container">
         <div className="tracker__content">
+          <ProfileBreadcrumbs links={[
+            {name: 'Главная', link: '/profile'},
+            {name: 'Трекер', link: '/profile/tracker'}
+          ]}
+          />
           <h2 className="tracker__title">Трекер</h2>
           <div className="tracker__tabs">
             <div className="tracker__tabs__head">
@@ -375,11 +416,12 @@ export const Tracker = () => {
                     </div>
                   );
                 })}
-                <ModalProject
-                  active={modalActiveProject}
-                  setActive={setModalActiveProject}
+                <ModalCreate
+                  active={modalCreateProject}
+                  setActive={setModalCreateProject}
+                  title={"Укажите название проекта:"}
                 />
-                <button onClick={() => setModalActiveProject(true)}>
+                <button onClick={createProject}>
                   <span>+</span>Создать проект
                 </button>
               </div>
@@ -391,8 +433,18 @@ export const Tracker = () => {
                 }
               >
                 <div className="tasks__head">
+                  <ModalCreate
+                    active={modalCreateColl}
+                    setActive={setModalCreateColl}
+                    title={"Добавить колонку: "}
+                  />
                   <h4>Проект : Разработка трекера</h4>
-                  <span className="tasks__head__add">+</span>
+                  <span
+                    className="tasks__head__add"
+                    onClick={() => setModalCreateColl(true)}
+                  >
+                    +
+                  </span>
                   <div className="tasks__head__persons">
                     <img src={avatarTest} alt="avatar" />
                     <img src={avatarTest} alt="avatar" />
@@ -422,7 +474,13 @@ export const Tracker = () => {
                         onDragOver={(e) => dragOverHandler(e)}
                         onDragEnter={(e) => dragEnterHandler(wrapperIndex)}
                         onDrop={(e) => dragDropHandler(e, wrapperIndex)}
-                        className={`tasks__board ${section.tasks.length >= 3 ? 'tasks__board__more' : ''} ${wrapperHover[wrapperIndex] ? 'tasks__board__hover' : ''}`}
+                        className={`tasks__board ${
+                          section.tasks.length >= 3 ? "tasks__board__more" : ""
+                        } ${
+                          wrapperHover[wrapperIndex]
+                            ? "tasks__board__hover"
+                            : ""
+                        }`}
                       >
                         <div className="board__head">
                           <span className={wrapperIndex === 3 ? "done" : ""}>
@@ -436,7 +494,7 @@ export const Tracker = () => {
                         {section.tasks.map((task, index) => {
                           if (index > 2) {
                             if (!section.open) {
-                              return
+                              return;
                             }
                           }
                           return (
@@ -444,7 +502,9 @@ export const Tracker = () => {
                               key={index}
                               className="tasks__board__item"
                               draggable={true}
-                              onDragStart={(e) => dragStartHandler(e, task, wrapperIndex)}
+                              onDragStart={(e) =>
+                                dragStartHandler(e, task, wrapperIndex)
+                              }
                               onDragEnd={(e) => dragEndHandler(e)}
                               onClick={() => setModalActiveTicket(true)}
                             >
@@ -473,7 +533,16 @@ export const Tracker = () => {
                           );
                         })}
                         {section.tasks.length > 3 && (
-                          <span className={section.open ? 'lessItems openItems' : 'moreItems openItems'} onClick={() => toggleMoreTasks(wrapperIndex)}>{section.open ? '-' : '+'}</span>
+                          <span
+                            className={
+                              section.open
+                                ? "lessItems openItems"
+                                : "moreItems openItems"
+                            }
+                            onClick={() => toggleMoreTasks(wrapperIndex)}
+                          >
+                            {section.open ? "-" : "+"}
+                          </span>
                         )}
                       </div>
                     );
@@ -483,30 +552,35 @@ export const Tracker = () => {
               <div
                 className={
                   toggleTab === 3
-                      ? "tracker__tabs__content__archive tasks active__content"
-                      : "tracker__tabs__content__projects"
+                    ? "tracker__tabs__content__archive tasks active__content"
+                    : "tracker__tabs__content__projects"
                 }
               >
-                <div className='archive__title'>
+                <div className="archive__title">
                   <h3>Архив:</h3>
                   <p>{filterCompleteTasks.length} задач(а)</p>
-                  <div className='archive__search'>
-                    <input type='text' onChange={(event) => filterArchiveTasks(event)} />
-                    <img src={search} alt='search' />
+                  <div className="archive__search">
+                    <input
+                      type="text"
+                      onChange={(event) => filterArchiveTasks(event)}
+                    />
+                    <img src={search} alt="search" />
                   </div>
                 </div>
-                <div className='archive__tasksWrapper'>
+                <div className="archive__tasksWrapper">
                   {filterCompleteTasks.map((task, index) => {
-                    return <div className='archive__completeTask' key={index}>
-                              <div className='archive__completeTask__description'>
-                                <p>{task.description}</p>
-                                <p className='date'>{task.dateComplete}</p>
-                              </div>
-                              <div className='archive__completeTask__info'>
-                                <img src={task.avatarDo} alt='avatar' />
-                                <p>{task.name}</p>
-                              </div>
-                           </div>
+                    return (
+                      <div className="archive__completeTask" key={index}>
+                        <div className="archive__completeTask__description">
+                          <p>{task.description}</p>
+                          <p className="date">{task.dateComplete}</p>
+                        </div>
+                        <div className="archive__completeTask__info">
+                          <img src={task.avatarDo} alt="avatar" />
+                          <p>{task.name}</p>
+                        </div>
+                      </div>
+                    );
                   })}
                 </div>
               </div>

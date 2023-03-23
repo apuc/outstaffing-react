@@ -1,0 +1,170 @@
+.partnerEmployees {
+  background: #F1F1F1;
+  height: 100%;
+  min-height: 100vh;
+  font-family: 'LabGrotesque', sans-serif;
+
+  &__title {
+    color: #000000;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 32px;
+    margin-bottom: 22px;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+
+  &__item {
+    background: #E1FCCF;
+    border-radius: 12px;
+    display: flex;
+    position: relative;
+
+    &__name {
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 25px 22px 25px;
+      display: flex;
+      align-items: center;
+      max-width: 274px;
+      width: 100%;
+
+      img {
+        width: 77px;
+        height: 77px;
+      }
+
+      h4 {
+        margin-left: 13px;
+        margin-bottom: 0;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 26px;
+        max-width: 96px;
+        color: #000000;
+      }
+    }
+
+    &__info {
+      display: flex;
+      padding: 15px 50px 14px 16px;
+      width: 100%;
+      justify-content: space-between;
+
+      &__qualification {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        h5 {
+          font-weight: 500;
+          font-size: 18px;
+          color: #000000;
+          margin-bottom: 0;
+        }
+
+        span {
+          color: #6F6F6F;
+          font-weight: 500;
+          font-size: 14px;
+        }
+
+        .info_summary {
+          display: flex;
+          align-items: center;
+
+          p {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 22px;
+            color: #000000;
+            margin: 0 18px 0 10px;
+          }
+
+          .arrow {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFFFFF;
+            border-radius: 50px;
+            width: 41px;
+            height: 41px;
+          }
+        }
+      }
+
+      &__project {
+        .name {
+          font-weight: 500;
+          font-size: 18px;
+          color: #111112;
+        }
+
+        h5 {
+          margin-bottom: 0;
+          font-weight: 500;
+          font-size: 18px;
+          color: #111112;
+        }
+
+        &__details {
+          display: flex;
+          margin-top: 24px;
+          column-gap: 25px;
+
+          .details__item {
+            display: flex;
+            align-items: center;
+
+            p {
+              margin-bottom: 0;
+              color: #6F6F6F;
+              font-weight: 500;
+              font-size: 13px;
+              line-height: 24px;
+
+              span {
+                color: #406128;
+                font-weight: 700;
+                text-decoration: underline;
+              }
+            }
+
+            .count {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-left: 8px;
+              padding: 0 6px;
+              background: #DDDDDD;
+              border-radius: 4px;
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 24px;
+              color: #6F6F6F;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  .container {
+    max-width: 1160px;
+    margin-top: 23px;
+
+    @media (max-width: 570px) {
+      margin-top: 0;
+    }
+  }
+
+  footer {
+    margin-top: 70px;
+  }
+}
