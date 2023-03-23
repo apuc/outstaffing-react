@@ -30,6 +30,7 @@ export const SliderWorkers = ({}) => {
       skils: "React / Vue Front end, Middle разработчик",
     },
   ]);
+
   const settings = {
     infinite: true,
     speed: 300,
@@ -52,9 +53,9 @@ export const SliderWorkers = ({}) => {
         </div>
 
         <Slider {...settings}>
-          {workers.map((worker) => {
+          {workers.map((worker, index) => {
             return (
-              <div className="worker">
+              <div className="worker" key={index}>
                 <img src={worker.avatar}></img>
                 <div className="worker-description">
                   <p>{worker.skils}</p>

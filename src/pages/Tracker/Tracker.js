@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { Footer } from "../../components/Footer/Footer";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getProjects } from "../../redux/projectsTrackerSlice";
+
 import ModalTiket from "../../components/UI/ModalTiket/ModalTiket";
 import ModalCreate from "../../components/UI/ModalCreate/ModalCreate";
 
@@ -16,25 +19,10 @@ import filesBoard from "../../images/filesBoard.svg";
 import search from "../../images/search.svg";
 
 import "./tracker.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { getProjects } from "../../redux/projectsTrackerSlice";
 
 export const Tracker = () => {
   const [toggleTab, setToggleTab] = useState(1);
-  // const [projects] = useState([
-  //   {
-  //     name: "Разработка трекера",
-  //     count: 4,
-  //   },
-  //   {
-  //     name: "Кинотеатр",
-  //     count: 4,
-  //   },
-  //   {
-  //     name: "Проект страхование",
-  //     count: 4,
-  //   },
-  // ]);
+
   const [tabTaskMok, setTabTaskMok] = useState([
     {
       name: "Открытые",
@@ -257,7 +245,6 @@ export const Tracker = () => {
   ]);
 
   const projects = useSelector(getProjects);
-  const dispatch = useDispatch();
 
   const toggleTabs = (index) => {
     setToggleTab(index);
@@ -504,7 +491,6 @@ export const Tracker = () => {
                             >
                               <div className="tasks__board__item__title">
                                 <p>{task.task}</p>
-                                <span>...</span>
                               </div>
                               <p className="tasks__board__item__description">
                                 {task.description}
