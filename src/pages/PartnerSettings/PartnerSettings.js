@@ -16,7 +16,7 @@ export const PartnerSettings = () => {
         <ProfileBreadcrumbs
           links={[
             { name: "Главная", link: "/profile" },
-            { name: "Данные моего персонала", link: "/profile/employees" },
+            { name: "Данные моего персонала", link: "/profile/settings" },
           ]}
         />
         <div className="partner-settings">

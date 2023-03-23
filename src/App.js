@@ -25,8 +25,9 @@ import { PartnerSettings } from "./pages/PartnerSettings/PartnerSettings"
 import {PartnerRequests} from './pages/PartnerRequests/PartnerRequests'
 import {PartnerAddRequest} from './pages/PartnerAddRequest/PartnerAddRequest'
 import {PartnerBid} from './pages/PartnerBid/PartnerBid'
-import {PartnerPersonalInfo} from "./pages/PartnerPersonalInfo/PartnerPersonalInfo";
+import {PartnerCategories} from "./pages/PartnerСategories/PartnerСategories";
 import {PartnerTreaties} from "./pages/PartnerTreaties/PartnerTreaties";
+import {PartnerEmployees} from "./pages/PartnerEmployees/PartnerEmployees";
 
 import './fonts/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -71,8 +72,9 @@ const App = () => {
               <Route exact path='requests' element={<PartnerRequests/>}/>
               <Route exact path='add-request' element={<PartnerAddRequest/>}/>
               <Route exact path='bid' element={<PartnerBid/>}/>
-              <Route exact path='employees' element={<PartnerPersonalInfo/>}/>
+              <Route exact path='categories' element={<PartnerCategories/>}/>
               <Route exact path='treaties' element={<PartnerTreaties/>}/>
+              <Route exact path='categories/employees' element={<PartnerEmployees/>}/>
             </Route>
 
             <Route path="*" element={<Navigate to="/profile" replace/>}/>
