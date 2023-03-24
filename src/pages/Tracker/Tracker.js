@@ -232,9 +232,19 @@ export const Tracker = () => {
 
   const [filterCompleteTasks, setFilterCompleteTasks] = useState(completeTasks);
 
+  // Modal State
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
   const [modalCreateProject, setModalCreateProject] = useState(false);
   const [modalCreateColl, setModalCreateColl] = useState(false);
+  const [modalCreateTiket, setModalCreateTiket] = useState(false);
+  const [valueTiket, setValueTiket] = useState("");
+  //
+
+  const [selectedTab, setSelectedTab] = useState({
+    name: "",
+    indexTab: 0,
+    task: [],
+  });
 
   const [startWrapperIndex, setStartWrapperIndex] = useState(null);
   const [wrapperHover, setWrapperHover] = useState([
@@ -343,8 +353,29 @@ export const Tracker = () => {
     );
   }
 
-  function createProject() {
-    setModalCreateProject(true);
+  function selectedTabTask(e, wrapperIndex, name, tasks) {
+    let tab = { name: name, indexTab: wrapperIndex, task: tasks };
+    setSelectedTab(tab);
+    setModalCreateTiket(true);
+  }
+
+  function createTiket() {
+    tabTaskMok.filter((item) => {
+      if (item.name == selectedTab.name) {
+        let newTiket = {
+          task: valueTiket,
+          description: "Сверстать часть таблицы. Сверстать часть таблицы",
+          comments: 0,
+          files: 0,
+          avatarCreated: avatarTest,
+          avatarDo: avatarTest,
+          id: item.tasks.length + 1,
+        };
+
+        item.tasks.push(newTiket);
+      }
+    });
+    setModalCreateTiket(false);
   }
 
   return (
@@ -402,7 +433,7 @@ export const Tracker = () => {
                   setActive={setModalCreateProject}
                   title={"Укажите название проекта:"}
                 />
-                <button onClick={createProject}>
+                <button onClick={() => setModalCreateProject(true)}>
                   <span>+</span>Создать проект
                 </button>
               </div>
@@ -442,10 +473,37 @@ export const Tracker = () => {
                     <img src={selectArrow} alt="arrow" />
                   </div>
                 </div>
+
                 <ModalTiket
                   active={modalActiveTicket}
                   setActive={setModalActiveTicket}
                 />
+
+                <div
+                  className={
+                    modalCreateTiket ? "modal-project active" : "modal-project"
+                  }
+                  onClick={() => setModalCreateTiket(false)}
+                >
+                  <div
+                    className="modal-project__content"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="title-project">
+                      <h4>Введите название карточки</h4>
+                      <div className="input-container">
+                        <input
+                          className="name-project"
+                          value={valueTiket}
+                          onChange={(e) => setValueTiket(e.target.value)}
+                        ></input>
+                      </div>
+                    </div>
+                    <button className="create-project" onClick={createTiket}>
+                      Создать
+                    </button>
+                  </div>
+                </div>
 
                 <div className="tasks__container">
                   {tabTaskMok.map((section, wrapperIndex) => {
@@ -468,7 +526,19 @@ export const Tracker = () => {
                             {section.name}
                           </span>
                           <div>
-                            <span className="add">+</span>
+                            <span
+                              className="add"
+                              onClick={(e) =>
+                                selectedTabTask(
+                                  e,
+                                  wrapperIndex,
+                                  section.name,
+                                  section.tasks
+                                )
+                              }
+                            >
+                              +
+                            </span>
                             <span className="more">...</span>
                           </div>
                         </div>
