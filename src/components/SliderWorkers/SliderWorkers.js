@@ -7,7 +7,7 @@ import "./sliderWorkers.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export const SliderWorkers = ({}) => {
+export const SliderWorkers = ({title, titleInfo, subTitle}) => {
   const [workers] = useState([
     {
       avatar: mockWorker,
@@ -46,11 +46,13 @@ export const SliderWorkers = ({}) => {
   return (
     <div className="slider-workers">
       <div className="container">
-        <div className="slider-workers__title">
-          <h2>Свободные разработчики </h2>
-          <h3> для Вашей команды</h3>
-        </div>
-
+        {Boolean(title) ?
+          <div className="slider-workers__title">
+            <h2>{title}</h2>
+            <h3>{titleInfo}</h3>
+          </div>
+            : ""
+        }
         <Slider {...settings}>
           {workers.map((worker) => {
             return (
@@ -64,15 +66,17 @@ export const SliderWorkers = ({}) => {
             );
           })}
         </Slider>
-
-        <div className="slider-workers__description">
-          <h2>Дополните свою команду опытными ИТ-специалистами</h2>
-          <p>
-            Даём финансовые, юридические и кадровые гарантии, предоставляем SLA
-            и отвечаем за работу команды. Вам не нужно искать, оформлять или
-            увольнять сотрудника — все хлопоты мы берем на себя.
-          </p>
-        </div>
+        {Boolean(subTitle) ?
+          <div className="slider-workers__description">
+            <h2>Дополните свою команду опытными ИТ-специалистами</h2>
+            <p>
+              Даём финансовые, юридические и кадровые гарантии, предоставляем SLA
+              и отвечаем за работу команды. Вам не нужно искать, оформлять или
+              увольнять сотрудника — все хлопоты мы берем на себя.
+            </p>
+          </div>
+            : ""
+        }
       </div>
     </div>
   );

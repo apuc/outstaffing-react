@@ -33,7 +33,7 @@ const AuthForPartners = () => {
   return (
     <section className="auth-partners">
       <AuthHeader />
-      <SliderWorkers />
+      <SliderWorkers title={"Свободные разработчики"} titleInfo={"для Вашей команды"} subTitle={true} />
       <div className="auth-partners__background">
         <img className="auth-partners__vector" src={vector} alt="" />
         <img className="auth-partners__vector-black" src={vectorBlack} alt="" />
