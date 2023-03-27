@@ -7,7 +7,8 @@ import {Footer} from '../../components/Footer/Footer'
 
 import {profiles, tags} from '../../redux/outstaffingSlice'
 
-import {Header} from "../../components/Header/Header";
+import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
+import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {apiRequest} from "../../api/request";
 import {Navigate} from "react-router-dom";
 
@@ -56,11 +57,20 @@ const Home = () => {
 
   return (
       <>
-        <Header/>
-        <div className='container'>
-          <Outstaffing/>
-          <Description onLoadMore={loadMore} isLoadingMore={isLoadingMore}/>
-          <Footer/>
+        <ProfileHeader/>
+        <div className="catalog">
+          <div className='container'>
+            <ProfileBreadcrumbs links={[
+              {name: 'Главная', link: '/profile'},
+              {name: 'Запросы и открытые позиции', link: '/profile/requests'},
+              {name: 'Каталог', link: '/profile/catalog'}
+            ]}
+            />
+            <h2 className="catalog__title">Каталог специалистов</h2>
+            <Outstaffing/>
+            <Description onLoadMore={loadMore} isLoadingMore={isLoadingMore}/>
+            <Footer/>
+          </div>
         </div>
       </>
   )
