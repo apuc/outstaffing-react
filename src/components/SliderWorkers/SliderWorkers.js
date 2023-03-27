@@ -33,9 +33,11 @@ export const SliderWorkers = ({}) => {
 
   const settings = {
     infinite: true,
-    speed: 300,
+    speed: 1000,
     slidesToShow: 3,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4500,
   };
 
   if (window.innerWidth < 575) {

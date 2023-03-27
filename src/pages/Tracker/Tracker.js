@@ -238,6 +238,7 @@ export const Tracker = () => {
   const [modalCreateColl, setModalCreateColl] = useState(false);
   const [modalCreateTiket, setModalCreateTiket] = useState(false);
   const [valueTiket, setValueTiket] = useState("");
+  const [valueColl, setValueColl] = useState("");
   //
 
   const [selectedTab, setSelectedTab] = useState({
@@ -376,6 +377,19 @@ export const Tracker = () => {
       }
     });
     setModalCreateTiket(false);
+    setValueTiket("");
+  }
+
+  function createTab() {
+    let newTab = {
+      name: valueColl,
+      open: false,
+      tasks: [],
+    };
+
+    tabTaskMok.unshift(newTab);
+    setValueColl("");
+    setModalCreateColl(false);
   }
 
   return (
@@ -445,12 +459,32 @@ export const Tracker = () => {
                 }
               >
                 <div className="tasks__head">
-                  <ModalCreate
-                    active={modalCreateColl}
-                    setActive={setModalCreateColl}
-                    title={"Добавить колонку: "}
-                  />
                   <h4>Проект : Разработка трекера</h4>
+                  <div
+                    className={
+                      modalCreateColl ? "modal-project active" : "modal-project"
+                    }
+                    onClick={() => setModalCreateColl(false)}
+                  >
+                    <div
+                      className="modal-project__content"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="title-project">
+                        <h4>Введите название карточки</h4>
+                        <div className="input-container">
+                          <input
+                            className="name-project"
+                            value={valueColl}
+                            onChange={(e) => setValueColl(e.target.value)}
+                          ></input>
+                        </div>
+                      </div>
+                      <button className="create-project" onClick={createTab}>
+                        Создать
+                      </button>
+                    </div>
+                  </div>
                   <span
                     className="tasks__head__add"
                     onClick={() => setModalCreateColl(true)}

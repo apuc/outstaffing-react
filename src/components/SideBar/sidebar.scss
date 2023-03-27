@@ -135,9 +135,10 @@
       line-height: 32px;
       color: #000000;
     }
+
     span {
-      font-size: 5px;
-      margin-left: 41px;
+      font-size: 12px;
+      margin-left: 0px;
     }
   }
 
@@ -193,6 +194,10 @@
   display: flex;
   width: 424px;
   left: 140px;
+
+  @media (max-width: 1440px) {
+    left: 79px;
+  }
 
   @media (max-width: 1024px) {
     left: 0;
