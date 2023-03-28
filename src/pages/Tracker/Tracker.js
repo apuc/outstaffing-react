@@ -4,6 +4,9 @@ import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getProjects } from "../../redux/projectsTrackerSlice";
+
 import ModalTiket from "../../components/UI/ModalTiket/ModalTiket";
 import ModalCreate from "../../components/UI/ModalCreate/ModalCreate";
 
@@ -17,25 +20,10 @@ import filesBoard from "../../images/filesBoard.svg";
 import search from "../../images/search.svg";
 
 import "./tracker.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { getProjects } from "../../redux/projectsTrackerSlice";
 
 export const Tracker = () => {
   const [toggleTab, setToggleTab] = useState(1);
-  // const [projects] = useState([
-  //   {
-  //     name: "Разработка трекера",
-  //     count: 4,
-  //   },
-  //   {
-  //     name: "Кинотеатр",
-  //     count: 4,
-  //   },
-  //   {
-  //     name: "Проект страхование",
-  //     count: 4,
-  //   },
-  // ]);
+
   const [tabTaskMok, setTabTaskMok] = useState([
     {
       name: "Открытые",
@@ -245,9 +233,20 @@ export const Tracker = () => {
 
   const [filterCompleteTasks, setFilterCompleteTasks] = useState(completeTasks);
 
+  // Modal State
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
   const [modalCreateProject, setModalCreateProject] = useState(false);
   const [modalCreateColl, setModalCreateColl] = useState(false);
+  const [modalCreateTiket, setModalCreateTiket] = useState(false);
+  const [valueTiket, setValueTiket] = useState("");
+  const [valueColl, setValueColl] = useState("");
+  //
+
+  const [selectedTab, setSelectedTab] = useState({
+    name: "",
+    indexTab: 0,
+    task: [],
+  });
 
   const [startWrapperIndex, setStartWrapperIndex] = useState(null);
   const [wrapperHover, setWrapperHover] = useState([
@@ -258,7 +257,6 @@ export const Tracker = () => {
   ]);
 
   const projects = useSelector(getProjects);
-  const dispatch = useDispatch();
 
   const toggleTabs = (index) => {
     setToggleTab(index);
@@ -357,8 +355,42 @@ export const Tracker = () => {
     );
   }
 
-  function createProject() {
-    setModalCreateProject(true);
+  function selectedTabTask(e, wrapperIndex, name, tasks) {
+    let tab = { name: name, indexTab: wrapperIndex, task: tasks };
+    setSelectedTab(tab);
+    setModalCreateTiket(true);
+  }
+
+  function createTiket() {
+    tabTaskMok.filter((item) => {
+      if (item.name == selectedTab.name) {
+        let newTiket = {
+          task: valueTiket,
+          description: "Сверстать часть таблицы. Сверстать часть таблицы",
+          comments: 0,
+          files: 0,
+          avatarCreated: avatarTest,
+          avatarDo: avatarTest,
+          id: item.tasks.length + 1,
+        };
+
+        item.tasks.push(newTiket);
+      }
+    });
+    setModalCreateTiket(false);
+    setValueTiket("");
+  }
+
+  function createTab() {
+    let newTab = {
+      name: valueColl,
+      open: false,
+      tasks: [],
+    };
+
+    tabTaskMok.unshift(newTab);
+    setValueColl("");
+    setModalCreateColl(false);
   }
 
   return (
@@ -421,7 +453,7 @@ export const Tracker = () => {
                   setActive={setModalCreateProject}
                   title={"Укажите название проекта:"}
                 />
-                <button onClick={createProject}>
+                <button onClick={() => setModalCreateProject(true)}>
                   <span>+</span>Создать проект
                 </button>
               </div>
@@ -433,12 +465,32 @@ export const Tracker = () => {
                 }
               >
                 <div className="tasks__head">
-                  <ModalCreate
-                    active={modalCreateColl}
-                    setActive={setModalCreateColl}
-                    title={"Добавить колонку: "}
-                  />
                   <h4>Проект : Разработка трекера</h4>
+                  <div
+                    className={
+                      modalCreateColl ? "modal-project active" : "modal-project"
+                    }
+                    onClick={() => setModalCreateColl(false)}
+                  >
+                    <div
+                      className="modal-project__content"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="title-project">
+                        <h4>Введите название карточки</h4>
+                        <div className="input-container">
+                          <input
+                            className="name-project"
+                            value={valueColl}
+                            onChange={(e) => setValueColl(e.target.value)}
+                          ></input>
+                        </div>
+                      </div>
+                      <button className="create-project" onClick={createTab}>
+                        Создать
+                      </button>
+                    </div>
+                  </div>
                   <span
                     className="tasks__head__add"
                     onClick={() => setModalCreateColl(true)}
@@ -461,10 +513,37 @@ export const Tracker = () => {
                     <img src={selectArrow} alt="arrow" />
                   </div>
                 </div>
+
                 <ModalTiket
                   active={modalActiveTicket}
                   setActive={setModalActiveTicket}
                 />
+
+                <div
+                  className={
+                    modalCreateTiket ? "modal-project active" : "modal-project"
+                  }
+                  onClick={() => setModalCreateTiket(false)}
+                >
+                  <div
+                    className="modal-project__content"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="title-project">
+                      <h4>Введите название карточки</h4>
+                      <div className="input-container">
+                        <input
+                          className="name-project"
+                          value={valueTiket}
+                          onChange={(e) => setValueTiket(e.target.value)}
+                        ></input>
+                      </div>
+                    </div>
+                    <button className="create-project" onClick={createTiket}>
+                      Создать
+                    </button>
+                  </div>
+                </div>
 
                 <div className="tasks__container">
                   {tabTaskMok.map((section, wrapperIndex) => {
@@ -487,7 +566,19 @@ export const Tracker = () => {
                             {section.name}
                           </span>
                           <div>
-                            <span className="add">+</span>
+                            <span
+                              className="add"
+                              onClick={(e) =>
+                                selectedTabTask(
+                                  e,
+                                  wrapperIndex,
+                                  section.name,
+                                  section.tasks
+                                )
+                              }
+                            >
+                              +
+                            </span>
                             <span className="more">...</span>
                           </div>
                         </div>
@@ -510,7 +601,6 @@ export const Tracker = () => {
                             >
                               <div className="tasks__board__item__title">
                                 <p>{task.task}</p>
-                                <span>...</span>
                               </div>
                               <p className="tasks__board__item__description">
                                 {task.description}

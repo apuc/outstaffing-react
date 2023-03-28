@@ -30,6 +30,13 @@ const AuthForPartners = () => {
     }
   }, [getToken]);
 
+  function scrollToForm() {
+    window.scrollTo({
+      top: 850,
+      behavior: "smooth",
+    });
+  }
+
   return (
     <section className="auth-partners">
       <AuthHeader />
@@ -39,13 +46,13 @@ const AuthForPartners = () => {
         <img className="auth-partners__vector-black" src={vectorBlack} alt="" />
         <div className="container">
           <div className="change-mode">
-            <div className="change-mode__arrow">
+            <div className="change-mode__arrow" onClick={() => scrollToForm()}>
               <img src={arrowBtn}></img>
             </div>
             <div className="buttons">
               <Link to={"/authdev"}>
                 <button className="change-mode__developersForPart">
-                  Для разработчика
+                  Для разработчиков
                 </button>
               </Link>
               <Link to={"/auth"}>

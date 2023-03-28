@@ -30,11 +30,14 @@ export const SliderWorkers = ({title, titleInfo, subTitle}) => {
       skils: "React / Vue Front end, Middle разработчик",
     },
   ]);
+
   const settings = {
     infinite: true,
-    speed: 300,
+    speed: 1000,
     slidesToShow: 3,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4500,
   };
 
   if (window.innerWidth < 575) {
@@ -54,9 +57,9 @@ export const SliderWorkers = ({title, titleInfo, subTitle}) => {
             : ""
         }
         <Slider {...settings}>
-          {workers.map((worker) => {
+          {workers.map((worker, index) => {
             return (
-              <div className="worker">
+              <div className="worker" key={index}>
                 <img src={worker.avatar}></img>
                 <div className="worker-description">
                   <p>{worker.skils}</p>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import {  setProject } from "../../../redux/projectsTrackerSlice";
+import { setProject } from "../../../redux/projectsTrackerSlice";
 
 import "./ModalCreate.scss";
 
@@ -9,13 +9,17 @@ export const ModalCreate = ({ active, setActive, title }) => {
   const dispatch = useDispatch();
 
   function createName() {
-    let newItem = {
-      name: inputValue,
-      count: 0,
-    };
-    dispatch(setProject(newItem));
-    setActive(false);
-    setInputValue("")
+    if (inputValue === "") {
+      return;
+    } else {
+      let newItem = {
+        name: inputValue,
+        count: 0,
+      };
+      dispatch(setProject(newItem));
+      setActive(false);
+      setInputValue("");
+    }
   }
 
   return (

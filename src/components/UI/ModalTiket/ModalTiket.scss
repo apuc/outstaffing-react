@@ -39,6 +39,24 @@
       &__category {
         margin-right: 17px;
       }
+
+      &__menu {
+        display: flex;
+        align-items: center;
+        margin-left: 110px;
+
+        p {
+          font-weight: 400;
+          font-size: 14px;
+          color: #252c32;
+          margin: 0 30px 0 0;
+
+          &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+          }
+        }
+      }
     }
 
     &__task {

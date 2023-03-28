@@ -31,6 +31,13 @@ const AuthForDevelopers = () => {
     }
   }, [getToken]);
 
+  function scrollToForm() {
+    window.scrollTo({
+      top: 850,
+      behavior: "smooth",
+    });
+  }
+
   return (
     <section className="auth-developers">
       <AuthHeader />
@@ -44,13 +51,13 @@ const AuthForDevelopers = () => {
         />
         <div className="container">
           <div className="change-mode">
-            <div className="change-mode__arrow">
+            <div className="change-mode__arrow" onClick={() => scrollToForm()}>
               <img src={arrowBtn}></img>
             </div>
             <div className="buttons">
               <Link to={"/authdev"}>
                 <button className="change-mode__developersForDev">
-                  Для разработчика
+                  Для разработчиков
                 </button>
               </Link>
               <Link to={"/auth"}>
