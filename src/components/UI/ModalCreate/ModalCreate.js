@@ -40,10 +40,11 @@ export const ModalCreate = ({ active, setActive, title }) => {
               onChange={(e) => setInputValue(e.target.value)}
             ></input>
           </div>
+          <button className="create-project" onClick={createName}>
+            Создать
+          </button>
         </div>
-        <button className="create-project" onClick={createName}>
-          Создать
-        </button>
+        <span className="exit" onClick={() => setActive(false)}></span>
       </div>
     </div>
   );

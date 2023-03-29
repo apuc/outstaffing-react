@@ -41,7 +41,7 @@ export const ModalRegistration = ({ active, setActive }) => {
             </div>
           </div>
           <div className="button-box">
-            <button>Отправить</button>
+            <button onClick={(e) => e.preventDefault()}>Отправить</button>
             <h5>
               У вас уже есть аккаунт? <p>Войти</p>
             </h5>
