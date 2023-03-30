@@ -26,6 +26,10 @@ h1 {
   position: relative !important;
 }
 
+p {
+  margin-bottom: 0;
+}
+
 @media (max-width: 568px) {
   .col-xs-12 {
     width: 100% !important;

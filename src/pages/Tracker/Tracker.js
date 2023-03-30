@@ -17,13 +17,14 @@ import avatarTest from "../../images/AvatarTest .png";
 import selectArrow from "../../images/select.svg";
 import commentsBoard from "../../images/commentsBoard.svg";
 import filesBoard from "../../images/filesBoard.svg";
-import search from "../../images/search.svg";
+import search from "../../images/serchIcon.png";
+import noProjects from "../../images/noProjects.png"
+import arrow from '../../images/arrowCalendar.png'
 
 import "./tracker.scss";
 
 export const Tracker = () => {
   const [toggleTab, setToggleTab] = useState(1);
-
   const [tabTaskMok, setTabTaskMok] = useState([
     {
       name: "Открытые",
@@ -132,102 +133,224 @@ export const Tracker = () => {
     },
   ]);
 
+  const [allTasks] = useState([
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: "7 марта 2023 г",
+      avatarDo: avatarTest,
+      project: "Будущее России"
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: "7 марта 2023 г",
+      avatarDo: avatarTest,
+      project: "Будущее России"
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: "7 марта 2023 г",
+      avatarDo: avatarTest,
+      project: "Будущее России"
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: "7 марта 2023 г",
+      avatarDo: avatarTest,
+      project: "Будущее России"
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: "7 марта 2023 г",
+      avatarDo: avatarTest,
+      project: "Будущее России"
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: "7 марта 2023 г",
+      avatarDo: avatarTest,
+      project: "Будущее России"
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: "7 марта 2023 г",
+      avatarDo: avatarTest,
+      project: "Будущее России"
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: "7 марта 2023 г",
+      avatarDo: avatarTest,
+      project: "Будущее России"
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: "7 марта 2023 г",
+      avatarDo: avatarTest,
+      project: "Будущее России"
+    },
+  ])
+
+  const [archiveProjects] = useState([
+      {
+        name: "Будущее России",
+        date: "7 марта 2023 г"
+      },
+      {
+        name: "Будущее России",
+        date: "7 марта 2023 г"
+      },
+      {
+        name: "Будущее России",
+        date: "7 марта 2023 г"
+      },
+      {
+        name: "Будущее России",
+        date: "7 марта 2023 г"
+      },
+      {
+        name: "Будущее России",
+        date: "7 марта 2023 г"
+      },
+      {
+        name: "Будущее России",
+        date: "7 марта 2023 г"
+      },
+      {
+        name: "Будущее России",
+        date: "7 марта 2023 г"
+      },
+      {
+        name: "Будущее России",
+        date: "7 марта 2023 г"
+      },
+      {
+        name: "Будущее России",
+        date: "7 марта 2023 г"
+      },
+    ]
+  )
+
   const [completeTasks] = useState([
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
       name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
-      name: "PK - 2245",
+      name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
-      name: "PE - 2245",
+      name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
-      name: "PA - 2245",
+      name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
-      name: "PB - 2245",
-      description: "Верстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
-      avatarDo: avatarTest,
-    },
-    {
-      name: "PC - 2245",
+      name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
-      name: "PD - 2245",
+      name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
     },
     {
-      name: "PA - 2245",
+      name: "PR - 2245",
       description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "07/мар/23",
+      dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
+      project: "Будущее России"
+    },
+    {
+      name: "PR - 2245",
+      description: "Сверстать часть таблицы. Сверстать часть таблицы",
+      dateComplete: "7 марта 2023 г",
+      avatarDo: avatarTest,
+      project: "Будущее России"
     },
   ]);
 
@@ -241,6 +364,8 @@ export const Tracker = () => {
   const [valueTiket, setValueTiket] = useState("");
   const [valueColl, setValueColl] = useState("");
   //
+
+  const [projectTasksOpen, setProjectTasksOpen] = useState(false)
 
   const [selectedTab, setSelectedTab] = useState({
     name: "",
@@ -259,6 +384,9 @@ export const Tracker = () => {
   const projects = useSelector(getProjects);
 
   const toggleTabs = (index) => {
+    if (projectTasksOpen) {
+      setProjectTasksOpen(false)
+    }
     setToggleTab(index);
   };
 
@@ -403,42 +531,50 @@ export const Tracker = () => {
             {name: 'Трекер', link: '/profile/tracker'}
           ]}
           />
-          <h2 className="tracker__title">Трекер</h2>
-          <div className="tracker__tabs">
-            <div className="tracker__tabs__head">
-              <div
-                className={toggleTab === 1 ? "tab active-tab" : "tab"}
-                onClick={() => toggleTabs(1)}
-              >
-                <img src={project} alt="img" />
-                <p>Проекты </p>
-              </div>
-              <div
-                className={toggleTab === 2 ? "tab active-tab" : "tab"}
-                onClick={() => toggleTabs(2)}
-              >
-                <img src={tasks} alt="img" />
-                <p>Задачи</p>
-              </div>
-              <div
-                className={toggleTab === 3 ? "tab active-tab" : "tab"}
-                onClick={() => toggleTabs(3)}
-              >
-                <img src={archive} alt="img" />
-                <p>Архив</p>
-              </div>
-            </div>
-            <div className="tracker__tabs__content">
-              <div
-                className={
-                  toggleTab === 1
-                    ? "tracker__tabs__content__projects active__content"
-                    : "tracker__tabs__content__projects"
-                }
-              >
-                {projects.map((project, index) => {
-                  return (
-                    <div className="project" key={index}>
+          <h2 className="tracker__title">Управление проектами с трекером</h2>
+        </div>
+      </div>
+      <div className="tracker__tabs">
+        <div className="tracker__tabs__head">
+          <div
+              className={toggleTab === 1 ? "tab active-tab" : "tab"}
+              onClick={() => toggleTabs(1)}
+          >
+            <img src={project} alt="img" />
+            <p>Проекты </p>
+          </div>
+          <div
+              className={toggleTab === 2 ? "tab active-tab" : "tab"}
+              onClick={() => toggleTabs(2)}
+          >
+            <img src={tasks} alt="img" />
+            <p>Все мои задачи</p>
+          </div>
+          <div
+              className={toggleTab === 3 ? "tab active-tab" : "tab"}
+              onClick={() => toggleTabs(3)}
+          >
+            <img src={archive} alt="img" />
+            <p>Архив</p>
+          </div>
+        </div>
+        <div className="tracker__tabs__content">
+          <div
+              className={
+                toggleTab === 1
+                    ? "tracker__tabs__content__projects active__content tracker__tabs__content__wrapper"
+                    : "tracker__tabs__content__projects tracker__tabs__content__wrapper"
+              }
+          >
+            <ModalCreate
+                active={modalCreateProject}
+                setActive={setModalCreateProject}
+                title={"Укажите название проекта:"}
+            />
+            {Boolean(projects.length) && !projectTasksOpen &&
+              projects.map((project, index) => {
+                return (
+                    <div className="project" key={index} onClick={() => setProjectTasksOpen(true)}>
                       <h3>{project.name}</h3>
                       <div className="project__info">
                         <p>Открытые задачи</p>
@@ -446,158 +582,180 @@ export const Tracker = () => {
                         <span className="add">+</span>
                       </div>
                     </div>
-                  );
-                })}
-                <ModalCreate
-                  active={modalCreateProject}
-                  setActive={setModalCreateProject}
-                  title={"Укажите название проекта:"}
-                />
-                <button onClick={() => setModalCreateProject(true)}>
+                );
+              })}
+              {!Boolean(projects.length) && !projectTasksOpen &&
+                <div className="no-projects">
+                  <div className="no-projects__createNew">
+                    <div>
+                      <img src={noProjects} alt="noProjectImg" />
+                      <p>Создайте свой первый проект</p>
+                    </div>
+                    <button className="createProjectBtn" onClick={() => setModalCreateProject(true)}>
+                      <span>+</span>Создать проект
+                    </button>
+                  </div>
+                  <p className="no-projects__info">Ставьте задачи, следите за прогрессом, ведите учёт рабочего времени</p>
+                </div>
+              }
+            {Boolean(projects.length) && !projectTasksOpen &&
+              <div className="create-newProject">
+                <button className="createProjectBtn" onClick={() => setModalCreateProject(true)}>
                   <span>+</span>Создать проект
                 </button>
+                <p>Ставьте задачи, следите за прогрессом, ведите учёт рабочего времени</p>
               </div>
-              <div
-                className={
-                  toggleTab === 2
+            }
+          </div>
+          <div
+              className={
+                toggleTab === 1 && projectTasksOpen
                     ? "tracker__tabs__content__tasks tasks active__content"
                     : "tracker__tabs__content__projects"
-                }
-              >
-                <div className="tasks__head">
-                  <h4>Проект : Разработка трекера</h4>
-                  <div
+              }
+          >
+            <div className="tasks__head">
+              <div className="tasks__head__wrapper">
+                <h4>Проект : Разработка трекера</h4>
+                <div
                     className={
                       modalCreateColl ? "modal-project active" : "modal-project"
                     }
                     onClick={() => setModalCreateColl(false)}
-                  >
-                    <div
-                      className="modal-project__content"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <div className="title-project">
-                        <h4>Введите название карточки</h4>
-                        <div className="input-container">
-                          <input
-                            className="name-project"
-                            value={valueColl}
-                            onChange={(e) => setValueColl(e.target.value)}
-                          ></input>
-                        </div>
-                      </div>
-                      <button className="create-project" onClick={createTab}>
-                        Создать
-                      </button>
-                    </div>
-                  </div>
-                  <span
-                    className="tasks__head__add"
-                    onClick={() => setModalCreateColl(true)}
-                  >
-                    +
-                  </span>
-                  <div className="tasks__head__persons">
-                    <img src={avatarTest} alt="avatar" />
-                    <img src={avatarTest} alt="avatar" />
-                    <img src={avatarTest} alt="avatar" />
-                    <img src={avatarTest} alt="avatar" />
-                    <span>+9</span>
-                  </div>
-                  <div className="tasks__head__select">
-                    <span>Учавствую</span>
-                    <img src={selectArrow} alt="arrow" />
-                  </div>
-                  <div className="tasks__head__select">
-                    <span>Мои</span>
-                    <img src={selectArrow} alt="arrow" />
-                  </div>
-                </div>
-
-                <ModalTiket
-                  active={modalActiveTicket}
-                  setActive={setModalActiveTicket}
-                />
-
-                <div
-                  className={
-                    modalCreateTiket ? "modal-project active" : "modal-project"
-                  }
-                  onClick={() => setModalCreateTiket(false)}
                 >
                   <div
-                    className="modal-project__content"
-                    onClick={(e) => e.stopPropagation()}
+                      className="modal-project__content"
+                      onClick={(e) => e.stopPropagation()}
                   >
                     <div className="title-project">
                       <h4>Введите название карточки</h4>
                       <div className="input-container">
                         <input
-                          className="name-project"
-                          value={valueTiket}
-                          onChange={(e) => setValueTiket(e.target.value)}
+                            className="name-project"
+                            value={valueColl}
+                            onChange={(e) => setValueColl(e.target.value)}
                         ></input>
                       </div>
                     </div>
-                    <button className="create-project" onClick={createTiket}>
+                    <button className="create-project" onClick={createTab}>
                       Создать
                     </button>
                   </div>
                 </div>
+                <div className="tasks__head__add">
+                  <span
+                      onClick={() => setModalCreateColl(true)}
+                  >
+                        +
+                  </span>
+                  <p>добавить задачу в проект</p>
+                </div>
+                <div className="tasks__head__persons">
+                  <img src={avatarTest} alt="avatar" />
+                  <img src={avatarTest} alt="avatar" />
+                  <span className="countPersons">+9</span>
+                  <span className="addPerson">+</span>
+                  <p>добавить участника в проект</p>
+                </div>
+                <div className="tasks__head__select">
+                  <span>Учавствую</span>
+                  <img src={selectArrow} alt="arrow" />
+                </div>
+                <div className="tasks__head__select">
+                  <span>Мои</span>
+                  <img src={selectArrow} alt="arrow" />
+                </div>
+                <div className="tasks__head__back" onClick={() => setProjectTasksOpen(false)}>
+                  <p>Вернуться на проекты</p>
+                  <img src={arrow} alt="arrow"/>
+                </div>
+              </div>
+            </div>
 
-                <div className="tasks__container">
-                  {tabTaskMok.map((section, wrapperIndex) => {
-                    return (
-                      <div
+            <ModalTiket
+                active={modalActiveTicket}
+                setActive={setModalActiveTicket}
+            />
+
+            <div
+                className={
+                  modalCreateTiket ? "modal-project active" : "modal-project"
+                }
+                onClick={() => setModalCreateTiket(false)}
+            >
+              <div
+                  className="modal-project__content"
+                  onClick={(e) => e.stopPropagation()}
+              >
+                <div className="title-project">
+                  <h4>Введите название карточки</h4>
+                  <div className="input-container">
+                    <input
+                        className="name-project"
+                        value={valueTiket}
+                        onChange={(e) => setValueTiket(e.target.value)}
+                    ></input>
+                  </div>
+                </div>
+                <button className="create-project" onClick={createTiket}>
+                  Создать
+                </button>
+              </div>
+            </div>
+
+            <div className="tasks__container">
+              {tabTaskMok.map((section, wrapperIndex) => {
+                return (
+                    <div
                         key={wrapperIndex}
                         onDragOver={(e) => dragOverHandler(e)}
                         onDragEnter={(e) => dragEnterHandler(wrapperIndex)}
                         onDrop={(e) => dragDropHandler(e, wrapperIndex)}
                         className={`tasks__board ${
-                          section.tasks.length >= 3 ? "tasks__board__more" : ""
+                            section.tasks.length >= 3 ? "tasks__board__more" : ""
                         } ${
-                          wrapperHover[wrapperIndex]
-                            ? "tasks__board__hover"
-                            : ""
+                            wrapperHover[wrapperIndex]
+                                ? "tasks__board__hover"
+                                : ""
                         }`}
-                      >
-                        <div className="board__head">
+                    >
+                      <div className="board__head">
                           <span className={wrapperIndex === 3 ? "done" : ""}>
                             {section.name}
                           </span>
-                          <div>
+                        <div>
                             <span
-                              className="add"
-                              onClick={(e) =>
-                                selectedTabTask(
-                                  e,
-                                  wrapperIndex,
-                                  section.name,
-                                  section.tasks
-                                )
-                              }
+                                className="add"
+                                onClick={(e) =>
+                                    selectedTabTask(
+                                        e,
+                                        wrapperIndex,
+                                        section.name,
+                                        section.tasks
+                                    )
+                                }
                             >
                               +
                             </span>
-                            <span className="more">...</span>
-                          </div>
+                          <span className="more">...</span>
                         </div>
-                        {section.tasks.map((task, index) => {
-                          if (index > 2) {
-                            if (!section.open) {
-                              return;
-                            }
+                      </div>
+                      {section.tasks.map((task, index) => {
+                        if (index > 2) {
+                          if (!section.open) {
+                            return;
                           }
-                          return (
+                        }
+                        return (
                             <div
-                              key={index}
-                              className="tasks__board__item"
-                              draggable={true}
-                              onDragStart={(e) =>
-                                dragStartHandler(e, task, wrapperIndex)
-                              }
-                              onDragEnd={(e) => dragEndHandler(e)}
-                              onClick={() => setModalActiveTicket(true)}
+                                key={index}
+                                className="tasks__board__item"
+                                draggable={true}
+                                onDragStart={(e) =>
+                                    dragStartHandler(e, task, wrapperIndex)
+                                }
+                                onDragEnd={(e) => dragEndHandler(e)}
+                                onClick={() => setModalActiveTicket(true)}
                             >
                               <div className="tasks__board__item__title">
                                 <p>{task.task}</p>
@@ -620,59 +778,132 @@ export const Tracker = () => {
                                 </div>
                               </div>
                             </div>
-                          );
-                        })}
-                        {section.tasks.length > 3 && (
+                        );
+                      })}
+                      {section.tasks.length > 3 && (
                           <span
-                            className={
-                              section.open
-                                ? "lessItems openItems"
-                                : "moreItems openItems"
-                            }
-                            onClick={() => toggleMoreTasks(wrapperIndex)}
+                              className={
+                                section.open
+                                    ? "lessItems openItems"
+                                    : "moreItems openItems"
+                              }
+                              onClick={() => toggleMoreTasks(wrapperIndex)}
                           >
                             {section.open ? "-" : "+"}
                           </span>
-                        )}
+                      )}
+                    </div>
+                );
+              })}
+            </div>
+          </div>
+          <div
+              className={
+                toggleTab === 2
+                    ? "tracker__tabs__content__allTasks taskList tasks active__content"
+                    : "tracker__tabs__content__projects"
+              }
+          >
+            <div className="taskList__head">
+              <h3>Список всех задач</h3>
+              <div className="taskList__head__search">
+                <img src={search} alt="search" />
+                <input
+                    type="text"
+                    placeholder="Найти задачу"
+                    onChange={(event) => filterArchiveTasks(event)}
+                />
+              </div>
+            </div>
+            <div className="taskList__wrapper">
+              {allTasks.map((task, index) => {
+                  return(
+                      <div className="task" key={index}>
+                        <div className="task__info">
+                          <h5>{task.name}</h5>
+                          <p>{task.description}</p>
+                        </div>
+                        <div className="task__person">
+                          <img src={task.avatarDo} alt="avatar" />
+                          <div className="task__project">
+                            <p>{task.project}</p>
+                            <span>{task.dateComplete}</span>
+                          </div>
+                        </div>
                       </div>
-                    );
-                  })}
+                  )
+                })
+              }
+            </div>
+          </div>
+          <div
+              className={
+                toggleTab === 3
+                    ? "tracker__tabs__content__archive active__content"
+                    : "tracker__tabs__content__projects"
+              }
+          >
+            <div className="archive__tasks">
+              <div className="archive__title">
+                <h3>Архив задач:</h3>
+                <p>{filterCompleteTasks.length} задач(а)</p>
+                <div className="archive__tasks__search">
+                  <img src={search} alt="search" />
+                  <input
+                      type="text"
+                      placeholder="Найти задачу"
+                      onChange={(event) => filterArchiveTasks(event)}
+                  />
                 </div>
               </div>
-              <div
-                className={
-                  toggleTab === 3
-                    ? "tracker__tabs__content__archive tasks active__content"
-                    : "tracker__tabs__content__projects"
-                }
-              >
-                <div className="archive__title">
-                  <h3>Архив:</h3>
-                  <p>{filterCompleteTasks.length} задач(а)</p>
-                  <div className="archive__search">
-                    <input
-                      type="text"
-                      onChange={(event) => filterArchiveTasks(event)}
-                    />
-                    <img src={search} alt="search" />
-                  </div>
-                </div>
-                <div className="archive__tasksWrapper">
-                  {filterCompleteTasks.map((task, index) => {
+              <div className="archive__tasksWrapper">
+                {Boolean(filterCompleteTasks.length) ?
+                  filterCompleteTasks.map((task, index) => {
                     return (
-                      <div className="archive__completeTask" key={index}>
-                        <div className="archive__completeTask__description">
-                          <p>{task.description}</p>
-                          <p className="date">{task.dateComplete}</p>
+                        <div className="archive__completeTask" key={index}>
+                          <div className="archive__completeTask__description">
+                            <p>{task.description}</p>
+                            <p className="date">{task.dateComplete}</p>
+                          </div>
+                          <div className="archive__completeTask__info">
+                            <img src={task.avatarDo} alt="avatar" />
+                            <div className="archive__completeTask__info__project">
+                              <span>Проект</span>
+                              <p>{task.project}</p>
+                            </div>
+                          </div>
                         </div>
-                        <div className="archive__completeTask__info">
-                          <img src={task.avatarDo} alt="avatar" />
-                          <p>{task.name}</p>
-                        </div>
-                      </div>
                     );
-                  })}
-                </div>
+                  })
+                  :
+                  <div className="archive__noItem">
+                    <p>В архиве задач нет</p>
+                  </div>
+                }
+              </div>
+            </div>
+            <div className="archive__projects">
+              <div className="archive__title">
+                <h3>Архив проектов:</h3>
+                <p>{archiveProjects.length} проект(ов)</p>
+              </div>
+              <div className="archive__tasksWrapper">
+                {Boolean(archiveProjects) ?
+                  archiveProjects.map((project, index) => {
+                      return (
+                          <div className="archive__completeTask" key={index}>
+                            <div className="archive__completeTask__description">
+                              <p>{project.name}</p>
+                              <p className="date">{project.date}</p>
+                            </div>
+                          </div>
+                      )
+                    })
+                  :
+                  <div className="archive__noItem">
+                    <p>В архиве проектов нет</p>
+                  </div>
+                }
               </div>
             </div>
           </div>
