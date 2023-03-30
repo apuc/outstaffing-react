@@ -25,6 +25,7 @@
 
   &__arrow {
     margin-top: 360px;
+    cursor: pointer;
   }
 
   @media (max-width: 575.98px) {
@@ -286,6 +287,7 @@
   align-items: center;
 
   &__arrow {
+    cursor: pointer;
     margin: 49px 0 43px 0;
     width: 48px;
     height: 48px;

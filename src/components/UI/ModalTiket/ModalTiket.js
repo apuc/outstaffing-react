@@ -17,7 +17,7 @@ export const ModalTiket = ({ active, setActive }) => {
     code: "PR - 2245",
     creator: "Василий Тарасов",
     descriptions:
-      "На многих страницах сайта отсутствуют или некорректно заполнены метатеги Description. Это может негативно повлиять на представление сайта в результатах поиска.Необходимо исправить все страницы где есть ошибки или отсутствует Title и  Description.",
+      "На многих страницах сайта отсутствуют или некорректно заполнены метатеги Description. Это может негативно повлиять на представление сайта в результатах поиска. Необходимо исправить все страницы где есть ошибки или отсутствует Title и  Description.",
   });
 
   const [workers] = useState([
@@ -44,7 +44,12 @@ export const ModalTiket = ({ active, setActive }) => {
           <h3 className="title-project">
             <img src={category} className="title-project__category"></img>
             Проект: {tiket.name}
+            <div className="title-project__menu">
+              <p>Редактировать</p>
+              <p>Удалить</p>
+            </div>
           </h3>
+
           <div className="content__task">
             <h5>{tiket.code}</h5>
             <div className="content__description">
