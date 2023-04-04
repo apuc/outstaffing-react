@@ -1,0 +1,50 @@
+.step {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: -100px;
+  padding:0 55px 0 85px;
+  width: 100%;
+
+  &__start {
+    display: flex;
+    align-items: center;
+
+    span {
+      font-weight: 900;
+      font-size: 258px;
+      line-height: 32px;
+      color: #52B709;
+    }
+
+    p {
+      margin-left: 20px;
+      max-width: 230px;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 32px;
+      color: #000000;
+    }
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    p {
+      background: #DDEEC6;
+      border-radius: 44px;
+      padding: 8px 26px;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 32px;
+    }
+
+    span {
+      margin-left: 55px;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 32px;
+    }
+  }
+}
