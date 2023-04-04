@@ -1,0 +1,128 @@
+.registrationCandidate {
+  font-family: "LabGrotesque", sans-serif;
+  position: relative;
+  background-color: #f1f1f1;
+
+  &__start {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 55px;
+
+    .step {
+      top: 36.5%;
+    }
+  }
+
+  &__formWrapper {
+    position: relative;
+    margin-top: 200px;
+    display: flex;
+    padding: 33px 69px 32px 30px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    width: 100%;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+
+    &__category {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 48px;
+      }
+
+      p {
+        margin-left: 18px;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        max-width: 120px;
+      }
+    }
+
+    &__skills {
+      max-width: 180px;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 20px;
+      color: #6F6F6F;
+    }
+
+    &__arrow {
+      width: 48px;
+      height: 48px;
+      background: #DDEEC6;
+      border-radius: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 70px;
+    margin-top: 20px;
+    row-gap: 28px;
+    column-gap: 55px;
+
+    &__input {
+      display: flex;
+      flex-direction: column;
+      width: 46%;
+
+      label {
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: #000000;
+        margin-bottom: 15px;
+      }
+
+      input {
+        background: #EFF2F7;
+        border-radius: 8px;
+        width: 100%;
+        padding: 8px 12px;
+        border: none;
+        outline: none;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+      }
+    }
+
+    &__submit {
+      width: 100%;
+      margin-top: 10px;
+
+      button {
+        border: none;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 32px;
+        color: #FFFFFF;
+        background: #52B709;
+        border-radius: 44px;
+        width: 180px;
+        height: 46px;
+      }
+    }
+  }
+
+  footer {
+    margin-top: 80px;
+  }
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 import userIcon from "../../images/userIcon.png";
 
@@ -17,13 +18,24 @@ export const AuthHeader = ({}) => {
           <div className="auth-nav">
             <ul>
               <li>
-                <a href="#">Главная</a>
+                <NavLink to={'/auth'}>
+                  <span>
+                    Главная
+                  </span>
+                </NavLink>
               </li>
               <li>
                 <a href="#">Кабинет разработчика</a>
               </li>
               <li>
                 <a href="#">Школа</a>
+              </li>
+              <li>
+                <NavLink to={'/auth-candidate'} className="candidate">
+                  <span>
+                    Войти в команду
+                  </span>
+                </NavLink>
               </li>
             </ul>
 

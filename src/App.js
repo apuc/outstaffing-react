@@ -28,6 +28,8 @@ import {PartnerBid} from './pages/PartnerBid/PartnerBid'
 import {PartnerCategories} from "./pages/PartnerСategories/PartnerСategories";
 import {PartnerTreaties} from "./pages/PartnerTreaties/PartnerTreaties";
 import {PartnerEmployees} from "./pages/PartnerEmployees/PartnerEmployees";
+import {AuthForCandidate} from "./pages/AuthForCandidate/AuthForCandidate";
+import {RegistrationForCandidate} from "./pages/RegistrationForCandidate/RegistrationForCandidate";
 
 import './fonts/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -44,6 +46,8 @@ const App = () => {
 
             <Route exact path='/authdev' element={<AuthForDevelopers/>}/>
             <Route exact path='/auth' element={<AuthForPartners/>}/>
+            <Route exact path='/auth-candidate' element={<AuthForCandidate/>}/>
+            <Route exact path='/registration-candidate' element={<RegistrationForCandidate/>}/>
 
             <Route exact path='/candidate/:id' element={<Candidate/>}/>
             <Route exact path='/candidate/:id/form' element={<FormPage/>}/>
@@ -77,7 +81,7 @@ const App = () => {
               <Route exact path='categories/employees' element={<PartnerEmployees/>}/>
             </Route>
 
-            <Route path="*" element={<Navigate to="/profile" replace/>}/>
+            <Route path="*" element={<Navigate to="/auth" replace/>}/>
           </Routes>
         </Router>
       </>

@@ -41,13 +41,19 @@
           font-size: 18px;
           line-height: 32px;
 
-          a,
-          a:hover {
+          a {
             color: #897676;
+          }
+          a:hover {
+            text-decoration: none;
           }
 
           a:focus {
             color: #000000;
+          }
+
+          .candidate {
+            color: #1458DD;
           }
         }
       }
