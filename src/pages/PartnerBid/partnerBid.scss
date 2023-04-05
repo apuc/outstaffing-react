@@ -343,6 +343,10 @@
       background: #FFFFFF;
       border-radius: 12px;
 
+      &:hover {
+        text-decoration: none;
+      }
+
       img {
         width: 88px;
         height: 88px;

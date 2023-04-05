@@ -4,15 +4,16 @@ import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {getProfileInfo} from "../../redux/outstaffingSlice";
 import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {Footer} from '../../components/Footer/Footer'
-import {transformHtml, urlForLocal} from "../../helper";
+import { urlForLocal} from "../../helper";
 
 import arrow from "../../images/right-arrow.png";
 import rightArrow from "../../images/arrowRight.png"
 import gitImgItem from "../../images/gitItemImg.png"
 
-import './summary.scss'
 import {apiRequest} from "../../api/request";
 import {Navigate} from "react-router-dom";
+
+import './summary.scss'
 
 export const Summary = () => {
     if(localStorage.getItem('role_status') === '18') {

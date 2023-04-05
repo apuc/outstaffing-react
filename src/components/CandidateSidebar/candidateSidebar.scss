@@ -2,9 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid whitesmoke;
+  border-radius: 12px;
   border-bottom: none !important;
   position: sticky;
+  background: #FFFFFF;
   top: 80px;
 
   &__position {

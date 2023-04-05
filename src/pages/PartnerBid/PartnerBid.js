@@ -113,7 +113,7 @@ export const PartnerBid = () => {
                     </div>
                     <div className='partnerBid__suitable__persons'>
                         {mokPersons.map((person, index) => {
-                            return <div key={index} className='partnerBid__suitable__person'>
+                            return <Link to='/candidate/110' key={index} className='partnerBid__suitable__person'>
                                         <img src={person.img} alt='avatar' />
                                         <p>{person.name}</p>
                                         <Link className='partnerBid__suitable__person__more' to={person.link}>
@@ -122,7 +122,7 @@ export const PartnerBid = () => {
                                         <div className='partnerBid__suitable__person__info'>
 
                                         </div>
-                                    </div>
+                                    </Link>
                         })
                         }
                     </div>

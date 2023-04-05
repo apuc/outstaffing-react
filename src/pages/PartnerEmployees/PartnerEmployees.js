@@ -42,9 +42,9 @@ export const PartnerEmployees = () => {
                                                 <div className="info_summary">
                                                     <img src={imgInfo} alt="img" />
                                                     <p>Данные и резюме</p>
-                                                    <div className="arrow">
+                                                    <Link to='/candidate/26' className="arrow">
                                                         <img src={rightArrow} alt="arrow" />
-                                                    </div>
+                                                    </Link>
                                                 </div>
                                             </div>
                                             <div className="partnerEmployees__item__info__project">

@@ -15,6 +15,7 @@ import summaryIcon from "../../images/summaryIcon.png"
 import timerIcon from "../../images/timerIcon.png"
 import paymentIcon from "../../images/paymentIcon.png"
 import settingIcon from "../../images/settingIcon.png"
+import avatarMok from "../PartnerTreaties/Images/avatarMok.png"
 
 import rightArrow from "../../images/arrowRight.png"
 
@@ -105,7 +106,7 @@ export const Profile = () => {
           </h2>
           <div className='summary__info'>
             <div className='summary__person'>
-              <img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : ''} className='summary__avatar' alt='avatar'/>
+              <img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : avatarMok} className='summary__avatar' alt='avatar'/>
               <p className='summary__name'>
                 {user === 'developer' ?
                     <span>{profileInfo.fio}, {profileInfo.specification} разработчик</span>

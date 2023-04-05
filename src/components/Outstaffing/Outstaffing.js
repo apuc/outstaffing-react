@@ -45,7 +45,7 @@ const Outstaffing = () => {
                     tagsArr.flat().filter((tag) => tag.name === 'skills_front')
                   }
                   img={front}
-                  header='Frontend'
+                  header='Frontend разработчики'
                   positionId='2'
                   isSelected={positionId === '2'}
                   onSelect={(id) => onSelectPosition(id)}
@@ -58,7 +58,7 @@ const Outstaffing = () => {
                     tagsArr.flat().filter((tag) => tag.name === 'skills_back')
                   }
                   img={back}
-                  header='Backend'
+                  header='Backend разработчики'
                   positionId='1'
                   isSelected={positionId === '1'}
                   onSelect={(id) => onSelectPosition(id)}
@@ -71,7 +71,7 @@ const Outstaffing = () => {
                     tagsArr.flat().filter((tag) => tag.name === 'skills_design')
                   }
                   img={design}
-                  header='Дизайн'
+                  header='Дизайн проектов'
                   positionId='5'
                   isSelected={positionId === '5'}
                   onSelect={(id) => onSelectPosition(id)}

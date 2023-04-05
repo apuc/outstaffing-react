@@ -50,10 +50,22 @@
     }
 
     &__info {
+      position: relative;
       display: flex;
       padding: 15px 50px 14px 16px;
       width: 100%;
       justify-content: space-between;
+
+      &:after {
+        content: '';
+        position: absolute;
+        background: #52B709;
+        border-radius: 12px;
+        height: 4px;
+        width: 51%;
+        top: 0;
+        right: 0;
+      }
 
       &__qualification {
         display: flex;
