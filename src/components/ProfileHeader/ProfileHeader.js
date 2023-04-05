@@ -9,6 +9,8 @@ import {getRole} from "../../redux/roleSlice";
 
 import {urlForLocal} from "../../helper";
 
+import avatarMok from "../../pages/PartnerTreaties/Images/avatarMok.png"
+
 import './profileHeader.scss'
 
 
@@ -129,7 +131,7 @@ export const ProfileHeader = () => {
                 }
               </h3>
               <NavLink end to={'/profile'}>
-                <img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : ""} className='profileHeader__personalInfoAvatar' alt='avatar'/>
+                <img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : avatarMok} className='profileHeader__personalInfoAvatar' alt='avatar'/>
               </NavLink>
             </div>
           </div>

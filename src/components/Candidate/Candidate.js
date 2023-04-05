@@ -4,6 +4,8 @@ import {useSelector, useDispatch} from 'react-redux'
 
 import SkillSection from '../SkillSection/SkillSection'
 import Sidebar from '../CandidateSidebar/CandidateSidebar'
+import {ProfileHeader} from "../ProfileHeader/ProfileHeader";
+import {ProfileBreadcrumbs} from "../ProfileBreadcrumbs/ProfileBreadcrumbs";
 import {Footer} from '../Footer/Footer'
 
 import {currentCandidate, selectCurrentCandidate,} from '../../redux/outstaffingSlice'
@@ -11,15 +13,16 @@ import {currentCandidate, selectCurrentCandidate,} from '../../redux/outstaffing
 import {apiRequest} from "../../api/request";
 import {createMarkup} from "../../helper";
 
-import arrow from '../../images/right-arrow.png'
+import gitImgItem from "../../images/gitItemImg.png"
 import rectangle from '../../images/rectangle_secondPage.png'
 import front from '../Outstaffing/images/front_end.png'
 import back from '../Outstaffing/images/back_end.png'
 import design from '../Outstaffing/images/design.png'
+import rightArrow from "../../images/arrowRight.png"
+
+import {LEVELS, SKILLS} from '../../constants/constants'
 
 import './candidate.scss'
-import {LogoutButton} from "../LogoutButton/LogoutButton";
-import {Header} from "../Header/Header";
 
 
 const Candidate = () => {
@@ -87,19 +90,28 @@ const Candidate = () => {
   const {header, img, classes} = setStyles();
 
   return (
-      <>
-        <Header/>
+      <div className='candidate__wrapper'>
+        <ProfileHeader/>
         <div className='container candidate'>
+          <ProfileBreadcrumbs links={[
+            {name: 'Главная', link: '/profile'},
+            {name: 'Каталог свободных специалистов', link: '/profile/catalog'},
+            {name: `${currentCandidateObj.specification} ${SKILLS[currentCandidateObj.position_id]}, ${LEVELS[currentCandidateObj.level]}`, link: `/candidate/${currentCandidateObj.id}`}
+          ]}
+          />
 
           <div className='row'>
             <div className='col-12 candidate__header'>
 
-              <div className='candidate__arrow' onClick={() => navigate('/')}>
-                <div className='candidate__arrow-img'>
-                  <img src={arrow} alt=''/>
-                </div>
-                <div className='candidate__arrow-sp'>
-                  <span>Вернуться к списку</span>
+              <div className='candidate__header__left'>
+                <h3>{currentCandidateObj.specification}{SKILLS[currentCandidateObj.position_id]} {LEVELS[currentCandidateObj.level]}</h3>
+                <div className='candidate__arrow' onClick={() => navigate('/profile/catalog')}>
+                  <div className='candidate__arrow-img'>
+                    <img src={rightArrow} alt=''/>
+                  </div>
+                  <div className='candidate__arrow-sp'>
+                    <span>Вернуться к списку</span>
+                  </div>
                 </div>
               </div>
 
@@ -145,35 +157,59 @@ const Candidate = () => {
                         <div className="col-12 col-xl-8">
                           <div className="candidate__works works">
                             <div className="works__body">
-                              <div className="works__item item-works">
-                                <div className="item-works__body">
-                                  <Link to="/" className="item-works__link">Vuetifyis.com</Link>
-                                  <div className="item-works__text">Forked from
-                                    peluprvi/vuetifyjs.com <br/> Vuetifyjs.com
-                                    documentation
-                                  </div>
-                                  <div className="item-works__mark">Angular</div>
-                                </div>
+                              <div className="works__body__info">
+                                <p>Страница портфолио кода разработчика</p>
                               </div>
                               <div className="works__item item-works">
-                                <div className="item-works__body">
-                                  <Link to="/" className="item-works__link">Vuetifyis.com</Link>
-                                  <div className="item-works__text">Forked from
-                                    peluprvi/vuetifyjs.com <br/> Vuetifyjs.com
-                                    documentation
+                                <Link className="item-works__body">
+                                  <div className='item-works__body__head'>
+                                    <div className='item-works__body__info'>
+                                      <img src={gitImgItem} alt='img' />
+                                      <div className='item-works__body__project'>
+                                        <h5>cybershop-api</h5>
+                                        <p>Реактивная социальная сеть</p>
+                                      </div>
+                                    </div>
+                                    <div className='item-works__body__head__arrow'>
+                                      <img src={rightArrow} alt='arrow' />
+                                    </div>
                                   </div>
-                                  <div className="item-works__mark">Angular</div>
-                                </div>
+                                  <span>JavaScript </span>
+                                </Link>
                               </div>
                               <div className="works__item item-works">
-                                <div className="item-works__body">
-                                  <Link to="/" className="item-works__link">Vuetifyis.com</Link>
-                                  <div className="item-works__text">Forked from
-                                    peluprvi/vuetifyjs.com <br/> Vuetifyjs.com
-                                    documentation
+                                <Link className="item-works__body">
+                                  <div className='item-works__body__head'>
+                                    <div className='item-works__body__info'>
+                                      <img src={gitImgItem} alt='img' />
+                                      <div className='item-works__body__project'>
+                                        <h5>cybershop-api</h5>
+                                        <p>Реактивная социальная сеть</p>
+                                      </div>
+                                    </div>
+                                    <div className='item-works__body__head__arrow'>
+                                      <img src={rightArrow} alt='arrow' />
+                                    </div>
                                   </div>
-                                  <div className="item-works__mark item-works__mark_yellow">Laravel</div>
-                                </div>
+                                  <span>JavaScript </span>
+                                </Link>
+                              </div>
+                              <div className="works__item item-works">
+                                <Link className="item-works__body">
+                                  <div className='item-works__body__head'>
+                                    <div className='item-works__body__info'>
+                                      <img src={gitImgItem} alt='img' />
+                                      <div className='item-works__body__project'>
+                                        <h5>cybershop-api</h5>
+                                        <p>Реактивная социальная сеть</p>
+                                      </div>
+                                    </div>
+                                    <div className='item-works__body__head__arrow'>
+                                      <img src={rightArrow} alt='arrow' />
+                                    </div>
+                                  </div>
+                                  <span>JavaScript </span>
+                                </Link>
                               </div>
                             </div>
                           </div>
@@ -185,7 +221,7 @@ const Candidate = () => {
           </div>
           <Footer/>
         </div>
-      </>
+      </div>
   )
 };
 
