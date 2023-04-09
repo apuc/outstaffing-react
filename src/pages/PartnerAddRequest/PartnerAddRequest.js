@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {Footer} from "../../components/Footer/Footer";
+import {Navigate} from "react-router-dom";
 
 import arrowDown from "../../images/selectArrow.png"
 import processImg from "../../images/partnerAddRequestFirstImg.png"
 import reportImg from "../../images/partnerAddRequestSecondImg.png"
 import documentsImg from "../../images/partnerAddRequestThirdInfo.png"
+import deleteIcon from "../../images/close.png"
 
-import {Navigate} from "react-router-dom";
 
 import './partnerAddRequest.scss'
 
@@ -17,6 +18,13 @@ export const PartnerAddRequest = () => {
     if(localStorage.getItem('role_status') !== '18') {
         return <Navigate to="/profile" replace/>
     }
+
+    const [skills, setSkills] = useState(['REST API', 'Async/await'])
+    const [selectedSkills, setSelectedSkills] = useState([])
+    const [filteredSkills, setFilteredSkills] = useState(skills)
+
+    const [openSkillsSelect, setOpenSkillsSelect] = useState(false)
+
     return (
         <div className='partnerAddRequest'>
             <ProfileHeader />
@@ -50,6 +58,50 @@ export const PartnerAddRequest = () => {
                                         <img src={arrowDown} />
                                     </div>
                                 </div>
+                            </div>
+                            <div className='form__block__section'>
+                                <h3>Навыки</h3>
+                                <div className='form__block__skills' onClick={() => {setOpenSkillsSelect(true)}}>
+                                    {Boolean(selectedSkills.length) &&
+                                        selectedSkills.map((skill, index) => {
+                                            return<div className='skill' key={index}>
+                                                <span >{skill}</span>
+                                                <img src={deleteIcon} alt='delete'
+                                                     onClick={() => {
+                                                         setFilteredSkills(prevArray => [...prevArray, skill])
+                                                         setSelectedSkills(selectedSkills.filter((skill, indexSkill) => {
+                                                             return indexSkill !== index
+                                                         }))
+                                                    }} />
+                                            </div>
+                                        })
+                                    }
+                                    {!selectedSkills.length &&
+                                        <input type='text' placeholder='Выберите навыки'
+                                               onChange={(e) => {
+                                                   setFilteredSkills(skills.filter((skill) => {
+                                                       return skill.toLowerCase().includes(e.target.value.toLowerCase())
+                                                   }))
+                                               }} />
+                                    }
+                                </div>
+                                {openSkillsSelect && Boolean(filteredSkills.length) &&
+                                    <div className='form__block__dropDown'>
+                                        {filteredSkills.map((skill, index) => {
+                                            return <span
+                                                key={skill}
+                                                onClick={() => {
+                                                    setSelectedSkills(prevArray => [...prevArray, skill])
+                                                    setFilteredSkills(filteredSkills.filter((skill, skillIndex) => {
+                                                        return skillIndex !== index
+                                                    }))
+                                                    setOpenSkillsSelect(false)
+                                                }}
+                                            >
+                                                        {skill}</span>
+                                        })}
+                                    </div>
+                                }
                             </div>
                         </div>
                         <div className='partnerAddRequest__form__block form__block'>

@@ -12,7 +12,7 @@
     margin-bottom: 1rem;
 
     h2 {
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-family: 'GT Eesti Pro Display', sans-serif;
       font-weight: 700;
       font-style: normal;
@@ -26,7 +26,6 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     padding: 0 1rem;
-    margin-bottom: 80px;
   }
 
   &__info {
@@ -48,8 +47,8 @@
 }
 
 .candidate-sidebar__info > img {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   border-radius: 100px;
 }
 
@@ -65,7 +64,7 @@
 
 .candidate-sidebar__experience {
   font-family: 'GT Eesti Pro Display', sans-serif;
-  font-size: 3em;
+  font-size: 2.5em;
   font-weight: 700;
   font-style: normal;
   letter-spacing: normal;
