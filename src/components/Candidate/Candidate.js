@@ -161,7 +161,7 @@ const Candidate = () => {
                                 <p>Страница портфолио кода разработчика</p>
                               </div>
                               <div className="works__item item-works">
-                                <Link className="item-works__body">
+                                <Link to='/' className="item-works__body">
                                   <div className='item-works__body__head'>
                                     <div className='item-works__body__info'>
                                       <img src={gitImgItem} alt='img' />
@@ -178,7 +178,7 @@ const Candidate = () => {
                                 </Link>
                               </div>
                               <div className="works__item item-works">
-                                <Link className="item-works__body">
+                                <Link to='/' className="item-works__body">
                                   <div className='item-works__body__head'>
                                     <div className='item-works__body__info'>
                                       <img src={gitImgItem} alt='img' />
@@ -195,7 +195,7 @@ const Candidate = () => {
                                 </Link>
                               </div>
                               <div className="works__item item-works">
-                                <Link className="item-works__body">
+                                <Link to='/' className="item-works__body">
                                   <div className='item-works__body__head'>
                                     <div className='item-works__body__info'>
                                       <img src={gitImgItem} alt='img' />
