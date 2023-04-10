@@ -300,6 +300,10 @@
     img {
       transform: rotate(90deg);
     }
+
+    @media (max-width: 660px) {
+      margin: 15px 0;
+    }
   }
 
   &__partnersForPart {

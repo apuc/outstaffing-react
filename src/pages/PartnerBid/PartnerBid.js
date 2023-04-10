@@ -116,7 +116,7 @@ export const PartnerBid = () => {
                             return <Link to='/candidate/110' key={index} className='partnerBid__suitable__person'>
                                         <img src={person.img} alt='avatar' />
                                         <p>{person.name}</p>
-                                        <Link className='partnerBid__suitable__person__more' to={person.link}>
+                                        <Link className='partnerBid__suitable__person__more' to='/candidate/110'>
                                             Подробнее
                                         </Link>
                                         <div className='partnerBid__suitable__person__info'>
