@@ -2,7 +2,7 @@ import React from 'react'
 
 import logo from '../../images/logoGuild.png'
 import vk from '../../images/vkLogo.svg'
-import tg from '../../images/tgLogo.svg'
+import tg from '../../images/tgFooter.png'
 import email from '../../images/emailLogo.svg'
 
 import './footer.scss'

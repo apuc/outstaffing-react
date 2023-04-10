@@ -1,6 +1,6 @@
 import React from "react";
 
-import tgLogo from "../../../images/TgLogo.svg";
+import telegramLogo from "../../../images/TgLogo.svg";
 import doc from "../../../images/doc.svg";
 import anyMoment from "../../../images/anyMoment.svg";
 
@@ -66,7 +66,7 @@ export const ModalRegistration = ({ active, setActive }) => {
           </div>
           <h4>Есть вопросы?</h4>
           <div className="body-reg__right-text">
-            <img src={tgLogo}></img>
+            <img src={telegramLogo}></img>
             <p>Напишите нам в Телеграм. Мы с удовольствием ответим!</p>
           </div>
         </div>

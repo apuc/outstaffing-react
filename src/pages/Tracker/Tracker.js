@@ -634,7 +634,7 @@ export const Tracker = () => {
                       onClick={(e) => e.stopPropagation()}
                   >
                     <div className="title-project">
-                      <h4>Введите название карточки</h4>
+                      <h4>Введите название колонки</h4>
                       <div className="input-container">
                         <input
                             className="name-project"
