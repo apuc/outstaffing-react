@@ -57,6 +57,10 @@
           }
         }
       }
+
+      img {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -67,7 +71,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1375px) {
   .auth-header {
     display: none;
   }

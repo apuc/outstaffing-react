@@ -4,7 +4,7 @@ import { setProject } from "../../../redux/projectsTrackerSlice";
 
 import "./ModalCreate.scss";
 
-export const ModalCreate = ({ active, setActive, title }) => {
+export const ModalCreate = ({ active, setActive, title, desc }) => {
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
 
@@ -33,6 +33,7 @@ export const ModalCreate = ({ active, setActive, title }) => {
       >
         <div className="title-project">
           <h4>{title}</h4>
+          <p>{desc}</p>
           <div className="input-container">
             <input
               className="name-project"
@@ -40,10 +41,11 @@ export const ModalCreate = ({ active, setActive, title }) => {
               onChange={(e) => setInputValue(e.target.value)}
             ></input>
           </div>
+          <button className="create-project" onClick={createName}>
+            Создать
+          </button>
         </div>
-        <button className="create-project" onClick={createName}>
-          Создать
-        </button>
+        <span className="exit" onClick={() => setActive(false)}></span>
       </div>
     </div>
   );

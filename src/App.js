@@ -8,28 +8,30 @@ import Home from "./pages/Home/Home";
 import Candidate from "./components/Candidate/Candidate";
 import Calendar from "./components/Calendar/Calendar";
 import ReportForm from "./components/ReportForm/ReportForm";
-import {ProfileCalendar} from "./components/ProfileCalendar/ProfileCalendar";
-import FormPage from './pages/FormPage/FormPage.js'
-import SingleReportPage from './pages/SingleReportPage/SingleReportPage'
-import {QuizPage} from './pages/quiz/QuizPage'
-import {InterjacentPage} from './pages/quiz/InterjacentPage'
-import {QuizTestPage} from './pages/quiz/QuizTestPage'
-import {InstructionPage} from './pages/quiz/InstructionPage'
-import {ResultPage} from './pages/quiz/ResultPage'
-import {Profile} from './pages/Profile/Profile.js'
-import {Summary} from './pages/Summary/Summary'
-import {ViewReport} from './pages/ViewReport/ViewReport'
-import {Tracker} from './pages/Tracker/Tracker'
-import {Payouts} from './pages/Payouts/Payouts'
-import { PartnerSettings } from "./pages/PartnerSettings/PartnerSettings"
-import {PartnerRequests} from './pages/PartnerRequests/PartnerRequests'
-import {PartnerAddRequest} from './pages/PartnerAddRequest/PartnerAddRequest'
-import {PartnerBid} from './pages/PartnerBid/PartnerBid'
-import {PartnerCategories} from "./pages/PartnerСategories/PartnerСategories";
-import {PartnerTreaties} from "./pages/PartnerTreaties/PartnerTreaties";
-import {PartnerEmployees} from "./pages/PartnerEmployees/PartnerEmployees";
+import FreeDevelopers from "./components/UI/FreeDevelopers/FreeDevelopers";
+import { ProfileCalendar } from "./components/ProfileCalendar/ProfileCalendar";
+import FormPage from "./pages/FormPage/FormPage.js";
+import SingleReportPage from "./pages/SingleReportPage/SingleReportPage";
+import { QuizPage } from "./pages/quiz/QuizPage";
+import { InterjacentPage } from "./pages/quiz/InterjacentPage";
+import { QuizTestPage } from "./pages/quiz/QuizTestPage";
+import { InstructionPage } from "./pages/quiz/InstructionPage";
+import { ResultPage } from "./pages/quiz/ResultPage";
+import { Profile } from "./pages/Profile/Profile.js";
+import { Summary } from "./pages/Summary/Summary";
+import { ViewReport } from "./pages/ViewReport/ViewReport";
+import { Tracker } from "./pages/Tracker/Tracker";
+import { Payouts } from "./pages/Payouts/Payouts";
+import { PartnerSettings } from "./pages/PartnerSettings/PartnerSettings";
+import { PartnerRequests } from "./pages/PartnerRequests/PartnerRequests";
+import { PartnerAddRequest } from "./pages/PartnerAddRequest/PartnerAddRequest";
+import { PartnerBid } from "./pages/PartnerBid/PartnerBid";
+import { PartnerCategories } from "./pages/PartnerСategories/PartnerСategories";
+import { PartnerTreaties } from "./pages/PartnerTreaties/PartnerTreaties";
+import { PartnerEmployees } from "./pages/PartnerEmployees/PartnerEmployees";
 import {AuthForCandidate} from "./pages/AuthForCandidate/AuthForCandidate";
 import {RegistrationForCandidate} from "./pages/RegistrationForCandidate/RegistrationForCandidate";
+
 
 import './fonts/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -46,6 +48,7 @@ const App = () => {
 
             <Route exact path='/authdev' element={<AuthForDevelopers/>}/>
             <Route exact path='/auth' element={<AuthForPartners/>}/>
+            <Route exact path="/worker/:id" element={<FreeDevelopers />} />
             <Route exact path='/auth-candidate' element={<AuthForCandidate/>}/>
             <Route exact path='/registration-candidate' element={<RegistrationForCandidate/>}/>
 

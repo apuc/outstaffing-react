@@ -2,7 +2,7 @@
   background: #f1f1f1;
   height: 100%;
   min-height: 100vh;
-  font-family: 'LabGrotesque', sans-serif;
+  font-family: "LabGrotesque", sans-serif;
 
   .infoPersonal__title {
     color: #000000;
@@ -89,6 +89,19 @@
       color: #ffffff;
       background: #52b709;
       border: none;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    &__input {
+      width: 100%;
+    }
+
+    &__buttons {
+      &-cancel,
+      &-save {
+        width: 120px;
+      }
     }
   }
 
@@ -191,20 +204,63 @@
   @media (max-width: 1200px) {
     margin-bottom: 15px;
 
+    &__logo {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__body {
+      margin-bottom: 100px;
+    }
+
+    &__report,
+    &__login {
+      width: 45%;
+      height: auto;
+    }
+
+    &__label {
+      &-second,
+      &-first {
+        flex-direction: row;
+      }
+    }
+  }
+
+  @media (max-width: 950px) {
     &__body {
       flex-direction: column;
+      margin-bottom: 20px;
+      align-items: center;
     }
+
+    &__report,
+    &__login {
+      width: 60%;
+    }
+
     &__report {
-      margin-top: 50px;
+      margin-top: 55px;
+      margin-bottom: 55px;
     }
   }
 
   @media (max-width: 570px) {
+    &__body {
+      flex-direction: column;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+
     &__report,
     &__login {
       width: 100%;
       height: 100%;
       padding: 20px 30px;
+    }
+
+    &__report {
+      margin-top: 55px;
     }
 
     &__logo {
@@ -218,6 +274,7 @@
         flex-direction: row;
       }
     }
+
     .checkbox {
       &__second {
         margin: 0px 0 0 20px;

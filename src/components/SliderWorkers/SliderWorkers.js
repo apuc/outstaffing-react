@@ -6,8 +6,9 @@ import mockWorker from "../../images/mokPerson.png";
 import "./sliderWorkers.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
-export const SliderWorkers = ({title, titleInfo, subTitle}) => {
+export const SliderWorkers = ({ title, titleInfo, subTitle }) => {
   const [workers] = useState([
     {
       avatar: mockWorker,
@@ -15,7 +16,11 @@ export const SliderWorkers = ({title, titleInfo, subTitle}) => {
     },
     {
       avatar: mockWorker,
-      skils: "React / Vue Front end, Middle разработчик",
+      skils: "Vue / React Front end, Senior разработчик",
+    },
+    {
+      avatar: mockWorker,
+      skils: "NodeJs  Fullstack, Middle разработчик",
     },
     {
       avatar: mockWorker,
@@ -23,11 +28,7 @@ export const SliderWorkers = ({title, titleInfo, subTitle}) => {
     },
     {
       avatar: mockWorker,
-      skils: "React / Vue Front end, Middle разработчик",
-    },
-    {
-      avatar: mockWorker,
-      skils: "React / Vue Front end, Middle разработчик",
+      skils: "React / PHP Fullstack, Middle разработчик",
     },
   ]);
 
@@ -49,13 +50,14 @@ export const SliderWorkers = ({title, titleInfo, subTitle}) => {
   return (
     <div className="slider-workers">
       <div className="container">
-        {Boolean(title) ?
+        {Boolean(title) ? (
           <div className="slider-workers__title">
             <h2>{title}</h2>
             <h3>{titleInfo}</h3>
           </div>
-            : ""
-        }
+        ) : (
+          ""
+        )}
         <Slider {...settings}>
           {workers.map((worker, index) => {
             return (
@@ -63,23 +65,26 @@ export const SliderWorkers = ({title, titleInfo, subTitle}) => {
                 <img src={worker.avatar}></img>
                 <div className="worker-description">
                   <p>{worker.skils}</p>
-                  <button className="worker__resume">Подробное резюме</button>
+                  <Link to={`/worker/${index}`} className="worker__resume">
+                    Подробное резюме
+                  </Link>
                 </div>
               </div>
             );
           })}
         </Slider>
-        {Boolean(subTitle) ?
+        {Boolean(subTitle) ? (
           <div className="slider-workers__description">
             <h2>Дополните свою команду опытными ИТ-специалистами</h2>
             <p>
-              Даём финансовые, юридические и кадровые гарантии, предоставляем SLA
-              и отвечаем за работу команды. Вам не нужно искать, оформлять или
-              увольнять сотрудника — все хлопоты мы берем на себя.
+              Даём финансовые, юридические и кадровые гарантии, предоставляем
+              SLA и отвечаем за работу команды. Вам не нужно искать, оформлять
+              или увольнять сотрудника — все хлопоты мы берем на себя.
             </p>
           </div>
-            : ""
-        }
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import arrow from "../../images/sideBarArrow.svg";
+import LogoITguild from "../../images/LogoITguild.svg";
 
 import "./sidebar.scss";
 
@@ -41,9 +42,7 @@ export const SideBar = () => {
 
       <div className={active ? "auth-body active" : "auth-body"}>
         <div className="auth-body__title">
-          <h3>IT</h3>
-          <p>guild</p>
-          <span>Аутстафинговая компания</span>
+          <img src={LogoITguild}></img>
         </div>
         <ul className="auth-body__navigation">
           <li>

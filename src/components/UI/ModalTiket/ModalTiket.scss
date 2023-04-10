@@ -30,38 +30,28 @@
     margin: 26px 0 0 21px;
 
     .title-project {
+      color: #1458dd;
       font-family: "LabGrotesque", sans-serif;
       display: flex;
       align-items: center;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 22px;
+      line-height: 32px;
 
       &__category {
         margin-right: 17px;
       }
-
-      &__menu {
-        display: flex;
-        align-items: center;
-        margin-left: 110px;
-
-        p {
-          font-weight: 400;
-          font-size: 14px;
-          color: #252c32;
-          margin: 0 30px 0 0;
-
-          &:hover {
-            cursor: pointer;
-            text-decoration: underline;
-          }
-        }
-      }
     }
 
     &__task {
-      margin-top: 22px;
+      margin-top: -5px;
       padding: 18px;
+
+      button {
+        img {
+          margin-right: 5px;
+        }
+      }
 
       h5 {
         font-family: "Inter", sans-serif;
@@ -69,7 +59,6 @@
         font-style: normal;
         font-size: 16px;
         line-height: 24px;
-
         color: #1a1919;
       }
     }
@@ -93,12 +82,23 @@
       flex-direction: row;
       margin: 29px 0 0 -5px;
 
-      .comment {
-        width: 100px;
+      .tasks {
         justify-content: space-evenly;
+
+        button {
+          width: 180px;
+          height: 40px;
+          background: #52b709;
+          border-radius: 44px;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 32px;
+          border: none;
+          color: #ffffff;
+        }
       }
 
-      .comment,
+      .tasks,
       .file {
         display: flex;
         align-items: center;
@@ -107,7 +107,61 @@
       .file {
         justify-content: space-between;
         margin-left: 20px;
-        width: 70px;
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: white;
+          width: 166px;
+          height: 40px;
+          border: 0.5px solid #1458dd;
+          border-radius: 44px;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 32px;
+          color: #1458dd;
+
+          img {
+            margin-right: 9px;
+          }
+        }
+
+        span {
+          margin: 0 3px 0 11px;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 15px;
+          color: #6e7c87;
+        }
+      }
+    }
+
+    &__input {
+      margin: 20px 0 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 438px;
+      height: 40px;
+      background: #f1f1f1;
+      border-radius: 44px;
+
+      input {
+        width: 80%;
+        background: inherit;
+        border: none;
+        outline: none;
+        padding-left: 30px;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 32px;
+        border-radius: 44px;
+      }
+
+      img {
+        cursor: pointer;
+        margin-right: 18px;
       }
     }
   }
@@ -115,14 +169,12 @@
   .workers {
     position: relative;
     border-left: 1px solid #f1f1f1;
-    width: 300px;
-    padding: 40px;
 
     .exit {
       cursor: pointer;
       position: absolute;
-      top: 22px;
-      right: 31px;
+      top: 35px;
+      right: 40px;
 
       &:before,
       &:after {
@@ -222,6 +274,32 @@
         margin: 0 0 0 11px;
         font-size: 12px;
         color: #807777;
+      }
+    }
+
+    &_box {
+      padding: 25px 85px 40px 40px;
+      border-bottom: 1px solid #f1f1f1;
+
+      &-middle {
+        padding: 0px 40px 25px 40px;
+        border-bottom: 1px solid #f1f1f1;
+      }
+
+      &-bottom {
+        padding: 40px 0 75px 56px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 38px;
+
+        div {
+          display: flex;
+          align-items: center;
+
+          p {
+            margin: 0 0 0 12px;
+          }
+        }
       }
     }
   }
