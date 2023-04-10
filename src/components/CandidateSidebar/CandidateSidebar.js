@@ -24,7 +24,7 @@ const getYearsString = (years) => {
 const CandidateSidebar = ({candidate, setActiveSnippet, activeSnippet}) => {
   const userId = localStorage.getItem('id');
   const showSnippet = () => {
-    setActiveSnippet((prev) => !prev)
+    setActiveSnippet(!activeSnippet)
   };
 
   return (
