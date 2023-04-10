@@ -14,6 +14,7 @@ import ModalErrorLogin from "../../components/UI/ModalErrorLogin/ModalErrorLogin
 import { apiRequest } from "../../api/request";
 
 import ellipse from "../../images/ellipse.png";
+import ModalRegistration from "../UI/ModalRegistration/ModalRegistration";
 
 import "./authBox.scss";
 
@@ -27,6 +28,7 @@ export const AuthBox = ({ title }) => {
 
   const [error, setError] = useState(null);
   const [modalError, setModalError] = useState(false);
+  const [modalReg, setModalReg] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem("auth_token")) {
@@ -112,11 +114,12 @@ export const AuthBox = ({ title }) => {
             {isLoading ? <Loader /> : "Войти"}
           </button>
 
-          {/* TODO: при клике отправлять на форму/модалку/страницу регистрации */}
+          <ModalRegistration active={modalReg} setActive={setModalReg} />
           <button
             className="auth-box__form-btn--role auth-box__auth-link"
             onClick={(e) => {
               e.preventDefault();
+              setModalReg(true);
             }}
           >
             Регистрация

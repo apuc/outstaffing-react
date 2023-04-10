@@ -104,7 +104,7 @@ const Candidate = () => {
             <div className='col-12 candidate__header'>
 
               <div className='candidate__header__left'>
-                <h3>{currentCandidateObj.specification}{SKILLS[currentCandidateObj.position_id]} {LEVELS[currentCandidateObj.level]}</h3>
+                <h3>{currentCandidateObj.specification} &nbsp; {SKILLS[currentCandidateObj.position_id]} &nbsp; {LEVELS[currentCandidateObj.level]}</h3>
                 <div className='candidate__arrow' onClick={() => navigate('/profile/catalog')}>
                   <div className='candidate__arrow-img'>
                     <img src={rightArrow} alt=''/>

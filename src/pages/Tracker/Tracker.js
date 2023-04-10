@@ -492,6 +492,12 @@ export const Tracker = () => {
   function createTiket() {
     tabTaskMok.filter((item) => {
       if (item.name == selectedTab.name) {
+        let idItem = 0;
+
+        item.tasks.forEach((item) => {
+          idItem = item.id;
+        });
+
         let newTiket = {
           task: valueTiket,
           description: "Сверстать часть таблицы. Сверстать часть таблицы",
@@ -499,7 +505,7 @@ export const Tracker = () => {
           files: 0,
           avatarCreated: avatarTest,
           avatarDo: avatarTest,
-          id: item.tasks.length + 1,
+          id: idItem + 1,
         };
 
         item.tasks.push(newTiket);
@@ -628,7 +634,7 @@ export const Tracker = () => {
                       onClick={(e) => e.stopPropagation()}
                   >
                     <div className="title-project">
-                      <h4>Введите название карточки</h4>
+                      <h4>Введите название колонки</h4>
                       <div className="input-container">
                         <input
                             className="name-project"

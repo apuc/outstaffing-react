@@ -41,7 +41,11 @@ const AuthForDevelopers = () => {
   return (
     <section className="auth-developers">
       <AuthHeader />
-      <SliderWorkers title={"Свободные разработчики"} titleInfo={"для Вашей команды"} subTitle={true} />
+      <SliderWorkers
+        title={"Свободные разработчики"}
+        titleInfo={"для Вашей команды"}
+        subTitle={true}
+      />
       <div className="auth-developers__background">
         <img className="auth-developers__vector" src={vector} alt="" />
         <img

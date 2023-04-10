@@ -59,6 +59,9 @@
     }
 
     &__resume {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-top: 5px;
       width: 177px;
       height: 40px;
@@ -73,6 +76,7 @@
       &:hover {
         transition: 0.5s;
         background-color: #52b709a8;
+        text-decoration: none;
       }
     }
   }
@@ -121,7 +125,13 @@
     }
   }
 
+  @media (max-width: 1375px) {
+    margin-top: 50px;
+  }
+
   @media (max-width: 1024px) {
+    margin-top: 0;
+
     &__title {
       flex-direction: column;
       padding: 120px 0 56px 0;
