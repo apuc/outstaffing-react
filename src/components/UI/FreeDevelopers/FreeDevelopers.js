@@ -40,7 +40,7 @@ export const FreeDevelopers = ({}) => {
               <div></div>
             </div>
           </div>
-          <button>Код разработчика</button>
+          <button className="button-green">Код разработчика</button>
         </div>
 
         <div className="free-dev__body">
@@ -66,6 +66,25 @@ export const FreeDevelopers = ({}) => {
               </li>
             </ul>
             <p>Время разработки: 2 года.</p>
+
+            <div className="free-dev__body-text-bottom">
+              <h5>
+                Godesigner - сервис для фриланс дизайнеров, копирайтеров и их
+                заказчиков
+              </h5>
+              <p>Стек – PHP (li3), HTML, CSS, JavaScript, MYSQL, Nginx.</p>
+              <ul>
+                <li> Расширение функционала старых модулей проекта</li>
+                <li>создание и проектирование новых модулей сайта</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="logIn">
+            <h3>Для просмотра полного резюме разработчика авторизуйтесь</h3>
+            <Link to={"/auth"} className="button-green">
+              Войти
+            </Link>
           </div>
         </div>
 

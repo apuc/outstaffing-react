@@ -5,6 +5,13 @@ import userIcon from "../../images/userIcon.png";
 import "./authHeader.scss";
 
 export const AuthHeader = ({}) => {
+  function scrollToForm() {
+    window.scrollTo({
+      top: 850,
+      behavior: "smooth",
+    });
+  }
+
   return (
     <div className="auth-header">
       <div className="auth-header__logo">
@@ -27,7 +34,12 @@ export const AuthHeader = ({}) => {
               </li>
             </ul>
 
-            <a href="#">
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToForm();
+              }}
+            >
               <img src={userIcon}></img>
             </a>
           </div>

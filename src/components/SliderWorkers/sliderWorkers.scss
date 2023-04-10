@@ -125,7 +125,13 @@
     }
   }
 
+  @media (max-width: 1375px) {
+    margin-top: 50px;
+  }
+
   @media (max-width: 1024px) {
+    margin-top: 0;
+
     &__title {
       flex-direction: column;
       padding: 120px 0 56px 0;
