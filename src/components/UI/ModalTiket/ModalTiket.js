@@ -15,6 +15,7 @@ import send from "../../../images/send.svg";
 import plus from "../../../images/plus.svg";
 
 import "./ModalTiket.scss";
+import ModalAdd from "../ModalAdd/ModalAdd";
 
 export const ModalTiket = ({ active, setActive }) => {
   const [tiket] = useState({
@@ -24,7 +25,6 @@ export const ModalTiket = ({ active, setActive }) => {
     descriptions:
       "На многих страницах сайта отсутствуют или некорректно заполнены метатеги Description. Это может негативно повлиять на представление сайта в результатах поиска. Необходимо исправить все страницы где есть ошибки или отсутствует Title и  Description.",
   });
-
   const [workers] = useState([
     {
       name: "Дмитрий Рогов",
@@ -35,6 +35,7 @@ export const ModalTiket = ({ active, setActive }) => {
       avatar: avatarMock1,
     },
   ]);
+  const [addSubtask, setAddSubtask] = useState(false);
 
   return (
     <div
@@ -61,7 +62,7 @@ export const ModalTiket = ({ active, setActive }) => {
             </div>
             <div className="content__communication">
               <p className="tasks">
-                <button>
+                <button onClick={() => setAddSubtask(true)}>
                   <img src={plus}></img>
                   Добавить под задачу
                 </button>
@@ -135,6 +136,20 @@ export const ModalTiket = ({ active, setActive }) => {
           </div>
         </div>
       </div>
+      <ModalAdd active={addSubtask} setActive={setAddSubtask}>
+        <div className="title-project subtask">
+          <h4>
+            Вы добавляете подзадачу <p>в колонку задачи {"Готово"}</p>
+          </h4>
+          <p className="title-project__decs">Введите текст</p>
+          <div>
+            <textarea className="title-project__textarea"></textarea>
+          </div>
+        </div>
+        <button className="button-add" onClick={(e) => e.preventDefault()}>
+          Добавить
+        </button>
+      </ModalAdd>
     </div>
   );
 };

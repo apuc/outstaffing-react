@@ -662,6 +662,28 @@ export const Tracker = () => {
                   </button>
                 </ModalAdd>
 
+                <ModalAdd active={modalAddWorker} setActive={setModalAddWorker}>
+                  <div className="title-project">
+                    <h4>Добавьте участника</h4>
+                    <p className="title-project__decs">
+                      Введите имя или e-mail{" "}
+                    </p>
+                    <div className="input-container">
+                      <input
+                        className="name-project"
+                        value={valueTiket}
+                        onChange={(e) => setValueTiket(e.target.value)}
+                      ></input>
+                    </div>
+                  </div>
+                  <button
+                    className="button-add"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    Добавить
+                  </button>
+                </ModalAdd>
+
                 <div className="tasks__head__add">
                   <span onClick={() => setModalCreateColl(true)}>+</span>
                   <p>добавить задачу в проект</p>
@@ -670,7 +692,9 @@ export const Tracker = () => {
                   <img src={avatarTest} alt="avatar" />
                   <img src={avatarTest} alt="avatar" />
                   <span className="countPersons">+9</span>
-                  <span className="addPerson">+</span>
+                  <span className="addPerson" onClick={setModalAddWorker}>
+                    +
+                  </span>
                   <p>добавить участника в проект</p>
                 </div>
                 <div className="tasks__head__select">
