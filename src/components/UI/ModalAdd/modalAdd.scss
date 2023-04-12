@@ -87,31 +87,31 @@
     align-items: center;
     justify-content: center;
   }
-
-  .exit {
-    cursor: pointer;
-    position: absolute;
-    top: 35px;
-    right: 40px;
-
-    &:before,
-    &:after {
-      content: "";
-      position: absolute;
-      width: 16px;
-      height: 2px;
-      background: #263238;
-    }
-
-    &:before {
-      transform: rotate(45deg);
-    }
-    &:after {
-      transform: rotate(-45deg);
-    }
-  }
 }
 
 .modal-add.active {
   transform: scale(1);
+}
+
+.exit {
+  cursor: pointer;
+  position: absolute;
+  top: 35px;
+  right: 40px;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 2px;
+    background: #263238;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(-45deg);
+  }
 }

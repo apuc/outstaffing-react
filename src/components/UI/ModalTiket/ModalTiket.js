@@ -14,8 +14,8 @@ import edit from "../../../images/edit.svg";
 import send from "../../../images/send.svg";
 import plus from "../../../images/plus.svg";
 
-import "./ModalTiket.scss";
 import ModalAdd from "../ModalAdd/ModalAdd";
+import "./ModalTiket.scss";
 
 export const ModalTiket = ({ active, setActive }) => {
   const [tiket] = useState({

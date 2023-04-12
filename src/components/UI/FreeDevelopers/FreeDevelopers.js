@@ -3,13 +3,15 @@ import React from "react";
 import AuthHeader from "../../AuthHeader/AuthHeader";
 import SideBar from "../../SideBar/SideBar";
 import { Footer } from "../../Footer/Footer";
+
+import { Link } from "react-router-dom";
+import { scrollToForm } from "../../../helper";
 import { ProfileBreadcrumbs } from "../../ProfileBreadcrumbs/ProfileBreadcrumbs";
 
 import mockWorker from "../../../images/mokPerson.png";
 import arrow from "../../../images/arrow_left.png";
 
 import "./freeDevelopers.scss";
-import { Link } from "react-router-dom";
 
 export const FreeDevelopers = ({}) => {
   return (
@@ -40,7 +42,9 @@ export const FreeDevelopers = ({}) => {
               <div></div>
             </div>
           </div>
-          <button className="button-green">Код разработчика</button>
+          <button className="button-green" onClick={scrollToForm}>
+            Код разработчика
+          </button>
         </div>
 
         <div className="free-dev__body">
