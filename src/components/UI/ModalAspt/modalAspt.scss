@@ -56,9 +56,16 @@
         }
 
         &_back {
-          display: flex;
-          align-items: center;
           margin: 40px 0 0 0;
+
+          a {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            line-height: 16px;
+            color: #5b6871;
+            text-decoration: none;
+          }
 
           div {
             background: #8dc63f;

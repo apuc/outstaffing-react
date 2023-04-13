@@ -24,14 +24,27 @@ const getYearsString = (years) => {
 
 const CandidateSidebar = ({ candidate, setActiveSnippet, activeSnippet }) => {
   const userId = localStorage.getItem("id");
+
+  const [addAspt, setAddAspt] = useState(false);
+
   const showSnippet = () => {
     setActiveSnippet(!activeSnippet);
   };
 
-  const [addAspt, setAddAspt] = useState(false);
+  let levelAspt = {
+    spec: candidate.specification,
+    skils: SKILLS[candidate.position_id],
+    level: LEVELS[candidate.level],
+  };
 
   return (
     <div className="candidate-sidebar">
+      <ModalAspt
+        active={addAspt}
+        setActive={setAddAspt}
+        level={levelAspt}
+      ></ModalAspt>
+
       <div className="candidate-sidebar__info">
         <div className="candidate-sidebar__position">
           <h2>
@@ -49,8 +62,6 @@ const CandidateSidebar = ({ candidate, setActiveSnippet, activeSnippet }) => {
           </>
         )}
 
-        <ModalAspt active={addAspt} setActive={setAddAspt}></ModalAspt>
-
         <button
           className="candidate-sidebar__select"
           onClick={() => setAddAspt(true)}
@@ -60,11 +71,8 @@ const CandidateSidebar = ({ candidate, setActiveSnippet, activeSnippet }) => {
 
         {userId && (
           <>
-            <Link to={`/${candidate.id}/calendar`}>
-              <button className="candidate-sidebar__select">Отчёты</button>
-            </Link>
             <button className="candidate-sidebar__select" onClick={showSnippet}>
-              {activeSnippet ? "Показать" : "Скрыть"}
+              {activeSnippet ? "Код разработчика" : "Скрыть"}
             </button>
             <div className="candidate-sidebar__achievements">
               {candidate &&

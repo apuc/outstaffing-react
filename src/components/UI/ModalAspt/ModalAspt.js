@@ -5,11 +5,12 @@ import logoTg from "../../../images/TgLogo.svg";
 import arrow from "../../../images/right-arrow.png";
 import interview from "../../../images/interviewLogo.svg";
 
+import { Link } from "react-router-dom";
 import ModalAdd from "../ModalAdd/ModalAdd";
 
 import "./modalAspt.scss";
 
-export const ModalAspt = ({ active, setActive }) => {
+export const ModalAspt = ({ active, setActive, level }) => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [modalSend, setModalSend] = useState(false);
@@ -36,13 +37,17 @@ export const ModalAspt = ({ active, setActive }) => {
           <div className="aspt-decs__avatar">
             <div className="aspt-decs__avatar_title">
               <img src={avatar}></img>
-              <p>Full-stack Back end - разработчик, Senior</p>
+              <p>
+                {level.spec} {level.skils}, {level.level}{" "}
+              </p>
             </div>
             <div className="aspt-decs__avatar_back">
-              <div>
-                <img src={arrow}></img>
-              </div>
-              <p>Вернуться к списку</p>
+              <Link to={"/profile/catalog"}>
+                <div>
+                  <img src={arrow}></img>
+                </div>
+                <p>Вернуться к списку</p>
+              </Link>
             </div>
           </div>
 
@@ -80,7 +85,7 @@ export const ModalAspt = ({ active, setActive }) => {
       <ModalAdd active={modalSend} setActive={setModalSend}>
         <div className="send">
           <img src={interview}></img>
-          <h2>Спасибо,собеседование назначено</h2>
+          <h2>Спасибо, собеседование назначено</h2>
           <p>
             Дата: <span>{date}</span>
           </p>
