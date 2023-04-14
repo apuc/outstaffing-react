@@ -25,5 +25,6 @@
 
   &__settings.active {
     transform: scale(1);
+    z-index: 99;
   }
 }

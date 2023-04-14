@@ -10,6 +10,7 @@ import { getProjects } from "../../redux/projectsTrackerSlice";
 import ModalTiket from "../../components/UI/ModalTiket/ModalTiket";
 import ModalCreate from "../../components/UI/ModalCreate/ModalCreate";
 import ModalAdd from "../../components/UI/ModalAdd/ModalAdd";
+import ProjectTiket from "../../components/ProjectTiket/ProjectTiket";
 
 import project from "../../images/trackerProject.svg";
 import tasks from "../../images/trackerTasks.svg";
@@ -21,13 +22,8 @@ import filesBoard from "../../images/filesBoard.svg";
 import search from "../../images/serchIcon.png";
 import noProjects from "../../images/noProjects.png";
 import arrow from "../../images/arrowCalendar.png";
-import link from "../../images/link.svg";
-import archiveSet from "../../images/archive.svg";
-import del from "../../images/delete.svg";
-import edit from "../../images/edit.svg";
 
 import "./tracker.scss";
-import ModalSettings from "../../components/UI/ModalSettings/ModalSettings";
 
 export const Tracker = () => {
   const [toggleTab, setToggleTab] = useState(1);
@@ -367,7 +363,6 @@ export const Tracker = () => {
   const [modalCreateProject, setModalCreateProject] = useState(false);
   const [modalCreateColl, setModalCreateColl] = useState(false);
   const [modalCreateTiket, setModalCreateTiket] = useState(false);
-  const [modalSettings, setModalSettings] = useState(false);
   const [valueTiket, setValueTiket] = useState("");
   const [valueColl, setValueColl] = useState("");
   //
@@ -534,34 +529,6 @@ export const Tracker = () => {
     setModalCreateColl(false);
   }
 
-  function selectedProject(project) {
-    projects.filter((item) => {
-      if (item.name == project.name) {
-        console.log(project);
-        setModalSettings(true);
-      }
-    });
-  }
-
-  useEffect(() => {
-    initListeners();
-  }, []);
-
-  function initListeners() {
-    document.addEventListener("click", closeByClickingOut);
-  }
-
-  function closeByClickingOut(event) {
-    const path = event.path || (event.composedPath && event.composedPath());
-
-    if (
-      event &&
-      !path.find((item) => item.classList && item.classList.contains("project"))
-    ) {
-      setModalSettings(false);
-    }
-  }
-
   return (
     <div className="tracker">
       <ProfileHeader />
@@ -618,43 +585,11 @@ export const Tracker = () => {
               !projectTasksOpen &&
               projects.map((project, index) => {
                 return (
-                  <div className="project" key={index}>
-                    <h3 onClick={() => setProjectTasksOpen(true)}>
-                      {project.name}
-                    </h3>
-                    <div className="project__info">
-                      <p>Открытые задачи</p>
-                      <span className="count">{project.count}</span>
-                      <span className="add">+</span>
-                      <span
-                        className="menu-settings"
-                        onClick={() => selectedProject(project)}
-                      >
-                        ...
-                      </span>
-                    </div>
-
-                    <ModalSettings active={modalSettings}>
-                      <div className="project__settings-menu">
-                        <div>
-                          <img src={edit}></img>
-                          <p>редактировать</p>
-                        </div>
-                        <div>
-                          <img src={link}></img>
-                          <p>ссылка на проект</p>
-                        </div>
-                        <div>
-                          <img src={archive}></img>
-                          <p>в архив</p>
-                        </div>
-                        <div>
-                          <img src={del}></img>
-                          <p>удалить</p>
-                        </div>
-                      </div>
-                    </ModalSettings>
-                  </div>
+                  <ProjectTiket
+                    key={index}
+                    project={project}
+                    setOpenProject={setProjectTasksOpen}
+                  ></ProjectTiket>
                 );
               })}
             {!Boolean(projects.length) && !projectTasksOpen && (
