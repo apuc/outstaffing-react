@@ -13,6 +13,8 @@ import vectorBlack from "../../images/Vector_Smart_Object_black.png";
 
 import { selectAuth } from "../../redux/outstaffingSlice";
 import { Link, useNavigate } from "react-router-dom";
+import { scrollToForm } from "../../helper";
+
 import { Footer } from "../../components/Footer/Footer";
 import SideBar from "../../components/SideBar/SideBar";
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
@@ -30,13 +32,6 @@ const AuthForDevelopers = () => {
       navigate("/profile");
     }
   }, [getToken]);
-
-  function scrollToForm() {
-    window.scrollTo({
-      top: 850,
-      behavior: "smooth",
-    });
-  }
 
   return (
     <section className="auth-developers">

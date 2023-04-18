@@ -6,9 +6,11 @@ import text from "../../images/Body_Text.png";
 import arrowBtn from "../../images/arrowRight.png";
 import vector from "../../images/Vector_Smart_Object.png";
 import vectorBlack from "../../images/Vector_Smart_Object_black.png";
+
 import { useSelector } from "react-redux";
 import { selectAuth } from "../../redux/outstaffingSlice";
 import { Link, useNavigate } from "react-router-dom";
+import { scrollToForm } from "../../helper";
 
 import { Footer } from "../../components/Footer/Footer";
 import { AuthBox } from "../../components/AuthBox/AuthBox";
@@ -30,17 +32,14 @@ const AuthForPartners = () => {
     }
   }, [getToken]);
 
-  function scrollToForm() {
-    window.scrollTo({
-      top: 850,
-      behavior: "smooth",
-    });
-  }
-
   return (
     <section className="auth-partners">
       <AuthHeader />
-      <SliderWorkers title={"Свободные разработчики"} titleInfo={"для Вашей команды"} subTitle={true} />
+      <SliderWorkers
+        title={"Свободные разработчики"}
+        titleInfo={"для Вашей команды"}
+        subTitle={true}
+      />
       <div className="auth-partners__background">
         <img className="auth-partners__vector" src={vector} alt="" />
         <img className="auth-partners__vector-black" src={vectorBlack} alt="" />

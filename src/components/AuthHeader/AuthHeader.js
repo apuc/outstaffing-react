@@ -1,18 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { scrollToForm } from "../../helper";
 
 import userIcon from "../../images/userIcon.png";
 
 import "./authHeader.scss";
 
 export const AuthHeader = ({}) => {
-  function scrollToForm() {
-    window.scrollTo({
-      top: 850,
-      behavior: "smooth",
-    });
-  }
-
   return (
     <div className="auth-header">
       <div className="auth-header__logo">
@@ -25,10 +19,8 @@ export const AuthHeader = ({}) => {
           <div className="auth-nav">
             <ul>
               <li>
-                <NavLink to={'/auth'}>
-                  <span>
-                    Главная
-                  </span>
+                <NavLink to={"/auth"}>
+                  <span>Главная</span>
                 </NavLink>
               </li>
               <li>
@@ -38,10 +30,8 @@ export const AuthHeader = ({}) => {
                 <a href="#">Школа</a>
               </li>
               <li>
-                <NavLink to={'/auth-candidate'} className="candidate">
-                  <span>
-                    Войти в команду
-                  </span>
+                <NavLink to={"/auth-candidate"} className="candidate">
+                  <span>Войти в команду</span>
                 </NavLink>
               </li>
             </ul>
