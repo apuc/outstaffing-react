@@ -9,10 +9,11 @@ import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {Footer} from "../../components/Footer/Footer";
 
-import arrow from "../../images/right-arrow.png";
-import arrowSwitchDate from "../../images/arrowViewReport.png";
 import {apiRequest} from "../../api/request";
 import {getCorrectDate, getCreatedDate, hourOfNum} from '../../components/Calendar/calendarHelper'
+
+import arrow from "../../images/right-arrow.png";
+import arrowSwitchDate from "../../images/arrowViewReport.png";
 
 import './viewReport.scss'
 

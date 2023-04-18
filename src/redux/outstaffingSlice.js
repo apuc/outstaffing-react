@@ -10,7 +10,9 @@ const initialState = {
   positionId: null,
   profileInfo: {},
   reportsDates: '',
-  partnerEmployees: []
+  partnerEmployees: [],
+  partnerRequestId: null,
+  partnerRequests: []
 };
 
 export const outstaffingSlice = createSlice({
@@ -49,11 +51,17 @@ export const outstaffingSlice = createSlice({
     },
     setPartnerEmployees: (state, action) => {
       state.partnerEmployees = action.payload
+    },
+    setPartnerRequestId: (state, action) => {
+      state.partnerRequestId = action.payload
+    },
+    setPartnerRequests: (state, action) => {
+      state.partnerRequests = action.payload
     }
   },
 });
 
-export const { tags, profiles, selectedItems, auth, currentCandidate, filteredCandidates, setPositionId, setUserInfo, setProfileInfo, setReportsDates, setPartnerEmployees } = outstaffingSlice.actions;
+export const { tags, profiles, selectedItems, auth, currentCandidate, filteredCandidates, setPositionId, setUserInfo, setProfileInfo, setReportsDates, setPartnerEmployees, setPartnerRequestId, setPartnerRequests } = outstaffingSlice.actions;
 
 export const selectProfiles = (state) => state.outstaffing.profiles;
 export const selectTags = (state) => state.outstaffing.tags;
@@ -66,5 +74,7 @@ export const getProfileInfo = (state) => state.outstaffing.profileInfo;
 export const selectUserInfo = (state) => state.outstaffing.userInfo;
 export const getReportsDates = (state) => state.outstaffing.reportsDates;
 export const getPartnerEmployees = (state) => state.outstaffing.partnerEmployees;
+export const getPartnerRequestId = (state) => state.outstaffing.partnerRequestId;
+export const getPartnerRequests = (state) => state.outstaffing.partnerRequests;
 
 export default outstaffingSlice.reducer;

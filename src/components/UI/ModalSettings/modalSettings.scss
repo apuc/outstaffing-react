@@ -1,0 +1,30 @@
+.project {
+  &__settings {
+    position: absolute;
+    padding: 32px 23px 10px 11px;
+    background: #e1fccf;
+    border-radius: 12px;
+    transform: scale(0);
+    bottom: -148px;
+    right: -120px;
+
+    &-menu {
+      font-size: 14px;
+      line-height: 38px;
+
+      div {
+        display: flex;
+        align-items: center;
+
+        img {
+          margin-right: 12px;
+        }
+      }
+    }
+  }
+
+  &__settings.active {
+    transform: scale(1);
+    z-index: 99;
+  }
+}
