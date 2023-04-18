@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState } from 'react';
 
 import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {Footer} from "../../components/Footer/Footer";
-import {Navigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
+
+import {apiRequest} from "../../api/request";
 
 import arrowDown from "../../images/selectArrow.png"
 import processImg from "../../images/partnerAddRequestFirstImg.png"
@@ -19,11 +21,62 @@ export const PartnerAddRequest = () => {
         return <Navigate to="/profile" replace/>
     }
 
-    const [skills, setSkills] = useState(['REST API', 'Async/await'])
-    const [selectedSkills, setSelectedSkills] = useState([])
-    const [filteredSkills, setFilteredSkills] = useState(skills)
+    const navigate= useNavigate();
 
+    const [skills, setSkills] = useState([])
+    const [filteredSkills, setFilteredSkills] = useState([])
+    const [specializationList, setSpecializationList] = useState([])
+    const [levelList, setLevelList] = useState([])
+    const [countList] = useState([1, 2, 3, 4, 5])
     const [openSkillsSelect, setOpenSkillsSelect] = useState(false)
+    const [openSpecializationList, setOpenSpecializationListOpen] = useState(false)
+    const [openLevelList, setOpenLevelList] = useState(false)
+    const [openCountList, setOpenCountList] = useState(false)
+    const [selectedSkills, setSelectedSkills] = useState([])
+    const [selectedSpecialization, setSelectedSpecialization] = useState('Выберите специализацию')
+    const [selectedLevel, setSelectedLevel] = useState('Выберите уровень')
+    const [selectedCount, setSelectedCount] = useState('Выберите кол-во сотрудников')
+    const [inputs, setInputs] = useState({title: '', description: ''})
+
+    useEffect(() => {
+        apiRequest(`/profile/positions-list`).then((el) => setSpecializationList(el))
+        apiRequest(`/profile/level-list`).then((el) => setLevelList(el))
+        apiRequest(`/skills/get-skills-list`).then((el) => {
+            setSkills(el)
+            setFilteredSkills(el)
+        })
+    }, [])
+
+    const disableBtn = () => {
+        if (!inputs.title ||
+            typeof selectedSpecialization === "string" ||
+            typeof selectedLevel === "string" ||
+            typeof selectedCount === "string" ||
+            !inputs.description ||
+            !selectedSkills.length) {
+            return false
+        }
+        return true
+    }
+
+    const handler = () => {
+        apiRequest('/request/create-request', {
+            method: 'POST',
+            data: {
+                user_id: localStorage.getItem('id'),
+                title: inputs.title,
+                position_id: selectedSpecialization.id,
+                knowledge_level_id: selectedLevel.id,
+                specialist_count: selectedCount,
+                status: 1,
+                descr: inputs.description,
+                skill_ids: selectedSkills.map((skill) => {return skill.id})
+            }
+        }).then((res) => {
+            navigate('/profile/requests');
+        })
+    }
+
 
     return (
         <div className='partnerAddRequest'>
@@ -43,31 +96,42 @@ export const PartnerAddRequest = () => {
                             <div className='form__block__section'>
                                 <h3>Название вакансии</h3>
                                 <div className='form__block__section__input'>
-                                    <input type='text' placeholder='Вакансия'/>
+                                    <input onChange={e => setInputs((prevValue) => ({...prevValue, title: e.target.value}) )} type='text' placeholder='Вакансия'/>
                                 </div>
                             </div>
                             <div className='form__block__section'>
                                 <h3>Выберите специализацию</h3>
-                                <div className='form__block__section__selects'>
+                                <div className='form__block__section__selects' onClick={() => {setOpenSpecializationListOpen(!openSpecializationList)}}>
                                     <div className='form__block__section__select'>
-                                        <span>Разработка</span>
-                                        <img src={arrowDown} />
-                                    </div>
-                                    <div className='form__block__section__select'>
-                                        <span>Backend Developer</span>
-                                        <img src={arrowDown} />
+                                        <span>{typeof selectedSpecialization === "string" ? selectedSpecialization : selectedSpecialization.name}</span>
+                                        <img className={openSpecializationList ? 'rotate' : ''} src={arrowDown} />
                                     </div>
                                 </div>
+                                {openSpecializationList && Boolean(specializationList.length) &&
+                                    <div className='form__block__dropDown'>
+                                        {specializationList.map((specialization, index) => {
+                                            return <p
+                                                key={specialization.id}
+                                                onClick={() => {
+                                                    setOpenSpecializationListOpen(false)
+                                                    setSelectedSpecialization(specialization)
+                                                }}
+                                            >
+                                                            {specialization.name}</p>
+                                        })}
+                                    </div>
+                                }
                             </div>
                             <div className='form__block__section'>
                                 <h3>Навыки</h3>
                                 <div className='form__block__skills' onClick={() => {setOpenSkillsSelect(true)}}>
                                     {Boolean(selectedSkills.length) &&
                                         selectedSkills.map((skill, index) => {
-                                            return<div className='skill' key={index}>
-                                                <span >{skill}</span>
+                                            return<div className='skill' key={`selected-${skill.id}`}>
+                                                <span >{skill.name}</span>
                                                 <img src={deleteIcon} alt='delete'
                                                      onClick={() => {
+                                                         setSkills(prevArray => [...prevArray, skill])
                                                          setFilteredSkills(prevArray => [...prevArray, skill])
                                                          setSelectedSkills(selectedSkills.filter((skill, indexSkill) => {
                                                              return indexSkill !== index
@@ -76,29 +140,30 @@ export const PartnerAddRequest = () => {
                                             </div>
                                         })
                                     }
-                                    {!selectedSkills.length &&
-                                        <input type='text' placeholder='Выберите навыки'
-                                               onChange={(e) => {
-                                                   setFilteredSkills(skills.filter((skill) => {
-                                                       return skill.toLowerCase().includes(e.target.value.toLowerCase())
-                                                   }))
-                                               }} />
-                                    }
+                                    <input type='text' placeholder='Выберите навыки'
+                                           onChange={(e) => {
+                                               setFilteredSkills(skills.filter((skill) => {
+                                                   return skill.name.toLowerCase().includes(e.target.value.toLowerCase())
+                                               }))
+                                           }} />
                                 </div>
                                 {openSkillsSelect && Boolean(filteredSkills.length) &&
                                     <div className='form__block__dropDown'>
                                         {filteredSkills.map((skill, index) => {
                                             return <span
-                                                key={skill}
+                                                key={skill.id}
                                                 onClick={() => {
                                                     setSelectedSkills(prevArray => [...prevArray, skill])
                                                     setFilteredSkills(filteredSkills.filter((skill, skillIndex) => {
                                                         return skillIndex !== index
                                                     }))
+                                                    setSkills(skills.filter((initSkill) => {
+                                                        return initSkill.id !==skill.id
+                                                    }))
                                                     setOpenSkillsSelect(false)
                                                 }}
                                             >
-                                                        {skill}</span>
+                                                        {skill.name}</span>
                                         })}
                                     </div>
                                 }
@@ -108,25 +173,53 @@ export const PartnerAddRequest = () => {
                             <h3 className='form__block__title'>Квалификация</h3>
                             <div className='form__block__section'>
                                 <h3>Выберите уровень знаний </h3>
-                                <div className='form__block__section__select'>
-                                    <span>Разработка</span>
-                                    <img src={arrowDown} />
+                                <div className='form__block__section__select' onClick={() => setOpenLevelList(!openLevelList)}>
+                                    <span>{typeof selectedLevel === "string" ? selectedLevel : selectedLevel.name}</span>
+                                    <img className={openLevelList ? 'rotate' : ''} src={arrowDown} />
                                 </div>
+                                {openLevelList && Boolean(Object.values(levelList).length) &&
+                                    <div className='form__block__dropDown'>
+                                        {Object.values(levelList).map((level, index) => {
+                                            return <p
+                                                key={level}
+                                                onClick={() => {
+                                                    setOpenLevelList(false)
+                                                    setSelectedLevel({name: level, id: index + 1})
+                                                }}
+                                            >
+                                                {level}</p>
+                                        })}
+                                    </div>
+                                }
                             </div>
                             <div className='form__block__section'>
                                 <h3>Введите необходимое описание</h3>
-                                <textarea/>
+                                <textarea onChange={e => setInputs((prevValue) => ({...prevValue, description: e.target.value}) )}/>
                             </div>
                             <div className='form__block__section'>
                                 <h3>Необходимое количество человек на позицию</h3>
-                                <div className='form__block__section__select'>
-                                    <span>2</span>
-                                    <img src={arrowDown} />
+                                <div className='form__block__section__select' onClick={() => setOpenCountList(true)}>
+                                    <span>{selectedCount}</span>
+                                    <img className={openCountList ? 'rotate' : ''} src={arrowDown} />
                                 </div>
+                                {openCountList &&
+                                <div className='form__block__dropDown'>
+                                    {countList.map((count) => {
+                                        return <p
+                                            key={count}
+                                            onClick={() => {
+                                                setOpenCountList(false)
+                                                setSelectedCount(count)
+                                            }}
+                                        >
+                                            {count}</p>
+                                    })}
+                                </div>
+                                }
                             </div>
                             <div className='form__block__buttons'>
-                                <button className='form__block__cancel'>Отмена</button>
-                                <button className='form__block__save'>Сохранить</button>
+                                <Link to='/profile/requests' className='form__block__cancel'>Отмена</Link>
+                                <button onClick={() => handler()} className={disableBtn() ? 'form__block__save' : 'form__block__save disable'}>Сохранить</button>
                             </div>
                         </div>
                     </div>
