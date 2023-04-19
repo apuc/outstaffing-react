@@ -22,6 +22,7 @@ import noProjects from "../../images/noProjects.png"
 import arrow from '../../images/arrowCalendar.png'
 
 import "./tracker.scss";
+import { Navigation } from "../../components/Navigation/Navigation";
 
 export const Tracker = () => {
   const [toggleTab, setToggleTab] = useState(1);
@@ -524,6 +525,7 @@ export const Tracker = () => {
   return (
     <div className="tracker">
       <ProfileHeader />
+      <Navigation />
       <div className="container">
         <div className="tracker__content">
           <ProfileBreadcrumbs links={[

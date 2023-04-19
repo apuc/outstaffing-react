@@ -12,6 +12,7 @@ import personImg from "../../images/mokPerson.png"
 import deleteBtn from "../../images/deleteBtn.png"
 
 import './partnerBid.scss'
+import { Navigation } from '../../components/Navigation/Navigation';
 
 export const PartnerBid = () => {
     if(localStorage.getItem('role_status') !== '18') {
@@ -37,6 +38,7 @@ export const PartnerBid = () => {
     return (
         <div className='partnerBid'>
             <ProfileHeader />
+            <Navigation />
             <div className='container'>
                 <ProfileBreadcrumbs links={[
                     {name: 'Главная', link: '/profile'},

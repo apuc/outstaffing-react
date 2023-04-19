@@ -1,5 +1,5 @@
 .footer {
-  margin-top: -3rem;
+  //margin-top: -3rem;
 
   &__left {
     display: flex;
@@ -74,7 +74,7 @@
 @media (max-width: 575.98px) {
   .footer {
     &__left {
-      margin-top: 80px;
+    //  margin-top: 80px;
     }
 
     &__description {

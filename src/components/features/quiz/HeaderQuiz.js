@@ -17,8 +17,8 @@ export const HeaderQuiz = ({header}) => {
   }, [userId, dispatch]);
 
   useEffect(() => {
-    apiRequest(`/user-questionnaire/questionnaires-list?user_id=${userId}`)
-        .then(res => dispatch(setQuestionnairesList(res)))
+    // apiRequest(`/user-questionnaire/questionnaires-list?user_id=${userId}`)
+    //     .then(res => dispatch(setQuestionnairesList(res)))
   }, [userId, dispatch]);
 
   return (

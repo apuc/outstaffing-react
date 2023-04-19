@@ -13,6 +13,7 @@ import gitImgItem from "../../images/gitItemImg.png"
 import './summary.scss'
 import {apiRequest} from "../../api/request";
 import {Navigate} from "react-router-dom";
+import { Navigation } from '../../components/Navigation/Navigation';
 
 export const Summary = () => {
     if(localStorage.getItem('role_status') === '18') {
@@ -29,6 +30,7 @@ export const Summary = () => {
   return (
       <div className='summary'>
         <ProfileHeader/>
+        <Navigation />
         <div className='container'>
           <div className='summary__content'>
               <ProfileBreadcrumbs links={[

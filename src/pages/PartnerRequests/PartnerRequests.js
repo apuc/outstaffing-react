@@ -9,6 +9,7 @@ import {Footer} from "../../components/Footer/Footer";
 import cursorImg from "../../images/cursorImg.png"
 
 import './partnerRequests.scss'
+import { Navigation } from '../../components/Navigation/Navigation';
 
 export const PartnerRequests = () => {
     if(localStorage.getItem('role_status') !== '18') {
@@ -35,6 +36,7 @@ export const PartnerRequests = () => {
     return (
         <div className='partnerRequests'>
             <ProfileHeader />
+            <Navigation  />
             <div className='container'>
                 <ProfileBreadcrumbs links={[
                     {name: 'Главная', link: '/profile'},

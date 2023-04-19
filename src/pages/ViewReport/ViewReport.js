@@ -15,6 +15,7 @@ import {apiRequest} from "../../api/request";
 import {getCorrectDate, getCreatedDate, hourOfNum} from '../../components/Calendar/calendarHelper'
 
 import './viewReport.scss'
+import { Navigation } from '../../components/Navigation/Navigation';
 
 export const ViewReport = () => {
     if(localStorage.getItem('role_status') === '18') {
@@ -78,6 +79,7 @@ export const ViewReport = () => {
     return (
         <div className='viewReport'>
             <ProfileHeader/>
+            <Navigation />
             <div className='container'>
                 <div className='viewReport__info'>
                     <ProfileBreadcrumbs links={[{name: 'Главная', link: '/profile'},

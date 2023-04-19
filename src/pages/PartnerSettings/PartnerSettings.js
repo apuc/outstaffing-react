@@ -7,11 +7,13 @@ import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import kontur from "../../images/konturLogo.png";
 import astral from "../../images/astralLogo.png";
 import "./partnerSettings.scss";
+import { Navigation } from "../../components/Navigation/Navigation";
 
 export const PartnerSettings = () => {
   return (
     <div className="settings">
       <ProfileHeader />
+      <Navigation />
       <div className="container settings__page">
         <ProfileBreadcrumbs
           links={[

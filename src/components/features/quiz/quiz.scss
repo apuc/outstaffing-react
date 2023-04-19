@@ -1,410 +1,736 @@
-@use 'sass:math';
-@import 'functions.scss';
+@use "sass:math";
+@import "functions.scss";
 
 $maxWidthContainer: 1123;
 
-._container{
-    max-width: 1123px;
-    margin: 0 auto;
-    padding: 0 10px;
+._container {
+  max-width: 1123px;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 
-.quiz-text{
-    font-size: 20px;
-    font-weight: 400;
-    line-height: math.div(30, 20);
+.quiz-text {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: math.div(30, 20);
 }
-.title{
-    color: #282828;
-    font-family: "GT Eesti Pro Display";
-    font-size: 33px;
-    font-weight: 700;
-    line-height: math.div(48, 33);
-    letter-spacing: 0.56px;
+.title {
+  color: #282828;
+  font-family: "GT Eesti Pro Display";
+  font-size: 33px;
+  font-weight: 700;
+  line-height: math.div(48, 33);
+  letter-spacing: 0.56px;
 }
-.subtitle{
-    color: #373936;
-    font-family: "GT Eesti Pro Display";
-    font-size: 20px;
-    font-weight: 400;
-    line-height: math.div(25, 20);
+.subtitle {
+  color: #373936;
+  font-family: "GT Eesti Pro Display";
+  font-size: 20px;
+  font-weight: 400;
+  line-height: math.div(25, 20);
 }
-.quiz-btn{
-    display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 6px 5px 20px rgba(82, 151, 34, 0.21);
-        border-radius: 23px;
-        color: #ffffff;
-        outline: none;
-        border: 2px solid #52b709;
-        background: #52b709;
-        transition: 0 all ease 0.8s;
-        padding: 14px 38px;
-        line-height: 1;
-        font-family: "Muller Extra Bold";
-        font-weight: 400;
-        font-size: 16px;
-        text-decoration: none;
-        &:hover{
-            text-decoration: none;
-            color: #52b709;
-            background: #fff;
-        }
-        &_dark-green{
-            background-color: #1a310c;
-            border: 2px solid #1a310c;
-            &:hover{
-                text-decoration: none;
-                color: #1a310c;
-                background: #fff;
-            }
-        }
-        &_restriction{
-            max-width: 131px;
-        }
+.quiz-btn {
+  display: flex;
+  font-family: "Lab Grotesque";
+  align-items: center;
+  justify-content: center;
+  // box-shadow: 6px 5px 20px rgba(82, 151, 34, 0.21);
+  white-space: nowrap;
+  background: #406128;
+  border-radius: 44px;
+  color: #fff;
+  outline: none;
+  //border: 2px solid #52b709;
+  border: none;
+  transition: 0 all ease 0.8s;
+  padding: 7px 51px;
+  font-weight: 400;
+  font-size: 14px;
+  text-decoration: none;
+  line-height: 200%;
+  // &:hover{
+  //     text-decoration: none;
+  //     color: #52b709;
+  //     background: #fff;
+  // }
+  &_back {
+    background: #dddddd;
+    color: #000;
+  }
+  &_dark-green {
+    background-color: #1a310c;
+    border: 2px solid #1a310c;
+    &:hover {
+      text-decoration: none;
+      color: #1a310c;
+      background: #fff;
+    }
+  }
 }
-.quiz-title_h3{
-    color: #000000;
-    font-family: "GT Eesti Pro Display";
-    font-size: 25px;
-    font-weight: 400;
-    line-height: math.div(30, 25);
+.quiz-title_h3 {
+  font-family: "Lab Grotesque";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 156%;
+  color: #52b709;
 }
 //=============================================
 
 .error-msg {
-    text-align: center;
-    font-size: 25px;
-    color: red;
-    font-weight: 500;
+  text-align: center;
+  font-size: 25px;
+  color: red;
+  font-weight: 500;
 }
 
-.header-quiz{
-    @include adaptiv-value("padding-top", 48, 30, 1);
-    @include adaptiv-value("padding-bottom", 85, 30, 1);
-    &__container{
-        max-width: $maxWidthContainer+px;
-        margin: 0 auto;
-        padding: 0 10px;
-    }
-    &__title-main{
-        font-family: "GT Eesti Pro Display";
-        font-size: 24px;
-        font-weight: bold;
-        @include adaptiv-value("margin-bottom", 80, 30, 1);
-    }
-    &__body{
-        display: flex;
-        flex-wrap: wrap;
-        row-gap: 30px;
-        margin-bottom: 39px;
-    }
-    &__body_interjacent{
-        align-items: center;
-    }
-    &__description{
-        max-width: 576px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    &__avatar{
-        position: relative;
-        display: block;
-        flex: 0 0 133px;
-        min-height: 133px;
-        margin-right: 31px;
-        img{
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            top: 0;
-            left: 0;
-        }
-    }
-    &__name-user{
-        color: #000000;
-        font-family: "GT Eesti Pro Display";
-        font-size: 16px;
-        font-weight: 400;
-        line-height: math.div(30, 20);
-        margin-right: 70px;
-    }
-    &__title{
-        color: #000000;
-        font-family: "GT Eesti Pro Display";
-        @include adaptiv-value("font-size", 25, 16, 1);
-        font-weight: 700;
-        line-height: math.div(36, 25);
-        position: relative;
-
-        &::before{
-            position: absolute;
-            content: "";
-            width: prc(316, 370);
-            height: 5px;
-            border-radius: 3px;
-            background-color: #54b611;
-            bottom: -26px;
-        }
-    }
-}
-.my-tests{
-    font-family: "GT Eesti Pro Display";
-    // @include adaptiv-value("padding-top", 85, 30, 1);
-    // @include adaptiv-value("padding-bottom", 85, 30, 1);
-    &__container{
-        max-width: $maxWidthContainer+px;
-        margin: 0 auto;
-        padding: 0 10px;
-    }
-    &__title{
-        color: #000000;
-        font-size: 25px;
-        font-weight: 400;
-        line-height: math.div(30, 25);
-        @include adaptiv-value("margin-bottom", 80, 30, 1);
-    }
-    &__items{
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        margin: 0 -41px -42px;
-    }
-}
-
-.item-test{
-    flex: 0 1 50%;
-    padding: 0 41px;
-    margin: 0 0 42px 0;
-    @media (max-width: 760px) {
-        flex: 0 1 100%;
-    }
-    &__name-test{
-        color: #373936;
-        margin-bottom: 29px;
-
-    }
-    .active{
-        color: #54b611;
-    }
-    &__body{
-
-    }
-}
-.test-data{
+.task {
+  @include adaptiv-value("padding-top", 35, 10, 1);
+  background: #fff;
+  border-radius: 12px;
+  &__container {
+    max-width: $maxWidthContainer + px;
+    margin: 0 auto;
+    padding: 31px 51px;
+  }
+  &__body {
+    margin-left: 50px;
+  }
+  &__header {
     display: flex;
     align-items: center;
-
-    &__calendar{
-        padding: 13px 21px;
-        box-shadow: 0 0 59px rgba(44, 44, 44, 0.05);
-        border-radius: 5px;
-        border: 1px solid #c4c4c4;
-        background-color: #f0f7e0;
-        font-weight: 400;
-        font-size: 13px;
-        display: flex;
-        align-items: center;
-        margin-right: 17px;
-        img{
-            display: block;
-            margin-right: 11px;
-        }
-
-    }
-    &__hr{
-        width: 28px;
-        height: 5px;
-        border-radius: 3px;
-        background-color: #54b611;
-        margin-right: 26px;
-    }
-    &__select{
-        max-width: 131px;
-    }
+    gap: 24px;
+    margin-bottom: 38px;
+  }
+  &__title {
+  }
+  &__form {
+  }
 }
 
-.progressbar{
-    max-width: $maxWidthContainer+px;
-    margin: 0 auto;
-    padding: 0 10px;
-    &__body{
-        display: flex;
-        align-items: center;
-    }
-    &__value{
-        flex: 0 0 39px;
-        height: 39px;
-        background-color: #5cb42b;
-        border-radius: 50%;
-        color: #fff;
-        letter-spacing: 1.1px;
-        font-size: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        // flex: 1 1 auto;
-        margin-right: 19px;
-    }
-    &__strip{
-        flex: 1 1 auto;
-        height: 19px;
-
-        div{
-            border-radius: 10px;
-            height: 100%;
-            background-color: #5cb42b;
-        }
-    }
+.form-task {
+  &__field {
+    padding: 10px 15px;
+    font-size: 17px;
+    font-family: "GT Eesti Pro Display";
+    letter-spacing: 0.3px;
+    outline: none;
+    border: none;
+    width: 100%;
+    resize: vertical;
+    background: #eff1f3;
+    border-radius: 8px;
+  }
+  &__check {
+    padding: 0;
+    height: initial;
+    width: initial;
+    margin-bottom: 0;
+    display: none;
+    cursor: pointer;
+  }
+  &__buttons {
+    display: flex;
+    gap: 56px;
+    flex-wrap: wrap;
+    align-items: center;
+    @include adaptiv-value("margin-top", 60, 30, 1);
+  }
 }
 
-.task{
-    @include adaptiv-value("padding-top", 35, 10, 1);
-    &__container{
-        max-width: $maxWidthContainer+px;
-        margin: 0 auto;
-        padding: 0 10px;
+.form-task__group {
+  display: block;
+  margin-bottom: 13px;
+  font-family: "Lab Grotesque";
+  label {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 160%;
+    color: #000000;
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+    &:before {
+      content: "";
+      -webkit-appearance: none;
+      background-color: #eff1f3;
+      border: 2px solid #eff1f3;
+      border-radius: 8px;
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+      cursor: pointer;
+      margin-right: 16px;
     }
-    &__title{
-        margin-bottom: 39px;
-    }
-    &__form{
-
-    }
-
-}
-
-.form-task{
-    &__field{
-        padding: 10px 15px;
-        font-size: 17px;
-        font-family: 'GT Eesti Pro Display';
-        letter-spacing: 0.3px;
-        outline: none;
-        border: 1px solid #52b709;
-        width: 100%;
-        resize: vertical;
-    }
-    &__check {
-        padding: 0;
-        height: initial;
-        width: initial;
-        margin-bottom: 0;
-        display: none;
-        cursor: pointer;
-    }
-    &__buttons{
-        display: flex;
-        gap: 56px;
-        flex-wrap: wrap;
-        align-items: center;
-        @include adaptiv-value("margin-top", 60, 30, 1);
-    }
-}
-
-.form-task__group{
+  }
+  input[type="radio"]:checked + label::after {
+    content: "";
     display: block;
-
-    margin-bottom: 15px;
-
-    label {
-        color: #373936;
-        font-family: "GT Eesti Pro Display";
-        font-size: 18px;
-        font-weight: 300;
-        line-height: math.div(28,18);
-        position: relative;
-        cursor: pointer;
-        &:before {
-            content:'';
-            -webkit-appearance: none;
-            background-color: transparent;
-            border: 2px solid #52b709;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
-            padding: 11px;
-            display: inline-block;
-            position: relative;
-            vertical-align: middle;
-            cursor: pointer;
-            margin-right: 30px;
-          }
-      }
-      input[type="radio"] + label:before{
-          border-radius: 50%;
-      }
-      input:checked + label:before{
-          background: #52b709;
-      }
-      input:checked + label:after {
-
-        content: "";
-        display: block;
-        position: absolute;
-        top: 6px;
-        left: 9px;
-        width: 7px;
-        height: 14px;
-        border: solid #fff;
-        border-width: 0 2px 2px 0;
-        transform: rotate(45deg);
-      }
+    position: absolute;
+    top: 7.5px;
+    left: 6px;
+    width: 12px;
+    height: 12px;
+    background: #8dc63f;
+    border-radius: 50%;
+  }
+  input:checked + label:before {
+    background: #eff1f3;
   }
 
-.instruction{
-    &__container{
-        max-width: $maxWidthContainer+px;
-        margin: 0 auto;
-        padding: 0 10px;
-    }
-    &__title{
-        @include adaptiv-value("margin-bottom", 62, 20, 1);
-    }
-    &__text{
-        color: #373936;
-        font-family: "GT Eesti Pro Display";
-        font-size: 18px;
-        font-weight: 300;
-        line-height: math.div(28, 18);
-        @include adaptiv-value("margin-bottom", 50, 20, 1);
-        span{
-            color: #54b611;
-            font-weight: 700;
-        }
-        &_info{
-            margin-bottom: 0;
-        }
-    }
-    &__info{
-        display: flex;
-        gap: 24px;
-        align-items: center;
-    }
-    &__icon{
-        width: 36px;
-        height: 33px;
-    }
-    &__btn{
-        margin-bottom: 34px;
-    }
+  input[type="checkbox"]:checked + label:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 9px;
+    width: 6px;
+    height: 13px;
+    border: solid #1c1243;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
 }
 
-.result{
-   font-family: "GT Eesti Pro Display";
-    &__body{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 10px;
+.instruction {
+  &__container {
+    max-width: $maxWidthContainer + px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+  &__title {
+    @include adaptiv-value("margin-bottom", 62, 20, 1);
+  }
+  &__text {
+    color: #373936;
+    font-family: "GT Eesti Pro Display";
+    font-size: 18px;
+    font-weight: 300;
+    line-height: math.div(28, 18);
+    @include adaptiv-value("margin-bottom", 50, 20, 1);
+    span {
+      color: #54b611;
+      font-weight: 700;
     }
-    &__text{
-        font-size: 24px;
-        font-weight: bold;
+    &_info {
+      margin-bottom: 0;
     }
-    &__score{
-        color: #5cb42b;
+  }
+  &__info {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  &__icon {
+    width: 36px;
+    height: 33px;
+  }
+  &__btn {
+    margin-bottom: 34px;
+  }
+}
+
+.result {
+  font-family: "GT Eesti Pro Display";
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  &__text {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  &__score {
+    color: #5cb42b;
+  }
+}
+
+.selected-category {
+  background: #ffffff;
+  border-radius: 12px;
+  &__container {
+    display: flex;
+    align-items: center;
+    padding: 35px;
+    flex-wrap: wrap;
+    @media (max-width: 723px) {
+      justify-content: space-between;
+      row-gap: 25px;
     }
+  }
+  &__title {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 156%;
+    color: #406128;
+    margin: 0 32px 0 0;
+  }
+  &__category {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 0 44px 0 0;
+  }
+  &__img {
+    height: 48px;
+    flex: 0 0 48px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__title-category {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 122%;
+    color: #000000;
+  }
+  &__button {
+    background: #e1fccf;
+    border-radius: 44px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 229%;
+    border: none;
+    padding: 5px 20px;
+    color: #000000;
+    @media (max-width: 723px) {
+      flex: 1 1 auto;
+      text-align: center;
+    }
+
+    &:hover {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+}
+
+.card-introduction {
+  padding: 0px 25px;
+  margin: 0px 0px 50px 0px;
+  flex: 0 1 33.333%;
+  @media (max-width: 850px) {
+    flex: 0 1 50%;
+  }
+  @media (max-width: 850px) {
+    flex: 1 1 auto;
+  }
+
+  &__body {
+    display: flex;
+    gap: 20px;
+  }
+  &__title {
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 171%;
+    color: #52b709;
+    margin: 0 0 30px 0;
+  }
+  &__icon {
+    flex: 0 0 25px;
+    height: 30px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 200%;
+    color: #000000;
+  }
+}
+
+.quiz-passing-information {
+  background: #fff;
+  border-radius: 12px;
+  &__container {
+    // @media (max-width: 600px) {
+    //   display: block;
+    // }
+    // @media (max-width: 600px) {
+    //   display: block;
+    // }
+    // @media (max-width: 600px) {
+    //   display: block;
+    // }
+  }
+  &__main {
+    //flex: 1 1 auto;
+    padding: 35px 45px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1.2fr 0.6fr;
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 20px;
+    }
+    @media (max-width: 500px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &__icon {
+    flex: 0 0 32px;
+    height: 35px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  &__text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 167%;
+    color: #6f6f6f;
+    span {
+      color: #111112;
+      font-weight: 700;
+    }
+  }
+  &__timer,
+  &__attempt {
+    display: flex;
+    gap: 23px;
+    align-items: center;
+  }
+
+  &__specialization {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  &__specialization-title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 122%;
+    color: #000000;
+    word-break: break-word;
+  }
+  &__button {
+    font-size: 18px;
+    max-width: 174px;
+    height: 46px;
+    font-weight: 500;
+  }
+}
+
+.block-text {
+  border-radius: 12px;
+  background: #fff;
+  text-align: center;
+  width: 100%;
+  padding: 18px 0;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 156%;
+  color: #000000;
+  a {
+    color: #406128;
+  }
+}
+
+.card-available-test {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &__container {
+    display: block;
+    @include adaptiv-value("padding-top", 30, 20, 1);
+    @include adaptiv-value("padding-bottom", 30, 20, 1);
+    @include adaptiv-value("padding-right", 28, 18, 1);
+    @include adaptiv-value("padding-left", 28, 18, 1);
+  }
+
+  &:hover {
+    box-shadow: 6px 5px 20px rgb(87 98 80 / 21%);
+    transform: scale(1.02);
+    text-decoration: none;
+  }
+
+  &__top-head {
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    margin: 0 0 24px 0;
+  }
+  &__title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 122%;
+    color: #000000;
+    max-width: 128px;
+    margin: 0;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      flex: 0 1 66%;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 20px;
+      color: #000000;
+      margin-bottom: 0;
+
+      span {
+        color: #52b709;
+        font-weight: 700;
+      }
+    }
+    &Link {
+      width: 48px;
+      height: 48px;
+      background: #ddeec6;
+      border-radius: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  &__finished {
+    background: rgba(255, 255, 255, 0.76);
+    mix-blend-mode: normal;
+    border: 3px solid #52b709;
+    border-radius: 12px;
+    padding: 13px 16px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+    p {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 129%;
+      color: #000000;
+    }
+    a {
+      &:hover {
+        text-decoration: none;
+        color: #fff;
+      }
+
+      display: block;
+      background: #52b709;
+      border-radius: 44px;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 213%;
+      color: #ffffff;
+      padding: 9px 25px;
+      white-space: nowrap;
+      outline: none;
+      border: none;
+    }
+  }
+}
+
+.block-completed-test {
+  background: #ffffff;
+  border-radius: 12px;
+  // .block-completed-test__container
+
+  &__container {
+    padding: 41px 35px 29px 59px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  // .block-completed-test__img
+
+  &__img {
+    flex: 0 0 54px;
+    height: 60px;
+    margin: 0 34px 0 0;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // .block-completed-test__title
+
+  &__title {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 156%;
+    margin: 0 60px 0 0;
+    color: #52b709;
+  }
+
+  // .block-completed-test__text
+
+  &__text {
+    max-width: 386px;
+    margin: 0 26px 0 0;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 200%;
+    color: #000000;
+  }
+
+  // .block-completed-test__button
+
+  &__button {
+    display: block;
+  }
+}
+
+.report {
+  // .report__row
+
+  &__row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    @media (max-width: 600px) {
+      display: block;
+    }
+  }
+
+  // .report__column
+
+  &__column {
+    &:first-child {
+      background: #ffffff;
+      flex: 0 1 22%;
+      border-radius: 12px;
+      @media (max-width: 1000px) {
+        flex: 0 1 50%;
+      }
+    }
+    height: 128px;
+    border-radius: 0px 12px 0px 0px;
+    flex: 0 1 26%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e1fccf;
+    gap: 21px;
+    &:last-child {
+      flex-direction: column;
+      gap: 0;
+    }
+    @media (max-width: 1000px) {
+      flex: 0 1 50%;
+    }
+  }
+
+  // .report__job-title
+
+  &__job-title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 122%;
+    color: #000000;
+  }
+
+  // .report__value
+
+  &__value {
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 56%;
+    color: #52b709;
+    // .report__value_false
+
+    &_false {
+      color: #5b6871;
+    }
+  }
+
+  // .report__text
+
+  &__text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 138%;
+    color: #000000;
+  }
+
+  // .report__status-text
+
+  &__status-text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 200%;
+    color: #000000;
+    width: 50%;
+  }
+
+  // .report__status
+
+  &__status {
+    background: #1458dd;
+    border-radius: 44px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 200%;
+    color: #ffffff;
+    padding: 7px 34px;
+    max-width: 154px;
+  }
+}
+
+.alert-result {
+  display: flex;
+  align-items: center;
+  @include adaptiv-value("padding-top", 39, 20, 1);
+  @include adaptiv-value("padding-bottom", 39, 20, 1);
+  @include adaptiv-value("padding-right", 61, 20, 1);
+  @include adaptiv-value("padding-left", 61, 20, 1);
+  background: #fff;
+  gap: 30px;
+  border-radius: 10px;
+  @media (max-width: 900px) {
+    flex-wrap: wrap;
+  }
+  &__column {
+    display: flex;
+    @include adaptiv-value("gap", 44, 14, 1);
+    align-items: center;
+    @media (max-width: 900px) {
+      flex: 1 1 auto;
+    }
+  }
+  &__icon {
+    width: 39px;
+    height: 39px;
+  }
+  &__text {
+    font-weight: 700;
+    @include adaptiv-value("font-size", 18, 14, 1);
+    line-height: 156%;
+    word-break: break-word;
+  }
+  &__button {
+    width: 231px;
+    @include adaptiv-value("font-size", 16, 14, 1);
+    @media (max-width: 900px) {
+      width: 100%;
+    }
+  }
 }

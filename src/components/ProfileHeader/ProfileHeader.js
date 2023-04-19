@@ -10,6 +10,7 @@ import {getRole} from "../../redux/roleSlice";
 import {urlForLocal} from "../../helper";
 
 import './profileHeader.scss'
+import { Navigation } from '../Navigation/Navigation';
 
 
 
@@ -20,58 +21,8 @@ export const ProfileHeader = () => {
 
 
   const userRole = useSelector(getRole);
-  const profileInfo = useSelector(getProfileInfo);
   const [user] = useState(localStorage.getItem('role_status') === '18' ? 'partner' : 'developer')
-  const [navInfo] = useState({
-    developer: [
-      {
-        path: '/summary',
-        name: 'Резюме'
-      },
-      {
-        path: '/calendar',
-        name: 'Отчетность'
-      },
-      {
-        path: '/tracker',
-        name: 'Трекер'
-      },
-      {
-        path: '/payouts',
-        name: 'Выплаты'
-      },
-      {
-        path: '/settings',
-        name: 'Настройки'
-      },
-    ],
-    partner: [
-      {
-        path: '/catalog',
-        name: 'Каталог'
-      },
-      {
-        path: '/requests',
-        name: 'Запросы'
-      },
-      {
-        path: '/categories',
-        name: 'Персонал'
-      },
-      {
-        path: '/tracker',
-        name: 'Трекер'
-      },
-      {
-        path: '/treaties',
-        name: 'Договора'
-      },
-      {
-        path: '/settings',
-        name: 'Настройки'
-      },
-    ]
-  })
+
 
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
@@ -109,29 +60,6 @@ export const ProfileHeader = () => {
             <button onClick={handler} className='profileHeader__logout'>
               {isLoggingOut ? <Loader/> : 'Выйти'}
             </button>
-          </div>
-        </div>
-        <div className='profileHeader__info'>
-          <div className='profileHeader__container'>
-            <nav className='profileHeader__nav'>
-              {
-                navInfo[user].map((link, index) => {
-                  return <NavLink key={index} end to={`/profile${link.path}`}>{link.name}</NavLink>
-                })
-              }
-            </nav>
-
-            <div className='profileHeader__personalInfo'>
-              <h3 className='profileHeader__personalInfoName'>
-                {user === 'developer' ?
-                    profileInfo?.fio :
-                    ''
-                }
-              </h3>
-              <NavLink end to={'/profile'}>
-                <img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : ""} className='profileHeader__personalInfoAvatar' alt='avatar'/>
-              </NavLink>
-            </div>
           </div>
         </div>
       </header>
