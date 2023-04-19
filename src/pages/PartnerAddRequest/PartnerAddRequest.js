@@ -15,6 +15,7 @@ import deleteIcon from "../../images/close.png"
 
 
 import './partnerAddRequest.scss'
+import { Navigation } from '../../components/Navigation/Navigation';
 
 export const PartnerAddRequest = () => {
     if(localStorage.getItem('role_status') !== '18') {
@@ -81,6 +82,7 @@ export const PartnerAddRequest = () => {
     return (
         <div className='partnerAddRequest'>
             <ProfileHeader />
+            <Navigation />
             <div className='container'>
                 <ProfileBreadcrumbs links={[
                     {name: 'Главная', link: '/profile'},

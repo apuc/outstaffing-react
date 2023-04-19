@@ -20,6 +20,8 @@ import avatarMok from "../PartnerTreaties/Images/avatarMok.png"
 import rightArrow from "../../images/arrowRight.png"
 
 import './profile.scss'
+import { CardControl } from '../../components/CardControl/CardControl';
+import { Navigation } from '../../components/Navigation/Navigation';
 
 export const Profile = () => {
 
@@ -28,19 +30,19 @@ export const Profile = () => {
   const [profileItemsInfo] = useState({
     developer: [
       {
-        path: '/calendar',
+        path: 'profile/calendar',
         img: reportsIcon,
         title: 'Ваша отчетность',
         description: '<span></span>Отработанных в этом месяце часов'
       },
       {
-        path: '/summary',
+        path: 'profile/summary',
         img: summaryIcon,
         title: 'Данные и резюме',
         description: 'Ваше резюме<br/><span>заполнено</span>'
       },
       {
-        path: '/tracker',
+        path: 'profile/tracker',
         img: timerIcon,
         title: 'Трекер времени',
         description: 'Сколько времени занимает<br/> выполнение задач'
@@ -52,7 +54,7 @@ export const Profile = () => {
         description: 'У вас <span>подтвержден</span><br/> статус самозанятого'
       },
       {
-        path: '/settings',
+        path: 'profile/settings',
         img: settingIcon,
         title: 'Настройки аккаунта',
         description: 'Перейдите чтобы начать<br/> редактирование'
@@ -60,31 +62,31 @@ export const Profile = () => {
     ],
     partner: [
       {
-        path: '/requests',
+        path: 'profile/requests',
         img: reportsIcon,
         title: 'Запросы и открытые позиции',
         description: '<span>У вас 2 вакансии<br/></span>открытые от лица компании'
       },
       {
-        path: '/categories',
+        path: 'profile/categories',
         img: summaryIcon,
         title: 'Данные персонала',
         description: 'Наши специалисты <br/><span>уже работающие у вас</span>'
       },
       {
-        path: '/tracker',
+        path: 'profile/tracker',
         img: timerIcon,
         title: 'Трекер времени',
         description: 'Контроль времени и<br/> выполнение задач'
       },
       {
-        path: '/treaties',
+        path: 'profile/treaties',
         img: paymentIcon,
         title: 'Договора и отчетность',
         description: 'Ключевые условия<br/> договора'
       },
       {
-        path: '/settings',
+        path: 'profile/settings',
         img: settingIcon,
         title: 'Настройки аккаунта',
         description: 'Перейдите чтобы начать<br/> редактирование'
@@ -95,6 +97,7 @@ export const Profile = () => {
   return (
       <div className='profile'>
         <ProfileHeader/>
+        <Navigation />
         <div className='container'>
           <ProfileBreadcrumbs links={[{name: 'Главная', link: '/profile'}]} />
           <h2 className='profile__title'>
@@ -119,18 +122,13 @@ export const Profile = () => {
           <div className='profile__items'>
             {
               profileItemsInfo[user].map((item, index) => {
-                return <Link key={index} to={`/profile${item.path}`} className='item'>
-                          <div className='item__about'>
-                            <img src={item.img} alt='itemImg'/>
-                            <h3>{item.title}</h3>
-                          </div>
-                          <div className='item__info'>
-                            <p dangerouslySetInnerHTML={{__html: item.description}}></p>
-                            <div className='item__infoLink'>
-                              <img src={rightArrow} alt='arrow'/>
-                            </div>
-                          </div>
-                        </Link>
+                return <CardControl 
+                description={item.description} 
+                img={item.img}
+                path={item.path}
+                title={item.title}
+                key={index}
+                />              
               })
             }
           </div>

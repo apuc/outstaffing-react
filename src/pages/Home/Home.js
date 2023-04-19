@@ -11,6 +11,7 @@ import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {apiRequest} from "../../api/request";
 import {Navigate} from "react-router-dom";
+import { Navigation } from '../../components/Navigation/Navigation'
 
 
 const Home = () => {
@@ -58,6 +59,7 @@ const Home = () => {
   return (
       <>
         <ProfileHeader/>
+        <Navigation />
         <div className="catalog">
           <div className='container'>
             <ProfileBreadcrumbs links={[

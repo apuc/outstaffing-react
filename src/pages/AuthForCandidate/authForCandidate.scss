@@ -6,7 +6,7 @@
 
   .auth {
     &__wrapper {
-      background: #FFFFFF;
+      background: #ffffff;
       border-radius: 12px;
       padding: 50px 0 35px 56px;
       margin-top: 40px;
@@ -55,7 +55,7 @@
 
       input {
         margin-bottom: 30px;
-        background: #EFF2F7;
+        background: #eff2f7;
         border-radius: 8px;
         min-width: 300px;
         width: 100%;
@@ -80,7 +80,7 @@
       }
 
       button {
-        background: #52B709;
+        background: #52b709;
         border-radius: 44px;
         max-width: 130px;
         border: none;
@@ -107,7 +107,7 @@
       text-align: center;
 
       span {
-        color: #52B709;
+        color: #52b709;
       }
 
       @media (max-width: 660px) {
@@ -122,13 +122,19 @@
     }
 
     &__categoriesWrapper {
-      display: flex;
       position: relative;
       margin-top: 200px;
-      flex-wrap: wrap;
-      row-gap: 24px;
-      column-gap: 21px;
       width: 100%;
+      display: grid;
+      grid-gap: 24px;
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-bottom: 24px;
+      @media (max-width: 955px) {
+        grid-template-columns: 1fr 1fr;
+      }
+      @media (max-width: 668px) {
+        grid-template-columns: 1fr;
+      }
 
       .categoriesItem {
         @media (max-width: 1094px) {

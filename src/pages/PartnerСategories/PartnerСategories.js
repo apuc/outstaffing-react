@@ -22,6 +22,7 @@ import rightArrow from "../../images/arrowRight.png"
 import avatarImg from "../PartnerEmployees/avatarMok.png";
 
 import "./partnerСategories.scss"
+import { Navigation } from '../../components/Navigation/Navigation';
 
 export const PartnerCategories = () => {
     const dispatch = useDispatch();
@@ -130,6 +131,7 @@ export const PartnerCategories = () => {
     return (
         <div className="partnerCategories">
             <ProfileHeader />
+            <Navigation />
             <div className="container">
                 <ProfileBreadcrumbs links={[
                     {name: 'Главная', link: '/profile'},

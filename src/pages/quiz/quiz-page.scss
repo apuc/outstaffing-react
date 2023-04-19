@@ -1,0 +1,143 @@
+.quiz-page{
+	background: #F1F1F1;
+	height: 100%;
+	min-height: 100vh;
+	font-family: "LabGrotesque", sans-serif;
+	display: flex;
+	flex-direction: column;
+	&__container{
+		max-width: 1160px;
+		margin: 0 auto 42px auto;
+		flex: 1 1 auto;
+		width: 100%;
+		padding: 0 15px;
+	}
+	&__title{
+		margin: 0 0 39px 0;
+	}
+	&__block{
+		background: #E1FCCF;
+		border-radius: 12px 12px 0px 0px;
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 178%;
+		color: #000000;
+		padding: 20px 51px;
+		margin: 0 0 16px 0;
+	}
+	&__cards-test{
+		display: grid;
+		grid-gap: 29px;
+		grid-template-columns: 1fr 1fr 1fr;
+		margin-bottom: 29px;
+		@media (max-width: 955px) {
+			grid-template-columns: 1fr 1fr;
+		}
+		@media (max-width: 668px) {
+			grid-template-columns: 1fr;
+		}
+ 
+	}
+	&__specialization{
+		margin: 0 0 26px 0;
+	}
+	&__categories-items{
+		display: grid;
+		grid-gap: 24px;
+		grid-template-columns: 1fr 1fr 1fr;
+		margin-bottom: 24px;
+		@media (max-width: 955px) {
+			grid-template-columns: 1fr 1fr;
+		}
+		@media (max-width: 668px) {
+			grid-template-columns: 1fr;
+		}
+	}
+}
+.interjacent-page-quiz{
+	
+	background: #F1F1F1;
+	height: 100%;
+	min-height: 100vh;
+	font-family: "LabGrotesque", sans-serif;
+	display: flex;
+	flex-direction: column;
+	&__title{
+		margin: 0 0 39px 0;
+	}
+	&__passing-information{
+		margin: 0 0 32px 0;
+	}
+	&__container{
+		max-width: 1160px;
+		margin: 0 auto 42px auto;
+		flex: 1 1 auto;
+		width: 100%;
+		padding: 0 15px;
+	}
+	&__introduction-items{
+		display: flex;
+		flex-wrap: wrap;
+    	margin: 0px -25px -50px;
+		margin: 0 auto 54px auto;
+			
+	}
+}
+
+.passing-tests-page{
+	background: #F1F1F1;
+	height: 100%;
+	min-height: 100vh;
+	font-family: "LabGrotesque", sans-serif;
+	display: flex;
+	flex-direction: column;
+	&__container{
+		max-width: 1160px;
+		margin: 0 auto 42px auto;
+		flex: 1 1 auto;
+		width: 100%;
+		padding: 0 15px;
+	}
+	&__title{
+		margin: 0 0 39px 0;
+	}
+	&__passing-information{
+		margin: 0 0 29px 0;
+	}
+	&__block-green{
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 178%;
+		color: #000000;
+		background: #E1FCCF;
+		border-radius: 12px 12px 0px 0px;
+		padding: 20px 51px;
+	}
+	&__introduction{
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
+
+
+.quiz-report-page{
+	background: #F1F1F1;
+	height: 100%;
+	min-height: 100vh;
+	font-family: "LabGrotesque", sans-serif;
+	display: flex;
+	flex-direction: column;
+	&__container{
+		max-width: 1160px;
+		margin: 0 auto 42px auto;
+		flex: 1 1 auto;
+		width: 100%;
+		padding: 0 15px;
+	}
+	&__title{
+		margin: 0 0 39px 0;
+	}
+	&__report-quiz{
+		margin: 0 0 28px 0;
+	}
+}

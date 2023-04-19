@@ -1,0 +1,166 @@
+.profile-candidate{
+	background: #F1F1F1;
+	height: 100%;
+	min-height: 100vh;
+	font-family: "LabGrotesque", sans-serif;
+	display: flex;
+	flex-direction: column;
+	//max-width: 1200px;
+	&__container{
+		max-width: 1160px;
+		margin: 0 auto 42px auto;
+		flex: 1 1 auto;
+		padding: 0 15px;	
+	}
+	&__title{
+		margin: 0 0 31px 0;
+	}
+	&__row{
+		display: flex;
+		gap: 30px;
+		flex-wrap: wrap;	
+	}
+	// &__column{
+	// 	flex: 1 1 60%;
+	// }
+	&__tests{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		flex: 1 1 60%;
+		gap: 30px;
+	}
+	&__cards{
+		display: flex;		
+		gap: 29px;
+		width: 100%;
+		@media (max-width: 660px) {
+			flex-wrap: wrap;
+		 }
+	}
+	&__head-bottom{
+		margin: 0 0 27px 0;
+		//max-width: 1160px;
+	}
+
+
+}
+
+
+.instructions-candidate{
+	flex: 1 1 auto;
+	background: #FFFFFF;
+	border-radius: 12px;
+	&__container{
+		padding: 40px 18px 32px 36px;
+		display: flex;
+		flex-direction: column;
+		gap: 29px;
+		@media (max-width: 660px) {
+			padding: 20px;
+		}
+	}
+	&__note{
+		display: flex;
+		align-items: center;
+		gap: 22px;
+		&:not(:last-child){
+			margin: 0 0 30px 0;
+		}
+		
+	}
+	&__icon{
+		width: 25px;
+		height: 30px;
+	}
+	&__title{
+		color: #52B709;
+		font-weight: 900;
+		font-size: 14px;
+		line-height: 171%;
+		margin: 0 0 20px 0;
+	}
+	&__text{
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 200%;
+		color: #000000;
+		max-width: 235px;
+		span{
+			color: #406128;
+			font-weight: 700;
+			text-decoration: underline;
+		}
+	}
+}
+
+.info-candidate{
+	width: 100%;
+	background: #fff;
+	border-radius: 12px;
+	padding: 20px 45px;
+	display: flex;
+	align-items: center;
+	gap: 47px;
+	@media (max-width:560px) {
+		padding: 20px;
+	}
+	&__img{
+		flex: 0 0 88px;
+		height: 88px;
+		img{
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+	}
+	&__info{
+		width: 100%;
+	}
+	&__title{
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 200%;
+		color: #000000;
+		margin: 0 0 12px 0;
+	}
+
+	&__decor{
+		background: #52B709;
+		border-radius: 12px;
+		height: 8px;
+		width: 60%;
+	}
+}
+
+.bottom-head{
+	margin: 0 0 40px 0;
+	height: 66px;
+	background: #FFF;
+	&__container{
+		max-width: 1160px;
+		margin: 0 auto;
+		padding: 0 15px;
+		height: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	&__img{
+		flex: 0 0 37px;
+		height: 37px;
+		img{
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+	}
+	&__title{
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 178%;
+		color: #807777;
+	}
+}

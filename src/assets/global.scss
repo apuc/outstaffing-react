@@ -1,0 +1,25 @@
+a:hover {
+  text-decoration: none !important;
+}
+.main-title {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 145%;
+  color: #000000;
+  word-break: break-word;
+  span {
+    color: #52b709;
+  }
+}
+.btn-green {
+  background: #52b709;
+  border-radius: 44px;
+  width: 100%;
+  border: none;
+  font-weight: 400;
+  line-height: 178%;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -10,9 +10,8 @@ import {getRole} from "../../redux/roleSlice";
 import {urlForLocal} from "../../helper";
 
 import avatarMok from "../../pages/PartnerTreaties/Images/avatarMok.png"
-
+import { Navigation } from '../Navigation/Navigation';
 import './profileHeader.scss'
-
 
 
 

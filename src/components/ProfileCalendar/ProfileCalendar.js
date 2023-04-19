@@ -19,6 +19,7 @@ import {getRequestDates, setReportDate, setRequestDate} from "../../redux/report
 
 import 'moment/locale/ru'
 import './profileCalendar.scss'
+import { Navigation } from '../Navigation/Navigation';
 
 
 export const ProfileCalendar = () => {
@@ -65,6 +66,7 @@ export const ProfileCalendar = () => {
     return (
         <div className='profile__calendar'>
             <ProfileHeader/>
+            <Navigation />
             <div className='container'>
                 <ProfileBreadcrumbs links={[{name: 'Главная', link: '/profile'},{name: 'Ваша отчетность', link: '/profile/calendar'}]} />
                 <h2 className='summary__title'>Ваши отчеты</h2>
