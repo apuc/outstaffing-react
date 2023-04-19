@@ -59,6 +59,7 @@
         width: 44px;
         height: 44px;
         margin-left: 21px;
+        cursor: pointer;
       }
     }
   }
@@ -339,6 +340,30 @@
       row-gap: 18px;
       position: relative;
       top: -15px;
+      max-height: 420px;
+      overflow: auto;
+
+      &::-webkit-scrollbar {
+        width: 4px;
+        background: 0 0;
+        box-shadow: 0 0 14px rgba(0, 0, 0, 0.04);
+        border-radius: 20px;
+      }
+
+      &::-webkit-scrollbar {
+        width: 4px;
+        border-radius: 20px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #8db274;
+        border-radius: 20px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #c5c0c6;
+        border-radius: 20px;
+      }
     }
 
     &__person {
@@ -353,8 +378,9 @@
       }
 
       img {
-        width: 88px;
+        max-width: 88px;
         height: 88px;
+        width: 100%;
       }
 
       p {
@@ -364,6 +390,7 @@
         line-height: 32px;
         margin-left: 60px;
         position: relative;
+        width: 100%;
 
         &:after {
           content: "";

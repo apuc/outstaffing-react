@@ -15,6 +15,7 @@ import lockDone from "./Images/lockDone.svg"
 import avatarMok from "./Images/avatarMok.png"
 
 import './partnerTreaties.scss'
+import { Navigation } from '../../components/Navigation/Navigation';
 
 export const PartnerTreaties = () => {
     const [toggleTab, setToggleTab] = useState(1);
@@ -25,6 +26,7 @@ export const PartnerTreaties = () => {
     return(
         <div className="treaties">
             <ProfileHeader/>
+            <Navigation />
             <div className="container">
                 <ProfileBreadcrumbs
                     links={[

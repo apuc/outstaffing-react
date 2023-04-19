@@ -12,6 +12,7 @@ import gitImgItem from "../../images/gitItemImg.png"
 
 import {apiRequest} from "../../api/request";
 import {Navigate} from "react-router-dom";
+import { Navigation } from '../../components/Navigation/Navigation';
 
 import './summary.scss'
 
@@ -30,6 +31,7 @@ export const Summary = () => {
   return (
       <div className='summary'>
         <ProfileHeader/>
+        <Navigation />
         <div className='container'>
           <div className='summary__content'>
               <ProfileBreadcrumbs links={[

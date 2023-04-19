@@ -22,6 +22,7 @@ import arrow from "../../images/right-arrow.png";
 
 import './reportForm.scss'
 import "react-datepicker/dist/react-datepicker.css";
+import { Navigation } from '../Navigation/Navigation'
 
 const ReportForm = () => {
   if(localStorage.getItem('role_status') === '18') {
@@ -99,6 +100,7 @@ const ReportForm = () => {
   return (
       <section className='report-form'>
         <ProfileHeader/>
+        <Navigation />
         <div className='container'>
           <ProfileBreadcrumbs links={[{name: 'Главная', link: '/profile'},
             {name: 'Ваша отчетность', link: '/profile/calendar'},

@@ -13,10 +13,7 @@ import { ProfileCalendar } from "./components/ProfileCalendar/ProfileCalendar";
 import FormPage from "./pages/FormPage/FormPage.js";
 import SingleReportPage from "./pages/SingleReportPage/SingleReportPage";
 import { QuizPage } from "./pages/quiz/QuizPage";
-import { InterjacentPage } from "./pages/quiz/InterjacentPage";
-import { QuizTestPage } from "./pages/quiz/QuizTestPage";
-import { InstructionPage } from "./pages/quiz/InstructionPage";
-import { ResultPage } from "./pages/quiz/ResultPage";
+import {QuizReportPage} from './pages/quiz/QuizReportPage';
 import { Profile } from "./pages/Profile/Profile.js";
 import { Summary } from "./pages/Summary/Summary";
 import { ViewReport } from "./pages/ViewReport/ViewReport";
@@ -32,9 +29,11 @@ import { PartnerEmployees } from "./pages/PartnerEmployees/PartnerEmployees";
 import {AuthForCandidate} from "./pages/AuthForCandidate/AuthForCandidate";
 import {RegistrationForCandidate} from "./pages/RegistrationForCandidate/RegistrationForCandidate";
 
-
+import './assets/global.scss'
 import './fonts/stylesheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { ProfileCandidate } from './pages/ProfileCandidate/ProfileCandidate';
+import { PassingTests } from './pages/quiz/PassingTests';
 
 
 
@@ -61,10 +60,8 @@ const App = () => {
 
             <Route exact path='quiz'>
               <Route index element={<QuizPage/>}/>
-              <Route exact path='interjacent' element={<InterjacentPage/>}/>
-              <Route exact path='test' element={<QuizTestPage/>}/>
-              <Route exact path='instruction' element={<InstructionPage/>}/>
-              <Route exact path='result' element={<ResultPage/>}/>
+              <Route exact path='test' element={<PassingTests />}/>
+              <Route exact path='report' element={<QuizReportPage/>}/>
             </Route>
 
             <Route exact path='profile'>
@@ -82,6 +79,9 @@ const App = () => {
               <Route exact path='categories' element={<PartnerCategories/>}/>
               <Route exact path='treaties' element={<PartnerTreaties/>}/>
               <Route exact path='categories/employees' element={<PartnerEmployees/>}/>
+            </Route>
+            <Route exact path='profile-candidate/:id'>
+              <Route index element={<ProfileCandidate />}/>
             </Route>
 
             <Route path="*" element={<Navigate to="/auth" replace/>}/>

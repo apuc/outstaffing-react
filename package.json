@@ -44,6 +44,7 @@
     "react-select": "^5.7.0",
     "react-slick": "^0.29.0",
     "react-syntax-highlighter": "^15.4.5",
+    "react-timer-hook": "^3.0.5",
     "react-yandex-metrika": "^2.6.0",
     "redux-devtools-extension": "^2.13.9",
     "resolve": "1.18.1",

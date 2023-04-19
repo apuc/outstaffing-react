@@ -16,6 +16,7 @@ import arrow from "../../images/right-arrow.png";
 import arrowSwitchDate from "../../images/arrowViewReport.png";
 
 import './viewReport.scss'
+import { Navigation } from '../../components/Navigation/Navigation';
 
 export const ViewReport = () => {
     if(localStorage.getItem('role_status') === '18') {
@@ -79,6 +80,7 @@ export const ViewReport = () => {
     return (
         <div className='viewReport'>
             <ProfileHeader/>
+            <Navigation />
             <div className='container'>
                 <div className='viewReport__info'>
                     <ProfileBreadcrumbs links={[{name: 'Главная', link: '/profile'},

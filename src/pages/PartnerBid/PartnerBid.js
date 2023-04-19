@@ -1,20 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux'
 import {getPartnerRequestId, getPartnerRequests, setPartnerRequestId} from '../../redux/outstaffingSlice'
 
 import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {Footer} from "../../components/Footer/Footer";
+import { Navigation } from '../../components/Navigation/Navigation';
 import {Loader} from "../../components/Loader/Loader"
 
 import {apiRequest} from "../../api/request";
 import {getCorrectDate} from "../../components/Calendar/calendarHelper";
 
+import {urlForLocal} from '../../helper'
+
 import arrowSwitchDate from "../../images/arrowViewReport.png";
 import backEndImg from "../../images/QualificationInfo.png";
 import middle from "../../images/QualificationInfoMiddle.png";
-import personImg from "../../images/mokPerson.png"
 import deleteBtn from "../../images/deleteBtn.png"
 
 import './partnerBid.scss'
@@ -23,9 +25,11 @@ export const PartnerBid = () => {
     if(localStorage.getItem('role_status') !== '18') {
         return <Navigate to="/profile" replace/>
     }
+
     const dispatch = useDispatch();
     const requestId = useSelector(getPartnerRequestId);
     const partnerRequests = useSelector(getPartnerRequests);
+    const navigate= useNavigate();
 
     if (!requestId) {
         return <Navigate to="/profile/requests" replace/>
@@ -39,29 +43,37 @@ export const PartnerBid = () => {
         })
     }, [requestId]);
 
+    const deleteRequest = () => {
+        apiRequest('/request/update-request', {
+            method: 'PUT',
+            data: {
+                user_id: localStorage.getItem('id'),
+                request_id: requestId,
+                status: 0,
+                // title: 'bro',
+                // position_id: 1,
+                // knowledge_level_id: 2,
+                // specialist_count: 2,
+                // descr: 'broooooo',
+                // skill_ids: [1, 2, 3]
+            }
+        }).then((res) => {
+            navigate('/profile/requests');
+        })
+    };
+
     const [requestInfo, setRequestInfo] = useState({})
     const [loader, setLoader] = useState(false)
-
-    const [mokPersons] = useState([
-        {
-            name: 'Дмитрий, PHP Back end - разработчик, Middle',
-            link: '/candidate/110',
-            img: personImg
-        },
-        {
-            name: 'Дмитрий, PHP Back end - разработчик, Middle',
-            link: '/candidate/111',
-            img: personImg
-        },
-        {
-            name: 'Дмитрий, PHP Back end - разработчик, Middle',
-            link: '/candidate/112',
-            img: personImg
-        }
-    ])
+    const [levels] = useState({
+        1: "Junior",
+        2: "Middle",
+        3: "Middle+",
+        4: "Senior",
+    })
     return (
         <div className='partnerBid'>
             <ProfileHeader />
+            <Navigation />
             <div className='container'>
                 <ProfileBreadcrumbs links={[
                     {name: 'Главная', link: '/profile'},
@@ -77,7 +89,7 @@ export const PartnerBid = () => {
                             <h3>{requestInfo.title}</h3>
                             <div className='partnerBid__qualification__buttons'>
                                 <button>Редактировать</button>
-                                <img src={deleteBtn} alt='delete'/>
+                                <img src={deleteBtn} alt='delete' onClick={() => deleteRequest()}/>
                             </div>
                         </div>
                         <div className='partnerBid__switcher'>
@@ -100,6 +112,7 @@ export const PartnerBid = () => {
                     </>
                 }
                 {Boolean(Object.keys(requestInfo).length) && !loader &&
+                    <>
                     <div className='table__wrapper'>
                         <table>
                             <thead>
@@ -148,27 +161,25 @@ export const PartnerBid = () => {
                             </tbody>
                         </table>
                     </div>
-                }
-                <div className='partnerBid__suitable'>
-                    <div className='partnerBid__suitable__title'>
-                        <p>Подходящие сотрудники по запросу</p>
-                    </div>
-                    <div className='partnerBid__suitable__persons'>
-                        {mokPersons.map((person, index) => {
-                            return <div key={index} className='partnerBid__suitable__person'>
-                                        <img src={person.img} alt='avatar' />
-                                        <p>{person.name}</p>
-                                        <Link className='partnerBid__suitable__person__more' to={person.link}>
-                                            Подробнее
-                                        </Link>
-                                        <div className='partnerBid__suitable__person__info'>
-
+                    <div className='partnerBid__suitable'>
+                        <div className='partnerBid__suitable__title'>
+                            <p>Подходящие сотрудники по запросу</p>
+                        </div>
+                        <div className='partnerBid__suitable__persons'>
+                            {requestInfo.result_profiles.length && requestInfo.result_profiles.map((person, index) => {
+                                return <div key={index} className='partnerBid__suitable__person'>
+                                            <img src={urlForLocal(person.photo)} alt='avatar' />
+                                            <p>{person.fio} - {person.position_title}, {levels[person.level]}</p>
+                                            <Link className='partnerBid__suitable__person__more' to={`/candidate/${person.id}`}>
+                                                Подробнее
+                                            </Link>
                                         </div>
-                                    </div>
-                        })
-                        }
+                            })
+                            }
+                        </div>
                     </div>
-                </div>
+                    </>
+                }
             </div>
             <Footer/>
         </div>
