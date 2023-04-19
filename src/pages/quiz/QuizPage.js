@@ -95,7 +95,7 @@ export const QuizPage = () => {
    const [selectedCategory, setsetSelectedCategory] = useState(false)
 
    useEffect(() => {
-      apiRequest(`/user-questionnaire/questionnaires-list?user_id=${107}`)
+      apiRequest(`/user-questionnaire/questionnaires-list?user_id=${userId}`)
          .then(res => dispatch(setQuestionnaires(res)))
    }, [])
 
