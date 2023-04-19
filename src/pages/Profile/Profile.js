@@ -5,6 +5,8 @@ import {Link} from "react-router-dom";
 import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {Footer} from "../../components/Footer/Footer";
+import { CardControl } from '../../components/CardControl/CardControl';
+import { Navigation } from '../../components/Navigation/Navigation';
 
 import {getProfileInfo} from "../../redux/outstaffingSlice";
 
@@ -17,11 +19,7 @@ import paymentIcon from "../../images/paymentIcon.png"
 import settingIcon from "../../images/settingIcon.png"
 import avatarMok from "../PartnerTreaties/Images/avatarMok.png"
 
-import rightArrow from "../../images/arrowRight.png"
-
 import './profile.scss'
-import { CardControl } from '../../components/CardControl/CardControl';
-import { Navigation } from '../../components/Navigation/Navigation';
 
 export const Profile = () => {
 
@@ -48,7 +46,7 @@ export const Profile = () => {
         description: 'Сколько времени занимает<br/> выполнение задач'
       },
       {
-        path: '/payouts',
+        path: 'profile/payouts',
         img: paymentIcon,
         title: 'Выплаты',
         description: 'У вас <span>подтвержден</span><br/> статус самозанятого'
@@ -122,13 +120,13 @@ export const Profile = () => {
           <div className='profile__items'>
             {
               profileItemsInfo[user].map((item, index) => {
-                return <CardControl 
-                description={item.description} 
+                return <CardControl
+                description={item.description}
                 img={item.img}
                 path={item.path}
                 title={item.title}
                 key={index}
-                />              
+                />
               })
             }
           </div>

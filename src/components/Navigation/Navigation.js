@@ -3,12 +3,14 @@ import { NavLink } from 'react-router-dom'
 import { urlForLocal } from '../../helper'
 import { apiRequest } from '../../api/request';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfileInfo } from '../../redux/outstaffingSlice';
+import { getProfileInfo, setProfileInfo } from '../../redux/outstaffingSlice';
+
+import avatarMok from "../../pages/PartnerTreaties/Images/avatarMok.png"
 
 export const Navigation = () => {
 	const dispatch = useDispatch();
- 
- 
+
+
 	const profileInfo = useSelector(getProfileInfo);
 	const [user] = useState(localStorage.getItem('role_status') === '18' ? 'partner' : 'developer')
 	const [navInfo] = useState({
@@ -61,7 +63,7 @@ export const Navigation = () => {
 		 },
 	  ]
 	})
-  
+
 	useEffect(() => {
 	  if (localStorage.getItem('role_status') === '18') {
 		 return
@@ -70,9 +72,9 @@ export const Navigation = () => {
 			.then((profileInfo) =>
 				 dispatch(setProfileInfo(profileInfo))
 			);
- 
+
 	}, [dispatch]);
- 
+
 	return (
 		<div className='profileHeader__info'>
 			<div className='profileHeader__container'>
@@ -92,7 +94,7 @@ export const Navigation = () => {
 						}
 					</h3>
 					<NavLink end to={'/profile'}>
-						<img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : ""} className='profileHeader__personalInfoAvatar' alt='avatar' />
+						<img src={profileInfo.photo ? urlForLocal(profileInfo.photo) : avatarMok} className='profileHeader__personalInfoAvatar' alt='avatar' />
 					</NavLink>
 				</div>
 			</div>
