@@ -13,11 +13,13 @@ import del from "../../../images/delete.svg";
 import edit from "../../../images/edit.svg";
 import send from "../../../images/send.svg";
 import plus from "../../../images/plus.svg";
+import fullScreen from "../../../images/inFullScreen.svg";
 
 import ModalAdd from "../ModalAdd/ModalAdd";
-import "./ModalTiket.scss";
+import "./ModalTicket.scss";
+import { Link } from "react-router-dom";
 
-export const ModalTiket = ({ active, setActive }) => {
+export const ModalTiсket = ({ active, setActive, index }) => {
   const [tiket] = useState({
     name: "Разработка трекера",
     code: "PR - 2245",
@@ -50,6 +52,9 @@ export const ModalTiket = ({ active, setActive }) => {
           <h3 className="title-project">
             <img src={category} className="title-project__category"></img>
             Проект: {tiket.name}
+            <Link to={`/tracker/${index}`} className="title-project__full">
+              <img src={fullScreen}></img>
+            </Link>
           </h3>
 
           <div className="content__task">
@@ -154,4 +159,4 @@ export const ModalTiket = ({ active, setActive }) => {
   );
 };
 
-export default ModalTiket;
+export default ModalTiсket;
