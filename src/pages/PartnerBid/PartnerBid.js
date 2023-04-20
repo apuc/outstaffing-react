@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, Navigate, useNavigate} from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux'
-import {getPartnerRequestId, getPartnerRequests, setPartnerRequestId} from '../../redux/outstaffingSlice'
+import {getPartnerRequestId, getPartnerRequests, setPartnerRequestId, setPartnerRequestInfo} from '../../redux/outstaffingSlice'
 
 import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
@@ -39,6 +39,7 @@ export const PartnerBid = () => {
         setLoader(true)
         apiRequest(`/request/get-request?request_id=${requestId}`).then((el) => {
             setRequestInfo(el)
+            dispatch(setPartnerRequestInfo(el))
             setLoader(false)
         })
     }, [requestId]);
@@ -50,12 +51,6 @@ export const PartnerBid = () => {
                 user_id: localStorage.getItem('id'),
                 request_id: requestId,
                 status: 0,
-                // title: 'bro',
-                // position_id: 1,
-                // knowledge_level_id: 2,
-                // specialist_count: 2,
-                // descr: 'broooooo',
-                // skill_ids: [1, 2, 3]
             }
         }).then((res) => {
             navigate('/profile/requests');
@@ -88,7 +83,7 @@ export const PartnerBid = () => {
                         <div className='partnerBid__qualification'>
                             <h3>{requestInfo.title}</h3>
                             <div className='partnerBid__qualification__buttons'>
-                                <button>Редактировать</button>
+                                <Link to='/profile/edit-request'>Редактировать</Link>
                                 <img src={deleteBtn} alt='delete' onClick={() => deleteRequest()}/>
                             </div>
                         </div>

@@ -4,8 +4,11 @@ import {ProfileHeader} from "../../components/ProfileHeader/ProfileHeader";
 import {ProfileBreadcrumbs} from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs"
 import {Footer} from "../../components/Footer/Footer";
 import {Link, Navigate, useNavigate} from "react-router-dom";
-
+import { Navigation } from '../../components/Navigation/Navigation';
 import {apiRequest} from "../../api/request";
+import {useSelector} from "react-redux";
+
+import { getPartnerRequestInfo } from '../../redux/outstaffingSlice'
 
 import arrowDown from "../../images/selectArrow.png"
 import processImg from "../../images/partnerAddRequestFirstImg.png"
@@ -15,15 +18,15 @@ import deleteIcon from "../../images/close.png"
 
 
 import './partnerAddRequest.scss'
-import { Navigation } from '../../components/Navigation/Navigation';
 
 export const PartnerAddRequest = () => {
     if(localStorage.getItem('role_status') !== '18') {
         return <Navigate to="/profile" replace/>
     }
 
+    const partnerRequestInfo = useSelector(getPartnerRequestInfo);
+    const currentUrl = useState(window.location.pathname)
     const navigate= useNavigate();
-
     const [skills, setSkills] = useState([])
     const [filteredSkills, setFilteredSkills] = useState([])
     const [specializationList, setSpecializationList] = useState([])
@@ -33,11 +36,16 @@ export const PartnerAddRequest = () => {
     const [openSpecializationList, setOpenSpecializationListOpen] = useState(false)
     const [openLevelList, setOpenLevelList] = useState(false)
     const [openCountList, setOpenCountList] = useState(false)
+    const [editRequest, setEditRequest] = useState(false)
     const [selectedSkills, setSelectedSkills] = useState([])
     const [selectedSpecialization, setSelectedSpecialization] = useState('Выберите специализацию')
     const [selectedLevel, setSelectedLevel] = useState('Выберите уровень')
     const [selectedCount, setSelectedCount] = useState('Выберите кол-во сотрудников')
     const [inputs, setInputs] = useState({title: '', description: ''})
+
+    if (currentUrl[0] === "/profile/edit-request" && !Object.keys(partnerRequestInfo).length) {
+        return <Navigate to="/profile/requests" replace/>
+    }
 
     useEffect(() => {
         apiRequest(`/profile/positions-list`).then((el) => setSpecializationList(el))
@@ -46,6 +54,17 @@ export const PartnerAddRequest = () => {
             setSkills(el)
             setFilteredSkills(el)
         })
+    }, [])
+
+    useEffect(() => {
+        if (currentUrl[0] === "/profile/edit-request" && Object.keys(partnerRequestInfo).length) {
+            setInputs({title: partnerRequestInfo.title, description: partnerRequestInfo.descr})
+            setSelectedSpecialization(partnerRequestInfo.position)
+            setSelectedLevel({name: partnerRequestInfo.level, id: partnerRequestInfo.knowledge_level_id})
+            setSelectedCount(partnerRequestInfo.specialist_count)
+            setSelectedSkills(partnerRequestInfo.skills)
+            setEditRequest(true)
+        }
     }, [])
 
     const disableBtn = () => {
@@ -61,21 +80,40 @@ export const PartnerAddRequest = () => {
     }
 
     const handler = () => {
-        apiRequest('/request/create-request', {
-            method: 'POST',
-            data: {
-                user_id: localStorage.getItem('id'),
-                title: inputs.title,
-                position_id: selectedSpecialization.id,
-                knowledge_level_id: selectedLevel.id,
-                specialist_count: selectedCount,
-                status: 1,
-                descr: inputs.description,
-                skill_ids: selectedSkills.map((skill) => {return skill.id})
-            }
-        }).then((res) => {
-            navigate('/profile/requests');
-        })
+        if (currentUrl[0] === "/profile/edit-request") {
+            apiRequest('/request/update-request', {
+                method: 'PUT',
+                data: {
+                    user_id: localStorage.getItem('id'),
+                    request_id: partnerRequestInfo.id,
+                    title: inputs.title,
+                    position_id: selectedSpecialization.id,
+                    knowledge_level_id: selectedLevel.id,
+                    specialist_count: selectedCount,
+                    status: 1,
+                    descr: inputs.description,
+                    skill_ids: selectedSkills.map((skill) => {return skill.id})
+                }
+            }).then((res) => {
+                navigate('/profile/requests');
+            })
+        } else {
+            apiRequest('/request/create-request', {
+                method: 'POST',
+                data: {
+                    user_id: localStorage.getItem('id'),
+                    title: inputs.title,
+                    position_id: selectedSpecialization.id,
+                    knowledge_level_id: selectedLevel.id,
+                    specialist_count: selectedCount,
+                    status: 1,
+                    descr: inputs.description,
+                    skill_ids: selectedSkills.map((skill) => {return skill.id})
+                }
+            }).then((res) => {
+                navigate('/profile/requests');
+            })
+        }
     }
 
 
@@ -87,10 +125,10 @@ export const PartnerAddRequest = () => {
                 <ProfileBreadcrumbs links={[
                     {name: 'Главная', link: '/profile'},
                     {name: 'Запросы и открытые позиции', link: '/profile/requests'},
-                    {name: 'Создание новой заявки', link: '/profile/add-request'}
+                    {name: `${editRequest ? 'Редактирование заявки' : 'Создание новой заявки'}`, link: '/profile/add-request'}
                 ]}
                 />
-                <h2 className='partnerAddRequest__title'>Страница добавления заявки</h2>
+                <h2 className='partnerAddRequest__title'>{editRequest ? 'Страница редактирования заявки' : 'Страница добавления заявки'}</h2>
                 <div className='partnerAddRequest__section'>
                     <div className='partnerAddRequest__form'>
                         <div className='partnerAddRequest__form__block form__block'>
@@ -98,7 +136,7 @@ export const PartnerAddRequest = () => {
                             <div className='form__block__section'>
                                 <h3>Название вакансии</h3>
                                 <div className='form__block__section__input'>
-                                    <input onChange={e => setInputs((prevValue) => ({...prevValue, title: e.target.value}) )} type='text' placeholder='Вакансия'/>
+                                    <input value={inputs.title} onChange={e => setInputs((prevValue) => ({...prevValue, title: e.target.value}) )} type='text' placeholder='Вакансия'/>
                                 </div>
                             </div>
                             <div className='form__block__section'>
@@ -196,7 +234,7 @@ export const PartnerAddRequest = () => {
                             </div>
                             <div className='form__block__section'>
                                 <h3>Введите необходимое описание</h3>
-                                <textarea onChange={e => setInputs((prevValue) => ({...prevValue, description: e.target.value}) )}/>
+                                <textarea value={inputs.description} onChange={e => setInputs((prevValue) => ({...prevValue, description: e.target.value}) )}/>
                             </div>
                             <div className='form__block__section'>
                                 <h3>Необходимое количество человек на позицию</h3>
