@@ -75,6 +75,7 @@ const App = () => {
               <Route exact path='settings' element={<PartnerSettings/>}/>
               <Route exact path='requests' element={<PartnerRequests/>}/>
               <Route exact path='add-request' element={<PartnerAddRequest/>}/>
+              <Route exact path='edit-request' element={<PartnerAddRequest/>}/>
               <Route exact path='bid' element={<PartnerBid/>}/>
               <Route exact path='categories' element={<PartnerCategories/>}/>
               <Route exact path='treaties' element={<PartnerTreaties/>}/>
