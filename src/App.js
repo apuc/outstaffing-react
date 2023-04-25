@@ -19,6 +19,7 @@ import { Summary } from "./pages/Summary/Summary";
 import { ViewReport } from "./pages/ViewReport/ViewReport";
 import { Tracker } from "./pages/Tracker/Tracker";
 import { Payouts } from "./pages/Payouts/Payouts";
+import { TicketFullScreen } from "./components/UI/TicketFullScreen/TicketFullScreen";
 import { PartnerSettings } from "./pages/PartnerSettings/PartnerSettings";
 import { PartnerRequests } from "./pages/PartnerRequests/PartnerRequests";
 import { PartnerAddRequest } from "./pages/PartnerAddRequest/PartnerAddRequest";
@@ -48,6 +49,11 @@ const App = () => {
             <Route exact path='/authdev' element={<AuthForDevelopers/>}/>
             <Route exact path='/auth' element={<AuthForPartners/>}/>
             <Route exact path="/worker/:id" element={<FreeDevelopers />} />
+            <Route
+                exact
+                path="/tracker/:id"
+                element={<TicketFullScreen />}
+            ></Route>
             <Route exact path='/auth-candidate' element={<AuthForCandidate/>}/>
             <Route exact path='/registration-candidate' element={<RegistrationForCandidate/>}/>
 
