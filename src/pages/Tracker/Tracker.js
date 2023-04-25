@@ -7,7 +7,7 @@ import { Footer } from "../../components/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { getProjects } from "../../redux/projectsTrackerSlice";
 
-import ModalTiket from "../../components/UI/ModalTiket/ModalTiket";
+import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
 import ModalCreate from "../../components/UI/ModalCreate/ModalCreate";
 import ModalAdd from "../../components/UI/ModalAdd/ModalAdd";
 import ProjectTiket from "../../components/ProjectTiket/ProjectTiket";
@@ -360,6 +360,7 @@ export const Tracker = () => {
 
   // Modal State
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
+  const [indexTicket, setIndexTicket] = useState(0);
   const [modalAddWorker, setModalAddWorker] = useState(false);
   const [modalCreateProject, setModalCreateProject] = useState(false);
   const [modalCreateColl, setModalCreateColl] = useState(false);
@@ -490,6 +491,11 @@ export const Tracker = () => {
     let tab = { name: name, indexTab: wrapperIndex, task: tasks };
     setSelectedTab(tab);
     setModalCreateTiket(true);
+  }
+
+  function openTicket(e, iTicket) {
+    setIndexTicket(iTicket);
+    setModalActiveTicket(true);
   }
 
   function createTiket() {
@@ -712,9 +718,10 @@ export const Tracker = () => {
               </div>
             </div>
 
-            <ModalTiket
+            <ModalTicket
               active={modalActiveTicket}
               setActive={setModalActiveTicket}
+              index={indexTicket}
             />
 
             <ModalAdd active={modalCreateTiket} setActive={setModalCreateTiket}>
@@ -783,7 +790,7 @@ export const Tracker = () => {
                             dragStartHandler(e, task, wrapperIndex)
                           }
                           onDragEnd={(e) => dragEndHandler(e)}
-                          onClick={() => setModalActiveTicket(true)}
+                          onClick={(e) => openTicket(e, index)}
                         >
                           <div className="tasks__board__item__title">
                             <p>{task.task}</p>
