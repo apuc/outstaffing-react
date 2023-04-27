@@ -1,8 +1,8 @@
 .partnerBid {
-  background: #F1F1F1;
+  background: #f1f1f1;
   height: 100%;
   min-height: 100vh;
-  font-family: 'LabGrotesque', sans-serif;
+  font-family: "LabGrotesque", sans-serif;
 
   .container {
     max-width: 1160px;
@@ -21,7 +21,7 @@
   }
 
   &__qualification {
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 12px;
     padding: 20px 37px;
     margin-top: 20px;
@@ -45,7 +45,7 @@
         max-width: 168px;
         width: 100%;
         height: 48px;
-        background: #E1FCCF;
+        background: #e1fccf;
         border-radius: 44px;
         font-weight: 500;
         font-size: 15px;
@@ -81,7 +81,7 @@
     .switchDate {
       width: 48px;
       height: 48px;
-      background: #8DC63F;
+      background: #8dc63f;
       border-radius: 50px;
       display: flex;
       justify-content: center;
@@ -131,12 +131,10 @@
       }
 
       thead {
-
         @media (max-width: 1205px) {
           display: grid;
         }
         tr {
-
           @media (max-width: 1205px) {
             display: grid;
             grid-template-columns: 74% calc(26% - 28px);
@@ -161,7 +159,6 @@
 
             &:first-child {
               padding: 32px 37px;
-
 
               @media (max-width: 640px) {
                 padding: 15px;
@@ -198,7 +195,6 @@
           display: grid;
         }
         tr {
-
           @media (max-width: 1205px) {
             display: grid;
             grid-template-columns: 74% calc(26% - 28px);
@@ -264,7 +260,7 @@
               .img__wrapper {
                 min-width: 48px;
                 height: 48px;
-                background: #8DC63F;
+                background: #8dc63f;
                 border-radius: 50px;
                 display: flex;
                 justify-content: center;
@@ -319,7 +315,7 @@
 
   &__suitable {
     &__title {
-      background: #E1FCCF;
+      background: #e1fccf;
       border-radius: 12px 12px 0px 0px;
       margin-top: 48px;
       padding: 18px 37px;
@@ -374,7 +370,7 @@
       display: flex;
       padding: 21px 45px 19px;
       align-items: center;
-      background: #FFFFFF;
+      background: #ffffff;
       border-radius: 12px;
 
       &:hover {
@@ -399,7 +395,7 @@
         &:after {
           content: "";
           position: absolute;
-          background: #52B709;
+          background: #52b709;
           border-radius: 12px;
           width: 70%;
           height: 8px;
@@ -410,9 +406,9 @@
 
       &__more {
         padding: 9px 45px;
-        background: #52B709;
+        background: #52b709;
         border-radius: 44px;
-        color: #FFFFFF;
+        color: #ffffff;
         font-weight: 500;
         font-size: 16px;
         line-height: 32px;
@@ -427,9 +423,10 @@
       &__info {
         width: 24px;
         height: 24px;
-        box-shadow: 0px 3px 2px -2px rgba(0, 0, 0, 0.06), 0px 5px 3px -2px rgba(0, 0, 0, 0.02);
+        box-shadow: 0px 3px 2px -2px rgba(0, 0, 0, 0.06),
+          0px 5px 3px -2px rgba(0, 0, 0, 0.02);
         border-radius: 6px;
-        border: 1px solid #DDDDDD;
+        border: 1px solid #dddddd;
         cursor: pointer;
         position: relative;
         display: flex;
@@ -439,7 +436,7 @@
 
         &:before {
           content: "...";
-          color: #6F6F6F;
+          color: #6f6f6f;
           font-size: 25px;
           position: relative;
           top: -6px;
@@ -499,6 +496,44 @@
           padding: 2px 10px;
         }
       }
+    }
+  }
+
+  .modal-decs {
+    text-align: center;
+    width: 78%;
+  }
+
+  .modal-title-delete {
+    align-items: center;
+    h4 {
+      margin: 0 auto;
+      font-size: 24px;
+    }
+  }
+
+  .buttons-modal {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+    &__no,
+    &__yes {
+      width: 89px;
+      height: 50px;
+      border-radius: 44px;
+      font-size: 14px;
+      line-height: 32px;
+      color: white;
+      border: none;
+    }
+
+    &__no {
+      background: #a29eb6;
+    }
+
+    &__yes {
+      background: #52b709;
     }
   }
 
