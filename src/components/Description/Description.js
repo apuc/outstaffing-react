@@ -16,8 +16,7 @@ import cursorImg from "../../images/cursorImg.png";
 import "./description.scss";
 
 const Description = ({ onLoadMore, isLoadingMore }) => {
-  // const candidatesListArr = useSelector(selectProfiles);
-  const candidatesListArr = [];
+  const candidatesListArr = useSelector(selectProfiles);
 
   return (
     <section className="description">
