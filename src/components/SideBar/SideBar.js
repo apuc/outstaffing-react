@@ -60,6 +60,12 @@ export const SideBar = () => {
           <li>
             <a href="#">Контакты</a>
           </li>
+          <li>
+            <a href="#">Блог</a>
+          </li>
+          <li>
+            <a href="#">FAQ</a>
+          </li>
         </ul>
         <p className="auth-body__politic">Политика конфиденциальности</p>
         <div className="auth-body__contacts">
