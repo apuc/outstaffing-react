@@ -35,10 +35,13 @@ import { AuthForCandidate } from "./pages/AuthForCandidate/AuthForCandidate";
 import { RegistrationForCandidate } from "./pages/RegistrationForCandidate/RegistrationForCandidate";
 import { ProfileCandidate } from "./pages/ProfileCandidate/ProfileCandidate";
 import { PassingTests } from "./pages/quiz/PassingTests";
-
 import "./assets/global.scss";
 import "./fonts/stylesheet.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { FREQUENTLY_ASKED_QUESTIONS_ROUTE, FREQUENTLY_ASKED_QUESTION_ROUTE } from "./constants/router-path";
+import { FrequentlyAskedQuestions } from "./pages/FrequentlyAskedQuestions/FrequentlyAskedQuestions";
+import { FrequentlyAskedQuestion } from "./pages/FrequentlyAskedQuestion/FrequentlyAskedQuestion";
+
 
 const App = () => {
   return (
@@ -46,7 +49,10 @@ const App = () => {
       <Router>
         <Routes>
           <Route exact path="/authdev" element={<AuthForDevelopers />} />
-          <Route exact path="/auth" element={<AuthForPartners />} />
+          <Route exact path="/auth" element={<AuthForPartners />} />          
+          <Route exact path={FREQUENTLY_ASKED_QUESTIONS_ROUTE} element={<FrequentlyAskedQuestions />}/>
+          <Route exact path={FREQUENTLY_ASKED_QUESTION_ROUTE+'/:id'} element={<FrequentlyAskedQuestion />} />     
+        
           <Route exact path="/worker/:id" element={<FreeDevelopers />} />
           <Route
             exact
@@ -98,7 +104,7 @@ const App = () => {
             <Route index element={<ProfileCandidate />} />
           </Route>
 
-          <Route path="*" element={<Navigate to="/auth" replace />} />
+          {/* <Route path="*" element={<Navigate to="/auth" replace />} /> */}
         </Routes>
       </Router>
     </>

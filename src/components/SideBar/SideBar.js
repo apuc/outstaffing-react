@@ -4,6 +4,8 @@ import arrow from "../../images/sideBarArrow.svg";
 import LogoITguild from "../../images/LogoITguild.svg";
 
 import "./sidebar.scss";
+import { Link } from "react-router-dom";
+import { FREQUENTLY_ASKED_QUESTIONS_ROUTE } from "../../constants/router-path";
 
 export const SideBar = () => {
   const [active, setActive] = useState(false);
@@ -64,7 +66,7 @@ export const SideBar = () => {
             <a href="#">Блог</a>
           </li>
           <li>
-            <a href="#">FAQ</a>
+            <Link to={FREQUENTLY_ASKED_QUESTIONS_ROUTE}>FAQ</Link>
           </li>
         </ul>
         <p className="auth-body__politic">Политика конфиденциальности</p>

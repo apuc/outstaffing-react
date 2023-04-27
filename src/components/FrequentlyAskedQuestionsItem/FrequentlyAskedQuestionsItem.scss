@@ -1,0 +1,43 @@
+@import "./../../assets/functions.scss";
+
+.frequently-asked-questions-item {
+  &__head {
+    display: flex;
+    gap: 19px;
+    margin: 0 0 -5px 29px;
+  }
+
+  &__icon-question {
+
+  }
+  &__title {
+    font-weight: 700;
+    @include adaptiv-value("font-size", 28, 22, 1);
+    line-height: 79%;
+    color: #1458dd;
+  }
+  &__body {
+    position: relative;
+    z-index: 2;
+    display: block;
+    &:not(:last-child) {
+      margin: 0 0 13px 0;
+    }
+    p {      
+      word-break: break-word;
+      background: #ffffff;
+      border-radius: 12px;
+      @include adaptiv-value("padding-top", 23, 15, 1);
+      @include adaptiv-value("padding-bottom", 23, 15, 1);
+      @include adaptiv-value("padding-left", 41, 22, 1);
+      @include adaptiv-value("padding-right", 41, 22, 1);
+      font-weight: 500;
+      @include adaptiv-value("font-size", 18, 16, 1);
+      line-height: 122%;
+      color: #000000;
+      min-height: 91px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

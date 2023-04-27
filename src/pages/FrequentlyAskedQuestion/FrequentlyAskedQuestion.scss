@@ -1,0 +1,60 @@
+@import './../../assets/functions.scss';
+
+.frequently-asked-question {
+	background: #f5f5f5;
+	height: 100%;
+	min-height: 100vh;
+	font-family: "LabGrotesque", sans-serif;
+	display: flex;
+	flex-direction: column;
+	@media (max-width: 1375px) {
+	 margin-top: 80px;
+  }
+	&__container {
+	  flex: 1 1 auto;
+	  margin-top: 30px;
+	}
+	&__title {
+	  font-weight: 500;
+	  @include adaptiv-value("font-size", 38, 24, 1);
+	  line-height: 84%;
+	  margin: 42px 0 30px 0;
+	  color: #000000;
+	}
+	&__back {
+	  margin: 0 0 30px 0;
+	  display: flex;
+	  align-items: center;
+	  cursor: pointer;
+	  gap: 19px;
+	  p {
+		 font-size: 12px;
+		 line-height: 167%;
+		 color: #6f6f6f;
+	  }
+	}
+	&__arrow {
+	  background: rgba(141, 198, 63, 0.5098039216);	 
+	  width: 48px;
+	  height: 48px;
+	  border-radius: 44px;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  transform: rotate(180deg);
+	}
+	&__answer {
+	  font-weight: 400;
+	  font-size: 20px;
+	  line-height: 120%;
+	  background: #ffffff;
+	  border-radius: 12px;
+	  word-break: break-word;
+	  color: #000000;
+	  @include adaptiv-value("padding-top", 33, 15, 1);
+	  @include adaptiv-value("padding-bottom", 33, 15, 1);
+	  @include adaptiv-value("padding-left", 41, 22, 1);
+	  @include adaptiv-value("padding-right", 41, 22, 1);
+	}
+ }
+ 
