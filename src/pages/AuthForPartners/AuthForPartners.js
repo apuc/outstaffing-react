@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import arrow from "../../images/arrow__login_page.png";
-import medium from "../../images/medium_male_big.png";
+import authImg from "../../images/auth_img.png";
 import cross from "../../images/cross.png";
 import text from "../../images/Body_Text.png";
 import arrowBtn from "../../images/arrowRight.png";
@@ -71,13 +71,14 @@ const AuthForPartners = () => {
             <div className="col-xl-2">
               <img className="auth-partners__arrow" src={arrow} alt="" />
             </div>
+
             <div className="col-12 col-xl-4">
               <div className="auth-partners__info">
                 <div className="auth-partners__info-box">
-                  <img src={medium} alt="" />
+                  <img src={authImg} alt="" />
                   <h3>
-                    Frontend разработчик,
-                    <br /> Middle
+                    Управление
+                    <br /> командой
                   </h3>
                 </div>
 
@@ -95,11 +96,14 @@ const AuthForPartners = () => {
                   </div>
 
                   <ul className="auth-partners__info-list">
-                    <li className="auth-partners__info-item">Ruby on Rails</li>
-                    <li className="auth-partners__info-item">PHP</li>
-                    <li className="auth-partners__info-item">Python</li>
-                    <li className="auth-partners__info-item">Vue.js</li>
-                    <li className="auth-partners__info-item">React. JS</li>
+                    <li className="auth-partners__info-item">
+                      Рабочее
+                      <br />
+                      пространство
+                    </li>
+                    <li className="auth-info__list-item">
+                      Управление задачами
+                    </li>
                   </ul>
                 </div>
 

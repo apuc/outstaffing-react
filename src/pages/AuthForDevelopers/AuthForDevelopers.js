@@ -4,7 +4,7 @@ import { AuthBox } from "../../components/AuthBox/AuthBox";
 
 import { useSelector } from "react-redux";
 import arrow from "../../images/arrow__login_page.png";
-import authImg from "../../images/auth_img.png";
+import medium from "../../images/medium_male_big.png";
 import cross from "../../images/cross.png";
 import text from "../../images/Body_Text.png";
 import arrowBtn from "../../images/arrowRight.png";
@@ -78,10 +78,10 @@ const AuthForDevelopers = () => {
             <div className="col-12 col-xl-4">
               <div className="auth-developers__info">
                 <div className="auth-developers__info-box">
-                  <img src={authImg} alt="" />
+                  <img src={medium} alt="" />
                   <h3>
-                    Управление
-                    <br /> командой
+                    Frontend разработчик,
+                    <br /> Middle
                   </h3>
                 </div>
 
@@ -100,13 +100,12 @@ const AuthForDevelopers = () => {
 
                   <ul className="auth-developers__info-list">
                     <li className="auth-developers__info-item">
-                      Рабочее
-                      <br />
-                      пространство
+                      Ruby on Rails
                     </li>
-                    <li className="auth-info__list-item">
-                      Управление задачами
-                    </li>
+                    <li className="auth-developers__info-item">PHP</li>
+                    <li className="auth-developers__info-item">Python</li>
+                    <li className="auth-developers__info-item">Vue.js</li>
+                    <li className="auth-developers__info-item">React. JS</li>
                   </ul>
                 </div>
 
