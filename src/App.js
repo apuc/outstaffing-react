@@ -39,6 +39,7 @@ import { PassingTests } from "./pages/quiz/PassingTests";
 import "./assets/global.scss";
 import "./fonts/stylesheet.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Blog from "./pages/Blog/Blog";
 
 const App = () => {
   return (
@@ -50,7 +51,7 @@ const App = () => {
           <Route exact path="/worker/:id" element={<FreeDevelopers />} />
           <Route
             exact
-            path="/tracker/:id"
+            path="/tracker/task/:id"
             element={<TicketFullScreen />}
           ></Route>
           <Route exact path="/auth-candidate" element={<AuthForCandidate />} />
@@ -59,6 +60,8 @@ const App = () => {
             path="/registration-candidate"
             element={<RegistrationForCandidate />}
           />
+
+          <Route exact path="/blog" element={<Blog />}></Route>
 
           <Route exact path="/candidate/:id" element={<Candidate />} />
           <Route exact path="/candidate/:id/form" element={<FormPage />} />

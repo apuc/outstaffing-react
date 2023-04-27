@@ -52,7 +52,7 @@ export const ModalTiсket = ({ active, setActive, index }) => {
           <h3 className="title-project">
             <img src={category} className="title-project__category"></img>
             Проект: {tiket.name}
-            <Link to={`/tracker/${index}`} className="title-project__full">
+            <Link to={`/tracker/task/${index}`} className="title-project__full">
               <img src={fullScreen}></img>
             </Link>
           </h3>
