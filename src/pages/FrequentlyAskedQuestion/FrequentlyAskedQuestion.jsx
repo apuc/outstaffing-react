@@ -32,7 +32,7 @@ export const FrequentlyAskedQuestion = () => {
       <div className="frequently-asked-question__container container">
         <ProfileBreadcrumbs
           links={[
-            { name: "Главная", link: "/profile-candidate" },
+            { name: "Главная", link: "/auth" },
             {
               name: "FAQ (часто задаваемые вопросы)",
               link: FREQUENTLY_ASKED_QUESTIONS_ROUTE,
