@@ -23,8 +23,11 @@ import search from "../../images/serchIcon.png";
 import noProjects from "../../images/noProjects.png";
 import arrow from "../../images/arrowCalendar.png";
 
-import "./tracker.scss";
+import {apiRequest} from "../../api/request";
 import { Navigation } from "../../components/Navigation/Navigation";
+
+
+import "./tracker.scss";
 
 export const Tracker = () => {
   const [toggleTab, setToggleTab] = useState(1);
@@ -385,6 +388,12 @@ export const Tracker = () => {
     false,
   ]);
 
+  useEffect(() => {
+    apiRequest(`/project/project-list?user_id=${localStorage.getItem('id')}&expand=columns`).then((el) => {
+
+    })
+  }, [])
+
   const projects = useSelector(getProjects);
 
   const toggleTabs = (index) => {
@@ -689,7 +698,7 @@ export const Tracker = () => {
 
                 <div className="tasks__head__add">
                   <span onClick={() => setModalCreateColl(true)}>+</span>
-                  <p>добавить задачу в проект</p>
+                  <p>добавить колонку</p>
                 </div>
                 <div className="tasks__head__persons">
                   <img src={avatarTest} alt="avatar" />
@@ -698,10 +707,10 @@ export const Tracker = () => {
                   <span className="addPerson" onClick={setModalAddWorker}>
                     +
                   </span>
-                  <p>добавить участника в проект</p>
+                  <p>добавить участника</p>
                 </div>
                 <div className="tasks__head__select">
-                  <span>Учавствую</span>
+                  <span>Участвую</span>
                   <img src={selectArrow} alt="arrow" />
                 </div>
                 <div className="tasks__head__select">
