@@ -3,6 +3,19 @@
   border-radius: 12px;
   width: 344px;
   margin-bottom: 24px;
+  transition: 0.4s;
+  a {
+    color: #000000;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.4s;
+    a {
+      color: #000000;
+    }
+  }
 
   h5 {
     font-style: normal;

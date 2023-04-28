@@ -1,0 +1,139 @@
+.article-blog {
+  background: #f1f1f1;
+
+  &__breadCrumbs {
+    margin-top: 30px;
+  }
+
+  &__title {
+    margin: 42px 0 44px 0;
+    h1 {
+      font-weight: 500;
+      font-size: 38px;
+      line-height: 32px;
+    }
+  }
+
+  &__return {
+    display: flex;
+    align-items: center;
+    &-link {
+      display: flex;
+      align-items: center;
+    }
+
+    span {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 20px;
+      color: #6f6f6f;
+      margin-left: 19px;
+    }
+
+    &-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 44px;
+      background: #8dc63f78;
+
+      img {
+        width: 45%;
+      }
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+
+    &-text {
+      margin-top: 30px;
+      padding: 33px;
+      background: #ffffff;
+      text-align: justify;
+      border-radius: 12px;
+
+      p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+      }
+    }
+
+    &-img {
+      margin-top: 16px;
+    }
+
+    &-footer {
+      margin: 30px 0 78px 25px;
+      display: flex;
+
+      .yandex {
+        display: flex;
+        align-items: center;
+        img {
+          margin: 0;
+          width: 39px;
+          height: 39px;
+        }
+
+        &__text {
+          margin-left: 18px;
+          p {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 32px;
+          }
+        }
+      }
+
+      .publication-date {
+        margin-left: 76px;
+        display: flex;
+        align-items: center;
+
+        p {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 20px;
+        }
+
+        img {
+          margin: 0 16px 0 0;
+        }
+      }
+    }
+
+    .more-articles {
+      display: flex;
+      align-items: center;
+      margin-bottom: 49px;
+
+      h1 {
+        font-weight: 500;
+        font-size: 33px;
+        line-height: 32px;
+      }
+
+      &__arrow {
+        margin: 0 0 0 21px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 27px;
+        height: 27px;
+        background: #80777770;
+        border-radius: 44px;
+
+        img {
+          width: 50%;
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}

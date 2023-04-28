@@ -15,6 +15,7 @@ import ReportForm from "./components/ReportForm/ReportForm";
 import FreeDevelopers from "./components/UI/FreeDevelopers/FreeDevelopers";
 import { TicketFullScreen } from "./components/UI/TicketFullScreen/TicketFullScreen";
 import { ProfileCalendar } from "./components/ProfileCalendar/ProfileCalendar";
+import Article from "./pages/Article/Article";
 import FormPage from "./pages/FormPage/FormPage.js";
 import SingleReportPage from "./pages/SingleReportPage/SingleReportPage";
 import { QuizPage } from "./pages/quiz/QuizPage";
@@ -35,11 +36,11 @@ import { AuthForCandidate } from "./pages/AuthForCandidate/AuthForCandidate";
 import { RegistrationForCandidate } from "./pages/RegistrationForCandidate/RegistrationForCandidate";
 import { ProfileCandidate } from "./pages/ProfileCandidate/ProfileCandidate";
 import { PassingTests } from "./pages/quiz/PassingTests";
+import Blog from "./pages/Blog/Blog";
 
 import "./assets/global.scss";
 import "./fonts/stylesheet.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Blog from "./pages/Blog/Blog";
 
 const App = () => {
   return (
@@ -62,6 +63,7 @@ const App = () => {
           />
 
           <Route exact path="/blog" element={<Blog />}></Route>
+          <Route exact path="/blog/article/:id" element={<Article />}></Route>
 
           <Route exact path="/candidate/:id" element={<Candidate />} />
           <Route exact path="/candidate/:id/form" element={<FormPage />} />
