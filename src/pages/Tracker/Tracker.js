@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getProjects } from "../../redux/projectsTrackerSlice";
+import { setAllProjects, getProjects, getProjectBoard, moveProjectTask, setProjectBoardFetch } from "../../redux/projectsTrackerSlice";
 
 import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
 import ModalCreate from "../../components/UI/ModalCreate/ModalCreate";
@@ -26,10 +26,10 @@ import arrow from "../../images/arrowCalendar.png";
 import {apiRequest} from "../../api/request";
 import { Navigation } from "../../components/Navigation/Navigation";
 
-
 import "./tracker.scss";
 
 export const Tracker = () => {
+  const dispatch = useDispatch();
   const [toggleTab, setToggleTab] = useState(1);
   const [tabTaskMok, setTabTaskMok] = useState([
     {
@@ -369,18 +369,16 @@ export const Tracker = () => {
   const [modalCreateColl, setModalCreateColl] = useState(false);
   const [modalCreateTiket, setModalCreateTiket] = useState(false);
   const [valueTiket, setValueTiket] = useState("");
+  const [descriptionTicket, setDescriptionTicket] = useState("")
   const [valueColl, setValueColl] = useState("");
   //
 
   const [projectTasksOpen, setProjectTasksOpen] = useState(false);
 
-  const [selectedTab, setSelectedTab] = useState({
-    name: "",
-    indexTab: 0,
-    task: [],
-  });
+  const [selectedTab, setSelectedTab] = useState(0);
 
   const [startWrapperIndex, setStartWrapperIndex] = useState(null);
+  const startWrapperIndexTest = useRef({})
   const [wrapperHover, setWrapperHover] = useState([
     false,
     false,
@@ -390,11 +388,12 @@ export const Tracker = () => {
 
   useEffect(() => {
     apiRequest(`/project/project-list?user_id=${localStorage.getItem('id')}&expand=columns`).then((el) => {
-
+      dispatch(setAllProjects(el.projects))
     })
   }, [])
 
   const projects = useSelector(getProjects);
+  const projectBoard = useSelector(getProjectBoard);
 
   const toggleTabs = (index) => {
     if (projectTasksOpen) {
@@ -403,10 +402,10 @@ export const Tracker = () => {
     setToggleTab(index);
   };
 
-  function toggleMoreTasks(wrapperIndex) {
+  function toggleMoreTasks(columnId) {
     setTabTaskMok((prevArray) =>
       prevArray.map((elem, index) => {
-        if (wrapperIndex === index) {
+        if (columnId === index) {
           return { ...elem, open: !elem.open };
         } else {
           return elem;
@@ -415,8 +414,9 @@ export const Tracker = () => {
     );
   }
 
-  function dragStartHandler(e, task, wrapperIndex) {
-    setStartWrapperIndex({ task: task, index: wrapperIndex });
+  function dragStartHandler(e, task, columnId) {
+    // setStartWrapperIndex({ task: task, index: columnId });
+    startWrapperIndexTest.current = { task: task, index: columnId };
     setTimeout(() => {
       e.target.classList.add("tasks__board__item__hide");
     }, 0);
@@ -435,13 +435,13 @@ export const Tracker = () => {
     e.preventDefault();
   }
 
-  function dragEnterHandler(wrapperIndex) {
-    if (wrapperIndex === startWrapperIndex.index) {
+  function dragEnterHandler(columnId) {
+    if (columnId === startWrapperIndexTest.current.index) {
       return;
     }
     setWrapperHover((prevArray) =>
       prevArray.map((elem, index) => {
-        if (index === wrapperIndex) {
+        if (index === columnId) {
           return true;
         } else {
           return false;
@@ -450,9 +450,9 @@ export const Tracker = () => {
     );
   }
 
-  function dragDropHandler(e, wrapperIndex) {
+  function dragDropHandler(e, columnId) {
     e.preventDefault();
-    if (startWrapperIndex.index === wrapperIndex) {
+    if (startWrapperIndexTest.current.index === columnId) {
       return;
     }
     setWrapperHover((prevArray) =>
@@ -460,22 +460,27 @@ export const Tracker = () => {
         return false;
       })
     );
-    setTabTaskMok((prevArray) =>
-      prevArray.map((elem, index) => {
-        if (index === wrapperIndex) {
-          return { ...elem, tasks: [...elem.tasks, startWrapperIndex.task] };
-        } else if (index === startWrapperIndex.index) {
-          return {
-            ...elem,
-            tasks: elem.tasks.filter((item) => {
-              return item.id !== startWrapperIndex.task.id;
-            }),
-          };
-        } else {
-          return elem;
-        }
-      })
-    );
+
+    if (columnId !== startWrapperIndexTest.current.index) {
+      dispatch(moveProjectTask({startWrapperIndex:startWrapperIndexTest.current, columnId}))
+    }
+
+    // setTabTaskMok((prevArray) =>
+    //   prevArray.map((elem, index) => {
+    //     if (index === columnId) {
+    //       return { ...elem, tasks: [...elem.tasks, startWrapperIndex.task] };
+    //     } else if (index === startWrapperIndex.index) {
+    //       return {
+    //         ...elem,
+    //         tasks: elem.tasks.filter((item) => {
+    //           return item.id !== startWrapperIndex.task.id;
+    //         }),
+    //       };
+    //     } else {
+    //       return elem;
+    //     }
+    //   })
+    // );
   }
 
   function filterArchiveTasks(e) {
@@ -496,9 +501,8 @@ export const Tracker = () => {
     );
   }
 
-  function selectedTabTask(e, wrapperIndex, name, tasks) {
-    let tab = { name: name, indexTab: wrapperIndex, task: tasks };
-    setSelectedTab(tab);
+  function selectedTabTask(columnId) {
+    setSelectedTab(columnId);
     setModalCreateTiket(true);
   }
 
@@ -508,39 +512,64 @@ export const Tracker = () => {
   }
 
   function createTiket() {
-    tabTaskMok.filter((item) => {
-      if (item.name == selectedTab.name) {
-        let idItem = 0;
+    if (!valueTiket || !descriptionTicket) {
+      return
+    }
 
-        item.tasks.forEach((item) => {
-          idItem = item.id;
-        });
-
-        let newTiket = {
-          task: valueTiket,
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 0,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: idItem + 1,
-        };
-
-        item.tasks.push(newTiket);
+    apiRequest('/task/create-task', {
+      method: 'POST',
+      data: {
+        project_id: projectBoard.id,
+        title: valueTiket,
+        description: descriptionTicket,
+        status: 1,
+        user_id: localStorage.getItem('id'),
+        column_id: selectedTab
       }
-    });
+    }).then((res) => {
+      dispatch(setProjectBoardFetch(projectBoard.id))
+    })
+
     setModalCreateTiket(false);
     setValueTiket("");
+    setDescriptionTicket("")
+    // tabTaskMok.filter((item) => {
+    //   if (item.name == selectedTab.name) {
+    //     let idItem = 0;
+    //
+    //     item.tasks.forEach((item) => {
+    //       idItem = item.id;
+    //     });
+    //
+    //     let newTiket = {
+    //       task: valueTiket,
+    //       description: descriptionTicket,
+    //       comments: 0,
+    //       files: 0,
+    //       avatarCreated: avatarTest,
+    //       avatarDo: avatarTest,
+    //       id: idItem + 1,
+    //     };
+    //
+    //     item.tasks.push(newTiket);
+    //   }
+    // });
   }
 
   function createTab() {
-    let newTab = {
-      name: valueColl,
-      open: false,
-      tasks: [],
-    };
+    if (!valueColl) {
+      return
+    }
 
-    tabTaskMok.unshift(newTab);
+    apiRequest('/project-column/create-column', {
+      method: 'POST',
+      data: {
+        project_id: projectBoard.id,
+        title: valueColl
+      }
+    }).then((res) => {
+      dispatch(setProjectBoardFetch(projectBoard.id))
+    })
     setValueColl("");
     setModalCreateColl(false);
   }
@@ -653,7 +682,7 @@ export const Tracker = () => {
           >
             <div className="tasks__head">
               <div className="tasks__head__wrapper">
-                <h4>Проект : Разработка трекера</h4>
+                <h4>Проект : {projectBoard.name}</h4>
 
                 <ModalAdd
                   active={modalCreateColl}
@@ -735,12 +764,21 @@ export const Tracker = () => {
 
             <ModalAdd active={modalCreateTiket} setActive={setModalCreateTiket}>
               <div className="title-project">
-                <h4>Введите название карточки</h4>
+                <h4>Введите название и описание задачи</h4>
                 <div className="input-container">
                   <input
                     className="name-project"
                     value={valueTiket}
                     onChange={(e) => setValueTiket(e.target.value)}
+                    placeholder='Название задачи'
+                  ></input>
+                </div>
+                <div className="input-container">
+                  <input
+                      className="name-project"
+                      value={descriptionTicket}
+                      onChange={(e) => setDescriptionTicket(e.target.value)}
+                      placeholder='Описание задачи'
                   ></input>
                 </div>
               </div>
@@ -750,59 +788,53 @@ export const Tracker = () => {
             </ModalAdd>
 
             <div className="tasks__container">
-              {tabTaskMok.map((section, wrapperIndex) => {
+              {Boolean(projectBoard?.columns) && Boolean(projectBoard.columns.length) && projectBoard.columns.map((column) => {
                 return (
                   <div
-                    key={wrapperIndex}
+                    key={column.id}
                     onDragOver={(e) => dragOverHandler(e)}
-                    onDragEnter={(e) => dragEnterHandler(wrapperIndex)}
-                    onDrop={(e) => dragDropHandler(e, wrapperIndex)}
+                    onDragEnter={(e) => dragEnterHandler(column.id)}
+                    onDrop={(e) => dragDropHandler(e, column.id)}
                     className={`tasks__board ${
-                      section.tasks.length >= 3 ? "tasks__board__more" : ""
+                        column.tasks.length >= 3 ? "tasks__board__more" : ""
                     } ${
-                      wrapperHover[wrapperIndex] ? "tasks__board__hover" : ""
+                      wrapperHover[column.id] ? "tasks__board__hover" : ""
                     }`}
                   >
                     <div className="board__head">
-                      <span className={wrapperIndex === 3 ? "done" : ""}>
-                        {section.name}
+                      {/*<span className={wrapperIndex === 3 ? "done" : ""}>*/}
+                      <span>
+                        {column.title}
                       </span>
                       <div>
                         <span
                           className="add"
-                          onClick={(e) =>
-                            selectedTabTask(
-                              e,
-                              wrapperIndex,
-                              section.name,
-                              section.tasks
-                            )
-                          }
+                          onClick={() => selectedTabTask(column.id)}
                         >
                           +
                         </span>
                         <span className="more">...</span>
                       </div>
                     </div>
-                    {section.tasks.map((task, index) => {
+                    {column.tasks.map((task, index) => {
                       if (index > 2) {
-                        if (!section.open) {
+                        if (!column.open) {
                           return;
                         }
                       }
                       return (
                         <div
-                          key={index}
+                          key={task.id}
                           className="tasks__board__item"
                           draggable={true}
                           onDragStart={(e) =>
-                            dragStartHandler(e, task, wrapperIndex)
+                            dragStartHandler(e, task, column.id)
                           }
                           onDragEnd={(e) => dragEndHandler(e)}
-                          onClick={(e) => openTicket(e, index)}
+                          onClick={(e) => openTicket(e, task.id)}
                         >
                           <div className="tasks__board__item__title">
-                            <p>{task.task}</p>
+                            <p>{task.title}</p>
                           </div>
                           <p className="tasks__board__item__description">
                             {task.description}
@@ -816,24 +848,24 @@ export const Tracker = () => {
                               <img src={filesBoard} alt="filesImg" />
                               <span>{task.files} файлов</span>
                             </div>
-                            <div className="tasks__board__item__info__avatars">
-                              <img src={task.avatarCreated} alt="avatar" />
-                              <img src={task.avatarDo} alt="avatar" />
-                            </div>
+                            {/*<div className="tasks__board__item__info__avatars">*/}
+                            {/*  <img src={task.avatarCreated} alt="avatar" />*/}
+                            {/*  <img src={task.avatarDo} alt="avatar" />*/}
+                            {/*</div>*/}
                           </div>
                         </div>
                       );
                     })}
-                    {section.tasks.length > 3 && (
+                    {column.tasks.length > 3 && (
                       <span
                         className={
-                          section.open
+                          column.open
                             ? "lessItems openItems"
                             : "moreItems openItems"
                         }
-                        onClick={() => toggleMoreTasks(wrapperIndex)}
+                        onClick={() => toggleMoreTasks(column.id)}
                       >
-                        {section.open ? "-" : "+"}
+                        {column.open ? "-" : "+"}
                       </span>
                     )}
                   </div>

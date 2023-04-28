@@ -6,10 +6,15 @@ import archiveSet from "../../images/archive.svg";
 import del from "../../images/delete.svg";
 import edit from "../../images/edit.svg";
 
+// import {apiRequest} from "../../api/request";
+import {useDispatch} from "react-redux";
+import { setProjectBoardFetch } from "../../redux/projectsTrackerSlice";
+
 import "./projectTiket.scss";
 
 export const ProjectTiket = ({ project, index, setOpenProject }) => {
   const [modalSettings, setModalSettings] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     initListeners();
@@ -32,11 +37,14 @@ export const ProjectTiket = ({ project, index, setOpenProject }) => {
 
   return (
     <div className="project" key={index}>
-      <h3 onClick={() => setOpenProject(true)}>{project.name}</h3>
+      <h3 onClick={() =>{
+          setOpenProject(true)
+          dispatch(setProjectBoardFetch(project.id))
+      }}>{project.name}</h3>
       <div className="project__info">
         <p>Открытые задачи</p>
-        <span className="count">{project.count}</span>
-        <span className="add">+</span>
+        <span className="count">-</span>
+        {/*<span className="add">{project.columns.length ? '+' : ''}</span>*/}
         <span className="menu-settings" onClick={() => setModalSettings(true)}>
           ...
         </span>

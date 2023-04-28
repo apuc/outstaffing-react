@@ -13,21 +13,15 @@ export const ModalCreate = ({ active, setActive, title }) => {
     if (inputValue === "") {
       return;
     } else {
-      let newItem = {
-        name: inputValue,
-        count: 0,
-      };
       apiRequest('/project/create', {
         method: 'POST',
         data: {
           user_id: localStorage.getItem('id'),
           name: inputValue,
           status: 1,
-          // description: '',
-          // company_id: 3
         }
       }).then((res) => {
-        dispatch(setProject(newItem));
+        dispatch(setProject(res));
         setActive(false);
         setInputValue("");
       })

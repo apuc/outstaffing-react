@@ -397,6 +397,9 @@
             border-radius: 6px;
             background: #ffffff;
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
             &__hide {
               opacity: 0;

@@ -20,7 +20,7 @@
     padding: 60px 60px 30px 60px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
   }
 
@@ -34,14 +34,14 @@
       height: 35px;
       background: #ffffff;
       border-radius: 8px;
+      margin-top: 12px;
     }
 
     h4 {
       font-weight: 500;
-      font-size: 22px;
+      font-size: 17px;
       line-height: 26px;
       color: #263238 !important;
-      margin-bottom: 22px !important;
     }
 
     &__decs {
@@ -73,7 +73,7 @@
   }
 
   .button-add {
-    margin: 20px 40% 0 0;
+    margin: 20px;
     width: 130px;
     height: 37px;
     background: #52b709;
