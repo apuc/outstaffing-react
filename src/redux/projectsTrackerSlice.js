@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {apiRequest} from "../api/request";
-import {act} from "@testing-library/react";
 
 const initialState = {
   projects: [],
@@ -24,12 +23,12 @@ export const projectsTrackerSlice = createSlice({
       state.projects.push(action.payload);
     },
     moveProjectTask: (state, action) => {
-      state.projectBoard.columns.forEach((column) => {
+      state.projectBoard.columns.forEach((column, index) => {
         if (column.id === action.payload.columnId) {
           column.tasks.push(action.payload.startWrapperIndex.task)
         }
         if (column.id === action.payload.startWrapperIndex.index) {
-          column.tasks.splice(column.tasks.indexOf(action.payload.startWrapperIndex.task), 1)
+          state.projectBoard.columns[index].tasks = column.tasks.filter((task)=> task.id !== action.payload.startWrapperIndex.task.id);
         }
       })
     }

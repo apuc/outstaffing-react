@@ -31,114 +31,6 @@ import "./tracker.scss";
 export const Tracker = () => {
   const dispatch = useDispatch();
   const [toggleTab, setToggleTab] = useState(1);
-  const [tabTaskMok, setTabTaskMok] = useState([
-    {
-      name: "Открытые",
-      open: false,
-      tasks: [
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 1,
-        },
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 2,
-        },
-      ],
-    },
-    {
-      name: "В процессе",
-      open: false,
-      tasks: [
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 3,
-        },
-      ],
-    },
-    {
-      name: "На проверке",
-      open: false,
-      tasks: [
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 4,
-        },
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 5,
-        },
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 6,
-        },
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 9,
-        },
-      ],
-    },
-    {
-      name: "Готово",
-      open: false,
-      tasks: [
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 7,
-        },
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 8,
-        },
-      ],
-    },
-  ]);
-
   const [allTasks] = useState([
     {
       name: "PR - 2245",
@@ -377,7 +269,6 @@ export const Tracker = () => {
 
   const [selectedTab, setSelectedTab] = useState(0);
 
-  const [startWrapperIndex, setStartWrapperIndex] = useState(null);
   const startWrapperIndexTest = useRef({})
   const [wrapperHover, setWrapperHover] = useState([
     false,
@@ -415,7 +306,6 @@ export const Tracker = () => {
   }
 
   function dragStartHandler(e, task, columnId) {
-    // setStartWrapperIndex({ task: task, index: columnId });
     startWrapperIndexTest.current = { task: task, index: columnId };
     setTimeout(() => {
       e.target.classList.add("tasks__board__item__hide");
@@ -449,7 +339,6 @@ export const Tracker = () => {
       })
     );
   }
-
   function dragDropHandler(e, columnId) {
     e.preventDefault();
     if (startWrapperIndexTest.current.index === columnId) {
@@ -462,25 +351,8 @@ export const Tracker = () => {
     );
 
     if (columnId !== startWrapperIndexTest.current.index) {
-      dispatch(moveProjectTask({startWrapperIndex:startWrapperIndexTest.current, columnId}))
+      dispatch(moveProjectTask({startWrapperIndex: startWrapperIndexTest.current, columnId}))
     }
-
-    // setTabTaskMok((prevArray) =>
-    //   prevArray.map((elem, index) => {
-    //     if (index === columnId) {
-    //       return { ...elem, tasks: [...elem.tasks, startWrapperIndex.task] };
-    //     } else if (index === startWrapperIndex.index) {
-    //       return {
-    //         ...elem,
-    //         tasks: elem.tasks.filter((item) => {
-    //           return item.id !== startWrapperIndex.task.id;
-    //         }),
-    //       };
-    //     } else {
-    //       return elem;
-    //     }
-    //   })
-    // );
   }
 
   function filterArchiveTasks(e) {
@@ -533,27 +405,6 @@ export const Tracker = () => {
     setModalCreateTiket(false);
     setValueTiket("");
     setDescriptionTicket("")
-    // tabTaskMok.filter((item) => {
-    //   if (item.name == selectedTab.name) {
-    //     let idItem = 0;
-    //
-    //     item.tasks.forEach((item) => {
-    //       idItem = item.id;
-    //     });
-    //
-    //     let newTiket = {
-    //       task: valueTiket,
-    //       description: descriptionTicket,
-    //       comments: 0,
-    //       files: 0,
-    //       avatarCreated: avatarTest,
-    //       avatarDo: avatarTest,
-    //       id: idItem + 1,
-    //     };
-    //
-    //     item.tasks.push(newTiket);
-    //   }
-    // });
   }
 
   function createTab() {
