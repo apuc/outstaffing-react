@@ -18,7 +18,7 @@
 
 .modal-tiket__content {
   background: #ffffff;
-  border: 1px solid #dde2e4;
+  //border: 1px solid #dde2e4;
   border-radius: 8px;
   display: flex;
   flex-direction: row;
@@ -291,13 +291,14 @@
       }
 
       &-bottom {
-        padding: 40px 0 75px 56px;
+        padding: 40px 110px 75px 56px;
         font-weight: 400;
         font-size: 14px;
         line-height: 38px;
 
         div {
           display: flex;
+          cursor: pointer;
           align-items: center;
 
           p {

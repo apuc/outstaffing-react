@@ -255,7 +255,7 @@ export const Tracker = () => {
 
   // Modal State
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
-  const [indexTicket, setIndexTicket] = useState(0);
+  const [selectedTicket, setSelectedTicket] = useState({});
   const [modalAddWorker, setModalAddWorker] = useState(false);
   const [modalCreateProject, setModalCreateProject] = useState(false);
   const [modalCreateColl, setModalCreateColl] = useState(false);
@@ -378,8 +378,8 @@ export const Tracker = () => {
     setModalCreateTiket(true);
   }
 
-  function openTicket(e, iTicket) {
-    setIndexTicket(iTicket);
+  function openTicket(e, task) {
+    setSelectedTicket(task);
     setModalActiveTicket(true);
   }
 
@@ -610,7 +610,9 @@ export const Tracker = () => {
             <ModalTicket
               active={modalActiveTicket}
               setActive={setModalActiveTicket}
-              index={indexTicket}
+              task={selectedTicket}
+              projectId={projectBoard.id}
+              projectName = {projectBoard.name}
             />
 
             <ModalAdd active={modalCreateTiket} setActive={setModalCreateTiket}>
@@ -682,7 +684,7 @@ export const Tracker = () => {
                             dragStartHandler(e, task, column.id)
                           }
                           onDragEnd={(e) => dragEndHandler(e)}
-                          onClick={(e) => openTicket(e, task.id)}
+                          onClick={(e) => openTicket(e, task)}
                         >
                           <div className="tasks__board__item__title">
                             <p>{task.title}</p>

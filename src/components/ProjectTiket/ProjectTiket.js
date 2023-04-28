@@ -6,9 +6,9 @@ import archiveSet from "../../images/archive.svg";
 import del from "../../images/delete.svg";
 import edit from "../../images/edit.svg";
 
-// import {apiRequest} from "../../api/request";
+import {apiRequest} from "../../api/request";
 import {useDispatch} from "react-redux";
-import { setProjectBoardFetch } from "../../redux/projectsTrackerSlice";
+import { deleteProject, setProjectBoardFetch } from "../../redux/projectsTrackerSlice";
 
 import "./projectTiket.scss";
 
@@ -35,6 +35,18 @@ export const ProjectTiket = ({ project, index, setOpenProject }) => {
     }
   }
 
+  function removeProject() {
+    apiRequest('/project/update', {
+      method: 'PUT',
+      data: {
+        project_id: project.id,
+        status: 0
+      }
+    }).then((res) => {
+      dispatch(deleteProject(project))
+    })
+  }
+
   return (
     <div className="project" key={index}>
       <h3 onClick={() =>{
@@ -52,7 +64,7 @@ export const ProjectTiket = ({ project, index, setOpenProject }) => {
 
       <ModalSettings active={modalSettings}>
         <div className="project__settings-menu">
-          <div>
+          <div onClick={() => console.log(project)}>
             <img src={edit}></img>
             <p>редактировать</p>
           </div>
@@ -64,7 +76,8 @@ export const ProjectTiket = ({ project, index, setOpenProject }) => {
             <img src={archiveSet}></img>
             <p>в архив</p>
           </div>
-          <div>
+          <div
+            onClick={removeProject}>
             <img src={del}></img>
             <p>удалить</p>
           </div>
