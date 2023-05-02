@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {Link} from "react-router-dom";
 import ModalSettings from "../UI/ModalSettings/ModalSettings";
 
 import link from "../../images/link.svg";
@@ -8,11 +9,11 @@ import edit from "../../images/edit.svg";
 
 import {apiRequest} from "../../api/request";
 import {useDispatch} from "react-redux";
-import { deleteProject, setProjectBoardFetch } from "../../redux/projectsTrackerSlice";
+import { deleteProject } from "../../redux/projectsTrackerSlice";
 
 import "./projectTiket.scss";
 
-export const ProjectTiket = ({ project, index, setOpenProject }) => {
+export const ProjectTiket = ({ project, index }) => {
   const [modalSettings, setModalSettings] = useState(false);
   const dispatch = useDispatch();
 
@@ -49,13 +50,10 @@ export const ProjectTiket = ({ project, index, setOpenProject }) => {
 
   return (
     <div className="project" key={index}>
-      <h3 onClick={() =>{
-          setOpenProject(true)
-          dispatch(setProjectBoardFetch(project.id))
-      }}>{project.name}</h3>
+      <Link to={`/tracker/project/${project.id}`}>{project.name}</Link>
       <div className="project__info">
         <p>Открытые задачи</p>
-        <span className="count">-</span>
+        <span className="count">{project.columns.reduce((accumulator, currentValue) => accumulator + currentValue.tasks.length, 0)}</span>
         {/*<span className="add">{project.columns.length ? '+' : ''}</span>*/}
         <span className="menu-settings" onClick={() => setModalSettings(true)}>
           ...
@@ -64,7 +62,7 @@ export const ProjectTiket = ({ project, index, setOpenProject }) => {
 
       <ModalSettings active={modalSettings}>
         <div className="project__settings-menu">
-          <div onClick={() => console.log(project)}>
+          <div>
             <img src={edit}></img>
             <p>редактировать</p>
           </div>

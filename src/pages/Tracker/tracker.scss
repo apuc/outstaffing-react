@@ -53,6 +53,7 @@
       padding: 12px 40px 15px 19px;
       cursor: pointer;
       align-items: center;
+      color: black;
 
       @media (max-width: 490px) {
         padding: 8px 20px 8px 14px;
@@ -328,6 +329,7 @@
             cursor: pointer;
             display: flex;
             align-items: center;
+            color: black;
 
             p {
               font-weight: 400;

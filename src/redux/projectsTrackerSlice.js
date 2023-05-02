@@ -3,7 +3,8 @@ import {apiRequest} from "../api/request";
 
 const initialState = {
   projects: [],
-  projectBoard: {}
+  projectBoard: {},
+  toggleTab: 1
 };
 
 export const setProjectBoardFetch = createAsyncThunk(
@@ -22,8 +23,10 @@ export const projectsTrackerSlice = createSlice({
     setProject: (state, action) => {
       state.projects.push(action.payload);
     },
+    setToggleTab: (state, action) => {
+      state.toggleTab = action.payload
+    },
     deleteProject: (state, action) => {
-      console.log(action.payload)
       state.projects = state.projects.filter((project) => project.id !== action.payload.id)
     },
     moveProjectTask: (state, action) => {
@@ -52,9 +55,10 @@ export const projectsTrackerSlice = createSlice({
   }
 });
 
-export const { setProject, deleteProject, setAllProjects, moveProjectTask } = projectsTrackerSlice.actions;
+export const { setProject, deleteProject, setAllProjects, moveProjectTask, setToggleTab } = projectsTrackerSlice.actions;
 
 export const getProjects = (state) => state.tracker.projects;
 export const getProjectBoard = (state) => state.tracker.projectBoard;
+export const getToggleTab = (state) => state.tracker.toggleTab
 
 export default projectsTrackerSlice.reducer;
