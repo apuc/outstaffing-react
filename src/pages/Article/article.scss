@@ -3,14 +3,28 @@
 
   &__breadCrumbs {
     margin-top: 30px;
+
+    @media (max-width: 1375px) {
+      margin-top: 0;
+      padding-top: 110px;
+    }
+
+    @media (max-width: 600px) {
+      display: none;
+    }
   }
 
   &__title {
     margin: 42px 0 44px 0;
+
     h1 {
       font-weight: 500;
       font-size: 38px;
       line-height: 32px;
+    }
+
+    @media (max-width: 600px) {
+      padding-top: 80px;
     }
   }
 
@@ -104,6 +118,19 @@
 
         img {
           margin: 0 16px 0 0;
+        }
+      }
+
+      @media (max-width: 600px) {
+        margin: 20px 0 20px 0;
+        flex-direction: column;
+
+        .publication-date {
+          margin: 0;
+        }
+
+        .yandex {
+          margin: 0 0 10px 0;
         }
       }
     }

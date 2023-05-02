@@ -6,7 +6,9 @@ import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileB
 import { Footer } from "../../components/Footer/Footer";
 import CardArticle from "../../components/UI/CardArticle/CardArticle";
 
-import arrowRight from "../../images/arrowRight.png";
+// import arrowRight from "../../images/arrowRight.png";
+import blogArrow from "../../images/blogArrow.svg";
+
 import cardImg1 from "../../images/cardArticleItem.png";
 import cardImg2 from "../../images/cardArticleItem2.png";
 import cardImg3 from "../../images/cardArticleItem3.png";
@@ -66,10 +68,11 @@ export const Blog = ({}) => {
         </div>
 
         <div className="blog__title">
-          <h1>Блог</h1>
-          <div className="blog__title-arrow">
-            <img src={arrowRight} />
+          <div>
+            <h1>Блог</h1>
+            <img src={blogArrow} className="blog__title-arrow" />
           </div>
+
           <h3>
             Из первых уст рассказываем о себе пользователям, делимся полезными и
             важными материалами, стремимся получать обратную связь
@@ -88,6 +91,10 @@ export const Blog = ({}) => {
               />
             );
           })}
+        </div>
+
+        <div className="blog__load-more">
+          <button>Загрузить еще</button>
         </div>
       </div>
 
