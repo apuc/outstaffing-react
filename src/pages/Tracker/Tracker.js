@@ -236,7 +236,7 @@ export const Tracker = () => {
               </div>
             </div>
             <div className="taskList__wrapper">
-              {filteredAllTasks.map((task) => {
+              {Boolean(filteredAllTasks.length) && filteredAllTasks.map((task) => {
                 return (
                   <div className="task" key={task.id}>
                     <div className="task__info">
