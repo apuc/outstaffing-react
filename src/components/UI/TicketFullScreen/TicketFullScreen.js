@@ -5,6 +5,8 @@ import { ProfileBreadcrumbs } from "../../ProfileBreadcrumbs/ProfileBreadcrumbs"
 import { Footer } from "../../Footer/Footer";
 import { Link } from "react-router-dom";
 import ModalAdd from "../ModalAdd/ModalAdd";
+import { useDispatch } from "react-redux";
+import {setToggleTab} from "../../../redux/projectsTrackerSlice";
 
 import avatarMock1 from "../../../images/avatarMoсk1.png";
 import avatarMock2 from "../../../images/avatarMoсk2.png";
@@ -28,10 +30,10 @@ import edit from "../../../images/edit.svg";
 import "./ticketFullScreen.scss";
 
 export const TicketFullScreen = ({}) => {
-  const [toggleTab, setToggleTab] = useState(1);
   const [addSubtask, setAddSubtask] = useState(false);
   const [modalAddWorker, setModalAddWorker] = useState(false);
   const [valueTiket, setValueTiket] = useState("");
+  const dispatch = useDispatch();
 
   const [tiket] = useState({
     name: "Разработка трекера",
@@ -52,7 +54,7 @@ export const TicketFullScreen = ({}) => {
   ]);
 
   const toggleTabs = (index) => {
-    setToggleTab(index);
+    dispatch(setToggleTab(index));
   };
 
   return (
@@ -71,31 +73,30 @@ export const TicketFullScreen = ({}) => {
       </div>
       <div className="tracker__tabs">
         <div className="tracker__tabs__head">
-          <div
-            className={toggleTab === 1 ? "tab active-tab" : "tab"}
+          <Link
+            to='/profile/tracker'
+            className="tab active-tab"
             onClick={() => toggleTabs(1)}
           >
             <img src={project} alt="img" />
             <p>Проекты </p>
-          </div>
-          <div
-            className={toggleTab === 2 ? "tab active-tab" : "tab"}
+          </Link>
+          <Link
+            to='/profile/tracker'
+            className="tab"
             onClick={() => toggleTabs(2)}
           >
             <img src={tasks} alt="img" />
-            <Link to={`/profile/tracker`} className="link">
-              <p>Все мои задачи</p>
-            </Link>
-          </div>
-          <div
-            className={toggleTab === 3 ? "tab active-tab" : "tab"}
+            <p>Все мои задачи</p>
+          </Link>
+          <Link
+            to='/profile/tracker'
+            className="tab"
             onClick={() => toggleTabs(3)}
           >
             <img src={archive} alt="img" />
-            <Link to={`/profile/tracker`} className="link">
-              <p>Архив</p>
-            </Link>
-          </div>
+            <p>Архив</p>
+          </Link>
         </div>
         <div className="tracker__tabs__content content-tabs">
           <div className="tasks__head">
