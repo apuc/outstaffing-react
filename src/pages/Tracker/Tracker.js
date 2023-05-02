@@ -3,12 +3,16 @@ import React, {useEffect, useState} from "react";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
+import {apiRequest} from "../../api/request";
+import { Navigation } from "../../components/Navigation/Navigation";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setAllProjects, getProjects, setToggleTab, getToggleTab } from "../../redux/projectsTrackerSlice";
 
 import ModalCreate from "../../components/UI/ModalCreate/ModalCreate";
 import ProjectTiket from "../../components/ProjectTiket/ProjectTiket";
+import { urlForLocal } from '../../helper'
+import { getCorrectDate} from "../../components/Calendar/calendarHelper";
 
 import project from "../../images/trackerProject.svg";
 import tasks from "../../images/trackerTasks.svg";
@@ -17,80 +21,14 @@ import avatarTest from "../../images/AvatarTest .png";
 import search from "../../images/serchIcon.png";
 import noProjects from "../../images/noProjects.png";
 
-import {apiRequest} from "../../api/request";
-import { Navigation } from "../../components/Navigation/Navigation";
-
 import "./tracker.scss";
 
 export const Tracker = () => {
   const dispatch = useDispatch();
   const projects = useSelector(getProjects);
   const tab = useSelector(getToggleTab)
-  const [allTasks] = useState([
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-  ]);
+  const [allTasks, setAllTasks] = useState([])
+  const [filteredAllTasks, setFilteredAllTasks] = useState([]);
 
   const [archiveProjects] = useState([
     {
@@ -100,35 +38,7 @@ export const Tracker = () => {
     {
       name: "Будущее России",
       date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
+    }
   ]);
 
   const [completeTasks] = useState([
@@ -152,98 +62,7 @@ export const Tracker = () => {
       dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
       project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
+    }
   ]);
 
   const [filterCompleteTasks, setFilterCompleteTasks] = useState(completeTasks);
@@ -255,11 +74,33 @@ export const Tracker = () => {
     apiRequest(`/project/project-list?user_id=${localStorage.getItem('id')}&expand=columns`).then((el) => {
       dispatch(setAllProjects(el.projects))
     })
+    apiRequest(`/task/get-user-tasks?user_id=${localStorage.getItem('id')}`).then((el) => {
+      setAllTasks(el)
+      setFilteredAllTasks(el)
+    })
   }, [])
 
   const toggleTabs = (index) => {
     dispatch(setToggleTab(index))
   };
+
+  function filterAllTask(e) {
+    setFilteredAllTasks(
+        allTasks.filter((item) => {
+          if (!e.target.value) {
+            return item;
+          }
+          if (
+              item.title.toLowerCase().startsWith(e.target.value.toLowerCase()) ||
+              item.description
+                  .toLowerCase()
+                  .startsWith(e.target.value.toLowerCase())
+          ) {
+            return item;
+          }
+        })
+    );
+  }
 
   function filterArchiveTasks(e) {
     setFilterCompleteTasks(
@@ -390,23 +231,23 @@ export const Tracker = () => {
                 <input
                   type="text"
                   placeholder="Найти задачу"
-                  onChange={(event) => filterArchiveTasks(event)}
+                  onChange={(event) => filterAllTask(event)}
                 />
               </div>
             </div>
             <div className="taskList__wrapper">
-              {allTasks.map((task, index) => {
+              {filteredAllTasks.map((task) => {
                 return (
-                  <div className="task" key={index}>
+                  <div className="task" key={task.id}>
                     <div className="task__info">
-                      <h5>{task.name}</h5>
+                      <h5>{task.title}</h5>
                       <p>{task.description}</p>
                     </div>
                     <div className="task__person">
-                      <img src={task.avatarDo} alt="avatar" />
+                      <img src={urlForLocal(task.user.avatar)} alt="avatar" />
                       <div className="task__project">
-                        <p>{task.project}</p>
-                        <span>{task.dateComplete}</span>
+                        <p>{task.user.fio}</p>
+                        <span>{getCorrectDate(task.created_at)}</span>
                       </div>
                     </div>
                   </div>
