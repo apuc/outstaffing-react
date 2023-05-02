@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ModalAdd from "../ModalAdd/ModalAdd";
-import {apiRequest} from "../../../api/request";
-import {useDispatch} from "react-redux";
+import { apiRequest } from "../../../api/request";
+import { useDispatch } from "react-redux";
 import { setProjectBoardFetch } from "../../../redux/projectsTrackerSlice";
 
 import avatarMock1 from "../../../images/avatarMoсk1.png";
@@ -22,7 +22,13 @@ import fullScreen from "../../../images/inFullScreen.svg";
 
 import "./ModalTicket.scss";
 
-export const ModalTiсket = ({ active, setActive, task, projectId, projectName }) => {
+export const ModalTiсket = ({
+  active,
+  setActive,
+  task,
+  projectId,
+  projectName,
+}) => {
   const dispatch = useDispatch();
   const [tiket] = useState({
     name: "Разработка трекера",
@@ -44,16 +50,16 @@ export const ModalTiсket = ({ active, setActive, task, projectId, projectName }
   const [addSubtask, setAddSubtask] = useState(false);
 
   function deleteTask() {
-    apiRequest('/task/update-task', {
-      method: 'PUT',
+    apiRequest("/task/update-task", {
+      method: "PUT",
       data: {
-        task_id : task.id,
-        status: 0
-      }
+        task_id: task.id,
+        status: 0,
+      },
     }).then((res) => {
-      setActive(false)
-      dispatch(setProjectBoardFetch(projectId))
-    })
+      setActive(false);
+      dispatch(setProjectBoardFetch(projectId));
+    });
   }
 
   return (
