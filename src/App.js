@@ -37,6 +37,7 @@ import { RegistrationForCandidate } from "./pages/RegistrationForCandidate/Regis
 import { ProfileCandidate } from "./pages/ProfileCandidate/ProfileCandidate";
 import { PassingTests } from "./pages/quiz/PassingTests";
 import Blog from "./pages/Blog/Blog";
+import { ProjectTracker } from "./pages/ProjectTracker/ProjectTracker";
 
 import "./assets/global.scss";
 import "./fonts/stylesheet.css";
@@ -55,6 +56,11 @@ const App = () => {
             path="/tracker/task/:id"
             element={<TicketFullScreen />}
           ></Route>
+          <Route
+            exact
+            path="/tracker/project/:id"
+            element={<ProjectTracker />}
+          />
           <Route exact path="/auth-candidate" element={<AuthForCandidate />} />
           <Route
             exact

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setProject } from "../../../redux/projectsTrackerSlice";
+import {apiRequest} from "../../../api/request";
 
 import "./ModalCreate.scss";
 
@@ -12,13 +13,18 @@ export const ModalCreate = ({ active, setActive, title }) => {
     if (inputValue === "") {
       return;
     } else {
-      let newItem = {
-        name: inputValue,
-        count: 0,
-      };
-      dispatch(setProject(newItem));
-      setActive(false);
-      setInputValue("");
+      apiRequest('/project/create', {
+        method: 'POST',
+        data: {
+          user_id: localStorage.getItem('id'),
+          name: inputValue,
+          status: 1,
+        }
+      }).then((res) => {
+        dispatch(setProject(res));
+        setActive(false);
+        setInputValue("");
+      })
     }
   }
 

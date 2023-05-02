@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import ModalAdd from "../ModalAdd/ModalAdd";
+import { apiRequest } from "../../../api/request";
+import { useDispatch } from "react-redux";
+import { setProjectBoardFetch } from "../../../redux/projectsTrackerSlice";
 
 import avatarMock1 from "../../../images/avatarMoсk1.png";
 import avatarMock2 from "../../../images/avatarMoсk2.png";
 import category from "../../../images/category.png";
 import watch from "../../../images/watch.png";
 import file from "../../../images/fileModal.svg";
-import task from "../../../images/tasksMock.png";
+import taskImg from "../../../images/tasksMock.png";
 import arrow from "../../../images/arrowStart.png";
 import link from "../../../images/link.svg";
 import archive from "../../../images/archive.svg";
@@ -15,11 +20,16 @@ import send from "../../../images/send.svg";
 import plus from "../../../images/plus.svg";
 import fullScreen from "../../../images/inFullScreen.svg";
 
-import ModalAdd from "../ModalAdd/ModalAdd";
 import "./ModalTicket.scss";
-import { Link } from "react-router-dom";
 
-export const ModalTiсket = ({ active, setActive, index }) => {
+export const ModalTiсket = ({
+  active,
+  setActive,
+  task,
+  projectId,
+  projectName,
+}) => {
+  const dispatch = useDispatch();
   const [tiket] = useState({
     name: "Разработка трекера",
     code: "PR - 2245",
@@ -39,6 +49,19 @@ export const ModalTiсket = ({ active, setActive, index }) => {
   ]);
   const [addSubtask, setAddSubtask] = useState(false);
 
+  function deleteTask() {
+    apiRequest("/task/update-task", {
+      method: "PUT",
+      data: {
+        task_id: task.id,
+        status: 0,
+      },
+    }).then((res) => {
+      setActive(false);
+      dispatch(setProjectBoardFetch(projectId));
+    });
+  }
+
   return (
     <div
       className={active ? "modal-tiket active" : "modal-tiket"}
@@ -51,18 +74,18 @@ export const ModalTiсket = ({ active, setActive, index }) => {
         <div className="content">
           <h3 className="title-project">
             <img src={category} className="title-project__category"></img>
-            Проект: {tiket.name}
-            <Link to={`/tracker/task/${index}`} className="title-project__full">
+            Проект: {projectName}
+            <Link to={`/tracker/${task.id}`} className="title-project__full">
               <img src={fullScreen}></img>
             </Link>
           </h3>
 
           <div className="content__task">
             <span>Задача</span>
-            <h5>{tiket.code}</h5>
+            <h5>{task.title}</h5>
             <div className="content__description">
-              <p>{tiket.descriptions}</p>
-              <img src={task} className="image-task"></img>
+              <p>{task.description}</p>
+              <img src={taskImg} className="image-task"></img>
               <p>{tiket.descriptions}</p>
             </div>
             <div className="content__communication">
@@ -90,8 +113,8 @@ export const ModalTiсket = ({ active, setActive, index }) => {
         <div className="workers">
           <div className="workers_box">
             <span className="exit" onClick={() => setActive(false)}></span>
-            <span>{tiket.code}</span>
-            <p className="workers__creator">Создатель : {tiket.creator}</p>
+            <span>{task.title}</span>
+            <p className="workers__creator">Создатель : {task.user?.fio}</p>
             <div>
               {workers.map((worker, index) => {
                 return (
@@ -134,7 +157,7 @@ export const ModalTiсket = ({ active, setActive, index }) => {
               <img src={archive}></img>
               <p>в архив</p>
             </div>
-            <div>
+            <div onClick={deleteTask}>
               <img src={del}></img>
               <p>удалить</p>
             </div>
