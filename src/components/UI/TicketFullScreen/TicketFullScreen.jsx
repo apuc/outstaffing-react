@@ -5,8 +5,10 @@ import { ProfileBreadcrumbs } from "../../ProfileBreadcrumbs/ProfileBreadcrumbs"
 import { Footer } from "../../Footer/Footer";
 import { Link } from "react-router-dom";
 import ModalAdd from "../ModalAdd/ModalAdd";
+import { Navigation } from "../../Navigation/Navigation";
+
 import { useDispatch } from "react-redux";
-import {setToggleTab} from "../../../redux/projectsTrackerSlice";
+import { setToggleTab } from "../../../redux/projectsTrackerSlice";
 
 import avatarMock1 from "../../../images/avatarMoсk1.png";
 import avatarMock2 from "../../../images/avatarMoсk2.png";
@@ -60,6 +62,7 @@ export const TicketFullScreen = ({}) => {
   return (
     <section className="ticket-full-screen">
       <ProfileHeader />
+      <Navigation />
       <div className="container">
         <div className="tracker__content">
           <ProfileBreadcrumbs
@@ -74,7 +77,7 @@ export const TicketFullScreen = ({}) => {
       <div className="tracker__tabs">
         <div className="tracker__tabs__head">
           <Link
-            to='/profile/tracker'
+            to="/profile/tracker"
             className="tab active-tab"
             onClick={() => toggleTabs(1)}
           >
@@ -82,7 +85,7 @@ export const TicketFullScreen = ({}) => {
             <p>Проекты </p>
           </Link>
           <Link
-            to='/profile/tracker'
+            to="/profile/tracker"
             className="tab"
             onClick={() => toggleTabs(2)}
           >
@@ -90,7 +93,7 @@ export const TicketFullScreen = ({}) => {
             <p>Все мои задачи</p>
           </Link>
           <Link
-            to='/profile/tracker'
+            to="/profile/tracker"
             className="tab"
             onClick={() => toggleTabs(3)}
           >
