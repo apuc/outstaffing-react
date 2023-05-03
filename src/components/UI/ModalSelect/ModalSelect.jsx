@@ -1,8 +1,8 @@
 import React from "react";
 
-import "./modalSettings.scss";
+import "./modalSelect.scss";
 
-export const ModalSettings = ({ active, children }) => {
+export const ModalSelect = ({ active, children }) => {
   return (
     <div className={active ? "project__settings active" : "project__settings "}>
       {children}
@@ -10,4 +10,4 @@ export const ModalSettings = ({ active, children }) => {
   );
 };
 
-export default ModalSettings;
+export default ModalSelect;
