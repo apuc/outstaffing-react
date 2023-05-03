@@ -30,12 +30,7 @@ export const ProjectTracker = () => {
     const [openColumnSelect, setOpenColumnSelect] = useState({})
     const [selectedTab, setSelectedTab] = useState(0);
     const startWrapperIndexTest = useRef({})
-    const [wrapperHover, setWrapperHover] = useState([
-        false,
-        false,
-        false,
-        false,
-    ]);
+    const [wrapperHover, setWrapperHover] = useState({});
     const projectBoard = useSelector(getProjectBoard);
     useEffect(() => {
         dispatch(setProjectBoardFetch(projectId.id))
@@ -45,6 +40,7 @@ export const ProjectTracker = () => {
         if (Object.keys(projectBoard).length) {
             projectBoard.columns.forEach(column => {
                 setOpenColumnSelect(prevState => ({...prevState, [column.id]: false}))
+                setWrapperHover(prevState => ({...prevState, [column.id]: false}))
             })
         }
     }, [projectBoard])
@@ -80,9 +76,8 @@ export const ProjectTracker = () => {
     }
 
     function dragEndHandler(e) {
-        setWrapperHover((prevArray) =>
-            prevArray.map((elem) => {
-                return false;
+        setWrapperHover(prevState => ({
+                [prevState]: false
             })
         );
         e.target.classList.remove("tasks__board__item__hide");
@@ -96,24 +91,19 @@ export const ProjectTracker = () => {
         if (columnId === startWrapperIndexTest.current.index) {
             return;
         }
-        setWrapperHover((prevArray) =>
-            prevArray.map((elem, index) => {
-                if (index === columnId) {
-                    return true;
-                } else {
-                    return false;
-                }
-            })
-        );
+
+        setWrapperHover(prevState => ({
+            [prevState]: false, [columnId]: true
+        }))
     }
     function dragDropHandler(e, columnId) {
         e.preventDefault();
         if (startWrapperIndexTest.current.index === columnId) {
             return;
         }
-        setWrapperHover((prevArray) =>
-            prevArray.map((elem) => {
-                return false;
+
+        setWrapperHover(prevState => ({
+                [prevState]: false
             })
         );
 
