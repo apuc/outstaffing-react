@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
@@ -18,18 +18,36 @@ import selectArrow from "../../images/select.svg";
 import commentsBoard from "../../images/commentsBoard.svg";
 import filesBoard from "../../images/filesBoard.svg";
 import arrow from "../../images/arrowCalendar.png";
+import del from "../../images/delete.svg";
+import edit from "../../images/edit.svg";
 
 import {apiRequest} from "../../api/request";
 import { Navigation } from "../../components/Navigation/Navigation";
 
 export const ProjectTracker = () => {
     const dispatch = useDispatch();
-    const currentUrl = useState(window.location.pathname)
-    const projectId = currentUrl[0].split('/').at(-1)
+    const projectId = useParams()
+    const [openColumnSelect, setOpenColumnSelect] = useState({})
+    const [selectedTab, setSelectedTab] = useState(0);
+    const startWrapperIndexTest = useRef({})
+    const [wrapperHover, setWrapperHover] = useState([
+        false,
+        false,
+        false,
+        false,
+    ]);
+    const projectBoard = useSelector(getProjectBoard);
+    useEffect(() => {
+        dispatch(setProjectBoardFetch(projectId.id))
+    }, [])
 
     useEffect(() => {
-        dispatch(setProjectBoardFetch(projectId))
-    }, [])
+        if (Object.keys(projectBoard).length) {
+            projectBoard.columns.forEach(column => {
+                setOpenColumnSelect(prevState => ({...prevState, [column.id]: false}))
+            })
+        }
+    }, [projectBoard])
 
     // Modal State
     const [modalActiveTicket, setModalActiveTicket] = useState(false);
@@ -41,18 +59,6 @@ export const ProjectTracker = () => {
     const [descriptionTicket, setDescriptionTicket] = useState("")
     const [valueColl, setValueColl] = useState("");
     //
-
-    const [selectedTab, setSelectedTab] = useState(0);
-
-    const startWrapperIndexTest = useRef({})
-    const [wrapperHover, setWrapperHover] = useState([
-        false,
-        false,
-        false,
-        false,
-    ]);
-
-    const projectBoard = useSelector(getProjectBoard);
 
     // function toggleMoreTasks(columnId) {
     //     setTabTaskMok((prevArray) =>
@@ -166,6 +172,19 @@ export const ProjectTracker = () => {
         })
         setValueColl("");
         setModalCreateColl(false);
+    }
+
+    function deleteColumn(id) {
+        apiRequest('/project-column/update-column', {
+            method: 'PUT',
+            data: {
+                column_id: id,
+                project_id: projectBoard.id,
+                status: 0
+            }
+        }).then((res) => {
+            dispatch(setProjectBoardFetch(projectBoard.id))
+        })
     }
 
     return (
@@ -340,18 +359,34 @@ export const ProjectTracker = () => {
                                         <div className="board__head">
                                             {/*<span className={wrapperIndex === 3 ? "done" : ""}>*/}
                                             <span>
-                        {column.title}
-                      </span>
+                                                {column.title}
+                                            </span>
                                             <div>
-                        <span
-                            className="add"
-                            onClick={() => selectedTabTask(column.id)}
-                        >
-                          +
-                        </span>
-                                                <span className="more">...</span>
+                                                <span
+                                                    className="add"
+                                                    onClick={() => selectedTabTask(column.id)}
+                                                >
+                                                  +
+                                                </span>
+                                                <span onClick={() => {
+                                                    setOpenColumnSelect(prevState => ({...prevState, [column.id]: true}))
+                                                }} className="more">...</span>
                                             </div>
                                         </div>
+                                        {openColumnSelect[column.id] &&
+                                            <div className='column__select'>
+                                                <div className='column__select__item' onClick={() => {
+                                                    setOpenColumnSelect(prevState => ({...prevState, [column.id]: false}))
+                                                }}>
+                                                    <img src={edit} alt='edit' />
+                                                    <span>Изменить</span>
+                                                </div>
+                                                <div className='column__select__item' onClick={() => deleteColumn(column.id)}>
+                                                    <img src={del} alt='delete' />
+                                                    <span>Удалить</span>
+                                                </div>
+                                            </div>
+                                        }
                                         {column.tasks.map((task, index) => {
                                             if (index > 2) {
                                                 if (!column.open) {
@@ -401,8 +436,8 @@ export const ProjectTracker = () => {
                                                 }
                                                 // onClick={() => toggleMoreTasks(column.id)}
                                             >
-                        {column.open ? "-" : "+"}
-                      </span>
+                                                {column.open ? "-" : "+"}
+                                            </span>
                                         )}
                                     </div>
                                 );

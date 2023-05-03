@@ -501,6 +501,31 @@
           &__more {
             padding-bottom: 50px;
           }
+
+          .column__select {
+            position: absolute;
+            padding: 15px;
+            background: #e1fccf;
+            border-radius: 12px;
+            right: -75px;
+            z-index: 10;
+            row-gap: 10px;
+            display: flex;
+            flex-direction: column;
+
+            &__item {
+              cursor: pointer;
+              display: flex;
+              align-content: center;
+              img {
+                margin-right: 5px;
+              }
+
+              span {
+                font-size: 14px;
+              }
+            }
+          }
         }
 
         .board {

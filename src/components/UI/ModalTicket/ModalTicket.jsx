@@ -5,8 +5,6 @@ import { apiRequest } from "../../../api/request";
 import { useDispatch } from "react-redux";
 import { setProjectBoardFetch } from "../../../redux/projectsTrackerSlice";
 
-import avatarMock1 from "../../../images/avatarMoсk1.png";
-import avatarMock2 from "../../../images/avatarMoсk2.png";
 import category from "../../../images/category.png";
 import watch from "../../../images/watch.png";
 import file from "../../../images/fileModal.svg";
@@ -30,23 +28,6 @@ export const ModalTiсket = ({
   projectName,
 }) => {
   const dispatch = useDispatch();
-  const [tiket] = useState({
-    name: "Разработка трекера",
-    code: "PR - 2245",
-    creator: "Василий Тарасов",
-    descriptions:
-      "На многих страницах сайта отсутствуют или некорректно заполнены метатеги Description. Это может негативно повлиять на представление сайта в результатах поиска. Необходимо исправить все страницы где есть ошибки или отсутствует Title и  Description.",
-  });
-  const [workers] = useState([
-    {
-      name: "Дмитрий Рогов",
-      avatar: avatarMock2,
-    },
-    {
-      name: "Марина Серова",
-      avatar: avatarMock1,
-    },
-  ]);
   const [addSubtask, setAddSubtask] = useState(false);
 
   function deleteTask() {
@@ -75,7 +56,7 @@ export const ModalTiсket = ({
           <h3 className="title-project">
             <img src={category} className="title-project__category"></img>
             Проект: {projectName}
-            <Link to={`/tracker/${task.id}`} className="title-project__full">
+            <Link to={`/tracker/task/${task.id}`} className="title-project__full">
               <img src={fullScreen}></img>
             </Link>
           </h3>
@@ -86,7 +67,7 @@ export const ModalTiсket = ({
             <div className="content__description">
               <p>{task.description}</p>
               <img src={taskImg} className="image-task"></img>
-              <p>{tiket.descriptions}</p>
+              <p>{task.description}</p>
             </div>
             <div className="content__communication">
               <p className="tasks">
@@ -116,7 +97,7 @@ export const ModalTiсket = ({
             <span>{task.title}</span>
             <p className="workers__creator">Создатель : {task.user?.fio}</p>
             <div>
-              {workers.map((worker, index) => {
+              {Boolean(task.taskUsers?.length) && task.taskUsers.map((worker, index) => {
                 return (
                   <div className="worker" key={index}>
                     <img src={worker.avatar}></img>
