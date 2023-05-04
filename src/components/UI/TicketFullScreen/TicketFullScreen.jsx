@@ -1,13 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 import { ProfileHeader } from "../../ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../Footer/Footer";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import ModalAdd from "../ModalAdd/ModalAdd";
+import { Navigation } from "../../Navigation/Navigation";
+
 import { useDispatch } from "react-redux";
 import { setToggleTab } from "../../../redux/projectsTrackerSlice";
-import {apiRequest} from "../../../api/request";
+import { apiRequest } from "../../../api/request";
 
 import project from "../../../images/trackerProject.svg";
 import watch from "../../../images/watch.png";
@@ -32,20 +34,22 @@ export const TicketFullScreen = ({}) => {
   const [addSubtask, setAddSubtask] = useState(false);
   const [modalAddWorker, setModalAddWorker] = useState(false);
   const [valueTiket, setValueTiket] = useState("");
-  const ticketId = useParams()
+  const ticketId = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [projectInfo, setProjectInfo] = useState({})
-  const [taskInfo, setTaskInfo] = useState({})
+  const [projectInfo, setProjectInfo] = useState({});
+  const [taskInfo, setTaskInfo] = useState({});
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
-      setTaskInfo(taskInfo)
-      apiRequest(`/project/get-project?project_id=${taskInfo.project_id}`).then((project) => {
-        setProjectInfo(project)
-      })
-    })
-  }, [])
+      setTaskInfo(taskInfo);
+      apiRequest(`/project/get-project?project_id=${taskInfo.project_id}`).then(
+        (project) => {
+          setProjectInfo(project);
+        }
+      );
+    });
+  }, []);
 
   function deleteTask() {
     apiRequest("/task/update-task", {
@@ -55,7 +59,7 @@ export const TicketFullScreen = ({}) => {
         status: 0,
       },
     }).then((res) => {
-      navigate(`/tracker/project/${taskInfo.project_id}`)
+      navigate(`/tracker/project/${taskInfo.project_id}`);
     });
   }
 
@@ -66,6 +70,7 @@ export const TicketFullScreen = ({}) => {
   return (
     <section className="ticket-full-screen">
       <ProfileHeader />
+      <Navigation />
       <div className="container">
         <div className="tracker__content">
           <ProfileBreadcrumbs
@@ -80,7 +85,7 @@ export const TicketFullScreen = ({}) => {
       <div className="tracker__tabs">
         <div className="tracker__tabs__head">
           <Link
-            to='/profile/tracker'
+            to="/profile/tracker"
             className="tab active-tab"
             onClick={() => toggleTabs(1)}
           >
@@ -88,7 +93,7 @@ export const TicketFullScreen = ({}) => {
             <p>Проекты </p>
           </Link>
           <Link
-            to='/profile/tracker'
+            to="/profile/tracker"
             className="tab"
             onClick={() => toggleTabs(2)}
           >
@@ -96,7 +101,7 @@ export const TicketFullScreen = ({}) => {
             <p>Все мои задачи</p>
           </Link>
           <Link
-            to='/profile/tracker'
+            to="/profile/tracker"
             className="tab"
             onClick={() => toggleTabs(3)}
           >
@@ -189,16 +194,19 @@ export const TicketFullScreen = ({}) => {
           </div>
           <div className="workers">
             <div className="workers_box">
-              <p className="workers__creator">Создатель :  <span>{taskInfo.user?.fio}</span></p>
+              <p className="workers__creator">
+                Создатель : <span>{taskInfo.user?.fio}</span>
+              </p>
               <div>
-                {Boolean(taskInfo.taskUsers?.length) && taskInfo.taskUsers.map((worker, index) => {
-                  return (
-                    <div className="worker" key={index}>
-                      <img src={worker.avatar}></img>
-                      <p>{worker.name}</p>
-                    </div>
-                  );
-                })}
+                {Boolean(taskInfo.taskUsers?.length) &&
+                  taskInfo.taskUsers.map((worker, index) => {
+                    return (
+                      <div className="worker" key={index}>
+                        <img src={worker.avatar}></img>
+                        <p>{worker.name}</p>
+                      </div>
+                    );
+                  })}
               </div>
 
               <div className="add-worker moreItems">

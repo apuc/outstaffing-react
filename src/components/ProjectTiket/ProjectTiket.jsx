@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import {Link} from "react-router-dom";
-import ModalSettings from "../UI/ModalSettings/ModalSettings";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { apiRequest } from "../../api/request";
+import { deleteProject, modalToggle } from "../../redux/projectsTrackerSlice";
+
+import { ModalSelect } from "../UI/ModalSelect/ModalSelect";
+import ModalAdd from "../UI/ModalAdd/ModalAdd";
 
 import link from "../../images/link.svg";
 import archiveSet from "../../images/archive.svg";
 import del from "../../images/delete.svg";
 import edit from "../../images/edit.svg";
 
-import {apiRequest} from "../../api/request";
-import {useDispatch} from "react-redux";
-import { deleteProject } from "../../redux/projectsTrackerSlice";
-
 import "./projectTiket.scss";
 
 export const ProjectTiket = ({ project, index }) => {
-  const [modalSettings, setModalSettings] = useState(false);
+  const [modalSelect, setModalSelect] = useState(false);
+  const [modalAdd, setModalAdd] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,20 +34,20 @@ export const ProjectTiket = ({ project, index }) => {
       event &&
       !path.find((item) => item.classList && item.classList.contains("project"))
     ) {
-      setModalSettings(false);
+      setModalSelect(false);
     }
   }
 
   function removeProject() {
-    apiRequest('/project/update', {
-      method: 'PUT',
+    apiRequest("/project/update", {
+      method: "PUT",
       data: {
         project_id: project.id,
-        status: 0
-      }
+        status: 0,
+      },
     }).then((res) => {
-      dispatch(deleteProject(project))
-    })
+      dispatch(deleteProject(project));
+    });
   }
 
   return (
@@ -53,16 +55,33 @@ export const ProjectTiket = ({ project, index }) => {
       <Link to={`/tracker/project/${project.id}`}>{project.name}</Link>
       <div className="project__info">
         <p>Открытые задачи</p>
-        <span className="count">{project.columns.reduce((accumulator, currentValue) => accumulator + currentValue.tasks.length, 0)}</span>
-        {/*<span className="add">{project.columns.length ? '+' : ''}</span>*/}
-        <span className="menu-settings" onClick={() => setModalSettings(true)}>
+        <span className="count">
+          {project.columns.reduce(
+            (accumulator, currentValue) =>
+              accumulator + currentValue.tasks.length,
+            0
+          )}
+        </span>
+        <span className="menu-settings" onClick={() => setModalSelect(true)}>
           ...
         </span>
       </div>
 
-      <ModalSettings active={modalSettings}>
+      <ModalAdd
+        active={modalAdd}
+        setActive={setModalAdd}
+        defautlInput={project.name}
+      ></ModalAdd>
+
+      <ModalSelect active={modalSelect}>
         <div className="project__settings-menu">
-          <div>
+          <div
+            onClick={() => {
+              dispatch(modalToggle("editProject"));
+              setModalAdd(true);
+              setModalSelect(false);
+            }}
+          >
             <img src={edit}></img>
             <p>редактировать</p>
           </div>
@@ -74,13 +93,12 @@ export const ProjectTiket = ({ project, index }) => {
             <img src={archiveSet}></img>
             <p>в архив</p>
           </div>
-          <div
-            onClick={removeProject}>
+          <div onClick={removeProject}>
             <img src={del}></img>
             <p>удалить</p>
           </div>
         </div>
-      </ModalSettings>
+      </ModalSelect>
     </div>
   );
 };
