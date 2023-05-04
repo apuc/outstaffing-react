@@ -62,6 +62,9 @@ export const ModalAdd = ({ active, setActive, selectedTab, defautlInput }) => {
     setDescriptionTicket("");
   }
 
+  function editProject() {
+  }
+
   function getModal() {
     switch (modalType) {
       case "createColumn":
@@ -156,7 +159,7 @@ export const ModalAdd = ({ active, setActive, selectedTab, defautlInput }) => {
                 ></input>
               </div>
             </div>
-            <button className="button-add" onClick={(e) => e.preventDefault()}>
+            <button className="button-add" onClick={editProject}>
               Сохранить
             </button>
             <span className="exit" onClick={() => setActive(false)}></span>

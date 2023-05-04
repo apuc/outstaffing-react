@@ -507,7 +507,8 @@
             padding: 15px;
             background: #e1fccf;
             border-radius: 12px;
-            right: -75px;
+            right: -20px;
+            top: 5px;
             z-index: 7;
             row-gap: 10px;
             display: flex;
@@ -525,6 +526,11 @@
                 font-size: 14px;
               }
             }
+          }
+
+          &__noItems {
+            font-weight: 500;
+            font-size: 25px;
           }
         }
 
