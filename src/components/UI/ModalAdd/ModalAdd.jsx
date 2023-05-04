@@ -157,7 +157,7 @@ export const ModalAdd = ({ active, setActive, selectedTab, defautlInput }) => {
               </div>
             </div>
             <button className="button-add" onClick={(e) => e.preventDefault()}>
-              Добавить
+              Сохранить
             </button>
             <span className="exit" onClick={() => setActive(false)}></span>
           </div>

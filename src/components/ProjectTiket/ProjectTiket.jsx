@@ -62,7 +62,6 @@ export const ProjectTiket = ({ project, index }) => {
             0
           )}
         </span>
-        {/*<span className="add">{project.columns.length ? '+' : ''}</span>*/}
         <span className="menu-settings" onClick={() => setModalSelect(true)}>
           ...
         </span>
