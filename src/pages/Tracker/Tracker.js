@@ -13,6 +13,7 @@ import ModalCreate from "../../components/UI/ModalCreate/ModalCreate";
 import ProjectTiket from "../../components/ProjectTiket/ProjectTiket";
 import { urlForLocal } from '../../helper'
 import { getCorrectDate} from "../../components/Calendar/calendarHelper";
+import { Loader } from "../../components/Loader/Loader";
 
 import project from "../../images/trackerProject.svg";
 import tasks from "../../images/trackerTasks.svg";
@@ -29,6 +30,7 @@ export const Tracker = () => {
   const tab = useSelector(getToggleTab)
   const [allTasks, setAllTasks] = useState([])
   const [filteredAllTasks, setFilteredAllTasks] = useState([]);
+  const [loader, setLoader] = useState(false)
 
   const [archiveProjects] = useState([
     {
@@ -71,8 +73,10 @@ export const Tracker = () => {
   const [modalCreateProject, setModalCreateProject] = useState(false);
 
   useEffect(() => {
+    setLoader(true)
     apiRequest(`/project/project-list?user_id=${localStorage.getItem('id')}&expand=columns`).then((el) => {
       dispatch(setAllProjects(el.projects))
+      setLoader(false)
     })
     apiRequest(`/task/get-user-tasks?user_id=${localStorage.getItem('id')}`).then((el) => {
       setAllTasks(el)
@@ -173,16 +177,22 @@ export const Tracker = () => {
               title={"Укажите название проекта:"}
             />
 
-            {Boolean(projects.length) &&
+            {loader &&
+              <Loader style='green'/>
+            }
+
+            {Boolean(projects.length) && !loader &&
               projects.map((project, index) => {
                 return (
-                  <ProjectTiket
-                    key={index}
-                    project={project}
-                  ></ProjectTiket>
+                    project.status !== 10 ?
+                      <ProjectTiket
+                        key={index}
+                        project={project}
+                      ></ProjectTiket>
+                        : ''
                 );
               })}
-            {!Boolean(projects.length) && (
+            {(!Boolean(projects.length) || !Boolean(projects.filter((project) => project.status !== 10).length)) && !loader && (
               <div className="no-projects">
                 <div className="no-projects__createNew">
                   <div>
@@ -202,7 +212,7 @@ export const Tracker = () => {
                 </p>
               </div>
             )}
-            {Boolean(projects.length) && (
+            {Boolean(projects.length) && !loader && (
               <div className="create-newProject">
                 <button
                   className="createProjectBtn"
@@ -235,25 +245,30 @@ export const Tracker = () => {
                 />
               </div>
             </div>
-            <div className="taskList__wrapper">
-              {Boolean(filteredAllTasks.length) && filteredAllTasks.map((task) => {
-                return (
-                  <div className="task" key={task.id}>
-                    <div className="task__info">
-                      <h5>{task.title}</h5>
-                      <p>{task.description}</p>
-                    </div>
-                    <div className="task__person">
-                      <img src={urlForLocal(task.user.avatar)} alt="avatar" />
-                      <div className="task__project">
-                        <p>{task.user.fio}</p>
-                        <span>{getCorrectDate(task.created_at)}</span>
+            {loader &&
+              <Loader style='green' />
+            }
+            {!loader &&
+              <div className="taskList__wrapper">
+                {Boolean(filteredAllTasks.length) && filteredAllTasks.map((task) => {
+                  return (
+                    <div className="task" key={task.id}>
+                      <div className="task__info">
+                        <h5>{task.title}</h5>
+                        <p>{task.description}</p>
+                      </div>
+                      <div className="task__person">
+                        <img src={urlForLocal(task.user.avatar)} alt="avatar" />
+                        <div className="task__project">
+                          <p>{task.user.fio}</p>
+                          <span>{getCorrectDate(task.created_at)}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            }
           </div>
           <div
             className={

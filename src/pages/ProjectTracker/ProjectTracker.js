@@ -4,15 +4,18 @@ import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
 import { Navigation } from "../../components/Navigation/Navigation";
+import { Loader } from "../../components/Loader/Loader";
 
 import { useDispatch, useSelector } from "react-redux";
 import { apiRequest } from "../../api/request";
 import {
   getProjectBoard,
+  getBoarderLoader,
   modalToggle,
   moveProjectTask,
   setProjectBoardFetch,
   setToggleTab,
+  activeLoader
 } from "../../redux/projectsTrackerSlice";
 
 import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
@@ -42,8 +45,10 @@ export const ProjectTracker = () => {
 
   const startWrapperIndexTest = useRef({});
   const projectBoard = useSelector(getProjectBoard);
+  const loader = useSelector(getBoarderLoader)
 
   useEffect(() => {
+    dispatch(activeLoader())
     dispatch(setProjectBoardFetch(projectId.id));
   }, []);
 
@@ -186,23 +191,27 @@ export const ProjectTracker = () => {
           </Link>
         </div>
         <div className="tracker__tabs__content">
+          {loader &&
+            <Loader style='green' />
+          }
+          {!loader &&
           <div className="tracker__tabs__content__tasks tasks active__content">
             <div className="tasks__head">
               <div className="tasks__head__wrapper">
                 <h4>Проект : {projectBoard.name}</h4>
 
                 <ModalAdd
-                  active={modalAdd}
-                  setActive={setModalAdd}
-                  selectedTab={selectedTab}
+                    active={modalAdd}
+                    setActive={setModalAdd}
+                    selectedTab={selectedTab}
                 ></ModalAdd>
 
                 <div className="tasks__head__add">
                   <span
-                    onClick={() => {
-                      dispatch(modalToggle("createColumn"));
-                      setModalAdd(true);
-                    }}
+                      onClick={() => {
+                        dispatch(modalToggle("createColumn"));
+                        setModalAdd(true);
+                      }}
                   >
                     +
                   </span>
@@ -213,11 +222,11 @@ export const ProjectTracker = () => {
                   <img src={avatarTest} alt="avatar" />
                   <span className="countPersons">+9</span>
                   <span
-                    className="addPerson"
-                    onClick={() => {
-                      dispatch(modalToggle("addWorker"));
-                      setModalAdd(true);
-                    }}
+                      className="addPerson"
+                      onClick={() => {
+                        dispatch(modalToggle("addWorker"));
+                        setModalAdd(true);
+                      }}
                   >
                     +
                   </span>
@@ -239,76 +248,76 @@ export const ProjectTracker = () => {
             </div>
 
             <ModalTicket
-              active={modalActiveTicket}
-              setActive={setModalActiveTicket}
-              task={selectedTicket}
-              projectId={projectBoard.id}
-              projectName={projectBoard.name}
+                active={modalActiveTicket}
+                setActive={setModalActiveTicket}
+                task={selectedTicket}
+                projectId={projectBoard.id}
+                projectName={projectBoard.name}
             />
 
             <div className="tasks__container">
               {Boolean(projectBoard?.columns) &&
-                Boolean(projectBoard.columns.length) &&
-                projectBoard.columns.map((column) => {
-                  return (
+              Boolean(projectBoard.columns.length) &&
+              projectBoard.columns.map((column) => {
+                return (
                     <div
-                      key={column.id}
-                      onDragOver={(e) => dragOverHandler(e)}
-                      onDragEnter={(e) => dragEnterHandler(column.id)}
-                      onDrop={(e) => dragDropHandler(e, column.id)}
-                      className={`tasks__board ${
-                        column.tasks.length >= 3 ? "tasks__board__more" : ""
-                      } ${
-                        wrapperHover[column.id] ? "tasks__board__hover" : ""
-                      }`}
+                        key={column.id}
+                        onDragOver={(e) => dragOverHandler(e)}
+                        onDragEnter={(e) => dragEnterHandler(column.id)}
+                        onDrop={(e) => dragDropHandler(e, column.id)}
+                        className={`tasks__board ${
+                            column.tasks.length >= 3 ? "tasks__board__more" : ""
+                        } ${
+                            wrapperHover[column.id] ? "tasks__board__hover" : ""
+                        }`}
                     >
                       <div className="board__head">
                         {/*<span className={wrapperIndex === 3 ? "done" : ""}>*/}
                         <span>{column.title}</span>
                         <div>
                           <span
-                            className="add"
-                            onClick={() => selectedTabTask(column.id)}
+                              className="add"
+                              onClick={() => selectedTabTask(column.id)}
                           >
                             +
                           </span>
                           <span
-                            onClick={() => {
-                              setOpenColumnSelect((prevState) => ({
-                                ...prevState,
-                                [column.id]: true,
-                              }));
-                            }}
-                            className="more"
+                              onClick={() => {
+                                setOpenColumnSelect((prevState) => ({
+                                  ...prevState,
+                                  [column.id]: true,
+                                }));
+                              }}
+                              className="more"
                           >
                             ...
                           </span>
                         </div>
                       </div>
                       {openColumnSelect[column.id] && (
-                        <div className="column__select">
-                          <div
-                            className="column__select__item"
-                            onClick={() => {
-                              setOpenColumnSelect((prevState) => ({
-                                ...prevState,
-                                [column.id]: false,
-                              }));
-                              dispatch(modalToggle("editColumn"));
-                              setModalAdd(true);
-                            }}
-                          >
-                            <img src={edit} alt="edit" />
-                            <span>Изменить</span>
+                          <div className="column__select">
+                            <div
+                                className="column__select__item"
+                                onClick={() => {
+                                  setOpenColumnSelect((prevState) => ({
+                                    ...prevState,
+                                    [column.id]: false,
+                                  }));
+                                  dispatch(modalToggle("editColumn"));
+                                  setModalAdd(true);
+                                }}
+                            >
+                              <img src={edit} alt="edit" />
+                              <span>Изменить</span>
+                            </div>
+                            <div
+                                className="column__select__item"
+                                onClick={() => deleteColumn(column.id)}
+                            >
+                              <img src={del} alt="delete" />
+                              <span>Удалить</span>
+                            </div>
                           </div>
-                          <div
-                            className="column__select__item"
-                            onClick={() => deleteColumn(column.id)}
-                          >
-                            <img src={del} alt="delete" />
-                            <span>Удалить</span>
-                          </div>
-                        </div>
                       )}
                       {column.tasks.map((task, index) => {
                         if (index > 2) {
@@ -317,56 +326,63 @@ export const ProjectTracker = () => {
                           }
                         }
                         return (
-                          <div
-                            key={task.id}
-                            className="tasks__board__item"
-                            draggable={true}
-                            onDragStart={(e) =>
-                              dragStartHandler(e, task, column.id)
-                            }
-                            onDragEnd={(e) => dragEndHandler(e)}
-                            onClick={(e) => openTicket(e, task)}
-                          >
-                            <div className="tasks__board__item__title">
-                              <p>{task.title}</p>
-                            </div>
-                            <p className="tasks__board__item__description">
-                              {task.description}
-                            </p>
-                            <div className="tasks__board__item__info">
-                              <div className="tasks__board__item__info__more">
-                                <img src={commentsBoard} alt="commentsImg" />
-                                <span>{task.comments} коментариев</span>
+                            <div
+                                key={task.id}
+                                className="tasks__board__item"
+                                draggable={true}
+                                onDragStart={(e) =>
+                                    dragStartHandler(e, task, column.id)
+                                }
+                                onDragEnd={(e) => dragEndHandler(e)}
+                                onClick={(e) => openTicket(e, task)}
+                            >
+                              <div className="tasks__board__item__title">
+                                <p>{task.title}</p>
                               </div>
-                              <div className="tasks__board__item__info__more">
-                                <img src={filesBoard} alt="filesImg" />
-                                <span>{task.files} файлов</span>
+                              <p className="tasks__board__item__description">
+                                {task.description}
+                              </p>
+                              <div className="tasks__board__item__info">
+                                <div className="tasks__board__item__info__more">
+                                  <img src={commentsBoard} alt="commentsImg" />
+                                  <span>{task.comments} коментариев</span>
+                                </div>
+                                <div className="tasks__board__item__info__more">
+                                  <img src={filesBoard} alt="filesImg" />
+                                  <span>{task.files} файлов</span>
+                                </div>
+                                {/*<div className="tasks__board__item__info__avatars">*/}
+                                {/*  <img src={task.avatarCreated} alt="avatar" />*/}
+                                {/*  <img src={task.avatarDo} alt="avatar" />*/}
+                                {/*</div>*/}
                               </div>
-                              {/*<div className="tasks__board__item__info__avatars">*/}
-                              {/*  <img src={task.avatarCreated} alt="avatar" />*/}
-                              {/*  <img src={task.avatarDo} alt="avatar" />*/}
-                              {/*</div>*/}
                             </div>
-                          </div>
                         );
                       })}
                       {column.tasks.length > 3 && (
-                        <span
-                          className={
-                            column.open
-                              ? "lessItems openItems"
-                              : "moreItems openItems"
-                          }
-                          // onClick={() => toggleMoreTasks(column.id)}
-                        >
+                          <span
+                              className={
+                                column.open
+                                    ? "lessItems openItems"
+                                    : "moreItems openItems"
+                              }
+                              // onClick={() => toggleMoreTasks(column.id)}
+                          >
                           {column.open ? "-" : "+"}
                         </span>
                       )}
                     </div>
-                  );
-                })}
+                );
+              })}
+              {Boolean(projectBoard?.columns) &&
+              !Boolean(projectBoard.columns.length) &&
+              <div className='tasks__board__noItems'>
+                В проекте нет задач.
+              </div>
+              }
             </div>
           </div>
+          }
         </div>
       </div>
       <Footer />

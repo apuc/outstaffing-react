@@ -21,7 +21,8 @@ export const ModalCreate = ({ active, setActive, title }) => {
           status: 1,
         }
       }).then((res) => {
-        dispatch(setProject(res));
+        const result = {...res, columns: []}
+        dispatch(setProject(result));
         setActive(false);
         setInputValue("");
       })
@@ -44,7 +45,7 @@ export const ModalCreate = ({ active, setActive, title }) => {
               className="name-project"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-            ></input>
+            />
           </div>
           <button className="create-project" onClick={createName}>
             Создать

@@ -43,7 +43,7 @@ export const ProjectTiket = ({ project, index }) => {
       method: "PUT",
       data: {
         project_id: project.id,
-        status: 0,
+        status: 10,
       },
     }).then((res) => {
       dispatch(deleteProject(project));

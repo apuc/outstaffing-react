@@ -507,8 +507,9 @@
             padding: 15px;
             background: #e1fccf;
             border-radius: 12px;
-            right: -75px;
-            z-index: 10;
+            right: -20px;
+            top: 5px;
+            z-index: 7;
             row-gap: 10px;
             display: flex;
             flex-direction: column;
@@ -525,6 +526,11 @@
                 font-size: 14px;
               }
             }
+          }
+
+          &__noItems {
+            font-weight: 500;
+            font-size: 25px;
           }
         }
 
