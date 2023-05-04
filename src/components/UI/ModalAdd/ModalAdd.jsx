@@ -162,6 +162,28 @@ export const ModalAdd = ({ active, setActive, selectedTab, defautlInput }) => {
             <span className="exit" onClick={() => setActive(false)}></span>
           </div>
         );
+      case "editColumn":
+        return (
+          <div
+            className="modal-add__content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="title-project">
+              <h4>Введите новое название</h4>
+              <div className="input-container">
+                <input
+                  className="name-project"
+                  value={defautlInput}
+                  onChange={(e) => setValueTiket(e.target.value)}
+                ></input>
+              </div>
+            </div>
+            <button className="button-add" onClick={(e) => e.preventDefault()}>
+              Сохранить
+            </button>
+            <span className="exit" onClick={() => setActive(false)}></span>
+          </div>
+        );
       default:
         return null;
     }

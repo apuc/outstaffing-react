@@ -266,6 +266,19 @@
       line-height: 32px;
       font-weight: 500;
       color: #2d4a17;
+      display: flex;
+      max-width: 200px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      span {
+        margin-left: 5px;
+        font-size: 14px;
+        line-height: 32px;
+        font-weight: 500;
+        display: flex;
+      }
     }
 
     .worker {

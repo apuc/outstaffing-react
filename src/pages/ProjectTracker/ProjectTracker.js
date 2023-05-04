@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { Navigation } from "../../components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
+import { Navigation } from "../../components/Navigation/Navigation";
 
 import { useDispatch, useSelector } from "react-redux";
+import { apiRequest } from "../../api/request";
 import {
   getProjectBoard,
   modalToggle,
@@ -25,31 +26,38 @@ import selectArrow from "../../images/select.svg";
 import commentsBoard from "../../images/commentsBoard.svg";
 import filesBoard from "../../images/filesBoard.svg";
 import arrow from "../../images/arrowCalendar.png";
+import del from "../../images/delete.svg";
+import edit from "../../images/edit.svg";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();
-  const currentUrl = useState(window.location.pathname);
-  const projectId = currentUrl[0].split("/").at(-1);
+  const projectId = useParams();
 
-  useEffect(() => {
-    dispatch(setProjectBoardFetch(projectId));
-  }, []);
-
+  const [openColumnSelect, setOpenColumnSelect] = useState({});
+  const [selectedTab, setSelectedTab] = useState(0);
+  const [wrapperHover, setWrapperHover] = useState({});
   const [modalAdd, setModalAdd] = useState(false);
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState({});
 
-  const [selectedTab, setSelectedTab] = useState(0);
-
   const startWrapperIndexTest = useRef({});
-  const [wrapperHover, setWrapperHover] = useState([
-    false,
-    false,
-    false,
-    false,
-  ]);
-
   const projectBoard = useSelector(getProjectBoard);
+
+  useEffect(() => {
+    dispatch(setProjectBoardFetch(projectId.id));
+  }, []);
+
+  useEffect(() => {
+    if (Object.keys(projectBoard).length) {
+      projectBoard.columns.forEach((column) => {
+        setOpenColumnSelect((prevState) => ({
+          ...prevState,
+          [column.id]: false,
+        }));
+        setWrapperHover((prevState) => ({ ...prevState, [column.id]: false }));
+      });
+    }
+  }, [projectBoard]);
 
   // function toggleMoreTasks(columnId) {
   //     setTabTaskMok((prevArray) =>
@@ -71,11 +79,9 @@ export const ProjectTracker = () => {
   }
 
   function dragEndHandler(e) {
-    setWrapperHover((prevArray) =>
-      prevArray.map((elem) => {
-        return false;
-      })
-    );
+    setWrapperHover((prevState) => ({
+      [prevState]: false,
+    }));
     e.target.classList.remove("tasks__board__item__hide");
   }
 
@@ -87,26 +93,21 @@ export const ProjectTracker = () => {
     if (columnId === startWrapperIndexTest.current.index) {
       return;
     }
-    setWrapperHover((prevArray) =>
-      prevArray.map((elem, index) => {
-        if (index === columnId) {
-          return true;
-        } else {
-          return false;
-        }
-      })
-    );
+
+    setWrapperHover((prevState) => ({
+      [prevState]: false,
+      [columnId]: true,
+    }));
   }
   function dragDropHandler(e, columnId) {
     e.preventDefault();
     if (startWrapperIndexTest.current.index === columnId) {
       return;
     }
-    setWrapperHover((prevArray) =>
-      prevArray.map((elem) => {
-        return false;
-      })
-    );
+
+    setWrapperHover((prevState) => ({
+      [prevState]: false,
+    }));
 
     if (columnId !== startWrapperIndexTest.current.index) {
       dispatch(
@@ -127,6 +128,19 @@ export const ProjectTracker = () => {
   function openTicket(e, task) {
     setSelectedTicket(task);
     setModalActiveTicket(true);
+  }
+
+  function deleteColumn(id) {
+    apiRequest("/project-column/update-column", {
+      method: "PUT",
+      data: {
+        column_id: id,
+        project_id: projectBoard.id,
+        status: 0,
+      },
+    }).then((res) => {
+      dispatch(setProjectBoardFetch(projectBoard.id));
+    });
   }
 
   return (
@@ -258,9 +272,44 @@ export const ProjectTracker = () => {
                           >
                             +
                           </span>
-                          <span className="more">...</span>
+                          <span
+                            onClick={() => {
+                              setOpenColumnSelect((prevState) => ({
+                                ...prevState,
+                                [column.id]: true,
+                              }));
+                            }}
+                            className="more"
+                          >
+                            ...
+                          </span>
                         </div>
                       </div>
+                      {openColumnSelect[column.id] && (
+                        <div className="column__select">
+                          <div
+                            className="column__select__item"
+                            onClick={() => {
+                              setOpenColumnSelect((prevState) => ({
+                                ...prevState,
+                                [column.id]: false,
+                              }));
+                              dispatch(modalToggle("editColumn"));
+                              setModalAdd(true);
+                            }}
+                          >
+                            <img src={edit} alt="edit" />
+                            <span>Изменить</span>
+                          </div>
+                          <div
+                            className="column__select__item"
+                            onClick={() => deleteColumn(column.id)}
+                          >
+                            <img src={del} alt="delete" />
+                            <span>Удалить</span>
+                          </div>
+                        </div>
+                      )}
                       {column.tasks.map((task, index) => {
                         if (index > 2) {
                           if (!column.open) {
