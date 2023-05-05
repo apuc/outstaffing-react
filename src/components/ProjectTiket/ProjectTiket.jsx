@@ -5,7 +5,7 @@ import { apiRequest } from "../../api/request";
 import { deleteProject, modalToggle } from "../../redux/projectsTrackerSlice";
 
 import { ModalSelect } from "../UI/ModalSelect/ModalSelect";
-import ModalAdd from "../UI/ModalAdd/ModalAdd";
+import TrackerModal from "../UI/TrackerModal/TrackerModal";
 
 import link from "../../images/link.svg";
 import archiveSet from "../../images/archive.svg";
@@ -67,11 +67,11 @@ export const ProjectTiket = ({ project, index }) => {
         </span>
       </div>
 
-      <ModalAdd
+      <TrackerModal
         active={modalAdd}
         setActive={setModalAdd}
         defautlInput={project.name}
-      ></ModalAdd>
+      ></TrackerModal>
 
       <ModalSelect active={modalSelect}>
         <div className="project__settings-menu">

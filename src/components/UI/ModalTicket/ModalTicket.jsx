@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ModalAdd from "../ModalAdd/ModalAdd";
+import TrackerModal from "../TrackerModal/TrackerModal";
 import { apiRequest } from "../../../api/request";
 import { useDispatch } from "react-redux";
-import { setProjectBoardFetch } from "../../../redux/projectsTrackerSlice";
+import {
+  modalToggle,
+  setProjectBoardFetch,
+} from "../../../redux/projectsTrackerSlice";
 
 import category from "../../../images/category.png";
 import watch from "../../../images/watch.png";
@@ -56,7 +59,10 @@ export const ModalTiсket = ({
           <h3 className="title-project">
             <img src={category} className="title-project__category"></img>
             Проект: {projectName}
-            <Link to={`/tracker/task/${task.id}`} className="title-project__full">
+            <Link
+              to={`/tracker/task/${task.id}`}
+              className="title-project__full"
+            >
               <img src={fullScreen}></img>
             </Link>
           </h3>
@@ -71,7 +77,12 @@ export const ModalTiсket = ({
             </div>
             <div className="content__communication">
               <p className="tasks">
-                <button onClick={() => setAddSubtask(true)}>
+                <button
+                  onClick={() => {
+                    dispatch(modalToggle("addSubtask"));
+                    setAddSubtask(true);
+                  }}
+                >
                   <img src={plus}></img>
                   Добавить под задачу
                 </button>
@@ -97,14 +108,15 @@ export const ModalTiсket = ({
             <span>{task.title}</span>
             <p className="workers__creator">Создатель : {task.user?.fio}</p>
             <div>
-              {Boolean(task.taskUsers?.length) && task.taskUsers.map((worker, index) => {
-                return (
-                  <div className="worker" key={index}>
-                    <img src={worker.avatar}></img>
-                    <p>{worker.name}</p>
-                  </div>
-                );
-              })}
+              {Boolean(task.taskUsers?.length) &&
+                task.taskUsers.map((worker, index) => {
+                  return (
+                    <div className="worker" key={index}>
+                      <img src={worker.avatar}></img>
+                      <p>{worker.name}</p>
+                    </div>
+                  );
+                })}
             </div>
 
             <div className="add-worker moreItems">
@@ -145,20 +157,12 @@ export const ModalTiсket = ({
           </div>
         </div>
       </div>
-      <ModalAdd active={addSubtask} setActive={setAddSubtask}>
-        <div className="title-project subtask">
-          <h4>
-            Вы добавляете подзадачу <p>в колонку задачи {"Готово"}</p>
-          </h4>
-          <p className="title-project__decs">Введите текст</p>
-          <div>
-            <textarea className="title-project__textarea"></textarea>
-          </div>
-        </div>
-        <button className="button-add" onClick={(e) => e.preventDefault()}>
-          Добавить
-        </button>
-      </ModalAdd>
+
+      <TrackerModal
+        active={addSubtask}
+        setActive={setAddSubtask}
+        defautlInput={task.column_id}
+      ></TrackerModal>
     </div>
   );
 };

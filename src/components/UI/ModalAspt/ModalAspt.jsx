@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
+import { Link } from "react-router-dom";
+import ModalLayout from "../ModalLayout/ModalLayout";
+
 import avatar from "../../../images/mokPerson.png";
 import logoTg from "../../../images/TgLogo.svg";
 import arrow from "../../../images/right-arrow.png";
 import interview from "../../../images/interviewLogo.svg";
-
-import { Link } from "react-router-dom";
-import ModalAdd from "../ModalAdd/ModalAdd";
 
 import "./modalAspt.scss";
 
@@ -82,7 +82,8 @@ export const ModalAspt = ({ active, setActive, level }) => {
         </div>
         <span className="exit" onClick={() => setActive(false)}></span>
       </div>
-      <ModalAdd active={modalSend} setActive={setModalSend}>
+
+      <ModalLayout active={modalSend} setActive={setModalSend}>
         <div className="send">
           <img src={interview}></img>
           <h2>Спасибо, собеседование назначено</h2>
@@ -93,7 +94,7 @@ export const ModalAspt = ({ active, setActive, level }) => {
             Время собеседования: <span>{time}</span>
           </p>
         </div>
-      </ModalAdd>
+      </ModalLayout>
     </div>
   );
 };

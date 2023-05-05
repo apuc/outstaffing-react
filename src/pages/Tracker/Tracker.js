@@ -1,18 +1,24 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
-import {apiRequest} from "../../api/request";
+import { apiRequest } from "../../api/request";
 import { Navigation } from "../../components/Navigation/Navigation";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setAllProjects, getProjects, setToggleTab, getToggleTab } from "../../redux/projectsTrackerSlice";
+import {
+  setAllProjects,
+  getProjects,
+  setToggleTab,
+  getToggleTab,
+  modalToggle,
+} from "../../redux/projectsTrackerSlice";
 
-import ModalCreate from "../../components/UI/ModalCreate/ModalCreate";
+import TrackerModal from "../../components/UI/TrackerModal/TrackerModal";
 import ProjectTiket from "../../components/ProjectTiket/ProjectTiket";
-import { urlForLocal } from '../../helper'
-import { getCorrectDate} from "../../components/Calendar/calendarHelper";
+import { urlForLocal } from "../../helper";
+import { getCorrectDate } from "../../components/Calendar/calendarHelper";
 import { Loader } from "../../components/Loader/Loader";
 
 import project from "../../images/trackerProject.svg";
@@ -27,10 +33,11 @@ import "./tracker.scss";
 export const Tracker = () => {
   const dispatch = useDispatch();
   const projects = useSelector(getProjects);
-  const tab = useSelector(getToggleTab)
-  const [allTasks, setAllTasks] = useState([])
+  const tab = useSelector(getToggleTab);
+
+  const [allTasks, setAllTasks] = useState([]);
   const [filteredAllTasks, setFilteredAllTasks] = useState([]);
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
 
   const [archiveProjects] = useState([
     {
@@ -40,7 +47,7 @@ export const Tracker = () => {
     {
       name: "Будущее России",
       date: "7 марта 2023 г",
-    }
+    },
   ]);
 
   const [completeTasks] = useState([
@@ -64,7 +71,7 @@ export const Tracker = () => {
       dateComplete: "7 марта 2023 г",
       avatarDo: avatarTest,
       project: "Будущее России",
-    }
+    },
   ]);
 
   const [filterCompleteTasks, setFilterCompleteTasks] = useState(completeTasks);
@@ -73,36 +80,42 @@ export const Tracker = () => {
   const [modalCreateProject, setModalCreateProject] = useState(false);
 
   useEffect(() => {
-    setLoader(true)
-    apiRequest(`/project/project-list?user_id=${localStorage.getItem('id')}&expand=columns`).then((el) => {
-      dispatch(setAllProjects(el.projects))
-      setLoader(false)
-    })
-    apiRequest(`/task/get-user-tasks?user_id=${localStorage.getItem('id')}`).then((el) => {
-      setAllTasks(el)
-      setFilteredAllTasks(el)
-    })
-  }, [])
+    setLoader(true);
+    apiRequest(
+      `/project/project-list?user_id=${localStorage.getItem(
+        "id"
+      )}&expand=columns`
+    ).then((el) => {
+      dispatch(setAllProjects(el.projects));
+      setLoader(false);
+    });
+    apiRequest(
+      `/task/get-user-tasks?user_id=${localStorage.getItem("id")}`
+    ).then((el) => {
+      setAllTasks(el);
+      setFilteredAllTasks(el);
+    });
+  }, []);
 
   const toggleTabs = (index) => {
-    dispatch(setToggleTab(index))
+    dispatch(setToggleTab(index));
   };
 
   function filterAllTask(e) {
     setFilteredAllTasks(
-        allTasks.filter((item) => {
-          if (!e.target.value) {
-            return item;
-          }
-          if (
-              item.title.toLowerCase().startsWith(e.target.value.toLowerCase()) ||
-              item.description
-                  .toLowerCase()
-                  .startsWith(e.target.value.toLowerCase())
-          ) {
-            return item;
-          }
-        })
+      allTasks.filter((item) => {
+        if (!e.target.value) {
+          return item;
+        }
+        if (
+          item.title.toLowerCase().startsWith(e.target.value.toLowerCase()) ||
+          item.description
+            .toLowerCase()
+            .startsWith(e.target.value.toLowerCase())
+        ) {
+          return item;
+        }
+      })
     );
   }
 
@@ -171,52 +184,58 @@ export const Tracker = () => {
                 : "tracker__tabs__content__projects tracker__tabs__content__wrapper"
             }
           >
-            <ModalCreate
+            <TrackerModal
               active={modalCreateProject}
               setActive={setModalCreateProject}
-              title={"Укажите название проекта:"}
-            />
+              titleProject={"Укажите название проекта:"}
+            ></TrackerModal>
 
-            {loader &&
-              <Loader style='green'/>
-            }
+            {loader && <Loader style="green" />}
 
-            {Boolean(projects.length) && !loader &&
+            {Boolean(projects.length) &&
+              !loader &&
               projects.map((project, index) => {
-                return (
-                    project.status !== 10 ?
-                      <ProjectTiket
-                        key={index}
-                        project={project}
-                      ></ProjectTiket>
-                        : ''
+                return project.status !== 10 ? (
+                  <ProjectTiket key={index} project={project}></ProjectTiket>
+                ) : (
+                  ""
                 );
               })}
-            {(!Boolean(projects.length) || !Boolean(projects.filter((project) => project.status !== 10).length)) && !loader && (
-              <div className="no-projects">
-                <div className="no-projects__createNew">
-                  <div>
-                    <img src={noProjects} alt="noProjectImg" />
-                    <p>Создайте свой первый проект</p>
+            {(!Boolean(projects.length) ||
+              !Boolean(
+                projects.filter((project) => project.status !== 10).length
+              )) &&
+              !loader && (
+                <div className="no-projects">
+                  <div className="no-projects__createNew">
+                    <div>
+                      <img src={noProjects} alt="noProjectImg" />
+                      <p>Создайте свой первый проект</p>
+                    </div>
+                    <button
+                      className="createProjectBtn"
+                      onClick={() => {
+                        dispatch(modalToggle("createProject"));
+                        setModalCreateProject(true);
+                      }}
+                    >
+                      <span>+</span>Создать проект
+                    </button>
                   </div>
-                  <button
-                    className="createProjectBtn"
-                    onClick={() => setModalCreateProject(true)}
-                  >
-                    <span>+</span>Создать проект
-                  </button>
+                  <p className="no-projects__info">
+                    Ставьте задачи, следите за прогрессом, ведите учёт рабочего
+                    времени
+                  </p>
                 </div>
-                <p className="no-projects__info">
-                  Ставьте задачи, следите за прогрессом, ведите учёт рабочего
-                  времени
-                </p>
-              </div>
-            )}
+              )}
             {Boolean(projects.length) && !loader && (
               <div className="create-newProject">
                 <button
                   className="createProjectBtn"
-                  onClick={() => setModalCreateProject(true)}
+                  onClick={() => {
+                    dispatch(modalToggle("createProject"));
+                    setModalCreateProject(true);
+                  }}
                 >
                   <span>+</span>Создать проект
                 </button>
@@ -245,30 +264,32 @@ export const Tracker = () => {
                 />
               </div>
             </div>
-            {loader &&
-              <Loader style='green' />
-            }
-            {!loader &&
+            {loader && <Loader style="green" />}
+            {!loader && (
               <div className="taskList__wrapper">
-                {Boolean(filteredAllTasks.length) && filteredAllTasks.map((task) => {
-                  return (
-                    <div className="task" key={task.id}>
-                      <div className="task__info">
-                        <h5>{task.title}</h5>
-                        <p>{task.description}</p>
-                      </div>
-                      <div className="task__person">
-                        <img src={urlForLocal(task.user.avatar)} alt="avatar" />
-                        <div className="task__project">
-                          <p>{task.user.fio}</p>
-                          <span>{getCorrectDate(task.created_at)}</span>
+                {Boolean(filteredAllTasks.length) &&
+                  filteredAllTasks.map((task) => {
+                    return (
+                      <div className="task" key={task.id}>
+                        <div className="task__info">
+                          <h5>{task.title}</h5>
+                          <p>{task.description}</p>
+                        </div>
+                        <div className="task__person">
+                          <img
+                            src={urlForLocal(task.user.avatar)}
+                            alt="avatar"
+                          />
+                          <div className="task__project">
+                            <p>{task.user.fio}</p>
+                            <span>{getCorrectDate(task.created_at)}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
-            }
+            )}
           </div>
           <div
             className={
