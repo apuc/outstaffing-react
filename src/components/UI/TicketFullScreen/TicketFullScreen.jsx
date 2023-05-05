@@ -4,11 +4,11 @@ import { ProfileHeader } from "../../ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../Footer/Footer";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import ModalAdd from "../ModalAdd/ModalAdd";
+import TrackerModal from "../TrackerModal/TrackerModal";
 import { Navigation } from "../../Navigation/Navigation";
 
 import { useDispatch } from "react-redux";
-import { setToggleTab } from "../../../redux/projectsTrackerSlice";
+import { modalToggle, setToggleTab } from "../../../redux/projectsTrackerSlice";
 import { apiRequest } from "../../../api/request";
 
 import project from "../../../images/trackerProject.svg";
@@ -31,9 +31,7 @@ import edit from "../../../images/edit.svg";
 import "./ticketFullScreen.scss";
 
 export const TicketFullScreen = ({}) => {
-  const [addSubtask, setAddSubtask] = useState(false);
   const [modalAddWorker, setModalAddWorker] = useState(false);
-  const [valueTiket, setValueTiket] = useState("");
   const ticketId = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -114,31 +112,22 @@ export const TicketFullScreen = ({}) => {
             <div className="tasks__head__wrapper">
               <h4>Проект : {projectInfo.name}</h4>
 
-              <ModalAdd active={modalAddWorker} setActive={setModalAddWorker}>
-                <div className="title-project">
-                  <h4>Добавьте участника</h4>
-                  <p className="title-project__decs">Введите имя или e-mail</p>
-                  <div className="input-container">
-                    <input
-                      className="name-project"
-                      value={valueTiket}
-                      onChange={(e) => setValueTiket(e.target.value)}
-                    ></input>
-                  </div>
-                </div>
-                <button
-                  className="button-add"
-                  onClick={(e) => e.preventDefault()}
-                >
-                  Добавить
-                </button>
-              </ModalAdd>
+              <TrackerModal
+                active={modalAddWorker}
+                setActive={setModalAddWorker}
+              ></TrackerModal>
 
               <div className="tasks__head__persons">
                 <img src={avatarTest} alt="avatar" />
                 <img src={avatarTest} alt="avatar" />
                 <span className="countPersons">+9</span>
-                <span className="addPerson" onClick={setModalAddWorker}>
+                <span
+                  className="addPerson"
+                  onClick={() => {
+                    dispatch(modalToggle("addWorker"));
+                    setModalAddWorker(true);
+                  }}
+                >
                   +
                 </span>
                 <p>добавить участника в проект</p>
@@ -172,7 +161,12 @@ export const TicketFullScreen = ({}) => {
               </div>
               <div className="content__communication">
                 <p className="tasks">
-                  <button onClick={() => setAddSubtask(true)}>
+                  <button
+                    onClick={() => {
+                      dispatch(modalToggle("addSubtask"));
+                      setModalAddWorker(true);
+                    }}
+                  >
                     <img src={plus}></img>
                     Добавить под задачу
                   </button>
@@ -210,7 +204,14 @@ export const TicketFullScreen = ({}) => {
               </div>
 
               <div className="add-worker moreItems">
-                <button>+</button>
+                <button
+                  onClick={() => {
+                    dispatch(modalToggle("addWorker"));
+                    setModalAddWorker(true);
+                  }}
+                >
+                  +
+                </button>
                 <span>Добавить участников</span>
               </div>
             </div>
@@ -247,21 +248,6 @@ export const TicketFullScreen = ({}) => {
             </div>
           </div>
         </div>
-
-        <ModalAdd active={addSubtask} setActive={setAddSubtask}>
-          <div className="title-project subtask">
-            <h4>
-              Вы добавляете подзадачу <p>в колонку задачи {"Готово"}</p>
-            </h4>
-            <p className="title-project__decs">Введите текст</p>
-            <div>
-              <textarea className="title-project__textarea"></textarea>
-            </div>
-          </div>
-          <button className="button-add" onClick={(e) => e.preventDefault()}>
-            Добавить
-          </button>
-        </ModalAdd>
       </div>
       <Footer />
     </section>

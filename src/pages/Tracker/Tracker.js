@@ -15,7 +15,7 @@ import {
   modalToggle,
 } from "../../redux/projectsTrackerSlice";
 
-import ModalAdd from "../../components/UI/ModalAdd/ModalAdd";
+import TrackerModal from "../../components/UI/TrackerModal/TrackerModal";
 import ProjectTiket from "../../components/ProjectTiket/ProjectTiket";
 import { urlForLocal } from "../../helper";
 import { getCorrectDate } from "../../components/Calendar/calendarHelper";
@@ -184,11 +184,11 @@ export const Tracker = () => {
                 : "tracker__tabs__content__projects tracker__tabs__content__wrapper"
             }
           >
-            <ModalAdd
+            <TrackerModal
               active={modalCreateProject}
               setActive={setModalCreateProject}
               titleProject={"Укажите название проекта:"}
-            ></ModalAdd>
+            ></TrackerModal>
 
             {loader && <Loader style="green" />}
 

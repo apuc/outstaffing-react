@@ -9,9 +9,9 @@ import {
   setProjectBoardFetch,
 } from "../../../redux/projectsTrackerSlice";
 
-import "./modalAdd.scss";
+import "./trackerModal.scss";
 
-export const ModalAdd = ({
+export const TrackerModal = ({
   active,
   setActive,
   selectedTab,
@@ -115,7 +115,7 @@ export const ModalAdd = ({
                   className="name-project"
                   value={emailWorker}
                   onChange={(e) => setEmailWorker(e.target.value)}
-                ></input>
+                />
               </div>
             </div>
             <button
@@ -139,7 +139,7 @@ export const ModalAdd = ({
                   value={valueTiket}
                   onChange={(e) => setValueTiket(e.target.value)}
                   placeholder="Название задачи"
-                ></input>
+                />
               </div>
               <div className="input-container">
                 <input
@@ -147,7 +147,7 @@ export const ModalAdd = ({
                   value={descriptionTicket}
                   onChange={(e) => setDescriptionTicket(e.target.value)}
                   placeholder="Описание задачи"
-                ></input>
+                />
               </div>
             </div>
             <button className="button-add" onClick={createTiket}>
@@ -164,7 +164,7 @@ export const ModalAdd = ({
                   className="name-project"
                   value={ProjectName}
                   onChange={(e) => editProjectName(e.target.value)}
-                ></input>
+                />
               </div>
             </div>
             <button className="button-add" onClick={editProject}>
@@ -215,7 +215,7 @@ export const ModalAdd = ({
                   className="name-project"
                   value={valueColumn}
                   onChange={(e) => setValueColumn(e.target.value)}
-                ></input>
+                />
               </div>
             </div>
             <button className="button-add" onClick={createTab}>
@@ -233,7 +233,7 @@ export const ModalAdd = ({
                   className="name-project"
                   value={defautlInput}
                   onChange={(e) => setValueTiket(e.target.value)}
-                ></input>
+                />
               </div>
             </div>
             <button className="button-add" onClick={(e) => e.preventDefault()}>
@@ -248,4 +248,4 @@ export const ModalAdd = ({
   );
 };
 
-export default ModalAdd;
+export default TrackerModal;

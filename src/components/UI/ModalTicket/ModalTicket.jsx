@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ModalAdd from "../ModalAdd/ModalAdd";
+import TrackerModal from "../TrackerModal/TrackerModal";
 import { apiRequest } from "../../../api/request";
 import { useDispatch } from "react-redux";
 import {
@@ -158,11 +158,11 @@ export const ModalTiсket = ({
         </div>
       </div>
 
-      <ModalAdd
+      <TrackerModal
         active={addSubtask}
         setActive={setAddSubtask}
         defautlInput={task.column_id}
-      ></ModalAdd>
+      ></TrackerModal>
     </div>
   );
 };

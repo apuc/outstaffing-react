@@ -13,7 +13,7 @@ import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileB
 import { Footer } from "../../components/Footer/Footer";
 import { Navigation } from "../../components/Navigation/Navigation";
 import { Loader } from "../../components/Loader/Loader";
-import ModalAdd from "../../components/UI/ModalAdd/ModalAdd";
+import ModalLayout from "../../components/UI/ModalLayout/ModalLayout";
 
 import { apiRequest } from "../../api/request";
 import { getCorrectDate } from "../../components/Calendar/calendarHelper";
@@ -76,7 +76,7 @@ export const PartnerBid = () => {
     <div className="partnerBid">
       <ProfileHeader />
       <Navigation />
-      <ModalAdd active={modalDelete} setActive={setModalDelete}>
+      <ModalLayout active={modalDelete} setActive={setModalDelete}>
         <div className="title-project modal-title-delete">
           <h4>Подтверждение удаления</h4>
           <p className="title-project__decs modal-decs">
@@ -99,7 +99,7 @@ export const PartnerBid = () => {
             </button>
           </div>
         </div>
-      </ModalAdd>
+      </ModalLayout>
 
       <div className="container">
         <ProfileBreadcrumbs
