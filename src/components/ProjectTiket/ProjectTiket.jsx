@@ -71,6 +71,7 @@ export const ProjectTiket = ({ project, index }) => {
         active={modalAdd}
         setActive={setModalAdd}
         defautlInput={project.name}
+        projectId={project.id}
       ></TrackerModal>
 
       <ModalSelect active={modalSelect}>
