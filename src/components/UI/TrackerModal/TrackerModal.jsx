@@ -7,6 +7,7 @@ import {
   getValueModalType,
   setProject,
   setProjectBoardFetch,
+  editProjectName
 } from "../../../redux/projectsTrackerSlice";
 
 import "./trackerModal.scss";
@@ -17,6 +18,7 @@ export const TrackerModal = ({
   selectedTab,
   defautlInput,
   titleProject,
+  projectId
 }) => {
   const dispatch = useDispatch();
   const projectBoard = useSelector(getProjectBoard);
@@ -24,7 +26,7 @@ export const TrackerModal = ({
   const modalType = useSelector(getValueModalType);
 
   const [emailWorker, setEmailWorker] = useState("");
-  const [ProjectName, setProjectName] = useState(defautlInput);
+  const [projectName, setProjectName] = useState(defautlInput);
   const [valueColumn, setValueColumn] = useState("");
   const [nameProject, setNameProject] = useState("");
 
@@ -73,10 +75,17 @@ export const TrackerModal = ({
     setDescriptionTicket("");
   }
 
-  function editProject() {}
-
-  function editProjectName(value) {
-    setProjectName(value);
+  function editProject() {
+    apiRequest("/project/update", {
+      method: "PUT",
+      data: {
+        project_id: projectId,
+        name: projectName
+      },
+    }).then((res) => {
+      setActive(false)
+      dispatch(editProjectName({id: projectId, name: projectName}))
+    });
   }
 
   function createProject() {
@@ -88,7 +97,7 @@ export const TrackerModal = ({
         data: {
           user_id: localStorage.getItem("id"),
           name: nameProject,
-          status: 1,
+          status: 19,
         },
       }).then((res) => {
         const result = { ...res, columns: [] };
@@ -162,8 +171,8 @@ export const TrackerModal = ({
               <div className="input-container">
                 <input
                   className="name-project"
-                  value={ProjectName}
-                  onChange={(e) => editProjectName(e.target.value)}
+                  value={projectName}
+                  onChange={(e) => setProjectName(e.target.value)}
                 />
               </div>
             </div>

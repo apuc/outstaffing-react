@@ -27,9 +27,11 @@ export const projectsTrackerSlice = createSlice({
       state.toggleTab = action.payload;
     },
     deleteProject: (state, action) => {
-      state.projects = state.projects.filter(
-        (project) => project.id !== action.payload.id
-      );
+      state.projects.forEach((project) => {
+        if (project.id === action.payload.id) {
+          project.status = 10
+        }
+      })
     },
     activeLoader: (state) => {
       state.boardLoader = true
@@ -53,6 +55,13 @@ export const projectsTrackerSlice = createSlice({
         }
       });
     },
+    editProjectName: (state, action) => {
+      state.projects.forEach((project) => {
+        if (project.id === action.payload.id) {
+          project.name = action.payload.name
+        }
+      })
+    },
     modalToggle: (state, action) => {
       state.modalType = action.payload;
     },
@@ -72,7 +81,8 @@ export const {
   moveProjectTask,
   setToggleTab,
   modalToggle,
-  activeLoader
+  activeLoader,
+  editProjectName
 } = projectsTrackerSlice.actions;
 
 export const getProjects = (state) => state.tracker.projects;

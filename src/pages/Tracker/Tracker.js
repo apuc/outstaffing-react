@@ -38,45 +38,9 @@ export const Tracker = () => {
   const [allTasks, setAllTasks] = useState([]);
   const [filteredAllTasks, setFilteredAllTasks] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [filterCompleteTasks, setFilterCompleteTasks] = useState([]);
+  // const [allCompletedTasks, setAllCompletedTasks] = useState([])
 
-  const [archiveProjects] = useState([
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-  ]);
-
-  const [completeTasks] = useState([
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-  ]);
-
-  const [filterCompleteTasks, setFilterCompleteTasks] = useState(completeTasks);
-
-  // Modal State
   const [modalCreateProject, setModalCreateProject] = useState(false);
 
   useEffect(() => {
@@ -88,6 +52,11 @@ export const Tracker = () => {
     ).then((el) => {
       dispatch(setAllProjects(el.projects));
       setLoader(false);
+      // setAllCompletedTasks(el.projects.filter((project) => {
+      //   if (project.status === 10 && project.columns.length) {
+      //     return project
+      //   }
+      // }).map((project) => { return project.columns}))
     });
     apiRequest(
       `/task/get-user-tasks?user_id=${localStorage.getItem("id")}`
@@ -120,21 +89,21 @@ export const Tracker = () => {
   }
 
   function filterArchiveTasks(e) {
-    setFilterCompleteTasks(
-      completeTasks.filter((item) => {
-        if (!e.target.value) {
-          return item;
-        }
-        if (
-          item.name.toLowerCase().startsWith(e.target.value.toLowerCase()) ||
-          item.description
-            .toLowerCase()
-            .startsWith(e.target.value.toLowerCase())
-        ) {
-          return item;
-        }
-      })
-    );
+    // setFilterCompleteTasks(
+    //   completeTasks.filter((item) => {
+    //     if (!e.target.value) {
+    //       return item;
+    //     }
+    //     if (
+    //       item.name.toLowerCase().startsWith(e.target.value.toLowerCase()) ||
+    //       item.description
+    //         .toLowerCase()
+    //         .startsWith(e.target.value.toLowerCase())
+    //     ) {
+    //       return item;
+    //     }
+    //   })
+    // );
   }
 
   return (
@@ -340,19 +309,19 @@ export const Tracker = () => {
             <div className="archive__projects">
               <div className="archive__title">
                 <h3>Архив проектов:</h3>
-                <p>{archiveProjects.length} проект(ов)</p>
+                <p>{projects.filter((project) => project.status === 10).length} проект(ов)</p>
               </div>
               <div className="archive__tasksWrapper">
-                {Boolean(archiveProjects) ? (
-                  archiveProjects.map((project, index) => {
-                    return (
+                {Boolean(projects.filter((project) => project.status === 10).length) ? (
+                  projects.map((project, index) => {
+                    return project.status === 10 ? (
                       <div className="archive__completeTask" key={index}>
                         <div className="archive__completeTask__description">
                           <p>{project.name}</p>
                           <p className="date">{project.date}</p>
                         </div>
                       </div>
-                    );
+                    ): '';
                   })
                 ) : (
                   <div className="archive__noItem">
