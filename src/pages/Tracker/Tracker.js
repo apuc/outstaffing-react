@@ -39,7 +39,7 @@ export const Tracker = () => {
   const [filteredAllTasks, setFilteredAllTasks] = useState([]);
   const [loader, setLoader] = useState(false);
   const [filterCompleteTasks, setFilterCompleteTasks] = useState([]);
-  // const [allCompletedTasks, setAllCompletedTasks] = useState([])
+  const [allCompletedTasks, setAllCompletedTasks] = useState([])
 
   const [modalCreateProject, setModalCreateProject] = useState(false);
 
@@ -52,11 +52,16 @@ export const Tracker = () => {
     ).then((el) => {
       dispatch(setAllProjects(el.projects));
       setLoader(false);
-      // setAllCompletedTasks(el.projects.filter((project) => {
-      //   if (project.status === 10 && project.columns.length) {
-      //     return project
-      //   }
-      // }).map((project) => { return project.columns}))
+      setAllCompletedTasks(el.projects.filter((project) => {
+        if (project.status === 10 && project.columns.length) {
+          return project
+        }
+      }).map((project) => { return project.columns}).reduce((acu, curr) => {
+        curr.forEach((item) => {
+          acu.push(...item.tasks)
+        })
+        return acu
+      }, []))
     });
     apiRequest(
       `/task/get-user-tasks?user_id=${localStorage.getItem("id")}`
