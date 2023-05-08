@@ -7,7 +7,7 @@ import {
   getValueModalType,
   setProject,
   setProjectBoardFetch,
-  editProjectName
+  editProjectName,
 } from "../../../redux/projectsTrackerSlice";
 
 import "./trackerModal.scss";
@@ -18,7 +18,8 @@ export const TrackerModal = ({
   selectedTab,
   defautlInput,
   titleProject,
-  projectId
+  projectId,
+  titleColumn,
 }) => {
   const dispatch = useDispatch();
   const projectBoard = useSelector(getProjectBoard);
@@ -29,6 +30,8 @@ export const TrackerModal = ({
   const [projectName, setProjectName] = useState(defautlInput);
   const [valueColumn, setValueColumn] = useState("");
   const [nameProject, setNameProject] = useState("");
+
+  // const [editTitleColumn, setEditTitleColumn] = useState(titleColumn);
 
   const [valueTiket, setValueTiket] = useState("");
   const [descriptionTicket, setDescriptionTicket] = useState("");
@@ -80,11 +83,11 @@ export const TrackerModal = ({
       method: "PUT",
       data: {
         project_id: projectId,
-        name: projectName
+        name: projectName,
       },
     }).then((res) => {
-      setActive(false)
-      dispatch(editProjectName({id: projectId, name: projectName}))
+      setActive(false);
+      dispatch(editProjectName({ id: projectId, name: projectName }));
     });
   }
 
@@ -232,7 +235,6 @@ export const TrackerModal = ({
             </button>
           </div>
         )}
-        {/* TODO: fix state */}
         {modalType === "editColumn" && (
           <div>
             <div className="title-project">
@@ -240,8 +242,8 @@ export const TrackerModal = ({
               <div className="input-container">
                 <input
                   className="name-project"
-                  value={defautlInput}
-                  onChange={(e) => setValueTiket(e.target.value)}
+                  value={titleColumn}
+                  onChange={(e) => setEditTitleColumn(e.target.value)}
                 />
               </div>
             </div>

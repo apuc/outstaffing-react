@@ -42,6 +42,7 @@ export const ProjectTracker = () => {
   const [modalAdd, setModalAdd] = useState(false);
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState({});
+  const [titleEditColumn, setTitleEditColumn] = useState("");
 
   const startWrapperIndexTest = useRef({});
   const projectBoard = useSelector(getProjectBoard);
@@ -202,7 +203,8 @@ export const ProjectTracker = () => {
                     active={modalAdd}
                     setActive={setModalAdd}
                     selectedTab={selectedTab}
-                  ></TrackerModal>
+                    titleColumn={titleEditColumn}
+                  />
 
                   <div className="tasks__head__add">
                     <span
@@ -302,6 +304,7 @@ export const ProjectTracker = () => {
                                   [column.id]: false,
                                 }));
                                 dispatch(modalToggle("editColumn"));
+                                setTitleEditColumn(column.title);
                                 setModalAdd(true);
                               }}
                             >
