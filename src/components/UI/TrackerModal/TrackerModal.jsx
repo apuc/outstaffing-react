@@ -28,10 +28,9 @@ export const TrackerModal = ({
 
   const [emailWorker, setEmailWorker] = useState("");
   const [projectName, setProjectName] = useState(defautlInput);
+  const [editTitleColumn, setEditTitleColumn] = useState(titleColumn);
   const [valueColumn, setValueColumn] = useState("");
   const [nameProject, setNameProject] = useState("");
-
-  // const [editTitleColumn, setEditTitleColumn] = useState(titleColumn);
 
   const [valueTiket, setValueTiket] = useState("");
   const [descriptionTicket, setDescriptionTicket] = useState("");
@@ -242,7 +241,7 @@ export const TrackerModal = ({
               <div className="input-container">
                 <input
                   className="name-project"
-                  value={titleColumn}
+                  value={editTitleColumn}
                   onChange={(e) => setEditTitleColumn(e.target.value)}
                 />
               </div>
