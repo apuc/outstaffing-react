@@ -8,6 +8,7 @@ import {
   setProject,
   setProjectBoardFetch,
   editProjectName,
+  getColumnTitle,
 } from "../../../redux/projectsTrackerSlice";
 
 import "./trackerModal.scss";
@@ -19,16 +20,18 @@ export const TrackerModal = ({
   defautlInput,
   titleProject,
   projectId,
-  titleColumn,
 }) => {
   const dispatch = useDispatch();
   const projectBoard = useSelector(getProjectBoard);
 
   const modalType = useSelector(getValueModalType);
 
+  const titleColumn = useSelector(getColumnTitle);
+
   const [emailWorker, setEmailWorker] = useState("");
   const [projectName, setProjectName] = useState(defautlInput);
-  const [editTitleColumn, setEditTitleColumn] = useState(titleColumn);
+  const [editTitleColumn, setEditTitleColumn] = useState("");
+
   const [valueColumn, setValueColumn] = useState("");
   const [nameProject, setNameProject] = useState("");
 
@@ -239,8 +242,19 @@ export const TrackerModal = ({
             <div className="title-project">
               <h4>Введите новое название</h4>
               <div className="input-container">
+                {/* {Boolean(projectBoard?.columns) &&
+                  Boolean(projectBoard.columns.length) &&
+                  projectBoard.columns.map((column) => {
+                    // console.log(column.title);
+                    // console.log("Lol" + titleColumn.title);
+                    if (column.title === titleColumn) {
+                      console.log(column.title);
+                      
+                    }
+                  })} */}
                 <input
                   className="name-project"
+                  placeholder={titleColumn}
                   value={editTitleColumn}
                   onChange={(e) => setEditTitleColumn(e.target.value)}
                 />
