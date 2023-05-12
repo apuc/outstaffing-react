@@ -18,7 +18,7 @@ import "./shortReport.scss";
 export const ShortReport = ({}) => {
   const reportDate = useSelector(getReportDate);
 
-  const sendTest = useSelector(getSendRequest);
+  const sendReport = useSelector(getSendRequest);
   const dispatch = useDispatch();
 
   const [taskText, setTaskText] = useState([]);
@@ -26,7 +26,6 @@ export const ShortReport = ({}) => {
   const [tomorrowTask, setTomorrowTask] = useState([]);
   const [totalHours, setTotalHours] = useState(0);
   const [loader, setLoader] = useState(false);
-  const [reportDay] = useState(new Date(getCreatedDate(reportDate)));
 
   function getReportFromDate(day) {
     setLoader(true);
@@ -39,7 +38,6 @@ export const ShortReport = ({}) => {
         "cardId"
       )}&date=${day}`
     ).then((res) => {
-      console.log(res);
       let spendTime = 0;
       for (const item of res) {
         if (item.difficulties) {
@@ -66,14 +64,14 @@ export const ShortReport = ({}) => {
     });
   }
 
-  if (sendTest) {
+  if (sendReport) {
     dispatch(setSendRequest(false));
     getReportFromDate(getCreatedDate(reportDate));
   }
 
   return (
     <div>
-      <div className="viewReport__info">
+      <div className="viewReport__info short-report">
         <h2 className="viewReport__title">
           Ваши отчеты - <span>просмотр отчета за день</span>
         </h2>

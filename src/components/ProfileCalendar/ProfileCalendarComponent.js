@@ -27,8 +27,8 @@ export const ProfileCalendarComponent = React.memo(
     const [currentDay] = useState(moment());
     const [calendar, setCalendar] = useState([]);
     const [month, setMonth] = useState("");
+    const [dayReport, setDayReport] = useState("");
     const [shortReport, setShortReport] = useState(false);
-    const [dayTest, setDayTest] = useState("");
 
     useEffect(() => {
       setCalendar(calendarHelper(value));
@@ -148,7 +148,7 @@ export const ProfileCalendarComponent = React.memo(
                     dispatch(setReportDate(day));
                     dispatch(setSendRequest(true));
                     setShortReport(true);
-                    setDayTest(day);
+                    setDayReport(day);
                   }}
                   key={day}
                   className={dayStyles(day)}
@@ -171,9 +171,13 @@ export const ProfileCalendarComponent = React.memo(
             )}
           </div>
         </div>
-        <Link to={correctRoute(dayTest)}>
-          <button className="calendar__btn">Посмотреть подробнее</button>
-        </Link>
+
+        {shortReport && (
+          <Link to={correctRoute(dayReport)}>
+            <button className="calendar__btn">Посмотреть подробнее</button>
+          </Link>
+        )}
+
         {shortReport && <ShortReport />}
       </div>
     );
