@@ -52,22 +52,26 @@ export const Tracker = () => {
     ).then((el) => {
       dispatch(setAllProjects(el.projects));
       setLoader(false);
-      setAllCompletedTasks(el.projects.filter((project) => {
-        if (project.status === 10 && project.columns.length) {
-          return project
-        }
-      }).map((project) => { return project.columns}).reduce((acu, curr) => {
-        curr.forEach((item) => {
-          acu.push(...item.tasks)
-        })
-        return acu
-      }, []))
+      // setAllCompletedTasks(el.projects.filter((project) => {
+      //   if (project.status === 10 && project.columns.length) {
+      //     return project
+      //   }
+      // }).map((project) => { return project.columns}).reduce((acu, curr) => {
+      //   curr.forEach((item) => {
+      //     acu.push(...item.tasks)
+      //   })
+      //   return acu
+      // }, []))
     });
     apiRequest(
       `/task/get-user-tasks?user_id=${localStorage.getItem("id")}`
     ).then((el) => {
-      setAllTasks(el);
-      setFilteredAllTasks(el);
+      const allTasks = el.filter((item) => item.status !== 0)
+      const completedTasks = el.filter((item) => item.status === 0)
+      setAllTasks(allTasks);
+      setFilteredAllTasks(allTasks);
+      setAllCompletedTasks(completedTasks)
+      setFilterCompleteTasks(completedTasks)
     });
   }, []);
 
@@ -94,21 +98,21 @@ export const Tracker = () => {
   }
 
   function filterArchiveTasks(e) {
-    // setFilterCompleteTasks(
-    //   completeTasks.filter((item) => {
-    //     if (!e.target.value) {
-    //       return item;
-    //     }
-    //     if (
-    //       item.name.toLowerCase().startsWith(e.target.value.toLowerCase()) ||
-    //       item.description
-    //         .toLowerCase()
-    //         .startsWith(e.target.value.toLowerCase())
-    //     ) {
-    //       return item;
-    //     }
-    //   })
-    // );
+    setFilterCompleteTasks(
+        allCompletedTasks.filter((item) => {
+        if (!e.target.value) {
+          return item;
+        }
+        if (
+          item.title.toLowerCase().startsWith(e.target.value.toLowerCase()) ||
+          item.description
+            .toLowerCase()
+            .startsWith(e.target.value.toLowerCase())
+        ) {
+          return item;
+        }
+      })
+    );
   }
 
   return (
@@ -291,14 +295,14 @@ export const Tracker = () => {
                     return (
                       <div className="archive__completeTask" key={index}>
                         <div className="archive__completeTask__description">
-                          <p>{task.description}</p>
-                          <p className="date">{task.dateComplete}</p>
+                          <p>{task.title}</p>
+                          <p className="date">{task.description}</p>
                         </div>
                         <div className="archive__completeTask__info">
-                          <img src={task.avatarDo} alt="avatar" />
+                          <img src={urlForLocal(task.user.avatar)} alt="avatar" />
                           <div className="archive__completeTask__info__project">
-                            <span>Проект</span>
-                            <p>{task.project}</p>
+                            {/*<span>Проект</span>*/}
+                            <p>{getCorrectDate(task.updated_at)}</p>
                           </div>
                         </div>
                       </div>
