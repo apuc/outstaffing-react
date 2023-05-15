@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import TrackerModal from "../TrackerModal/TrackerModal";
 import { apiRequest } from "../../../api/request";
@@ -32,6 +32,8 @@ export const ModalTiсket = ({
 }) => {
   const dispatch = useDispatch();
   const [addSubtask, setAddSubtask] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [inputsValue, setInputsValue] = useState({title: task.title, description: task.description})
 
   function deleteTask() {
     apiRequest("/task/update-task", {
@@ -42,6 +44,19 @@ export const ModalTiсket = ({
       },
     }).then((res) => {
       setActive(false);
+      dispatch(setProjectBoardFetch(projectId));
+    });
+  }
+
+  function editTask() {
+    apiRequest("/task/update-task", {
+      method: "PUT",
+      data: {
+        task_id: task.id,
+        title: inputsValue.title,
+        description: inputsValue.description
+      },
+    }).then((res) => {
       dispatch(setProjectBoardFetch(projectId));
     });
   }
@@ -69,11 +84,14 @@ export const ModalTiсket = ({
 
           <div className="content__task">
             <span>Задача</span>
-            <h5>{task.title}</h5>
+            {editOpen ? <input value={inputsValue.title} onChange={(e) => {
+              setInputsValue((prevValue) => ({...prevValue, title: e.target.value}))
+            }} /> :<h5>{inputsValue.title}</h5>}
             <div className="content__description">
-              <p>{task.description}</p>
+              {editOpen ? <input value={inputsValue.description} onChange={(e) => {
+                setInputsValue((prevValue) => ({...prevValue, description: e.target.value}))
+              }}/> :<p>{inputsValue.description}</p>}
               <img src={taskImg} className="image-task"></img>
-              <p>{task.description}</p>
             </div>
             <div className="content__communication">
               <p className="tasks">
@@ -138,15 +156,22 @@ export const ModalTiсket = ({
           </div>
 
           <div className="workers_box-bottom">
-            <div>
+            <div className={editOpen ? 'edit' : ''} onClick={() => {
+              if(editOpen) {
+                setEditOpen(!editOpen)
+                editTask()
+              } else {
+                setEditOpen(!editOpen)
+              }
+            }}>
               <img src={edit}></img>
-              <p>редактировать</p>
+              <p>{editOpen ? 'сохранить' : 'редактировать'}</p>
             </div>
             <div>
               <img src={link}></img>
               <p>ссылка на проект</p>
             </div>
-            <div>
+            <div onClick={deleteTask}>
               <img src={archive}></img>
               <p>в архив</p>
             </div>

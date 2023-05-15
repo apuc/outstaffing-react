@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { apiRequest } from "../../../api/request";
 import {
+  setColumnName,
   getProjectBoard,
   getValueModalType,
   setProject,
   setProjectBoardFetch,
   editProjectName,
-  getColumnTitle,
+  editColumnName,
+  getColumnName,
+  getColumnId
 } from "../../../redux/projectsTrackerSlice";
 
 import "./trackerModal.scss";
@@ -20,16 +23,16 @@ export const TrackerModal = ({
   defautlInput,
   titleProject,
   projectId,
-  titleColumn
 }) => {
   const dispatch = useDispatch();
   const projectBoard = useSelector(getProjectBoard);
+  const columnName = useSelector(getColumnName);
+  const columnId = useSelector(getColumnId)
 
   const modalType = useSelector(getValueModalType);
 
   const [emailWorker, setEmailWorker] = useState("");
   const [projectName, setProjectName] = useState(defautlInput);
-  const [editTitleColumn, setEditTitleColumn] = useState(titleColumn);
 
   const [valueColumn, setValueColumn] = useState("");
   const [nameProject, setNameProject] = useState("");
@@ -90,6 +93,19 @@ export const TrackerModal = ({
       setActive(false);
       dispatch(editProjectName({ id: projectId, name: projectName }));
     });
+  }
+
+  function changeColumnName() {
+    apiRequest("/project-column/update-column", {
+      method: "PUT",
+      data: {
+        column_id: columnId,
+        title: columnName
+      }
+    }).then((res) => {
+      setActive(false);
+      dispatch(editColumnName({id: columnId, title: columnName}))
+    })
   }
 
   function createProject() {
@@ -243,12 +259,12 @@ export const TrackerModal = ({
               <div className="input-container">
                 <input
                   className="name-project"
-                  value={editTitleColumn}
-                  onChange={(e) => setEditTitleColumn(e.target.value)}
+                  value={columnName}
+                  onChange={(e) => dispatch(setColumnName(e.target.value))}
                 />
               </div>
             </div>
-            <button className="button-add" onClick={(e) => e.preventDefault()}>
+            <button className="button-add" onClick={changeColumnName}>
               Сохранить
             </button>
           </div>

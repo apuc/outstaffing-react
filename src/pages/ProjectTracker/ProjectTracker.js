@@ -16,7 +16,8 @@ import {
   setProjectBoardFetch,
   setToggleTab,
   activeLoader,
-  setColumnTitle,
+  setColumnName,
+  setColumnId,
 } from "../../redux/projectsTrackerSlice";
 
 import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
@@ -217,9 +218,9 @@ export const ProjectTracker = () => {
                     <p>добавить колонку</p>
                   </div>
                   <div className="tasks__head__persons">
-                    <img src={avatarTest} alt="avatar" />
-                    <img src={avatarTest} alt="avatar" />
-                    <span className="countPersons">+9</span>
+                    {/*<img src={avatarTest} alt="avatar" />*/}
+                    {/*<img src={avatarTest} alt="avatar" />*/}
+                    <span className="countPersons">{projectBoard.projectUsers?.length}</span>
                     <span
                       className="addPerson"
                       onClick={() => {
@@ -246,13 +247,13 @@ export const ProjectTracker = () => {
                 </div>
               </div>
 
-              <ModalTicket
-                active={modalActiveTicket}
-                setActive={setModalActiveTicket}
-                task={selectedTicket}
-                projectId={projectBoard.id}
-                projectName={projectBoard.name}
-              />
+              {Boolean(modalActiveTicket) && <ModalTicket
+                  active={modalActiveTicket}
+                  setActive={setModalActiveTicket}
+                  task={selectedTicket}
+                  projectId={projectBoard.id}
+                  projectName={projectBoard.name}
+              />}
 
               <div className="tasks__container">
                 {Boolean(projectBoard?.columns) &&
@@ -270,12 +271,6 @@ export const ProjectTracker = () => {
                           wrapperHover[column.id] ? "tasks__board__hover" : ""
                         }`}
                       >
-                        <TrackerModal
-                            active={modalAdd}
-                            setActive={setModalAdd}
-                            selectedTab={selectedTab}
-                            titleColumn={column.title}
-                        />
                         <div className="board__head">
                           {/*<span className={wrapperIndex === 3 ? "done" : ""}>*/}
                           <span>{column.title}</span>
@@ -309,6 +304,8 @@ export const ProjectTracker = () => {
                                   [column.id]: false,
                                 }));
                                 dispatch(modalToggle("editColumn"));
+                                dispatch(setColumnName(column.title))
+                                dispatch(setColumnId(column.id))
                                 setModalAdd(true);
                               }}
                             >

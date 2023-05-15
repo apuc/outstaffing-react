@@ -290,6 +290,8 @@ export const Tracker = () => {
                 </div>
               </div>
               <div className="archive__tasksWrapper">
+                {loader && <Loader style="green" />}
+                {!loader && <>
                 {Boolean(filterCompleteTasks.length) ? (
                   filterCompleteTasks.map((task, index) => {
                     return (
@@ -313,6 +315,8 @@ export const Tracker = () => {
                     <p>В архиве задач нет</p>
                   </div>
                 )}
+                </>
+                }
               </div>
             </div>
             <div className="archive__projects">
