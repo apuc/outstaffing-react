@@ -6,7 +6,6 @@ const initialState = {
   projectBoard: {},
   toggleTab: 1,
   modalType: "",
-  titleColumn: "",
   boardLoader: false,
 };
 
@@ -66,9 +65,6 @@ export const projectsTrackerSlice = createSlice({
     modalToggle: (state, action) => {
       state.modalType = action.payload;
     },
-    setColumnTitle: (state, action) => {
-      state.titleColumn = action.payload;
-    },
   },
   extraReducers: {
     [setProjectBoardFetch.fulfilled]: (state, action) => {
@@ -94,7 +90,6 @@ export const getProjects = (state) => state.tracker.projects;
 export const getProjectBoard = (state) => state.tracker.projectBoard;
 export const getToggleTab = (state) => state.tracker.toggleTab;
 export const getValueModalType = (state) => state.tracker.modalType;
-export const getColumnTitle = (state) => state.tracker.titleColumn;
 export const getBoarderLoader = (state) => state.tracker.boardLoader;
 
 export default projectsTrackerSlice.reducer;

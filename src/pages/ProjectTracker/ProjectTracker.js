@@ -270,6 +270,12 @@ export const ProjectTracker = () => {
                           wrapperHover[column.id] ? "tasks__board__hover" : ""
                         }`}
                       >
+                        <TrackerModal
+                            active={modalAdd}
+                            setActive={setModalAdd}
+                            selectedTab={selectedTab}
+                            titleColumn={column.title}
+                        />
                         <div className="board__head">
                           {/*<span className={wrapperIndex === 3 ? "done" : ""}>*/}
                           <span>{column.title}</span>
@@ -303,7 +309,6 @@ export const ProjectTracker = () => {
                                   [column.id]: false,
                                 }));
                                 dispatch(modalToggle("editColumn"));
-                                dispatch(setColumnTitle(column.title));
                                 setModalAdd(true);
                               }}
                             >
