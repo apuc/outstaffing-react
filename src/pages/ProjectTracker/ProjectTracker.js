@@ -16,6 +16,7 @@ import {
   setProjectBoardFetch,
   setToggleTab,
   activeLoader,
+  setColumnTitle,
 } from "../../redux/projectsTrackerSlice";
 
 import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
@@ -191,18 +192,18 @@ export const ProjectTracker = () => {
           </Link>
         </div>
         <div className="tracker__tabs__content">
+          <TrackerModal
+            active={modalAdd}
+            setActive={setModalAdd}
+            selectedTab={selectedTab}
+          />
+
           {loader && <Loader style="green" />}
           {!loader && (
             <div className="tracker__tabs__content__tasks tasks active__content">
               <div className="tasks__head">
                 <div className="tasks__head__wrapper">
                   <h4>Проект : {projectBoard.name}</h4>
-
-                  <TrackerModal
-                    active={modalAdd}
-                    setActive={setModalAdd}
-                    selectedTab={selectedTab}
-                  ></TrackerModal>
 
                   <div className="tasks__head__add">
                     <span
@@ -269,6 +270,12 @@ export const ProjectTracker = () => {
                           wrapperHover[column.id] ? "tasks__board__hover" : ""
                         }`}
                       >
+                        <TrackerModal
+                            active={modalAdd}
+                            setActive={setModalAdd}
+                            selectedTab={selectedTab}
+                            titleColumn={column.title}
+                        />
                         <div className="board__head">
                           {/*<span className={wrapperIndex === 3 ? "done" : ""}>*/}
                           <span>{column.title}</span>
