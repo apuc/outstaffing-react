@@ -453,6 +453,8 @@
 
               &__more {
                 cursor: pointer;
+                display: flex;
+                align-items: center;
                 span {
                   font-weight: 500;
                   font-size: 12px;
