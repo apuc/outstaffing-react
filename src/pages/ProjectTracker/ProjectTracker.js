@@ -16,7 +16,8 @@ import {
   setProjectBoardFetch,
   setToggleTab,
   activeLoader,
-  setColumnTitle,
+  setColumnName,
+  setColumnId,
 } from "../../redux/projectsTrackerSlice";
 
 import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
@@ -25,7 +26,6 @@ import TrackerModal from "../../components/UI/TrackerModal/TrackerModal";
 import project from "../../images/trackerProject.svg";
 import tasks from "../../images/trackerTasks.svg";
 import archive from "../../images/archiveTracker.svg";
-import avatarTest from "../../images/AvatarTest .png";
 import selectArrow from "../../images/select.svg";
 import commentsBoard from "../../images/commentsBoard.svg";
 import filesBoard from "../../images/filesBoard.svg";
@@ -39,6 +39,7 @@ export const ProjectTracker = () => {
 
   const [openColumnSelect, setOpenColumnSelect] = useState({});
   const [selectedTab, setSelectedTab] = useState(0);
+  const [priorityTask, setPriorityTask] = useState(0);
   const [wrapperHover, setWrapperHover] = useState({});
   const [modalAdd, setModalAdd] = useState(false);
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
@@ -125,10 +126,11 @@ export const ProjectTracker = () => {
     }
   }
 
-  function selectedTabTask(columnId) {
+  function selectedTabTask(columnId, length) {
     setSelectedTab(columnId);
     dispatch(modalToggle("createTiketProject"));
     setModalAdd(true);
+    setPriorityTask(length + 1)
   }
 
   function openTicket(e, task) {
@@ -196,6 +198,7 @@ export const ProjectTracker = () => {
             active={modalAdd}
             setActive={setModalAdd}
             selectedTab={selectedTab}
+            priorityTask={priorityTask}
           />
 
           {loader && <Loader style="green" />}
@@ -217,9 +220,9 @@ export const ProjectTracker = () => {
                     <p>добавить колонку</p>
                   </div>
                   <div className="tasks__head__persons">
-                    <img src={avatarTest} alt="avatar" />
-                    <img src={avatarTest} alt="avatar" />
-                    <span className="countPersons">+9</span>
+                    {/*<img src={avatarTest} alt="avatar" />*/}
+                    {/*<img src={avatarTest} alt="avatar" />*/}
+                    <span className="countPersons">{projectBoard.projectUsers?.length}</span>
                     <span
                       className="addPerson"
                       onClick={() => {
@@ -246,13 +249,13 @@ export const ProjectTracker = () => {
                 </div>
               </div>
 
-              <ModalTicket
-                active={modalActiveTicket}
-                setActive={setModalActiveTicket}
-                task={selectedTicket}
-                projectId={projectBoard.id}
-                projectName={projectBoard.name}
-              />
+              {Boolean(modalActiveTicket) && <ModalTicket
+                  active={modalActiveTicket}
+                  setActive={setModalActiveTicket}
+                  task={selectedTicket}
+                  projectId={projectBoard.id}
+                  projectName={projectBoard.name}
+              />}
 
               <div className="tasks__container">
                 {Boolean(projectBoard?.columns) &&
@@ -270,19 +273,13 @@ export const ProjectTracker = () => {
                           wrapperHover[column.id] ? "tasks__board__hover" : ""
                         }`}
                       >
-                        <TrackerModal
-                            active={modalAdd}
-                            setActive={setModalAdd}
-                            selectedTab={selectedTab}
-                            titleColumn={column.title}
-                        />
                         <div className="board__head">
                           {/*<span className={wrapperIndex === 3 ? "done" : ""}>*/}
                           <span>{column.title}</span>
                           <div>
                             <span
                               className="add"
-                              onClick={() => selectedTabTask(column.id)}
+                              onClick={() => selectedTabTask(column.id, column.tasks.length)}
                             >
                               +
                             </span>
@@ -309,6 +306,8 @@ export const ProjectTracker = () => {
                                   [column.id]: false,
                                 }));
                                 dispatch(modalToggle("editColumn"));
+                                dispatch(setColumnName(column.title))
+                                dispatch(setColumnId(column.id))
                                 setModalAdd(true);
                               }}
                             >
@@ -325,11 +324,11 @@ export const ProjectTracker = () => {
                           </div>
                         )}
                         {column.tasks.map((task, index) => {
-                          if (index > 2) {
-                            if (!column.open) {
-                              return;
-                            }
-                          }
+                          // if (index > 2) {
+                          //   if (!column.open) {
+                          //     return;
+                          //   }
+                          // }
                           return (
                             <div
                               key={task.id}
@@ -350,7 +349,7 @@ export const ProjectTracker = () => {
                               <div className="tasks__board__item__info">
                                 <div className="tasks__board__item__info__more">
                                   <img src={commentsBoard} alt="commentsImg" />
-                                  <span>{task.comments} коментариев</span>
+                                  <span>{task.comment_count} коментариев</span>
                                 </div>
                                 <div className="tasks__board__item__info__more">
                                   <img src={filesBoard} alt="filesImg" />
@@ -364,18 +363,18 @@ export const ProjectTracker = () => {
                             </div>
                           );
                         })}
-                        {column.tasks.length > 3 && (
-                          <span
-                            className={
-                              column.open
-                                ? "lessItems openItems"
-                                : "moreItems openItems"
-                            }
-                            // onClick={() => toggleMoreTasks(column.id)}
-                          >
-                            {column.open ? "-" : "+"}
-                          </span>
-                        )}
+                        {/*{column.tasks.length > 3 && (*/}
+                        {/*  <span*/}
+                        {/*    className={*/}
+                        {/*      column.open*/}
+                        {/*        ? "lessItems openItems"*/}
+                        {/*        : "moreItems openItems"*/}
+                        {/*    }*/}
+                        {/*    // onClick={() => toggleMoreTasks(column.id)}*/}
+                        {/*  >*/}
+                        {/*    {column.open ? "-" : "+"}*/}
+                        {/*  </span>*/}
+                        {/*)}*/}
                       </div>
                     );
                   })}
