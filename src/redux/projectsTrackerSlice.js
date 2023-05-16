@@ -6,7 +6,7 @@ const initialState = {
   projectBoard: {},
   toggleTab: 1,
   modalType: "",
-  boardLoader: false
+  boardLoader: false,
 };
 
 export const setProjectBoardFetch = createAsyncThunk("userInfo", (id) =>
@@ -29,12 +29,12 @@ export const projectsTrackerSlice = createSlice({
     deleteProject: (state, action) => {
       state.projects.forEach((project) => {
         if (project.id === action.payload.id) {
-          project.status = 10
+          project.status = 10;
         }
-      })
+      });
     },
     activeLoader: (state) => {
-      state.boardLoader = true
+      state.boardLoader = true;
     },
     moveProjectTask: (state, action) => {
       state.projectBoard.columns.forEach((column, index) => {
@@ -58,9 +58,9 @@ export const projectsTrackerSlice = createSlice({
     editProjectName: (state, action) => {
       state.projects.forEach((project) => {
         if (project.id === action.payload.id) {
-          project.name = action.payload.name
+          project.name = action.payload.name;
         }
-      })
+      });
     },
     modalToggle: (state, action) => {
       state.modalType = action.payload;
@@ -69,7 +69,7 @@ export const projectsTrackerSlice = createSlice({
   extraReducers: {
     [setProjectBoardFetch.fulfilled]: (state, action) => {
       state.projectBoard = action.payload;
-      state.boardLoader = false
+      state.boardLoader = false;
     },
   },
 });
@@ -82,13 +82,14 @@ export const {
   setToggleTab,
   modalToggle,
   activeLoader,
-  editProjectName
+  editProjectName,
+  setColumnTitle,
 } = projectsTrackerSlice.actions;
 
 export const getProjects = (state) => state.tracker.projects;
 export const getProjectBoard = (state) => state.tracker.projectBoard;
 export const getToggleTab = (state) => state.tracker.toggleTab;
 export const getValueModalType = (state) => state.tracker.modalType;
-export const getBoarderLoader = (state) => state.tracker.boardLoader
+export const getBoarderLoader = (state) => state.tracker.boardLoader;
 
 export default projectsTrackerSlice.reducer;
