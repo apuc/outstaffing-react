@@ -27,6 +27,7 @@ export const ShortReport = ({}) => {
   const [tomorrowTask, setTomorrowTask] = useState([]);
   const [totalHours, setTotalHours] = useState(0);
   const [loader, setLoader] = useState(false);
+  const [dateTest, setDateTest] = useState("");
 
   function getReportFromDate(day) {
     setLoader(true);
@@ -40,6 +41,7 @@ export const ShortReport = ({}) => {
     ).then((res) => {
       let spendTime = 0;
       for (const item of res) {
+        setDateTest(item.created_at);
         if (item.difficulties) {
           setDifficulties((prevArray) => [...prevArray, item.difficulties]);
         }
@@ -76,9 +78,7 @@ export const ShortReport = ({}) => {
           <h2 className="viewReport__title">
             Ваши отчеты - <span>просмотр отчета за день</span>
           </h2>
-          <Link to={`profile/view/${reportDate}`}>
-            Посмотреть подробнее об отчете
-          </Link>
+          <Link to={`../view/${dateTest}`}>Посмотреть подробнее об отчете</Link>
         </div>
 
         <div className="viewReport__bar">

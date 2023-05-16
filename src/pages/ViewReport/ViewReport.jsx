@@ -46,7 +46,6 @@ export const ViewReport = () => {
         "cardId"
       )}&date=${day}`
     ).then((res) => {
-      console.log(res);
       let spendTime = 0;
       for (const item of res) {
         if (item.difficulties) {
@@ -122,6 +121,7 @@ export const ViewReport = () => {
           </div>
         </div>
         <div className="viewReport__switchDate">
+          <Link></Link>
           <div
             className="viewReport__switchDate__prev switchDate"
             onClick={() => previousDay()}
