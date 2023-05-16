@@ -65,6 +65,19 @@ export const ProfileCalendarComponent = React.memo(
       return "pass";
     }
 
+    // function correctRoute(day) {
+    //   for (const date of reports) {
+    //     if (
+    //       `${new Date(day).getFullYear()}-${correctDay(
+    //         new Date(day).getMonth() + 1
+    //       )}-${correctDay(new Date(day).getDate())}` === date.created_at
+    //     ) {
+    //       return `../view/${day}`;
+    //     }
+    //   }
+    //   return "../../report";
+    // }
+
     function correctRoute(day) {
       for (const date of reports) {
         if (
@@ -72,7 +85,7 @@ export const ProfileCalendarComponent = React.memo(
             new Date(day).getMonth() + 1
           )}-${correctDay(new Date(day).getDate())}` === date.created_at
         ) {
-          return `../view/${day}`;
+          return;
         }
       }
       return "../../report";
@@ -146,37 +159,32 @@ export const ProfileCalendarComponent = React.memo(
                 <button
                   onClick={() => {
                     dispatch(setReportDate(day));
-                    dispatch(setSendRequest(true));
-                    setShortReport(true);
-                    setDayReport(day);
                   }}
                   key={day}
                   className={dayStyles(day)}
                   name={day.format("dddd")}
                   id="btn"
                 >
-                  {/* <Link to={correctRoute(day)}>
+                  <Link
+                    to={correctRoute(day)}
+                    onClick={() => {
+                      setShortReport(true);
+                      setDayReport(day);
+                      dispatch(setSendRequest(true));
+                    }}
+                  >
                     <img
                       className={"calendar__icon"}
                       src={calendarIcon}
                       alt=""
                     />
                     {currentMonthAndDay(day)}
-                  </Link> */}
-
-                  <img className={"calendar__icon"} src={calendarIcon} alt="" />
-                  {currentMonthAndDay(day)}
+                  </Link>
                 </button>
               ))
             )}
           </div>
         </div>
-
-        {shortReport && (
-          <Link to={correctRoute(dayReport)}>
-            <button className="calendar__btn">Посмотреть подробнее</button>
-          </Link>
-        )}
 
         {shortReport && <ShortReport />}
       </div>

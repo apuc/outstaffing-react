@@ -1,3 +1,15 @@
 .short-report {
   margin-bottom: 30px;
 }
+
+.viewReport {
+  &__title-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    a {
+      font-size: 16px;
+    }
+  }
+}

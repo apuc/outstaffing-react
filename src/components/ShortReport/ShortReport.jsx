@@ -12,6 +12,7 @@ import {
   setSendRequest,
 } from "../../redux/reportSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import "./shortReport.scss";
 
@@ -32,7 +33,6 @@ export const ShortReport = ({}) => {
     setTaskText([]);
     setDifficulties([]);
     setTomorrowTask([]);
-
     apiRequest(
       `reports/find-by-date?user_card_id=${localStorage.getItem(
         "cardId"
@@ -72,9 +72,15 @@ export const ShortReport = ({}) => {
   return (
     <div>
       <div className="viewReport__info short-report">
-        <h2 className="viewReport__title">
-          Ваши отчеты - <span>просмотр отчета за день</span>
-        </h2>
+        <div className="viewReport__title-box">
+          <h2 className="viewReport__title">
+            Ваши отчеты - <span>просмотр отчета за день</span>
+          </h2>
+          <Link to={`profile/view/${reportDate}`}>
+            Посмотреть подробнее об отчете
+          </Link>
+        </div>
+
         <div className="viewReport__bar">
           <h3 className="viewReport__bar__date">
             {getCorrectDate(reportDate)}
