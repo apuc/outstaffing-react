@@ -33,7 +33,8 @@ export const ModalTiсket = ({
   const dispatch = useDispatch();
   const [addSubtask, setAddSubtask] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
-  const [inputsValue, setInputsValue] = useState({title: task.title, description: task.description})
+  const [inputsValue, setInputsValue] = useState({title: task.title, description: task.description, comment: ''});
+  const [comments, setComments] = useState([]);
 
   function deleteTask() {
     apiRequest("/task/update-task", {
@@ -60,6 +61,23 @@ export const ModalTiсket = ({
       dispatch(setProjectBoardFetch(projectId));
     });
   }
+
+  function editComment() {
+    apiRequest("/comment/create", {
+      method: "POST",
+      data: {
+        text: inputsValue.comment,
+        entity_type: 2,
+        entity_id: task.id
+      }
+    }).then((res) => {
+      setInputsValue((prevValue) => ({...prevValue, comment: ''}))
+    })
+  }
+
+  useEffect(() => {
+    apiRequest(`/comment/get-by-entity?entity_type=2&entity_id=${task.id}`).then((res) => setComments(res))
+  }, [])
 
   return (
     <div
@@ -115,8 +133,10 @@ export const ModalTiсket = ({
               </p>
             </div>
             <div className="content__input">
-              <input placeholder="Оставить комментарий"></input>
-              <img src={send}></img>
+              <input placeholder="Оставить комментарий" value={inputsValue.comment} onChange={(e) => {
+                setInputsValue((prevValue) => ({...prevValue, comment: e.target.value}))
+              }} />
+              <img src={send} onClick={editComment}></img>
             </div>
           </div>
         </div>

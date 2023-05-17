@@ -39,13 +39,15 @@ export const TicketFullScreen = ({}) => {
   const [projectInfo, setProjectInfo] = useState({});
   const [taskInfo, setTaskInfo] = useState({});
   const [editOpen, setEditOpen] = useState(false);
-  const [inputsValue, setInputsValue] = useState({})
-  const [loader, setLoader] = useState(true)
+  const [inputsValue, setInputsValue] = useState({});
+  const [loader, setLoader] = useState(true);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
       setTaskInfo(taskInfo);
-      setInputsValue({title: taskInfo.title, description: taskInfo.description})
+      setInputsValue({title: taskInfo.title, description: taskInfo.description, comment: ''})
+      apiRequest(`/comment/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`).then((res) => setComments(res))
       apiRequest(`/project/get-project?project_id=${taskInfo.project_id}`).then(
         (project) => {
           setProjectInfo(project);
@@ -77,6 +79,19 @@ export const TicketFullScreen = ({}) => {
       },
     }).then((res) => {
     });
+  }
+
+  function editComment() {
+    apiRequest("/comment/create", {
+      method: "POST",
+      data: {
+        text: inputsValue.comment,
+        entity_type: 2,
+        entity_id: taskInfo.id
+      }
+    }).then((res) => {
+      setInputsValue((prevValue) => ({...prevValue, comment: ''}))
+    })
   }
 
   const toggleTabs = (index) => {
@@ -204,8 +219,10 @@ export const TicketFullScreen = ({}) => {
                 </p>
               </div>
               <div className="content__input">
-                <input placeholder="Оставить комментарий"></input>
-                <img src={send}></img>
+                <input placeholder="Оставить комментарий" value={inputsValue.comment} onChange={(e) => {
+                  setInputsValue((prevValue) => ({...prevValue, comment: e.target.value}))
+                }} />
+                <img src={send} onClick={editComment}></img>
               </div>
             </div>
           </div>

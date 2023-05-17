@@ -142,17 +142,25 @@ export const TrackerModal = ({
     }).then((el) => {
       setActive(false);
       selectedWorker(null)
+      setSelectWorkersOpen(false)
     })
   }
 
   useEffect(() => {
-    modalType === "addWorker" ? apiRequest('/project/my-employee').then((el) => setWorkers(el.managerEmployees)) : ''
+    modalType === "addWorker" ? apiRequest('/project/my-employee').then((el) => {
+      let persons = el.managerEmployees
+      projectBoard.projectUsers.forEach(person => persons.splice(persons.indexOf(person), 1))
+      setWorkers(persons)
+    }) : ''
   }, [modalType])
 
   return (
     <div
       className={active ? "modal-add active" : "modal-add"}
-      onClick={() => setActive(false)}
+      onClick={() => {
+        setActive(false)
+        setSelectWorkersOpen(false)
+      }}
     >
       <div className="modal-add__content" onClick={(e) => e.stopPropagation()}>
         {modalType === "addWorker" && (
@@ -172,6 +180,9 @@ export const TrackerModal = ({
                 {Boolean(selectWorkersOpen) &&
                 <div className='select__worker__dropDown'>
                   {workers.map((worker) => {
+                    if ((workers.length === 1 || 0) && worker === selectedWorker) {
+                      return <p>Пользователей нет</p>
+                    }
                     if (worker === selectedWorker) {
                       return
                     }
