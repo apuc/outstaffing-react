@@ -45,9 +45,7 @@ export const ViewReport = () => {
         "cardId"
       )}&date=${day}`
     ).then((res) => {
-      console.log(res);
       let spendTime = 0;
-
       for (const item of res) {
         if (item.difficulties) {
           setDifficulties((prevArray) => [...prevArray, item.difficulties]);

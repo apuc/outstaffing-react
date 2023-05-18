@@ -24,10 +24,10 @@ import "./../Calendar/calendarComponent.scss";
 export const ProfileCalendarComponent = React.memo(
   ({ value, setValueHandler, reports, totalHours }) => {
     const dispatch = useDispatch();
+
     const [currentDay] = useState(moment());
     const [calendar, setCalendar] = useState([]);
     const [month, setMonth] = useState("");
-    const [dayReport, setDayReport] = useState("");
     const [shortReport, setShortReport] = useState(false);
 
     useEffect(() => {
@@ -146,20 +146,15 @@ export const ProfileCalendarComponent = React.memo(
                 <button
                   onClick={() => {
                     dispatch(setReportDate(day));
+                    setShortReport(true);
+                    dispatch(setSendRequest(true));
                   }}
                   key={day}
                   className={dayStyles(day)}
                   name={day.format("dddd")}
                   id="btn"
                 >
-                  <Link
-                    to={correctRoute(day)}
-                    onClick={() => {
-                      setShortReport(true);
-                      setDayReport(day);
-                      dispatch(setSendRequest(true));
-                    }}
-                  >
+                  <Link to={correctRoute(day)}>
                     <img
                       className={"calendar__icon"}
                       src={calendarIcon}

@@ -13,6 +13,7 @@ import {
 } from "../../redux/reportSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Loader } from "../Loader/Loader";
 
 import "./shortReport.scss";
 
@@ -34,6 +35,7 @@ export const ShortReport = ({}) => {
     setTaskText([]);
     setDifficulties([]);
     setTomorrowTask([]);
+    setTotalHours(0);
     apiRequest(
       `reports/find-by-date?user_card_id=${localStorage.getItem(
         "cardId"
@@ -95,6 +97,7 @@ export const ShortReport = ({}) => {
           </p>
         </div>
       </div>
+      {loader && <Loader style="green" />}
       {Boolean(taskText.length) && (
         <div className="viewReport__content">
           <div className="table__container">
