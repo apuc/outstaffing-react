@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 
-import { useSelector } from "react-redux";
-import { getReportDate } from "../../redux/reportSlice";
-
 import { Loader } from "../../components/Loader/Loader";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
+import { Navigation } from "../../components/Navigation/Navigation";
 
 import { apiRequest } from "../../api/request";
 import {
@@ -20,22 +18,20 @@ import arrow from "../../images/right-arrow.png";
 import arrowSwitchDate from "../../images/arrowViewReport.png";
 
 import "./viewReport.scss";
-import { Navigation } from "../../components/Navigation/Navigation";
 
 export const ViewReport = () => {
   if (localStorage.getItem("role_status") === "18") {
     return <Navigate to="/profile" replace />;
   }
-  const reportDate = useSelector(getReportDate); // :D
 
   const dateReport = useParams();
-  const [testReportDay] = useState(new Date(dateReport.id));
+  const [previousReportDay] = useState(new Date(dateReport.id));
+  const [nextReportDay] = useState(new Date(dateReport.id));
 
   const [taskText, setTaskText] = useState([]);
   const [difficulties, setDifficulties] = useState([]);
   const [tomorrowTask, setTomorrowTask] = useState([]);
   const [totalHours, setTotalHours] = useState(0);
-  const [reportDay] = useState(new Date(getCreatedDate(reportDate))); ///
   const [currentDay] = useState(new Date());
   const [loader, setLoader] = useState(false);
 
@@ -74,21 +70,22 @@ export const ViewReport = () => {
       setTotalHours(spendTime);
       setLoader(false);
     });
-    testReportDay.setDate(testReportDay.getDate() - 1);
+    previousReportDay.setDate(previousReportDay.getDate() - 1);
+    nextReportDay.setDate(nextReportDay.getDate() + 1);
   }
 
   function nextDay() {
-    reportDay.setDate(reportDay.getDate() + 1);
-    getReportFromDate(getCreatedDate(reportDay));
+    getReportFromDate(getCreatedDate(nextReportDay));
+    previousReportDay.setDate(previousReportDay.getDate() + 2);
   }
 
   function previousDay() {
-    getReportFromDate(getCreatedDate(testReportDay));
+    getReportFromDate(getCreatedDate(previousReportDay));
+    nextReportDay.setDate(nextReportDay.getDate() - 2);
   }
 
   useEffect(() => {
     getReportFromDate(dateReport.id);
-    console.log(dateReport.id);
   }, []);
 
   return (
@@ -129,7 +126,7 @@ export const ViewReport = () => {
               previousDay();
             }}
           >
-            <Link to={`../view/${getCreatedDate(testReportDay)}`}>
+            <Link to={`../view/${getCreatedDate(previousReportDay)}`}>
               <div className="viewReport__switchDate__prev switchDate">
                 <img src={arrowSwitchDate} alt="arrow" />
               </div>
@@ -138,15 +135,14 @@ export const ViewReport = () => {
 
           <p>{getCorrectDate(dateReport.id)}</p>
 
-          <div>
-            <Link to={`../view/${0}`}>
+          <div onClick={() => nextDay()}>
+            <Link to={`../view/${getCreatedDate(nextReportDay)}`}>
               <div
                 className={`viewReport__switchDate__next switchDate ${
-                  getCreatedDate(currentDay) === getCreatedDate(reportDay)
+                  getCreatedDate(currentDay) === getCreatedDate(nextReportDay)
                     ? "disable"
                     : ""
                 }`}
-                onClick={() => nextDay()}
               >
                 <img src={arrowSwitchDate} alt="arrow" />
               </div>

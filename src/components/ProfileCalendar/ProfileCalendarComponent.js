@@ -65,19 +65,6 @@ export const ProfileCalendarComponent = React.memo(
       return "pass";
     }
 
-    // function correctRoute(day) {
-    //   for (const date of reports) {
-    //     if (
-    //       `${new Date(day).getFullYear()}-${correctDay(
-    //         new Date(day).getMonth() + 1
-    //       )}-${correctDay(new Date(day).getDate())}` === date.created_at
-    //     ) {
-    //       return `../view/${day}`;
-    //     }
-    //   }
-    //   return "../../report";
-    // }
-
     function correctRoute(day) {
       for (const date of reports) {
         if (
