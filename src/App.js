@@ -88,8 +88,9 @@ const App = () => {
             <Route index element={<Profile />} />
             <Route exact path="catalog" element={<Home />} />
             <Route exact path="calendar" element={<ProfileCalendar />} />
+            <Route exact path="calendar/view/" element={<ProfileCalendar />} />
             <Route exact path="summary" element={<Summary />} />
-            <Route exact path="view" element={<ViewReport />} />
+            <Route exact path="view/:id" element={<ViewReport />} />
             <Route exact path="tracker" element={<Tracker />} />
             <Route exact path="payouts" element={<Payouts />} />
             <Route exact path="settings" element={<PartnerSettings />} />
