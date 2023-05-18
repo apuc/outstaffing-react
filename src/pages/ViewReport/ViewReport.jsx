@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { getReportDate } from "../../redux/reportSlice";
@@ -26,13 +26,16 @@ export const ViewReport = () => {
   if (localStorage.getItem("role_status") === "18") {
     return <Navigate to="/profile" replace />;
   }
-  const reportDate = useSelector(getReportDate);
+  const reportDate = useSelector(getReportDate); // :D
+
+  const dateReport = useParams();
+  const [testReportDay] = useState(new Date(dateReport.id));
 
   const [taskText, setTaskText] = useState([]);
   const [difficulties, setDifficulties] = useState([]);
   const [tomorrowTask, setTomorrowTask] = useState([]);
   const [totalHours, setTotalHours] = useState(0);
-  const [reportDay] = useState(new Date(getCreatedDate(reportDate)));
+  const [reportDay] = useState(new Date(getCreatedDate(reportDate))); ///
   const [currentDay] = useState(new Date());
   const [loader, setLoader] = useState(false);
 
@@ -46,7 +49,9 @@ export const ViewReport = () => {
         "cardId"
       )}&date=${day}`
     ).then((res) => {
+      console.log(res);
       let spendTime = 0;
+
       for (const item of res) {
         if (item.difficulties) {
           setDifficulties((prevArray) => [...prevArray, item.difficulties]);
@@ -69,6 +74,7 @@ export const ViewReport = () => {
       setTotalHours(spendTime);
       setLoader(false);
     });
+    testReportDay.setDate(testReportDay.getDate() - 1);
   }
 
   function nextDay() {
@@ -77,13 +83,14 @@ export const ViewReport = () => {
   }
 
   function previousDay() {
-    reportDay.setDate(reportDay.getDate() - 1);
-    getReportFromDate(getCreatedDate(reportDay));
+    getReportFromDate(getCreatedDate(testReportDay));
   }
 
   useEffect(() => {
-    getReportFromDate(getCreatedDate(reportDate));
+    getReportFromDate(dateReport.id);
+    console.log(dateReport.id);
   }, []);
+
   return (
     <div className="viewReport">
       <ProfileHeader />
@@ -106,7 +113,7 @@ export const ViewReport = () => {
           </Link>
           <div className="viewReport__bar">
             <h3 className="viewReport__bar__date">
-              {getCorrectDate(reportDay)}
+              {getCorrectDate(dateReport.id)}
             </h3>
             <p className="viewReport__bar__hours">
               Вами потрачено на работу :{" "}
@@ -114,30 +121,36 @@ export const ViewReport = () => {
                 {totalHours} {hourOfNum(totalHours)}
               </span>
             </p>
-            {/*<div className='viewReport__bar__progressBar'>*/}
-            {/*    <span></span>*/}
-            {/*</div>*/}
-            {/*<p className='viewReport__bar__total'>122 часа из 160</p>*/}
           </div>
         </div>
         <div className="viewReport__switchDate">
-          <Link></Link>
           <div
-            className="viewReport__switchDate__prev switchDate"
-            onClick={() => previousDay()}
+            onClick={() => {
+              previousDay();
+            }}
           >
-            <img src={arrowSwitchDate} alt="arrow" />
+            <Link to={`../view/${getCreatedDate(testReportDay)}`}>
+              <div className="viewReport__switchDate__prev switchDate">
+                <img src={arrowSwitchDate} alt="arrow" />
+              </div>
+            </Link>
           </div>
-          <p>{getCorrectDate(reportDay)}</p>
-          <div
-            className={`viewReport__switchDate__next switchDate ${
-              getCreatedDate(currentDay) === getCreatedDate(reportDay)
-                ? "disable"
-                : ""
-            }`}
-            onClick={() => nextDay()}
-          >
-            <img src={arrowSwitchDate} alt="arrow" />
+
+          <p>{getCorrectDate(dateReport.id)}</p>
+
+          <div>
+            <Link to={`../view/${0}`}>
+              <div
+                className={`viewReport__switchDate__next switchDate ${
+                  getCreatedDate(currentDay) === getCreatedDate(reportDay)
+                    ? "disable"
+                    : ""
+                }`}
+                onClick={() => nextDay()}
+              >
+                <img src={arrowSwitchDate} alt="arrow" />
+              </div>
+            </Link>
           </div>
         </div>
         {loader && <Loader width={75} height={75} />}
