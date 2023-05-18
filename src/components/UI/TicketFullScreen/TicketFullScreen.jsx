@@ -6,9 +6,10 @@ import { Footer } from "../../Footer/Footer";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import TrackerModal from "../TrackerModal/TrackerModal";
 import { Navigation } from "../../Navigation/Navigation";
+import {Loader} from "../../Loader/Loader";
 
 import { useDispatch } from "react-redux";
-import { modalToggle, setToggleTab } from "../../../redux/projectsTrackerSlice";
+import {modalToggle, setToggleTab} from "../../../redux/projectsTrackerSlice";
 import { apiRequest } from "../../../api/request";
 
 import project from "../../../images/trackerProject.svg";
@@ -37,13 +38,18 @@ export const TicketFullScreen = ({}) => {
   const navigate = useNavigate();
   const [projectInfo, setProjectInfo] = useState({});
   const [taskInfo, setTaskInfo] = useState({});
+  const [editOpen, setEditOpen] = useState(false);
+  const [inputsValue, setInputsValue] = useState({})
+  const [loader, setLoader] = useState(true)
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
       setTaskInfo(taskInfo);
+      setInputsValue({title: taskInfo.title, description: taskInfo.description})
       apiRequest(`/project/get-project?project_id=${taskInfo.project_id}`).then(
         (project) => {
           setProjectInfo(project);
+          setLoader(false)
         }
       );
     });
@@ -58,6 +64,18 @@ export const TicketFullScreen = ({}) => {
       },
     }).then((res) => {
       navigate(`/tracker/project/${taskInfo.project_id}`);
+    });
+  }
+
+  function editTask() {
+    apiRequest("/task/update-task", {
+      method: "PUT",
+      data: {
+        task_id: taskInfo.id,
+        title: inputsValue.title,
+        description: inputsValue.description
+      },
+    }).then((res) => {
     });
   }
 
@@ -107,6 +125,8 @@ export const TicketFullScreen = ({}) => {
             <p>Архив</p>
           </Link>
         </div>
+        {loader ? <Loader /> :
+        <>
         <div className="tracker__tabs__content content-tabs">
           <div className="tasks__head">
             <div className="tasks__head__wrapper">
@@ -153,11 +173,14 @@ export const TicketFullScreen = ({}) => {
           <div className="content ticket-whith">
             <div className="content__task">
               <span>Задача</span>
-              <h5>{taskInfo.title}</h5>
+              {editOpen ? <input value={inputsValue.title} onChange={(e) => {
+                setInputsValue((prevValue) => ({...prevValue, title: e.target.value}))
+              }} /> :<h5>{inputsValue.title}</h5>}
               <div className="content__description">
-                <p>{taskInfo.description}</p>
+                {editOpen ? <input value={inputsValue.description} onChange={(e) => {
+                  setInputsValue((prevValue) => ({...prevValue, description: e.target.value}))
+                }}/> :<p>{inputsValue.description}</p>}
                 <img src={task} className="image-task"></img>
-                <p>{taskInfo.description}</p>
               </div>
               <div className="content__communication">
                 <p className="tasks">
@@ -229,9 +252,16 @@ export const TicketFullScreen = ({}) => {
             </div>
 
             <div className="workers_box-bottom">
-              <div>
+              <div className={editOpen ? 'edit' : ''} onClick={() => {
+                if(editOpen) {
+                  setEditOpen(!editOpen)
+                  editTask()
+                } else {
+                  setEditOpen(!editOpen)
+                }
+              }}>
                 <img src={edit}></img>
-                <p>редактировать</p>
+                <p>{editOpen ? 'сохранить' : 'редактировать'}</p>
               </div>
               <div>
                 <img src={link}></img>
@@ -248,6 +278,8 @@ export const TicketFullScreen = ({}) => {
             </div>
           </div>
         </div>
+        </>
+        }
       </div>
       <Footer />
     </section>

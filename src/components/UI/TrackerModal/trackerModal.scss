@@ -61,6 +61,56 @@
       font-size: 15px;
       line-height: 18px;
     }
+
+    .select__worker {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px;
+      background: white;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      position: relative;
+
+      p {
+        max-width: 150px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 14px;
+      }
+
+      img {
+        transition: all 0.3s ease;
+        width: 16px;
+        height: 16px;
+      }
+
+      &__dropDown {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        width: 100%;
+        padding: 5px;
+        top: 35px;
+        left: 0;
+        background: white;
+        border-radius: 5px;
+        row-gap: 5px;
+
+        .worker {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+
+    .open {
+      .arrow {
+        transform: rotate(180deg);
+      }
+    }
   }
 
   .name-project {

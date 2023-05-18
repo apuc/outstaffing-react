@@ -7,6 +7,8 @@ const initialState = {
   toggleTab: 1,
   modalType: "",
   boardLoader: false,
+  columnName: "",
+  columnId: 0
 };
 
 export const setProjectBoardFetch = createAsyncThunk("userInfo", (id) =>
@@ -55,12 +57,25 @@ export const projectsTrackerSlice = createSlice({
         }
       });
     },
+    setColumnName: (state, action) => {
+      state.columnName = action.payload
+    },
+    setColumnId: (state, action) => {
+      state.columnId = action.payload
+    },
     editProjectName: (state, action) => {
       state.projects.forEach((project) => {
         if (project.id === action.payload.id) {
           project.name = action.payload.name;
         }
       });
+    },
+    editColumnName: (state, action) => {
+      state.projectBoard.columns.forEach((column) => {
+        if (column.id === action.payload.id) {
+          column.title = action.payload.title
+        }
+      })
     },
     modalToggle: (state, action) => {
       state.modalType = action.payload;
@@ -76,6 +91,7 @@ export const projectsTrackerSlice = createSlice({
 
 export const {
   setProject,
+  setColumnName,
   deleteProject,
   setAllProjects,
   moveProjectTask,
@@ -83,7 +99,8 @@ export const {
   modalToggle,
   activeLoader,
   editProjectName,
-  setColumnTitle,
+  editColumnName,
+  setColumnId
 } = projectsTrackerSlice.actions;
 
 export const getProjects = (state) => state.tracker.projects;
@@ -91,5 +108,7 @@ export const getProjectBoard = (state) => state.tracker.projectBoard;
 export const getToggleTab = (state) => state.tracker.toggleTab;
 export const getValueModalType = (state) => state.tracker.modalType;
 export const getBoarderLoader = (state) => state.tracker.boardLoader;
+export const getColumnName = (state) => state.tracker.columnName;
+export const getColumnId = (state) => state.tracker.columnId;
 
 export default projectsTrackerSlice.reducer;
