@@ -135,15 +135,14 @@ export const ViewReport = () => {
 
           <p>{getCorrectDate(dateReport.id)}</p>
 
-          <div onClick={() => nextDay()}>
+          <div
+            onClick={() => nextDay()}
+            className={`${
+              getCreatedDate(currentDay) === dateReport.id ? "disable" : ""
+            }`}
+          >
             <Link to={`../view/${getCreatedDate(nextReportDay)}`}>
-              <div
-                className={`viewReport__switchDate__next switchDate ${
-                  getCreatedDate(currentDay) === getCreatedDate(nextReportDay)
-                    ? "disable"
-                    : ""
-                }`}
-              >
+              <div className={`viewReport__switchDate__next switchDate`}>
                 <img src={arrowSwitchDate} alt="arrow" />
               </div>
             </Link>
