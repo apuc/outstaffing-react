@@ -309,6 +309,118 @@
               line-height: 17px;
               max-width: 125px;
             }
+
+            .persons__list {
+              position: absolute;
+              z-index: 2;
+              display: flex;
+              flex-direction: column;
+              background: linear-gradient(180deg, #FFFFFF 0%, #EBEBEB 100%);
+              border-radius: 40px;
+              padding: 33px 24px 44px 34px;
+              width: 425px;
+              cursor: default;
+
+              &__close {
+                cursor: pointer;
+                width: 8px;
+                height: 8px;
+                margin-left: auto;
+              }
+
+              &__count {
+                display: flex;
+                align-items: end;
+                color: #1458DD;
+                font-size: 22px;
+                margin-top: 10px;
+                span {
+                  font-size: 44px;
+                  font-weight: 700;
+                  line-height: 40px;
+                  width: auto;
+                  height: auto;
+                  margin-right: 5px;
+                }
+              }
+
+              &__info {
+                display: flex;
+                font-size: 18px;
+                line-height: 22px;
+                color: #263238;
+                font-weight: 500;
+                margin: 13px 0 32px;
+
+                span {
+                  width: auto;
+                  height: auto;
+                  color: #1458DD;
+                  font-weight: 600;
+                  font-size: 18px;
+                  line-height: 22px;
+                }
+              }
+
+              &__items {
+                display: flex;
+                flex-wrap: wrap;
+                row-gap: 60px;
+                column-gap: 35px;
+                margin-bottom: 38px;
+              }
+
+              &__item {
+                width: 145px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .avatar {
+                  width: 22px;
+                  height: 22px;
+                }
+
+                span {
+                  display: block;
+                  font-weight: 400;
+                  font-size: 12px;
+                  line-height: initial;
+                  color: #807777;
+                  width: auto;
+                  height: auto;
+                  max-width: 85px;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                }
+
+                .delete {
+                  cursor: pointer;
+                  width: 14px;
+                  height: 14px;
+                }
+              }
+
+              &__add {
+                display: flex;
+                cursor: pointer;
+
+                span {
+                  background: #8BCC60;
+                  left: 0;
+                }
+
+                p {
+                  margin-left: 17px;
+                  color: #000000;
+                  font-weight: 400;
+                  font-size: 12px;
+                  line-height: 32px;
+                  position: initial;
+                }
+              }
+            }
           }
 
           &__select {

@@ -12,7 +12,8 @@ import {
   editProjectName,
   editColumnName,
   getColumnName,
-  getColumnId
+  getColumnId,
+  addPersonToProject
 } from "../../../redux/projectsTrackerSlice";
 
 import arrowDown from "../../../images/selectArrow.png"
@@ -136,23 +137,36 @@ export const TrackerModal = ({
     apiRequest("/project/add-user", {
       method: "POST",
       data: {
-        user_id: selectedWorker.id,
+        user_id: selectedWorker.user_id,
         project_id: projectBoard.id
       }
     }).then((el) => {
+      dispatch(addPersonToProject(el))
       setActive(false);
-      selectedWorker(null)
+      setSelectedWorker('')
+      setSelectWorkersOpen(false)
     })
   }
 
   useEffect(() => {
-    modalType === "addWorker" ? apiRequest('/project/my-employee').then((el) => setWorkers(el.managerEmployees)) : ''
-  }, [modalType])
+    modalType === "addWorker" ? apiRequest('/project/my-employee').then((el) => {
+      let persons = el.managerEmployees
+      let ids = projectBoard.projectUsers.map((user) => user.user_id)
+      setWorkers(persons.reduce((acc, cur) => {
+        if (!ids.includes(cur.user_id)) acc.push(cur)
+        return acc
+      }, []))
+    }) : ''
+  }, [active])
+
 
   return (
     <div
       className={active ? "modal-add active" : "modal-add"}
-      onClick={() => setActive(false)}
+      onClick={() => {
+        setActive(false)
+        setSelectWorkersOpen(false)
+      }}
     >
       <div className="modal-add__content" onClick={(e) => e.stopPropagation()}>
         {modalType === "addWorker" && (
@@ -170,18 +184,24 @@ export const TrackerModal = ({
                 <p>{selectedWorker ? selectedWorker.employee.fio : 'Выберите пользователя'}</p>
                 <img className='arrow' src={arrowDown} alt='arrow' />
                 {Boolean(selectWorkersOpen) &&
-                <div className='select__worker__dropDown'>
-                  {workers.map((worker) => {
-                    if (worker === selectedWorker) {
-                      return
+                  <div className='select__worker__dropDown'>
+                    {Boolean(workers.length) ?
+                      workers.map((worker) => {
+                      if (worker === selectedWorker) {
+                        return
+                      }
+                      return <div className='worker' key={worker.id} onClick={() =>
+                        {
+                          setSelectedWorker(worker)
+                        }
+                      }>
+                        <p>{worker.employee.fio}</p>
+                        <img src={urlForLocal(worker.employee.avatar)} alt='avatar'/>
+                      </div>
+                    }) :
+                        <div>Нет пользователей</div>
                     }
-                    return <div className='worker' key={worker.id} onClick={() => setSelectedWorker(worker)}>
-                      <p>{worker.employee.fio}</p>
-                      <img src={urlForLocal(worker.employee.avatar)} alt='avatar'/>
-                    </div>
-                  })
-                  }
-                </div>
+                  </div>
                 }
               </div>
             </div>

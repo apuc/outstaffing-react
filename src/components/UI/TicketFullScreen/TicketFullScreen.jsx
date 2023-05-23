@@ -8,8 +8,15 @@ import TrackerModal from "../TrackerModal/TrackerModal";
 import { Navigation } from "../../Navigation/Navigation";
 import {Loader} from "../../Loader/Loader";
 
-import { useDispatch } from "react-redux";
-import {modalToggle, setToggleTab} from "../../../redux/projectsTrackerSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {
+  deletePersonOnProject,
+  modalToggle,
+  setProjectBoardFetch,
+  setToggleTab,
+  getProjectBoard,
+  getBoarderLoader
+} from "../../../redux/projectsTrackerSlice";
 import { apiRequest } from "../../../api/request";
 
 import project from "../../../images/trackerProject.svg";
@@ -22,7 +29,6 @@ import plus from "../../../images/plus.svg";
 import tasks from "../../../images/trackerTasks.svg";
 import archive from "../../../images/archiveTracker.svg";
 import selectArrow from "../../../images/select.svg";
-import avatarTest from "../../../images/AvatarTest .png";
 import arrow from "../../../images/arrowCalendar.png";
 import link from "../../../images/link.svg";
 import archive2 from "../../../images/archive.svg";
@@ -30,28 +36,39 @@ import del from "../../../images/delete.svg";
 import edit from "../../../images/edit.svg";
 
 import "./ticketFullScreen.scss";
+import close from "../../../images/closeProjectPersons.svg";
+import {urlForLocal} from "../../../helper";
+import {getCorrectDate} from "../../Calendar/calendarHelper";
 
 export const TicketFullScreen = ({}) => {
   const [modalAddWorker, setModalAddWorker] = useState(false);
   const ticketId = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [projectInfo, setProjectInfo] = useState({});
+  const projectBoard = useSelector(getProjectBoard);
+  const boardLoader = useSelector(getBoarderLoader);
   const [taskInfo, setTaskInfo] = useState({});
   const [editOpen, setEditOpen] = useState(false);
-  const [inputsValue, setInputsValue] = useState({})
-  const [loader, setLoader] = useState(true)
+  const [inputsValue, setInputsValue] = useState({});
+  const [loader, setLoader] = useState(true);
+  const [comments, setComments] = useState([]);
+  const [commentsEditOpen, setCommentsEditOpen] = useState({})
+  const [commentsEditText, setCommentsEditText] = useState({})
+  const [personListOpen, setPersonListOpen] = useState(false)
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
       setTaskInfo(taskInfo);
-      setInputsValue({title: taskInfo.title, description: taskInfo.description})
-      apiRequest(`/project/get-project?project_id=${taskInfo.project_id}`).then(
-        (project) => {
-          setProjectInfo(project);
-          setLoader(false)
-        }
-      );
+      setInputsValue({title: taskInfo.title, description: taskInfo.description, comment: ''})
+      apiRequest(`/comment/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`).then((res) => {
+        setComments(res)
+        res.forEach((item) => {
+          setCommentsEditOpen((prevValue) => ({...prevValue, [item.id]: false}))
+          setCommentsEditText((prevValue) => ({...prevValue, [item.id]: item.text}))
+        })
+      })
+      dispatch(setProjectBoardFetch(taskInfo.project_id));
+      setLoader(boardLoader)
     });
   }, []);
 
@@ -76,6 +93,59 @@ export const TicketFullScreen = ({}) => {
         description: inputsValue.description
       },
     }).then((res) => {
+    });
+  }
+
+  function createComment() {
+    apiRequest("/comment/create", {
+      method: "POST",
+      data: {
+        text: inputsValue.comment,
+        entity_type: 2,
+        entity_id: taskInfo.id
+      }
+    }).then((res) => {
+      let newComment = res
+      newComment.created_at = new Date()
+      setInputsValue((prevValue) => ({...prevValue, comment: ''}))
+      setComments((prevValue) => ([...prevValue, newComment]))
+      setCommentsEditOpen((prevValue) => ({...prevValue, [res.id]: false}))
+      setCommentsEditText((prevValue) => ({...prevValue, [res.id]: res.text}))
+    })
+  }
+
+  function deleteComment(commentId) {
+    apiRequest("/comment/update", {
+      method: "PUT",
+      data: {
+        comment_id: commentId,
+        status: 0
+      }
+    }).then((res) => {
+      setComments((prevValue) => prevValue.filter((item) => item.id !== commentId))
+    })
+  }
+
+  function editComment(commentId) {
+    apiRequest("/comment/update", {
+      method: "PUT",
+      data: {
+        comment_id: commentId,
+        text: commentsEditText[commentId]
+      }
+    }).then((res) => {
+    })
+  }
+
+  function deletePerson(userId) {
+    apiRequest("/project/del-user", {
+      method: "DELETE",
+      data: {
+        project_id: projectBoard.id,
+        user_id: userId
+      },
+    }).then((res) => {
+      dispatch(deletePersonOnProject(userId))
     });
   }
 
@@ -130,7 +200,7 @@ export const TicketFullScreen = ({}) => {
         <div className="tracker__tabs__content content-tabs">
           <div className="tasks__head">
             <div className="tasks__head__wrapper">
-              <h4>Проект : {projectInfo.name}</h4>
+              <h4>Проект : {projectBoard.name}</h4>
 
               <TrackerModal
                 active={modalAddWorker}
@@ -138,19 +208,45 @@ export const TicketFullScreen = ({}) => {
               ></TrackerModal>
 
               <div className="tasks__head__persons">
-                <img src={avatarTest} alt="avatar" />
-                <img src={avatarTest} alt="avatar" />
-                <span className="countPersons">+9</span>
+                {/*<img src={avatarTest} alt="avatar" />*/}
+                {/*<img src={avatarTest} alt="avatar" />*/}
+                <span className="countPersons">{projectBoard.projectUsers?.length}</span>
                 <span
                   className="addPerson"
                   onClick={() => {
-                    dispatch(modalToggle("addWorker"));
-                    setModalAddWorker(true);
+                    setPersonListOpen(true)
                   }}
                 >
                   +
                 </span>
-                <p>добавить участника в проект</p>
+                <p>добавить участника</p>
+                {personListOpen &&
+                <div className='persons__list'>
+                  <img className='persons__list__close' src={close} alt='close' onClick={() => setPersonListOpen(false)} />
+                  <div className='persons__list__count'><span>{projectBoard.projectUsers?.length}</span>участник</div>
+                  <div className='persons__list__info'>В проекте - <span>“{projectBoard.name}”</span></div>
+                  <div className='persons__list__items'>
+                    {projectBoard.projectUsers?.map((person) => {
+                      return <div className='persons__list__item' key={person.user_id}>
+                        <img className='avatar' src={urlForLocal(person.user.avatar)} alt='avatar' />
+                        <span>{person.user.fio}</span>
+                        <img className='delete' src={close} alt='delete' onClick={() => deletePerson(person.user_id)}/>
+                      </div>
+                    })
+                    }
+                  </div>
+                  <div className='persons__list__add'
+                       onClick={() => {
+                         dispatch(modalToggle("addWorker"));
+                         setModalAddWorker(true);
+                         setPersonListOpen(false)
+                       }}
+                  >
+                    <span className='addPerson'>+</span>
+                    <p>Добавить участников</p>
+                  </div>
+                </div>
+                }
               </div>
               <div className="tasks__head__select">
                 <span>Учавствую</span>
@@ -180,7 +276,7 @@ export const TicketFullScreen = ({}) => {
                 {editOpen ? <input value={inputsValue.description} onChange={(e) => {
                   setInputsValue((prevValue) => ({...prevValue, description: e.target.value}))
                 }}/> :<p>{inputsValue.description}</p>}
-                <img src={task} className="image-task"></img>
+                {/*<img src={task} className="image-task"></img>*/}
               </div>
               <div className="content__communication">
                 <p className="tasks">
@@ -204,8 +300,33 @@ export const TicketFullScreen = ({}) => {
                 </p>
               </div>
               <div className="content__input">
-                <input placeholder="Оставить комментарий"></input>
-                <img src={send}></img>
+                <input placeholder="Оставить комментарий" value={inputsValue.comment} onChange={(e) => {
+                  setInputsValue((prevValue) => ({...prevValue, comment: e.target.value}))
+                }} />
+                <img src={send} onClick={createComment}></img>
+              </div>
+              <div className='comments__list'>
+                {comments.map((comment) => {
+                  return <div className='comments__list__item' key={comment.id}>
+                    <div className='comments__list__item__info'>
+                      <span>{getCorrectDate(comment.created_at)}</span>
+                      <div className={commentsEditOpen[comment.id] ? 'edit edit__open' : 'edit'} >
+                        <img src={edit} alt='edit' onClick={() => {
+                          if (commentsEditOpen[comment.id]) {
+                            editComment(comment.id)
+                          }
+                          setCommentsEditOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
+                        }} />
+                      </div>
+                      <img src={del} alt='delete' onClick={() => deleteComment(comment.id)} />
+                    </div>
+                    {commentsEditOpen[comment.id] ? <input value={commentsEditText[comment.id]} onChange={(e) =>  {
+                      setCommentsEditText((prevValue) => ({...prevValue, [comment.id]: e.target.value}))
+                    }} /> : <p>{commentsEditText[comment.id]}</p>}
+                  </div>
+                })
+
+                }
               </div>
             </div>
           </div>

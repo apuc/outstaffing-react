@@ -35,6 +35,12 @@ export const projectsTrackerSlice = createSlice({
         }
       });
     },
+    deletePersonOnProject: (state,action) => {
+      state.projectBoard.projectUsers =  state.projectBoard.projectUsers.filter((person) => person.user_id !== action.payload)
+    },
+    addPersonToProject: (state, action) => {
+      state.projectBoard.projectUsers.push(action.payload)
+    },
     activeLoader: (state) => {
       state.boardLoader = true;
     },
@@ -100,7 +106,9 @@ export const {
   activeLoader,
   editProjectName,
   editColumnName,
-  setColumnId
+  setColumnId,
+  deletePersonOnProject,
+  addPersonToProject
 } = projectsTrackerSlice.actions;
 
 export const getProjects = (state) => state.tracker.projects;

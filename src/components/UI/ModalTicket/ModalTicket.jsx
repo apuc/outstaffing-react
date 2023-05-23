@@ -8,6 +8,8 @@ import {
   setProjectBoardFetch,
 } from "../../../redux/projectsTrackerSlice";
 
+import {getCorrectDate} from '../../../components/Calendar/calendarHelper'
+
 import category from "../../../images/category.png";
 import watch from "../../../images/watch.png";
 import file from "../../../images/fileModal.svg";
@@ -33,7 +35,10 @@ export const ModalTiсket = ({
   const dispatch = useDispatch();
   const [addSubtask, setAddSubtask] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
-  const [inputsValue, setInputsValue] = useState({title: task.title, description: task.description})
+  const [inputsValue, setInputsValue] = useState({title: task.title, description: task.description, comment: ''});
+  const [comments, setComments] = useState([]);
+  const [commentsEditOpen, setCommentsEditOpen] = useState({})
+  const [commentsEditText, setCommentsEditText] = useState({})
 
   function deleteTask() {
     apiRequest("/task/update-task", {
@@ -60,6 +65,57 @@ export const ModalTiсket = ({
       dispatch(setProjectBoardFetch(projectId));
     });
   }
+
+  function createComment() {
+    apiRequest("/comment/create", {
+      method: "POST",
+      data: {
+        text: inputsValue.comment,
+        entity_type: 2,
+        entity_id: task.id
+      }
+    }).then((res) => {
+      let newComment = res
+      newComment.created_at = new Date()
+      setInputsValue((prevValue) => ({...prevValue, comment: ''}))
+      setComments((prevValue) => ([...prevValue, newComment]))
+      setCommentsEditOpen((prevValue) => ({...prevValue, [res.id]: false}))
+      setCommentsEditText((prevValue) => ({...prevValue, [res.id]: res.text}))
+    })
+  }
+  function deleteComment(commentId) {
+    apiRequest("/comment/update", {
+      method: "PUT",
+      data: {
+        comment_id: commentId,
+        status: 0
+      }
+    }).then((res) => {
+      setComments((prevValue) => prevValue.filter((item) => item.id !== commentId))
+    })
+  }
+
+  function editComment(commentId) {
+
+    apiRequest("/comment/update", {
+      method: "PUT",
+      data: {
+        comment_id: commentId,
+        text: commentsEditText[commentId]
+      }
+    }).then((res) => {
+    })
+  }
+
+  useEffect(() => {
+    apiRequest(`/comment/get-by-entity?entity_type=2&entity_id=${task.id}`).then((res) => {
+      setComments(res)
+      res.forEach((item) => {
+        setCommentsEditOpen((prevValue) => ({...prevValue, [item.id]: false}))
+        setCommentsEditText((prevValue) => ({...prevValue, [item.id]: item.text}))
+      })
+    })
+  }, [])
 
   return (
     <div
@@ -91,7 +147,7 @@ export const ModalTiсket = ({
               {editOpen ? <input value={inputsValue.description} onChange={(e) => {
                 setInputsValue((prevValue) => ({...prevValue, description: e.target.value}))
               }}/> :<p>{inputsValue.description}</p>}
-              <img src={taskImg} className="image-task"></img>
+              {/*<img src={taskImg} className="image-task"></img>*/}
             </div>
             <div className="content__communication">
               <p className="tasks">
@@ -115,8 +171,33 @@ export const ModalTiсket = ({
               </p>
             </div>
             <div className="content__input">
-              <input placeholder="Оставить комментарий"></input>
-              <img src={send}></img>
+              <input placeholder="Оставить комментарий" value={inputsValue.comment} onChange={(e) => {
+                setInputsValue((prevValue) => ({...prevValue, comment: e.target.value}))
+              }} />
+              <img src={send} onClick={createComment}></img>
+            </div>
+            <div className='comments__list'>
+              {comments.map((comment) => {
+                return <div className='comments__list__item' key={comment.id}>
+                  <div className='comments__list__item__info'>
+                    <span>{getCorrectDate(comment.created_at)}</span>
+                    <div className={commentsEditOpen[comment.id] ? 'edit edit__open' : 'edit'} >
+                      <img src={edit} alt='edit' onClick={() => {
+                        if (commentsEditOpen[comment.id]) {
+                          editComment(comment.id)
+                        }
+                        setCommentsEditOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
+                      }} />
+                    </div>
+                    <img src={del} alt='delete' onClick={() => deleteComment(comment.id)} />
+                  </div>
+                  {commentsEditOpen[comment.id] ? <input value={commentsEditText[comment.id]} onChange={(e) =>  {
+                    setCommentsEditText((prevValue) => ({...prevValue, [comment.id]: e.target.value}))
+                  }} /> : <p>{commentsEditText[comment.id]}</p>}
+                </div>
+              })
+
+              }
             </div>
           </div>
         </div>
