@@ -50,6 +50,7 @@
 
   &__nav {
     display: flex;
+    flex-wrap: wrap;
     column-gap: 30px;
 
     .active {

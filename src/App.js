@@ -38,6 +38,8 @@ import { ProfileCandidate } from "./pages/ProfileCandidate/ProfileCandidate";
 import { PassingTests } from "./pages/quiz/PassingTests";
 import Blog from "./pages/Blog/Blog";
 import { ProjectTracker } from "./pages/ProjectTracker/ProjectTracker";
+import { FrequentlyAskedQuestions } from "./pages/FrequentlyAskedQuestions/FrequentlyAskedQuestions";
+import { FrequentlyAskedQuestion } from "./pages/FrequentlyAskedQuestion/FrequentlyAskedQuestion";
 
 import "./assets/global.scss";
 import "./fonts/stylesheet.css";
@@ -50,6 +52,7 @@ const App = () => {
         <Routes>
           <Route exact path="/authdev" element={<AuthForDevelopers />} />
           <Route exact path="/auth" element={<AuthForPartners />} />
+
           <Route exact path="/worker/:id" element={<FreeDevelopers />} />
           <Route
             exact
@@ -70,6 +73,16 @@ const App = () => {
 
           <Route exact path="/blog" element={<Blog />}></Route>
           <Route exact path="/blog/article/:id" element={<Article />}></Route>
+          <Route
+            exact
+            path="/frequently-asked-questions"
+            element={<FrequentlyAskedQuestions />}
+          />
+          <Route
+            exact
+            path="/frequently-asked-question/:id"
+            element={<FrequentlyAskedQuestion />}
+          />
 
           <Route exact path="/candidate/:id" element={<Candidate />} />
           <Route exact path="/candidate/:id/form" element={<FormPage />} />

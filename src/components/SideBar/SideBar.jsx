@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import arrow from "../../images/sideBarArrow.svg";
 import LogoITguild from "../../images/LogoITguild.svg";
 
 import "./sidebar.scss";
-import { Link } from "react-router-dom";
 
 export const SideBar = () => {
   const [active, setActive] = useState(false);
@@ -65,7 +65,7 @@ export const SideBar = () => {
             <Link to={"/blog"}>Блог</Link>
           </li>
           <li>
-            <a href="#">FAQ</a>
+            <Link to={"/frequently-asked-questions"}>FAQ</Link>
           </li>
         </ul>
         <p className="auth-body__politic">Политика конфиденциальности</p>
