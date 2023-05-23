@@ -132,7 +132,7 @@ export const ModalTiсket = ({
       method: "PUT",
       data: {
         task_id: task.id,
-        executor_id: null
+        executor_id: 0
       },
     }).then((res) => {
       setExecutor(null)
