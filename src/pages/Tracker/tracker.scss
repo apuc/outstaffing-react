@@ -555,6 +555,10 @@
               font-weight: 400;
               font-size: 14px;
               line-height: 140%;
+              max-width: 295px;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
             }
 
             &__info {

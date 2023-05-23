@@ -13,7 +13,6 @@ import {getCorrectDate} from '../../../components/Calendar/calendarHelper'
 import category from "../../../images/category.png";
 import watch from "../../../images/watch.png";
 import file from "../../../images/fileModal.svg";
-import taskImg from "../../../images/tasksMock.png";
 import arrow from "../../../images/arrowStart.png";
 import link from "../../../images/link.svg";
 import archive from "../../../images/archive.svg";
@@ -22,8 +21,10 @@ import edit from "../../../images/edit.svg";
 import send from "../../../images/send.svg";
 import plus from "../../../images/plus.svg";
 import fullScreen from "../../../images/inFullScreen.svg";
+import close from "../../../images/closeProjectPersons.svg";
 
 import "./ModalTicket.scss";
+import {urlForLocal} from "../../../helper";
 
 export const ModalTiсket = ({
   active,
@@ -31,6 +32,7 @@ export const ModalTiсket = ({
   task,
   projectId,
   projectName,
+  projectUsers
 }) => {
   const dispatch = useDispatch();
   const [addSubtask, setAddSubtask] = useState(false);
@@ -39,6 +41,11 @@ export const ModalTiсket = ({
   const [comments, setComments] = useState([]);
   const [commentsEditOpen, setCommentsEditOpen] = useState({})
   const [commentsEditText, setCommentsEditText] = useState({})
+  const [dropListOpen, setDropListOpen] = useState(false)
+  const [dropListMembersOpen, setDropListMembersOpen] = useState(false)
+  const [executor, setExecutor] = useState(task.executor)
+  const [members, setMembers] = useState(task.taskUsers)
+  const [users, setUsers] = useState([])
 
   function deleteTask() {
     apiRequest("/task/update-task", {
@@ -107,6 +114,56 @@ export const ModalTiсket = ({
     })
   }
 
+  function taskExecutor(person) {
+    apiRequest("/task/update-task", {
+      method: "PUT",
+      data: {
+        task_id: task.id,
+        executor_id: person.user_id
+      },
+    }).then((res) => {
+      setDropListOpen(false)
+      setExecutor(res.executor)
+    });
+  }
+
+  function deleteTaskExecutor() {
+    apiRequest("/task/update-task", {
+      method: "PUT",
+      data: {
+        task_id: task.id,
+        executor_id: null
+      },
+    }).then((res) => {
+      setExecutor(null)
+    });
+  }
+
+  function addMember(person) {
+    apiRequest("/task/add-user-to-task", {
+      method: "POST",
+      data: {
+        task_id: task.id,
+        user_id: person.user_id
+      },
+    }).then((res) => {
+      setDropListMembersOpen(false)
+      setMembers((prevValue) => ([...prevValue, res]))
+    });
+  }
+
+  function deleteMember(person) {
+    apiRequest("/task/del-user", {
+      method: "DELETE",
+      data: {
+        task_id: task.id,
+        user_id: person.user_id
+      },
+    }).then((res) => {
+      setMembers(members.filter((item) => item.user_id !== person.user_id))
+    });
+  }
+
   useEffect(() => {
     apiRequest(`/comment/get-by-entity?entity_type=2&entity_id=${task.id}`).then((res) => {
       setComments(res)
@@ -116,6 +173,15 @@ export const ModalTiсket = ({
       })
     })
   }, [])
+
+  useEffect(() => {
+    let ids = members.map((user) => user.user_id)
+    setUsers(projectUsers.reduce((acc, cur) => {
+      if (!ids.includes(cur.user_id)) acc.push(cur)
+      return acc
+    }, []))
+  }, [members])
+
 
   return (
     <div
@@ -202,25 +268,66 @@ export const ModalTiсket = ({
           </div>
         </div>
         <div className="workers">
-          <div className="workers_box">
+          <div className="workers_box task__info">
             <span className="exit" onClick={() => setActive(false)}></span>
-            <span>{task.title}</span>
+            <span className='nameProject'>{task.title}</span>
             <p className="workers__creator">Создатель : {task.user?.fio}</p>
-            <div>
-              {Boolean(task.taskUsers?.length) &&
-                task.taskUsers.map((worker, index) => {
-                  return (
-                    <div className="worker" key={index}>
-                      <img src={worker.avatar}></img>
-                      <p>{worker.name}</p>
+
+            {executor ?
+              <div className='executor'>
+                <p>Исполнитель: {executor.fio}</p>
+                <img src={urlForLocal(executor.avatar)} alt='avatar' />
+                <img src={close} className='delete' onClick={() => deleteTaskExecutor()} />
+              </div> :
+              <div className="add-worker moreItems ">
+                <button onClick={() => setDropListOpen(true)}>+</button>
+                <span>Добавить исполнителя</span>
+                {dropListOpen &&
+                  <div className='dropdownList'>
+                    <img src={close} className='dropdownList__close' onClick={() => setDropListOpen(false)} />
+                    {projectUsers.map((person) => {
+                      return <div className='dropdownList__person' key={person.user_id} onClick={() => taskExecutor(person)}>
+                        <span>{person.user.fio}</span>
+                        <img src={urlForLocal(person.user.avatar)} />
+                      </div>
+                    })
+                    }
+                  </div>
+                }
+              </div>
+            }
+
+            {Boolean(members.length) &&
+            <div className='members'>
+              <p>Участники:</p>
+                <div className='members__list'>
+                  {members.map((member) => {
+                    return <div className='worker' key={member.user_id}>
+                      <p>{member.fio}</p>
+                      <img src={urlForLocal(member.avatar)} />
+                      <img src={close} className='delete' onClick={() => deleteMember(member)} />
                     </div>
-                  );
-                })}
+                  })
+                  }
+                </div>
             </div>
+            }
 
             <div className="add-worker moreItems">
-              <button>+</button>
+              <button onClick={() => setDropListMembersOpen(true)}>+</button>
               <span>Добавить участников</span>
+              {dropListMembersOpen &&
+              <div className='dropdownList'>
+                <img src={close} className='dropdownList__close' onClick={() => setDropListMembersOpen(false)} />
+                {users.length ? users.map((person) => {
+                  return <div className='dropdownList__person' key={person.user_id} onClick={() => addMember(person)}>
+                    <span>{person.user.fio}</span>
+                    <img src={urlForLocal(person.user.avatar)} />
+                  </div>
+                }) : <p className='noUsers'>Нет пользователей</p>
+                }
+              </div>
+              }
             </div>
           </div>
 
@@ -228,7 +335,7 @@ export const ModalTiсket = ({
             <div className="time">
               <img src={watch}></img>
               <span>Длительность : </span>
-              <p>{"8:30:22"}</p>
+              <p>{"0:00:00"}</p>
             </div>
 
             <button className="start">

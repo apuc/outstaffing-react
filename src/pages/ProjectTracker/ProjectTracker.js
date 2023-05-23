@@ -297,6 +297,7 @@ export const ProjectTracker = () => {
                   task={selectedTicket}
                   projectId={projectBoard.id}
                   projectName={projectBoard.name}
+                  projectUsers={projectBoard.projectUsers}
               />}
 
               <div className="tasks__container">
