@@ -349,6 +349,17 @@ export const TicketFullScreen = ({}) => {
 
               <div className="add-worker moreItems">
                 <button
+                    onClick={() => {
+                      dispatch(modalToggle("addWorker"));
+                      setModalAddWorker(true);
+                    }}
+                >
+                  +
+                </button>
+                <span>Добавить исполнителя</span>
+              </div>
+              <div className="add-worker moreItems">
+                <button
                   onClick={() => {
                     dispatch(modalToggle("addWorker"));
                     setModalAddWorker(true);
@@ -364,7 +375,7 @@ export const TicketFullScreen = ({}) => {
               <div className="time">
                 <img src={watch}></img>
                 <span>Длительность : </span>
-                <p>{"8:30:22"}</p>
+                <p>{"0:00:00"}</p>
               </div>
 
               <button className="start">
