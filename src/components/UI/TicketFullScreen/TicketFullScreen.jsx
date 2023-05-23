@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { ProfileHeader } from "../../ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../Footer/Footer";
-import { Link } from "react-router-dom";
-import ModalAdd from "../ModalAdd/ModalAdd";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import TrackerModal from "../TrackerModal/TrackerModal";
+import { Navigation } from "../../Navigation/Navigation";
+import {Loader} from "../../Loader/Loader";
 
-import avatarMock1 from "../../../images/avatarMoсk1.png";
-import avatarMock2 from "../../../images/avatarMoсk2.png";
+import { useDispatch } from "react-redux";
+import {modalToggle, setToggleTab} from "../../../redux/projectsTrackerSlice";
+import { apiRequest } from "../../../api/request";
+
 import project from "../../../images/trackerProject.svg";
 import watch from "../../../images/watch.png";
 import file from "../../../images/fileModal.svg";
@@ -28,36 +32,61 @@ import edit from "../../../images/edit.svg";
 import "./ticketFullScreen.scss";
 
 export const TicketFullScreen = ({}) => {
-  const [toggleTab, setToggleTab] = useState(1);
-  const [addSubtask, setAddSubtask] = useState(false);
   const [modalAddWorker, setModalAddWorker] = useState(false);
-  const [valueTiket, setValueTiket] = useState("");
+  const ticketId = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [projectInfo, setProjectInfo] = useState({});
+  const [taskInfo, setTaskInfo] = useState({});
+  const [editOpen, setEditOpen] = useState(false);
+  const [inputsValue, setInputsValue] = useState({})
+  const [loader, setLoader] = useState(true)
 
-  const [tiket] = useState({
-    name: "Разработка трекера",
-    code: "PR - 2245",
-    creator: "Василий Тарасов",
-    descriptions:
-      "На многих страницах сайта отсутствуют или некорректно заполнены метатеги Description. Это может негативно повлиять на представление сайта в результатах поиска. Необходимо исправить все страницы где есть ошибки или отсутствует Title и  Description.",
-  });
-  const [workers] = useState([
-    {
-      name: "Дмитрий Рогов",
-      avatar: avatarMock2,
-    },
-    {
-      name: "Марина Серова",
-      avatar: avatarMock1,
-    },
-  ]);
+  useEffect(() => {
+    apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
+      setTaskInfo(taskInfo);
+      setInputsValue({title: taskInfo.title, description: taskInfo.description})
+      apiRequest(`/project/get-project?project_id=${taskInfo.project_id}`).then(
+        (project) => {
+          setProjectInfo(project);
+          setLoader(false)
+        }
+      );
+    });
+  }, []);
+
+  function deleteTask() {
+    apiRequest("/task/update-task", {
+      method: "PUT",
+      data: {
+        task_id: ticketId.id,
+        status: 0,
+      },
+    }).then((res) => {
+      navigate(`/tracker/project/${taskInfo.project_id}`);
+    });
+  }
+
+  function editTask() {
+    apiRequest("/task/update-task", {
+      method: "PUT",
+      data: {
+        task_id: taskInfo.id,
+        title: inputsValue.title,
+        description: inputsValue.description
+      },
+    }).then((res) => {
+    });
+  }
 
   const toggleTabs = (index) => {
-    setToggleTab(index);
+    dispatch(setToggleTab(index));
   };
 
   return (
     <section className="ticket-full-screen">
       <ProfileHeader />
+      <Navigation />
       <div className="container">
         <div className="tracker__content">
           <ProfileBreadcrumbs
@@ -71,62 +100,54 @@ export const TicketFullScreen = ({}) => {
       </div>
       <div className="tracker__tabs">
         <div className="tracker__tabs__head">
-          <div
-            className={toggleTab === 1 ? "tab active-tab" : "tab"}
+          <Link
+            to="/profile/tracker"
+            className="tab active-tab"
             onClick={() => toggleTabs(1)}
           >
             <img src={project} alt="img" />
             <p>Проекты </p>
-          </div>
-          <div
-            className={toggleTab === 2 ? "tab active-tab" : "tab"}
+          </Link>
+          <Link
+            to="/profile/tracker"
+            className="tab"
             onClick={() => toggleTabs(2)}
           >
             <img src={tasks} alt="img" />
-            <Link to={`/profile/tracker`} className="link">
-              <p>Все мои задачи</p>
-            </Link>
-          </div>
-          <div
-            className={toggleTab === 3 ? "tab active-tab" : "tab"}
+            <p>Все мои задачи</p>
+          </Link>
+          <Link
+            to="/profile/tracker"
+            className="tab"
             onClick={() => toggleTabs(3)}
           >
             <img src={archive} alt="img" />
-            <Link to={`/profile/tracker`} className="link">
-              <p>Архив</p>
-            </Link>
-          </div>
+            <p>Архив</p>
+          </Link>
         </div>
+        {loader ? <Loader /> :
+        <>
         <div className="tracker__tabs__content content-tabs">
           <div className="tasks__head">
             <div className="tasks__head__wrapper">
-              <h4>Проект : Разработка трекера</h4>
+              <h4>Проект : {projectInfo.name}</h4>
 
-              <ModalAdd active={modalAddWorker} setActive={setModalAddWorker}>
-                <div className="title-project">
-                  <h4>Добавьте участника</h4>
-                  <p className="title-project__decs">Введите имя или e-mail</p>
-                  <div className="input-container">
-                    <input
-                      className="name-project"
-                      value={valueTiket}
-                      onChange={(e) => setValueTiket(e.target.value)}
-                    ></input>
-                  </div>
-                </div>
-                <button
-                  className="button-add"
-                  onClick={(e) => e.preventDefault()}
-                >
-                  Добавить
-                </button>
-              </ModalAdd>
+              <TrackerModal
+                active={modalAddWorker}
+                setActive={setModalAddWorker}
+              ></TrackerModal>
 
               <div className="tasks__head__persons">
                 <img src={avatarTest} alt="avatar" />
                 <img src={avatarTest} alt="avatar" />
                 <span className="countPersons">+9</span>
-                <span className="addPerson" onClick={setModalAddWorker}>
+                <span
+                  className="addPerson"
+                  onClick={() => {
+                    dispatch(modalToggle("addWorker"));
+                    setModalAddWorker(true);
+                  }}
+                >
                   +
                 </span>
                 <p>добавить участника в проект</p>
@@ -152,15 +173,23 @@ export const TicketFullScreen = ({}) => {
           <div className="content ticket-whith">
             <div className="content__task">
               <span>Задача</span>
-              <h5>{tiket.code}</h5>
+              {editOpen ? <input value={inputsValue.title} onChange={(e) => {
+                setInputsValue((prevValue) => ({...prevValue, title: e.target.value}))
+              }} /> :<h5>{inputsValue.title}</h5>}
               <div className="content__description">
-                <p>{tiket.descriptions}</p>
+                {editOpen ? <input value={inputsValue.description} onChange={(e) => {
+                  setInputsValue((prevValue) => ({...prevValue, description: e.target.value}))
+                }}/> :<p>{inputsValue.description}</p>}
                 <img src={task} className="image-task"></img>
-                <p>{tiket.descriptions}</p>
               </div>
               <div className="content__communication">
                 <p className="tasks">
-                  <button onClick={() => setAddSubtask(true)}>
+                  <button
+                    onClick={() => {
+                      dispatch(modalToggle("addSubtask"));
+                      setModalAddWorker(true);
+                    }}
+                  >
                     <img src={plus}></img>
                     Добавить под задачу
                   </button>
@@ -182,20 +211,30 @@ export const TicketFullScreen = ({}) => {
           </div>
           <div className="workers">
             <div className="workers_box">
-              <p className="workers__creator">Создатель : {tiket.creator}</p>
+              <p className="workers__creator">
+                Создатель : <span>{taskInfo.user?.fio}</span>
+              </p>
               <div>
-                {workers.map((worker, index) => {
-                  return (
-                    <div className="worker" key={index}>
-                      <img src={worker.avatar}></img>
-                      <p>{worker.name}</p>
-                    </div>
-                  );
-                })}
+                {Boolean(taskInfo.taskUsers?.length) &&
+                  taskInfo.taskUsers.map((worker, index) => {
+                    return (
+                      <div className="worker" key={index}>
+                        <img src={worker.avatar}></img>
+                        <p>{worker.name}</p>
+                      </div>
+                    );
+                  })}
               </div>
 
               <div className="add-worker moreItems">
-                <button>+</button>
+                <button
+                  onClick={() => {
+                    dispatch(modalToggle("addWorker"));
+                    setModalAddWorker(true);
+                  }}
+                >
+                  +
+                </button>
                 <span>Добавить участников</span>
               </div>
             </div>
@@ -213,9 +252,16 @@ export const TicketFullScreen = ({}) => {
             </div>
 
             <div className="workers_box-bottom">
-              <div>
+              <div className={editOpen ? 'edit' : ''} onClick={() => {
+                if(editOpen) {
+                  setEditOpen(!editOpen)
+                  editTask()
+                } else {
+                  setEditOpen(!editOpen)
+                }
+              }}>
                 <img src={edit}></img>
-                <p>редактировать</p>
+                <p>{editOpen ? 'сохранить' : 'редактировать'}</p>
               </div>
               <div>
                 <img src={link}></img>
@@ -225,28 +271,15 @@ export const TicketFullScreen = ({}) => {
                 <img src={archive2}></img>
                 <p>в архив</p>
               </div>
-              <div>
+              <div onClick={deleteTask}>
                 <img src={del}></img>
                 <p>удалить</p>
               </div>
             </div>
           </div>
         </div>
-
-        <ModalAdd active={addSubtask} setActive={setAddSubtask}>
-          <div className="title-project subtask">
-            <h4>
-              Вы добавляете подзадачу <p>в колонку задачи {"Готово"}</p>
-            </h4>
-            <p className="title-project__decs">Введите текст</p>
-            <div>
-              <textarea className="title-project__textarea"></textarea>
-            </div>
-          </div>
-          <button className="button-add" onClick={(e) => e.preventDefault()}>
-            Добавить
-          </button>
-        </ModalAdd>
+        </>
+        }
       </div>
       <Footer />
     </section>

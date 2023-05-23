@@ -1,0 +1,77 @@
+.blog {
+  background: #f1f1f1;
+
+  &__breadCrumbs {
+    margin-top: 30px;
+
+    @media (max-width: 1375px) {
+      margin-top: 0;
+      padding-top: 100px;
+    }
+
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+
+    h1 {
+      font-weight: 500;
+      font-size: 48px;
+      line-height: 32px;
+    }
+
+    h3 {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 28px;
+      text-align: justify;
+    }
+
+    div {
+      display: flex;
+    }
+
+    &-arrow {
+      margin: 0 27px 0 20px;
+    }
+
+    @media (max-width: 600px) {
+      padding-top: 110px;
+      flex-direction: column;
+
+      div {
+        margin: 0 0 15px 0;
+      }
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  &__load-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 35px;
+
+    button {
+      background: #52b709;
+      border-radius: 44px;
+      width: 202px;
+      height: 50px;
+      color: white;
+      font-size: 16px;
+      line-height: 32px;
+      border: none;
+    }
+  }
+}

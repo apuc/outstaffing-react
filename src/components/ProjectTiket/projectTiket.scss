@@ -19,7 +19,7 @@
     padding: 8px 13px 8px;
   }
 
-  h3 {
+  a {
     font-weight: 700;
     font-size: 18px;
     line-height: 32px;
@@ -27,7 +27,12 @@
     margin-bottom: 10px;
     overflow: hidden;
     white-space: nowrap;
+    display: flex;
     text-overflow: ellipsis;
+
+    &:hover {
+      color: black;
+    }
   }
 
   &__info {
@@ -78,7 +83,6 @@
       color: #6f6f6f;
       right: 0;
       top: -35%;
-      z-index: 999;
 
       @media (max-width: 430px) {
         display: none;

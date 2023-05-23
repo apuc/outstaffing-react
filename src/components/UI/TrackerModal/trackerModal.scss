@@ -20,7 +20,7 @@
     padding: 60px 60px 30px 60px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
   }
 
@@ -34,6 +34,7 @@
       height: 35px;
       background: #ffffff;
       border-radius: 8px;
+      margin-top: 12px;
     }
 
     h4 {
@@ -41,14 +42,13 @@
       font-size: 22px;
       line-height: 26px;
       color: #263238 !important;
-      margin-bottom: 22px !important;
     }
 
     &__decs {
       font-weight: 300;
       font-size: 12px;
       line-height: 14px;
-      margin: -13px 0 16px 0;
+      margin: 12px 0 16px 0;
     }
 
     &__textarea {
@@ -60,6 +60,56 @@
       border: none;
       font-size: 15px;
       line-height: 18px;
+    }
+
+    .select__worker {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px;
+      background: white;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      position: relative;
+
+      p {
+        max-width: 150px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 14px;
+      }
+
+      img {
+        transition: all 0.3s ease;
+        width: 16px;
+        height: 16px;
+      }
+
+      &__dropDown {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        width: 100%;
+        padding: 5px;
+        top: 35px;
+        left: 0;
+        background: white;
+        border-radius: 5px;
+        row-gap: 5px;
+
+        .worker {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+
+    .open {
+      .arrow {
+        transform: rotate(180deg);
+      }
     }
   }
 
@@ -73,7 +123,7 @@
   }
 
   .button-add {
-    margin: 20px 40% 0 0;
+    margin: 20px;
     width: 130px;
     height: 37px;
     background: #52b709;

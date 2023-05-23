@@ -3,480 +3,90 @@ import React, { useEffect, useState } from "react";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
+import { apiRequest } from "../../api/request";
+import { Navigation } from "../../components/Navigation/Navigation";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getProjects } from "../../redux/projectsTrackerSlice";
+import {
+  setAllProjects,
+  getProjects,
+  setToggleTab,
+  getToggleTab,
+  modalToggle,
+} from "../../redux/projectsTrackerSlice";
 
-import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
-import ModalCreate from "../../components/UI/ModalCreate/ModalCreate";
-import ModalAdd from "../../components/UI/ModalAdd/ModalAdd";
+import TrackerModal from "../../components/UI/TrackerModal/TrackerModal";
 import ProjectTiket from "../../components/ProjectTiket/ProjectTiket";
+import { urlForLocal } from "../../helper";
+import { getCorrectDate } from "../../components/Calendar/calendarHelper";
+import { Loader } from "../../components/Loader/Loader";
 
 import project from "../../images/trackerProject.svg";
 import tasks from "../../images/trackerTasks.svg";
 import archive from "../../images/archiveTracker.svg";
 import avatarTest from "../../images/AvatarTest .png";
-import selectArrow from "../../images/select.svg";
-import commentsBoard from "../../images/commentsBoard.svg";
-import filesBoard from "../../images/filesBoard.svg";
 import search from "../../images/serchIcon.png";
 import noProjects from "../../images/noProjects.png";
-import arrow from "../../images/arrowCalendar.png";
 
 import "./tracker.scss";
-import { Navigation } from "../../components/Navigation/Navigation";
 
 export const Tracker = () => {
-  const [toggleTab, setToggleTab] = useState(1);
-  const [tabTaskMok, setTabTaskMok] = useState([
-    {
-      name: "Открытые",
-      open: false,
-      tasks: [
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 1,
-        },
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 2,
-        },
-      ],
-    },
-    {
-      name: "В процессе",
-      open: false,
-      tasks: [
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 3,
-        },
-      ],
-    },
-    {
-      name: "На проверке",
-      open: false,
-      tasks: [
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 4,
-        },
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 5,
-        },
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 6,
-        },
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 9,
-        },
-      ],
-    },
-    {
-      name: "Готово",
-      open: false,
-      tasks: [
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 7,
-        },
-        {
-          task: "PR - 2245",
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 12,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: 8,
-        },
-      ],
-    },
-  ]);
-
-  const [allTasks] = useState([
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-  ]);
-
-  const [archiveProjects] = useState([
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-    {
-      name: "Будущее России",
-      date: "7 марта 2023 г",
-    },
-  ]);
-
-  const [completeTasks] = useState([
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-    {
-      name: "PR - 2245",
-      description: "Сверстать часть таблицы. Сверстать часть таблицы",
-      dateComplete: "7 марта 2023 г",
-      avatarDo: avatarTest,
-      project: "Будущее России",
-    },
-  ]);
-
-  const [filterCompleteTasks, setFilterCompleteTasks] = useState(completeTasks);
-
-  // Modal State
-  const [modalActiveTicket, setModalActiveTicket] = useState(false);
-  const [indexTicket, setIndexTicket] = useState(0);
-  const [modalAddWorker, setModalAddWorker] = useState(false);
-  const [modalCreateProject, setModalCreateProject] = useState(false);
-  const [modalCreateColl, setModalCreateColl] = useState(false);
-  const [modalCreateTiket, setModalCreateTiket] = useState(false);
-  const [valueTiket, setValueTiket] = useState("");
-  const [valueColl, setValueColl] = useState("");
-  //
-
-  const [projectTasksOpen, setProjectTasksOpen] = useState(false);
-
-  const [selectedTab, setSelectedTab] = useState({
-    name: "",
-    indexTab: 0,
-    task: [],
-  });
-
-  const [startWrapperIndex, setStartWrapperIndex] = useState(null);
-  const [wrapperHover, setWrapperHover] = useState([
-    false,
-    false,
-    false,
-    false,
-  ]);
-
+  const dispatch = useDispatch();
   const projects = useSelector(getProjects);
+  const tab = useSelector(getToggleTab);
+
+  const [allTasks, setAllTasks] = useState([]);
+  const [filteredAllTasks, setFilteredAllTasks] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const [filterCompleteTasks, setFilterCompleteTasks] = useState([]);
+  const [allCompletedTasks, setAllCompletedTasks] = useState([])
+
+  const [modalCreateProject, setModalCreateProject] = useState(false);
+
+  useEffect(() => {
+    setLoader(true);
+    apiRequest(
+      `/project/project-list?user_id=${localStorage.getItem(
+        "id"
+      )}&expand=columns`
+    ).then((el) => {
+      dispatch(setAllProjects(el.projects));
+      setLoader(false);
+      // setAllCompletedTasks(el.projects.filter((project) => {
+      //   if (project.status === 10 && project.columns.length) {
+      //     return project
+      //   }
+      // }).map((project) => { return project.columns}).reduce((acu, curr) => {
+      //   curr.forEach((item) => {
+      //     acu.push(...item.tasks)
+      //   })
+      //   return acu
+      // }, []))
+    });
+    apiRequest(
+      `/task/get-user-tasks?user_id=${localStorage.getItem("id")}`
+    ).then((el) => {
+      const allTasks = el.filter((item) => item.status !== 0)
+      const completedTasks = el.filter((item) => item.status === 0)
+      setAllTasks(allTasks);
+      setFilteredAllTasks(allTasks);
+      setAllCompletedTasks(completedTasks)
+      setFilterCompleteTasks(completedTasks)
+    });
+  }, []);
 
   const toggleTabs = (index) => {
-    if (projectTasksOpen) {
-      setProjectTasksOpen(false);
-    }
-    setToggleTab(index);
+    dispatch(setToggleTab(index));
   };
 
-  function toggleMoreTasks(wrapperIndex) {
-    setTabTaskMok((prevArray) =>
-      prevArray.map((elem, index) => {
-        if (wrapperIndex === index) {
-          return { ...elem, open: !elem.open };
-        } else {
-          return elem;
-        }
-      })
-    );
-  }
-
-  function dragStartHandler(e, task, wrapperIndex) {
-    setStartWrapperIndex({ task: task, index: wrapperIndex });
-    setTimeout(() => {
-      e.target.classList.add("tasks__board__item__hide");
-    }, 0);
-  }
-
-  function dragEndHandler(e) {
-    setWrapperHover((prevArray) =>
-      prevArray.map((elem) => {
-        return false;
-      })
-    );
-    e.target.classList.remove("tasks__board__item__hide");
-  }
-
-  function dragOverHandler(e) {
-    e.preventDefault();
-  }
-
-  function dragEnterHandler(wrapperIndex) {
-    if (wrapperIndex === startWrapperIndex.index) {
-      return;
-    }
-    setWrapperHover((prevArray) =>
-      prevArray.map((elem, index) => {
-        if (index === wrapperIndex) {
-          return true;
-        } else {
-          return false;
-        }
-      })
-    );
-  }
-
-  function dragDropHandler(e, wrapperIndex) {
-    e.preventDefault();
-    if (startWrapperIndex.index === wrapperIndex) {
-      return;
-    }
-    setWrapperHover((prevArray) =>
-      prevArray.map((elem) => {
-        return false;
-      })
-    );
-    setTabTaskMok((prevArray) =>
-      prevArray.map((elem, index) => {
-        if (index === wrapperIndex) {
-          return { ...elem, tasks: [...elem.tasks, startWrapperIndex.task] };
-        } else if (index === startWrapperIndex.index) {
-          return {
-            ...elem,
-            tasks: elem.tasks.filter((item) => {
-              return item.id !== startWrapperIndex.task.id;
-            }),
-          };
-        } else {
-          return elem;
-        }
-      })
-    );
-  }
-
-  function filterArchiveTasks(e) {
-    setFilterCompleteTasks(
-      completeTasks.filter((item) => {
+  function filterAllTask(e) {
+    setFilteredAllTasks(
+      allTasks.filter((item) => {
         if (!e.target.value) {
           return item;
         }
         if (
-          item.name.toLowerCase().startsWith(e.target.value.toLowerCase()) ||
+          item.title.toLowerCase().startsWith(e.target.value.toLowerCase()) ||
           item.description
             .toLowerCase()
             .startsWith(e.target.value.toLowerCase())
@@ -487,53 +97,22 @@ export const Tracker = () => {
     );
   }
 
-  function selectedTabTask(e, wrapperIndex, name, tasks) {
-    let tab = { name: name, indexTab: wrapperIndex, task: tasks };
-    setSelectedTab(tab);
-    setModalCreateTiket(true);
-  }
-
-  function openTicket(e, iTicket) {
-    setIndexTicket(iTicket);
-    setModalActiveTicket(true);
-  }
-
-  function createTiket() {
-    tabTaskMok.filter((item) => {
-      if (item.name == selectedTab.name) {
-        let idItem = 0;
-
-        item.tasks.forEach((item) => {
-          idItem = item.id;
-        });
-
-        let newTiket = {
-          task: valueTiket,
-          description: "Сверстать часть таблицы. Сверстать часть таблицы",
-          comments: 0,
-          files: 0,
-          avatarCreated: avatarTest,
-          avatarDo: avatarTest,
-          id: idItem + 1,
-        };
-
-        item.tasks.push(newTiket);
-      }
-    });
-    setModalCreateTiket(false);
-    setValueTiket("");
-  }
-
-  function createTab() {
-    let newTab = {
-      name: valueColl,
-      open: false,
-      tasks: [],
-    };
-
-    tabTaskMok.unshift(newTab);
-    setValueColl("");
-    setModalCreateColl(false);
+  function filterArchiveTasks(e) {
+    setFilterCompleteTasks(
+        allCompletedTasks.filter((item) => {
+        if (!e.target.value) {
+          return item;
+        }
+        if (
+          item.title.toLowerCase().startsWith(e.target.value.toLowerCase()) ||
+          item.description
+            .toLowerCase()
+            .startsWith(e.target.value.toLowerCase())
+        ) {
+          return item;
+        }
+      })
+    );
   }
 
   return (
@@ -554,21 +133,21 @@ export const Tracker = () => {
       <div className="tracker__tabs">
         <div className="tracker__tabs__head">
           <div
-            className={toggleTab === 1 ? "tab active-tab" : "tab"}
+            className={tab === 1 ? "tab active-tab" : "tab"}
             onClick={() => toggleTabs(1)}
           >
             <img src={project} alt="img" />
             <p>Проекты </p>
           </div>
           <div
-            className={toggleTab === 2 ? "tab active-tab" : "tab"}
+            className={tab === 2 ? "tab active-tab" : "tab"}
             onClick={() => toggleTabs(2)}
           >
             <img src={tasks} alt="img" />
             <p>Все мои задачи</p>
           </div>
           <div
-            className={toggleTab === 3 ? "tab active-tab" : "tab"}
+            className={tab === 3 ? "tab active-tab" : "tab"}
             onClick={() => toggleTabs(3)}
           >
             <img src={archive} alt="img" />
@@ -578,53 +157,63 @@ export const Tracker = () => {
         <div className="tracker__tabs__content">
           <div
             className={
-              toggleTab === 1
+              tab === 1
                 ? "tracker__tabs__content__projects active__content tracker__tabs__content__wrapper"
                 : "tracker__tabs__content__projects tracker__tabs__content__wrapper"
             }
           >
-            <ModalCreate
+            <TrackerModal
               active={modalCreateProject}
               setActive={setModalCreateProject}
-              title={"Укажите название проекта:"}
-            />
+              titleProject={"Укажите название проекта:"}
+            ></TrackerModal>
+
+            {loader && <Loader style="green" />}
 
             {Boolean(projects.length) &&
-              !projectTasksOpen &&
+              !loader &&
               projects.map((project, index) => {
-                return (
-                  <ProjectTiket
-                    key={index}
-                    project={project}
-                    setOpenProject={setProjectTasksOpen}
-                  ></ProjectTiket>
+                return project.status !== 10 ? (
+                  <ProjectTiket key={index} project={project}></ProjectTiket>
+                ) : (
+                  ""
                 );
               })}
-            {!Boolean(projects.length) && !projectTasksOpen && (
-              <div className="no-projects">
-                <div className="no-projects__createNew">
-                  <div>
-                    <img src={noProjects} alt="noProjectImg" />
-                    <p>Создайте свой первый проект</p>
+            {(!Boolean(projects.length) ||
+              !Boolean(
+                projects.filter((project) => project.status !== 10).length
+              )) &&
+              !loader && (
+                <div className="no-projects">
+                  <div className="no-projects__createNew">
+                    <div>
+                      <img src={noProjects} alt="noProjectImg" />
+                      <p>Создайте свой первый проект</p>
+                    </div>
+                    <button
+                      className="createProjectBtn"
+                      onClick={() => {
+                        dispatch(modalToggle("createProject"));
+                        setModalCreateProject(true);
+                      }}
+                    >
+                      <span>+</span>Создать проект
+                    </button>
                   </div>
-                  <button
-                    className="createProjectBtn"
-                    onClick={() => setModalCreateProject(true)}
-                  >
-                    <span>+</span>Создать проект
-                  </button>
+                  <p className="no-projects__info">
+                    Ставьте задачи, следите за прогрессом, ведите учёт рабочего
+                    времени
+                  </p>
                 </div>
-                <p className="no-projects__info">
-                  Ставьте задачи, следите за прогрессом, ведите учёт рабочего
-                  времени
-                </p>
-              </div>
-            )}
-            {Boolean(projects.length) && !projectTasksOpen && (
+              )}
+            {Boolean(projects.length) && !loader && (
               <div className="create-newProject">
                 <button
                   className="createProjectBtn"
-                  onClick={() => setModalCreateProject(true)}
+                  onClick={() => {
+                    dispatch(modalToggle("createProject"));
+                    setModalCreateProject(true);
+                  }}
                 >
                   <span>+</span>Создать проект
                 </button>
@@ -637,204 +226,7 @@ export const Tracker = () => {
           </div>
           <div
             className={
-              toggleTab === 1 && projectTasksOpen
-                ? "tracker__tabs__content__tasks tasks active__content"
-                : "tracker__tabs__content__projects"
-            }
-          >
-            <div className="tasks__head">
-              <div className="tasks__head__wrapper">
-                <h4>Проект : Разработка трекера</h4>
-
-                <ModalAdd
-                  active={modalCreateColl}
-                  setActive={setModalCreateColl}
-                >
-                  <div className="title-project">
-                    <h4>Введите название колонки</h4>
-                    <div className="input-container">
-                      <input
-                        className="name-project"
-                        value={valueColl}
-                        onChange={(e) => setValueColl(e.target.value)}
-                      ></input>
-                    </div>
-                  </div>
-                  <button className="button-add" onClick={createTab}>
-                    Создать
-                  </button>
-                </ModalAdd>
-
-                <ModalAdd active={modalAddWorker} setActive={setModalAddWorker}>
-                  <div className="title-project">
-                    <h4>Добавьте участника</h4>
-                    <p className="title-project__decs">
-                      Введите имя или e-mail{" "}
-                    </p>
-                    <div className="input-container">
-                      <input
-                        className="name-project"
-                        value={valueTiket}
-                        onChange={(e) => setValueTiket(e.target.value)}
-                      ></input>
-                    </div>
-                  </div>
-                  <button
-                    className="button-add"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Добавить
-                  </button>
-                </ModalAdd>
-
-                <div className="tasks__head__add">
-                  <span onClick={() => setModalCreateColl(true)}>+</span>
-                  <p>добавить задачу в проект</p>
-                </div>
-                <div className="tasks__head__persons">
-                  <img src={avatarTest} alt="avatar" />
-                  <img src={avatarTest} alt="avatar" />
-                  <span className="countPersons">+9</span>
-                  <span className="addPerson" onClick={setModalAddWorker}>
-                    +
-                  </span>
-                  <p>добавить участника в проект</p>
-                </div>
-                <div className="tasks__head__select">
-                  <span>Учавствую</span>
-                  <img src={selectArrow} alt="arrow" />
-                </div>
-                <div className="tasks__head__select">
-                  <span>Мои</span>
-                  <img src={selectArrow} alt="arrow" />
-                </div>
-                <div
-                  className="tasks__head__back"
-                  onClick={() => setProjectTasksOpen(false)}
-                >
-                  <p>Вернуться на проекты</p>
-                  <img src={arrow} alt="arrow" />
-                </div>
-              </div>
-            </div>
-
-            <ModalTicket
-              active={modalActiveTicket}
-              setActive={setModalActiveTicket}
-              index={indexTicket}
-            />
-
-            <ModalAdd active={modalCreateTiket} setActive={setModalCreateTiket}>
-              <div className="title-project">
-                <h4>Введите название карточки</h4>
-                <div className="input-container">
-                  <input
-                    className="name-project"
-                    value={valueTiket}
-                    onChange={(e) => setValueTiket(e.target.value)}
-                  ></input>
-                </div>
-              </div>
-              <button className="button-add" onClick={createTiket}>
-                Создать
-              </button>
-            </ModalAdd>
-
-            <div className="tasks__container">
-              {tabTaskMok.map((section, wrapperIndex) => {
-                return (
-                  <div
-                    key={wrapperIndex}
-                    onDragOver={(e) => dragOverHandler(e)}
-                    onDragEnter={(e) => dragEnterHandler(wrapperIndex)}
-                    onDrop={(e) => dragDropHandler(e, wrapperIndex)}
-                    className={`tasks__board ${
-                      section.tasks.length >= 3 ? "tasks__board__more" : ""
-                    } ${
-                      wrapperHover[wrapperIndex] ? "tasks__board__hover" : ""
-                    }`}
-                  >
-                    <div className="board__head">
-                      <span className={wrapperIndex === 3 ? "done" : ""}>
-                        {section.name}
-                      </span>
-                      <div>
-                        <span
-                          className="add"
-                          onClick={(e) =>
-                            selectedTabTask(
-                              e,
-                              wrapperIndex,
-                              section.name,
-                              section.tasks
-                            )
-                          }
-                        >
-                          +
-                        </span>
-                        <span className="more">...</span>
-                      </div>
-                    </div>
-                    {section.tasks.map((task, index) => {
-                      if (index > 2) {
-                        if (!section.open) {
-                          return;
-                        }
-                      }
-                      return (
-                        <div
-                          key={index}
-                          className="tasks__board__item"
-                          draggable={true}
-                          onDragStart={(e) =>
-                            dragStartHandler(e, task, wrapperIndex)
-                          }
-                          onDragEnd={(e) => dragEndHandler(e)}
-                          onClick={(e) => openTicket(e, index)}
-                        >
-                          <div className="tasks__board__item__title">
-                            <p>{task.task}</p>
-                          </div>
-                          <p className="tasks__board__item__description">
-                            {task.description}
-                          </p>
-                          <div className="tasks__board__item__info">
-                            <div className="tasks__board__item__info__more">
-                              <img src={commentsBoard} alt="commentsImg" />
-                              <span>{task.comments} коментариев</span>
-                            </div>
-                            <div className="tasks__board__item__info__more">
-                              <img src={filesBoard} alt="filesImg" />
-                              <span>{task.files} файлов</span>
-                            </div>
-                            <div className="tasks__board__item__info__avatars">
-                              <img src={task.avatarCreated} alt="avatar" />
-                              <img src={task.avatarDo} alt="avatar" />
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                    {section.tasks.length > 3 && (
-                      <span
-                        className={
-                          section.open
-                            ? "lessItems openItems"
-                            : "moreItems openItems"
-                        }
-                        onClick={() => toggleMoreTasks(wrapperIndex)}
-                      >
-                        {section.open ? "-" : "+"}
-                      </span>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div
-            className={
-              toggleTab === 2
+              tab === 2
                 ? "tracker__tabs__content__allTasks taskList tasks active__content"
                 : "tracker__tabs__content__projects"
             }
@@ -846,33 +238,40 @@ export const Tracker = () => {
                 <input
                   type="text"
                   placeholder="Найти задачу"
-                  onChange={(event) => filterArchiveTasks(event)}
+                  onChange={(event) => filterAllTask(event)}
                 />
               </div>
             </div>
-            <div className="taskList__wrapper">
-              {allTasks.map((task, index) => {
-                return (
-                  <div className="task" key={index}>
-                    <div className="task__info">
-                      <h5>{task.name}</h5>
-                      <p>{task.description}</p>
-                    </div>
-                    <div className="task__person">
-                      <img src={task.avatarDo} alt="avatar" />
-                      <div className="task__project">
-                        <p>{task.project}</p>
-                        <span>{task.dateComplete}</span>
+            {loader && <Loader style="green" />}
+            {!loader && (
+              <div className="taskList__wrapper">
+                {Boolean(filteredAllTasks.length) &&
+                  filteredAllTasks.map((task) => {
+                    return (
+                      <div className="task" key={task.id}>
+                        <div className="task__info">
+                          <h5>{task.title}</h5>
+                          <p>{task.description}</p>
+                        </div>
+                        <div className="task__person">
+                          <img
+                            src={urlForLocal(task.user.avatar)}
+                            alt="avatar"
+                          />
+                          <div className="task__project">
+                            <p>{task.user.fio}</p>
+                            <span>{getCorrectDate(task.created_at)}</span>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                    );
+                  })}
+              </div>
+            )}
           </div>
           <div
             className={
-              toggleTab === 3
+              tab === 3
                 ? "tracker__tabs__content__archive active__content"
                 : "tracker__tabs__content__projects"
             }
@@ -891,19 +290,21 @@ export const Tracker = () => {
                 </div>
               </div>
               <div className="archive__tasksWrapper">
+                {loader && <Loader style="green" />}
+                {!loader && <>
                 {Boolean(filterCompleteTasks.length) ? (
                   filterCompleteTasks.map((task, index) => {
                     return (
                       <div className="archive__completeTask" key={index}>
                         <div className="archive__completeTask__description">
-                          <p>{task.description}</p>
-                          <p className="date">{task.dateComplete}</p>
+                          <p>{task.title}</p>
+                          <p className="date">{task.description}</p>
                         </div>
                         <div className="archive__completeTask__info">
-                          <img src={task.avatarDo} alt="avatar" />
+                          <img src={urlForLocal(task.user.avatar)} alt="avatar" />
                           <div className="archive__completeTask__info__project">
-                            <span>Проект</span>
-                            <p>{task.project}</p>
+                            {/*<span>Проект</span>*/}
+                            <p>{getCorrectDate(task.updated_at)}</p>
                           </div>
                         </div>
                       </div>
@@ -914,24 +315,26 @@ export const Tracker = () => {
                     <p>В архиве задач нет</p>
                   </div>
                 )}
+                </>
+                }
               </div>
             </div>
             <div className="archive__projects">
               <div className="archive__title">
                 <h3>Архив проектов:</h3>
-                <p>{archiveProjects.length} проект(ов)</p>
+                <p>{projects.filter((project) => project.status === 10).length} проект(ов)</p>
               </div>
               <div className="archive__tasksWrapper">
-                {Boolean(archiveProjects) ? (
-                  archiveProjects.map((project, index) => {
-                    return (
+                {Boolean(projects.filter((project) => project.status === 10).length) ? (
+                  projects.map((project, index) => {
+                    return project.status === 10 ? (
                       <div className="archive__completeTask" key={index}>
                         <div className="archive__completeTask__description">
                           <p>{project.name}</p>
                           <p className="date">{project.date}</p>
                         </div>
                       </div>
-                    );
+                    ): '';
                   })
                 ) : (
                   <div className="archive__noItem">

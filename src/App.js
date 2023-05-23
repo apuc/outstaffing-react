@@ -15,6 +15,7 @@ import ReportForm from "./components/ReportForm/ReportForm";
 import FreeDevelopers from "./components/UI/FreeDevelopers/FreeDevelopers";
 import { TicketFullScreen } from "./components/UI/TicketFullScreen/TicketFullScreen";
 import { ProfileCalendar } from "./components/ProfileCalendar/ProfileCalendar";
+import Article from "./pages/Article/Article";
 import FormPage from "./pages/FormPage/FormPage.js";
 import SingleReportPage from "./pages/SingleReportPage/SingleReportPage";
 import { QuizPage } from "./pages/quiz/QuizPage";
@@ -35,13 +36,14 @@ import { AuthForCandidate } from "./pages/AuthForCandidate/AuthForCandidate";
 import { RegistrationForCandidate } from "./pages/RegistrationForCandidate/RegistrationForCandidate";
 import { ProfileCandidate } from "./pages/ProfileCandidate/ProfileCandidate";
 import { PassingTests } from "./pages/quiz/PassingTests";
-import "./assets/global.scss";
-import "./fonts/stylesheet.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { FREQUENTLY_ASKED_QUESTIONS_ROUTE, FREQUENTLY_ASKED_QUESTION_ROUTE } from "./constants/router-path";
+import Blog from "./pages/Blog/Blog";
+import { ProjectTracker } from "./pages/ProjectTracker/ProjectTracker";
 import { FrequentlyAskedQuestions } from "./pages/FrequentlyAskedQuestions/FrequentlyAskedQuestions";
 import { FrequentlyAskedQuestion } from "./pages/FrequentlyAskedQuestion/FrequentlyAskedQuestion";
 
+import "./assets/global.scss";
+import "./fonts/stylesheet.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   return (
@@ -49,21 +51,37 @@ const App = () => {
       <Router>
         <Routes>
           <Route exact path="/authdev" element={<AuthForDevelopers />} />
-          <Route exact path="/auth" element={<AuthForPartners />} />          
-          <Route exact path={FREQUENTLY_ASKED_QUESTIONS_ROUTE} element={<FrequentlyAskedQuestions />}/>
-          <Route exact path={FREQUENTLY_ASKED_QUESTION_ROUTE+'/:id'} element={<FrequentlyAskedQuestion />} />     
-        
+          <Route exact path="/auth" element={<AuthForPartners />} />
+
           <Route exact path="/worker/:id" element={<FreeDevelopers />} />
           <Route
             exact
-            path="/tracker/:id"
+            path="/tracker/task/:id"
             element={<TicketFullScreen />}
           ></Route>
+          <Route
+            exact
+            path="/tracker/project/:id"
+            element={<ProjectTracker />}
+          />
           <Route exact path="/auth-candidate" element={<AuthForCandidate />} />
           <Route
             exact
             path="/registration-candidate"
             element={<RegistrationForCandidate />}
+          />
+
+          <Route exact path="/blog" element={<Blog />}></Route>
+          <Route exact path="/blog/article/:id" element={<Article />}></Route>
+          <Route
+            exact
+            path="/frequently-asked-questions"
+            element={<FrequentlyAskedQuestions />}
+          />
+          <Route
+            exact
+            path="/frequently-asked-question/:id"
+            element={<FrequentlyAskedQuestion />}
           />
 
           <Route exact path="/candidate/:id" element={<Candidate />} />
@@ -83,8 +101,9 @@ const App = () => {
             <Route index element={<Profile />} />
             <Route exact path="catalog" element={<Home />} />
             <Route exact path="calendar" element={<ProfileCalendar />} />
+            <Route exact path="calendar/view/" element={<ProfileCalendar />} />
             <Route exact path="summary" element={<Summary />} />
-            <Route exact path="view" element={<ViewReport />} />
+            <Route exact path="view/:id" element={<ViewReport />} />
             <Route exact path="tracker" element={<Tracker />} />
             <Route exact path="payouts" element={<Payouts />} />
             <Route exact path="settings" element={<PartnerSettings />} />
@@ -104,7 +123,7 @@ const App = () => {
             <Route index element={<ProfileCandidate />} />
           </Route>
 
-          {/* <Route path="*" element={<Navigate to="/auth" replace />} /> */}
+          <Route path="*" element={<Navigate to="/auth" replace />} />
         </Routes>
       </Router>
     </>

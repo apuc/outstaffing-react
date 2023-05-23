@@ -6,19 +6,18 @@
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
-  transform: scale(0);
 }
 
 .modal-tiket.active {
-  transform: scale(1);
+  display: flex;
 }
 
 .modal-tiket__content {
   background: #ffffff;
-  border: 1px solid #dde2e4;
+  //border: 1px solid #dde2e4;
   border-radius: 8px;
   display: flex;
   flex-direction: row;
@@ -50,6 +49,16 @@
     &__task {
       margin-top: -5px;
       padding: 18px;
+      display: flex;
+      flex-direction: column;
+
+      input {
+        font-style: normal;
+        font-size: 16px;
+        line-height: 24px;
+        max-width: 340px;
+        outline: none;
+      }
 
       button {
         img {
@@ -64,10 +73,14 @@
         font-size: 16px;
         line-height: 24px;
         color: #1a1919;
+        margin-bottom: 0;
       }
     }
 
     &__description {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
       p {
         font-weight: 400;
         font-size: 14px;
@@ -77,7 +90,8 @@
       }
 
       .image-task {
-        margin: 0 0 20px 0;
+        margin: 10px 0 20px 0;
+        max-width: 330px;
       }
     }
 
@@ -266,6 +280,19 @@
       line-height: 32px;
       font-weight: 500;
       color: #2d4a17;
+      display: flex;
+      max-width: 200px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      span {
+        margin-left: 5px;
+        font-size: 14px;
+        line-height: 32px;
+        font-weight: 500;
+        display: flex;
+      }
     }
 
     .worker {
@@ -291,17 +318,28 @@
       }
 
       &-bottom {
-        padding: 40px 0 75px 56px;
+        padding: 40px 110px 75px 56px;
         font-weight: 400;
         font-size: 14px;
         line-height: 38px;
 
         div {
           display: flex;
+          cursor: pointer;
           align-items: center;
+          padding-left: 10px;
 
           p {
             margin: 0 0 0 12px;
+          }
+        }
+
+        .edit {
+          background: #52b709;
+          border-radius: 50px;
+
+          p {
+            font-weight: 700;
           }
         }
       }

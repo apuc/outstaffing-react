@@ -1,11 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import arrow from "../../images/sideBarArrow.svg";
 import LogoITguild from "../../images/LogoITguild.svg";
 
 import "./sidebar.scss";
-import { Link } from "react-router-dom";
-import { FREQUENTLY_ASKED_QUESTIONS_ROUTE } from "../../constants/router-path";
 
 export const SideBar = () => {
   const [active, setActive] = useState(false);
@@ -48,10 +47,10 @@ export const SideBar = () => {
         </div>
         <ul className="auth-body__navigation">
           <li>
-            <a href="#">Вход для партнеров</a>
+            <Link to={"/auth"}>Вход для партнеров</Link>
           </li>
           <li>
-            <a href="#">Кабинет разработчика</a>
+            <Link to={"/auth"}>Кабинет разработчика</Link>
           </li>
           <li>
             <a href="#">Школа</a>
@@ -63,10 +62,10 @@ export const SideBar = () => {
             <a href="#">Контакты</a>
           </li>
           <li>
-            <a href="#">Блог</a>
+            <Link to={"/blog"}>Блог</Link>
           </li>
           <li>
-            <Link to={FREQUENTLY_ASKED_QUESTIONS_ROUTE}>FAQ</Link>
+            <Link to={"/frequently-asked-questions"}>FAQ</Link>
           </li>
         </ul>
         <p className="auth-body__politic">Политика конфиденциальности</p>
