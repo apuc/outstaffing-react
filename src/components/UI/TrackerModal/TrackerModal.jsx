@@ -12,7 +12,8 @@ import {
   editProjectName,
   editColumnName,
   getColumnName,
-  getColumnId
+  getColumnId,
+  addPersonToProject
 } from "../../../redux/projectsTrackerSlice";
 
 import arrowDown from "../../../images/selectArrow.png"
@@ -136,12 +137,13 @@ export const TrackerModal = ({
     apiRequest("/project/add-user", {
       method: "POST",
       data: {
-        user_id: selectedWorker.id,
+        user_id: selectedWorker.user_id,
         project_id: projectBoard.id
       }
     }).then((el) => {
+      dispatch(addPersonToProject(el))
       setActive(false);
-      selectedWorker(null)
+      setSelectedWorker('')
       setSelectWorkersOpen(false)
     })
   }
@@ -149,10 +151,14 @@ export const TrackerModal = ({
   useEffect(() => {
     modalType === "addWorker" ? apiRequest('/project/my-employee').then((el) => {
       let persons = el.managerEmployees
-      projectBoard.projectUsers.forEach(person => persons.splice(persons.indexOf(person), 1))
-      setWorkers(persons)
+      let ids = projectBoard.projectUsers.map((user) => user.user_id)
+      setWorkers(persons.reduce((acc, cur) => {
+        if (!ids.includes(cur.user_id)) acc.push(cur)
+        return acc
+      }, []))
     }) : ''
-  }, [modalType])
+  }, [active])
+
 
   return (
     <div
@@ -178,21 +184,24 @@ export const TrackerModal = ({
                 <p>{selectedWorker ? selectedWorker.employee.fio : 'Выберите пользователя'}</p>
                 <img className='arrow' src={arrowDown} alt='arrow' />
                 {Boolean(selectWorkersOpen) &&
-                <div className='select__worker__dropDown'>
-                  {workers.map((worker) => {
-                    if ((workers.length === 1 || 0) && worker === selectedWorker) {
-                      return <p>Пользователей нет</p>
+                  <div className='select__worker__dropDown'>
+                    {Boolean(workers.length) ?
+                      workers.map((worker) => {
+                      if (worker === selectedWorker) {
+                        return
+                      }
+                      return <div className='worker' key={worker.id} onClick={() =>
+                        {
+                          setSelectedWorker(worker)
+                        }
+                      }>
+                        <p>{worker.employee.fio}</p>
+                        <img src={urlForLocal(worker.employee.avatar)} alt='avatar'/>
+                      </div>
+                    }) :
+                        <div>Нет пользователей</div>
                     }
-                    if (worker === selectedWorker) {
-                      return
-                    }
-                    return <div className='worker' key={worker.id} onClick={() => setSelectedWorker(worker)}>
-                      <p>{worker.employee.fio}</p>
-                      <img src={urlForLocal(worker.employee.avatar)} alt='avatar'/>
-                    </div>
-                  })
-                  }
-                </div>
+                  </div>
                 }
               </div>
             </div>

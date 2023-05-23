@@ -75,6 +75,46 @@
         color: #1a1919;
         margin-bottom: 0;
       }
+
+      .comments__list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        &__item {
+          padding: 10px 20px;
+          display: flex;
+          flex-direction: column;
+          max-width: 438px;
+          background: #f1f1f1;
+          border-radius: 44px;
+          font-size: 14px;
+          width: 100%;
+          row-gap: 10px;
+
+          &__info {
+            display: flex;
+            justify-content: center;
+            column-gap: 15px;
+
+            .edit {
+              width: 25px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 5px;
+            }
+
+            .edit__open {
+              background: green;
+            }
+
+            img {
+              cursor: pointer;
+              width: 15px;
+            }
+          }
+        }
+      }
     }
 
     &__description {

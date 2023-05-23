@@ -5,6 +5,7 @@ import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileB
 import { Footer } from "../../components/Footer/Footer";
 import { Navigation } from "../../components/Navigation/Navigation";
 import { Loader } from "../../components/Loader/Loader";
+import { urlForLocal } from '../../helper'
 
 import { useDispatch, useSelector } from "react-redux";
 import { apiRequest } from "../../api/request";
@@ -18,6 +19,7 @@ import {
   activeLoader,
   setColumnName,
   setColumnId,
+  deletePersonOnProject
 } from "../../redux/projectsTrackerSlice";
 
 import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
@@ -32,6 +34,7 @@ import filesBoard from "../../images/filesBoard.svg";
 import arrow from "../../images/arrowCalendar.png";
 import del from "../../images/delete.svg";
 import edit from "../../images/edit.svg";
+import close from "../../images/closeProjectPersons.svg"
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();
@@ -44,6 +47,7 @@ export const ProjectTracker = () => {
   const [modalAdd, setModalAdd] = useState(false);
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState({});
+  const [personListOpen, setPersonListOpen] = useState(false)
 
   const startWrapperIndexTest = useRef({});
   const projectBoard = useSelector(getProjectBoard);
@@ -151,6 +155,18 @@ export const ProjectTracker = () => {
     });
   }
 
+  function deletePerson(userId) {
+    apiRequest("/project/del-user", {
+      method: "DELETE",
+      data: {
+        project_id: projectBoard.id,
+        user_id: userId
+      },
+    }).then((res) => {
+      dispatch(deletePersonOnProject(userId))
+    });
+  }
+
   return (
     <div className="tracker">
       <ProfileHeader />
@@ -226,13 +242,39 @@ export const ProjectTracker = () => {
                     <span
                       className="addPerson"
                       onClick={() => {
-                        dispatch(modalToggle("addWorker"));
-                        setModalAdd(true);
+                        setPersonListOpen(true)
                       }}
                     >
                       +
                     </span>
                     <p>добавить участника</p>
+                    {personListOpen &&
+                    <div className='persons__list'>
+                      <img className='persons__list__close' src={close} alt='close' onClick={() => setPersonListOpen(false)} />
+                      <div className='persons__list__count'><span>{projectBoard.projectUsers?.length}</span>участник</div>
+                      <div className='persons__list__info'>В проекте - <span>“{projectBoard.name}”</span></div>
+                      <div className='persons__list__items'>
+                        {projectBoard.projectUsers?.map((person) => {
+                          return <div className='persons__list__item' key={person.user_id}>
+                                    <img className='avatar' src={urlForLocal(person.user.avatar)} alt='avatar' />
+                                    <span>{person.user.fio}</span>
+                                    <img className='delete' src={close} alt='delete' onClick={() => deletePerson(person.user_id)}/>
+                                </div>
+                        })
+                        }
+                      </div>
+                      <div className='persons__list__add'
+                           onClick={() => {
+                             dispatch(modalToggle("addWorker"));
+                             setModalAdd(true);
+                             setPersonListOpen(false)
+                           }}
+                      >
+                        <span className='addPerson'>+</span>
+                        <p>Добавить участников</p>
+                      </div>
+                    </div>
+                    }
                   </div>
                   <div className="tasks__head__select">
                     <span>Участвую</span>
