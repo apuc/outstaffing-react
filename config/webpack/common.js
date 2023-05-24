@@ -1,45 +1,44 @@
-const paths = require('../paths');
+const paths = require("../paths");
 
-const webpack = require('webpack');
+const webpack = require("webpack");
 
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const Dotenv = require('dotenv-webpack');
-
+const Dotenv = require("dotenv-webpack");
 
 const plugins = [
-  '@babel/plugin-proposal-class-properties',
-  '@babel/plugin-syntax-dynamic-import',
-  '@babel/plugin-transform-runtime'
+  "@babel/plugin-proposal-class-properties",
+  "@babel/plugin-syntax-dynamic-import",
+  "@babel/plugin-transform-runtime",
 ];
 
-if (process.env.NODE_ENV === 'development') {
-  plugins.push('react-refresh/babel');
+if (process.env.NODE_ENV === "development") {
+  plugins.push("react-refresh/babel");
 }
 
 const babelLoader = {
-  loader: 'babel-loader',
+  loader: "babel-loader",
   options: {
     presets: [
       // "react-app",
-      '@babel/preset-env',
-      '@babel/preset-react',
+      "@babel/preset-env",
+      "@babel/preset-react",
     ],
-    plugins: plugins
-  }
+    plugins: plugins,
+  },
 };
 
 module.exports = {
   entry: `${paths.src}/index.js`,
   output: {
     path: paths.build,
-    filename: '[name].bundle.js',
-    publicPath: '/',
+    filename: "[name].bundle.js",
+    publicPath: "/",
     // publicPath: 'https://itguild.info',
     asyncChunks: true,
     clean: true,
-    crossOriginLoading: 'anonymous',
+    crossOriginLoading: "anonymous",
     module: true,
     environment: {
       arrowFunction: true,
@@ -47,57 +46,56 @@ module.exports = {
       const: true,
       destructuring: true,
       dynamicImport: false,
-      forOf: true
-    }
+      forOf: true,
+    },
   },
   resolve: {
     alias: {
-      '@': `${paths.src}/modules`
+      "@": `${paths.src}/modules`,
     },
-    extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json']
+    extensions: [".mjs", ".js", ".jsx", ".ts", ".tsx", ".json"],
   },
   experiments: {
     topLevelAwait: true,
-    outputModule: true
+    outputModule: true,
   },
   module: {
     rules: [
-
       // JavaScript, React
       {
         test: /\.m?jsx?$/i,
         exclude: /node_modules/,
-        use: babelLoader
+        use: babelLoader,
       },
       // TypeScript
       {
         test: /.tsx?$/i,
         exclude: /node_modules/,
-        use: [babelLoader, 'ts-loader']
+        use: [babelLoader, "ts-loader"],
       },
       // CSS, SASS
       {
         test: /\.(c|sa|sc)ss$/i,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
-            options: {importLoaders: 1}
+            loader: "css-loader",
+            options: { importLoaders: 1 },
           },
-          'sass-loader'
-        ]
+          "sass-loader",
+        ],
       },
       // MD
       {
         test: /\.md$/i,
-        use: ['html-loader', 'markdown-loader']
+        use: ["html-loader", "markdown-loader"],
       },
       // static files
       {
-        test: /\.(jpe?g|png|gif|svg|eot|ttf|woff2|woff?)$/i,
-        type: 'asset/resource'
-      }
-    ]
+        test: /\.(jpe?g|png|gif|webp|svg|eot|ttf|woff2|woff?)$/i,
+        type: "asset/resource",
+      },
+    ],
   },
   plugins: [
     new webpack.ProgressPlugin(),
@@ -107,10 +105,10 @@ module.exports = {
         {
           from: `${paths.public}`,
           globOptions: {
-            ignore: ["**/index.html"]
-          }
-        }
-      ]
+            ignore: ["**/index.html"],
+          },
+        },
+      ],
     }),
 
     new HtmlWebpackPlugin({
@@ -119,11 +117,11 @@ module.exports = {
     }),
 
     new webpack.ProvidePlugin({
-      React: 'react'
+      React: "react",
     }),
 
     new Dotenv({
-      path: '.env'
-    })
-  ]
+      path: ".env",
+    }),
+  ],
 };

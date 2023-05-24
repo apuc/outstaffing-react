@@ -7,6 +7,7 @@ import Sidebar from "../CandidateSidebar/CandidateSidebar";
 import { ProfileHeader } from "../ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../Footer/Footer";
+import { Navigation } from "../Navigation/Navigation";
 
 import {
   currentCandidate,
@@ -16,17 +17,17 @@ import {
 import { apiRequest } from "../../api/request";
 import { createMarkup } from "../../helper";
 
-import gitImgItem from "../../images/gitItemImg.png";
+import gitImgItem from "../../images/gitItemImg.svg";
+
 import rectangle from "../../images/rectangle_secondPage.png";
-import front from "../Outstaffing/images/front_end.png";
-import back from "../Outstaffing/images/back_end.png";
-import design from "../Outstaffing/images/design.png";
-import rightArrow from "../../images/arrowRight.png";
+import front from "../../images/front-end.webp";
+import back from "../../images/back-end.webp";
+import design from "../../images/design.webp";
+import rightArrow from "../../images/arrowRight.svg";
 
 import { LEVELS, SKILLS } from "../../constants/constants";
 
 import "./candidate.scss";
-import { Navigation } from "../Navigation/Navigation";
 
 const Candidate = () => {
   if (localStorage.getItem("role_status") !== "18") {

@@ -1,20 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
-
-import { Loader } from "../Loader/Loader";
-
 import { auth, selectAuth, setUserInfo } from "../../redux/outstaffingSlice";
 import { loading } from "../../redux/loaderSlice";
 import { setRole } from "../../redux/roleSlice";
 import { selectIsLoading } from "../../redux/loaderSlice";
 
-import ModalErrorLogin from "../../components/UI/ModalErrorLogin/ModalErrorLogin";
-
+import ModalRegistration from "../UI/ModalRegistration/ModalRegistration";
+import ModalErrorLogin from "../UI/ModalErrorLogin/ModalErrorLogin";
+import { Loader } from "../Loader/Loader";
 import { apiRequest } from "../../api/request";
 
 import ellipse from "../../images/ellipse.png";
-import ModalRegistration from "../UI/ModalRegistration/ModalRegistration";
 
 import "./authBox.scss";
 
@@ -78,7 +76,7 @@ export const AuthBox = ({ title }) => {
         Войти в <span>систему</span>
       </h2>
       <div className="auth-box__title">
-        <img src={ellipse} alt="" />
+        <img src={ellipse} alt="." />
         <span>{title}</span>
       </div>
       <form ref={ref} className="auth-box__form">

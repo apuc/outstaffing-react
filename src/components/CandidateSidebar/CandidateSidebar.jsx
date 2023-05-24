@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Achievement } from "../Achievement/Achievement";
 
+import { Achievement } from "../Achievement/Achievement";
 import ModalAspt from "../UI/ModalAspt/ModalAspt";
+
 import { urlForLocal } from "../../helper";
 import { LEVELS, SKILLS } from "../../constants/constants";
 
