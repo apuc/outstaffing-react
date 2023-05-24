@@ -74,7 +74,7 @@ export const ProfileCalendarComponent = React.memo(
             new Date(day).getMonth() + 1
           )}-${correctDay(new Date(day).getDate())}` === date.created_at
         ) {
-          return;
+          return "#";
         }
       }
       return "../../report";
