@@ -18,7 +18,6 @@ import { apiRequest } from "../../api/request";
 import { createMarkup } from "../../helper";
 
 import gitImgItem from "../../images/gitItemImg.svg";
-
 import rectangle from "../../images/rectangle_secondPage.png";
 import front from "../../images/front-end.webp";
 import back from "../../images/back-end.webp";

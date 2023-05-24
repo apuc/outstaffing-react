@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
 
 import { getReports } from "../Calendar/calendarHelper";
-import { Link, Navigate } from "react-router-dom";
 import moment from "moment";
-
 import { ProfileCalendarComponent } from "./ProfileCalendarComponent";
 import { Loader } from "../Loader/Loader";
 import { ProfileHeader } from "../ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileBreadcrumbs } from "../ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../Footer/Footer";
 import { Navigation } from "../Navigation/Navigation";
-import { ViewReport } from "../../pages/ViewReport/ViewReport";
-
 import { urlForLocal } from "../../helper";
-
 import { apiRequest } from "../../api/request";
 import { getProfileInfo } from "../../redux/outstaffingSlice";
 import {

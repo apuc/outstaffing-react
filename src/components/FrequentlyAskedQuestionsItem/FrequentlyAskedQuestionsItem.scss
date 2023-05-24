@@ -7,23 +7,23 @@
     margin: 0 0 -5px 29px;
   }
 
-  &__icon-question {
-
-  }
   &__title {
     font-weight: 700;
     @include adaptiv-value("font-size", 28, 22, 1);
     line-height: 79%;
     color: #1458dd;
   }
+
   &__body {
     position: relative;
     z-index: 2;
     display: block;
+
     &:not(:last-child) {
       margin: 0 0 13px 0;
     }
-    p {      
+
+    p {
       word-break: break-word;
       background: #ffffff;
       border-radius: 12px;

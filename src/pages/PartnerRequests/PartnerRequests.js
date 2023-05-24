@@ -14,7 +14,7 @@ import { Footer } from "../../components/Footer/Footer";
 
 import { apiRequest } from "../../api/request";
 
-import cursorImg from "../../images/cursorImg.png";
+import cursorImg from "../../images/cursorImg.svg";
 
 import "./partnerRequests.scss";
 import { Navigation } from "../../components/Navigation/Navigation";

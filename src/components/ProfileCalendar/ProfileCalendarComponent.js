@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
-import arrow from "../../images/arrowCalendar.png";
-import rectangle from "../../images/rectangle__calendar.png";
-import calendarIcon from "../../images/calendar_icon.png";
-import moment from "moment";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
+import {
+  setReportDate,
+  setRequestDate,
+  setSendRequest,
+} from "../../redux/reportSlice";
 import {
   calendarHelper,
   currentMonthAndDay,
   getReports,
   hourOfNum,
 } from "../Calendar/calendarHelper";
-import {
-  setReportDate,
-  setRequestDate,
-  setSendRequest,
-} from "../../redux/reportSlice";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import ShortReport from "../ShortReport/ShortReport";
+
+import arrow from "../../images/arrowCalendar.png";
+import rectangle from "../../images/rectangle__calendar.png";
+import calendarIcon from "../../images/calendar.svg";
+import moment from "moment";
 
 import "moment/locale/ru";
 import "./../Calendar/calendarComponent.scss";

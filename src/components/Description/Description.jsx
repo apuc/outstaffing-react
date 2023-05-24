@@ -9,9 +9,8 @@ import { selectProfiles } from "../../redux/outstaffingSlice";
 
 import { urlForLocal } from "../../helper";
 
-import male from "../../images/medium_male.png";
 import rectangle from "../../images/rectangle_secondPage.png";
-import cursorImg from "../../images/cursorImg.png";
+import cursorImg from "../../images/cursorImg.svg";
 
 import "./description.scss";
 

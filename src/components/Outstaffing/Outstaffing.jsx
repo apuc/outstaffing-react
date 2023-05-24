@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 import OutstaffingBlock from "../OutstaffingBlock/OutstaffingBlock";
 import TagSelect from "../Select/TagSelect";
-
 import {
   selectTags,
   getPositionId,

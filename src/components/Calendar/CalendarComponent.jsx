@@ -3,7 +3,7 @@ import { calendarHelper, currentMonthAndDay } from "./calendarHelper";
 
 import ellipse from "../../images/ellipse.png";
 import rectangle from "../../images/rectangle__calendar.png";
-import calendarIcon from "../../images/calendar_icon.png";
+import calendarIcon from "../../images/calendar.svg";
 
 import moment from "moment";
 import "moment/locale/ru";
