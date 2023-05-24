@@ -14,7 +14,7 @@ import {
   hourOfNum,
 } from "../../components/Calendar/calendarHelper";
 
-import arrow from "../../images/right-arrow.png";
+import arrow from "../../images/left-arrow.png";
 import arrowSwitchDate from "../../images/arrowViewReport.png";
 
 import "./viewReport.scss";
@@ -103,7 +103,7 @@ export const ViewReport = () => {
             Ваши отчеты - <span>просмотр отчета за день</span>
           </h2>
           <Link className="viewReport__back" to={`/profile/calendar`}>
-            <img src={arrow} alt="arrow" />
+            <img src={arrow} alt="#" />
             <p>Вернуться</p>
           </Link>
           <div className="viewReport__bar">

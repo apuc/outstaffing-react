@@ -8,7 +8,7 @@ import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileB
 import CardArticle from "../../components/UI/CardArticle/CardArticle";
 
 import mockImgArticle from "../../images/mockImgArticle.png";
-import rightArrow from "../../images/right-arrow.png";
+import rightArrow from "../../images/left-arrow.png";
 import yandexZen from "../../images/yandexZen.svg";
 import cardCalendar from "../../images/cardCalendar.svg";
 import cardImg1 from "../../images/cardArticleItem.png";

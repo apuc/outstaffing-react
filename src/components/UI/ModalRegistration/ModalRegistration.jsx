@@ -1,6 +1,6 @@
 import React from "react";
 
-import telegramLogo from "../../../images/TgLogo.svg";
+import telegramLogo from "../../../images/tgLogo.svg";
 import doc from "../../../images/doc.svg";
 import anyMoment from "../../../images/anyMoment.svg";
 

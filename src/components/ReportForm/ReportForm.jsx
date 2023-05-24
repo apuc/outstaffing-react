@@ -13,20 +13,19 @@ registerLocale("ru", ru);
 import { Loader } from "../Loader/Loader";
 import { Footer } from "../Footer/Footer";
 import { ProfileHeader } from "../ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileBreadcrumbs } from "../ProfileBreadcrumbs/ProfileBreadcrumbs";
 
 import { apiRequest } from "../../api/request";
-
+import { Navigation } from "../Navigation/Navigation";
 import { getReportDate } from "../../redux/reportSlice";
 
 import calendarIcon from "../../images/calendar.svg";
 import ellipse from "../../images/ellipse.png";
-import remove from "../../images/remove.png";
-import arrow from "../../images/right-arrow.png";
+import remove from "../../images/remove.svg";
+import arrow from "../../images/left-arrow.png";
 
 import "./reportForm.scss";
 import "react-datepicker/dist/react-datepicker.css";
-import { Navigation } from "../Navigation/Navigation";
 
 const ReportForm = () => {
   if (localStorage.getItem("role_status") === "18") {

@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import ModalLayout from "../ModalLayout/ModalLayout";
 
 import avatar from "../../../images/mokPerson.png";
-import logoTg from "../../../images/TgLogo.svg";
-import arrow from "../../../images/right-arrow.png";
+import logoTg from "../../../images/tgLogo.svg";
+import arrow from "../../../images/left-arrow.png";
 import interview from "../../../images/interviewLogo.svg";
 
 import "./modalAspt.scss";

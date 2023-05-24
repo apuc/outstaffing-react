@@ -10,7 +10,7 @@ import { urlForLocal } from "../../helper";
 import { apiRequest } from "../../api/request";
 import { Navigation } from "../../components/Navigation/Navigation";
 
-import arrow from "../../images/right-arrow.png";
+import arrow from "../../images/left-arrow.png";
 import rightArrow from "../../images/arrowRight.svg";
 import gitImgItem from "../../images/gitItemImg.svg";
 
