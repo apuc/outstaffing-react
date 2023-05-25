@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import "./ProfileCandidate.scss";
+
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { CardControl } from "../../components/CardControl/CardControl";
-import settingIcon from "../../images/settingIcon.png";
-import reportsIcon from "../../images/reports.png";
-import noteIcon from "../../images/note.png";
-import questionIcon from "../../images/question.png";
-import medium_male from "../../images/medium_male.png";
 import { Footer } from "../../components/Footer/Footer";
 import { HeadBottom } from "../../components/features/Candidate-lk/HeadBottom";
+
+import settingIcon from "../../assets/icons/settingIcon.png";
+import reportsIcon from "../../assets/images/reports.png";
+import noteIcon from "../../assets/images/note.png";
+import questionIcon from "../../assets/images/question.png";
+import medium_male from "../../assets/images/medium_male.png";
+
+import "./ProfileCandidate.scss";
 
 export const ProfileCandidate = () => {
   const [candidatsCardsControl] = useState([

@@ -1,8 +1,8 @@
 import React from "react";
 
-import telegramLogo from "../../../images/tgLogo.svg";
-import doc from "../../../images/doc.svg";
-import anyMoment from "../../../images/anyMoment.svg";
+import telegramLogo from "../../../assets/icons/tgLogo.svg";
+import doc from "../../../assets/icons/doc.svg";
+import anyMoment from "../../../assets/icons/anyMoment.svg";
 
 import "./modalRegistration.scss";
 

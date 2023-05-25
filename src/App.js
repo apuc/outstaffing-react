@@ -16,7 +16,7 @@ import FreeDevelopers from "./components/UI/FreeDevelopers/FreeDevelopers";
 import { TicketFullScreen } from "./components/UI/TicketFullScreen/TicketFullScreen";
 import { ProfileCalendar } from "./components/ProfileCalendar/ProfileCalendar";
 import Article from "./pages/Article/Article";
-import FormPage from "./pages/FormPage/FormPage.js";
+import FormPage from "./pages/FormPage/FormPage";
 import SingleReportPage from "./pages/SingleReportPage/SingleReportPage";
 import { QuizPage } from "./pages/quiz/QuizPage";
 import { QuizReportPage } from "./pages/quiz/QuizReportPage";

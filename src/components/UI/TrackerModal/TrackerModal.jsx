@@ -16,7 +16,7 @@ import {
   addPersonToProject,
 } from "../../../redux/projectsTrackerSlice";
 
-import arrowDown from "../../../images/selectArrow.png";
+import arrowDown from "../../../assets/icons/arrows/selectArrow.png";
 
 import "./trackerModal.scss";
 

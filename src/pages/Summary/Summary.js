@@ -10,9 +10,9 @@ import { urlForLocal } from "../../helper";
 import { apiRequest } from "../../api/request";
 import { Navigation } from "../../components/Navigation/Navigation";
 
-import arrow from "../../images/left-arrow.png";
-import rightArrow from "../../images/arrowRight.svg";
-import gitImgItem from "../../images/gitItemImg.svg";
+import arrow from "../../assets/icons/arrows/left-arrow.png";
+import rightArrow from "../../assets/icons/arrows/arrowRight.svg";
+import gitImgItem from "../../assets/icons/gitItemImg.svg";
 
 import "./summary.scss";
 

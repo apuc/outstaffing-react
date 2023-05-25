@@ -1,19 +1,19 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {selectUserInfo, setQuestionnairesList, setUserInfo} from "../../../redux/quizSlice";
-import {apiRequest} from "../../../api/request";
-import {urlForLocal} from "../../../helper";
-import './quiz.scss'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export const HeaderQuiz = ({header}) => {
+import { selectUserInfo, setUserInfo } from "../../../redux/quizSlice";
+import { apiRequest } from "../../../api/request";
+import { urlForLocal } from "../../../helper";
 
+import "./quiz.scss";
+
+export const HeaderQuiz = ({ header }) => {
   const dispatch = useDispatch();
-  const userId = localStorage.getItem('id');
+  const userId = localStorage.getItem("id");
   const userInfo = useSelector(selectUserInfo);
 
-
   useEffect(() => {
-    dispatch(setUserInfo(userId))
+    dispatch(setUserInfo(userId));
   }, [userId, dispatch]);
 
   useEffect(() => {
@@ -22,25 +22,38 @@ export const HeaderQuiz = ({header}) => {
   }, [userId, dispatch]);
 
   return (
-      <div>
-        {userInfo?.status === 500 ? <div className="error-msg">{userInfo.message}</div> :
-            <div className="header-quiz">
-              <div className="header-quiz__container">
-                {!userInfo ? <h2>Loading...</h2> :
-                    <>
-                      {header && <h2 className={'header-quiz__title-main'}>Добрый день, {userInfo.fio}</h2>}
-                      <div className="header-quiz__body header-quiz__body_interjacent">
-                        <div className="header-quiz__avatar">
-                          <img src={urlForLocal(userInfo.photo)} alt={userInfo.photo}/>
-                        </div>
-                        <div className="header-quiz__name-user">{userInfo.fio}</div>
-                        <div className="header-quiz__title">{userInfo.position_name}</div>
-                      </div>
-                    </>
-                }
-              </div>
-            </div>
-        }
-      </div>
-  )
+    <div>
+      {userInfo?.status === 500 ? (
+        <div className="error-msg">{userInfo.message}</div>
+      ) : (
+        <div className="header-quiz">
+          <div className="header-quiz__container">
+            {!userInfo ? (
+              <h2>Loading...</h2>
+            ) : (
+              <>
+                {header && (
+                  <h2 className={"header-quiz__title-main"}>
+                    Добрый день, {userInfo.fio}
+                  </h2>
+                )}
+                <div className="header-quiz__body header-quiz__body_interjacent">
+                  <div className="header-quiz__avatar">
+                    <img
+                      src={urlForLocal(userInfo.photo)}
+                      alt={userInfo.photo}
+                    />
+                  </div>
+                  <div className="header-quiz__name-user">{userInfo.fio}</div>
+                  <div className="header-quiz__title">
+                    {userInfo.position_name}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };

@@ -21,21 +21,21 @@ import { apiRequest } from "../../../api/request";
 import { urlForLocal } from "../../../helper";
 import { getCorrectDate } from "../../Calendar/calendarHelper";
 
-import project from "../../../images/trackerProject.svg";
-import watch from "../../../images/watch.svg";
-import file from "../../../images/fileModal.svg";
-import send from "../../../images/send.svg";
-import arrow2 from "../../../images/arrowStart.png";
-import plus from "../../../images/plus.svg";
-import tasks from "../../../images/trackerTasks.svg";
-import archive from "../../../images/archiveTracker.svg";
-import selectArrow from "../../../images/select.svg";
-import arrow from "../../../images/arrowCalendar.png";
-import link from "../../../images/link.svg";
-import archive2 from "../../../images/archive.svg";
-import del from "../../../images/delete.svg";
-import edit from "../../../images/edit.svg";
-import close from "../../../images/closeProjectPersons.svg";
+import project from "../../../assets/icons/trackerProject.svg";
+import watch from "../../../assets/icons/watch.svg";
+import file from "../../../assets/icons/fileModal.svg";
+import send from "../../../assets/icons/send.svg";
+import arrow2 from "../../../assets/icons/arrows/arrowStart.png";
+import plus from "../../../assets/icons/plus.svg";
+import tasks from "../../../assets/icons/trackerTasks.svg";
+import archive from "../../../assets/icons/archiveTracker.svg";
+import selectArrow from "../../../assets/icons/arrows/select.svg";
+import arrow from "../../../assets/icons/arrows/arrowCalendar.png";
+import link from "../../../assets/icons/link.svg";
+import archive2 from "../../../assets/icons/archive.svg";
+import del from "../../../assets/icons/delete.svg";
+import edit from "../../../assets/icons/edit.svg";
+import close from "../../../assets/icons/closeProjectPersons.svg";
 
 import "./ticketFullScreen.scss";
 

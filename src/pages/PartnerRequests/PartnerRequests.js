@@ -6,6 +6,7 @@ import {
   setPartnerRequests,
 } from "../../redux/outstaffingSlice";
 
+import { Navigation } from "../../components/Navigation/Navigation";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { SliderWorkers } from "../../components/SliderWorkers/SliderWorkers";
@@ -14,10 +15,9 @@ import { Footer } from "../../components/Footer/Footer";
 
 import { apiRequest } from "../../api/request";
 
-import cursorImg from "../../images/cursorImg.svg";
+import cursorImg from "../../assets/icons/cursorImg.svg";
 
 import "./partnerRequests.scss";
-import { Navigation } from "../../components/Navigation/Navigation";
 
 export const PartnerRequests = () => {
   if (localStorage.getItem("role_status") !== "18") {

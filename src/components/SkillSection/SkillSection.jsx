@@ -1,9 +1,10 @@
-import React from 'react'
-import './skillSection.scss'
+import React from "react";
+
+import "./skillSection.scss";
 
 const SkillSection = ({ skillsArr }) => {
   return (
-    <div className='skill-section'>
+    <div className="skill-section">
       <h3>Навыки:</h3>
       <ul>
         {skillsArr &&
@@ -12,7 +13,7 @@ const SkillSection = ({ skillsArr }) => {
           ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default SkillSection
+export default SkillSection;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import questionIcon from "./../../images/faq/question.svg";
+import questionIcon from "./../../assets/images/faq/question.svg";
 
 import "./FrequentlyAskedQuestionsItem.scss";
 

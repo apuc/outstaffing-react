@@ -11,13 +11,13 @@ import { selectAuth } from "../../redux/outstaffingSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { scrollToForm } from "../../helper";
 
-import arrow from "../../images/arrow__login_page.png";
-import authImg from "../../images/auth_img.png";
-import cross from "../../images/cross.png";
-import text from "../../images/Body_Text.png";
-import arrowBtn from "../../images/arrowRight.svg";
-import vector from "../../images/Vector_Smart_Object.png";
-import vectorBlack from "../../images/Vector_Smart_Object_black.png";
+import arrow from "../../assets/icons/arrows/arrow__login_page.png";
+import authImg from "../../assets/images/auth_img.png";
+import cross from "../../assets/images/cross.png";
+import text from "../../assets/images/Body_Text.png";
+import arrowBtn from "../../assets/icons/arrows/arrowRight.svg";
+import vector from "../../assets/images/Vector_Smart_Object.png";
+import vectorBlack from "../../assets/images/Vector_Smart_Object_black.png";
 
 import "./authForPartners.scss";
 

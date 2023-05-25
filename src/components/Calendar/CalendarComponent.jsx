@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { calendarHelper, currentMonthAndDay } from "./calendarHelper";
 
-import ellipse from "../../images/ellipse.png";
-import rectangle from "../../images/rectangle__calendar.png";
-import calendarIcon from "../../images/calendar.svg";
+import ellipse from "../../assets/icons/ellipse.png";
+import rectangle from "../../assets/images/rectangle__calendar.png";
+import calendarIcon from "../../assets/icons/calendar.svg";
 
 import moment from "moment";
 import "moment/locale/ru";

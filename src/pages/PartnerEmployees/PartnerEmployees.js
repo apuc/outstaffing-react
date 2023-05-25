@@ -6,9 +6,10 @@ import { getPartnerEmployees } from "../../redux/outstaffingSlice";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
+import { Navigation } from "../../components/Navigation/Navigation";
 
-import imgInfo from "./emplInfo.png";
-import rightArrow from "../../images/arrowRight.svg";
+import imgInfo from "../../assets/images/emplInfo.png";
+import rightArrow from "../../assets/icons/arrows/arrowRight.svg";
 
 import "./partnerEmployees.scss";
 
@@ -23,6 +24,7 @@ export const PartnerEmployees = () => {
   return (
     <div className="partnerEmployees">
       <ProfileHeader />
+      <Navigation />
       <div className="container">
         <ProfileBreadcrumbs
           links={[

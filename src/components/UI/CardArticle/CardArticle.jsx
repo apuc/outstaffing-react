@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import cardCalendar from "../../../images/cardCalendar.svg";
+import cardCalendar from "../../../assets/icons/cardCalendar.svg";
 
 import "./cardArticle.scss";
 

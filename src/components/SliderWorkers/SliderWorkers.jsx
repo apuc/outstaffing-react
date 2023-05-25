@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
-import mockWorker from "../../images/mokPerson.png";
+
+import mockWorker from "../../assets/images/mock/mokPerson.png";
 
 import "./sliderWorkers.scss";
 import "slick-carousel/slick/slick.css";

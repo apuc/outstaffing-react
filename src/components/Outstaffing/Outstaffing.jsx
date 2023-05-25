@@ -9,9 +9,9 @@ import {
   setPositionId,
 } from "../../redux/outstaffingSlice";
 
-import front from "../../images/front-end.webp";
-import back from "../../images/back-end.webp";
-import design from "../../images/design.webp";
+import front from "../../assets/images/partnerProfile/front-end.webp";
+import back from "../../assets/images/partnerProfile/back-end.webp";
+import design from "../../assets/images/partnerProfile/design.webp";
 
 import "./outstaffing.scss";
 

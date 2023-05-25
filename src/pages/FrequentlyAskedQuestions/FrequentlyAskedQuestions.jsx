@@ -3,10 +3,10 @@ import React from "react";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
 import { FrequentlyAskedQuestionsItem } from "../../components/FrequentlyAskedQuestionsItem/FrequentlyAskedQuestionsItem";
-
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
 import SideBar from "../../components/SideBar/SideBar";
-import arrow from "./../../images/faq/arrow.svg";
+
+import arrow from "./../../assets/images/faq/arrow.svg";
 
 import "./FrequentlyAskedQuestions.scss";
 

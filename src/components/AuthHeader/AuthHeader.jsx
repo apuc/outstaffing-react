@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { scrollToForm } from "../../helper";
 
-import userIcon from "../../images/userIcon.svg";
+import userIcon from "../../assets/icons/userIcon.svg";
 
 import "./authHeader.scss";
 

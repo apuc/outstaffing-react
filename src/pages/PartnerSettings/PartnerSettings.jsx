@@ -1,13 +1,14 @@
 import React from "react";
-import { Footer } from "../../components/Footer/Footer";
 
+import { Footer } from "../../components/Footer/Footer";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-
-import kontur from "../../images/konturLogo.png";
-import astral from "../../images/astralLogo.png";
-import "./partnerSettings.scss";
 import { Navigation } from "../../components/Navigation/Navigation";
+
+import kontur from "../../assets/images/logo/konturLogo.png";
+import astral from "../../assets/images/logo/astralLogo.png";
+
+import "./partnerSettings.scss";
 
 export const PartnerSettings = () => {
   return (

@@ -19,10 +19,10 @@ import { apiRequest } from "../../api/request";
 import { Navigation } from "../Navigation/Navigation";
 import { getReportDate } from "../../redux/reportSlice";
 
-import calendarIcon from "../../images/calendar.svg";
-import ellipse from "../../images/ellipse.png";
-import remove from "../../images/remove.svg";
-import arrow from "../../images/left-arrow.png";
+import calendarIcon from "../../assets/icons/calendar.svg";
+import ellipse from "../../assets/icons/ellipse.png";
+import remove from "../../assets/icons/remove.svg";
+import arrow from "../../assets/icons/arrows/left-arrow.png";
 
 import "./reportForm.scss";
 import "react-datepicker/dist/react-datepicker.css";

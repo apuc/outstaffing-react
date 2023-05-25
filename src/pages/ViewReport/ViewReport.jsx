@@ -14,8 +14,8 @@ import {
   hourOfNum,
 } from "../../components/Calendar/calendarHelper";
 
-import arrow from "../../images/left-arrow.png";
-import arrowSwitchDate from "../../images/arrowViewReport.png";
+import arrow from "../../assets/icons/arrows/left-arrow.png";
+import arrowSwitchDate from "../../assets/icons/arrows/arrowViewReport.png";
 
 import "./viewReport.scss";
 

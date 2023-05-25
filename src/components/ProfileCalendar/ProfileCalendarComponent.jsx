@@ -15,9 +15,10 @@ import {
 } from "../Calendar/calendarHelper";
 import ShortReport from "../ShortReport/ShortReport";
 
-import arrow from "../../images/arrowCalendar.png";
-import rectangle from "../../images/rectangle__calendar.png";
-import calendarIcon from "../../images/calendar.svg";
+import arrow from "../../assets/icons/arrows/arrowCalendar.png";
+import rectangle from "../../assets/images/rectangle__calendar.png";
+import calendarIcon from "../../assets/icons/calendar.svg";
+
 import moment from "moment";
 
 import "moment/locale/ru";

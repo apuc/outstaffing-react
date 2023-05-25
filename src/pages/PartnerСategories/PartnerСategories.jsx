@@ -9,17 +9,17 @@ import { Footer } from "../../components/Footer/Footer";
 
 import { setPartnerEmployees } from "../../redux/outstaffingSlice";
 
-import BackEndImg from "../../images/personalBackEnd.svg";
-import FrontendImg from "../../images/PersonalFrontend.svg";
-import ArchitectureImg from "../../images/PersonalArchitecture.svg";
-import DesignImg from "../../images/PersonalDesign.svg";
-import TestImg from "../../images/PersonalTesters.svg";
-import AdminImg from "../../images/PersonalAdmin.svg";
-import ManageImg from "../../images/PersonalMng.svg";
-import CopyImg from "../../images/PersonalCopy.svg";
-import SmmImg from "../../images/PersonalSMM.svg";
-import rightArrow from "../../images/arrowRight.svg";
-import avatarImg from "../PartnerEmployees/avatarMok.png";
+import BackEndImg from "../../assets/images/partnerProfile/personalBackEnd.svg";
+import FrontendImg from "../../assets/images/partnerProfile/PersonalFrontend.svg";
+import ArchitectureImg from "../../assets/images/partnerProfile/PersonalArchitecture.svg";
+import DesignImg from "../../assets/images/partnerProfile/PersonalDesign.svg";
+import TestImg from "../../assets/images/partnerProfile/PersonalTesters.svg";
+import AdminImg from "../../assets/images/partnerProfile/PersonalAdmin.svg";
+import ManageImg from "../../assets/images/partnerProfile/PersonalMng.svg";
+import CopyImg from "../../assets/images/partnerProfile/PersonalCopy.svg";
+import SmmImg from "../../assets/images/partnerProfile/PersonalSMM.svg";
+import rightArrow from "../../assets/icons/arrows/arrowRight.svg";
+import avatarImg from "../../assets/images/avatarMok.png";
 
 import "./partnerСategories.scss";
 import { Navigation } from "../../components/Navigation/Navigation";

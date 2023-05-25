@@ -12,7 +12,7 @@ import ModalErrorLogin from "../UI/ModalErrorLogin/ModalErrorLogin";
 import { Loader } from "../Loader/Loader";
 import { apiRequest } from "../../api/request";
 
-import ellipse from "../../images/ellipse.png";
+import ellipse from "../../assets/icons/ellipse.png";
 
 import "./authBox.scss";
 

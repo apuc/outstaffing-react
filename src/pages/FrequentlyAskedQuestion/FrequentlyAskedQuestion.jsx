@@ -6,7 +6,7 @@ import SideBar from "../../components/SideBar/SideBar";
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
 import { Footer } from "../../components/Footer/Footer";
 
-import arrowBtn from "../../images/arrowRight.svg";
+import arrowBtn from "../../assets/icons/arrows/arrowRight.svg";
 
 import "./FrequentlyAskedQuestion.scss";
 

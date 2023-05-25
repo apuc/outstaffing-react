@@ -17,12 +17,12 @@ import {
 import { apiRequest } from "../../api/request";
 import { createMarkup } from "../../helper";
 
-import gitImgItem from "../../images/gitItemImg.svg";
-import rectangle from "../../images/rectangle_secondPage.png";
-import front from "../../images/front-end.webp";
-import back from "../../images/back-end.webp";
-import design from "../../images/design.webp";
-import rightArrow from "../../images/arrowRight.svg";
+import gitImgItem from "../../assets/icons/gitItemImg.svg";
+import rectangle from "../../assets/images/rectangle_secondPage.png";
+import front from "../../assets/images/partnerProfile/front-end.webp";
+import back from "../../assets/images/partnerProfile/back-end.webp";
+import design from "../../assets/images/partnerProfile/design.webp";
+import rightArrow from "../../assets/icons/arrows/arrowRight.svg";
 
 import { LEVELS, SKILLS } from "../../constants/constants";
 

@@ -9,7 +9,7 @@ import { LogoutButton } from "../LogoutButton/LogoutButton";
 import { urlForLocal } from "../../helper";
 import { selectCurrentCandidate } from "../../redux/outstaffingSlice";
 
-import rectangle from "../../images/rectangle_secondPage.png";
+import rectangle from "../../assets/images/rectangle_secondPage.png";
 
 import "./calendar.scss";
 

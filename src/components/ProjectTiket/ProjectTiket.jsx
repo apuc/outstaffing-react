@@ -7,10 +7,10 @@ import { deleteProject, modalToggle } from "../../redux/projectsTrackerSlice";
 import { ModalSelect } from "../UI/ModalSelect/ModalSelect";
 import TrackerModal from "../UI/TrackerModal/TrackerModal";
 
-import link from "../../images/link.svg";
-import archiveSet from "../../images/archive.svg";
-import del from "../../images/delete.svg";
-import edit from "../../images/edit.svg";
+import link from "../../assets/icons/link.svg";
+import archiveSet from "../../assets/icons/archive.svg";
+import del from "../../assets/icons/delete.svg";
+import edit from "../../assets/icons/edit.svg";
 
 import "./projectTiket.scss";
 

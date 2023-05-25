@@ -5,7 +5,7 @@ import { apiRequest } from "../../api/request";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileInfo, setProfileInfo } from "../../redux/outstaffingSlice";
 
-import avatarMok from "../../pages/PartnerTreaties/Images/avatarMok.png";
+import avatarMok from "../../assets/images/avatarMok.png";
 
 export const Navigation = () => {
   const dispatch = useDispatch();

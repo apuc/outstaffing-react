@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 import { scrollToForm } from "../../../helper";
 import { ProfileBreadcrumbs } from "../../ProfileBreadcrumbs/ProfileBreadcrumbs";
 
-import mockWorker from "../../../images/mokPerson.png";
-import arrow from "../../../images/arrow_left.png";
+import mockWorker from "../../../assets/images/mock/mokPerson.png";
+import arrow from "../../../assets/icons/arrows/arrow_left.png";
 
 import "./freeDevelopers.scss";
 

@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
-
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../components/Footer/Footer";
-import { apiRequest } from "../../api/request";
-import { Navigation } from "../../components/Navigation/Navigation";
-
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   setAllProjects,
   getProjects,
@@ -15,18 +9,22 @@ import {
   modalToggle,
 } from "../../redux/projectsTrackerSlice";
 
+import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "../../components/Footer/Footer";
+import { apiRequest } from "../../api/request";
+import { Navigation } from "../../components/Navigation/Navigation";
 import TrackerModal from "../../components/UI/TrackerModal/TrackerModal";
 import ProjectTiket from "../../components/ProjectTiket/ProjectTiket";
 import { urlForLocal } from "../../helper";
 import { getCorrectDate } from "../../components/Calendar/calendarHelper";
 import { Loader } from "../../components/Loader/Loader";
 
-import project from "../../images/trackerProject.svg";
-import tasks from "../../images/trackerTasks.svg";
-import archive from "../../images/archiveTracker.svg";
-import avatarTest from "../../images/AvatarTest .png";
-import search from "../../images/serchIcon.png";
-import noProjects from "../../images/noProjects.png";
+import project from "../../assets/icons/trackerProject.svg";
+import tasks from "../../assets/icons/trackerTasks.svg";
+import archive from "../../assets/icons/archiveTracker.svg";
+import search from "../../assets/icons/serchIcon.png";
+import noProjects from "../../assets/images/noProjects.png";
 
 import "./tracker.scss";
 
@@ -39,7 +37,7 @@ export const Tracker = () => {
   const [filteredAllTasks, setFilteredAllTasks] = useState([]);
   const [loader, setLoader] = useState(false);
   const [filterCompleteTasks, setFilterCompleteTasks] = useState([]);
-  const [allCompletedTasks, setAllCompletedTasks] = useState([])
+  const [allCompletedTasks, setAllCompletedTasks] = useState([]);
 
   const [modalCreateProject, setModalCreateProject] = useState(false);
 
@@ -66,12 +64,12 @@ export const Tracker = () => {
     apiRequest(
       `/task/get-user-tasks?user_id=${localStorage.getItem("id")}`
     ).then((el) => {
-      const allTasks = el.filter((item) => item.status !== 0)
-      const completedTasks = el.filter((item) => item.status === 0)
+      const allTasks = el.filter((item) => item.status !== 0);
+      const completedTasks = el.filter((item) => item.status === 0);
       setAllTasks(allTasks);
       setFilteredAllTasks(allTasks);
-      setAllCompletedTasks(completedTasks)
-      setFilterCompleteTasks(completedTasks)
+      setAllCompletedTasks(completedTasks);
+      setFilterCompleteTasks(completedTasks);
     });
   }, []);
 
@@ -99,7 +97,7 @@ export const Tracker = () => {
 
   function filterArchiveTasks(e) {
     setFilterCompleteTasks(
-        allCompletedTasks.filter((item) => {
+      allCompletedTasks.filter((item) => {
         if (!e.target.value) {
           return item;
         }
@@ -291,41 +289,50 @@ export const Tracker = () => {
               </div>
               <div className="archive__tasksWrapper">
                 {loader && <Loader style="green" />}
-                {!loader && <>
-                {Boolean(filterCompleteTasks.length) ? (
-                  filterCompleteTasks.map((task, index) => {
-                    return (
-                      <div className="archive__completeTask" key={index}>
-                        <div className="archive__completeTask__description">
-                          <p>{task.title}</p>
-                          <p className="date">{task.description}</p>
-                        </div>
-                        <div className="archive__completeTask__info">
-                          <img src={urlForLocal(task.user.avatar)} alt="avatar" />
-                          <div className="archive__completeTask__info__project">
-                            {/*<span>Проект</span>*/}
-                            <p>{getCorrectDate(task.updated_at)}</p>
+                {!loader && (
+                  <>
+                    {Boolean(filterCompleteTasks.length) ? (
+                      filterCompleteTasks.map((task, index) => {
+                        return (
+                          <div className="archive__completeTask" key={index}>
+                            <div className="archive__completeTask__description">
+                              <p>{task.title}</p>
+                              <p className="date">{task.description}</p>
+                            </div>
+                            <div className="archive__completeTask__info">
+                              <img
+                                src={urlForLocal(task.user.avatar)}
+                                alt="avatar"
+                              />
+                              <div className="archive__completeTask__info__project">
+                                {/*<span>Проект</span>*/}
+                                <p>{getCorrectDate(task.updated_at)}</p>
+                              </div>
+                            </div>
                           </div>
-                        </div>
+                        );
+                      })
+                    ) : (
+                      <div className="archive__noItem">
+                        <p>В архиве задач нет</p>
                       </div>
-                    );
-                  })
-                ) : (
-                  <div className="archive__noItem">
-                    <p>В архиве задач нет</p>
-                  </div>
+                    )}
+                  </>
                 )}
-                </>
-                }
               </div>
             </div>
             <div className="archive__projects">
               <div className="archive__title">
                 <h3>Архив проектов:</h3>
-                <p>{projects.filter((project) => project.status === 10).length} проект(ов)</p>
+                <p>
+                  {projects.filter((project) => project.status === 10).length}{" "}
+                  проект(ов)
+                </p>
               </div>
               <div className="archive__tasksWrapper">
-                {Boolean(projects.filter((project) => project.status === 10).length) ? (
+                {Boolean(
+                  projects.filter((project) => project.status === 10).length
+                ) ? (
                   projects.map((project, index) => {
                     return project.status === 10 ? (
                       <div className="archive__completeTask" key={index}>
@@ -334,7 +341,9 @@ export const Tracker = () => {
                           <p className="date">{project.date}</p>
                         </div>
                       </div>
-                    ): '';
+                    ) : (
+                      ""
+                    );
                   })
                 ) : (
                   <div className="archive__noItem">

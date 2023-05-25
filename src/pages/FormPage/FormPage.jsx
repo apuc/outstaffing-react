@@ -3,23 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
 import SVG from "react-inlinesvg";
 
-import Form from "../../components/Form/Form";
-import { Footer } from "../../components/Footer/Footer";
-import { LogoutButton } from "../../components/LogoutButton/LogoutButton";
-
-import arrow from "../../images/left-arrow.png";
-import rectangle from "../../images/rectangle_secondPage.png";
-import telegramIcon from "../../images/telegram-icon.svg";
-
 import { LEVELS, SKILLS } from "../../constants/constants";
-
 import {
   currentCandidate,
   selectCurrentCandidate,
 } from "../../redux/outstaffingSlice";
-
 import { apiRequest } from "../../api/request";
 import { urlForLocal } from "../../helper";
+
+import Form from "../../components/Form/Form";
+import { Footer } from "../../components/Footer/Footer";
+import { LogoutButton } from "../../components/LogoutButton/LogoutButton";
+
+import arrow from "../../assets/icons/arrows/left-arrow.png";
+import rectangle from "../../assets/images/rectangle_secondPage.png";
+import telegramIcon from "../../assets/icons/telegram-icon.svg";
 
 import "./formPage.scss";
 

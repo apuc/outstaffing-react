@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ModalLayout from "../ModalLayout/ModalLayout";
 
-import avatar from "../../../images/mokPerson.png";
-import logoTg from "../../../images/tgLogo.svg";
-import arrow from "../../../images/left-arrow.png";
-import interview from "../../../images/interviewLogo.svg";
+import avatar from "../../../assets/images/mock/mokPerson.png";
+import logoTg from "../../../assets/icons/tgLogo.svg";
+import arrow from "../../../assets/icons/arrows/left-arrow.png";
+import interview from "../../../assets/images/logo/interviewLogo.svg";
 
 import "./modalAspt.scss";
 

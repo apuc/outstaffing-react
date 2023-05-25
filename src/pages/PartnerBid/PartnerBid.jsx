@@ -20,10 +20,10 @@ import { getCorrectDate } from "../../components/Calendar/calendarHelper";
 
 import { urlForLocal } from "../../helper";
 
-import arrowSwitchDate from "../../images/arrowViewReport.png";
-import backEndImg from "../../images/QualificationInfo.png";
-import middle from "../../images/QualificationInfoMiddle.png";
-import deleteBtn from "../../images/deleteBtn.png";
+import arrowSwitchDate from "../../assets/icons/arrows/arrowViewReport.png";
+import backEndImg from "../../assets/images/QualificationInfo.png";
+import middle from "../../assets/images/QualificationInfoMiddle.png";
+import deleteBtn from "../../assets/images/deleteBtn.png";
 
 import "./partnerBid.scss";
 

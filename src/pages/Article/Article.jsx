@@ -7,13 +7,13 @@ import { Footer } from "../../components/Footer/Footer";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import CardArticle from "../../components/UI/CardArticle/CardArticle";
 
-import mockImgArticle from "../../images/mockImgArticle.png";
-import rightArrow from "../../images/left-arrow.png";
-import yandexZen from "../../images/yandexZen.svg";
-import cardCalendar from "../../images/cardCalendar.svg";
-import cardImg1 from "../../images/cardArticleItem.png";
-import cardImg2 from "../../images/cardArticleItem2.png";
-import cardImg3 from "../../images/cardArticleItem3.png";
+import mockImgArticle from "../../assets/images/mock/mockImgArticle.png";
+import rightArrow from "../../assets/icons/arrows/left-arrow.png";
+import yandexZen from "../../assets/icons/yandexZen.svg";
+import cardCalendar from "../../assets/icons/cardCalendar.svg";
+import cardImg1 from "../../assets/images/mock/cardArticleItem.png";
+import cardImg2 from "../../assets/images/mock/cardArticleItem2.png";
+import cardImg3 from "../../assets/images/mock/cardArticleItem3.png";
 
 import "./article.scss";
 

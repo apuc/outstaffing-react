@@ -11,18 +11,18 @@ import {
 } from "../../../redux/projectsTrackerSlice";
 import { getCorrectDate } from "../../../components/Calendar/calendarHelper";
 
-import category from "../../../images/category.svg";
-import watch from "../../../images/watch.svg";
-import file from "../../../images/fileModal.svg";
-import arrow from "../../../images/arrowStart.png";
-import link from "../../../images/link.svg";
-import archive from "../../../images/archive.svg";
-import del from "../../../images/delete.svg";
-import edit from "../../../images/edit.svg";
-import send from "../../../images/send.svg";
-import plus from "../../../images/plus.svg";
-import fullScreen from "../../../images/inFullScreen.svg";
-import close from "../../../images/closeProjectPersons.svg";
+import category from "../../../assets/icons/category.svg";
+import watch from "../../../assets/icons/watch.svg";
+import file from "../../../assets/icons/fileModal.svg";
+import arrow from "../../../assets/icons/arrows/arrowStart.png";
+import link from "../../../assets/icons/link.svg";
+import archive from "../../../assets/icons/archive.svg";
+import del from "../../../assets/icons/delete.svg";
+import edit from "../../../assets/icons/edit.svg";
+import send from "../../../assets/icons/send.svg";
+import plus from "../../../assets/icons/plus.svg";
+import fullScreen from "../../../assets/icons/arrows/inFullScreen.svg";
+import close from "../../../assets/icons/closeProjectPersons.svg";
 
 import "./ModalTicket.scss";
 
