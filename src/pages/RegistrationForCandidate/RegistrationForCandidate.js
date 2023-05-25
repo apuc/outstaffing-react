@@ -5,7 +5,7 @@ import SideBar from "../../components/SideBar/SideBar";
 import StepsForCandidate from "../../components/StepsForCandidate/StepsForCandidate";
 import { Footer } from "../../components/Footer/Footer";
 
-import BackEndImg from "../../pages/PartnerСategories/images/personalBackEnd.png";
+import BackEndImg from "../../images/personalBackEnd.svg";
 import arrowBtn from "../../images/arrowRight.svg";
 
 import "./registationForCandidate.scss";

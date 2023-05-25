@@ -9,15 +9,15 @@ import { Footer } from "../../components/Footer/Footer";
 
 import { setPartnerEmployees } from "../../redux/outstaffingSlice";
 
-import BackEndImg from "./images/personalBackEnd.png";
-import FrontendImg from "./images/PersonalFrontend.png";
-import ArchitectureImg from "./images/PersonalArchitecture.png";
-import DesignImg from "./images/PersonalDesign.png";
-import TestImg from "./images/PersonalTesters.png";
-import AdminImg from "./images/PersonalAdmin.png";
-import ManageImg from "./images/PersonalMng.png";
-import CopyImg from "./images/PersonalCopy.png";
-import SmmImg from "./images/PersonalSMM.png";
+import BackEndImg from "../../images/personalBackEnd.svg";
+import FrontendImg from "../../images/PersonalFrontend.svg";
+import ArchitectureImg from "../../images/PersonalArchitecture.svg";
+import DesignImg from "../../images/PersonalDesign.svg";
+import TestImg from "../../images/PersonalTesters.svg";
+import AdminImg from "../../images/PersonalAdmin.svg";
+import ManageImg from "../../images/PersonalMng.svg";
+import CopyImg from "../../images/PersonalCopy.svg";
+import SmmImg from "../../images/PersonalSMM.svg";
 import rightArrow from "../../images/arrowRight.svg";
 import avatarImg from "../PartnerEmployees/avatarMok.png";
 

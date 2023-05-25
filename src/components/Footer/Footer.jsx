@@ -1,8 +1,8 @@
 import React from "react";
 
-import logo from "../../images/logoGuild.png";
+import logo from "../../images/LogoITguild.svg";
 import vk from "../../images/vkLogo.svg";
-import tg from "../../images/tgFooter.png";
+import tg from "../../images/tgFooter.svg";
 import email from "../../images/emailLogo.svg";
 
 import "./footer.scss";
@@ -13,7 +13,7 @@ export const Footer = () => {
       <div className="container">
         <div className="footer">
           <div className="footer__top">
-            <img src={logo} alt="logo" />
+            <img src={logo} alt="logo" className="logo" />
             <p>
               Подберем и документально оформим IT-специалистов, после чего
               передадим исполнителей под ваше руководство. Вы получаете полное

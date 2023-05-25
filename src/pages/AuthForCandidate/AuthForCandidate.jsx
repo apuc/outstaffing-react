@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { loading, selectIsLoading } from "../../redux/loaderSlice";
 import { apiRequest } from "../../api/request";
 import { auth, selectAuth, setUserInfo } from "../../redux/outstaffingSlice";
 import { setRole } from "../../redux/roleSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
 import SideBar from "../../components/SideBar/SideBar";
@@ -12,15 +13,15 @@ import CategoriesItem from "../../components/CategoriesItem/CategoriesItem";
 import StepsForCandidate from "../../components/StepsForCandidate/StepsForCandidate";
 import { Footer } from "../../components/Footer/Footer";
 
-import BackEndImg from "../../pages/PartnerСategories/images/personalBackEnd.png";
-import FrontendImg from "../../pages/PartnerСategories/images/PersonalFrontend.png";
-import ArchitectureImg from "../../pages/PartnerСategories/images/PersonalArchitecture.png";
-import DesignImg from "../../pages/PartnerСategories/images/PersonalDesign.png";
-import TestImg from "../../pages/PartnerСategories/images/PersonalTesters.png";
-import AdminImg from "../../pages/PartnerСategories/images/PersonalAdmin.png";
-import ManageImg from "../../pages/PartnerСategories/images/PersonalMng.png";
-import CopyImg from "../../pages/PartnerСategories/images/PersonalCopy.png";
-import SmmImg from "../../pages/PartnerСategories/images/PersonalSMM.png";
+import BackEndImg from "../../images/personalBackEnd.svg";
+import FrontendImg from "../../images/PersonalFrontend.svg";
+import ArchitectureImg from "../../images/PersonalArchitecture.svg";
+import DesignImg from "../../images/PersonalDesign.svg";
+import TestImg from "../../images/PersonalTesters.svg";
+import AdminImg from "../../images/PersonalAdmin.svg";
+import ManageImg from "../../images/PersonalMng.svg";
+import CopyImg from "../../images/PersonalCopy.svg";
+import SmmImg from "../../images/PersonalSMM.svg";
 
 import authImg from "../../images/authCandidateFormImg.png";
 import arrowBtn from "../../images/arrowRight.svg";
