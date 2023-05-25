@@ -42,7 +42,7 @@ import { FrequentlyAskedQuestions } from "./pages/FrequentlyAskedQuestions/Frequ
 import { FrequentlyAskedQuestion } from "./pages/FrequentlyAskedQuestion/FrequentlyAskedQuestion";
 
 import "./assets/global.scss";
-import "./fonts/stylesheet.css";
+import "./assets/fonts/stylesheet.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
