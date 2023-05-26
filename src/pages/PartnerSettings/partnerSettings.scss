@@ -72,7 +72,6 @@
 
     &-cancel,
     &-save {
-      border-radius: 44px;
       width: 151px;
       height: 40px;
       font-size: 14px;
@@ -83,12 +82,10 @@
       color: #6f6f6f;
       background: white;
       border: 0.5px solid #8dc63f;
-    }
 
-    &-save {
-      color: #ffffff;
-      background: #52b709;
-      border: none;
+      &:hover {
+        background-color: white;
+      }
     }
   }
 

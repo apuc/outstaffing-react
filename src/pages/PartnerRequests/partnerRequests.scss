@@ -161,20 +161,18 @@
         }
       }
 
-      a {
-        background: #52b709;
+      button {
         max-width: 188px;
-        border-radius: 44px;
         height: 52px;
-        border: none;
-        font-weight: 400;
         font-size: 15px;
-        line-height: 32px;
-        color: #ffffff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         transition: 0.3s all ease;
+
+        a {
+          color: #ffffff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
 
         span {
           color: white;
@@ -186,8 +184,6 @@
         &:hover {
           box-shadow: 6px 5px 20px rgb(87 98 80 / 21%);
           transform: scale(1.02);
-          text-decoration: none;
-          color: #ffffff;
         }
       }
     }
@@ -260,21 +256,22 @@
           }
         }
 
-        a {
-          background: #52b709;
+        button {
           max-width: 174px;
-          border-radius: 44px;
           width: 100%;
           height: 46px;
-          border: none;
           font-weight: 400;
           font-size: 15px;
           line-height: 32px;
-          color: #ffffff;
-          display: flex;
-          justify-content: center;
-          align-items: center;
           transition: 0.3s all ease;
+
+          a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            width: 100%;
+          }
 
           span {
             color: white;
@@ -286,8 +283,6 @@
           &:hover {
             box-shadow: 6px 5px 20px rgb(87 98 80 / 21%);
             transform: scale(1.02);
-            text-decoration: none;
-            color: #ffffff;
           }
         }
       }

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 
+import Button from "../Common/Button/Button";
+
 import mockWorker from "../../assets/images/mock/mokPerson.png";
 
 import "./sliderWorkers.scss";
@@ -65,9 +67,9 @@ export const SliderWorkers = ({ title, titleInfo, subTitle }) => {
                 <img src={worker.avatar}></img>
                 <div className="worker-description">
                   <p>{worker.skils}</p>
-                  <Link to={`/worker/${index}`} className="worker__resume">
-                    Подробное резюме
-                  </Link>
+                  <Button styles="worker__resume">
+                    <Link to={`/worker/${index}`}>Подробное резюме</Link>
+                  </Button>
                 </div>
               </div>
             );

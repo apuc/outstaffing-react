@@ -59,24 +59,16 @@
     }
 
     &__resume {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       margin-top: 5px;
       width: 177px;
       height: 40px;
-      background: #52b709;
-      border-radius: 44px;
       font-size: 14px;
       line-height: 32px;
-      color: white;
-      border: none;
       transition: 0.5s;
 
-      &:hover {
-        transition: 0.5s;
-        background-color: #52b709a8;
-        text-decoration: none;
+      a {
+        color: white;
+        width: 100%;
       }
     }
   }

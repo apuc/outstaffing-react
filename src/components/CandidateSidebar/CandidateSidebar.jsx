@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Achievement } from "../Achievement/Achievement";
-import ModalAspt from "../UI/ModalAspt/ModalAspt";
+import ModalAspirant from "../UI/ModalAspirant/ModalAspirant";
 
 import { urlForLocal } from "../../helper";
 import { LEVELS, SKILLS } from "../../constants/constants";
@@ -39,11 +39,11 @@ const CandidateSidebar = ({ candidate, setActiveSnippet, activeSnippet }) => {
 
   return (
     <div className="candidate-sidebar">
-      <ModalAspt
+      <ModalAspirant
         active={addAspt}
         setActive={setAddAspt}
         level={levelAspt}
-      ></ModalAspt>
+      ></ModalAspirant>
 
       <div className="candidate-sidebar__info">
         <div className="candidate-sidebar__position">

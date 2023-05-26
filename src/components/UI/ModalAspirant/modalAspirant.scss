@@ -164,32 +164,32 @@
       }
     }
   }
-
-  .send {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    h2 {
-      text-align: center;
-      margin: 25px 0 31px 0;
-    }
-
-    p {
-      font-size: 14px;
-      line-height: 17px;
-      font-weight: 700;
-      text-align: center;
-      color: #000000;
-      margin-bottom: 10px;
-
-      span {
-        color: #406128;
-      }
-    }
-  }
 }
 
 .modal-aspt.active {
   transform: scale(1);
+}
+
+.send {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    text-align: center;
+    margin: 25px 0 31px 0;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 700;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 10px;
+
+    span {
+      color: #406128;
+    }
+  }
 }

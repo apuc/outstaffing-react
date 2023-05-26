@@ -5,6 +5,7 @@ import {
   setPartnerRequestId,
   setPartnerRequests,
 } from "../../redux/outstaffingSlice";
+import { apiRequest } from "../../api/request";
 
 import { Navigation } from "../../components/Navigation/Navigation";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
@@ -12,8 +13,7 @@ import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileB
 import { SliderWorkers } from "../../components/SliderWorkers/SliderWorkers";
 import { Loader } from "../../components/Loader/Loader";
 import { Footer } from "../../components/Footer/Footer";
-
-import { apiRequest } from "../../api/request";
+import Button from "../../components/Common/Button/Button";
 
 import cursorImg from "../../assets/icons/cursorImg.svg";
 
@@ -82,10 +82,12 @@ export const PartnerRequests = () => {
                 Оператор компании заводит заявку и указывает необходимые
                 параметры — количество сотрудников, стек, уровень специалиста
               </p>
-              <Link to={"/profile/add-request"}>
-                <span>+</span>
-                Создать запрос
-              </Link>
+              <Button>
+                <Link to={"/profile/add-request"}>
+                  <span>+</span>
+                  Создать запрос
+                </Link>
+              </Button>
             </div>
           </div>
         )}
@@ -95,10 +97,12 @@ export const PartnerRequests = () => {
               <div className="partnerRequests__noItems__create__link">
                 <img src={cursorImg} alt="cursor" />
                 <p>У вас еще нет запросов на сотрудников</p>
-                <Link to={"/profile/add-request"}>
-                  <span>+</span>
-                  Создать запрос
-                </Link>
+                <Button>
+                  <Link to={"/profile/add-request"}>
+                    <span>+</span>
+                    Создать запрос
+                  </Link>
+                </Button>
               </div>
               <div className="partnerRequests__noItems__create__instruction">
                 <h3>Инструкция: подачи заявки</h3>

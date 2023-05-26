@@ -118,7 +118,7 @@
       }
     }
 
-    .logIn {
+    .login {
       position: absolute;
       bottom: 75px;
       border: 3px solid #52b709;
@@ -140,10 +140,8 @@
       }
 
       a {
-        width: 140px;
-        height: 50px;
         color: white;
-        text-decoration: none;
+        width: 100%;
       }
 
       @media (max-width: 920px) {
@@ -156,7 +154,7 @@
           text-align: center;
         }
 
-        a {
+        button {
           margin-top: 15px;
           height: 25px;
           height: 40px;
@@ -229,17 +227,9 @@
   }
 }
 
-.button-green {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  background: #52b709;
-  border-radius: 44px;
+.dev-code {
   width: 202px;
   height: 50px;
   font-weight: 500;
   font-size: 16px;
-  line-height: 32px;
-  color: #ffffff;
-  border: none;
 }

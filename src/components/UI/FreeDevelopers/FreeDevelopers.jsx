@@ -1,12 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import AuthHeader from "../../AuthHeader/AuthHeader";
 import SideBar from "../../SideBar/SideBar";
 import { Footer } from "../../Footer/Footer";
-
-import { Link } from "react-router-dom";
 import { scrollToForm } from "../../../helper";
 import { ProfileBreadcrumbs } from "../../ProfileBreadcrumbs/ProfileBreadcrumbs";
+import Button from "../../Common/Button/Button";
 
 import mockWorker from "../../../assets/images/mock/mokPerson.png";
 import arrow from "../../../assets/icons/arrows/arrow_left.png";
@@ -42,9 +42,9 @@ export const FreeDevelopers = ({}) => {
               <div></div>
             </div>
           </div>
-          <button className="button-green" onClick={scrollToForm}>
+          <Button onClick={scrollToForm} styles={"dev-code"}>
             Код разработчика
-          </button>
+          </Button>
         </div>
 
         <div className="free-dev__body">
@@ -84,14 +84,13 @@ export const FreeDevelopers = ({}) => {
             </div>
           </div>
 
-          <div className="logIn">
+          <div className="login">
             <h3>Для просмотра полного резюме разработчика авторизуйтесь</h3>
-            <Link to={"/auth"} className="button-green">
-              Войти
-            </Link>
+            <Button styles={"dev-code"}>
+              <Link to={"/auth"}>Войти</Link>
+            </Button>
           </div>
         </div>
-
         <Footer />
       </div>
     </section>
