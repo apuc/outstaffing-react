@@ -1,8 +1,9 @@
 import React from "react";
 
-import "./modalErrorLogin.scss";
 import ModalLayout from "../../Common/ModalLayout/ModalLayout";
 import BaseButton from "../../Common/BaseButton/BaseButton";
+
+import "./modalErrorLogin.scss";
 
 export const ModalErrorLogin = ({ active, setActive, title }) => {
   return (

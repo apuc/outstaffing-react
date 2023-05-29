@@ -52,6 +52,8 @@ module.exports = {
   resolve: {
     alias: {
       "@": `${paths.src}/modules`,
+      // "@components": `${paths.src}/components`,
+      // "@assets": `${paths.src}/assets`,
     },
     extensions: [".mjs", ".js", ".jsx", ".ts", ".tsx", ".json"],
   },
