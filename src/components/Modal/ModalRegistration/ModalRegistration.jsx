@@ -1,7 +1,7 @@
 import React from "react";
 
 import ModalLayout from "../../Common/ModalLayout/ModalLayout";
-import Button from "../../Common/Button/Button";
+import BaseButton from "../../Common/BaseButton/BaseButton";
 
 import telegramLogo from "../../../assets/icons/tgLogo.svg";
 import doc from "../../../assets/icons/doc.svg";
@@ -37,12 +37,12 @@ export const ModalRegistration = ({ active, setActive }) => {
           </div>
         </div>
         <div className="button-box">
-          <Button
+          <BaseButton
             onClick={(e) => e.preventDefault()}
             styles={"button-box__submit"}
           >
             Отправить
-          </Button>
+          </BaseButton>
           <h5>
             У вас уже есть аккаунт? <p>Войти</p>
           </h5>

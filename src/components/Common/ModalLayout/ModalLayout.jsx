@@ -2,11 +2,18 @@ import React from "react";
 
 import "./modalLayout.scss";
 
-export const ModalLayout = ({ active, setActive, children, styles }) => {
+export const ModalLayout = ({
+  active,
+  setActive,
+  children,
+  styles,
+  ...props
+}) => {
   return (
     <div
       className={active ? `modal-layout active` : "modal-layout"}
       onClick={() => setActive(false)}
+      {...props}
     >
       <div
         className={

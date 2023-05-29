@@ -13,7 +13,7 @@ import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileB
 import { SliderWorkers } from "../../components/SliderWorkers/SliderWorkers";
 import { Loader } from "../../components/Loader/Loader";
 import { Footer } from "../../components/Footer/Footer";
-import Button from "../../components/Common/Button/Button";
+import BaseButton from "../../components/Common/BaseButton/BaseButton";
 
 import cursorImg from "../../assets/icons/cursorImg.svg";
 
@@ -82,12 +82,12 @@ export const PartnerRequests = () => {
                 Оператор компании заводит заявку и указывает необходимые
                 параметры — количество сотрудников, стек, уровень специалиста
               </p>
-              <Button>
+              <BaseButton>
                 <Link to={"/profile/add-request"}>
                   <span>+</span>
                   Создать запрос
                 </Link>
-              </Button>
+              </BaseButton>
             </div>
           </div>
         )}
@@ -97,12 +97,12 @@ export const PartnerRequests = () => {
               <div className="partnerRequests__noItems__create__link">
                 <img src={cursorImg} alt="cursor" />
                 <p>У вас еще нет запросов на сотрудников</p>
-                <Button>
+                <BaseButton>
                   <Link to={"/profile/add-request"}>
                     <span>+</span>
                     Создать запрос
                   </Link>
-                </Button>
+                </BaseButton>
               </div>
               <div className="partnerRequests__noItems__create__instruction">
                 <h3>Инструкция: подачи заявки</h3>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import { ProfileHeader } from "../../ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../Footer/Footer";
+import { ProfileHeader } from "../../../ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "../../../ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "../../../Footer/Footer";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import TrackerModal from "../TrackerModal/TrackerModal";
-import { Navigation } from "../../Navigation/Navigation";
-import { Loader } from "../../Loader/Loader";
+import TrackerModal from "../../../UI/TrackerModal/TrackerModal";
+import { Navigation } from "../../../Navigation/Navigation";
+import { Loader } from "../../../Loader/Loader";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,26 +16,27 @@ import {
   setToggleTab,
   getProjectBoard,
   getBoarderLoader,
-} from "../../../redux/projectsTrackerSlice";
-import { apiRequest } from "../../../api/request";
-import { urlForLocal } from "../../../helper";
-import { getCorrectDate } from "../../Calendar/calendarHelper";
+} from "../../../../redux/projectsTrackerSlice";
+import { apiRequest } from "../../../../api/request";
+import { urlForLocal } from "../../../../helper";
+import { getCorrectDate } from "../../../Calendar/calendarHelper";
+import BaseButton from "../../../Common/BaseButton/BaseButton";
 
-import project from "../../../assets/icons/trackerProject.svg";
-import watch from "../../../assets/icons/watch.svg";
-import file from "../../../assets/icons/fileModal.svg";
-import send from "../../../assets/icons/send.svg";
-import arrow2 from "../../../assets/icons/arrows/arrowStart.png";
-import plus from "../../../assets/icons/plus.svg";
-import tasks from "../../../assets/icons/trackerTasks.svg";
-import archive from "../../../assets/icons/archiveTracker.svg";
-import selectArrow from "../../../assets/icons/arrows/select.svg";
-import arrow from "../../../assets/icons/arrows/arrowCalendar.png";
-import link from "../../../assets/icons/link.svg";
-import archive2 from "../../../assets/icons/archive.svg";
-import del from "../../../assets/icons/delete.svg";
-import edit from "../../../assets/icons/edit.svg";
-import close from "../../../assets/icons/closeProjectPersons.svg";
+import project from "../../../../assets/icons/trackerProject.svg";
+import watch from "../../../../assets/icons/watch.svg";
+import file from "../../../../assets/icons/fileModal.svg";
+import send from "../../../../assets/icons/send.svg";
+import arrow2 from "../../../../assets/icons/arrows/arrowStart.png";
+import plus from "../../../../assets/icons/plus.svg";
+import tasks from "../../../../assets/icons/trackerTasks.svg";
+import archive from "../../../../assets/icons/archiveTracker.svg";
+import selectArrow from "../../../../assets/icons/arrows/select.svg";
+import arrow from "../../../../assets/icons/arrows/arrowCalendar.png";
+import link from "../../../../assets/icons/link.svg";
+import archive2 from "../../../../assets/icons/archive.svg";
+import del from "../../../../assets/icons/delete.svg";
+import edit from "../../../../assets/icons/edit.svg";
+import close from "../../../../assets/icons/closeProjectPersons.svg";
 
 import "./ticketFullScreen.scss";
 
@@ -307,7 +308,7 @@ export const TicketFullScreen = ({}) => {
                 </div>
               </div>
             </div>
-            <div className="modal-tiket__content ticket">
+            <div className="tracker-ticket ticket">
               <div className="content ticket-whith">
                 <div className="content__task">
                   <span>Задача</span>
@@ -338,25 +339,25 @@ export const TicketFullScreen = ({}) => {
                     ) : (
                       <p>{inputsValue.description}</p>
                     )}
-                    {/*<img src={task} className="image-task"></img>*/}
                   </div>
                   <div className="content__communication">
                     <p className="tasks">
-                      <button
+                      <BaseButton
                         onClick={() => {
                           dispatch(modalToggle("addSubtask"));
-                          setModalAddWorker(true);
+                          setAddSubtask(true);
                         }}
+                        styles={"tasks__button"}
                       >
                         <img src={plus}></img>
                         Добавить под задачу
-                      </button>
+                      </BaseButton>
                     </p>
                     <p className="file">
-                      <button>
+                      <BaseButton styles={"file__button"}>
                         <img src={file}></img>
                         Загрузить файл
-                      </button>
+                      </BaseButton>
                       <span>{0}</span>
                       Файлов
                     </p>

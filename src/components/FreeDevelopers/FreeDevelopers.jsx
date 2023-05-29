@@ -6,7 +6,7 @@ import SideBar from "../SideBar/SideBar";
 import { Footer } from "../Footer/Footer";
 import { scrollToForm } from "../../helper";
 import { ProfileBreadcrumbs } from "../ProfileBreadcrumbs/ProfileBreadcrumbs";
-import Button from "../Common/Button/Button";
+import BaseButton from "../Common/BaseButton/BaseButton";
 
 import mockWorker from "../../assets/images/mock/mokPerson.png";
 import arrow from "../../assets/icons/arrows/arrow_left.png";
@@ -42,9 +42,9 @@ export const FreeDevelopers = ({}) => {
               <div></div>
             </div>
           </div>
-          <Button onClick={scrollToForm} styles={"dev-code"}>
+          <BaseButton onClick={scrollToForm} styles={"dev-code"}>
             Код разработчика
-          </Button>
+          </BaseButton>
         </div>
 
         <div className="free-dev__body">
@@ -86,9 +86,9 @@ export const FreeDevelopers = ({}) => {
 
           <div className="login">
             <h3>Для просмотра полного резюме разработчика авторизуйтесь</h3>
-            <Button styles={"dev-code"}>
+            <BaseButton styles={"dev-code"}>
               <Link to={"/auth"}>Войти</Link>
-            </Button>
+            </BaseButton>
           </div>
         </div>
         <Footer />

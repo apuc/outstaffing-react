@@ -4,7 +4,7 @@ import { Footer } from "../../components/Footer/Footer";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { Navigation } from "../../components/Navigation/Navigation";
-import Button from "../../components/Common/Button/Button";
+import BaseButton from "../../components/Common/BaseButton/BaseButton";
 
 import kontur from "../../assets/images/logo/konturLogo.png";
 import astral from "../../assets/images/logo/astralLogo.png";
@@ -40,8 +40,12 @@ export const PartnerSettings = () => {
               </div>
 
               <div className="settings__buttons">
-                <Button styles={"settings__buttons-cancel"}>Отмена</Button>
-                <Button styles={"settings__buttons-save"}>Сохранить</Button>
+                <BaseButton styles={"settings__buttons-cancel"}>
+                  Отмена
+                </BaseButton>
+                <BaseButton styles={"settings__buttons-save"}>
+                  Сохранить
+                </BaseButton>
               </div>
               <span className="settings__agreement">
                 Нажимая "Сохранить", вы соглашаетесь с Правилами обработки и
@@ -77,8 +81,12 @@ export const PartnerSettings = () => {
               </div>
 
               <div className="settings__buttons">
-                <Button styles={"settings__buttons-cancel"}>Отмена</Button>
-                <Button styles={"settings__buttons-save"}>Сохранить</Button>
+                <BaseButton styles={"settings__buttons-cancel"}>
+                  Отмена
+                </BaseButton>
+                <BaseButton styles={"settings__buttons-save"}>
+                  Сохранить
+                </BaseButton>
               </div>
               <span className="settings__agreement">
                 Нажимая "Сохранить", вы соглашаетесь с Правилами обработки и

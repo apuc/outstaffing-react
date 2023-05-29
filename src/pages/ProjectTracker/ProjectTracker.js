@@ -22,7 +22,7 @@ import {
   deletePersonOnProject,
 } from "../../redux/projectsTrackerSlice";
 
-import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
+import ModalTicket from "../../components/Modal/Tracker/ModalTicket/ModalTicket";
 import TrackerModal from "../../components/UI/TrackerModal/TrackerModal";
 
 import project from "../../assets/icons/trackerProject.svg";

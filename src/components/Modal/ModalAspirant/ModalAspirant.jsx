@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 import ModalLayout from "../../Common/ModalLayout/ModalLayout";
-import Button from "../../Common/Button/Button";
+import BaseButton from "../../Common/BaseButton/BaseButton";
 
 import avatar from "../../../assets/images/mock/mokPerson.png";
 import logoTg from "../../../assets/icons/tgLogo.svg";
@@ -74,9 +74,9 @@ export const ModalAspirant = ({ active, setActive, level }) => {
             onChange={(e) => setTime(e.target.value)}
           ></input>
         </div>
-        <Button onClick={send} styles="form-interview__submit">
+        <BaseButton onClick={send} styles="form-interview__submit">
           Отправить
-        </Button>
+        </BaseButton>
       </div>
       <span className="exit" onClick={() => setActive(false)}></span>
       <ModalLayout active={modalSend} setActive={setModalSend} styles={"send"}>

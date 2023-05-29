@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import TrackerModal from "../TrackerModal/TrackerModal";
-import { apiRequest } from "../../../api/request";
+import { apiRequest } from "../../../../api/request";
 import { useDispatch } from "react-redux";
-import { urlForLocal } from "../../../helper";
+import { urlForLocal } from "../../../../helper";
 import {
   modalToggle,
   setProjectBoardFetch,
-} from "../../../redux/projectsTrackerSlice";
-import { getCorrectDate } from "../../../components/Calendar/calendarHelper";
+} from "../../../../redux/projectsTrackerSlice";
+import { getCorrectDate } from "../../../../components/Calendar/calendarHelper";
 
-import category from "../../../assets/icons/category.svg";
-import watch from "../../../assets/icons/watch.svg";
-import file from "../../../assets/icons/fileModal.svg";
-import arrow from "../../../assets/icons/arrows/arrowStart.png";
-import link from "../../../assets/icons/link.svg";
-import archive from "../../../assets/icons/archive.svg";
-import del from "../../../assets/icons/delete.svg";
-import edit from "../../../assets/icons/edit.svg";
-import send from "../../../assets/icons/send.svg";
-import plus from "../../../assets/icons/plus.svg";
-import fullScreen from "../../../assets/icons/arrows/inFullScreen.svg";
-import close from "../../../assets/icons/closeProjectPersons.svg";
+// import TrackerModal from "";
+import TrackerModal from "../../../UI/TrackerModal/TrackerModal";
+import ModalLayout from "../../../Common/ModalLayout/ModalLayout";
+import BaseButton from "../../../Common/BaseButton/BaseButton";
+
+import category from "../../../../assets/icons/category.svg";
+import watch from "../../../../assets/icons/watch.svg";
+import file from "../../../../assets/icons/fileModal.svg";
+import arrow from "../../../../assets/icons/arrows/arrowStart.png";
+import link from "../../../../assets/icons/link.svg";
+import archive from "../../../../assets/icons/archive.svg";
+import del from "../../../../assets/icons/delete.svg";
+import edit from "../../../../assets/icons/edit.svg";
+import send from "../../../../assets/icons/send.svg";
+import plus from "../../../../assets/icons/plus.svg";
+import fullScreen from "../../../../assets/icons/arrows/inFullScreen.svg";
+import close from "../../../../assets/icons/closeProjectPersons.svg";
 
 import "./ModalTicket.scss";
 
@@ -200,13 +204,11 @@ export const ModalTiсket = ({
   }, [members]);
 
   return (
-    <div
-      className={active ? "modal-tiket active" : "modal-tiket"}
-      onClick={() => setActive(false)}
-    >
-      <div
-        className="modal-tiket__content"
-        onClick={(e) => e.stopPropagation()}
+    <>
+      <ModalLayout
+        active={active}
+        setActive={setActive}
+        styles={"tracker-ticket"}
       >
         <div className="content">
           <h3 className="title-project">
@@ -253,21 +255,22 @@ export const ModalTiсket = ({
             </div>
             <div className="content__communication">
               <p className="tasks">
-                <button
+                <BaseButton
                   onClick={() => {
                     dispatch(modalToggle("addSubtask"));
                     setAddSubtask(true);
                   }}
+                  styles={"tasks__button"}
                 >
                   <img src={plus}></img>
                   Добавить под задачу
-                </button>
+                </BaseButton>
               </p>
               <p className="file">
-                <button>
+                <BaseButton styles={"file__button"}>
                   <img src={file}></img>
                   Загрузить файл
-                </button>
+                </BaseButton>
                 <span>{0}</span>
                 Файлов
               </p>
@@ -474,14 +477,14 @@ export const ModalTiсket = ({
             </div>
           </div>
         </div>
-      </div>
+      </ModalLayout>
 
       <TrackerModal
         active={addSubtask}
         setActive={setAddSubtask}
         defautlInput={task.column_id}
       ></TrackerModal>
-    </div>
+    </>
   );
 };
 

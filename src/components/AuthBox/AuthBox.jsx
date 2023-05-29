@@ -7,8 +7,8 @@ import { loading } from "../../redux/loaderSlice";
 import { setRole } from "../../redux/roleSlice";
 import { selectIsLoading } from "../../redux/loaderSlice";
 
-import ModalRegistration from "../UI/ModalRegistration/ModalRegistration";
-import ModalErrorLogin from "../UI/ModalErrorLogin/ModalErrorLogin";
+import ModalRegistration from "../Modal/ModalRegistration/ModalRegistration";
+import ModalErrorLogin from "../Modal/ModalErrorLogin/ModalErrorLogin";
 import { Loader } from "../Loader/Loader";
 import { apiRequest } from "../../api/request";
 
@@ -49,7 +49,7 @@ export const AuthBox = ({ title }) => {
         data: formData,
       }).then((res) => {
         if (!res.access_token) {
-          setError("Некорректные данные для входа");
+          setError("Введены некоректные данные для входа");
           setModalError(true);
           dispatch(loading(false));
         } else {

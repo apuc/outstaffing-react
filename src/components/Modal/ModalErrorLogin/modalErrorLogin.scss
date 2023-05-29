@@ -1,0 +1,31 @@
+.error-login {
+  position: relative;
+  padding: 54px 76px;
+  background: linear-gradient(180deg, #ffffff 0%, #ebebeb 100%);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    font-size: 24px;
+    line-height: 29px;
+    color: #263238;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 12px;
+    line-height: 14px;
+    width: 176px;
+    text-align: center;
+    font-weight: 300;
+    margin-bottom: 30px;
+  }
+
+  &__button {
+    font-size: 14px;
+    width: 198px;
+    height: 50px;
+  }
+}

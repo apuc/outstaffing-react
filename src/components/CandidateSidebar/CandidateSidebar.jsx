@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Achievement } from "../Achievement/Achievement";
-import ModalAspirant from "../UI/ModalAspirant/ModalAspirant";
+import ModalAspirant from "../Modal/ModalAspirant/ModalAspirant";
 
 import { urlForLocal } from "../../helper";
 import { LEVELS, SKILLS } from "../../constants/constants";

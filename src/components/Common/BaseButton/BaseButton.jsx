@@ -1,8 +1,8 @@
 import React from "react";
 
-import classes from "./button.module.scss";
+import classes from "./basebutton.module.scss";
 
-export const Button = ({ children, styles, ...props }) => {
+export const BaseButton = ({ children, styles, ...props }) => {
   return (
     <button
       className={styles ? `${styles} ${classes.button}` : classes.button}
@@ -13,4 +13,4 @@ export const Button = ({ children, styles, ...props }) => {
   );
 };
 
-export default Button;
+export default BaseButton;

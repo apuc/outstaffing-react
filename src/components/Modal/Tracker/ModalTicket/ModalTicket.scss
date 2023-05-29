@@ -1,24 +1,8 @@
-.modal-tiket {
-  z-index: 9;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.11);
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-tiket.active {
-  display: flex;
-}
-
-.modal-tiket__content {
+.tracker-ticket {
   background: #ffffff;
-  //border: 1px solid #dde2e4;
+  padding: 0;
   border-radius: 8px;
+  align-items: initial;
   display: flex;
   flex-direction: row;
 
@@ -121,6 +105,7 @@
       display: flex;
       flex-direction: column;
       margin-top: 10px;
+
       p {
         font-weight: 400;
         font-size: 14px;
@@ -143,16 +128,10 @@
       .tasks {
         justify-content: space-evenly;
 
-        button {
+        &__button {
           width: 180px;
           height: 40px;
-          background: #52b709;
-          border-radius: 44px;
-          font-weight: 400;
           font-size: 12px;
-          line-height: 32px;
-          border: none;
-          color: #ffffff;
         }
       }
 
@@ -166,18 +145,13 @@
         justify-content: space-between;
         margin-left: 20px;
 
-        button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        &__button {
           background: white;
           width: 166px;
           height: 40px;
           border: 0.5px solid #1458dd;
-          border-radius: 44px;
           font-weight: 400;
           font-size: 12px;
-          line-height: 32px;
           color: #1458dd;
 
           img {
