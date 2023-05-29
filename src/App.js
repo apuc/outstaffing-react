@@ -12,7 +12,7 @@ import Home from "./pages/Home/Home";
 import Candidate from "./components/Candidate/Candidate";
 import Calendar from "./components/Calendar/Calendar";
 import ReportForm from "./components/ReportForm/ReportForm";
-import FreeDevelopers from "./components/UI/FreeDevelopers/FreeDevelopers";
+import FreeDevelopers from "./components/FreeDevelopers/FreeDevelopers";
 import { TicketFullScreen } from "./components/UI/TicketFullScreen/TicketFullScreen";
 import { ProfileCalendar } from "./components/ProfileCalendar/ProfileCalendar";
 import Article from "./pages/Article/Article";

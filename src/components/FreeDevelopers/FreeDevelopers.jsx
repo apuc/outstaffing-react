@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import AuthHeader from "../../AuthHeader/AuthHeader";
-import SideBar from "../../SideBar/SideBar";
-import { Footer } from "../../Footer/Footer";
-import { scrollToForm } from "../../../helper";
-import { ProfileBreadcrumbs } from "../../ProfileBreadcrumbs/ProfileBreadcrumbs";
-import Button from "../../Common/Button/Button";
+import AuthHeader from "../AuthHeader/AuthHeader";
+import SideBar from "../SideBar/SideBar";
+import { Footer } from "../Footer/Footer";
+import { scrollToForm } from "../../helper";
+import { ProfileBreadcrumbs } from "../ProfileBreadcrumbs/ProfileBreadcrumbs";
+import Button from "../Common/Button/Button";
 
-import mockWorker from "../../../assets/images/mock/mokPerson.png";
-import arrow from "../../../assets/icons/arrows/arrow_left.png";
+import mockWorker from "../../assets/images/mock/mokPerson.png";
+import arrow from "../../assets/icons/arrows/arrow_left.png";
 
 import "./freeDevelopers.scss";
 

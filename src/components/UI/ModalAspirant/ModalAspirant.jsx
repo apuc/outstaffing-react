@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
-import ModalLayout from "../ModalLayout/ModalLayout";
+import ModalLayout from "../../Common/ModalLayout/ModalLayout";
+import Button from "../../Common/Button/Button";
 
 import avatar from "../../../assets/images/mock/mokPerson.png";
 import logoTg from "../../../assets/icons/tgLogo.svg";
@@ -26,23 +27,18 @@ export const ModalAspirant = ({ active, setActive, level }) => {
     }
   };
 
-  // TODO: Исправить стили тут, и заменить в модалках
   return (
-    <ModalLayout
-      active={active}
-      setActive={setActive}
-      styles={"modal-aspt__content"}
-    >
-      <div className="aspt-decs">
+    <ModalLayout active={active} setActive={setActive} styles={"aspirant"}>
+      <div className="aspirant-decs">
         <h1>Выбранный кандидат</h1>
-        <div className="aspt-decs__avatar">
-          <div className="aspt-decs__avatar_title">
+        <div className="aspirant-decs__avatar">
+          <div className="aspirant-decs__avatar_title">
             <img src={avatar}></img>
             <p>
               {level.spec} {level.skils}, {level.level}{" "}
             </p>
           </div>
-          <div className="aspt-decs__avatar_back">
+          <div className="aspirant-decs__avatar_back">
             <Link to={"/profile/catalog"}>
               <div>
                 <img src={arrow}></img>
@@ -52,9 +48,9 @@ export const ModalAspirant = ({ active, setActive, level }) => {
           </div>
         </div>
 
-        <div className="aspt-decs__telega">
+        <div className="aspirant-decs__telega">
           <h4>Есть вопросы?</h4>
-          <div className="aspt-decs__telega-logo">
+          <div className="aspirant-decs__telega-logo">
             <img src={logoTg}></img>
             <p>Напишите нам в Телеграм. Мы с удовольствием ответим!</p>
           </div>
@@ -78,11 +74,11 @@ export const ModalAspirant = ({ active, setActive, level }) => {
             onChange={(e) => setTime(e.target.value)}
           ></input>
         </div>
-
-        <button onClick={send}>Отправить</button>
+        <Button onClick={send} styles="form-interview__submit">
+          Отправить
+        </Button>
       </div>
       <span className="exit" onClick={() => setActive(false)}></span>
-
       <ModalLayout active={modalSend} setActive={setModalSend} styles={"send"}>
         <div className="send">
           <img src={interview}></img>

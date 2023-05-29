@@ -13,11 +13,10 @@ import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileB
 import { Footer } from "../../components/Footer/Footer";
 import { Navigation } from "../../components/Navigation/Navigation";
 import { Loader } from "../../components/Loader/Loader";
-import ModalLayout from "../../components/UI/ModalLayout/ModalLayout";
-
-import { apiRequest } from "../../api/request";
+import ModalLayout from "../../components/Common/ModalLayout/ModalLayout";
 import { getCorrectDate } from "../../components/Calendar/calendarHelper";
 
+import { apiRequest } from "../../api/request";
 import { urlForLocal } from "../../helper";
 
 import arrowSwitchDate from "../../assets/icons/arrows/arrowViewReport.png";
