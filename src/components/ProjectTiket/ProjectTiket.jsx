@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { apiRequest } from "../../api/request";
-import { deleteProject, modalToggle } from "../../redux/projectsTrackerSlice";
 
-import { ModalSelect } from "../UI/ModalSelect/ModalSelect";
-import TrackerModal from "../UI/TrackerModal/TrackerModal";
+import { apiRequest } from "@api/request";
+import { deleteProject, modalToggle } from "@redux/projectsTrackerSlice";
 
-import link from "../../images/link.svg";
-import archiveSet from "../../images/archive.svg";
-import del from "../../images/delete.svg";
-import edit from "../../images/edit.svg";
+import { ModalSelect } from "@components/Modal/ModalSelect/ModalSelect";
+import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
+
+import link from "assets/icons/link.svg";
+import archiveSet from "assets/icons/archive.svg";
+import del from "assets/icons/delete.svg";
+import edit from "assets/icons/edit.svg";
 
 import "./projectTiket.scss";
 

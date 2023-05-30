@@ -2,10 +2,10 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  font-family: 'LabGrotesque', sans-serif;
+  font-family: "LabGrotesque", sans-serif;
 
   &__head {
-    background: #E1FCCF;
+    background: #e1fccf;
   }
 
   &__container {
@@ -26,7 +26,7 @@
     color: black;
 
     span {
-      color: #52B709;
+      color: #52b709;
     }
 
     &:hover {
@@ -45,7 +45,7 @@
   }
 
   &__info {
-    background: #FFFFFF;
+    background: #ffffff;
   }
 
   &__nav {

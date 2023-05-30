@@ -1,10 +1,10 @@
-const { merge } = require('webpack-merge');
+const { merge } = require("webpack-merge");
 
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-    .BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-const prod = require('./prod');
+const prod = require("./prod");
 
 module.exports = merge(prod, {
-    plugins: [new BundleAnalyzerPlugin()]
+  plugins: [new BundleAnalyzerPlugin()],
 });

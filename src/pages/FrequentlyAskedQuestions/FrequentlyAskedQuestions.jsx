@@ -1,78 +1,83 @@
 import React from "react";
-import "./FrequentlyAskedQuestions.scss";
-import AuthHeader from "../../components/AuthHeader/AuthHeader";
-import SideBar from "../../components/SideBar/SideBar";
-import arrow from "./../../images/faq/arrow.svg";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../components/Footer/Footer";
-import { FREQUENTLY_ASKED_QUESTIONS_ROUTE } from "../../constants/router-path";
-import { FrequentlyAskedQuestionsItem } from "../../components/FrequentlyAskedQuestionsItem/FrequentlyAskedQuestionsItem";
 
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "@components/Common/Footer/Footer";
+import { FrequentlyAskedQuestionsItem } from "@components/FrequentlyAskedQuestionsItem/FrequentlyAskedQuestionsItem";
+import AuthHeader from "@components/Common/AuthHeader/AuthHeader";
+import SideBar from "@components/SideBar/SideBar";
+
+import arrow from "assets/images/faq/arrow.svg";
+
+import "./FrequentlyAskedQuestions.scss";
 
 export const FrequentlyAskedQuestions = () => {
-
   const rubrics = [
     {
-      title: 'Общие вопросы ',
+      title: "Общие вопросы ",
       questions: [
         {
           id: 1,
-          title: 'Это фриланс-платформа?'
+          title: "Это фриланс-платформа?",
         },
         {
           id: 2,
-          title: 'Чем вы отличаетесь от традиционного процесса выбора исполнителя?'
+          title:
+            "Чем вы отличаетесь от традиционного процесса выбора исполнителя?",
         },
         {
           id: 3,
-          title: 'Это фриланс-платформа?'
+          title: "Это фриланс-платформа?",
         },
         {
           id: 4,
-          title: 'Чем вы отличаетесь от традиционного процесса выбора исполнителя?'
-        }
-      ]
+          title:
+            "Чем вы отличаетесь от традиционного процесса выбора исполнителя?",
+        },
+      ],
     },
     {
-      title: 'Поиск специалиста',
+      title: "Поиск специалиста",
       questions: [
         {
           id: 11,
-          title: 'Это фриланс-платформа?'
+          title: "Это фриланс-платформа?",
         },
         {
           id: 22,
-          title: 'Чем вы отличаетесь от традиционного процесса выбора исполнителя?'
+          title:
+            "Чем вы отличаетесь от традиционного процесса выбора исполнителя?",
         },
         {
           id: 33,
-          title: 'Это фриланс-платформа?'
+          title: "Это фриланс-платформа?",
         },
         {
           id: 44,
-          title: 'Чем вы отличаетесь от традиционного процесса выбора исполнителя?'
-        }
-      ]
+          title:
+            "Чем вы отличаетесь от традиционного процесса выбора исполнителя?",
+        },
+      ],
     },
     {
-      title: 'Бронирование специалиста',
+      title: "Бронирование специалиста",
       questions: [
         {
           id: 11,
-          title: 'Это фриланс-платформа?'
-        }        
-      ]
+          title: "Это фриланс-платформа?",
+        },
+      ],
     },
     {
-      title: 'Работа с выбранным специалистом',
+      title: "Работа с выбранным специалистом",
       questions: [
         {
           id: 11,
-          title: 'Чем вы отличаетесь от традиционного процесса выбора исполнителя?'
-        }        
-      ]
+          title:
+            "Чем вы отличаетесь от традиционного процесса выбора исполнителя?",
+        },
+      ],
     },
-  ]
+  ];
 
   return (
     <div className="frequently-asked-questions">
@@ -83,7 +88,10 @@ export const FrequentlyAskedQuestions = () => {
         <ProfileBreadcrumbs
           links={[
             { name: "Главная", link: "/auth" },
-            { name: "FAQ (часто задаваемые вопросы)", link: FREQUENTLY_ASKED_QUESTIONS_ROUTE },
+            {
+              name: "FAQ (часто задаваемые вопросы)",
+              link: "/frequently-asked-questions",
+            },
           ]}
         />
         <div className="frequently-asked-questions__about">
@@ -98,13 +106,12 @@ export const FrequentlyAskedQuestions = () => {
           </div>
         </div>
         <div className="frequently-asked-questions__items">
-          {
-            rubrics.map((rubric,index)=><FrequentlyAskedQuestionsItem rubric={rubric} key={index} />)
-          }          
-        </div>       
+          {rubrics.map((rubric, index) => (
+            <FrequentlyAskedQuestionsItem rubric={rubric} key={index} />
+          ))}
+        </div>
       </div>
-		<Footer />
+      <Footer />
     </div>
   );
 };
-

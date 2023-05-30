@@ -7,7 +7,7 @@
   }
 
   a {
-    color: #5B6871;
+    color: #5b6871;
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
@@ -31,11 +31,11 @@
     }
 
     &:after {
-      content: '';
-      background-image: url("../../images/BreadcrumbsArrow.png");
+      content: "";
+      background-image: url("../../assets/icons/arrows/BreadcrumbsArrow.png");
       background-repeat: no-repeat;
       width: 7px;
-      height:10px;
+      height: 10px;
       position: absolute;
       right: -14px;
     }

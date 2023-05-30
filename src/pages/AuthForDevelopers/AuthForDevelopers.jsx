@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from "react";
-
-import { AuthBox } from "../../components/AuthBox/AuthBox";
-
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import arrow from "../../images/arrow__login_page.png";
-import medium from "../../images/medium_male_big.png";
-import cross from "../../images/cross.png";
-import text from "../../images/Body_Text.png";
-import arrowBtn from "../../images/arrowRight.png";
-import vector from "../../images/Vector_Smart_Object.png";
-import vectorBlack from "../../images/Vector_Smart_Object_black.png";
-
-import { selectAuth } from "../../redux/outstaffingSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { scrollToForm } from "../../helper";
 
-import { Footer } from "../../components/Footer/Footer";
-import SideBar from "../../components/SideBar/SideBar";
-import AuthHeader from "../../components/AuthHeader/AuthHeader";
-import SliderWorkers from "../../components/SliderWorkers/SliderWorkers";
+import { selectAuth } from "@redux/outstaffingSlice";
+import { scrollToForm } from "@utils/helper";
+
+import { Footer } from "@components/Common/Footer/Footer";
+import SideBar from "@components/SideBar/SideBar";
+import AuthHeader from "@components/Common/AuthHeader/AuthHeader";
+import SliderWorkers from "@components/SliderWorkers/SliderWorkers";
+import { AuthBox } from "@components/AuthBox/AuthBox";
+
+import arrow from "assets/icons/arrows/arrow__login_page.png";
+import medium from "assets/images/medium_male_big.png";
+import cross from "assets/images/cross.png";
+import text from "assets/images/Body_Text.png";
+import arrowBtn from "assets/icons/arrows/arrowRight.svg";
+import vector from "assets/images/Vector_Smart_Object.png";
+import vectorBlack from "assets/images/Vector_Smart_Object_black.png";
 
 import "./authForDevelopers.scss";
 

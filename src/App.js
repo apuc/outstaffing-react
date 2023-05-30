@@ -12,11 +12,11 @@ import Home from "./pages/Home/Home";
 import Candidate from "./components/Candidate/Candidate";
 import Calendar from "./components/Calendar/Calendar";
 import ReportForm from "./components/ReportForm/ReportForm";
-import FreeDevelopers from "./components/UI/FreeDevelopers/FreeDevelopers";
-import { TicketFullScreen } from "./components/UI/TicketFullScreen/TicketFullScreen";
+import FreeDevelopers from "./components/FreeDevelopers/FreeDevelopers";
+import { TicketFullScreen } from "./components/Modal/Tracker/TicketFullScreen/TicketFullScreen";
 import { ProfileCalendar } from "./components/ProfileCalendar/ProfileCalendar";
 import Article from "./pages/Article/Article";
-import FormPage from "./pages/FormPage/FormPage.js";
+import FormPage from "./pages/FormPage/FormPage";
 import SingleReportPage from "./pages/SingleReportPage/SingleReportPage";
 import { QuizPage } from "./pages/quiz/QuizPage";
 import { QuizReportPage } from "./pages/quiz/QuizReportPage";
@@ -42,7 +42,7 @@ import { FrequentlyAskedQuestions } from "./pages/FrequentlyAskedQuestions/Frequ
 import { FrequentlyAskedQuestion } from "./pages/FrequentlyAskedQuestion/FrequentlyAskedQuestion";
 
 import "./assets/global.scss";
-import "./fonts/stylesheet.css";
+import "./assets/fonts/stylesheet.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {

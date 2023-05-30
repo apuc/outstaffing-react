@@ -1,14 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../components/Footer/Footer";
-import { Navigation } from "../../components/Navigation/Navigation";
-import { Loader } from "../../components/Loader/Loader";
-import { urlForLocal } from '../../helper'
 
+import { urlForLocal } from "@utils/helper";
 import { useDispatch, useSelector } from "react-redux";
-import { apiRequest } from "../../api/request";
+import { apiRequest } from "@api/request";
 import {
   getProjectBoard,
   getBoarderLoader,
@@ -19,22 +14,27 @@ import {
   activeLoader,
   setColumnName,
   setColumnId,
-  deletePersonOnProject
-} from "../../redux/projectsTrackerSlice";
+  deletePersonOnProject,
+} from "@redux/projectsTrackerSlice";
 
-import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
-import TrackerModal from "../../components/UI/TrackerModal/TrackerModal";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Navigation } from "@components/Navigation/Navigation";
+import { Loader } from "@components/Common/Loader/Loader";
+import ModalTicket from "@components/Modal/Tracker/ModalTicket/ModalTicket";
+import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
 
-import project from "../../images/trackerProject.svg";
-import tasks from "../../images/trackerTasks.svg";
-import archive from "../../images/archiveTracker.svg";
-import selectArrow from "../../images/select.svg";
-import commentsBoard from "../../images/commentsBoard.svg";
-import filesBoard from "../../images/filesBoard.svg";
-import arrow from "../../images/arrowCalendar.png";
-import del from "../../images/delete.svg";
-import edit from "../../images/edit.svg";
-import close from "../../images/closeProjectPersons.svg"
+import project from "assets/icons/trackerProject.svg";
+import tasks from "assets/icons/trackerTasks.svg";
+import archive from "assets/icons/archiveTracker.svg";
+import selectArrow from "assets/icons/arrows/select.svg";
+import commentsBoard from "assets/icons/commentsBoard.svg";
+import filesBoard from "assets/icons/filesBoard.svg";
+import arrow from "assets/icons/arrows/arrowCalendar.png";
+import del from "assets/icons/delete.svg";
+import edit from "assets/icons/edit.svg";
+import close from "assets/icons/closeProjectPersons.svg";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ export const ProjectTracker = () => {
   const [modalAdd, setModalAdd] = useState(false);
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState({});
-  const [personListOpen, setPersonListOpen] = useState(false)
+  const [personListOpen, setPersonListOpen] = useState(false);
 
   const startWrapperIndexTest = useRef({});
   const projectBoard = useSelector(getProjectBoard);
@@ -134,7 +134,7 @@ export const ProjectTracker = () => {
     setSelectedTab(columnId);
     dispatch(modalToggle("createTiketProject"));
     setModalAdd(true);
-    setPriorityTask(length + 1)
+    setPriorityTask(length + 1);
   }
 
   function openTicket(e, task) {
@@ -160,10 +160,10 @@ export const ProjectTracker = () => {
       method: "DELETE",
       data: {
         project_id: projectBoard.id,
-        user_id: userId
+        user_id: userId,
       },
     }).then((res) => {
-      dispatch(deletePersonOnProject(userId))
+      dispatch(deletePersonOnProject(userId));
     });
   }
 
@@ -238,43 +238,69 @@ export const ProjectTracker = () => {
                   <div className="tasks__head__persons">
                     {/*<img src={avatarTest} alt="avatar" />*/}
                     {/*<img src={avatarTest} alt="avatar" />*/}
-                    <span className="countPersons">{projectBoard.projectUsers?.length}</span>
+                    <span className="countPersons">
+                      {projectBoard.projectUsers?.length}
+                    </span>
                     <span
                       className="addPerson"
                       onClick={() => {
-                        setPersonListOpen(true)
+                        setPersonListOpen(true);
                       }}
                     >
                       +
                     </span>
                     <p>добавить участника</p>
-                    {personListOpen &&
-                    <div className='persons__list'>
-                      <img className='persons__list__close' src={close} alt='close' onClick={() => setPersonListOpen(false)} />
-                      <div className='persons__list__count'><span>{projectBoard.projectUsers?.length}</span>участник</div>
-                      <div className='persons__list__info'>В проекте - <span>“{projectBoard.name}”</span></div>
-                      <div className='persons__list__items'>
-                        {projectBoard.projectUsers?.map((person) => {
-                          return <div className='persons__list__item' key={person.user_id}>
-                                    <img className='avatar' src={urlForLocal(person.user.avatar)} alt='avatar' />
-                                    <span>{person.user.fio}</span>
-                                    <img className='delete' src={close} alt='delete' onClick={() => deletePerson(person.user_id)}/>
-                                </div>
-                        })
-                        }
+                    {personListOpen && (
+                      <div className="persons__list">
+                        <img
+                          className="persons__list__close"
+                          src={close}
+                          alt="close"
+                          onClick={() => setPersonListOpen(false)}
+                        />
+                        <div className="persons__list__count">
+                          <span>{projectBoard.projectUsers?.length}</span>
+                          участник
+                        </div>
+                        <div className="persons__list__info">
+                          В проекте - <span>“{projectBoard.name}”</span>
+                        </div>
+                        <div className="persons__list__items">
+                          {projectBoard.projectUsers?.map((person) => {
+                            return (
+                              <div
+                                className="persons__list__item"
+                                key={person.user_id}
+                              >
+                                <img
+                                  className="avatar"
+                                  src={urlForLocal(person.user.avatar)}
+                                  alt="avatar"
+                                />
+                                <span>{person.user.fio}</span>
+                                <img
+                                  className="delete"
+                                  src={close}
+                                  alt="delete"
+                                  onClick={() => deletePerson(person.user_id)}
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div
+                          className="persons__list__add"
+                          onClick={() => {
+                            dispatch(modalToggle("addWorker"));
+                            setModalAdd(true);
+                            setPersonListOpen(false);
+                          }}
+                        >
+                          <span className="addPerson">+</span>
+                          <p>Добавить участников</p>
+                        </div>
                       </div>
-                      <div className='persons__list__add'
-                           onClick={() => {
-                             dispatch(modalToggle("addWorker"));
-                             setModalAdd(true);
-                             setPersonListOpen(false)
-                           }}
-                      >
-                        <span className='addPerson'>+</span>
-                        <p>Добавить участников</p>
-                      </div>
-                    </div>
-                    }
+                    )}
                   </div>
                   <div className="tasks__head__select">
                     <span>Участвую</span>
@@ -291,14 +317,16 @@ export const ProjectTracker = () => {
                 </div>
               </div>
 
-              {Boolean(modalActiveTicket) && <ModalTicket
+              {Boolean(modalActiveTicket) && (
+                <ModalTicket
                   active={modalActiveTicket}
                   setActive={setModalActiveTicket}
                   task={selectedTicket}
                   projectId={projectBoard.id}
                   projectName={projectBoard.name}
                   projectUsers={projectBoard.projectUsers}
-              />}
+                />
+              )}
 
               <div className="tasks__container">
                 {Boolean(projectBoard?.columns) &&
@@ -322,7 +350,9 @@ export const ProjectTracker = () => {
                           <div>
                             <span
                               className="add"
-                              onClick={() => selectedTabTask(column.id, column.tasks.length)}
+                              onClick={() =>
+                                selectedTabTask(column.id, column.tasks.length)
+                              }
                             >
                               +
                             </span>
@@ -349,8 +379,8 @@ export const ProjectTracker = () => {
                                   [column.id]: false,
                                 }));
                                 dispatch(modalToggle("editColumn"));
-                                dispatch(setColumnName(column.title))
-                                dispatch(setColumnId(column.id))
+                                dispatch(setColumnName(column.title));
+                                dispatch(setColumnId(column.id));
                                 setModalAdd(true);
                               }}
                             >

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import arrow from "../../images/sideBarArrow.svg";
-import LogoITguild from "../../images/LogoITguild.svg";
+import arrow from "assets/icons/sideBarArrow.svg";
+import LogoITguild from "assets/images/logo/LogoITguild.svg";
 
 import "./sidebar.scss";
 
