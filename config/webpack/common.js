@@ -52,10 +52,16 @@ module.exports = {
   resolve: {
     alias: {
       "@": `${paths.src}/modules`,
-      // "@components": `${paths.src}/components`,
-      // "@assets": `${paths.src}/assets`,
+      assets: `${paths.src}/assets`,
+      "@components": `${paths.src}/components`,
+      "@pages": `${paths.src}/pages`,
+      "@redux": `${paths.src}/redux`,
+      "@store": `${paths.src}/store`,
+      "@api": `${paths.src}/api`,
+      "@hooks": `${paths.src}/hooks`,
     },
-    extensions: [".mjs", ".js", ".jsx", ".ts", ".tsx", ".json"],
+    // extensions: [".mjs", ".js", ".jsx", ".ts", ".tsx", ".json"],
+    extensions: [".jsx", "..."],
   },
   experiments: {
     topLevelAwait: true,
