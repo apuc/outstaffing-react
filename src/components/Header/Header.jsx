@@ -1,6 +1,6 @@
 import React from "react";
 
-import { LogoutButton } from "../LogoutButton/LogoutButton";
+import { LogoutButton } from "@components/LogoutButton/LogoutButton";
 
 import "./header.scss";
 

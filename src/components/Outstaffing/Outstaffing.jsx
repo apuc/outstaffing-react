@@ -1,17 +1,18 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import OutstaffingBlock from "../OutstaffingBlock/OutstaffingBlock";
-import TagSelect from "../Select/TagSelect";
+import OutstaffingBlock from "@components/OutstaffingBlock/OutstaffingBlock";
+import TagSelect from "@components/Select/TagSelect";
+
 import {
   selectTags,
   getPositionId,
   setPositionId,
-} from "../../redux/outstaffingSlice";
+} from "@redux/outstaffingSlice";
 
-import front from "../../assets/images/partnerProfile/front-end.webp";
-import back from "../../assets/images/partnerProfile/back-end.webp";
-import design from "../../assets/images/partnerProfile/design.webp";
+import front from "assets/images/partnerProfile/front-end.webp";
+import back from "assets/images/partnerProfile/back-end.webp";
+import design from "assets/images/partnerProfile/design.webp";
 
 import "./outstaffing.scss";
 

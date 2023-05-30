@@ -8,7 +8,7 @@ import SliderWorkers from "../../components/SliderWorkers/SliderWorkers";
 import { AuthBox } from "../../components/AuthBox/AuthBox";
 import { selectAuth } from "../../redux/outstaffingSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { scrollToForm } from "../../helper";
+import { scrollToForm } from "../../utils/helper";
 
 import arrow from "../../assets/icons/arrows/arrow__login_page.png";
 import medium from "../../assets/images/medium_male_big.png";

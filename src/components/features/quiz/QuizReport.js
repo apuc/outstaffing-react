@@ -1,6 +1,6 @@
 import React from "react";
 
-import StarRating from "../../StarRating/StarRating";
+import StarRating from "@components/StarRating/StarRating";
 
 export const QuizReport = () => {
   return (

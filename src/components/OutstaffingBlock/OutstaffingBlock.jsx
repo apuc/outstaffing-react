@@ -1,13 +1,9 @@
 import React from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectItems,
-  selectedItems,
-  profiles,
-} from "../../redux/outstaffingSlice";
 
-import { apiRequest } from "../../api/request";
+import { selectItems, selectedItems, profiles } from "@redux/outstaffingSlice";
+import { apiRequest } from "@api/request";
 
 import "./outstaffingBlock.scss";
 

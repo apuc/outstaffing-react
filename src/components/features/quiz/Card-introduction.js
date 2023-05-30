@@ -1,6 +1,6 @@
 import React from "react";
 
-import questionIcon from "../../../assets/images/question.png";
+import questionIcon from "assets/images/question.png";
 
 import "./quiz.scss";
 

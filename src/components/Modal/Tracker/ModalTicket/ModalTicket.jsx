@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-import { apiRequest } from "../../../../api/request";
 import { useDispatch } from "react-redux";
-import { urlForLocal } from "../../../../helper";
-import {
-  modalToggle,
-  setProjectBoardFetch,
-} from "../../../../redux/projectsTrackerSlice";
-import { getCorrectDate } from "../../../../components/Calendar/calendarHelper";
 
-import TrackerModal from "../../../UI/TrackerModal/TrackerModal";
-import ModalLayout from "../../../Common/ModalLayout/ModalLayout";
-import BaseButton from "../../../Common/BaseButton/BaseButton";
+import { apiRequest } from "@api/request";
+import { urlForLocal } from "@utils/helper";
+import { modalToggle, setProjectBoardFetch } from "@redux/projectsTrackerSlice";
+import { getCorrectDate } from "@components/Calendar/calendarHelper";
 
-import category from "../../../../assets/icons/category.svg";
-import watch from "../../../../assets/icons/watch.svg";
-import file from "../../../../assets/icons/fileModal.svg";
-import arrow from "../../../../assets/icons/arrows/arrowStart.png";
-import link from "../../../../assets/icons/link.svg";
-import archive from "../../../../assets/icons/archive.svg";
-import del from "../../../../assets/icons/delete.svg";
-import edit from "../../../../assets/icons/edit.svg";
-import send from "../../../../assets/icons/send.svg";
-import plus from "../../../../assets/icons/plus.svg";
-import fullScreen from "../../../../assets/icons/arrows/inFullScreen.svg";
-import close from "../../../../assets/icons/closeProjectPersons.svg";
+import TrackerModal from "@components/UI/TrackerModal/TrackerModal";
+import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
+import BaseButton from "@components/Common/BaseButton/BaseButton";
+
+import category from "assets/icons/category.svg";
+import watch from "assets/icons/watch.svg";
+import file from "assets/icons/fileModal.svg";
+import arrow from "assets/icons/arrows/arrowStart.png";
+import link from "assets/icons/link.svg";
+import archive from "assets/icons/archive.svg";
+import del from "assets/icons/delete.svg";
+import edit from "assets/icons/edit.svg";
+import send from "assets/icons/send.svg";
+import plus from "assets/icons/plus.svg";
+import fullScreen from "assets/icons/arrows/inFullScreen.svg";
+import close from "assets/icons/closeProjectPersons.svg";
 
 import "./ModalTicket.scss";
 

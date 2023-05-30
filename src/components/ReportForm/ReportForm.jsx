@@ -10,19 +10,19 @@ import {
 import ru from "date-fns/locale/ru";
 registerLocale("ru", ru);
 
-import { Loader } from "../Loader/Loader";
-import { Footer } from "../Footer/Footer";
-import { ProfileHeader } from "../ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Loader } from "@components/Loader/Loader";
+import { Footer } from "@components/Footer/Footer";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 
-import { apiRequest } from "../../api/request";
-import { Navigation } from "../Navigation/Navigation";
-import { getReportDate } from "../../redux/reportSlice";
+import { apiRequest } from "@api/request";
+import { Navigation } from "@components/Navigation/Navigation";
+import { getReportDate } from "@redux/reportSlice";
 
-import calendarIcon from "../../assets/icons/calendar.svg";
-import ellipse from "../../assets/icons/ellipse.png";
-import remove from "../../assets/icons/remove.svg";
-import arrow from "../../assets/icons/arrows/left-arrow.png";
+import calendarIcon from "assets/icons/calendar.svg";
+import ellipse from "assets/icons/ellipse.png";
+import remove from "assets/icons/remove.svg";
+import arrow from "assets/icons/arrows/left-arrow.png";
 
 import "./reportForm.scss";
 import "react-datepicker/dist/react-datepicker.css";

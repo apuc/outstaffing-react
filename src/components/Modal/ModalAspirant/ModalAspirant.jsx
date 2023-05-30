@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-
 import { Link } from "react-router-dom";
-import ModalLayout from "../../Common/ModalLayout/ModalLayout";
-import BaseButton from "../../Common/BaseButton/BaseButton";
 
-import avatar from "../../../assets/images/mock/mokPerson.png";
-import logoTg from "../../../assets/icons/tgLogo.svg";
-import arrow from "../../../assets/icons/arrows/left-arrow.png";
-import interview from "../../../assets/images/logo/interviewLogo.svg";
+import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
+import BaseButton from "@components/Common/BaseButton/BaseButton";
+
+import avatar from "assets/images/mock/mokPerson.png";
+import logoTg from "assets/icons/tgLogo.svg";
+import arrow from "assets/icons/arrows/left-arrow.png";
+import interview from "assets/images/logo/interviewLogo.svg";
 
 import "./modalAspirant.scss";
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectedTest } from "../../../redux/quizSlice";
+
+import { selectedTest } from "@redux/quizSlice";
 
 export const GetOptionTask = ({ type, answer, handleChange, inputValue }) => {
   const id = localStorage.getItem("id");

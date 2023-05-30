@@ -4,12 +4,12 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import CalendarComponent from "./CalendarComponent";
 import { currentMonth } from "./calendarHelper";
-import { Footer } from "../Footer/Footer";
-import { LogoutButton } from "../LogoutButton/LogoutButton";
-import { urlForLocal } from "../../helper";
-import { selectCurrentCandidate } from "../../redux/outstaffingSlice";
+import { Footer } from "@components/Footer/Footer";
+import { LogoutButton } from "@components/LogoutButton/LogoutButton";
+import { urlForLocal } from "@utils/helper";
+import { selectCurrentCandidate } from "@redux/outstaffingSlice";
 
-import rectangle from "../../assets/images/rectangle_secondPage.png";
+import rectangle from "assets/images/rectangle_secondPage.png";
 
 import "./calendar.scss";
 

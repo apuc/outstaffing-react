@@ -16,7 +16,7 @@ import { apiRequest } from "../../api/request";
 import { Navigation } from "../../components/Navigation/Navigation";
 import TrackerModal from "../../components/UI/TrackerModal/TrackerModal";
 import ProjectTiket from "../../components/ProjectTiket/ProjectTiket";
-import { urlForLocal } from "../../helper";
+import { urlForLocal } from "../../utils/helper";
 import { getCorrectDate } from "../../components/Calendar/calendarHelper";
 import { Loader } from "../../components/Loader/Loader";
 

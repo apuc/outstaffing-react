@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 
-import BaseButton from "../Common/BaseButton/BaseButton";
+import BaseButton from "@components/Common/BaseButton/BaseButton";
 
-import mockWorker from "../../assets/images/mock/mokPerson.png";
+import mockWorker from "assets/images/mock/mokPerson.png";
 
 import "./sliderWorkers.scss";
 import "slick-carousel/slick/slick.css";

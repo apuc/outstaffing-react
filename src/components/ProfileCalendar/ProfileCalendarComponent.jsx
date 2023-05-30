@@ -6,23 +6,23 @@ import {
   setReportDate,
   setRequestDate,
   setSendRequest,
-} from "../../redux/reportSlice";
+} from "@redux/reportSlice";
 import {
   calendarHelper,
   currentMonthAndDay,
   getReports,
   hourOfNum,
-} from "../Calendar/calendarHelper";
-import ShortReport from "../ShortReport/ShortReport";
+} from "@components/Calendar/calendarHelper";
+import ShortReport from "@components/ShortReport/ShortReport";
 
-import arrow from "../../assets/icons/arrows/arrowCalendar.png";
-import rectangle from "../../assets/images/rectangle__calendar.png";
-import calendarIcon from "../../assets/icons/calendar.svg";
+import arrow from "assets/icons/arrows/arrowCalendar.png";
+import rectangle from "assets/images/rectangle__calendar.png";
+import calendarIcon from "assets/icons/calendar.svg";
 
 import moment from "moment";
 
 import "moment/locale/ru";
-import "./../Calendar/calendarComponent.scss";
+import "@components/Calendar/calendarComponent.scss";
 
 export const ProfileCalendarComponent = React.memo(
   ({ value, setValueHandler, reports, totalHours }) => {

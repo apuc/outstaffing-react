@@ -1,6 +1,6 @@
 import React from "react";
 
-import iconSpecialization from "../../../assets/images/partnerProfile/personalBackEnd.svg";
+import iconSpecialization from "assets/images/partnerProfile/personalBackEnd.svg";
 
 export const SelectedCategory = ({ setSelectedCategory }) => {
   return (

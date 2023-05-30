@@ -17,7 +17,7 @@ import ModalLayout from "../../components/Common/ModalLayout/ModalLayout";
 import { getCorrectDate } from "../../components/Calendar/calendarHelper";
 
 import { apiRequest } from "../../api/request";
-import { urlForLocal } from "../../helper";
+import { urlForLocal } from "../../utils/helper";
 
 import arrowSwitchDate from "../../assets/icons/arrows/arrowViewReport.png";
 import backEndImg from "../../assets/images/QualificationInfo.png";

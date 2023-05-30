@@ -9,7 +9,7 @@ import SliderWorkers from "../../components/SliderWorkers/SliderWorkers";
 import { useSelector } from "react-redux";
 import { selectAuth } from "../../redux/outstaffingSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { scrollToForm } from "../../helper";
+import { scrollToForm } from "../../utils/helper";
 
 import arrow from "../../assets/icons/arrows/arrow__login_page.png";
 import authImg from "../../assets/images/auth_img.png";

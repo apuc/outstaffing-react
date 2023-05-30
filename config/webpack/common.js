@@ -54,6 +54,7 @@ module.exports = {
       "@": `${paths.src}/modules`,
       assets: `${paths.src}/assets`,
       "@components": `${paths.src}/components`,
+      "@utils": `${paths.src}/utils`,
       "@pages": `${paths.src}/pages`,
       "@redux": `${paths.src}/redux`,
       "@store": `${paths.src}/store`,

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { apiRequest } from "../../../api/request";
+import { apiRequest } from "@api/request";
 import { HeaderQuiz } from "./HeaderQuiz";
 
 import { Progressbar } from "./ProgressbarQuiz";
@@ -16,9 +16,9 @@ import {
   questionsSelector,
   setAnswers,
   setCompleteTest,
-} from "./../../../redux/quizSlice";
+} from "@redux/quizSlice";
 
-import questionIcon from "../../../assets/images/question.png";
+import questionIcon from "assets/images/question.png";
 
 import "./quiz.scss";
 

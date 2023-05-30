@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import rightArrow from "../../../assets/icons/arrows/arrowRight.svg";
-import StarRating from "../../StarRating/StarRating";
+import StarRating from "@components/StarRating/StarRating";
+
+import rightArrow from "assets/icons/arrows/arrowRight.svg";
 
 export const CardAvailableTest = ({ title, description, path, passedTest }) => {
   return (

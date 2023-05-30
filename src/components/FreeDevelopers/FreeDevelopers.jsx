@@ -1,15 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import AuthHeader from "../AuthHeader/AuthHeader";
-import SideBar from "../SideBar/SideBar";
-import { Footer } from "../Footer/Footer";
-import { scrollToForm } from "../../helper";
-import { ProfileBreadcrumbs } from "../ProfileBreadcrumbs/ProfileBreadcrumbs";
-import BaseButton from "../Common/BaseButton/BaseButton";
+import { scrollToForm } from "@utils/helper";
 
-import mockWorker from "../../assets/images/mock/mokPerson.png";
-import arrow from "../../assets/icons/arrows/arrow_left.png";
+import AuthHeader from "@components/AuthHeader/AuthHeader";
+import SideBar from "@components/SideBar/SideBar";
+import { Footer } from "@components/Footer/Footer";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import BaseButton from "@components/Common/BaseButton/BaseButton";
+
+import mockWorker from "assets/images/mock/mokPerson.png";
+import arrow from "assets/icons/arrows/arrow_left.png";
 
 import "./freeDevelopers.scss";
 

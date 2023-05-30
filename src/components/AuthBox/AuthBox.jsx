@@ -1,18 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-import { auth, selectAuth, setUserInfo } from "../../redux/outstaffingSlice";
-import { loading } from "../../redux/loaderSlice";
-import { setRole } from "../../redux/roleSlice";
-import { selectIsLoading } from "../../redux/loaderSlice";
 
-import ModalRegistration from "../Modal/ModalRegistration/ModalRegistration";
-import ModalErrorLogin from "../Modal/ModalErrorLogin/ModalErrorLogin";
-import { Loader } from "../Loader/Loader";
-import { apiRequest } from "../../api/request";
+import { auth, selectAuth, setUserInfo } from "@redux/outstaffingSlice";
+import { loading, selectIsLoading } from "@redux/loaderSlice";
+import { setRole } from "@redux/roleSlice";
 
-import ellipse from "../../assets/icons/ellipse.png";
+import ModalRegistration from "@components/Modal/ModalRegistration/ModalRegistration";
+import ModalErrorLogin from "@components/Modal/ModalErrorLogin/ModalErrorLogin";
+import { Loader } from "@components/Loader/Loader";
+import { apiRequest } from "@api/request";
+
+import ellipse from "assets/icons/ellipse.png";
 
 import "./authBox.scss";
 

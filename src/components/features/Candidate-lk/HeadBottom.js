@@ -1,6 +1,6 @@
 import React from "react";
 
-import medium_male from "../../../assets/images/medium_male.png";
+import medium_male from "assets/images/medium_male.png";
 
 export const HeadBottom = () => {
   return (

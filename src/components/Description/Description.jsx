@@ -4,13 +4,12 @@ import { Link } from "react-router-dom";
 
 import ErrorBoundary from "../../hoc/ErrorBoundary";
 
-import { LEVELS, SKILLS } from "../../constants/constants";
-import { selectProfiles } from "../../redux/outstaffingSlice";
+import { LEVELS, SKILLS } from "@utils/constants";
+import { urlForLocal } from "@utils/helper";
+import { selectProfiles } from "@redux/outstaffingSlice";
 
-import { urlForLocal } from "../../helper";
-
-import rectangle from "../../assets/images/rectangle_secondPage.png";
-import cursorImg from "../../assets/icons/cursorImg.svg";
+import rectangle from "assets/images/rectangle_secondPage.png";
+import cursorImg from "assets/icons/cursorImg.svg";
 
 import "./description.scss";
 

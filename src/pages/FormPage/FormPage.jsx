@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
 import SVG from "react-inlinesvg";
 
-import { LEVELS, SKILLS } from "../../constants/constants";
+import { LEVELS, SKILLS } from "../../utils/constants";
 import {
   currentCandidate,
   selectCurrentCandidate,
 } from "../../redux/outstaffingSlice";
 import { apiRequest } from "../../api/request";
-import { urlForLocal } from "../../helper";
+import { urlForLocal } from "../../utils/helper";
 
 import Form from "../../components/Form/Form";
 import { Footer } from "../../components/Footer/Footer";

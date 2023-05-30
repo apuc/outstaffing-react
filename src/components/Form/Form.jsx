@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 
-import { apiRequest } from "../../api/request";
-import { Loader } from "../Loader/Loader";
+import { apiRequest } from "@api/request";
+import { Loader } from "@components/Loader/Loader";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 

@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { apiRequest } from "../../api/request";
+import { apiRequest } from "@api/request";
 import {
   getCorrectDate,
   getCreatedDate,
   hourOfNum,
-} from "../../components/Calendar/calendarHelper";
+} from "@components/Calendar/calendarHelper";
 import {
   getReportDate,
   getSendRequest,
   setSendRequest,
-} from "../../redux/reportSlice";
-import { Loader } from "../Loader/Loader";
+} from "@redux/reportSlice";
+import { Loader } from "@components/Loader/Loader";
 
 import "./shortReport.scss";
 

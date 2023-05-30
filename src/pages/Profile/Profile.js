@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { getProfileInfo } from "../../redux/outstaffingSlice";
-import { urlForLocal } from "../../helper";
+import { urlForLocal } from "../../utils/helper";
 
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";

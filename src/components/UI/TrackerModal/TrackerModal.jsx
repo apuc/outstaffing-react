@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
-import { apiRequest } from "../../../api/request";
-import { urlForLocal } from "../../../helper";
+
+import { apiRequest } from "@api/request";
+import { urlForLocal } from "@utils/helper";
 import {
   setColumnName,
   getProjectBoard,
@@ -14,9 +14,9 @@ import {
   getColumnName,
   getColumnId,
   addPersonToProject,
-} from "../../../redux/projectsTrackerSlice";
+} from "@redux/projectsTrackerSlice";
 
-import arrowDown from "../../../assets/icons/arrows/selectArrow.png";
+import arrowDown from "assets/icons/arrows/selectArrow.png";
 
 import "./trackerModal.scss";
 

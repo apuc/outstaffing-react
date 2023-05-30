@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import compltedImage from "../../../assets/images/quiz/compltedImage.png";
+import compltedImage from "assets/images/quiz/compltedImage.png";
 
 export const BlockCompletedTest = () => {
   const id = localStorage.getItem("id");

@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-
-import { ProfileHeader } from "../../../ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../../ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../../Footer/Footer";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import TrackerModal from "../../../UI/TrackerModal/TrackerModal";
-import { Navigation } from "../../../Navigation/Navigation";
-import { Loader } from "../../../Loader/Loader";
-
 import { useDispatch, useSelector } from "react-redux";
+
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "@components/Footer/Footer";
+import { getCorrectDate } from "@components/Calendar/calendarHelper";
+import BaseButton from "@components/Common/BaseButton/BaseButton";
+import TrackerModal from "@components/UI/TrackerModal/TrackerModal";
+import { Navigation } from "@components/Navigation/Navigation";
+import { Loader } from "@components/Loader/Loader";
+
 import {
   deletePersonOnProject,
   modalToggle,
@@ -16,27 +18,25 @@ import {
   setToggleTab,
   getProjectBoard,
   getBoarderLoader,
-} from "../../../../redux/projectsTrackerSlice";
-import { apiRequest } from "../../../../api/request";
-import { urlForLocal } from "../../../../helper";
-import { getCorrectDate } from "../../../Calendar/calendarHelper";
-import BaseButton from "../../../Common/BaseButton/BaseButton";
+} from "@redux/projectsTrackerSlice";
+import { apiRequest } from "@api/request";
+import { urlForLocal } from "@utils/helper";
 
-import project from "../../../../assets/icons/trackerProject.svg";
-import watch from "../../../../assets/icons/watch.svg";
-import file from "../../../../assets/icons/fileModal.svg";
-import send from "../../../../assets/icons/send.svg";
-import arrow2 from "../../../../assets/icons/arrows/arrowStart.png";
-import plus from "../../../../assets/icons/plus.svg";
-import tasks from "../../../../assets/icons/trackerTasks.svg";
-import archive from "../../../../assets/icons/archiveTracker.svg";
-import selectArrow from "../../../../assets/icons/arrows/select.svg";
-import arrow from "../../../../assets/icons/arrows/arrowCalendar.png";
-import link from "../../../../assets/icons/link.svg";
-import archive2 from "../../../../assets/icons/archive.svg";
-import del from "../../../../assets/icons/delete.svg";
-import edit from "../../../../assets/icons/edit.svg";
-import close from "../../../../assets/icons/closeProjectPersons.svg";
+import project from "assets/icons/trackerProject.svg";
+import watch from "assets/icons/watch.svg";
+import file from "assets/icons/fileModal.svg";
+import send from "assets/icons/send.svg";
+import arrow2 from "assets/icons/arrows/arrowStart.png";
+import plus from "assets/icons/plus.svg";
+import tasks from "assets/icons/trackerTasks.svg";
+import archive from "assets/icons/archiveTracker.svg";
+import selectArrow from "assets/icons/arrows/select.svg";
+import arrow from "assets/icons/arrows/arrowCalendar.png";
+import link from "assets/icons/link.svg";
+import archive2 from "assets/icons/archive.svg";
+import del from "assets/icons/delete.svg";
+import edit from "assets/icons/edit.svg";
+import close from "assets/icons/closeProjectPersons.svg";
 
 import "./ticketFullScreen.scss";
 

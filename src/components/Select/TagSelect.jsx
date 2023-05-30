@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
 
-import { Loader } from "../Loader/Loader";
-import { apiRequest } from "../../api/request";
+import { Loader } from "@components/Loader/Loader";
+import { apiRequest } from "@api/request";
 import {
   selectedItems,
   selectItems,
   selectTags,
   profiles,
   setPositionId,
-} from "../../redux/outstaffingSlice";
+} from "@redux/outstaffingSlice";
 
 import "./tagSelect.scss";
 

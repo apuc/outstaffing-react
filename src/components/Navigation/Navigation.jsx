@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { urlForLocal } from "../../helper";
-import { apiRequest } from "../../api/request";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileInfo, setProfileInfo } from "../../redux/outstaffingSlice";
 
-import avatarMok from "../../assets/images/avatarMok.png";
+import { urlForLocal } from "@utils/helper";
+import { apiRequest } from "@api/request";
+import { getProfileInfo, setProfileInfo } from "@redux/outstaffingSlice";
+
+import avatarMok from "assets/images/avatarMok.png";
 
 export const Navigation = () => {
   const dispatch = useDispatch();

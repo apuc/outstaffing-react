@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
-import { selectAuth } from "../../redux/outstaffingSlice";
+import { selectAuth } from "@redux/outstaffingSlice";
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
   const isAuth = useSelector(selectAuth);

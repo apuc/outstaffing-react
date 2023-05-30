@@ -6,7 +6,7 @@ import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { getProfileInfo } from "../../redux/outstaffingSlice";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "../../components/Footer/Footer";
-import { urlForLocal } from "../../helper";
+import { urlForLocal } from "../../utils/helper";
 import { apiRequest } from "../../api/request";
 import { Navigation } from "../../components/Navigation/Navigation";
 

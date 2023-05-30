@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { setSelectedTest } from "../../../redux/quizSlice";
-import { urlForLocal } from "../../../helper";
+import { setSelectedTest } from "@redux/quizSlice";
+import { urlForLocal } from "@utils/helper";
 
-import calendarImage from "./../../../assets/icons/calendar.svg";
+import calendarImage from "assets/icons/calendar.svg";
 
 import "./quiz.scss";
 

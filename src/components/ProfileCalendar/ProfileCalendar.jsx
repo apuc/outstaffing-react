@@ -2,23 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 
-import { getReports } from "../Calendar/calendarHelper";
-import moment from "moment";
-import { ProfileCalendarComponent } from "./ProfileCalendarComponent";
-import { Loader } from "../Loader/Loader";
-import { ProfileHeader } from "../ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../Footer/Footer";
-import { Navigation } from "../Navigation/Navigation";
-import { urlForLocal } from "../../helper";
-import { apiRequest } from "../../api/request";
-import { getProfileInfo } from "../../redux/outstaffingSlice";
+import { urlForLocal } from "@utils/helper";
+import { apiRequest } from "@api/request";
+import { getProfileInfo } from "@redux/outstaffingSlice";
 import {
   getRequestDates,
   setReportDate,
   setRequestDate,
-} from "../../redux/reportSlice";
+} from "@redux/reportSlice";
+import { getReports } from "@components/Calendar/calendarHelper";
 
+import { ProfileCalendarComponent } from "./ProfileCalendarComponent";
+import { Loader } from "@components/Loader/Loader";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "@components/Footer/Footer";
+import { Navigation } from "@components/Navigation/Navigation";
+
+import moment from "moment";
 import "moment/locale/ru";
 import "./profileCalendar.scss";
 

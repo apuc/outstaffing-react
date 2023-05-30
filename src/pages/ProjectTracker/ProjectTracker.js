@@ -5,7 +5,7 @@ import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileB
 import { Footer } from "../../components/Footer/Footer";
 import { Navigation } from "../../components/Navigation/Navigation";
 import { Loader } from "../../components/Loader/Loader";
-import { urlForLocal } from "../../helper";
+import { urlForLocal } from "../../utils/helper";
 
 import { useDispatch, useSelector } from "react-redux";
 import { apiRequest } from "../../api/request";

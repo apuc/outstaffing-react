@@ -1,6 +1,6 @@
 import React from "react";
 
-import suucessIcon from "../../../assets/images/quiz/success.png";
+import suucessIcon from "assets/images/quiz/success.png";
 
 export const AlertResult = () => {
   const successTest = false;

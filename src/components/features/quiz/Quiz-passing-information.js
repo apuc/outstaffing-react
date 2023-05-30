@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useTimer } from "react-timer-hook";
 
-import StarRating from "../../StarRating/StarRating";
-import { completedTestSelector } from "../../../redux/quizSlice";
+import StarRating from "@components/StarRating/StarRating";
+import { completedTestSelector } from "@redux/quizSlice";
 
-import timer from "../../../assets/images/quiz/timer.png";
-import accempt from "../../../assets/images/quiz/accempt.png";
+import timer from "assets/images/quiz/timer.png";
+import accempt from "assets/images/quiz/accempt.png";
 
 export const QuizPassingInformation = ({ expiryTimestamp, setStartTest }) => {
   const { seconds, minutes, isRunning, start, pause, resume, restart } =
