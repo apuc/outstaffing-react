@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  questionnairesSelector,
-  setQuestionnaires,
-} from "../../redux/quizSlice";
-import { apiRequest } from "../../api/request";
+import { questionnairesSelector, setQuestionnaires } from "@redux/quizSlice";
+import { apiRequest } from "@api/request";
 
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { HeadBottom } from "../../components/features/Candidate-lk/HeadBottom";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { SelectedCategory } from "../../components/features/quiz/SelectedCategory";
-import { Footer } from "../../components/Footer/Footer";
-import { CardAvailableTest } from "../../components/features/quiz/CardAviableTest";
-import CategoriesItem from "../../components/CategoriesItem/CategoriesItem";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { HeadBottom } from "@components/features/Candidate-lk/HeadBottom";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { SelectedCategory } from "@components/features/quiz/SelectedCategory";
+import { Footer } from "@components/Common/Footer/Footer";
+import { CardAvailableTest } from "@components/features/quiz/CardAviableTest";
+import CategoriesItem from "@components/CategoriesItem/CategoriesItem";
 
-import BackEndImg from "../../assets/images/partnerProfile/personalBackEnd.svg";
-import FrontendImg from "../../assets/images/partnerProfile/PersonalFrontend.svg";
-import ArchitectureImg from "../../assets/images/partnerProfile/PersonalArchitecture.svg";
-import DesignImg from "../../assets/images/partnerProfile/PersonalDesign.svg";
-import TestImg from "../../assets/images/partnerProfile/PersonalTesters.svg";
-import AdminImg from "../../assets/images/partnerProfile/PersonalAdmin.svg";
-import ManageImg from "../../assets/images/partnerProfile/PersonalMng.svg";
-import CopyImg from "../../assets/images/partnerProfile/PersonalCopy.svg";
-import SmmImg from "../../assets/images/partnerProfile/PersonalSMM.svg";
+import BackEndImg from "assets/images/partnerProfile/personalBackEnd.svg";
+import FrontendImg from "assets/images/partnerProfile/PersonalFrontend.svg";
+import ArchitectureImg from "assets/images/partnerProfile/PersonalArchitecture.svg";
+import DesignImg from "assets/images/partnerProfile/PersonalDesign.svg";
+import TestImg from "assets/images/partnerProfile/PersonalTesters.svg";
+import AdminImg from "assets/images/partnerProfile/PersonalAdmin.svg";
+import ManageImg from "assets/images/partnerProfile/PersonalMng.svg";
+import CopyImg from "assets/images/partnerProfile/PersonalCopy.svg";
+import SmmImg from "assets/images/partnerProfile/PersonalSMM.svg";
 
 import "./quiz-page.scss";
 

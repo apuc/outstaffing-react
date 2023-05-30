@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { CardControl } from "../../components/CardControl/CardControl";
-import { Footer } from "../../components/Footer/Footer";
-import { HeadBottom } from "../../components/features/Candidate-lk/HeadBottom";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { CardControl } from "@components/CardControl/CardControl";
+import { Footer } from "@components/Common/Footer/Footer";
+import { HeadBottom } from "@components/features/Candidate-lk/HeadBottom";
 
-import settingIcon from "../../assets/icons/settingIcon.png";
-import reportsIcon from "../../assets/images/reports.png";
-import noteIcon from "../../assets/images/note.png";
-import questionIcon from "../../assets/images/question.png";
-import medium_male from "../../assets/images/medium_male.png";
+import settingIcon from "assets/icons/settingIcon.png";
+import reportsIcon from "assets/images/reports.png";
+import noteIcon from "assets/images/note.png";
+import questionIcon from "assets/images/question.png";
+import medium_male from "assets/images/medium_male.png";
 
 import "./ProfileCandidate.scss";
 

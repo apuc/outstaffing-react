@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "@components/Footer/Footer";
+import { Footer } from "@components/Common/Footer/Footer";
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
-import TrackerModal from "@components/UI/TrackerModal/TrackerModal";
+import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
-import { Loader } from "@components/Loader/Loader";
+import { Loader } from "@components/Common/Loader/Loader";
 
 import {
   deletePersonOnProject,

@@ -8,7 +8,7 @@ import { setRole } from "@redux/roleSlice";
 
 import ModalRegistration from "@components/Modal/ModalRegistration/ModalRegistration";
 import ModalErrorLogin from "@components/Modal/ModalErrorLogin/ModalErrorLogin";
-import { Loader } from "@components/Loader/Loader";
+import { Loader } from "@components/Common/Loader/Loader";
 import { apiRequest } from "@api/request";
 
 import ellipse from "assets/icons/ellipse.png";

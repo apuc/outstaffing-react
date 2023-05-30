@@ -1,13 +1,13 @@
 import React from "react";
 
-import { Footer } from "../../components/Footer/Footer";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { Navigation } from "../../components/Navigation/Navigation";
-import BaseButton from "../../components/Common/BaseButton/BaseButton";
+import { Footer } from "@components/Common/Footer/Footer";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { Navigation } from "@components/Navigation/Navigation";
+import BaseButton from "@components/Common/BaseButton/BaseButton";
 
-import kontur from "../../assets/images/logo/konturLogo.png";
-import astral from "../../assets/images/logo/astralLogo.png";
+import kontur from "assets/images/logo/konturLogo.png";
+import astral from "assets/images/logo/astralLogo.png";
 
 import "./partnerSettings.scss";
 

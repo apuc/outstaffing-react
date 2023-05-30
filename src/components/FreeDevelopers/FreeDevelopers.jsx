@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 import { scrollToForm } from "@utils/helper";
 
-import AuthHeader from "@components/AuthHeader/AuthHeader";
+import AuthHeader from "@components/Common/AuthHeader/AuthHeader";
 import SideBar from "@components/SideBar/SideBar";
-import { Footer } from "@components/Footer/Footer";
+import { Footer } from "@components/Common/Footer/Footer";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 

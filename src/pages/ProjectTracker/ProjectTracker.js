@@ -1,14 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../components/Footer/Footer";
-import { Navigation } from "../../components/Navigation/Navigation";
-import { Loader } from "../../components/Loader/Loader";
-import { urlForLocal } from "../../utils/helper";
 
+import { urlForLocal } from "@utils/helper";
 import { useDispatch, useSelector } from "react-redux";
-import { apiRequest } from "../../api/request";
+import { apiRequest } from "@api/request";
 import {
   getProjectBoard,
   getBoarderLoader,
@@ -20,21 +15,26 @@ import {
   setColumnName,
   setColumnId,
   deletePersonOnProject,
-} from "../../redux/projectsTrackerSlice";
+} from "@redux/projectsTrackerSlice";
 
-import ModalTicket from "../../components/Modal/Tracker/ModalTicket/ModalTicket";
-import TrackerModal from "../../components/UI/TrackerModal/TrackerModal";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Navigation } from "@components/Navigation/Navigation";
+import { Loader } from "@components/Common/Loader/Loader";
+import ModalTicket from "@components/Modal/Tracker/ModalTicket/ModalTicket";
+import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
 
-import project from "../../assets/icons/trackerProject.svg";
-import tasks from "../../assets/icons/trackerTasks.svg";
-import archive from "../../assets/icons/archiveTracker.svg";
-import selectArrow from "../../assets/icons/arrows/select.svg";
-import commentsBoard from "../../assets/icons/commentsBoard.svg";
-import filesBoard from "../../assets/icons/filesBoard.svg";
-import arrow from "../../assets/icons/arrows/arrowCalendar.png";
-import del from "../../assets/icons/delete.svg";
-import edit from "../../assets/icons/edit.svg";
-import close from "../../assets/icons/closeProjectPersons.svg";
+import project from "assets/icons/trackerProject.svg";
+import tasks from "assets/icons/trackerTasks.svg";
+import archive from "assets/icons/archiveTracker.svg";
+import selectArrow from "assets/icons/arrows/select.svg";
+import commentsBoard from "assets/icons/commentsBoard.svg";
+import filesBoard from "assets/icons/filesBoard.svg";
+import arrow from "assets/icons/arrows/arrowCalendar.png";
+import del from "assets/icons/delete.svg";
+import edit from "assets/icons/edit.svg";
+import close from "assets/icons/closeProjectPersons.svg";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();

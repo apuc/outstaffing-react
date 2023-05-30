@@ -6,7 +6,7 @@ import SkillSection from "@components/SkillSection/SkillSection";
 import Sidebar from "@components/CandidateSidebar/CandidateSidebar";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "@components/Footer/Footer";
+import { Footer } from "@components/Common/Footer/Footer";
 import { Navigation } from "@components/Navigation/Navigation";
 
 import {

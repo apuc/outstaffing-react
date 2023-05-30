@@ -13,10 +13,10 @@ import {
 import { getReports } from "@components/Calendar/calendarHelper";
 
 import { ProfileCalendarComponent } from "./ProfileCalendarComponent";
-import { Loader } from "@components/Loader/Loader";
+import { Loader } from "@components/Common/Loader/Loader";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "@components/Footer/Footer";
+import { Footer } from "@components/Common/Footer/Footer";
 import { Navigation } from "@components/Navigation/Navigation";
 
 import moment from "moment";

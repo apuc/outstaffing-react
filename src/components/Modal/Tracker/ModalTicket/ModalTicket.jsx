@@ -7,7 +7,7 @@ import { urlForLocal } from "@utils/helper";
 import { modalToggle, setProjectBoardFetch } from "@redux/projectsTrackerSlice";
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
 
-import TrackerModal from "@components/UI/TrackerModal/TrackerModal";
+import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
 import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken, urlHasParams } from "../utils/helper";
+import { getToken, urlHasParams } from "@utils/helper";
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,

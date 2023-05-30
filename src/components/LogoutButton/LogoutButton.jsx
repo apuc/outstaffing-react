@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { useLogout } from "@hooks/useLogout";
-import { Loader } from "@components/Loader/Loader";
+import { Loader } from "@components/Common/Loader/Loader";
 import { getRole } from "@redux/roleSlice";
 
 import "./logoutButton.scss";

@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import CalendarComponent from "./CalendarComponent";
 import { currentMonth } from "./calendarHelper";
-import { Footer } from "@components/Footer/Footer";
+import { Footer } from "@components/Common/Footer/Footer";
 import { LogoutButton } from "@components/LogoutButton/LogoutButton";
 import { urlForLocal } from "@utils/helper";
 import { selectCurrentCandidate } from "@redux/outstaffingSlice";

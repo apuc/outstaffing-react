@@ -13,7 +13,7 @@ import {
   getSendRequest,
   setSendRequest,
 } from "@redux/reportSlice";
-import { Loader } from "@components/Loader/Loader";
+import { Loader } from "@components/Common/Loader/Loader";
 
 import "./shortReport.scss";
 

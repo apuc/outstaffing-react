@@ -7,24 +7,24 @@ import {
   setToggleTab,
   getToggleTab,
   modalToggle,
-} from "../../redux/projectsTrackerSlice";
+} from "@redux/projectsTrackerSlice";
+import { urlForLocal } from "@utils/helper";
+import { apiRequest } from "@api/request";
 
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../components/Footer/Footer";
-import { apiRequest } from "../../api/request";
-import { Navigation } from "../../components/Navigation/Navigation";
-import TrackerModal from "../../components/UI/TrackerModal/TrackerModal";
-import ProjectTiket from "../../components/ProjectTiket/ProjectTiket";
-import { urlForLocal } from "../../utils/helper";
-import { getCorrectDate } from "../../components/Calendar/calendarHelper";
-import { Loader } from "../../components/Loader/Loader";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Navigation } from "@components/Navigation/Navigation";
+import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
+import ProjectTiket from "@components/ProjectTiket/ProjectTiket";
+import { getCorrectDate } from "@components/Calendar/calendarHelper";
+import { Loader } from "@components/Common/Loader/Loader";
 
-import project from "../../assets/icons/trackerProject.svg";
-import tasks from "../../assets/icons/trackerTasks.svg";
-import archive from "../../assets/icons/archiveTracker.svg";
-import search from "../../assets/icons/serchIcon.png";
-import noProjects from "../../assets/images/noProjects.png";
+import project from "assets/icons/trackerProject.svg";
+import tasks from "assets/icons/trackerTasks.svg";
+import archive from "assets/icons/archiveTracker.svg";
+import search from "assets/icons/serchIcon.png";
+import noProjects from "assets/images/noProjects.png";
 
 import "./tracker.scss";
 

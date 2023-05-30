@@ -6,23 +6,22 @@ import {
   getPartnerRequests,
   setPartnerRequestId,
   setPartnerRequestInfo,
-} from "../../redux/outstaffingSlice";
+} from "@redux/outstaffingSlice";
+import { apiRequest } from "@api/request";
+import { urlForLocal } from "@utils/helper";
 
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../components/Footer/Footer";
-import { Navigation } from "../../components/Navigation/Navigation";
-import { Loader } from "../../components/Loader/Loader";
-import ModalLayout from "../../components/Common/ModalLayout/ModalLayout";
-import { getCorrectDate } from "../../components/Calendar/calendarHelper";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Navigation } from "@components/Navigation/Navigation";
+import { Loader } from "@components/Common/Loader/Loader";
+import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
+import { getCorrectDate } from "@components/Calendar/calendarHelper";
 
-import { apiRequest } from "../../api/request";
-import { urlForLocal } from "../../utils/helper";
-
-import arrowSwitchDate from "../../assets/icons/arrows/arrowViewReport.png";
-import backEndImg from "../../assets/images/QualificationInfo.png";
-import middle from "../../assets/images/QualificationInfoMiddle.png";
-import deleteBtn from "../../assets/images/deleteBtn.png";
+import arrowSwitchDate from "assets/icons/arrows/arrowViewReport.png";
+import backEndImg from "assets/images/QualificationInfo.png";
+import middle from "assets/images/QualificationInfoMiddle.png";
+import deleteBtn from "assets/images/deleteBtn.png";
 
 import "./partnerBid.scss";
 

@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router";
 import SVG from "react-inlinesvg";
 
-import { TaskItem } from "../../components/TaskItem/TaskItem";
-import { LogoutButton } from "../../components/LogoutButton/LogoutButton";
+import { TaskItem } from "@components/TaskItem/TaskItem";
+import { LogoutButton } from "@components/LogoutButton/LogoutButton";
 
-import arrowLeft from "../../assets/icons/arrows/left-arrow.png";
-import dateArrowIcon from "../../assets/icons/arrows/dateArrow.svg";
-import calendarIcon from "../../assets/icons/calendar.svg";
+import arrowLeft from "assets/icons/arrows/left-arrow.png";
+import dateArrowIcon from "assets/icons/arrows/dateArrow.svg";
+import calendarIcon from "assets/icons/calendar.svg";
 
 import "./singleReportPage.scss";
 

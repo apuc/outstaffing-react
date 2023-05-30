@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { apiRequest } from "@api/request";
 import { deleteProject, modalToggle } from "@redux/projectsTrackerSlice";
 
-import { ModalSelect } from "@components/UI/ModalSelect/ModalSelect";
-import TrackerModal from "@components/UI/TrackerModal/TrackerModal";
+import { ModalSelect } from "@components/Modal/ModalSelect/ModalSelect";
+import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
 
 import link from "assets/icons/link.svg";
 import archiveSet from "assets/icons/archive.svg";

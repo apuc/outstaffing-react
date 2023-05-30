@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
-import AuthHeader from "../../components/AuthHeader/AuthHeader";
-import SideBar from "../../components/SideBar/SideBar";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../components/Footer/Footer";
-import CardArticle from "../../components/UI/CardArticle/CardArticle";
+import AuthHeader from "@components/Common/AuthHeader/AuthHeader";
+import SideBar from "@components/SideBar/SideBar";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "@components/Common/Footer/Footer";
+import CardArticle from "@components/CardArticle/CardArticle";
 
-import blogArrow from "../../assets/icons/arrows/blogArrow.svg";
-import cardImg1 from "../../assets/images/mock/cardArticleItem.png";
-import cardImg2 from "../../assets/images/mock/cardArticleItem2.png";
-import cardImg3 from "../../assets/images/mock/cardArticleItem3.png";
-import cardImg4 from "../../assets/images/mock/cardArticleItem4.png";
-import cardImg5 from "../../assets/images/mock/cardArticleItem5.png";
-import cardImg6 from "../../assets/images/mock/cardArticleItem6.png";
+import blogArrow from "assets/icons/arrows/blogArrow.svg";
+import cardImg1 from "assets/images/mock/cardArticleItem.png";
+import cardImg2 from "assets/images/mock/cardArticleItem2.png";
+import cardImg3 from "assets/images/mock/cardArticleItem3.png";
+import cardImg4 from "assets/images/mock/cardArticleItem4.png";
+import cardImg5 from "assets/images/mock/cardArticleItem5.png";
+import cardImg6 from "assets/images/mock/cardArticleItem6.png";
 
 import "./blog.scss";
 

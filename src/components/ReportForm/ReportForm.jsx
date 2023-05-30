@@ -10,8 +10,8 @@ import {
 import ru from "date-fns/locale/ru";
 registerLocale("ru", ru);
 
-import { Loader } from "@components/Loader/Loader";
-import { Footer } from "@components/Footer/Footer";
+import { Loader } from "@components/Common/Loader/Loader";
+import { Footer } from "@components/Common/Footer/Footer";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 

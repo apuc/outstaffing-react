@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { getProfileInfo } from "../../redux/outstaffingSlice";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../components/Footer/Footer";
-import { urlForLocal } from "../../utils/helper";
-import { apiRequest } from "../../api/request";
-import { Navigation } from "../../components/Navigation/Navigation";
+import { apiRequest } from "@api/request";
+import { urlForLocal } from "@utils/helper";
+import { getProfileInfo } from "@redux/outstaffingSlice";
 
-import arrow from "../../assets/icons/arrows/left-arrow.png";
-import rightArrow from "../../assets/icons/arrows/arrowRight.svg";
-import gitImgItem from "../../assets/icons/gitItemImg.svg";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Navigation } from "@components/Navigation/Navigation";
+
+import arrow from "assets/icons/arrows/left-arrow.png";
+import rightArrow from "assets/icons/arrows/arrowRight.svg";
+import gitImgItem from "assets/icons/gitItemImg.svg";
 
 import "./summary.scss";
 

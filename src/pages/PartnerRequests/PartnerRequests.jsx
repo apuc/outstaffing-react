@@ -4,18 +4,18 @@ import { useDispatch } from "react-redux";
 import {
   setPartnerRequestId,
   setPartnerRequests,
-} from "../../redux/outstaffingSlice";
-import { apiRequest } from "../../api/request";
+} from "@redux/outstaffingSlice";
+import { apiRequest } from "@api/request";
 
-import { Navigation } from "../../components/Navigation/Navigation";
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { SliderWorkers } from "../../components/SliderWorkers/SliderWorkers";
-import { Loader } from "../../components/Loader/Loader";
-import { Footer } from "../../components/Footer/Footer";
-import BaseButton from "../../components/Common/BaseButton/BaseButton";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { SliderWorkers } from "@components/SliderWorkers/SliderWorkers";
+import { Loader } from "@components/Common/Loader/Loader";
+import { Footer } from "@components/Common/Footer/Footer";
+import BaseButton from "@components/Common/BaseButton/BaseButton";
 
-import cursorImg from "../../assets/icons/cursorImg.svg";
+import cursorImg from "assets/icons/cursorImg.svg";
 
 import "./partnerRequests.scss";
 

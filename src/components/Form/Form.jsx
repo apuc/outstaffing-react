@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 
 import { apiRequest } from "@api/request";
-import { Loader } from "@components/Loader/Loader";
+import { Loader } from "@components/Common/Loader/Loader";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 

@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../components/Footer/Footer";
-import { Navigation } from "../../components/Navigation/Navigation";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Navigation } from "@components/Navigation/Navigation";
 
-import mainTabImg from "../../assets/icons/mainTreaties.png";
-import actImg from "../../assets/icons/actTreaties.png";
-import checkImg from "../../assets/icons/checkTreaties.png";
-import arrowDown from "../../assets/icons/arrows/arrowDown.png";
-import logoAstral from "../../assets/images/logo/astralLogo.png";
-import arrowItem from "../../assets/icons/arrows/arrowCheck.png";
-import lock from "../../assets/icons/lock.svg";
-import lockDone from "../../assets/icons/lockDone.svg";
-import avatarMok from "../../assets/images/avatarMok.png";
+import mainTabImg from "assets/icons/mainTreaties.png";
+import actImg from "assets/icons/actTreaties.png";
+import checkImg from "assets/icons/checkTreaties.png";
+import arrowDown from "assets/icons/arrows/arrowDown.png";
+import logoAstral from "assets/images/logo/astralLogo.png";
+import arrowItem from "assets/icons/arrows/arrowCheck.png";
+import lock from "assets/icons/lock.svg";
+import lockDone from "assets/icons/lockDone.svg";
+import avatarMok from "assets/images/avatarMok.png";
 
 import "./partnerTreaties.scss";
 

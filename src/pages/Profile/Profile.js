@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-import { getProfileInfo } from "../../redux/outstaffingSlice";
-import { urlForLocal } from "../../utils/helper";
+import { getProfileInfo } from "@redux/outstaffingSlice";
+import { urlForLocal } from "@utils/helper";
 
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../components/Footer/Footer";
-import { CardControl } from "../../components/CardControl/CardControl";
-import { Navigation } from "../../components/Navigation/Navigation";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "@components/Common/Footer/Footer";
+import { CardControl } from "@components/CardControl/CardControl";
+import { Navigation } from "@components/Navigation/Navigation";
 
-import reportsIcon from "../../assets/images/reports.png";
-import summaryIcon from "../../assets/icons/summaryIcon.png";
-import timerIcon from "../../assets/icons/timerIcon.png";
-import paymentIcon from "../../assets/icons/paymentIcon.png";
-import settingIcon from "../../assets/icons/settingIcon.png";
-import avatarMok from "../../assets/images/avatarMok.png";
+import reportsIcon from "assets/images/reports.png";
+import summaryIcon from "assets/icons/summaryIcon.png";
+import timerIcon from "assets/icons/timerIcon.png";
+import paymentIcon from "assets/icons/paymentIcon.png";
+import settingIcon from "assets/icons/settingIcon.png";
+import avatarMok from "assets/images/avatarMok.png";
 
 import "./profile.scss";
 
