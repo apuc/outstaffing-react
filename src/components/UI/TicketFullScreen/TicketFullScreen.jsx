@@ -22,7 +22,6 @@ import { apiRequest } from "../../../api/request";
 import project from "../../../images/trackerProject.svg";
 import watch from "../../../images/watch.png";
 import file from "../../../images/fileModal.svg";
-import task from "../../../images/tasksMock.png";
 import send from "../../../images/send.svg";
 import arrow2 from "../../../images/arrowStart.png";
 import plus from "../../../images/plus.svg";
@@ -34,10 +33,11 @@ import link from "../../../images/link.svg";
 import archive2 from "../../../images/archive.svg";
 import del from "../../../images/delete.svg";
 import edit from "../../../images/edit.svg";
+import accept from "../../../images/accept.png"
 
 import "./ticketFullScreen.scss";
 import close from "../../../images/closeProjectPersons.svg";
-import {urlForLocal} from "../../../helper";
+import {getCorrectRequestDate, urlForLocal} from "../../../helper";
 import {getCorrectDate} from "../../Calendar/calendarHelper";
 
 export const TicketFullScreen = ({}) => {
@@ -53,8 +53,11 @@ export const TicketFullScreen = ({}) => {
   const [loader, setLoader] = useState(true);
   const [comments, setComments] = useState([]);
   const [commentsEditOpen, setCommentsEditOpen] = useState({})
+  const [subCommentsCreateOpen, setSubCommentsCreateOpen] = useState({})
   const [commentsEditText, setCommentsEditText] = useState({})
   const [personListOpen, setPersonListOpen] = useState(false)
+  const [timerStart, setTimerStart] = useState(false)
+  const [timerInfo, setTimerInfo] = useState({})
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
@@ -64,8 +67,15 @@ export const TicketFullScreen = ({}) => {
         setComments(res)
         res.forEach((item) => {
           setCommentsEditOpen((prevValue) => ({...prevValue, [item.id]: false}))
+          setSubCommentsCreateOpen((prevValue) => ({...prevValue, [item.id]: false}))
           setCommentsEditText((prevValue) => ({...prevValue, [item.id]: item.text}))
         })
+      })
+      taskInfo.timers.forEach((time) => {
+        if (!time.stopped_at) {
+          setTimerStart(true)
+          setTimerInfo(time)
+        }
       })
       dispatch(setProjectBoardFetch(taskInfo.project_id));
       setLoader(boardLoader)
@@ -135,6 +145,30 @@ export const TicketFullScreen = ({}) => {
       }
     }).then((res) => {
     })
+  }
+
+  function startTaskTimer() {
+    apiRequest("/timer/create", {
+      method: "POST",
+      data: {
+        entity_type: 2,
+        entity_id: taskInfo.id,
+        created_at: getCorrectRequestDate(new Date())
+      }
+    }).then((res) => {
+      setTimerStart(true)
+      setTimerInfo(res)
+    })
+  }
+
+  function stopTaskTimer() {
+    apiRequest("/timer/update", {
+      method: "PUT",
+      data: {
+        timer_id: timerInfo.id,
+        stopped_at: getCorrectRequestDate(new Date())
+      }
+    }).then((res) => setTimerStart(false))
   }
 
   function deletePerson(userId) {
@@ -309,20 +343,40 @@ export const TicketFullScreen = ({}) => {
                 {comments.map((comment) => {
                   return <div className='comments__list__item' key={comment.id}>
                     <div className='comments__list__item__info'>
-                      <span>{getCorrectDate(comment.created_at)}</span>
-                      <div className={commentsEditOpen[comment.id] ? 'edit edit__open' : 'edit'} >
-                        <img src={edit} alt='edit' onClick={() => {
-                          if (commentsEditOpen[comment.id]) {
-                            editComment(comment.id)
-                          }
-                          setCommentsEditOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
-                        }} />
+                      <div className='comments__list__item__fio'>
+                        <img src={urlForLocal(comment.user.avatar)} alt='avatar' />
+                        <p>{comment.user.fio}</p>
                       </div>
-                      <img src={del} alt='delete' onClick={() => deleteComment(comment.id)} />
+                      <div className='comments__list__item__date'>
+                        <span>{getCorrectDate(comment.created_at)}</span>
+                        <div className={commentsEditOpen[comment.id] ? 'edit edit__open' : 'edit'} >
+                          <img src={edit} alt='edit' onClick={() => {
+                            if (commentsEditOpen[comment.id]) {
+                              editComment(comment.id)
+                            }
+                            setCommentsEditOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
+                          }} />
+                        </div>
+                        <img src={del} alt='delete' onClick={() => deleteComment(comment.id)} />
+                      </div>
                     </div>
-                    {commentsEditOpen[comment.id] ? <input value={commentsEditText[comment.id]} onChange={(e) =>  {
+                    {commentsEditOpen[comment.id] ? <input className='comments__list__item__text' value={commentsEditText[comment.id]} onChange={(e) =>  {
                       setCommentsEditText((prevValue) => ({...prevValue, [comment.id]: e.target.value}))
-                    }} /> : <p>{commentsEditText[comment.id]}</p>}
+                    }} /> : <p className='comments__list__item__text'>{commentsEditText[comment.id]}</p>}
+                    {subCommentsCreateOpen[comment.id] ?
+                        <div className='comments__list__item__answer__new'>
+                          <input />
+                          <img src={accept} alt='accept'
+                             onClick={() => {
+                               setSubCommentsCreateOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
+                             }}
+                          />
+                        </div>
+                        :
+                      <span onClick={() => {
+                        setSubCommentsCreateOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
+                      }} className='comments__list__item__answer'>Ответить</span>
+                    }
                   </div>
                 })
 
@@ -378,9 +432,15 @@ export const TicketFullScreen = ({}) => {
                 <p>{"0:00:00"}</p>
               </div>
 
-              <button className="start">
-                Начать делать <img src={arrow2}></img>
-              </button>
+              {timerStart ?
+                  <button className="stop" onClick={() => stopTaskTimer()}>
+                    Остановить
+                  </button>
+                  :
+                  <button className="start" onClick={() => startTaskTimer()}>
+                    Начать делать <img src={arrow2}></img>
+                  </button>
+              }
             </div>
 
             <div className="workers_box-bottom">

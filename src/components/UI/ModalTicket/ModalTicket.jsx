@@ -24,7 +24,8 @@ import fullScreen from "../../../images/inFullScreen.svg";
 import close from "../../../images/closeProjectPersons.svg";
 
 import "./ModalTicket.scss";
-import {urlForLocal} from "../../../helper";
+import {urlForLocal, getCorrectRequestDate} from "../../../helper";
+import accept from "../../../images/accept.png";
 
 export const ModalTiсket = ({
   active,
@@ -41,11 +42,20 @@ export const ModalTiсket = ({
   const [comments, setComments] = useState([]);
   const [commentsEditOpen, setCommentsEditOpen] = useState({})
   const [commentsEditText, setCommentsEditText] = useState({})
+  const [subCommentsCreateOpen, setSubCommentsCreateOpen] = useState({})
   const [dropListOpen, setDropListOpen] = useState(false)
   const [dropListMembersOpen, setDropListMembersOpen] = useState(false)
   const [executor, setExecutor] = useState(task.executor)
   const [members, setMembers] = useState(task.taskUsers)
   const [users, setUsers] = useState([])
+  const [timerStart, setTimerStart] = useState(false)
+  const [timerInfo, setTimerInfo] = useState({})
+  const [currentTimerCount, setCurrentTimerCount] = useState({
+    hours: 0,
+    minute: 0,
+    seconds: 0
+  })
+  const [timerId, setTimerId] = useState(null)
 
   function deleteTask() {
     apiRequest("/task/update-task", {
@@ -111,6 +121,47 @@ export const ModalTiсket = ({
         text: commentsEditText[commentId]
       }
     }).then((res) => {
+      // createSubComment()
+    })
+  }
+
+  // function createSubComment() {
+  //   apiRequest("/comment/create", {
+  //     method: "POST",
+  //     data: {
+  //       text: '12312312',
+  //       entity_type: 2,
+  //       entity_id: task.id,
+  //       parent_id: 36
+  //     }
+  //   }).then((res) => console.log(res))
+  // }
+
+  function startTaskTimer() {
+    apiRequest("/timer/create", {
+      method: "POST",
+      data: {
+        entity_type: 2,
+        entity_id: task.id,
+        created_at: getCorrectRequestDate(new Date())
+      }
+    }).then((res) => {
+      setTimerStart(true)
+      setTimerInfo(res)
+      startTimer()
+    })
+  }
+
+  function stopTaskTimer() {
+    apiRequest("/timer/update", {
+      method: "PUT",
+      data: {
+        timer_id: timerInfo.id,
+        stopped_at: getCorrectRequestDate(new Date())
+      }
+    }).then((res) => {
+      setTimerStart(false)
+      clearInterval(timerId)
     })
   }
 
@@ -170,9 +221,61 @@ export const ModalTiсket = ({
       res.forEach((item) => {
         setCommentsEditOpen((prevValue) => ({...prevValue, [item.id]: false}))
         setCommentsEditText((prevValue) => ({...prevValue, [item.id]: item.text}))
+        setSubCommentsCreateOpen((prevValue) => ({...prevValue, [item.id]: false}))
+      })
+    })
+    apiRequest(`/timer/get-by-entity?entity_type=2&entity_id=${task.id}`).then((res) => {
+      let timerSeconds = 0
+      res.forEach((time) => {
+        timerSeconds += time.deltaSeconds
+        setCurrentTimerCount({
+          hours: Math.floor(timerSeconds / 60 / 60),
+          minute: Math.floor(timerSeconds / 60 % 60),
+          seconds: timerSeconds % 60}
+        )
+        updateTimerHours = Math.floor(timerSeconds / 60 / 60)
+        updateTimerMinute = Math.floor(timerSeconds / 60 % 60)
+        updateTimerSec = timerSeconds % 60
+        if (!time.stopped_at) {
+          setTimerStart(true)
+          startTimer()
+          setTimerInfo(time)
+        }
       })
     })
   }, [])
+
+  function startTimer () {
+    setTimerId(setInterval(() => {
+      run()
+    }, 1000))
+  }
+
+  let updateTimerSec = currentTimerCount.seconds, updateTimerMinute = currentTimerCount.minute, updateTimerHours = currentTimerCount.hours
+
+  function run () {
+    updateTimerSec++
+    if (updateTimerSec > 60) {
+      updateTimerMinute++
+      updateTimerSec = 0
+    }
+    if (updateTimerMinute === 60) {
+      updateTimerMinute = 0
+      updateTimerHours++
+    }
+
+    return setCurrentTimerCount({
+      hours: updateTimerHours,
+      minute: updateTimerMinute,
+      seconds: updateTimerSec
+    })
+  }
+
+  function correctTimerTime (time) {
+    if (time < 10) return `0${time}`
+    if (time > 10) return time
+  }
+
 
   useEffect(() => {
     let ids = members.map((user) => user.user_id)
@@ -246,20 +349,40 @@ export const ModalTiсket = ({
               {comments.map((comment) => {
                 return <div className='comments__list__item' key={comment.id}>
                   <div className='comments__list__item__info'>
-                    <span>{getCorrectDate(comment.created_at)}</span>
-                    <div className={commentsEditOpen[comment.id] ? 'edit edit__open' : 'edit'} >
-                      <img src={edit} alt='edit' onClick={() => {
-                        if (commentsEditOpen[comment.id]) {
-                          editComment(comment.id)
-                        }
-                        setCommentsEditOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
-                      }} />
+                    <div className='comments__list__item__fio'>
+                      <img src={urlForLocal(comment.user.avatar)} alt='avatar' />
+                      <p>{comment.user.fio}</p>
                     </div>
-                    <img src={del} alt='delete' onClick={() => deleteComment(comment.id)} />
+                    <div className='comments__list__item__date'>
+                      <span>{getCorrectDate(comment.created_at)}</span>
+                      <div className={commentsEditOpen[comment.id] ? 'edit edit__open' : 'edit'} >
+                        <img src={edit} alt='edit' onClick={() => {
+                          if (commentsEditOpen[comment.id]) {
+                            editComment(comment.id)
+                          }
+                          setCommentsEditOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
+                        }} />
+                      </div>
+                      <img src={del} alt='delete' onClick={() => deleteComment(comment.id)} />
+                    </div>
                   </div>
-                  {commentsEditOpen[comment.id] ? <input value={commentsEditText[comment.id]} onChange={(e) =>  {
+                  {commentsEditOpen[comment.id] ? <input className='comments__list__item__text' value={commentsEditText[comment.id]} onChange={(e) =>  {
                     setCommentsEditText((prevValue) => ({...prevValue, [comment.id]: e.target.value}))
-                  }} /> : <p>{commentsEditText[comment.id]}</p>}
+                  }} /> : <p className='comments__list__item__text'>{commentsEditText[comment.id]}</p>}
+                  {subCommentsCreateOpen[comment.id] ?
+                      <div className='comments__list__item__answer__new'>
+                        <input />
+                        <img src={accept} alt='accept'
+                             onClick={() => {
+                               setSubCommentsCreateOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
+                             }}
+                        />
+                      </div>
+                      :
+                      <span onClick={() => {
+                        setSubCommentsCreateOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
+                      }} className='comments__list__item__answer'>Ответить</span>
+                  }
                 </div>
               })
 
@@ -335,12 +458,20 @@ export const ModalTiсket = ({
             <div className="time">
               <img src={watch}></img>
               <span>Длительность : </span>
-              <p>{"0:00:00"}</p>
+              <p>
+                {correctTimerTime(currentTimerCount.hours)}:{correctTimerTime(currentTimerCount.minute)}:{correctTimerTime(currentTimerCount.seconds)}
+              </p>
             </div>
 
-            <button className="start">
-              Начать делать <img src={arrow}></img>
-            </button>
+            {timerStart ?
+              <button className="stop" onClick={() => stopTaskTimer()}>
+                Остановить
+              </button>
+                :
+              <button className="start" onClick={() => startTaskTimer()}>
+                Начать делать <img src={arrow}></img>
+              </button>
+            }
           </div>
 
           <div className="workers_box-bottom">

@@ -79,22 +79,60 @@
       .comments__list {
         display: flex;
         flex-direction: column;
-        row-gap: 10px;
+        max-height: 420px;
+        overflow: auto;
         &__item {
           padding: 10px 20px;
           display: flex;
           flex-direction: column;
           max-width: 438px;
-          background: #f1f1f1;
           border-radius: 44px;
           font-size: 14px;
           width: 100%;
-          row-gap: 10px;
+
+          &__fio {
+            display: flex;
+            align-items: center;
+
+            p {
+              font-size: 12px;
+              color: #000000;
+              line-height: 32px;
+              max-width: 150px;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              margin-left: 10px;
+            }
+
+            img {
+              width: 24px;
+              height: 24px;
+            }
+          }
+
+          &__date {
+            display: flex;
+            align-items: center;
+            column-gap: 5px;
+
+            img {
+              cursor: pointer;
+              width: 15px;
+            }
+
+            span {
+              font-size: 12px;
+            }
+          }
+
+          &__text {
+            margin-left: 34px;
+          }
 
           &__info {
             display: flex;
-            justify-content: center;
-            column-gap: 15px;
+            justify-content: space-between;
 
             .edit {
               width: 25px;
@@ -107,10 +145,35 @@
             .edit__open {
               background: green;
             }
+          }
 
-            img {
-              cursor: pointer;
-              width: 15px;
+          &__answer {
+            margin-left: 34px;
+            text-decoration-line: underline;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 32px;
+            cursor: pointer;
+
+            &__new {
+              margin-left: 34px;
+              font-size: 14px;
+              border-radius: 5px;
+              border: 1px solid gainsboro;
+              padding: 3px 5px;
+              display: flex;
+              align-items: center;
+
+              img {
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+              }
+
+              input {
+                width: 90%;
+                border: none;
+              }
             }
           }
         }
@@ -315,12 +378,21 @@
       color: white;
       background: #1458dd;
       border-radius: 44px;
-      opacity: 0.5;
-      pointer-events: none;
 
       img {
         margin-left: 10px;
       }
+    }
+
+    .stop {
+      font-size: 12px;
+      margin-top: 25px;
+      width: 151px;
+      height: 40px;
+      border: none;
+      color: white;
+      background: red;
+      border-radius: 44px;
     }
 
     .time {
