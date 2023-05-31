@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 import {
   answersSelector,
-  fetchGetAnswers,
-  fetchUserAnswerOne,
-  fetchUserAnswersMany,
+  fetchGetAnswers, // fetchUserAnswerOne,
+  // fetchUserAnswersMany,
   questionsSelector,
-  selectedTest,
-  setAnswers,
+  selectedTest, // setAnswers,
   setCompleteTest,
 } from "@redux/quizSlice";
 
@@ -18,12 +15,11 @@ import { apiRequest } from "@api/request";
 import questionIcon from "assets/images/question.png";
 
 import { GetOptionTask } from "./GetOptionTask";
-import { HeaderQuiz } from "./HeaderQuiz";
-import { Progressbar } from "./ProgressbarQuiz";
+// import { HeaderQuiz } from "./HeaderQuiz";
+// import { Progressbar } from "./ProgressbarQuiz";
 import "./quiz.scss";
 
 export const TaskQuiz = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const answers = useSelector(answersSelector);
@@ -42,7 +38,6 @@ export const TaskQuiz = () => {
     // .then(json => console.log(json))
     apiRequest(`/question/get-questions?uuid=${dataTest.uuid}`).then(
       (response) => {
-        console.log(response);
         dispatch(fetchGetAnswers(response[0].id));
         setStripValue(((+index + 1) * 100) / response.length);
       }

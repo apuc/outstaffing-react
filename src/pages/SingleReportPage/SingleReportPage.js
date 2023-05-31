@@ -66,9 +66,9 @@ const SingleReportPage = () => {
           <div className="single-report-page__marker"></div>
           <h3>Какие задачи были выполнены?</h3>
         </div>
-        {tasks.map((task) => {
+        {tasks.map((task, index) => {
           return (
-            <div className="single-report-page__tasks-item">
+            <div className="single-report-page__tasks-item" key={index}>
               <TaskItem {...task} />
             </div>
           );

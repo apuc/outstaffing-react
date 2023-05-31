@@ -152,7 +152,7 @@ export const ProjectTracker = () => {
         project_id: projectBoard.id,
         status: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       dispatch(setProjectBoardFetch(projectBoard.id));
     });
   }
@@ -164,7 +164,7 @@ export const ProjectTracker = () => {
         project_id: projectBoard.id,
         user_id: userId,
       },
-    }).then((res) => {
+    }).then(() => {
       dispatch(deletePersonOnProject(userId));
     });
   }
@@ -338,7 +338,7 @@ export const ProjectTracker = () => {
                       <div
                         key={column.id}
                         onDragOver={(e) => dragOverHandler(e)}
-                        onDragEnter={(e) => dragEnterHandler(column.id)}
+                        onDragEnter={() => dragEnterHandler(column.id)}
                         onDrop={(e) => dragDropHandler(e, column.id)}
                         className={`tasks__board ${
                           column.tasks.length >= 3 ? "tasks__board__more" : ""
@@ -398,7 +398,7 @@ export const ProjectTracker = () => {
                             </div>
                           </div>
                         )}
-                        {column.tasks.map((task, index) => {
+                        {column.tasks.map((task) => {
                           // if (index > 2) {
                           //   if (!column.open) {
                           //     return;
@@ -454,7 +454,7 @@ export const ProjectTracker = () => {
                     );
                   })}
                 {Boolean(projectBoard?.columns) &&
-                  !Boolean(projectBoard.columns.length) && (
+                  !projectBoard.columns.length && (
                     <div className="tasks__board__noItems">
                       В проекте нет задач.
                     </div>

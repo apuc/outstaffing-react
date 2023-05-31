@@ -16,7 +16,7 @@ import cardImg1 from "assets/images/mock/cardArticleItem.png";
 
 import "./blog.scss";
 
-export const Blog = ({}) => {
+export const Blog = () => {
   const [article] = useState([
     {
       image: cardImg1,

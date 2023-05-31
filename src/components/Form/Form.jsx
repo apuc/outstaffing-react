@@ -29,8 +29,10 @@ const Form = () => {
   const handleModal = (status) => {
     SweetAlert.fire({
       text:
+        // eslint-disable-next-line no-constant-condition
         status !== 200 || 201 ? "Какие-то неполадки =(" : "Форма отправлена",
       preConfirm: () =>
+        // eslint-disable-next-line no-constant-condition
         status !== 200 || 201
           ? () => {
               setStatus(null);

@@ -13,7 +13,7 @@ import "./FrequentlyAskedQuestion.scss";
 export const FrequentlyAskedQuestion = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const [question, setQuestion] = useState({
+  const [question] = useState({
     id: params.id,
     title: "Это фриланс-платформа?",
     answer:

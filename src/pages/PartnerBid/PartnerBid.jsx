@@ -59,7 +59,7 @@ export const PartnerBid = () => {
         request_id: requestId,
         status: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       navigate("/profile/requests");
     });
   };

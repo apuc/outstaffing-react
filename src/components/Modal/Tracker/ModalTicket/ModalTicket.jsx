@@ -60,7 +60,7 @@ export const ModalTiсket = ({
         task_id: task.id,
         status: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       setActive(false);
       dispatch(setProjectBoardFetch(projectId));
     });
@@ -74,7 +74,7 @@ export const ModalTiсket = ({
         title: inputsValue.title,
         description: inputsValue.description,
       },
-    }).then((res) => {
+    }).then(() => {
       dispatch(setProjectBoardFetch(projectId));
     });
   }
@@ -106,7 +106,7 @@ export const ModalTiсket = ({
         comment_id: commentId,
         status: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       setComments((prevValue) =>
         prevValue.filter((item) => item.id !== commentId)
       );
@@ -120,7 +120,7 @@ export const ModalTiсket = ({
         comment_id: commentId,
         text: commentsEditText[commentId],
       },
-    }).then((res) => {});
+    }).then(() => {});
   }
 
   function taskExecutor(person) {
@@ -143,7 +143,7 @@ export const ModalTiсket = ({
         task_id: task.id,
         executor_id: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       setExecutor(null);
     });
   }
@@ -168,7 +168,7 @@ export const ModalTiсket = ({
         task_id: task.id,
         user_id: person.user_id,
       },
-    }).then((res) => {
+    }).then(() => {
       setMembers(members.filter((item) => item.user_id !== person.user_id));
     });
   }

@@ -14,7 +14,7 @@ import mockWorker from "assets/images/mock/mokPerson.png";
 
 import "./freeDevelopers.scss";
 
-export const FreeDevelopers = ({}) => {
+export const FreeDevelopers = () => {
   return (
     <section className="free-dev">
       <AuthHeader />

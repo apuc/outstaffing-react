@@ -55,6 +55,8 @@
     "cross-env": "^7.0.3",
     "css-loader": "6.7.3",
     "dotenv-webpack": "^7.0.3",
+    "eslint": "^8.41.0",
+    "eslint-plugin-react": "^7.32.2",
     "html-webpack-plugin": "5.5.0",
     "mini-css-extract-plugin": "^2.7.2",
     "node-sass": "8.0.0",
@@ -78,7 +80,8 @@
     "build": "cross-env SERVE=true webpack -c config/webpack/prod.js",
     "start": "webpack serve -c config/webpack/dev.js",
     "analyze": "webpack --analyze -c config/webpack/analyze.js",
-    "format": "prettier --write \"./**/*.{js,jsx}\""
+    "format": "prettier --write \"./**/*.{js,jsx}\"",
+    "lint": "npx eslint 'src/**/*.{js,jsx,ts,tsx}'"
   },
   "eslintConfig": {
     "extends": [

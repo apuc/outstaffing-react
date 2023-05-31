@@ -23,6 +23,7 @@ import arrow from "assets/icons/arrows/arrowCalendar.png";
 import calendarIcon from "assets/icons/calendar.svg";
 import rectangle from "assets/images/rectangle__calendar.png";
 
+// eslint-disable-next-line react/display-name
 export const ProfileCalendarComponent = React.memo(
   ({ value, setValueHandler, reports, totalHours }) => {
     const dispatch = useDispatch();

@@ -57,7 +57,7 @@ export const projectsTrackerSlice = createSlice({
               task_id: action.payload.startWrapperIndex.task.id,
               column_id: column.id,
             },
-          }).then((res) => {});
+          }).then(() => {});
         }
         if (column.id === action.payload.startWrapperIndex.index) {
           state.projectBoard.columns[index].tasks = column.tasks.filter(

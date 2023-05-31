@@ -19,7 +19,7 @@ import { Loader } from "@components/Common/Loader/Loader";
 
 import "./shortReport.scss";
 
-export const ShortReport = ({}) => {
+export const ShortReport = () => {
   const reportDate = useSelector(getReportDate);
 
   const sendReport = useSelector(getSendRequest);

@@ -57,7 +57,7 @@ export const TrackerModal = ({
         project_id: projectBoard.id,
         title: valueColumn,
       },
-    }).then((res) => {
+    }).then(() => {
       dispatch(setProjectBoardFetch(projectBoard.id));
     });
     setValueColumn("");
@@ -80,7 +80,7 @@ export const TrackerModal = ({
         column_id: selectedTab,
         priority: priorityTask,
       },
-    }).then((res) => {
+    }).then(() => {
       dispatch(setProjectBoardFetch(projectBoard.id));
     });
 
@@ -96,7 +96,7 @@ export const TrackerModal = ({
         project_id: projectId,
         name: projectName,
       },
-    }).then((res) => {
+    }).then(() => {
       setActive(false);
       dispatch(editProjectName({ id: projectId, name: projectName }));
     });
@@ -109,7 +109,7 @@ export const TrackerModal = ({
         column_id: columnId,
         title: columnName,
       },
-    }).then((res) => {
+    }).then(() => {
       setActive(false);
       dispatch(editColumnName({ id: columnId, title: columnName }));
     });

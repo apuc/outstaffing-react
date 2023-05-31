@@ -103,7 +103,7 @@ const ReportForm = () => {
         created_at: getCreatedDate(startDate),
         status: 1,
       },
-    }).then((res) => {
+    }).then(() => {
       setReportSuccess("Отчет отправлен");
       setTimeout(() => {
         setReportSuccess("");

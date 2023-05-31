@@ -117,7 +117,7 @@ export const PartnerAddRequest = () => {
             return skill.id;
           }),
         },
-      }).then((res) => {
+      }).then(() => {
         navigate("/profile/requests");
       });
     } else {
@@ -135,7 +135,7 @@ export const PartnerAddRequest = () => {
             return skill.id;
           }),
         },
-      }).then((res) => {
+      }).then(() => {
         navigate("/profile/requests");
       });
     }
@@ -206,7 +206,7 @@ export const PartnerAddRequest = () => {
                 {openSpecializationList &&
                   Boolean(specializationList.length) && (
                     <div className="form__block__dropDown">
-                      {specializationList.map((specialization, index) => {
+                      {specializationList.map((specialization) => {
                         return (
                           <p
                             key={specialization.id}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { completedTestSelector, selectedTest } from "@redux/quizSlice";
+import { completedTestSelector } from "@redux/quizSlice";
 
 import { Footer } from "@components/Common/Footer/Footer";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
@@ -14,11 +14,6 @@ import { QuizPassingInformation } from "@components/features/quiz/Quiz-passing-i
 import { TaskQuiz } from "@components/features/quiz/Task";
 
 export const PassingTests = () => {
-  //const selectedTest = useSelector(selectedTest)
-
-  if ("") {
-  }
-
   const time = new Date();
   time.setSeconds(time.getSeconds() + 600); //600 - кол-во секунд для прохождения теста
 

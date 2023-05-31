@@ -5,8 +5,7 @@ import { selectUserInfo, setUserInfo } from "@redux/quizSlice";
 
 import { urlForLocal } from "@utils/helper";
 
-import { apiRequest } from "@api/request";
-
+// import { apiRequest } from "@api/request";
 import "./quiz.scss";
 
 export const HeaderQuiz = ({ header }) => {

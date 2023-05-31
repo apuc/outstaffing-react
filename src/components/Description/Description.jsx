@@ -13,7 +13,7 @@ import rectangle from "assets/images/rectangle_secondPage.png";
 import ErrorBoundary from "../../hoc/ErrorBoundary";
 import "./description.scss";
 
-const Description = ({ onLoadMore, isLoadingMore }) => {
+const Description = ({ onLoadMore }) => {
   const candidatesListArr = useSelector(selectProfiles);
 
   return (

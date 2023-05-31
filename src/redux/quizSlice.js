@@ -117,7 +117,7 @@ export const quizSlice = createSlice({
     setSelectedTest: (state, action) => {
       state.selectedTest = action.payload;
     },
-    setCompleteTest: (state, action) => {
+    setCompleteTest: (state) => {
       state.completedTest = true;
     },
   },

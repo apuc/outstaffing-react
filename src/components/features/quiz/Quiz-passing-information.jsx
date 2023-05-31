@@ -10,14 +10,13 @@ import accempt from "assets/images/quiz/accempt.png";
 import timer from "assets/images/quiz/timer.png";
 
 export const QuizPassingInformation = ({ expiryTimestamp, setStartTest }) => {
-  const { seconds, minutes, isRunning, start, pause, resume, restart } =
-    useTimer({
-      expiryTimestamp,
-      autoStart: false,
-      onExpire: () => {
-        console.warn("onExpire called");
-      },
-    });
+  const { seconds, minutes, isRunning, start, restart } = useTimer({
+    expiryTimestamp,
+    autoStart: false,
+    onExpire: () => {
+      console.warn("onExpire called");
+    },
+  });
   const completedTest = useSelector(completedTestSelector);
 
   const startTesting = () => {

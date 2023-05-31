@@ -47,7 +47,7 @@ export const ProjectTiket = ({ project, index }) => {
         project_id: project.id,
         status: 10,
       },
-    }).then((res) => {
+    }).then(() => {
       dispatch(deleteProject(project));
     });
   }

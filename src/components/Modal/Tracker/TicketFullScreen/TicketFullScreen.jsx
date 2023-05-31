@@ -42,7 +42,7 @@ import watch from "assets/icons/watch.svg";
 
 import "./ticketFullScreen.scss";
 
-export const TicketFullScreen = ({}) => {
+export const TicketFullScreen = () => {
   const [modalAddWorker, setModalAddWorker] = useState(false);
   const ticketId = useParams();
   const dispatch = useDispatch();
@@ -93,7 +93,7 @@ export const TicketFullScreen = ({}) => {
         task_id: ticketId.id,
         status: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       navigate(`/tracker/project/${taskInfo.project_id}`);
     });
   }
@@ -106,7 +106,7 @@ export const TicketFullScreen = ({}) => {
         title: inputsValue.title,
         description: inputsValue.description,
       },
-    }).then((res) => {});
+    }).then(() => {});
   }
 
   function createComment() {
@@ -137,7 +137,7 @@ export const TicketFullScreen = ({}) => {
         comment_id: commentId,
         status: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       setComments((prevValue) =>
         prevValue.filter((item) => item.id !== commentId)
       );
@@ -151,7 +151,7 @@ export const TicketFullScreen = ({}) => {
         comment_id: commentId,
         text: commentsEditText[commentId],
       },
-    }).then((res) => {});
+    }).then(() => {});
   }
 
   function deletePerson(userId) {
@@ -161,7 +161,7 @@ export const TicketFullScreen = ({}) => {
         project_id: projectBoard.id,
         user_id: userId,
       },
-    }).then((res) => {
+    }).then(() => {
       dispatch(deletePersonOnProject(userId));
     });
   }
