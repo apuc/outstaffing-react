@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { apiRequest } from "@api/request";
-import { urlForLocal } from "@utils/helper";
 import {
-  setColumnName,
+  addPersonToProject,
+  editColumnName,
+  editProjectName,
+  getColumnId,
+  getColumnName,
   getProjectBoard,
   getValueModalType,
+  setColumnName,
   setProject,
   setProjectBoardFetch,
-  editProjectName,
-  editColumnName,
-  getColumnName,
-  getColumnId,
-  addPersonToProject,
 } from "@redux/projectsTrackerSlice";
+
+import { urlForLocal } from "@utils/helper";
+
+import { apiRequest } from "@api/request";
 
 import arrowDown from "assets/icons/arrows/selectArrow.png";
 

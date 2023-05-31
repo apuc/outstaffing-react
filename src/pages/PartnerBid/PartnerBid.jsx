@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+
 import {
   getPartnerRequestId,
   getPartnerRequests,
   setPartnerRequestId,
   setPartnerRequestInfo,
 } from "@redux/outstaffingSlice";
-import { apiRequest } from "@api/request";
+
 import { urlForLocal } from "@utils/helper";
 
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { apiRequest } from "@api/request";
+
+import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import { Footer } from "@components/Common/Footer/Footer";
-import { Navigation } from "@components/Navigation/Navigation";
 import { Loader } from "@components/Common/Loader/Loader";
 import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
-import { getCorrectDate } from "@components/Calendar/calendarHelper";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
 import arrowSwitchDate from "assets/icons/arrows/arrowViewReport.png";
 import backEndImg from "assets/images/QualificationInfo.png";

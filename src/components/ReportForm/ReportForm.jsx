@@ -1,31 +1,33 @@
-import React, { useState, useEffect } from "react";
+import ru from "date-fns/locale/ru";
+import React, { useEffect, useState } from "react";
+import DatePicker, { registerLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import DatePicker, { registerLocale } from "react-datepicker";
+
+import { getReportDate } from "@redux/reportSlice";
+
+import { apiRequest } from "@api/request";
+
+import { Footer } from "@components/Common/Footer/Footer";
+import { Loader } from "@components/Common/Loader/Loader";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+
+import arrow from "assets/icons/arrows/left-arrow.png";
+import calendarIcon from "assets/icons/calendar.svg";
+import ellipse from "assets/icons/ellipse.png";
+import remove from "assets/icons/remove.svg";
+
 import {
   getCorrectDate,
   getCreatedDate,
   hourOfNum,
 } from "../Calendar/calendarHelper";
-import ru from "date-fns/locale/ru";
-registerLocale("ru", ru);
-
-import { Loader } from "@components/Common/Loader/Loader";
-import { Footer } from "@components/Common/Footer/Footer";
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-
-import { apiRequest } from "@api/request";
-import { Navigation } from "@components/Navigation/Navigation";
-import { getReportDate } from "@redux/reportSlice";
-
-import calendarIcon from "assets/icons/calendar.svg";
-import ellipse from "assets/icons/ellipse.png";
-import remove from "assets/icons/remove.svg";
-import arrow from "assets/icons/arrows/left-arrow.png";
-
 import "./reportForm.scss";
-import "react-datepicker/dist/react-datepicker.css";
+
+registerLocale("ru", ru);
 
 const ReportForm = () => {
   if (localStorage.getItem("role_status") === "18") {

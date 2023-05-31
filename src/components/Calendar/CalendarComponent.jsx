@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { calendarHelper, currentMonthAndDay } from "./calendarHelper";
+import moment from "moment";
+import "moment/locale/ru";
+import React, { useEffect, useState } from "react";
 
+import calendarIcon from "assets/icons/calendar.svg";
 import ellipse from "assets/icons/ellipse.png";
 import rectangle from "assets/images/rectangle__calendar.png";
-import calendarIcon from "assets/icons/calendar.svg";
-
-import moment from "moment";
-
-import "moment/locale/ru";
 
 import "./calendarComponent.scss";
+import { calendarHelper, currentMonthAndDay } from "./calendarHelper";
 
 const CalendarComponent = ({ onSelect }) => {
   const [value, setValue] = useState(moment());

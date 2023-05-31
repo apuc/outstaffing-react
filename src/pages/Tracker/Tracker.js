@@ -2,28 +2,30 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  setAllProjects,
   getProjects,
-  setToggleTab,
   getToggleTab,
   modalToggle,
+  setAllProjects,
+  setToggleTab,
 } from "@redux/projectsTrackerSlice";
+
 import { urlForLocal } from "@utils/helper";
+
 import { apiRequest } from "@api/request";
 
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "@components/Common/Footer/Footer";
-import { Navigation } from "@components/Navigation/Navigation";
-import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
-import ProjectTiket from "@components/ProjectTiket/ProjectTiket";
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
+import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
+import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import ProjectTiket from "@components/ProjectTiket/ProjectTiket";
 
-import project from "assets/icons/trackerProject.svg";
-import tasks from "assets/icons/trackerTasks.svg";
 import archive from "assets/icons/archiveTracker.svg";
 import search from "assets/icons/serchIcon.png";
+import project from "assets/icons/trackerProject.svg";
+import tasks from "assets/icons/trackerTasks.svg";
 import noProjects from "assets/images/noProjects.png";
 
 import "./tracker.scss";

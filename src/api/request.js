@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { getToken, urlHasParams } from "@utils/helper";
 
 const instance = axios.create({

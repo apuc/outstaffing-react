@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 
-import { apiRequest } from "@api/request";
-import { HeaderQuiz } from "./HeaderQuiz";
-
-import { Progressbar } from "./ProgressbarQuiz";
-import { GetOptionTask } from "./GetOptionTask";
 import {
-  fetchUserAnswersMany,
-  fetchUserAnswerOne,
-  fetchGetAnswers,
   answersSelector,
-  selectedTest,
+  fetchGetAnswers,
+  fetchUserAnswerOne,
+  fetchUserAnswersMany,
   questionsSelector,
+  selectedTest,
   setAnswers,
   setCompleteTest,
 } from "@redux/quizSlice";
 
+import { apiRequest } from "@api/request";
+
 import questionIcon from "assets/images/question.png";
 
+import { GetOptionTask } from "./GetOptionTask";
+import { HeaderQuiz } from "./HeaderQuiz";
+import { Progressbar } from "./ProgressbarQuiz";
 import "./quiz.scss";
 
 export const TaskQuiz = () => {

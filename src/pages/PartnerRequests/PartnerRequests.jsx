@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
+
 import {
   setPartnerRequestId,
   setPartnerRequests,
 } from "@redux/outstaffingSlice";
+
 import { apiRequest } from "@api/request";
 
-import { Navigation } from "@components/Navigation/Navigation";
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { SliderWorkers } from "@components/SliderWorkers/SliderWorkers";
-import { Loader } from "@components/Common/Loader/Loader";
-import { Footer } from "@components/Common/Footer/Footer";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Loader } from "@components/Common/Loader/Loader";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import { SliderWorkers } from "@components/SliderWorkers/SliderWorkers";
 
 import cursorImg from "assets/icons/cursorImg.svg";
 

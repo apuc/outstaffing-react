@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import SideBar from "@components/SideBar/SideBar";
 import AuthHeader from "@components/Common/AuthHeader/AuthHeader";
 import { Footer } from "@components/Common/Footer/Footer";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import SideBar from "@components/SideBar/SideBar";
 
 import arrowBtn from "assets/icons/arrows/arrowRight.svg";
 

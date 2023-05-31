@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
 
-import { Loader } from "@components/Common/Loader/Loader";
-import { apiRequest } from "@api/request";
 import { auth, setProfileInfo } from "@redux/outstaffingSlice";
 import { getRole } from "@redux/roleSlice";
+
+import { apiRequest } from "@api/request";
+
+import { Loader } from "@components/Common/Loader/Loader";
 
 import "./profileHeader.scss";
 

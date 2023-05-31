@@ -49,6 +49,7 @@
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "babel-loader": "^9.1.2",
     "copy-webpack-plugin": "^10.2.0",
     "cross-env": "^7.0.3",
@@ -76,7 +77,8 @@
   "scripts": {
     "build": "cross-env SERVE=true webpack -c config/webpack/prod.js",
     "start": "webpack serve -c config/webpack/dev.js",
-    "analyze": "webpack --analyze -c config/webpack/analyze.js"
+    "analyze": "webpack --analyze -c config/webpack/analyze.js",
+    "format": "prettier --write \"./**/*.{js,jsx}\""
   },
   "eslintConfig": {
     "extends": [

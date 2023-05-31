@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 import { completedTestSelector, selectedTest } from "@redux/quizSlice";
 
+import { Footer } from "@components/Common/Footer/Footer";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import { HeadBottom } from "@components/features/Candidate-lk/HeadBottom";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "@components/Common/Footer/Footer";
-import { QuizPassingInformation } from "@components/features/quiz/Quiz-passing-information";
-import { CardIntroduction } from "@components/features/quiz/Card-introduction";
-import { TaskQuiz } from "@components/features/quiz/Task";
 import { BlockCompletedTest } from "@components/features/quiz/BlockCompletedTest";
+import { CardIntroduction } from "@components/features/quiz/Card-introduction";
+import { QuizPassingInformation } from "@components/features/quiz/Quiz-passing-information";
+import { TaskQuiz } from "@components/features/quiz/Task";
 
 export const PassingTests = () => {
   //const selectedTest = useSelector(selectedTest)

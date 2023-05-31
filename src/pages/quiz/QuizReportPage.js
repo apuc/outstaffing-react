@@ -1,15 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { selectedTest } from "@redux/quizSlice";
 
+import { Footer } from "@components/Common/Footer/Footer";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import { HeadBottom } from "@components/features/Candidate-lk/HeadBottom";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { QuizReport } from "@components/features/quiz/QuizReport";
-import { Footer } from "@components/Common/Footer/Footer";
 import { AlertResult } from "@components/features/quiz/AlertResult";
+import { QuizReport } from "@components/features/quiz/QuizReport";
 
 export const QuizReportPage = () => {
   const test = useSelector(selectedTest);

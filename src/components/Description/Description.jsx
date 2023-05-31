@@ -2,15 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import ErrorBoundary from "../../hoc/ErrorBoundary";
+import { selectProfiles } from "@redux/outstaffingSlice";
 
 import { LEVELS, SKILLS } from "@utils/constants";
 import { urlForLocal } from "@utils/helper";
-import { selectProfiles } from "@redux/outstaffingSlice";
 
-import rectangle from "assets/images/rectangle_secondPage.png";
 import cursorImg from "assets/icons/cursorImg.svg";
+import rectangle from "assets/images/rectangle_secondPage.png";
 
+import ErrorBoundary from "../../hoc/ErrorBoundary";
 import "./description.scss";
 
 const Description = ({ onLoadMore, isLoadingMore }) => {

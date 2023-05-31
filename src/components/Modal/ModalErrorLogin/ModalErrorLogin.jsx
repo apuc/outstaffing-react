@@ -1,7 +1,7 @@
 import React from "react";
 
-import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
+import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 
 import "./modalErrorLogin.scss";
 

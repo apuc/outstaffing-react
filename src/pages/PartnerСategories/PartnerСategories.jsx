@@ -1,28 +1,28 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "@components/Common/Footer/Footer";
 
 import { setPartnerEmployees } from "@redux/outstaffingSlice";
 
-import BackEndImg from "assets/images/partnerProfile/personalBackEnd.svg";
-import FrontendImg from "assets/images/partnerProfile/PersonalFrontend.svg";
-import ArchitectureImg from "assets/images/partnerProfile/PersonalArchitecture.svg";
-import DesignImg from "assets/images/partnerProfile/PersonalDesign.svg";
-import TestImg from "assets/images/partnerProfile/PersonalTesters.svg";
-import AdminImg from "assets/images/partnerProfile/PersonalAdmin.svg";
-import ManageImg from "assets/images/partnerProfile/PersonalMng.svg";
-import CopyImg from "assets/images/partnerProfile/PersonalCopy.svg";
-import SmmImg from "assets/images/partnerProfile/PersonalSMM.svg";
+import { Footer } from "@components/Common/Footer/Footer";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+
 import rightArrow from "assets/icons/arrows/arrowRight.svg";
 import avatarImg from "assets/images/avatarMok.png";
+import AdminImg from "assets/images/partnerProfile/PersonalAdmin.svg";
+import ArchitectureImg from "assets/images/partnerProfile/PersonalArchitecture.svg";
+import CopyImg from "assets/images/partnerProfile/PersonalCopy.svg";
+import DesignImg from "assets/images/partnerProfile/PersonalDesign.svg";
+import FrontendImg from "assets/images/partnerProfile/PersonalFrontend.svg";
+import ManageImg from "assets/images/partnerProfile/PersonalMng.svg";
+import SmmImg from "assets/images/partnerProfile/PersonalSMM.svg";
+import TestImg from "assets/images/partnerProfile/PersonalTesters.svg";
+import BackEndImg from "assets/images/partnerProfile/personalBackEnd.svg";
 
-import "./partnerСategories.scss";
 import { Navigation } from "../../components/Navigation/Navigation";
+import "./partnerСategories.scss";
 
 export const PartnerCategories = () => {
   const dispatch = useDispatch();

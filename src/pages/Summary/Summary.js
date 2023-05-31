@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-import { apiRequest } from "@api/request";
-import { urlForLocal } from "@utils/helper";
 import { getProfileInfo } from "@redux/outstaffingSlice";
 
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { urlForLocal } from "@utils/helper";
+
+import { apiRequest } from "@api/request";
+
 import { Footer } from "@components/Common/Footer/Footer";
 import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
-import arrow from "assets/icons/arrows/left-arrow.png";
 import rightArrow from "assets/icons/arrows/arrowRight.svg";
+import arrow from "assets/icons/arrows/left-arrow.png";
 import gitImgItem from "assets/icons/gitItemImg.svg";
 
 import "./summary.scss";

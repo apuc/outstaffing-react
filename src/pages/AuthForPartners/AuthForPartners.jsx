@@ -3,21 +3,22 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { selectAuth } from "@redux/outstaffingSlice";
+
 import { scrollToForm } from "@utils/helper";
 
-import { Footer } from "@components/Common/Footer/Footer";
 import { AuthBox } from "@components/AuthBox/AuthBox";
-import SideBar from "@components/SideBar/SideBar";
 import AuthHeader from "@components/Common/AuthHeader/AuthHeader";
+import { Footer } from "@components/Common/Footer/Footer";
+import SideBar from "@components/SideBar/SideBar";
 import SliderWorkers from "@components/SliderWorkers/SliderWorkers";
 
-import arrow from "assets/icons/arrows/arrow__login_page.png";
-import authImg from "assets/images/auth_img.png";
-import cross from "assets/images/cross.png";
-import text from "assets/images/Body_Text.png";
 import arrowBtn from "assets/icons/arrows/arrowRight.svg";
+import arrow from "assets/icons/arrows/arrow__login_page.png";
+import text from "assets/images/Body_Text.png";
 import vector from "assets/images/Vector_Smart_Object.png";
 import vectorBlack from "assets/images/Vector_Smart_Object_black.png";
+import authImg from "assets/images/auth_img.png";
+import cross from "assets/images/cross.png";
 
 import "./authForPartners.scss";
 

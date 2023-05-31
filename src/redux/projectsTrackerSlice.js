@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import { apiRequest } from "../api/request";
 
 const initialState = {
@@ -8,7 +9,7 @@ const initialState = {
   modalType: "",
   boardLoader: false,
   columnName: "",
-  columnId: 0
+  columnId: 0,
 };
 
 export const setProjectBoardFetch = createAsyncThunk("userInfo", (id) =>
@@ -35,11 +36,13 @@ export const projectsTrackerSlice = createSlice({
         }
       });
     },
-    deletePersonOnProject: (state,action) => {
-      state.projectBoard.projectUsers =  state.projectBoard.projectUsers.filter((person) => person.user_id !== action.payload)
+    deletePersonOnProject: (state, action) => {
+      state.projectBoard.projectUsers = state.projectBoard.projectUsers.filter(
+        (person) => person.user_id !== action.payload
+      );
     },
     addPersonToProject: (state, action) => {
-      state.projectBoard.projectUsers.push(action.payload)
+      state.projectBoard.projectUsers.push(action.payload);
     },
     activeLoader: (state) => {
       state.boardLoader = true;
@@ -64,10 +67,10 @@ export const projectsTrackerSlice = createSlice({
       });
     },
     setColumnName: (state, action) => {
-      state.columnName = action.payload
+      state.columnName = action.payload;
     },
     setColumnId: (state, action) => {
-      state.columnId = action.payload
+      state.columnId = action.payload;
     },
     editProjectName: (state, action) => {
       state.projects.forEach((project) => {
@@ -79,9 +82,9 @@ export const projectsTrackerSlice = createSlice({
     editColumnName: (state, action) => {
       state.projectBoard.columns.forEach((column) => {
         if (column.id === action.payload.id) {
-          column.title = action.payload.title
+          column.title = action.payload.title;
         }
-      })
+      });
     },
     modalToggle: (state, action) => {
       state.modalType = action.payload;
@@ -108,7 +111,7 @@ export const {
   editColumnName,
   setColumnId,
   deletePersonOnProject,
-  addPersonToProject
+  addPersonToProject,
 } = projectsTrackerSlice.actions;
 
 export const getProjects = (state) => state.tracker.projects;

@@ -1,40 +1,42 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
-import { urlForLocal } from "@utils/helper";
-import { useDispatch, useSelector } from "react-redux";
-import { apiRequest } from "@api/request";
 import {
-  getProjectBoard,
+  activeLoader,
+  deletePersonOnProject,
   getBoarderLoader,
+  getProjectBoard,
   modalToggle,
   moveProjectTask,
+  setColumnId,
+  setColumnName,
   setProjectBoardFetch,
   setToggleTab,
-  activeLoader,
-  setColumnName,
-  setColumnId,
-  deletePersonOnProject,
 } from "@redux/projectsTrackerSlice";
 
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { urlForLocal } from "@utils/helper";
+
+import { apiRequest } from "@api/request";
+
 import { Footer } from "@components/Common/Footer/Footer";
-import { Navigation } from "@components/Navigation/Navigation";
 import { Loader } from "@components/Common/Loader/Loader";
 import ModalTicket from "@components/Modal/Tracker/ModalTicket/ModalTicket";
 import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
-import project from "assets/icons/trackerProject.svg";
-import tasks from "assets/icons/trackerTasks.svg";
 import archive from "assets/icons/archiveTracker.svg";
-import selectArrow from "assets/icons/arrows/select.svg";
-import commentsBoard from "assets/icons/commentsBoard.svg";
-import filesBoard from "assets/icons/filesBoard.svg";
 import arrow from "assets/icons/arrows/arrowCalendar.png";
+import selectArrow from "assets/icons/arrows/select.svg";
+import close from "assets/icons/closeProjectPersons.svg";
+import commentsBoard from "assets/icons/commentsBoard.svg";
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
-import close from "assets/icons/closeProjectPersons.svg";
+import filesBoard from "assets/icons/filesBoard.svg";
+import project from "assets/icons/trackerProject.svg";
+import tasks from "assets/icons/trackerTasks.svg";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();

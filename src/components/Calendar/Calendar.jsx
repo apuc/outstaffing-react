@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
-import CalendarComponent from "./CalendarComponent";
-import { currentMonth } from "./calendarHelper";
+import { selectCurrentCandidate } from "@redux/outstaffingSlice";
+
+import { urlForLocal } from "@utils/helper";
+
 import { Footer } from "@components/Common/Footer/Footer";
 import { LogoutButton } from "@components/LogoutButton/LogoutButton";
-import { urlForLocal } from "@utils/helper";
-import { selectCurrentCandidate } from "@redux/outstaffingSlice";
 
 import rectangle from "assets/images/rectangle_secondPage.png";
 
+import CalendarComponent from "./CalendarComponent";
 import "./calendar.scss";
+import { currentMonth } from "./calendarHelper";
 
 const Calendar = () => {
   if (localStorage.getItem("role_status") !== "18") {

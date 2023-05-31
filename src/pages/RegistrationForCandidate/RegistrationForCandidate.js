@@ -1,12 +1,12 @@
 import React from "react";
 
 import AuthHeader from "@components/Common/AuthHeader/AuthHeader";
+import { Footer } from "@components/Common/Footer/Footer";
 import SideBar from "@components/SideBar/SideBar";
 import StepsForCandidate from "@components/StepsForCandidate/StepsForCandidate";
-import { Footer } from "@components/Common/Footer/Footer";
 
-import BackEndImg from "assets/images/partnerProfile/personalBackEnd.svg";
 import arrowBtn from "assets/icons/arrows/arrowRight.svg";
+import BackEndImg from "assets/images/partnerProfile/personalBackEnd.svg";
 
 import "./registationForCandidate.scss";
 

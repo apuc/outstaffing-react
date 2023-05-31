@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+
+import { getProfileInfo, setProfileInfo } from "@redux/outstaffingSlice";
 
 import { urlForLocal } from "@utils/helper";
+
 import { apiRequest } from "@api/request";
-import { getProfileInfo, setProfileInfo } from "@redux/outstaffingSlice";
 
 import avatarMok from "assets/images/avatarMok.png";
 

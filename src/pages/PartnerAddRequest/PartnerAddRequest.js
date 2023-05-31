@@ -2,19 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
-import { apiRequest } from "@api/request";
 import { getPartnerRequestInfo } from "@redux/outstaffingSlice";
 
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { apiRequest } from "@api/request";
+
 import { Footer } from "@components/Common/Footer/Footer";
 import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
 import arrowDown from "assets/icons/arrows/selectArrow.png";
+import deleteIcon from "assets/icons/close.png";
 import processImg from "assets/images/partnerProfile/partnerAddRequestFirstImg.png";
 import reportImg from "assets/images/partnerProfile/partnerAddRequestSecondImg.png";
 import documentsImg from "assets/images/partnerProfile/partnerAddRequestThirdInfo.png";
-import deleteIcon from "assets/icons/close.png";
 
 import "./partnerAddRequest.scss";
 
