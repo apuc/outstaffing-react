@@ -5,6 +5,7 @@ import { ProfileBreadcrumbs } from "../../ProfileBreadcrumbs/ProfileBreadcrumbs"
 import { Footer } from "../../Footer/Footer";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import TrackerModal from "../TrackerModal/TrackerModal";
+import TrackerTaskComment from "../../../components/TrackerTaskComment/TrackerTaskComment";
 import { Navigation } from "../../Navigation/Navigation";
 import {Loader} from "../../Loader/Loader";
 
@@ -33,12 +34,10 @@ import link from "../../../images/link.svg";
 import archive2 from "../../../images/archive.svg";
 import del from "../../../images/delete.svg";
 import edit from "../../../images/edit.svg";
-import accept from "../../../images/accept.png"
 
 import "./ticketFullScreen.scss";
 import close from "../../../images/closeProjectPersons.svg";
 import {getCorrectRequestDate, urlForLocal} from "../../../helper";
-import {getCorrectDate} from "../../Calendar/calendarHelper";
 
 export const TicketFullScreen = ({}) => {
   const [modalAddWorker, setModalAddWorker] = useState(false);
@@ -52,9 +51,6 @@ export const TicketFullScreen = ({}) => {
   const [inputsValue, setInputsValue] = useState({});
   const [loader, setLoader] = useState(true);
   const [comments, setComments] = useState([]);
-  const [commentsEditOpen, setCommentsEditOpen] = useState({})
-  const [subCommentsCreateOpen, setSubCommentsCreateOpen] = useState({})
-  const [commentsEditText, setCommentsEditText] = useState({})
   const [personListOpen, setPersonListOpen] = useState(false)
   const [timerStart, setTimerStart] = useState(false)
   const [timerInfo, setTimerInfo] = useState({})
@@ -64,12 +60,17 @@ export const TicketFullScreen = ({}) => {
       setTaskInfo(taskInfo);
       setInputsValue({title: taskInfo.title, description: taskInfo.description, comment: ''})
       apiRequest(`/comment/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`).then((res) => {
-        setComments(res)
-        res.forEach((item) => {
-          setCommentsEditOpen((prevValue) => ({...prevValue, [item.id]: false}))
-          setSubCommentsCreateOpen((prevValue) => ({...prevValue, [item.id]: false}))
-          setCommentsEditText((prevValue) => ({...prevValue, [item.id]: item.text}))
-        })
+        const comments = res.reduce((acc, cur) => {
+          if (!cur.parent_id) {
+            acc.push({...cur, subComments: []})
+          } else {
+            acc.forEach((item) => {
+              if (item.id === cur.parent_id) item.subComments.push(cur)
+            })
+          }
+          return acc
+        }, [])
+        setComments(comments)
       })
       taskInfo.timers.forEach((time) => {
         if (!time.stopped_at) {
@@ -102,7 +103,7 @@ export const TicketFullScreen = ({}) => {
         title: inputsValue.title,
         description: inputsValue.description
       },
-    }).then((res) => {
+    }).then(() => {
     });
   }
 
@@ -117,33 +118,9 @@ export const TicketFullScreen = ({}) => {
     }).then((res) => {
       let newComment = res
       newComment.created_at = new Date()
+      newComment.subComments = []
       setInputsValue((prevValue) => ({...prevValue, comment: ''}))
       setComments((prevValue) => ([...prevValue, newComment]))
-      setCommentsEditOpen((prevValue) => ({...prevValue, [res.id]: false}))
-      setCommentsEditText((prevValue) => ({...prevValue, [res.id]: res.text}))
-    })
-  }
-
-  function deleteComment(commentId) {
-    apiRequest("/comment/update", {
-      method: "PUT",
-      data: {
-        comment_id: commentId,
-        status: 0
-      }
-    }).then((res) => {
-      setComments((prevValue) => prevValue.filter((item) => item.id !== commentId))
-    })
-  }
-
-  function editComment(commentId) {
-    apiRequest("/comment/update", {
-      method: "PUT",
-      data: {
-        comment_id: commentId,
-        text: commentsEditText[commentId]
-      }
-    }).then((res) => {
     })
   }
 
@@ -168,7 +145,7 @@ export const TicketFullScreen = ({}) => {
         timer_id: timerInfo.id,
         stopped_at: getCorrectRequestDate(new Date())
       }
-    }).then((res) => setTimerStart(false))
+    }).then(() => setTimerStart(false))
   }
 
   function deletePerson(userId) {
@@ -181,6 +158,42 @@ export const TicketFullScreen = ({}) => {
     }).then((res) => {
       dispatch(deletePersonOnProject(userId))
     });
+  }
+
+  function commentDelete(comment) {
+    setComments((prevValue) => prevValue.filter((item) => item.id !== comment.id))
+    if (comment.subComments.length) {
+      comment.subComments.forEach((subComment) => {
+        apiRequest("/comment/update", {
+          method: "PUT",
+          data: {
+            comment_id: subComment.id,
+            status: 0
+          }
+        }).then(() => {
+        })
+      })
+    }
+  }
+
+  function addSubComment(commentId, subComment) {
+    const addSubComment = comments
+    addSubComment.forEach((comment) => {
+      if (comment.id === commentId) {
+        comment.subComments.push(subComment)
+      }
+    })
+    setComments(addSubComment)
+  }
+
+  function subCommentDelete(subComment) {
+    const deleteSubComment = comments
+    deleteSubComment.forEach((comment, index) => {
+      if (comment.id === subComment.parent_id) {
+        deleteSubComment[index].subComments = comment.subComments.filter((item) => item.id !== subComment.id)
+      }
+    })
+    setComments([...deleteSubComment])
   }
 
   const toggleTabs = (index) => {
@@ -341,43 +354,14 @@ export const TicketFullScreen = ({}) => {
               </div>
               <div className='comments__list'>
                 {comments.map((comment) => {
-                  return <div className='comments__list__item' key={comment.id}>
-                    <div className='comments__list__item__info'>
-                      <div className='comments__list__item__fio'>
-                        <img src={urlForLocal(comment.user.avatar)} alt='avatar' />
-                        <p>{comment.user.fio}</p>
-                      </div>
-                      <div className='comments__list__item__date'>
-                        <span>{getCorrectDate(comment.created_at)}</span>
-                        <div className={commentsEditOpen[comment.id] ? 'edit edit__open' : 'edit'} >
-                          <img src={edit} alt='edit' onClick={() => {
-                            if (commentsEditOpen[comment.id]) {
-                              editComment(comment.id)
-                            }
-                            setCommentsEditOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
-                          }} />
-                        </div>
-                        <img src={del} alt='delete' onClick={() => deleteComment(comment.id)} />
-                      </div>
-                    </div>
-                    {commentsEditOpen[comment.id] ? <input className='comments__list__item__text' value={commentsEditText[comment.id]} onChange={(e) =>  {
-                      setCommentsEditText((prevValue) => ({...prevValue, [comment.id]: e.target.value}))
-                    }} /> : <p className='comments__list__item__text'>{commentsEditText[comment.id]}</p>}
-                    {subCommentsCreateOpen[comment.id] ?
-                        <div className='comments__list__item__answer__new'>
-                          <input />
-                          <img src={accept} alt='accept'
-                             onClick={() => {
-                               setSubCommentsCreateOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
-                             }}
-                          />
-                        </div>
-                        :
-                      <span onClick={() => {
-                        setSubCommentsCreateOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
-                      }} className='comments__list__item__answer'>Ответить</span>
-                    }
-                  </div>
+                  return <TrackerTaskComment
+                      key={comment.id}
+                      taskId={taskInfo.id}
+                      comment={comment}
+                      commentDelete={commentDelete}
+                      addSubComment={addSubComment}
+                      subCommentDelete={subCommentDelete}
+                  />
                 })
 
                 }

@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import TrackerModal from "../TrackerModal/TrackerModal";
+import TrackerTaskComment from "../../../components/TrackerTaskComment/TrackerTaskComment";
 import { apiRequest } from "../../../api/request";
 import { useDispatch } from "react-redux";
 import {
   modalToggle,
   setProjectBoardFetch,
 } from "../../../redux/projectsTrackerSlice";
-
-import {getCorrectDate} from '../../../components/Calendar/calendarHelper'
 
 import category from "../../../images/category.png";
 import watch from "../../../images/watch.png";
@@ -25,7 +24,6 @@ import close from "../../../images/closeProjectPersons.svg";
 
 import "./ModalTicket.scss";
 import {urlForLocal, getCorrectRequestDate} from "../../../helper";
-import accept from "../../../images/accept.png";
 
 export const ModalTiсket = ({
   active,
@@ -40,9 +38,6 @@ export const ModalTiсket = ({
   const [editOpen, setEditOpen] = useState(false);
   const [inputsValue, setInputsValue] = useState({title: task.title, description: task.description, comment: ''});
   const [comments, setComments] = useState([]);
-  const [commentsEditOpen, setCommentsEditOpen] = useState({})
-  const [commentsEditText, setCommentsEditText] = useState({})
-  const [subCommentsCreateOpen, setSubCommentsCreateOpen] = useState({})
   const [dropListOpen, setDropListOpen] = useState(false)
   const [dropListMembersOpen, setDropListMembersOpen] = useState(false)
   const [executor, setExecutor] = useState(task.executor)
@@ -94,48 +89,47 @@ export const ModalTiсket = ({
     }).then((res) => {
       let newComment = res
       newComment.created_at = new Date()
+      newComment.subComments = []
       setInputsValue((prevValue) => ({...prevValue, comment: ''}))
       setComments((prevValue) => ([...prevValue, newComment]))
-      setCommentsEditOpen((prevValue) => ({...prevValue, [res.id]: false}))
-      setCommentsEditText((prevValue) => ({...prevValue, [res.id]: res.text}))
     })
   }
-  function deleteComment(commentId) {
-    apiRequest("/comment/update", {
-      method: "PUT",
-      data: {
-        comment_id: commentId,
-        status: 0
+
+  function commentDelete(comment) {
+    setComments((prevValue) => prevValue.filter((item) => item.id !== comment.id))
+    if (comment.subComments.length) {
+      comment.subComments.forEach((subComment) => {
+        apiRequest("/comment/update", {
+          method: "PUT",
+          data: {
+            comment_id: subComment.id,
+            status: 0
+          }
+        }).then(() => {
+        })
+      })
+    }
+  }
+
+  function addSubComment(commentId, subComment) {
+    const addSubComment = comments
+    addSubComment.forEach((comment) => {
+      if (comment.id === commentId) {
+        comment.subComments.push(subComment)
       }
-    }).then((res) => {
-      setComments((prevValue) => prevValue.filter((item) => item.id !== commentId))
     })
+    setComments(addSubComment)
   }
 
-  function editComment(commentId) {
-
-    apiRequest("/comment/update", {
-      method: "PUT",
-      data: {
-        comment_id: commentId,
-        text: commentsEditText[commentId]
+  function subCommentDelete(subComment) {
+    const deleteSubComment = comments
+    deleteSubComment.forEach((comment, index) => {
+      if (comment.id === subComment.parent_id) {
+        deleteSubComment[index].subComments = comment.subComments.filter((item) => item.id !== subComment.id)
       }
-    }).then((res) => {
-      // createSubComment()
     })
+    setComments([...deleteSubComment])
   }
-
-  // function createSubComment() {
-  //   apiRequest("/comment/create", {
-  //     method: "POST",
-  //     data: {
-  //       text: '12312312',
-  //       entity_type: 2,
-  //       entity_id: task.id,
-  //       parent_id: 36
-  //     }
-  //   }).then((res) => console.log(res))
-  // }
 
   function startTaskTimer() {
     apiRequest("/timer/create", {
@@ -159,7 +153,7 @@ export const ModalTiсket = ({
         timer_id: timerInfo.id,
         stopped_at: getCorrectRequestDate(new Date())
       }
-    }).then((res) => {
+    }).then(() => {
       setTimerStart(false)
       clearInterval(timerId)
     })
@@ -185,7 +179,7 @@ export const ModalTiсket = ({
         task_id: task.id,
         executor_id: 0
       },
-    }).then((res) => {
+    }).then(() => {
       setExecutor(null)
     });
   }
@@ -210,19 +204,24 @@ export const ModalTiсket = ({
         task_id: task.id,
         user_id: person.user_id
       },
-    }).then((res) => {
+    }).then(() => {
       setMembers(members.filter((item) => item.user_id !== person.user_id))
     });
   }
 
   useEffect(() => {
     apiRequest(`/comment/get-by-entity?entity_type=2&entity_id=${task.id}`).then((res) => {
-      setComments(res)
-      res.forEach((item) => {
-        setCommentsEditOpen((prevValue) => ({...prevValue, [item.id]: false}))
-        setCommentsEditText((prevValue) => ({...prevValue, [item.id]: item.text}))
-        setSubCommentsCreateOpen((prevValue) => ({...prevValue, [item.id]: false}))
-      })
+      const comments = res.reduce((acc, cur) => {
+        if (!cur.parent_id) {
+          acc.push({...cur, subComments: []})
+        } else {
+          acc.forEach((item) => {
+            if (item.id === cur.parent_id) item.subComments.push(cur)
+          })
+        }
+        return acc
+      }, [])
+      setComments(comments)
     })
     apiRequest(`/timer/get-by-entity?entity_type=2&entity_id=${task.id}`).then((res) => {
       let timerSeconds = 0
@@ -347,45 +346,15 @@ export const ModalTiсket = ({
             </div>
             <div className='comments__list'>
               {comments.map((comment) => {
-                return <div className='comments__list__item' key={comment.id}>
-                  <div className='comments__list__item__info'>
-                    <div className='comments__list__item__fio'>
-                      <img src={urlForLocal(comment.user.avatar)} alt='avatar' />
-                      <p>{comment.user.fio}</p>
-                    </div>
-                    <div className='comments__list__item__date'>
-                      <span>{getCorrectDate(comment.created_at)}</span>
-                      <div className={commentsEditOpen[comment.id] ? 'edit edit__open' : 'edit'} >
-                        <img src={edit} alt='edit' onClick={() => {
-                          if (commentsEditOpen[comment.id]) {
-                            editComment(comment.id)
-                          }
-                          setCommentsEditOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
-                        }} />
-                      </div>
-                      <img src={del} alt='delete' onClick={() => deleteComment(comment.id)} />
-                    </div>
-                  </div>
-                  {commentsEditOpen[comment.id] ? <input className='comments__list__item__text' value={commentsEditText[comment.id]} onChange={(e) =>  {
-                    setCommentsEditText((prevValue) => ({...prevValue, [comment.id]: e.target.value}))
-                  }} /> : <p className='comments__list__item__text'>{commentsEditText[comment.id]}</p>}
-                  {subCommentsCreateOpen[comment.id] ?
-                      <div className='comments__list__item__answer__new'>
-                        <input />
-                        <img src={accept} alt='accept'
-                             onClick={() => {
-                               setSubCommentsCreateOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
-                             }}
-                        />
-                      </div>
-                      :
-                      <span onClick={() => {
-                        setSubCommentsCreateOpen((prevValue) => ({...prevValue, [comment.id]: !prevValue[comment.id]}))
-                      }} className='comments__list__item__answer'>Ответить</span>
-                  }
-                </div>
-              })
-
+                return <TrackerTaskComment
+                    key={comment.id}
+                    taskId={task.id}
+                    comment={comment}
+                    commentDelete={commentDelete}
+                    addSubComment={addSubComment}
+                    subCommentDelete={subCommentDelete}
+                />
+                })
               }
             </div>
           </div>
