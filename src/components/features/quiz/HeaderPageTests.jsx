@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { selectedTest, selectUserInfo } from "@redux/quizSlice";
+import { selectUserInfo, selectedTest } from "@redux/quizSlice";
+
 import { urlForLocal } from "@utils/helper";
 
 import "./quiz.scss";

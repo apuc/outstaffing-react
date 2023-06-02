@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 import { scrollToForm } from "@utils/helper";
 
 import AuthHeader from "@components/Common/AuthHeader/AuthHeader";
-import SideBar from "@components/SideBar/SideBar";
+import BaseButton from "@components/Common/BaseButton/BaseButton";
 import { Footer } from "@components/Common/Footer/Footer";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import BaseButton from "@components/Common/BaseButton/BaseButton";
+import SideBar from "@components/SideBar/SideBar";
 
-import mockWorker from "assets/images/mock/mokPerson.png";
 import arrow from "assets/icons/arrows/arrow_left.png";
+import mockWorker from "assets/images/mock/mokPerson.png";
 
 import "./freeDevelopers.scss";
 
-export const FreeDevelopers = ({}) => {
+export const FreeDevelopers = () => {
   return (
     <section className="free-dev">
       <AuthHeader />

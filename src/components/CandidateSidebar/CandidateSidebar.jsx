@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
+import { LEVELS, SKILLS } from "@utils/constants";
+import { urlForLocal } from "@utils/helper";
+
 import { Achievement } from "@components/Achievement/Achievement";
 import ModalAspirant from "@components/Modal/ModalAspirant/ModalAspirant";
-
-import { urlForLocal } from "@utils/helper";
-import { LEVELS, SKILLS } from "@utils/constants";
 
 import "./candidateSidebar.scss";
 

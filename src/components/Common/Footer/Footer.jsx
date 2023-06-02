@@ -1,9 +1,9 @@
 import React from "react";
 
-import logo from "assets/images/logo/LogoITguild.svg";
-import vk from "assets/icons/vkLogo.svg";
-import tg from "assets/icons/tgFooter.svg";
 import email from "assets/icons/emailLogo.svg";
+import tg from "assets/icons/tgFooter.svg";
+import vk from "assets/icons/vkLogo.svg";
+import logo from "assets/images/logo/LogoITguild.svg";
 
 import "./footer.scss";
 

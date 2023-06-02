@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { getProfileInfo } from "@redux/outstaffingSlice";
+
 import { urlForLocal } from "@utils/helper";
 
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "@components/Common/Footer/Footer";
 import { CardControl } from "@components/CardControl/CardControl";
+import { Footer } from "@components/Common/Footer/Footer";
 import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
-import reportsIcon from "assets/images/reports.png";
-import summaryIcon from "assets/icons/summaryIcon.png";
-import timerIcon from "assets/icons/timerIcon.png";
 import paymentIcon from "assets/icons/paymentIcon.png";
 import settingIcon from "assets/icons/settingIcon.png";
+import summaryIcon from "assets/icons/summaryIcon.png";
+import timerIcon from "assets/icons/timerIcon.png";
 import avatarMok from "assets/images/avatarMok.png";
+import reportsIcon from "assets/images/reports.png";
 
 import "./profile.scss";
 

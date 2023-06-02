@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import outstaffingReducer from "../redux/outstaffingSlice";
+
 import loaderReducer from "../redux/loaderSlice";
-import roleReducer from "../redux/roleSlice";
-import reportReducer from "../redux/reportSlice";
-import quizSlice from "../redux/quizSlice";
+import outstaffingReducer from "../redux/outstaffingSlice";
 import projectsTrackerSlice from "../redux/projectsTrackerSlice";
+import quizSlice from "../redux/quizSlice";
+import reportReducer from "../redux/reportSlice";
+import roleReducer from "../redux/roleSlice";
 
 export const store = configureStore({
   reducer: {

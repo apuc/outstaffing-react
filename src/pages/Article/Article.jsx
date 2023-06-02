@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import CardArticle from "@components/CardArticle/CardArticle";
 import AuthHeader from "@components/Common/AuthHeader/AuthHeader";
-import SideBar from "@components/SideBar/SideBar";
 import { Footer } from "@components/Common/Footer/Footer";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import CardArticle from "@components/CardArticle/CardArticle";
+import SideBar from "@components/SideBar/SideBar";
 
-import mockImgArticle from "assets/images/mock/mockImgArticle.png";
 import rightArrow from "assets/icons/arrows/left-arrow.png";
-import yandexZen from "assets/icons/yandexZen.svg";
 import cardCalendar from "assets/icons/cardCalendar.svg";
-import cardImg1 from "assets/images/mock/cardArticleItem.png";
+import yandexZen from "assets/icons/yandexZen.svg";
 import cardImg2 from "assets/images/mock/cardArticleItem2.png";
 import cardImg3 from "assets/images/mock/cardArticleItem3.png";
+import cardImg1 from "assets/images/mock/cardArticleItem.png";
+import mockImgArticle from "assets/images/mock/mockImgArticle.png";
 
 import "./article.scss";
 
-export const Article = ({}) => {
+export const Article = () => {
   const [article] = useState([
     {
       image: cardImg1,

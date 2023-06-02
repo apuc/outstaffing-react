@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link, useNavigate, Navigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-
-import SkillSection from "@components/SkillSection/SkillSection";
-import Sidebar from "@components/CandidateSidebar/CandidateSidebar";
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "@components/Common/Footer/Footer";
-import { Navigation } from "@components/Navigation/Navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
 import {
   currentCandidate,
   selectCurrentCandidate,
 } from "@redux/outstaffingSlice";
 
-import { apiRequest } from "@api/request";
-import { createMarkup } from "@utils/helper";
 import { LEVELS, SKILLS } from "@utils/constants";
+import { createMarkup } from "@utils/helper";
 
+import { apiRequest } from "@api/request";
+
+import Sidebar from "@components/CandidateSidebar/CandidateSidebar";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import SkillSection from "@components/SkillSection/SkillSection";
+
+import rightArrow from "assets/icons/arrows/arrowRight.svg";
 import gitImgItem from "assets/icons/gitItemImg.svg";
-import rectangle from "assets/images/rectangle_secondPage.png";
-import front from "assets/images/partnerProfile/front-end.webp";
 import back from "assets/images/partnerProfile/back-end.webp";
 import design from "assets/images/partnerProfile/design.webp";
-import rightArrow from "assets/icons/arrows/arrowRight.svg";
+import front from "assets/images/partnerProfile/front-end.webp";
+import rectangle from "assets/images/rectangle_secondPage.png";
 
 import "./candidate.scss";
 

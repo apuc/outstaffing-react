@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { selectUserInfo, setUserInfo } from "@redux/quizSlice";
-import { apiRequest } from "@api/request";
+
 import { urlForLocal } from "@utils/helper";
 
+// import { apiRequest } from "@api/request";
 import "./quiz.scss";
 
 export const HeaderQuiz = ({ header }) => {

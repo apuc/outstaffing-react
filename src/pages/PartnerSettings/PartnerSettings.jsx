@@ -1,13 +1,13 @@
 import React from "react";
 
+import BaseButton from "@components/Common/BaseButton/BaseButton";
 import { Footer } from "@components/Common/Footer/Footer";
+import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { Navigation } from "@components/Navigation/Navigation";
-import BaseButton from "@components/Common/BaseButton/BaseButton";
 
-import kontur from "assets/images/logo/konturLogo.png";
 import astral from "assets/images/logo/astralLogo.png";
+import kontur from "assets/images/logo/konturLogo.png";
 
 import "./partnerSettings.scss";
 

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import Slider from "react-slick";
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 
 import mockWorker from "assets/images/mock/mokPerson.png";
 
 import "./sliderWorkers.scss";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 export const SliderWorkers = ({ title, titleInfo, subTitle }) => {
   const [workers] = useState([

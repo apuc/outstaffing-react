@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { auth, selectAuth, setUserInfo } from "@redux/outstaffingSlice";
 import { loading, selectIsLoading } from "@redux/loaderSlice";
+import { auth, selectAuth, setUserInfo } from "@redux/outstaffingSlice";
 import { setRole } from "@redux/roleSlice";
 
-import ModalRegistration from "@components/Modal/ModalRegistration/ModalRegistration";
-import ModalErrorLogin from "@components/Modal/ModalErrorLogin/ModalErrorLogin";
-import { Loader } from "@components/Common/Loader/Loader";
 import { apiRequest } from "@api/request";
+
+import { Loader } from "@components/Common/Loader/Loader";
+import ModalErrorLogin from "@components/Modal/ModalErrorLogin/ModalErrorLogin";
+import ModalRegistration from "@components/Modal/ModalRegistration/ModalRegistration";
 
 import ellipse from "assets/icons/ellipse.png";
 

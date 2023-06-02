@@ -7,7 +7,7 @@ import userIcon from "assets/icons/userIcon.svg";
 
 import "./authHeader.scss";
 
-export const AuthHeader = ({}) => {
+export const AuthHeader = () => {
   return (
     <div className="auth-header">
       <div className="auth-header__logo">

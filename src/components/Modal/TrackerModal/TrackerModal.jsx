@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { apiRequest } from "@api/request";
-import { urlForLocal } from "@utils/helper";
 import {
-  setColumnName,
+  addPersonToProject,
+  editColumnName,
+  editProjectName,
+  getColumnId,
+  getColumnName,
   getProjectBoard,
   getValueModalType,
+  setColumnName,
   setProject,
   setProjectBoardFetch,
-  editProjectName,
-  editColumnName,
-  getColumnName,
-  getColumnId,
-  addPersonToProject,
 } from "@redux/projectsTrackerSlice";
+
+import { urlForLocal } from "@utils/helper";
+
+import { apiRequest } from "@api/request";
 
 import arrowDown from "assets/icons/arrows/selectArrow.png";
 
@@ -55,7 +57,7 @@ export const TrackerModal = ({
         project_id: projectBoard.id,
         title: valueColumn,
       },
-    }).then((res) => {
+    }).then(() => {
       dispatch(setProjectBoardFetch(projectBoard.id));
     });
     setValueColumn("");
@@ -78,7 +80,7 @@ export const TrackerModal = ({
         column_id: selectedTab,
         priority: priorityTask,
       },
-    }).then((res) => {
+    }).then(() => {
       dispatch(setProjectBoardFetch(projectBoard.id));
     });
 
@@ -94,7 +96,7 @@ export const TrackerModal = ({
         project_id: projectId,
         name: projectName,
       },
-    }).then((res) => {
+    }).then(() => {
       setActive(false);
       dispatch(editProjectName({ id: projectId, name: projectName }));
     });
@@ -107,7 +109,7 @@ export const TrackerModal = ({
         column_id: columnId,
         title: columnName,
       },
-    }).then((res) => {
+    }).then(() => {
       setActive(false);
       dispatch(editColumnName({ id: columnId, title: columnName }));
     });

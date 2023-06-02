@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { apiRequest } from "@api/request";
 import { deleteProject, modalToggle } from "@redux/projectsTrackerSlice";
+
+import { apiRequest } from "@api/request";
 
 import { ModalSelect } from "@components/Modal/ModalSelect/ModalSelect";
 import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
 
-import link from "assets/icons/link.svg";
 import archiveSet from "assets/icons/archive.svg";
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
+import link from "assets/icons/link.svg";
 
 import "./projectTiket.scss";
 
@@ -46,7 +47,7 @@ export const ProjectTiket = ({ project, index }) => {
         project_id: project.id,
         status: 10,
       },
-    }).then((res) => {
+    }).then(() => {
       dispatch(deleteProject(project));
     });
   }

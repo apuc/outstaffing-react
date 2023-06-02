@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-import { apiRequest } from "@api/request";
 import { profiles, tags } from "@redux/outstaffingSlice";
 
-import Outstaffing from "@components/Outstaffing/Outstaffing";
-import Description from "@components/Description/Description";
+import { apiRequest } from "@api/request";
+
 import { Footer } from "@components/Common/Footer/Footer";
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import Description from "@components/Description/Description";
 import { Navigation } from "@components/Navigation/Navigation";
+import Outstaffing from "@components/Outstaffing/Outstaffing";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
 const Home = () => {
   if (localStorage.getItem("role_status") !== "18") {

@@ -1,11 +1,11 @@
 import React from "react";
 
-import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
+import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 
-import telegramLogo from "assets/icons/tgLogo.svg";
-import doc from "assets/icons/doc.svg";
 import anyMoment from "assets/icons/anyMoment.svg";
+import doc from "assets/icons/doc.svg";
+import telegramLogo from "assets/icons/tgLogo.svg";
 
 import "./modalRegistration.scss";
 

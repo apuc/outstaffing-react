@@ -1,23 +1,25 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
 import SVG from "react-inlinesvg";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
-import { LEVELS, SKILLS } from "@utils/constants";
 import {
   currentCandidate,
   selectCurrentCandidate,
 } from "@redux/outstaffingSlice";
-import { apiRequest } from "@api/request";
+
+import { LEVELS, SKILLS } from "@utils/constants";
 import { urlForLocal } from "@utils/helper";
 
-import Form from "@components/Form/Form";
+import { apiRequest } from "@api/request";
+
 import { Footer } from "@components/Common/Footer/Footer";
+import Form from "@components/Form/Form";
 import { LogoutButton } from "@components/LogoutButton/LogoutButton";
 
 import arrow from "assets/icons/arrows/left-arrow.png";
-import rectangle from "assets/images/rectangle_secondPage.png";
 import telegramIcon from "assets/icons/telegram-icon.svg";
+import rectangle from "assets/images/rectangle_secondPage.png";
 
 import "./formPage.scss";
 

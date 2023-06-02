@@ -1,15 +1,16 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
+
 import { getPartnerEmployees } from "@redux/outstaffingSlice";
 
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
-import imgInfo from "assets/images/emplInfo.png";
 import rightArrow from "assets/icons/arrows/arrowRight.svg";
+import imgInfo from "assets/images/emplInfo.png";
 
 import "./partnerEmployees.scss";
 

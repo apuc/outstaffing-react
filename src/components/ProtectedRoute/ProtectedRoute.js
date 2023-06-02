@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import { selectAuth } from "@redux/outstaffingSlice";
 
@@ -9,6 +9,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
   const existingToken = localStorage.getItem("auth_token");
   const expiresAt = localStorage.getItem("access_token_expired_at");
 
+  // eslint-disable-next-line no-unused-vars
   const isTokenAlive =
     !isAuth &&
     existingToken &&

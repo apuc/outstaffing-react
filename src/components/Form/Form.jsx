@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
-
-import { apiRequest } from "@api/request";
-import { Loader } from "@components/Common/Loader/Loader";
+import "react-phone-input-2/lib/style.css";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-import "react-phone-input-2/lib/style.css";
+import { apiRequest } from "@api/request";
+
+import { Loader } from "@components/Common/Loader/Loader";
+
 import "./form.scss";
 
 const SweetAlert = withReactContent(Swal);
@@ -28,8 +29,10 @@ const Form = () => {
   const handleModal = (status) => {
     SweetAlert.fire({
       text:
+        // eslint-disable-next-line no-constant-condition
         status !== 200 || 201 ? "Какие-то неполадки =(" : "Форма отправлена",
       preConfirm: () =>
+        // eslint-disable-next-line no-constant-condition
         status !== 200 || 201
           ? () => {
               setStatus(null);

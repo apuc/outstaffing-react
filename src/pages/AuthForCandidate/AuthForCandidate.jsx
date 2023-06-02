@@ -3,27 +3,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { loading, selectIsLoading } from "@redux/loaderSlice";
-import { apiRequest } from "@api/request";
 import { auth, selectAuth, setUserInfo } from "@redux/outstaffingSlice";
 import { setRole } from "@redux/roleSlice";
 
-import AuthHeader from "@components/Common/AuthHeader/AuthHeader";
-import SideBar from "@components/SideBar/SideBar";
-import CategoriesItem from "@components/CategoriesItem/CategoriesItem";
-import StepsForCandidate from "@components/StepsForCandidate/StepsForCandidate";
-import { Footer } from "@components/Common/Footer/Footer";
+import { apiRequest } from "@api/request";
 
-import BackEndImg from "assets/images/partnerProfile/personalBackEnd.svg";
-import FrontendImg from "assets/images/partnerProfile/PersonalFrontend.svg";
-import ArchitectureImg from "assets/images/partnerProfile/PersonalArchitecture.svg";
-import DesignImg from "assets/images/partnerProfile/PersonalDesign.svg";
-import TestImg from "assets/images/partnerProfile/PersonalTesters.svg";
-import AdminImg from "assets/images/partnerProfile/PersonalAdmin.svg";
-import ManageImg from "assets/images/partnerProfile/PersonalMng.svg";
-import CopyImg from "assets/images/partnerProfile/PersonalCopy.svg";
-import SmmImg from "assets/images/partnerProfile/PersonalSMM.svg";
-import authImg from "assets/images/partnerProfile/authCandidateFormImg.png";
+import CategoriesItem from "@components/CategoriesItem/CategoriesItem";
+import AuthHeader from "@components/Common/AuthHeader/AuthHeader";
+import { Footer } from "@components/Common/Footer/Footer";
+import SideBar from "@components/SideBar/SideBar";
+import StepsForCandidate from "@components/StepsForCandidate/StepsForCandidate";
+
 import arrowBtn from "assets/icons/arrows/arrowRight.svg";
+import AdminImg from "assets/images/partnerProfile/PersonalAdmin.svg";
+import ArchitectureImg from "assets/images/partnerProfile/PersonalArchitecture.svg";
+import CopyImg from "assets/images/partnerProfile/PersonalCopy.svg";
+import DesignImg from "assets/images/partnerProfile/PersonalDesign.svg";
+import FrontendImg from "assets/images/partnerProfile/PersonalFrontend.svg";
+import ManageImg from "assets/images/partnerProfile/PersonalMng.svg";
+import SmmImg from "assets/images/partnerProfile/PersonalSMM.svg";
+import TestImg from "assets/images/partnerProfile/PersonalTesters.svg";
+import authImg from "assets/images/partnerProfile/authCandidateFormImg.png";
+import BackEndImg from "assets/images/partnerProfile/personalBackEnd.svg";
 
 import "./authForCandidate.scss";
 

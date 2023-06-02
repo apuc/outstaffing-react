@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import moment from "moment";
+import "moment/locale/ru";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -7,6 +9,8 @@ import {
   setRequestDate,
   setSendRequest,
 } from "@redux/reportSlice";
+
+import "@components/Calendar/calendarComponent.scss";
 import {
   calendarHelper,
   currentMonthAndDay,
@@ -16,14 +20,10 @@ import {
 import ShortReport from "@components/ShortReport/ShortReport";
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
-import rectangle from "assets/images/rectangle__calendar.png";
 import calendarIcon from "assets/icons/calendar.svg";
+import rectangle from "assets/images/rectangle__calendar.png";
 
-import moment from "moment";
-
-import "moment/locale/ru";
-import "@components/Calendar/calendarComponent.scss";
-
+// eslint-disable-next-line react/display-name
 export const ProfileCalendarComponent = React.memo(
   ({ value, setValueHandler, reports, totalHours }) => {
     const dispatch = useDispatch();

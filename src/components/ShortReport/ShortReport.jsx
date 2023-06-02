@@ -2,22 +2,24 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { apiRequest } from "@api/request";
-import {
-  getCorrectDate,
-  getCreatedDate,
-  hourOfNum,
-} from "@components/Calendar/calendarHelper";
 import {
   getReportDate,
   getSendRequest,
   setSendRequest,
 } from "@redux/reportSlice";
+
+import { apiRequest } from "@api/request";
+
+import {
+  getCorrectDate,
+  getCreatedDate,
+  hourOfNum,
+} from "@components/Calendar/calendarHelper";
 import { Loader } from "@components/Common/Loader/Loader";
 
 import "./shortReport.scss";
 
-export const ShortReport = ({}) => {
+export const ShortReport = () => {
   const reportDate = useSelector(getReportDate);
 
   const sendReport = useSelector(getSendRequest);

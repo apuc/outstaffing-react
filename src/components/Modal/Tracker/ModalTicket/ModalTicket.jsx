@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
+import { modalToggle, setProjectBoardFetch } from "@redux/projectsTrackerSlice";
+
+import { urlForLocal } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
-import { urlForLocal } from "@utils/helper";
-import { modalToggle, setProjectBoardFetch } from "@redux/projectsTrackerSlice";
+
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
-
-import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
-import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
+import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
+import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
 
-import category from "assets/icons/category.svg";
-import watch from "assets/icons/watch.svg";
-import file from "assets/icons/fileModal.svg";
-import arrow from "assets/icons/arrows/arrowStart.png";
-import link from "assets/icons/link.svg";
 import archive from "assets/icons/archive.svg";
+import arrow from "assets/icons/arrows/arrowStart.png";
+import fullScreen from "assets/icons/arrows/inFullScreen.svg";
+import category from "assets/icons/category.svg";
+import close from "assets/icons/closeProjectPersons.svg";
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
-import send from "assets/icons/send.svg";
+import file from "assets/icons/fileModal.svg";
+import link from "assets/icons/link.svg";
 import plus from "assets/icons/plus.svg";
-import fullScreen from "assets/icons/arrows/inFullScreen.svg";
-import close from "assets/icons/closeProjectPersons.svg";
+import send from "assets/icons/send.svg";
+import watch from "assets/icons/watch.svg";
 
 import "./ModalTicket.scss";
 
@@ -58,7 +60,7 @@ export const ModalTiсket = ({
         task_id: task.id,
         status: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       setActive(false);
       dispatch(setProjectBoardFetch(projectId));
     });
@@ -72,7 +74,7 @@ export const ModalTiсket = ({
         title: inputsValue.title,
         description: inputsValue.description,
       },
-    }).then((res) => {
+    }).then(() => {
       dispatch(setProjectBoardFetch(projectId));
     });
   }
@@ -104,7 +106,7 @@ export const ModalTiсket = ({
         comment_id: commentId,
         status: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       setComments((prevValue) =>
         prevValue.filter((item) => item.id !== commentId)
       );
@@ -118,7 +120,7 @@ export const ModalTiсket = ({
         comment_id: commentId,
         text: commentsEditText[commentId],
       },
-    }).then((res) => {});
+    }).then(() => {});
   }
 
   function taskExecutor(person) {
@@ -141,7 +143,7 @@ export const ModalTiсket = ({
         task_id: task.id,
         executor_id: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       setExecutor(null);
     });
   }
@@ -166,7 +168,7 @@ export const ModalTiсket = ({
         task_id: task.id,
         user_id: person.user_id,
       },
-    }).then((res) => {
+    }).then(() => {
       setMembers(members.filter((item) => item.user_id !== person.user_id));
     });
   }

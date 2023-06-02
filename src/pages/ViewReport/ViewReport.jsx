@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 
-import { Loader } from "@components/Common/Loader/Loader";
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "@components/Common/Footer/Footer";
-import { Navigation } from "@components/Navigation/Navigation";
-
 import { apiRequest } from "@api/request";
+
 import {
   getCorrectDate,
   getCreatedDate,
   hourOfNum,
 } from "@components/Calendar/calendarHelper";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Loader } from "@components/Common/Loader/Loader";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
-import arrow from "assets/icons/arrows/left-arrow.png";
 import arrowSwitchDate from "assets/icons/arrows/arrowViewReport.png";
+import arrow from "assets/icons/arrows/left-arrow.png";
 
 import "./viewReport.scss";
 

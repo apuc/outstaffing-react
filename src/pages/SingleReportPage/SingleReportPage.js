@@ -1,12 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router";
 import SVG from "react-inlinesvg";
+import { useNavigate } from "react-router";
 
-import { TaskItem } from "@components/TaskItem/TaskItem";
 import { LogoutButton } from "@components/LogoutButton/LogoutButton";
+import { TaskItem } from "@components/TaskItem/TaskItem";
 
-import arrowLeft from "assets/icons/arrows/left-arrow.png";
 import dateArrowIcon from "assets/icons/arrows/dateArrow.svg";
+import arrowLeft from "assets/icons/arrows/left-arrow.png";
 import calendarIcon from "assets/icons/calendar.svg";
 
 import "./singleReportPage.scss";
@@ -66,9 +66,9 @@ const SingleReportPage = () => {
           <div className="single-report-page__marker"></div>
           <h3>Какие задачи были выполнены?</h3>
         </div>
-        {tasks.map((task) => {
+        {tasks.map((task, index) => {
           return (
-            <div className="single-report-page__tasks-item">
+            <div className="single-report-page__tasks-item" key={index}>
               <TaskItem {...task} />
             </div>
           );

@@ -1,26 +1,28 @@
+import moment from "moment";
+import "moment/locale/ru";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 
-import { urlForLocal } from "@utils/helper";
-import { apiRequest } from "@api/request";
 import { getProfileInfo } from "@redux/outstaffingSlice";
 import {
   getRequestDates,
   setReportDate,
   setRequestDate,
 } from "@redux/reportSlice";
+
+import { urlForLocal } from "@utils/helper";
+
+import { apiRequest } from "@api/request";
+
 import { getReports } from "@components/Calendar/calendarHelper";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Loader } from "@components/Common/Loader/Loader";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
 import { ProfileCalendarComponent } from "./ProfileCalendarComponent";
-import { Loader } from "@components/Common/Loader/Loader";
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "@components/Common/Footer/Footer";
-import { Navigation } from "@components/Navigation/Navigation";
-
-import moment from "moment";
-import "moment/locale/ru";
 import "./profileCalendar.scss";
 
 export const ProfileCalendar = () => {

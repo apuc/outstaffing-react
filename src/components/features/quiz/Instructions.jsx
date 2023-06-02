@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import { selectedTest } from "@redux/quizSlice";
 
 import { apiRequest } from "@api/request";
-import { selectedTest } from "@redux/quizSlice";
 
 import comment from "assets/icons/comment.jpg";
 
