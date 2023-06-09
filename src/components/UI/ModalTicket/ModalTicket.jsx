@@ -98,6 +98,7 @@ export const ModalTiсket = ({
   function commentDelete(comment) {
     setComments((prevValue) => prevValue.filter((item) => item.id !== comment.id))
     if (comment.subComments.length) {
+      // promiseAll
       comment.subComments.forEach((subComment) => {
         apiRequest("/comment/update", {
           method: "PUT",
@@ -225,7 +226,7 @@ export const ModalTiсket = ({
     })
     apiRequest(`/timer/get-by-entity?entity_type=2&entity_id=${task.id}`).then((res) => {
       let timerSeconds = 0
-      res.forEach((time) => {
+      res.length && res.forEach((time) => {
         timerSeconds += time.deltaSeconds
         setCurrentTimerCount({
           hours: Math.floor(timerSeconds / 60 / 60),
@@ -437,7 +438,7 @@ export const ModalTiсket = ({
                 Остановить
               </button>
                 :
-              <button className="start" onClick={() => startTaskTimer()}>
+              <button className={task.executor_id === Number(localStorage.getItem('id')) ? 'start' : 'start disable'} onClick={() => startTaskTimer()}>
                 Начать делать <img src={arrow}></img>
               </button>
             }

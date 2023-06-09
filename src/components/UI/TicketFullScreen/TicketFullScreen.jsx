@@ -16,7 +16,7 @@ import {
   setProjectBoardFetch,
   setToggleTab,
   getProjectBoard,
-  getBoarderLoader
+  getBoarderLoader, filteredParticipateTasks, filterCreatedByMe
 } from "../../../redux/projectsTrackerSlice";
 import { apiRequest } from "../../../api/request";
 
@@ -28,15 +28,15 @@ import arrow2 from "../../../images/arrowStart.png";
 import plus from "../../../images/plus.svg";
 import tasks from "../../../images/trackerTasks.svg";
 import archive from "../../../images/archiveTracker.svg";
-import selectArrow from "../../../images/select.svg";
 import arrow from "../../../images/arrowCalendar.png";
 import link from "../../../images/link.svg";
 import archive2 from "../../../images/archive.svg";
 import del from "../../../images/delete.svg";
 import edit from "../../../images/edit.svg";
+import accept from "../../../images/accept.png";
+import close from "../../../images/closeProjectPersons.svg";
 
 import "./ticketFullScreen.scss";
-import close from "../../../images/closeProjectPersons.svg";
 import {getCorrectRequestDate, urlForLocal} from "../../../helper";
 
 export const TicketFullScreen = ({}) => {
@@ -295,14 +295,6 @@ export const TicketFullScreen = ({}) => {
                 </div>
                 }
               </div>
-              <div className="tasks__head__select">
-                <span>Учавствую</span>
-                <img src={selectArrow} alt="arrow" />
-              </div>
-              <div className="tasks__head__select">
-                <span>Мои</span>
-                <img src={selectArrow} alt="arrow" />
-              </div>
               <Link to={`/profile/tracker`} className="link">
                 <div className="tasks__head__back">
                   <p>Вернуться на проекты</p>
@@ -421,7 +413,7 @@ export const TicketFullScreen = ({}) => {
                     Остановить
                   </button>
                   :
-                  <button className="start" onClick={() => startTaskTimer()}>
+                  <button className={taskInfo.executor_id === Number(localStorage.getItem('id')) ? 'start' : 'start disable'} onClick={() => startTaskTimer()}>
                     Начать делать <img src={arrow2}></img>
                   </button>
               }

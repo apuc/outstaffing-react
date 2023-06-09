@@ -77,15 +77,19 @@ export const TrackerTaskComment = ({
                 </div>
                 <div className='comments__list__item__date'>
                     <span>{getCorrectDate(comment.created_at)}</span>
-                    <div className={commentsEditOpen ? 'edit edit__open' : 'edit'} >
-                        <img src={edit} alt='edit' onClick={() => {
-                            if (commentsEditOpen) {
-                                editComment()
-                            }
-                            setCommentsEditOpen(!commentsEditOpen)
-                        }} />
-                    </div>
-                    <img src={del} alt='delete' onClick={() => deleteComment()} />
+                    {comment.user_id === Number(localStorage.getItem('id')) &&
+                        <>
+                        <div className={commentsEditOpen ? 'edit edit__open' : 'edit'} >
+                            <img src={edit} alt='edit' onClick={() => {
+                                if (commentsEditOpen) {
+                                    editComment()
+                                }
+                                setCommentsEditOpen(!commentsEditOpen)
+                            }} />
+                        </div>
+                        <img src={del} alt='delete' onClick={() => deleteComment()} />
+                        </>
+                    }
                 </div>
             </div>
             {commentsEditOpen ?

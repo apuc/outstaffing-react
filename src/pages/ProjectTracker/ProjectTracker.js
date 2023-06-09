@@ -19,7 +19,10 @@ import {
   activeLoader,
   setColumnName,
   setColumnId,
-  deletePersonOnProject
+  setColumnPriority,
+  deletePersonOnProject,
+  filterCreatedByMe,
+  filteredParticipateTasks
 } from "../../redux/projectsTrackerSlice";
 
 import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
@@ -28,13 +31,13 @@ import TrackerModal from "../../components/UI/TrackerModal/TrackerModal";
 import project from "../../images/trackerProject.svg";
 import tasks from "../../images/trackerTasks.svg";
 import archive from "../../images/archiveTracker.svg";
-import selectArrow from "../../images/select.svg";
 import commentsBoard from "../../images/commentsBoard.svg";
 import filesBoard from "../../images/filesBoard.svg";
 import arrow from "../../images/arrowCalendar.png";
 import del from "../../images/delete.svg";
 import edit from "../../images/edit.svg";
 import close from "../../images/closeProjectPersons.svg"
+import accept from "../../images/accept.png";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();
@@ -48,7 +51,8 @@ export const ProjectTracker = () => {
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState({});
   const [personListOpen, setPersonListOpen] = useState(false)
-
+  const [checkBoxParticipateTasks, setCheckBoxParticipateTasks] = useState(false)
+  const [checkBoxMyTasks, setCheckBoxMyTasks] = useState(false)
   const startWrapperIndexTest = useRef({});
   const projectBoard = useSelector(getProjectBoard);
   const loader = useSelector(getBoarderLoader);
@@ -142,16 +146,36 @@ export const ProjectTracker = () => {
     setModalActiveTicket(true);
   }
 
-  function deleteColumn(id) {
+  function deleteColumn(column) {
+    const priorityColumns = []
     apiRequest("/project-column/update-column", {
       method: "PUT",
       data: {
-        column_id: id,
+        column_id: column.id,
         project_id: projectBoard.id,
         status: 0,
       },
     }).then((res) => {
-      dispatch(setProjectBoardFetch(projectBoard.id));
+      if (column.priority < projectBoard.columns.length) {
+        for (let i = column.priority; i < projectBoard.columns.length; i++) {
+          const currentColumn = {
+            column_id: projectBoard.columns[i].id,
+            priority: i
+          }
+          priorityColumns.push(currentColumn)
+        }
+        apiRequest("/project-column/set-priority", {
+          method: "POST",
+          data: {
+            project_id: projectBoard.id,
+            data: JSON.stringify(priorityColumns)
+          }
+        }).then(() => {
+          dispatch(setProjectBoardFetch(projectBoard.id));
+        })
+      } else {
+        dispatch(setProjectBoardFetch(projectBoard.id));
+      }
     });
   }
 
@@ -165,6 +189,28 @@ export const ProjectTracker = () => {
     }).then((res) => {
       dispatch(deletePersonOnProject(userId))
     });
+  }
+
+  function filterParticipateTasks() {
+    if (!checkBoxParticipateTasks) {
+      dispatch(filteredParticipateTasks(Number(localStorage.getItem('id'))))
+    } else {
+      dispatch(setProjectBoardFetch(projectId.id))
+      setCheckBoxParticipateTasks(false)
+      setCheckBoxMyTasks(false)
+    }
+    setCheckBoxParticipateTasks(!checkBoxParticipateTasks)
+  }
+
+  function filterMyTask() {
+    if (!checkBoxMyTasks) {
+      dispatch(filterCreatedByMe(Number(localStorage.getItem('id'))))
+    } else {
+      dispatch(setProjectBoardFetch(projectId.id))
+      setCheckBoxParticipateTasks(false)
+      setCheckBoxMyTasks(false)
+    }
+    setCheckBoxMyTasks(!checkBoxMyTasks)
   }
 
   return (
@@ -276,13 +322,21 @@ export const ProjectTracker = () => {
                     </div>
                     }
                   </div>
-                  <div className="tasks__head__select">
+                  <div className="tasks__head__checkBox" onClick={filterParticipateTasks}>
                     <span>Участвую</span>
-                    <img src={selectArrow} alt="arrow" />
+                    <div className="tasks__head__checkBox__box">
+                      {checkBoxParticipateTasks &&
+                        <img src={accept} alt='accept' />
+                      }
+                    </div>
                   </div>
-                  <div className="tasks__head__select">
+                  <div className="tasks__head__checkBox" onClick={filterMyTask}>
                     <span>Мои</span>
-                    <img src={selectArrow} alt="arrow" />
+                    <div className="tasks__head__checkBox__box">
+                      {checkBoxMyTasks &&
+                          <img src={accept} alt='accept' />
+                      }
+                    </div>
                   </div>
                   <Link to="/profile/tracker" className="tasks__head__back">
                     <p>Вернуться на проекты</p>
@@ -351,6 +405,7 @@ export const ProjectTracker = () => {
                                 dispatch(modalToggle("editColumn"));
                                 dispatch(setColumnName(column.title))
                                 dispatch(setColumnId(column.id))
+                                dispatch(setColumnPriority(column.priority))
                                 setModalAdd(true);
                               }}
                             >
@@ -359,7 +414,7 @@ export const ProjectTracker = () => {
                             </div>
                             <div
                               className="column__select__item"
-                              onClick={() => deleteColumn(column.id)}
+                              onClick={() => deleteColumn(column)}
                             >
                               <img src={del} alt="delete" />
                               <span>Удалить</span>

@@ -436,6 +436,11 @@
       }
     }
 
+    .disable {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
     .stop {
       font-size: 12px;
       margin-top: 25px;

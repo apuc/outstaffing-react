@@ -423,17 +423,32 @@
             }
           }
 
-          &__select {
+          &__checkBox {
             cursor: pointer;
+            display: flex;
+            align-items: center;
 
-            img {
-              margin-left: 18px;
-            }
             span {
               color: #252c32;
               font-weight: 400;
               font-size: 14px;
               line-height: 24px;
+            }
+
+            &__box {
+              width: 20px;
+              height: 20px;
+              border-radius: 6px;
+              border: solid 1px gray;
+              margin-left: 5px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              img {
+                width: 18px;
+                height: 18px;
+              }
             }
           }
 
