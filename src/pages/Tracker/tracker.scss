@@ -502,13 +502,31 @@
             0px 1px 1px rgba(0, 0, 0, 0.06);
           border-radius: 8px;
           padding: 16px 14px 16px 8px;
-          width: 350px;
+          min-width: 353px;
+          max-width: 353px;
           display: flex;
           flex-direction: column;
           row-gap: 16px;
           height: fit-content;
           position: relative;
           transition: all 0.3s ease;
+          //max-height: 500px;
+          //overflow-y: auto;
+
+          &::-webkit-scrollbar {
+            width: 3px;
+            border-radius: 10px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: #cbd9f9;
+            border-radius: 20px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background: #c5c0c6;
+            border-radius: 20px;
+          }
 
           &__hover {
             box-shadow: 0px 2px 10px #9cc480,

@@ -74,18 +74,6 @@ export const ProjectTracker = () => {
     }
   }, [projectBoard]);
 
-  // function toggleMoreTasks(columnId) {
-  //     setTabTaskMok((prevArray) =>
-  //         prevArray.map((elem, index) => {
-  //             if (columnId === index) {
-  //                 return { ...elem, open: !elem.open };
-  //             } else {
-  //                 return elem;
-  //             }
-  //         })
-  //     );
-  // }
-
   function dragStartHandler(e, task, columnId) {
     startWrapperIndexTest.current = { task: task, index: columnId };
     setTimeout(() => {
@@ -155,7 +143,7 @@ export const ProjectTracker = () => {
         project_id: projectBoard.id,
         status: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       if (column.priority < projectBoard.columns.length) {
         for (let i = column.priority; i < projectBoard.columns.length; i++) {
           const currentColumn = {
@@ -186,7 +174,7 @@ export const ProjectTracker = () => {
         project_id: projectBoard.id,
         user_id: userId
       },
-    }).then((res) => {
+    }).then(() => {
       dispatch(deletePersonOnProject(userId))
     });
   }
@@ -282,8 +270,6 @@ export const ProjectTracker = () => {
                     <p>добавить колонку</p>
                   </div>
                   <div className="tasks__head__persons">
-                    {/*<img src={avatarTest} alt="avatar" />*/}
-                    {/*<img src={avatarTest} alt="avatar" />*/}
                     <span className="countPersons">{projectBoard.projectUsers?.length}</span>
                     <span
                       className="addPerson"
@@ -365,13 +351,10 @@ export const ProjectTracker = () => {
                         onDragEnter={(e) => dragEnterHandler(column.id)}
                         onDrop={(e) => dragDropHandler(e, column.id)}
                         className={`tasks__board ${
-                          column.tasks.length >= 3 ? "tasks__board__more" : ""
-                        } ${
                           wrapperHover[column.id] ? "tasks__board__hover" : ""
                         }`}
                       >
                         <div className="board__head">
-                          {/*<span className={wrapperIndex === 3 ? "done" : ""}>*/}
                           <span>{column.title}</span>
                           <div>
                             <span
@@ -422,11 +405,6 @@ export const ProjectTracker = () => {
                           </div>
                         )}
                         {column.tasks.map((task, index) => {
-                          // if (index > 2) {
-                          //   if (!column.open) {
-                          //     return;
-                          //   }
-                          // }
                           return (
                             <div
                               key={task.id}
@@ -453,26 +431,10 @@ export const ProjectTracker = () => {
                                   <img src={filesBoard} alt="filesImg" />
                                   <span>{task.files} файлов</span>
                                 </div>
-                                {/*<div className="tasks__board__item__info__avatars">*/}
-                                {/*  <img src={task.avatarCreated} alt="avatar" />*/}
-                                {/*  <img src={task.avatarDo} alt="avatar" />*/}
-                                {/*</div>*/}
                               </div>
                             </div>
                           );
                         })}
-                        {/*{column.tasks.length > 3 && (*/}
-                        {/*  <span*/}
-                        {/*    className={*/}
-                        {/*      column.open*/}
-                        {/*        ? "lessItems openItems"*/}
-                        {/*        : "moreItems openItems"*/}
-                        {/*    }*/}
-                        {/*    // onClick={() => toggleMoreTasks(column.id)}*/}
-                        {/*  >*/}
-                        {/*    {column.open ? "-" : "+"}*/}
-                        {/*  </span>*/}
-                        {/*)}*/}
                       </div>
                     );
                   })}
