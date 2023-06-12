@@ -26,7 +26,7 @@
 
   .title-project {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
 
     .input-container {
@@ -34,7 +34,11 @@
       height: 35px;
       background: #ffffff;
       border-radius: 8px;
-      margin-top: 12px;
+      margin: 12px 0;
+
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
     }
 
     h4 {
@@ -123,7 +127,6 @@
   }
 
   .button-add {
-    margin: 20px;
     width: 130px;
     height: 37px;
     background: #52b709;
@@ -136,6 +139,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
   }
 }
 

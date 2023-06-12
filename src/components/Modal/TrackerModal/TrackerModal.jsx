@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useEffect, useState} from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+import { apiRequest } from "../../../api/request";
+import { urlForLocal } from '../../../utils/helper'
 import {
-  addPersonToProject,
-  editColumnName,
-  editProjectName,
-  getColumnId,
-  getColumnName,
+  setColumnName,
+  setColumnPriority,
   getProjectBoard,
   getValueModalType,
-  setColumnName,
   setProject,
   setProjectBoardFetch,
-} from "@redux/projectsTrackerSlice";
+  editProjectName,
+  editColumnName,
+  getColumnName,
+  getColumnId,
+  addPersonToProject, getColumnPriority
+} from "../../../redux/projectsTrackerSlice";
 
-import { urlForLocal } from "@utils/helper";
-
-import { apiRequest } from "@api/request";
-
-import arrowDown from "assets/icons/arrows/selectArrow.png";
+import arrowDown from "../../../assets/icons/arrows/selectArrow.png"
 
 import "./trackerModal.scss";
 
@@ -34,7 +33,8 @@ export const TrackerModal = ({
   const dispatch = useDispatch();
   const projectBoard = useSelector(getProjectBoard);
   const columnName = useSelector(getColumnName);
-  const columnId = useSelector(getColumnId);
+  const columnId = useSelector(getColumnId)
+  const columnPriority = useSelector(getColumnPriority)
 
   const modalType = useSelector(getValueModalType);
   const [projectName, setProjectName] = useState(defautlInput);
@@ -42,9 +42,9 @@ export const TrackerModal = ({
   const [nameProject, setNameProject] = useState("");
   const [valueTiket, setValueTiket] = useState("");
   const [descriptionTicket, setDescriptionTicket] = useState("");
-  const [workers, setWorkers] = useState([]);
-  const [selectWorkersOpen, setSelectWorkersOpen] = useState(false);
-  const [selectedWorker, setSelectedWorker] = useState(null);
+  const [workers, setWorkers] = useState([])
+  const [selectWorkersOpen, setSelectWorkersOpen] = useState(false)
+  const [selectedWorker, setSelectedWorker] = useState(null)
 
   function createTab() {
     if (!valueColumn) {
@@ -55,6 +55,7 @@ export const TrackerModal = ({
       method: "POST",
       data: {
         project_id: projectBoard.id,
+        priority: projectBoard.columns.length ? projectBoard.columns.at(-1).priority + 1 : 1,
         title: valueColumn,
       },
     }).then(() => {
@@ -102,7 +103,42 @@ export const TrackerModal = ({
     });
   }
 
-  function changeColumnName() {
+  function changeColumnParams() {
+    projectBoard.columns.forEach((column) => {
+      if (column.id === columnId && column.priority !== columnPriority) {
+        const priorityColumns = [{
+          column_id: column.id,
+          priority: Number(columnPriority)
+        }]
+        for (let i = column.priority; i < columnPriority; i++) {
+          const currentColumn = {
+            column_id: projectBoard.columns[i].id,
+            priority: i
+          }
+          priorityColumns.push(currentColumn)
+        }
+        for (let i = column.priority; i > columnPriority; i--) {
+          const currentColumn = {
+            column_id: projectBoard.columns[i - 2].id,
+            priority: i
+          }
+          priorityColumns.push(currentColumn)
+        }
+        apiRequest("/project-column/set-priority", {
+          method: "POST",
+          data: {
+            project_id: projectBoard.id,
+            data: JSON.stringify(priorityColumns)
+          }
+        }).then(() => {
+          dispatch(setProjectBoardFetch(projectBoard.id));
+        })
+      }
+    })
+    changeColumnTitle()
+  }
+
+  function changeColumnTitle() {
     apiRequest("/project-column/update-column", {
       method: "PUT",
       data: {
@@ -337,8 +373,19 @@ export const TrackerModal = ({
                   onChange={(e) => dispatch(setColumnName(e.target.value))}
                 />
               </div>
+              <h4>Приоритет колонки</h4>
+              <div className="input-container">
+                <input
+                    className="name-project"
+                    placeholder='Приоритет колонки'
+                    type='number'
+                    step='1'
+                    value={columnPriority}
+                    onChange={(e) => dispatch(setColumnPriority(e.target.value))}
+                />
+              </div>
             </div>
-            <button className="button-add" onClick={changeColumnName}>
+            <button className="button-add" onClick={changeColumnParams}>
               Сохранить
             </button>
           </div>

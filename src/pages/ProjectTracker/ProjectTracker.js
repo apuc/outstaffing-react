@@ -1,42 +1,43 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
+import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Navigation } from "../../components/Navigation/Navigation";
+import { Loader } from "@components/Common/Loader/Loader";
+import { urlForLocal } from '../../utils/helper'
 
+import { useDispatch, useSelector } from "react-redux";
+import { apiRequest } from "../../api/request";
 import {
-  activeLoader,
-  deletePersonOnProject,
-  getBoarderLoader,
   getProjectBoard,
+  getBoarderLoader,
   modalToggle,
   moveProjectTask,
-  setColumnId,
-  setColumnName,
   setProjectBoardFetch,
   setToggleTab,
-} from "@redux/projectsTrackerSlice";
+  activeLoader,
+  setColumnName,
+  setColumnId,
+  setColumnPriority,
+  deletePersonOnProject,
+  filterCreatedByMe,
+  filteredParticipateTasks
+} from "../../redux/projectsTrackerSlice";
 
-import { urlForLocal } from "@utils/helper";
+import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
+import TrackerModal from "../../components/Modal/TrackerModal/TrackerModal";
 
-import { apiRequest } from "@api/request";
-
-import { Footer } from "@components/Common/Footer/Footer";
-import { Loader } from "@components/Common/Loader/Loader";
-import ModalTicket from "@components/Modal/Tracker/ModalTicket/ModalTicket";
-import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
-import { Navigation } from "@components/Navigation/Navigation";
-import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-
-import archive from "assets/icons/archiveTracker.svg";
-import arrow from "assets/icons/arrows/arrowCalendar.png";
-import selectArrow from "assets/icons/arrows/select.svg";
-import close from "assets/icons/closeProjectPersons.svg";
-import commentsBoard from "assets/icons/commentsBoard.svg";
-import del from "assets/icons/delete.svg";
-import edit from "assets/icons/edit.svg";
-import filesBoard from "assets/icons/filesBoard.svg";
-import project from "assets/icons/trackerProject.svg";
-import tasks from "assets/icons/trackerTasks.svg";
+import project from "../../assets/icons/trackerProject.svg";
+import tasks from "../../assets/icons/trackerTasks.svg";
+import archive from "../../assets/icons/archiveTracker.svg";
+import commentsBoard from "../../assets/icons/commentsBoard.svg";
+import filesBoard from "../../assets/icons/filesBoard.svg";
+import arrow from "../../assets/icons/arrows/arrowCalendar.png";
+import del from "../../assets/icons/delete.svg";
+import edit from "../../assets/icons/edit.svg";
+import close from "../../assets/icons/close.png"
+import accept from "../../assets/images/accept.png";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();
@@ -49,8 +50,9 @@ export const ProjectTracker = () => {
   const [modalAdd, setModalAdd] = useState(false);
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState({});
-  const [personListOpen, setPersonListOpen] = useState(false);
-
+  const [personListOpen, setPersonListOpen] = useState(false)
+  const [checkBoxParticipateTasks, setCheckBoxParticipateTasks] = useState(false)
+  const [checkBoxMyTasks, setCheckBoxMyTasks] = useState(false)
   const startWrapperIndexTest = useRef({});
   const projectBoard = useSelector(getProjectBoard);
   const loader = useSelector(getBoarderLoader);
@@ -71,18 +73,6 @@ export const ProjectTracker = () => {
       });
     }
   }, [projectBoard]);
-
-  // function toggleMoreTasks(columnId) {
-  //     setTabTaskMok((prevArray) =>
-  //         prevArray.map((elem, index) => {
-  //             if (columnId === index) {
-  //                 return { ...elem, open: !elem.open };
-  //             } else {
-  //                 return elem;
-  //             }
-  //         })
-  //     );
-  // }
 
   function dragStartHandler(e, task, columnId) {
     startWrapperIndexTest.current = { task: task, index: columnId };
@@ -136,7 +126,7 @@ export const ProjectTracker = () => {
     setSelectedTab(columnId);
     dispatch(modalToggle("createTiketProject"));
     setModalAdd(true);
-    setPriorityTask(length + 1);
+    setPriorityTask(length + 1)
   }
 
   function openTicket(e, task) {
@@ -144,16 +134,36 @@ export const ProjectTracker = () => {
     setModalActiveTicket(true);
   }
 
-  function deleteColumn(id) {
+  function deleteColumn(column) {
+    const priorityColumns = []
     apiRequest("/project-column/update-column", {
       method: "PUT",
       data: {
-        column_id: id,
+        column_id: column.id,
         project_id: projectBoard.id,
         status: 0,
       },
     }).then(() => {
-      dispatch(setProjectBoardFetch(projectBoard.id));
+      if (column.priority < projectBoard.columns.length) {
+        for (let i = column.priority; i < projectBoard.columns.length; i++) {
+          const currentColumn = {
+            column_id: projectBoard.columns[i].id,
+            priority: i
+          }
+          priorityColumns.push(currentColumn)
+        }
+        apiRequest("/project-column/set-priority", {
+          method: "POST",
+          data: {
+            project_id: projectBoard.id,
+            data: JSON.stringify(priorityColumns)
+          }
+        }).then(() => {
+          dispatch(setProjectBoardFetch(projectBoard.id));
+        })
+      } else {
+        dispatch(setProjectBoardFetch(projectBoard.id));
+      }
     });
   }
 
@@ -162,11 +172,33 @@ export const ProjectTracker = () => {
       method: "DELETE",
       data: {
         project_id: projectBoard.id,
-        user_id: userId,
+        user_id: userId
       },
     }).then(() => {
-      dispatch(deletePersonOnProject(userId));
+      dispatch(deletePersonOnProject(userId))
     });
+  }
+
+  function filterParticipateTasks() {
+    if (!checkBoxParticipateTasks) {
+      dispatch(filteredParticipateTasks(Number(localStorage.getItem('id'))))
+    } else {
+      dispatch(setProjectBoardFetch(projectId.id))
+      setCheckBoxParticipateTasks(false)
+      setCheckBoxMyTasks(false)
+    }
+    setCheckBoxParticipateTasks(!checkBoxParticipateTasks)
+  }
+
+  function filterMyTask() {
+    if (!checkBoxMyTasks) {
+      dispatch(filterCreatedByMe(Number(localStorage.getItem('id'))))
+    } else {
+      dispatch(setProjectBoardFetch(projectId.id))
+      setCheckBoxParticipateTasks(false)
+      setCheckBoxMyTasks(false)
+    }
+    setCheckBoxMyTasks(!checkBoxMyTasks)
   }
 
   return (
@@ -238,79 +270,59 @@ export const ProjectTracker = () => {
                     <p>добавить колонку</p>
                   </div>
                   <div className="tasks__head__persons">
-                    {/*<img src={avatarTest} alt="avatar" />*/}
-                    {/*<img src={avatarTest} alt="avatar" />*/}
-                    <span className="countPersons">
-                      {projectBoard.projectUsers?.length}
-                    </span>
+                    <span className="countPersons">{projectBoard.projectUsers?.length}</span>
                     <span
                       className="addPerson"
                       onClick={() => {
-                        setPersonListOpen(true);
+                        setPersonListOpen(true)
                       }}
                     >
                       +
                     </span>
                     <p>добавить участника</p>
-                    {personListOpen && (
-                      <div className="persons__list">
-                        <img
-                          className="persons__list__close"
-                          src={close}
-                          alt="close"
-                          onClick={() => setPersonListOpen(false)}
-                        />
-                        <div className="persons__list__count">
-                          <span>{projectBoard.projectUsers?.length}</span>
-                          участник
-                        </div>
-                        <div className="persons__list__info">
-                          В проекте - <span>“{projectBoard.name}”</span>
-                        </div>
-                        <div className="persons__list__items">
-                          {projectBoard.projectUsers?.map((person) => {
-                            return (
-                              <div
-                                className="persons__list__item"
-                                key={person.user_id}
-                              >
-                                <img
-                                  className="avatar"
-                                  src={urlForLocal(person.user.avatar)}
-                                  alt="avatar"
-                                />
-                                <span>{person.user.fio}</span>
-                                <img
-                                  className="delete"
-                                  src={close}
-                                  alt="delete"
-                                  onClick={() => deletePerson(person.user_id)}
-                                />
-                              </div>
-                            );
-                          })}
-                        </div>
-                        <div
-                          className="persons__list__add"
-                          onClick={() => {
-                            dispatch(modalToggle("addWorker"));
-                            setModalAdd(true);
-                            setPersonListOpen(false);
-                          }}
-                        >
-                          <span className="addPerson">+</span>
-                          <p>Добавить участников</p>
-                        </div>
+                    {personListOpen &&
+                    <div className='persons__list'>
+                      <img className='persons__list__close' src={close} alt='close' onClick={() => setPersonListOpen(false)} />
+                      <div className='persons__list__count'><span>{projectBoard.projectUsers?.length}</span>участник</div>
+                      <div className='persons__list__info'>В проекте - <span>“{projectBoard.name}”</span></div>
+                      <div className='persons__list__items'>
+                        {projectBoard.projectUsers?.map((person) => {
+                          return <div className='persons__list__item' key={person.user_id}>
+                                    <img className='avatar' src={urlForLocal(person.user.avatar)} alt='avatar' />
+                                    <span>{person.user.fio}</span>
+                                    <img className='delete' src={close} alt='delete' onClick={() => deletePerson(person.user_id)}/>
+                                </div>
+                        })
+                        }
                       </div>
-                    )}
+                      <div className='persons__list__add'
+                           onClick={() => {
+                             dispatch(modalToggle("addWorker"));
+                             setModalAdd(true);
+                             setPersonListOpen(false)
+                           }}
+                      >
+                        <span className='addPerson'>+</span>
+                        <p>Добавить участников</p>
+                      </div>
+                    </div>
+                    }
                   </div>
-                  <div className="tasks__head__select">
+                  <div className="tasks__head__checkBox" onClick={filterParticipateTasks}>
                     <span>Участвую</span>
-                    <img src={selectArrow} alt="arrow" />
+                    <div className="tasks__head__checkBox__box">
+                      {checkBoxParticipateTasks &&
+                        <img src={accept} alt='accept' />
+                      }
+                    </div>
                   </div>
-                  <div className="tasks__head__select">
+                  <div className="tasks__head__checkBox" onClick={filterMyTask}>
                     <span>Мои</span>
-                    <img src={selectArrow} alt="arrow" />
+                    <div className="tasks__head__checkBox__box">
+                      {checkBoxMyTasks &&
+                          <img src={accept} alt='accept' />
+                      }
+                    </div>
                   </div>
                   <Link to="/profile/tracker" className="tasks__head__back">
                     <p>Вернуться на проекты</p>
@@ -319,16 +331,14 @@ export const ProjectTracker = () => {
                 </div>
               </div>
 
-              {Boolean(modalActiveTicket) && (
-                <ModalTicket
+              {Boolean(modalActiveTicket) && <ModalTicket
                   active={modalActiveTicket}
                   setActive={setModalActiveTicket}
                   task={selectedTicket}
                   projectId={projectBoard.id}
                   projectName={projectBoard.name}
                   projectUsers={projectBoard.projectUsers}
-                />
-              )}
+              />}
 
               <div className="tasks__container">
                 {Boolean(projectBoard?.columns) &&
@@ -338,23 +348,18 @@ export const ProjectTracker = () => {
                       <div
                         key={column.id}
                         onDragOver={(e) => dragOverHandler(e)}
-                        onDragEnter={() => dragEnterHandler(column.id)}
+                        onDragEnter={(e) => dragEnterHandler(column.id)}
                         onDrop={(e) => dragDropHandler(e, column.id)}
                         className={`tasks__board ${
-                          column.tasks.length >= 3 ? "tasks__board__more" : ""
-                        } ${
                           wrapperHover[column.id] ? "tasks__board__hover" : ""
                         }`}
                       >
                         <div className="board__head">
-                          {/*<span className={wrapperIndex === 3 ? "done" : ""}>*/}
                           <span>{column.title}</span>
                           <div>
                             <span
                               className="add"
-                              onClick={() =>
-                                selectedTabTask(column.id, column.tasks.length)
-                              }
+                              onClick={() => selectedTabTask(column.id, column.tasks.length)}
                             >
                               +
                             </span>
@@ -381,8 +386,9 @@ export const ProjectTracker = () => {
                                   [column.id]: false,
                                 }));
                                 dispatch(modalToggle("editColumn"));
-                                dispatch(setColumnName(column.title));
-                                dispatch(setColumnId(column.id));
+                                dispatch(setColumnName(column.title))
+                                dispatch(setColumnId(column.id))
+                                dispatch(setColumnPriority(column.priority))
                                 setModalAdd(true);
                               }}
                             >
@@ -391,19 +397,14 @@ export const ProjectTracker = () => {
                             </div>
                             <div
                               className="column__select__item"
-                              onClick={() => deleteColumn(column.id)}
+                              onClick={() => deleteColumn(column)}
                             >
                               <img src={del} alt="delete" />
                               <span>Удалить</span>
                             </div>
                           </div>
                         )}
-                        {column.tasks.map((task) => {
-                          // if (index > 2) {
-                          //   if (!column.open) {
-                          //     return;
-                          //   }
-                          // }
+                        {column.tasks.map((task, index) => {
                           return (
                             <div
                               key={task.id}
@@ -430,31 +431,15 @@ export const ProjectTracker = () => {
                                   <img src={filesBoard} alt="filesImg" />
                                   <span>{task.files} файлов</span>
                                 </div>
-                                {/*<div className="tasks__board__item__info__avatars">*/}
-                                {/*  <img src={task.avatarCreated} alt="avatar" />*/}
-                                {/*  <img src={task.avatarDo} alt="avatar" />*/}
-                                {/*</div>*/}
                               </div>
                             </div>
                           );
                         })}
-                        {/*{column.tasks.length > 3 && (*/}
-                        {/*  <span*/}
-                        {/*    className={*/}
-                        {/*      column.open*/}
-                        {/*        ? "lessItems openItems"*/}
-                        {/*        : "moreItems openItems"*/}
-                        {/*    }*/}
-                        {/*    // onClick={() => toggleMoreTasks(column.id)}*/}
-                        {/*  >*/}
-                        {/*    {column.open ? "-" : "+"}*/}
-                        {/*  </span>*/}
-                        {/*)}*/}
                       </div>
                     );
                   })}
                 {Boolean(projectBoard?.columns) &&
-                  !projectBoard.columns.length && (
+                  !Boolean(projectBoard.columns.length) && (
                     <div className="tasks__board__noItems">
                       В проекте нет задач.
                     </div>

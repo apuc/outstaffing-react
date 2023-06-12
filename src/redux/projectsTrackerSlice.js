@@ -10,6 +10,7 @@ const initialState = {
   boardLoader: false,
   columnName: "",
   columnId: 0,
+  columnPriority: 0
 };
 
 export const setProjectBoardFetch = createAsyncThunk("userInfo", (id) =>
@@ -66,11 +67,24 @@ export const projectsTrackerSlice = createSlice({
         }
       });
     },
+    filterCreatedByMe: (state, action) => {
+      state.projectBoard.columns.forEach((column) => {
+        column.tasks = column.tasks.filter((task) => task.user_id === action.payload)
+      })
+    },
+    filteredParticipateTasks: (state, action) => {
+      state.projectBoard.columns.forEach((column) => {
+        column.tasks = column.tasks.filter((task) => task.taskUsers.some((person) => person.user_id === action.payload))
+      })
+    },
     setColumnName: (state, action) => {
       state.columnName = action.payload;
     },
     setColumnId: (state, action) => {
       state.columnId = action.payload;
+    },
+    setColumnPriority: (state, action) => {
+      state.columnPriority = action.payload
     },
     editProjectName: (state, action) => {
       state.projects.forEach((project) => {
@@ -110,8 +124,11 @@ export const {
   editProjectName,
   editColumnName,
   setColumnId,
+  setColumnPriority,
   deletePersonOnProject,
   addPersonToProject,
+  filterCreatedByMe,
+  filteredParticipateTasks
 } = projectsTrackerSlice.actions;
 
 export const getProjects = (state) => state.tracker.projects;
@@ -121,5 +138,6 @@ export const getValueModalType = (state) => state.tracker.modalType;
 export const getBoarderLoader = (state) => state.tracker.boardLoader;
 export const getColumnName = (state) => state.tracker.columnName;
 export const getColumnId = (state) => state.tracker.columnId;
+export const getColumnPriority = (state) => state.tracker.columnPriority
 
 export default projectsTrackerSlice.reducer;
