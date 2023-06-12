@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import { apiRequest } from "../api/request";
 
 const initialState = {
@@ -36,11 +37,13 @@ export const projectsTrackerSlice = createSlice({
         }
       });
     },
-    deletePersonOnProject: (state,action) => {
-      state.projectBoard.projectUsers =  state.projectBoard.projectUsers.filter((person) => person.user_id !== action.payload)
+    deletePersonOnProject: (state, action) => {
+      state.projectBoard.projectUsers = state.projectBoard.projectUsers.filter(
+        (person) => person.user_id !== action.payload
+      );
     },
     addPersonToProject: (state, action) => {
-      state.projectBoard.projectUsers.push(action.payload)
+      state.projectBoard.projectUsers.push(action.payload);
     },
     activeLoader: (state) => {
       state.boardLoader = true;
@@ -55,7 +58,7 @@ export const projectsTrackerSlice = createSlice({
               task_id: action.payload.startWrapperIndex.task.id,
               column_id: column.id,
             },
-          }).then((res) => {});
+          }).then(() => {});
         }
         if (column.id === action.payload.startWrapperIndex.index) {
           state.projectBoard.columns[index].tasks = column.tasks.filter(
@@ -75,10 +78,10 @@ export const projectsTrackerSlice = createSlice({
       })
     },
     setColumnName: (state, action) => {
-      state.columnName = action.payload
+      state.columnName = action.payload;
     },
     setColumnId: (state, action) => {
-      state.columnId = action.payload
+      state.columnId = action.payload;
     },
     setColumnPriority: (state, action) => {
       state.columnPriority = action.payload
@@ -93,9 +96,9 @@ export const projectsTrackerSlice = createSlice({
     editColumnName: (state, action) => {
       state.projectBoard.columns.forEach((column) => {
         if (column.id === action.payload.id) {
-          column.title = action.payload.title
+          column.title = action.payload.title;
         }
-      })
+      });
     },
     modalToggle: (state, action) => {
       state.modalType = action.payload;

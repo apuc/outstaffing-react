@@ -1,15 +1,15 @@
 body {
-  font-family: 'LabGrotesque', sans-serif !important;
+  font-family: "LabGrotesque", sans-serif !important;
 }
 
 .container {
   max-width: 1160px !important;
 }
 .catalog {
-  background: #F1F1F1;
+  background: #f1f1f1;
   height: 100%;
   min-height: 100vh;
-  font-family: 'LabGrotesque', sans-serif;
+  font-family: "LabGrotesque", sans-serif;
   padding-top: 23px;
 
   &__title {
@@ -37,7 +37,7 @@ body {
   }
 
   & > p {
-    font-family: 'GT Eesti Pro Display';
+    font-family: "GT Eesti Pro Display";
     font-size: 1.2em;
     font-weight: 300;
     font-style: normal;
@@ -60,7 +60,7 @@ body {
       right: 13%;
       top: 30%;
       max-width: 130px;
-      font-family: 'GT Eesti Pro Display';
+      font-family: "GT Eesti Pro Display";
       font-size: 18px;
       font-weight: 400;
       font-style: normal;
@@ -85,7 +85,7 @@ body {
 
   &__items {
     li {
-      font-family: 'GT Eesti Pro Display';
+      font-family: "GT Eesti Pro Display";
       font-size: 1.8em;
       font-weight: 100;
       font-style: normal;

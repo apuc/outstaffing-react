@@ -1,0 +1,18 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #52b709;
+  border-radius: 44px;
+  color: white;
+  font-style: normal;
+  font-family: "LabGrotesque", sans-serif;
+  border: none;
+  transition: 0.5s;
+
+  &:hover {
+    transition: 0.5s;
+    background-color: #52b709a8;
+    text-decoration: none;
+  }
+}

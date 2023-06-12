@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+
 import {
   getPartnerRequestId,
   getPartnerRequests,
   setPartnerRequestId,
   setPartnerRequestInfo,
-} from "../../redux/outstaffingSlice";
+} from "@redux/outstaffingSlice";
 
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../components/Footer/Footer";
-import { Navigation } from "../../components/Navigation/Navigation";
-import { Loader } from "../../components/Loader/Loader";
-import ModalLayout from "../../components/UI/ModalLayout/ModalLayout";
+import { urlForLocal } from "@utils/helper";
 
-import { apiRequest } from "../../api/request";
-import { getCorrectDate } from "../../components/Calendar/calendarHelper";
+import { apiRequest } from "@api/request";
 
-import { urlForLocal } from "../../helper";
+import { getCorrectDate } from "@components/Calendar/calendarHelper";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Loader } from "@components/Common/Loader/Loader";
+import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
-import arrowSwitchDate from "../../images/arrowViewReport.png";
-import backEndImg from "../../images/QualificationInfo.png";
-import middle from "../../images/QualificationInfoMiddle.png";
-import deleteBtn from "../../images/deleteBtn.png";
+import arrowSwitchDate from "assets/icons/arrows/arrowViewReport.png";
+import backEndImg from "assets/images/QualificationInfo.png";
+import middle from "assets/images/QualificationInfoMiddle.png";
+import deleteBtn from "assets/images/deleteBtn.png";
 
 import "./partnerBid.scss";
 
@@ -58,7 +59,7 @@ export const PartnerBid = () => {
         request_id: requestId,
         status: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       navigate("/profile/requests");
     });
   };

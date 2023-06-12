@@ -1,11 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   role: null,
 };
 
 export const roleSlice = createSlice({
-  name: 'role',
+  name: "role",
   initialState,
   reducers: {
     setRole: (state, action) => {

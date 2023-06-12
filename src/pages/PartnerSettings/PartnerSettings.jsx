@@ -1,13 +1,15 @@
 import React from "react";
-import { Footer } from "../../components/Footer/Footer";
 
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
+import BaseButton from "@components/Common/BaseButton/BaseButton";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
-import kontur from "../../images/konturLogo.png";
-import astral from "../../images/astralLogo.png";
+import astral from "assets/images/logo/astralLogo.png";
+import kontur from "assets/images/logo/konturLogo.png";
+
 import "./partnerSettings.scss";
-import { Navigation } from "../../components/Navigation/Navigation";
 
 export const PartnerSettings = () => {
   return (
@@ -38,8 +40,12 @@ export const PartnerSettings = () => {
               </div>
 
               <div className="settings__buttons">
-                <button className="settings__buttons-cancel">Отмена</button>
-                <button className="settings__buttons-save">Сохранить</button>
+                <BaseButton styles={"settings__buttons-cancel"}>
+                  Отмена
+                </BaseButton>
+                <BaseButton styles={"settings__buttons-save"}>
+                  Сохранить
+                </BaseButton>
               </div>
               <span className="settings__agreement">
                 Нажимая "Сохранить", вы соглашаетесь с Правилами обработки и
@@ -75,8 +81,12 @@ export const PartnerSettings = () => {
               </div>
 
               <div className="settings__buttons">
-                <button className="settings__buttons-cancel">Отмена</button>
-                <button className="settings__buttons-save">Сохранить</button>
+                <BaseButton styles={"settings__buttons-cancel"}>
+                  Отмена
+                </BaseButton>
+                <BaseButton styles={"settings__buttons-save"}>
+                  Сохранить
+                </BaseButton>
               </div>
               <span className="settings__agreement">
                 Нажимая "Сохранить", вы соглашаетесь с Правилами обработки и
