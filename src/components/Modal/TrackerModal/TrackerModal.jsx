@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { apiRequest } from "../../../api/request";
-import { urlForLocal } from '../../../helper'
+import { urlForLocal } from '../../../utils/helper'
 import {
   setColumnName,
   setColumnPriority,
@@ -17,7 +17,7 @@ import {
   addPersonToProject, getColumnPriority
 } from "../../../redux/projectsTrackerSlice";
 
-import arrowDown from "../../../images/selectArrow.png"
+import arrowDown from "../../../assets/icons/arrows/selectArrow.png"
 
 import "./trackerModal.scss";
 

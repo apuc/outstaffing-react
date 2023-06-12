@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../components/Footer/Footer";
+import { Footer } from "@components/Common/Footer/Footer";
 import { Navigation } from "../../components/Navigation/Navigation";
-import { Loader } from "../../components/Loader/Loader";
-import { urlForLocal } from '../../helper'
+import { Loader } from "@components/Common/Loader/Loader";
+import { urlForLocal } from '../../utils/helper'
 
 import { useDispatch, useSelector } from "react-redux";
 import { apiRequest } from "../../api/request";
@@ -26,18 +26,18 @@ import {
 } from "../../redux/projectsTrackerSlice";
 
 import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
-import TrackerModal from "../../components/UI/TrackerModal/TrackerModal";
+import TrackerModal from "../../components/Modal/TrackerModal/TrackerModal";
 
-import project from "../../images/trackerProject.svg";
-import tasks from "../../images/trackerTasks.svg";
-import archive from "../../images/archiveTracker.svg";
-import commentsBoard from "../../images/commentsBoard.svg";
-import filesBoard from "../../images/filesBoard.svg";
-import arrow from "../../images/arrowCalendar.png";
-import del from "../../images/delete.svg";
-import edit from "../../images/edit.svg";
-import close from "../../images/closeProjectPersons.svg"
-import accept from "../../images/accept.png";
+import project from "../../assets/icons/trackerProject.svg";
+import tasks from "../../assets/icons/trackerTasks.svg";
+import archive from "../../assets/icons/archiveTracker.svg";
+import commentsBoard from "../../assets/icons/commentsBoard.svg";
+import filesBoard from "../../assets/icons/filesBoard.svg";
+import arrow from "../../assets/icons/arrows/arrowCalendar.png";
+import del from "../../assets/icons/delete.svg";
+import edit from "../../assets/icons/edit.svg";
+import close from "../../assets/icons/close.png"
+import accept from "../../assets/images/accept.png";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import { ProfileHeader } from "../../ProfileHeader/ProfileHeader";
 import { ProfileBreadcrumbs } from "../../ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "../../Footer/Footer";
+import { Footer } from "@components/Common/Footer/Footer";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import TrackerModal from "../TrackerModal/TrackerModal";
+import TrackerModal from "../../Modal/TrackerModal/TrackerModal";
 import TrackerTaskComment from "../../../components/TrackerTaskComment/TrackerTaskComment";
 import { Navigation } from "../../Navigation/Navigation";
-import {Loader} from "../../Loader/Loader";
+import {Loader} from "@components/Common/Loader/Loader";
 
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -33,7 +33,7 @@ import link from "../../../images/link.svg";
 import archive2 from "../../../images/archive.svg";
 import del from "../../../images/delete.svg";
 import edit from "../../../images/edit.svg";
-import accept from "../../../images/accept.png";
+import accept from "../../../assets/images/accept.png";
 import close from "../../../images/closeProjectPersons.svg";
 
 import "./ticketFullScreen.scss";

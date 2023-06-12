@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import TrackerTaskSubComment from "../TrackerTaskComment/TrackerTaskComment";
 import { apiRequest } from "../../api/request";
-import {urlForLocal} from "../../helper";
+import {urlForLocal} from '../../utils/helper';
 import {getCorrectDate} from "../Calendar/calendarHelper";
-import edit from "../../images/edit.svg";
-import del from "../../images/delete.svg";
-import accept from "../../images/accept.png";
+import edit from "../../assets/icons/edit.svg";
+import del from "../../assets/icons/delete.svg";
+import accept from "../../assets/images/accept.png";
 
 export const TrackerTaskComment = ({
     taskId,
