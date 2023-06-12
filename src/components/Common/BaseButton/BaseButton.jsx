@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./basebutton.module.scss";
+import classes from "./basebutton.scss";
 
 export const BaseButton = ({ children, styles, ...props }) => {
   return (
