@@ -16,7 +16,7 @@ import {
   setProjectBoardFetch,
   setToggleTab,
   getProjectBoard,
-  getBoarderLoader, filteredParticipateTasks, filterCreatedByMe
+  getBoarderLoader,
 } from "../../../redux/projectsTrackerSlice";
 import { apiRequest } from "../../../api/request";
 
@@ -33,7 +33,6 @@ import link from "../../../images/link.svg";
 import archive2 from "../../../images/archive.svg";
 import del from "../../../images/delete.svg";
 import edit from "../../../images/edit.svg";
-import accept from "../../../assets/images/accept.png";
 import close from "../../../images/closeProjectPersons.svg";
 
 import "./ticketFullScreen.scss";

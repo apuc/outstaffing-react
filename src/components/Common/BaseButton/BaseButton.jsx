@@ -1,11 +1,11 @@
 import React from "react";
 
-import classes from "./basebutton.module.scss";
+import "./basebutton.scss"
 
 export const BaseButton = ({ children, styles, ...props }) => {
   return (
     <button
-      className={styles ? `${styles} ${classes.button}` : classes.button}
+      className={styles ? `${styles} button` : "button"}
       {...props}
     >
       {children}
