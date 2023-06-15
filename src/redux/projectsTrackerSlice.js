@@ -51,12 +51,13 @@ export const projectsTrackerSlice = createSlice({
     moveProjectTask: (state, action) => {
       state.projectBoard.columns.forEach((column, index) => {
         if (column.id === action.payload.columnId) {
-          column.tasks.push(action.payload.startWrapperIndex.task);
+          column.tasks.push({...action.payload.startWrapperIndex.task, column_id: column.id});
           apiRequest(`/task/update-task`, {
             method: "PUT",
             data: {
               task_id: action.payload.startWrapperIndex.task.id,
               column_id: column.id,
+              priority: column.tasks.length - 1
             },
           }).then(() => {});
         }
@@ -66,6 +67,38 @@ export const projectsTrackerSlice = createSlice({
           );
         }
       });
+    },
+    movePositionProjectTask: (state, action) => {
+      state.projectBoard.columns.forEach((column, index) => {
+        if (column.id === action.payload.startTask.column_id) {
+          state.projectBoard.columns[index].tasks = column.tasks.filter((task) => task.id !== action.payload.startTask.id)
+        }
+        if (column.id === action.payload.finishTask.column_id) {
+          column.tasks.splice(action.payload.finishIndex, 0, {...action.payload.startTask, column_id: column.id})
+          apiRequest(`/task/update-task`, {
+            method: "PUT",
+            data: {
+              task_id: action.payload.startTask.id,
+              column_id: column.id,
+            },
+          }).then(() => {});
+          const priorityTasks = []
+          column.tasks.forEach((task, index) => {
+            const curTask = {
+              task_id: task.id,
+              priority: index
+            }
+            priorityTasks.push(curTask)
+          })
+          apiRequest(`/task/set-priority`, {
+            method: "POST",
+            data: {
+              data: JSON.stringify(priorityTasks),
+              column_id: column.id,
+            },
+          }).then(() => {});
+        }
+      })
     },
     filterCreatedByMe: (state, action) => {
       state.projectBoard.columns.forEach((column) => {
@@ -128,7 +161,8 @@ export const {
   deletePersonOnProject,
   addPersonToProject,
   filterCreatedByMe,
-  filteredParticipateTasks
+  filteredParticipateTasks,
+  movePositionProjectTask
 } = projectsTrackerSlice.actions;
 
 export const getProjects = (state) => state.tracker.projects;

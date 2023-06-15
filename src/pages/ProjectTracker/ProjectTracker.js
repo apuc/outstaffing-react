@@ -22,7 +22,8 @@ import {
   setColumnPriority,
   deletePersonOnProject,
   filterCreatedByMe,
-  filteredParticipateTasks
+  filteredParticipateTasks,
+  movePositionProjectTask
 } from "../../redux/projectsTrackerSlice";
 
 import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
@@ -47,6 +48,7 @@ export const ProjectTracker = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [priorityTask, setPriorityTask] = useState(0);
   const [wrapperHover, setWrapperHover] = useState({});
+  const [taskHover, setTaskHover] = useState({})
   const [modalAdd, setModalAdd] = useState(false);
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState({});
@@ -63,29 +65,56 @@ export const ProjectTracker = () => {
   }, []);
 
   useEffect(() => {
+    const tasksHover = {}
+    const columnHover = {}
     if (Object.keys(projectBoard).length) {
       projectBoard.columns.forEach((column) => {
         setOpenColumnSelect((prevState) => ({
           ...prevState,
           [column.id]: false,
         }));
-        setWrapperHover((prevState) => ({ ...prevState, [column.id]: false }));
+        columnHover[column.id] = false
+        column.tasks.forEach(task => tasksHover[task.id] = false)
       });
     }
+    setWrapperHover(columnHover)
+    setTaskHover(tasksHover)
   }, [projectBoard]);
 
   function dragStartHandler(e, task, columnId) {
     startWrapperIndexTest.current = { task: task, index: columnId };
-    setTimeout(() => {
-      e.target.classList.add("tasks__board__item__hide");
-    }, 0);
   }
 
-  function dragEndHandler(e) {
+  function dragOverTaskHandler(e, task) {
+    e.preventDefault()
+    if (startWrapperIndexTest.current.task.id === task.id) {
+      return
+    }
+    setTaskHover((prevState) => ({[prevState]: false, [task.id]: true}))
+  }
+
+  function dragLeaveTaskHandler(e) {
+    setTaskHover((prevState) => ({[prevState]: false}))
+  }
+
+  function dragEndTaskHandler() {
+    setTaskHover((prevState) => ({[prevState]: false}))
     setWrapperHover((prevState) => ({
       [prevState]: false,
     }));
-    e.target.classList.remove("tasks__board__item__hide");
+  }
+
+  function dragDropTaskHandler(e, task, column) {
+    e.preventDefault()
+    if (task.id === startWrapperIndexTest.current.task.id) {
+      return
+    }
+    const finishTask = column.tasks.indexOf(task)
+    dispatch(movePositionProjectTask({
+      startTask: startWrapperIndexTest.current.task,
+      finishTask: task,
+      finishIndex: finishTask
+    }))
   }
 
   function dragOverHandler(e) {
@@ -102,15 +131,19 @@ export const ProjectTracker = () => {
       [columnId]: true,
     }));
   }
+
   function dragDropHandler(e, columnId) {
     e.preventDefault();
-    if (startWrapperIndexTest.current.index === columnId) {
-      return;
-    }
 
     setWrapperHover((prevState) => ({
       [prevState]: false,
     }));
+
+    if (startWrapperIndexTest.current.index === columnId
+        ||
+        e.target.className.includes('__item')) {
+      return;
+    }
 
     if (columnId !== startWrapperIndexTest.current.index) {
       dispatch(
@@ -126,7 +159,7 @@ export const ProjectTracker = () => {
     setSelectedTab(columnId);
     dispatch(modalToggle("createTiketProject"));
     setModalAdd(true);
-    setPriorityTask(length + 1)
+    setPriorityTask(length)
   }
 
   function openTicket(e, task) {
@@ -404,20 +437,23 @@ export const ProjectTracker = () => {
                             </div>
                           </div>
                         )}
-                        {column.tasks.map((task, index) => {
+                        {column.tasks.map((task) => {
                           return (
                             <div
                               key={task.id}
-                              className="tasks__board__item"
+                              className={`tasks__board__item ${
+                                  taskHover[task.id] ? "task__hover" : ""
+                              }`}
                               draggable={true}
-                              onDragStart={(e) =>
-                                dragStartHandler(e, task, column.id)
-                              }
-                              onDragEnd={(e) => dragEndHandler(e)}
+                              onDragStart={(e) => dragStartHandler(e, task, column.id)}
+                              onDragOver={(e) => dragOverTaskHandler(e, task)}
+                              onDragLeave={(e) => dragLeaveTaskHandler(e)}
+                              onDragEnd={(e) => dragEndTaskHandler()}
+                              onDrop={(e) => dragDropTaskHandler(e, task, column)}
                               onClick={(e) => openTicket(e, task)}
                             >
                               <div className="tasks__board__item__title">
-                                <p>{task.title}</p>
+                                <p className='task__board__item__title'>{task.title}</p>
                               </div>
                               <p className="tasks__board__item__description">
                                 {task.description}
