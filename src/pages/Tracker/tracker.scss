@@ -534,6 +534,10 @@
               0px 1px 1px rgba(0, 0, 0, 0.06);
           }
 
+          .task__hover {
+            box-shadow: 0 0 5px gray;
+          }
+
           &__item {
             width: 328px;
             max-height: 250px;
