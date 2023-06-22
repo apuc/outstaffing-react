@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import TrackerModal from "../../../components/Modal/TrackerModal/TrackerModal";
 import TrackerTaskComment from "../../../components/TrackerTaskComment/TrackerTaskComment";
 import { apiRequest } from "../../../api/request";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import "./modalTicket.scss"
 import {
   modalToggle,
@@ -24,6 +24,7 @@ import fullScreen from "../../../assets/icons/arrows/inFullScreen.svg";
 import close from "../../../assets/icons/closeProjectPersons.svg";
 
 import {urlForLocal, getCorrectRequestDate} from "../../../utils/helper";
+import {getProfileInfo} from "@redux/outstaffingSlice";
 
 export const ModalTiсket = ({
   active,
@@ -51,6 +52,9 @@ export const ModalTiсket = ({
     seconds: 0
   })
   const [timerId, setTimerId] = useState(null)
+  const [correctProjectUsers, setCorrectProjectUsers] = useState(projectUsers)
+  const [executorId, setExecutorId] = useState(task.executor_id)
+  const profileInfo = useSelector(getProfileInfo);
 
   function deleteTask() {
     apiRequest("/task/update-task", {
@@ -168,8 +172,10 @@ export const ModalTiсket = ({
         executor_id: person.user_id
       },
     }).then((res) => {
+      setExecutorId(person.user_id)
       setDropListOpen(false)
       setExecutor(res.executor)
+      dispatch(setProjectBoardFetch(projectId));
     });
   }
 
@@ -181,7 +187,9 @@ export const ModalTiсket = ({
         executor_id: 0
       },
     }).then(() => {
-      setExecutor(null)
+      setExecutorId(null)
+      setExecutor(null);
+      dispatch(setProjectBoardFetch(projectId));
     });
   }
 
@@ -195,6 +203,7 @@ export const ModalTiсket = ({
     }).then((res) => {
       setDropListMembersOpen(false)
       setMembers((prevValue) => ([...prevValue, res]))
+      dispatch(setProjectBoardFetch(projectId));
     });
   }
 
@@ -206,7 +215,8 @@ export const ModalTiсket = ({
         user_id: person.user_id
       },
     }).then(() => {
-      setMembers(members.filter((item) => item.user_id !== person.user_id))
+      setMembers(members.filter((item) => item.user_id !== person.user_id));
+      dispatch(setProjectBoardFetch(projectId));
     });
   }
 
@@ -243,6 +253,16 @@ export const ModalTiсket = ({
         }
       })
     })
+
+    if (localStorage.getItem("role_status") !== "18" && Boolean(!correctProjectUsers.find((item) => item.user_id === profileInfo.id_user))) {
+      setCorrectProjectUsers((prevState) => [...prevState, {
+        user: {
+          avatar: profileInfo.photo,
+          fio: profileInfo.fio
+        },
+        user_id: profileInfo.id_user
+      }])
+    }
   }, [])
 
   function startTimer () {
@@ -313,23 +333,24 @@ export const ModalTiсket = ({
               setInputsValue((prevValue) => ({...prevValue, title: e.target.value}))
             }} /> :<h5>{inputsValue.title}</h5>}
             <div className="content__description">
-              {editOpen ? <input value={inputsValue.description} onChange={(e) => {
+              {editOpen ?
+                  <textarea value={inputsValue.description} onChange={(e) => {
                 setInputsValue((prevValue) => ({...prevValue, description: e.target.value}))
               }}/> :<p>{inputsValue.description}</p>}
               {/*<img src={taskImg} className="image-task"></img>*/}
             </div>
             <div className="content__communication">
-              <p className="tasks">
-                <button
-                  onClick={() => {
-                    dispatch(modalToggle("addSubtask"));
-                    setAddSubtask(true);
-                  }}
-                >
-                  <img src={plus}></img>
-                  Добавить под задачу
-                </button>
-              </p>
+              {/*<p className="tasks">*/}
+              {/*  <button*/}
+              {/*    onClick={() => {*/}
+              {/*      dispatch(modalToggle("addSubtask"));*/}
+              {/*      setAddSubtask(true);*/}
+              {/*    }}*/}
+              {/*  >*/}
+              {/*    <img src={plus}></img>*/}
+              {/*    Добавить под задачу*/}
+              {/*  </button>*/}
+              {/*</p>*/}
               <p className="file">
                 <button>
                   <img src={file}></img>
@@ -378,7 +399,7 @@ export const ModalTiсket = ({
                 {dropListOpen &&
                   <div className='dropdownList'>
                     <img src={close} className='dropdownList__close' onClick={() => setDropListOpen(false)} />
-                    {projectUsers.map((person) => {
+                    {correctProjectUsers.map((person) => {
                       return <div className='dropdownList__person' key={person.user_id} onClick={() => taskExecutor(person)}>
                         <span>{person.user.fio}</span>
                         <img src={urlForLocal(person.user.avatar)} />
@@ -434,12 +455,17 @@ export const ModalTiсket = ({
             </div>
 
             {timerStart ?
-              <button className="stop" onClick={() => stopTaskTimer()}>
+              <button
+                  className={executorId === Number(localStorage.getItem('id')) ? 'stop' : 'stop disable'}
+                  onClick={() => stopTaskTimer()}>
                 Остановить
               </button>
                 :
-              <button className={task.executor_id === Number(localStorage.getItem('id')) ? 'start' : 'start disable'} onClick={() => startTaskTimer()}>
-                Начать делать <img src={arrow}></img>
+              <button
+                  className={executorId === Number(localStorage.getItem('id')) ? 'start' : 'start disable'}
+                  onClick={() => startTaskTimer()}>
+                Начать делать
+                <img src={arrow}></img>
               </button>
             }
           </div>
