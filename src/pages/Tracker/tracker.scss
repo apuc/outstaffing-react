@@ -232,13 +232,11 @@
 
           &__add {
             display: flex;
-            span {
+            margin: 0 15px 0 10px;
+
+            .button-add-column {
               width: 33px;
               height: 33px;
-              background: #52b709;
-              border-radius: 44px;
-              color: whitesmoke;
-              cursor: pointer;
               font-size: 15px;
               display: flex;
               align-items: center;
@@ -315,7 +313,7 @@
               z-index: 2;
               display: flex;
               flex-direction: column;
-              background: linear-gradient(180deg, #FFFFFF 0%, #EBEBEB 100%);
+              background: linear-gradient(180deg, #ffffff 0%, #ebebeb 100%);
               border-radius: 40px;
               padding: 33px 24px 44px 34px;
               width: 425px;
@@ -331,7 +329,7 @@
               &__count {
                 display: flex;
                 align-items: end;
-                color: #1458DD;
+                color: #1458dd;
                 font-size: 22px;
                 margin-top: 10px;
                 span {
@@ -355,7 +353,7 @@
                 span {
                   width: auto;
                   height: auto;
-                  color: #1458DD;
+                  color: #1458dd;
                   font-weight: 600;
                   font-size: 18px;
                   line-height: 22px;
@@ -407,7 +405,7 @@
                 cursor: pointer;
 
                 span {
-                  background: #8BCC60;
+                  background: #8bcc60;
                   left: 0;
                 }
 
@@ -424,6 +422,7 @@
           }
 
           &__checkBox {
+            margin: 0 15px 0 0;
             cursor: pointer;
             display: flex;
             align-items: center;

@@ -18,7 +18,7 @@ import { apiRequest } from "@api/request";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
-import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
+import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
@@ -386,10 +386,10 @@ export const TicketFullScreen = () => {
                       </BaseButton>
                     </p>
                     <p className="file">
-                      <button>
-                        <img src={file} alt="file"></img>
+                      <BaseButton styles={"button-add-file"}>
+                        <img src={file}></img>
                         Загрузить файл
-                      </button>
+                      </BaseButton>
                       <span>{0}</span>
                       Файлов
                     </p>
@@ -441,25 +441,28 @@ export const TicketFullScreen = () => {
                   </div>
 
                   <div className="add-worker moreItems">
-                    <button
+                    <BaseButton
                       onClick={() => {
                         dispatch(modalToggle("addWorker"));
                         setModalAddWorker(true);
                       }}
+                      styles={"button-add-worker"}
                     >
                       +
-                    </button>
+                    </BaseButton>
                     <span>Добавить исполнителя</span>
                   </div>
                   <div className="add-worker moreItems">
-                    <button
+                    <BaseButton
                       onClick={() => {
                         dispatch(modalToggle("addWorker"));
                         setModalAddWorker(true);
                       }}
+                      styles={"button-add-worker"}
                     >
                       +
-                    </button>
+                    </BaseButton>
+
                     <span>Добавить участников</span>
                   </div>
                 </div>

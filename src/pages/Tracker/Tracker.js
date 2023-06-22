@@ -16,7 +16,7 @@ import { apiRequest } from "@api/request";
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
-import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
+import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";

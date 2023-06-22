@@ -277,7 +277,7 @@
         justify-content: space-between;
         margin-left: 20px;
 
-        button {
+        .button-add-file {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -331,6 +331,10 @@
       img {
         cursor: pointer;
         margin-right: 18px;
+      }
+
+      &:focus-within {
+        border: 1px solid #0000004d;
       }
     }
   }
@@ -392,6 +396,7 @@
       display: flex;
       align-items: center;
       position: relative;
+      margin-bottom: 5px;
 
       span {
         color: #000000;
@@ -402,17 +407,12 @@
         font-weight: 400;
       }
 
-      button {
-        cursor: pointer;
-        background: #8bcc60;
-        border-radius: 44px;
+      .button-add-worker {
         width: 33px;
         height: 33px;
         display: flex;
         justify-content: center;
         align-items: center;
-        border: none;
-        color: white;
         font-size: 17px;
       }
     }
@@ -600,6 +600,10 @@
           p {
             font-weight: 700;
           }
+        }
+
+        p:hover {
+          text-decoration: underline;
         }
       }
     }

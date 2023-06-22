@@ -23,10 +23,11 @@ import { urlForLocal } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
+import BaseButton from "@components/Common/BaseButton/BaseButton";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
 import ModalTicket from "@components/Modal/Tracker/ModalTicket/ModalTicket";
-import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
+import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
@@ -298,14 +299,23 @@ export const ProjectTracker = () => {
                   <h4>Проект : {projectBoard.name}</h4>
 
                   <div className="tasks__head__add">
-                    <span
+                    <BaseButton
+                      onClick={() => {
+                        dispatch(modalToggle("createColumn"));
+                        setModalAdd(true);
+                      }}
+                      styles={"button-add-column"}
+                    >
+                      +
+                    </BaseButton>
+                    {/* <span
                       onClick={() => {
                         dispatch(modalToggle("createColumn"));
                         setModalAdd(true);
                       }}
                     >
                       +
-                    </span>
+                    </span> */}
                     <p>добавить колонку</p>
                   </div>
                   <div className="tasks__head__persons">

@@ -28,6 +28,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin: 0 0 15px 0;
 
     .input-container {
       width: 287px;
@@ -129,13 +130,13 @@
   .button-add {
     width: 130px;
     height: 37px;
-    background: #52b709;
-    border-radius: 44px;
-    border: none;
+    // background: #52b709;
+    // border-radius: 44px;
+    // border: none;
     font-weight: 400;
     font-size: 15px;
     line-height: 32px;
-    color: #ffffff;
+    // color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;

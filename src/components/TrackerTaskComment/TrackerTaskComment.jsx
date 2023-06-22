@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 
-import { apiRequest } from "../../api/request";
-import del from "../../assets/icons/delete.svg";
-import edit from "../../assets/icons/edit.svg";
-import accept from "../../assets/images/accept.png";
-import { urlForLocal } from "../../utils/helper";
-import { getCorrectDate } from "../Calendar/calendarHelper";
-import TrackerTaskSubComment from "../TrackerTaskComment/TrackerTaskComment";
+import { urlForLocal } from "@utils/helper";
+
+import { apiRequest } from "@api/request";
+
+import { getCorrectDate } from "@components/Calendar/calendarHelper";
+import TrackerTaskSubComment from "@components/TrackerTaskComment/TrackerTaskComment";
+
+import del from "assets/icons/delete.svg";
+import edit from "assets/icons/edit.svg";
+import accept from "assets/images/accept.png";
 
 export const TrackerTaskComment = ({
   taskId,

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { apiRequest } from "../../../api/request";
-import arrowDown from "../../../assets/icons/arrows/selectArrow.png";
 import {
   addPersonToProject,
   editColumnName,
@@ -16,8 +14,16 @@ import {
   setColumnPriority,
   setProject,
   setProjectBoardFetch,
-} from "../../../redux/projectsTrackerSlice";
-import { urlForLocal } from "../../../utils/helper";
+} from "@redux/projectsTrackerSlice";
+
+import { urlForLocal } from "@utils/helper";
+
+import { apiRequest } from "@api/request";
+
+import BaseButton from "@components/Common/BaseButton/BaseButton";
+
+import arrowDown from "assets/icons/arrows/selectArrow.png";
+
 import "./trackerModal.scss";
 
 export const TrackerModal = ({
@@ -266,9 +272,9 @@ export const TrackerModal = ({
                 )}
               </div>
             </div>
-            <button className="button-add" onClick={addUserToProject}>
+            <BaseButton styles={"button-add"} onClick={addUserToProject}>
               Добавить
-            </button>
+            </BaseButton>
           </div>
         )}
         {modalType === "createTiketProject" && (
@@ -292,9 +298,9 @@ export const TrackerModal = ({
                 />
               </div>
             </div>
-            <button className="button-add" onClick={createTiket}>
+            <BaseButton styles={"button-add"} onClick={createTiket}>
               Создать
-            </button>
+            </BaseButton>
           </div>
         )}
         {modalType === "editProject" && (
@@ -309,9 +315,10 @@ export const TrackerModal = ({
                 />
               </div>
             </div>
-            <button className="button-add" onClick={editProject}>
+
+            <BaseButton styles={"button-add"} onClick={editProject}>
               Сохранить
-            </button>
+            </BaseButton>
           </div>
         )}
         {modalType === "createProject" && (
@@ -325,9 +332,9 @@ export const TrackerModal = ({
                   onChange={(e) => setNameProject(e.target.value)}
                 />
               </div>
-              <button className="button-add" onClick={createProject}>
+              <BaseButton styles={"button-add"} onClick={createProject}>
                 Создать
-              </button>
+              </BaseButton>
             </div>
           </div>
         )}
@@ -343,9 +350,12 @@ export const TrackerModal = ({
                 <textarea className="title-project__textarea"></textarea>
               </div>
             </div>
-            <button className="button-add" onClick={(e) => e.preventDefault()}>
+            <BaseButton
+              styles={"button-add"}
+              onClick={(e) => e.preventDefault()}
+            >
               Добавить
-            </button>
+            </BaseButton>
           </div>
         )}
         {modalType === "createColumn" && (
@@ -360,9 +370,9 @@ export const TrackerModal = ({
                 />
               </div>
             </div>
-            <button className="button-add" onClick={createTab}>
+            <BaseButton styles={"button-add"} onClick={createTab}>
               Создать
-            </button>
+            </BaseButton>
           </div>
         )}
         {modalType === "editColumn" && (
@@ -388,9 +398,9 @@ export const TrackerModal = ({
                 />
               </div>
             </div>
-            <button className="button-add" onClick={changeColumnParams}>
+            <BaseButton styles={"button-add"} onClick={changeColumnParams}>
               Сохранить
-            </button>
+            </BaseButton>
           </div>
         )}
 

@@ -9,7 +9,7 @@ import { getCorrectRequestDate, urlForLocal } from "@utils/helper";
 import { apiRequest } from "@api/request";
 
 import BaseButton from "@components/Common/BaseButton/BaseButton";
-import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
+import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
 
 import archive from "assets/icons/archive.svg";
@@ -370,10 +370,10 @@ export const ModalTiсket = ({
                 </BaseButton>
               </p>
               <p className="file">
-                <button>
+                <BaseButton styles={"button-add-file"}>
                   <img src={file}></img>
                   Загрузить файл
-                </button>
+                </BaseButton>
                 <span>{0}</span>
                 Файлов
               </p>
@@ -425,7 +425,12 @@ export const ModalTiсket = ({
               </div>
             ) : (
               <div className="add-worker moreItems ">
-                <button onClick={() => setDropListOpen(true)}>+</button>
+                <BaseButton
+                  onClick={() => setDropListOpen(true)}
+                  styles={"button-add-worker"}
+                >
+                  +
+                </BaseButton>
                 <span>Добавить исполнителя</span>
                 {dropListOpen && (
                   <div className="dropdownList">
@@ -473,7 +478,12 @@ export const ModalTiсket = ({
             )}
 
             <div className="add-worker moreItems">
-              <button onClick={() => setDropListMembersOpen(true)}>+</button>
+              <BaseButton
+                onClick={() => setDropListMembersOpen(true)}
+                styles={"button-add-worker"}
+              >
+                +
+              </BaseButton>
               <span>Добавить участников</span>
               {dropListMembersOpen && (
                 <div className="dropdownList">
