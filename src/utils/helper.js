@@ -53,12 +53,11 @@ export function scrollToForm() {
 }
 
 export function getCorrectRequestDate(date) {
-  const yyyy = String(date.getUTCFullYear())
+  const yyyy = String(date.getUTCFullYear());
   const mm = String(date.getUTCMonth() + 1).padStart(2, "0");
   const dd = String(date.getUTCDate()).padStart(2, "0");
-  const hh = String(date.getUTCHours())
-  const min = String(date.getUTCMinutes())
-  const sec = String(date.getUTCSeconds())
-  return `${yyyy}-${mm}-${dd} ${hh}:${min}:${sec}`
+  const hh = String(date.getUTCHours());
+  const min = String(date.getUTCMinutes());
+  const sec = String(date.getUTCSeconds());
+  return `${yyyy}-${mm}-${dd} ${hh}:${min}:${sec}`;
 }
-
