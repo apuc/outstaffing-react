@@ -109,8 +109,8 @@
 
           &__subComment {
             &:before {
-              content: '';
-              background: #E4E4E6;
+              content: "";
+              background: #e4e4e6;
               height: 1px;
               width: 7px;
               position: absolute;
@@ -121,9 +121,9 @@
 
           &__main {
             &:after {
-              content: '';
+              content: "";
               position: absolute;
-              background-image: url("../../../assets/images/mainTaskCommentImg.png");
+              background-image: url("assets/images/mainTaskCommentImg.png");
               width: 10px;
               height: 8px;
               top: 50px;
@@ -131,9 +131,9 @@
             }
 
             &:before {
-              content: '';
+              content: "";
               position: absolute;
-              background: #E4E4E6;
+              background: #e4e4e6;
               width: 1px;
               height: calc(100% - 120px);
               left: 29px;
@@ -258,16 +258,12 @@
       .tasks {
         justify-content: space-evenly;
 
-        button {
+        .button-green-add {
           width: 180px;
           height: 40px;
-          background: #52b709;
-          border-radius: 44px;
           font-weight: 400;
           font-size: 12px;
           line-height: 32px;
-          border: none;
-          color: #ffffff;
         }
       }
 
