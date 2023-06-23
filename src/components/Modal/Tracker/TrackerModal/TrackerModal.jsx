@@ -21,6 +21,7 @@ import { urlForLocal } from "@utils/helper";
 import { apiRequest } from "@api/request";
 
 import BaseButton from "@components/Common/BaseButton/BaseButton";
+import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 
 import arrowDown from "assets/icons/arrows/selectArrow.png";
 
@@ -211,202 +212,197 @@ export const TrackerModal = ({
   }, [active]);
 
   return (
-    <div
-      className={active ? "modal-add active" : "modal-add"}
-      onClick={() => {
-        setActive(false);
-        setSelectWorkersOpen(false);
-      }}
+    <ModalLayout
+      active={active}
+      setActive={setActive}
+      // onClick={() => {
+      //   setSelectWorkersOpen(false);
+      // }}
     >
-      <div className="modal-add__content" onClick={(e) => e.stopPropagation()}>
-        {modalType === "addWorker" && (
-          <div>
-            <div className="title-project">
-              <h4>Добавьте участника</h4>
-              {/*<div className="input-container">*/}
-              {/*  <input*/}
-              {/*    className="name-project"*/}
-              {/*    value={emailWorker}*/}
-              {/*    onChange={(e) => setEmailWorker(e.target.value)}*/}
-              {/*  />*/}
-              {/*</div>*/}
-              <div
-                className={
-                  selectWorkersOpen ? "select__worker open" : "select__worker"
-                }
-                onClick={() => setSelectWorkersOpen(!selectWorkersOpen)}
-              >
-                <p>
-                  {selectedWorker
-                    ? selectedWorker.employee.fio
-                    : "Выберите пользователя"}
-                </p>
-                <img className="arrow" src={arrowDown} alt="arrow" />
-                {Boolean(selectWorkersOpen) && (
-                  <div className="select__worker__dropDown">
-                    {Boolean(workers.length) ? (
-                      workers.map((worker) => {
-                        if (worker === selectedWorker) {
-                          return;
-                        }
-                        return (
-                          <div
-                            className="worker"
-                            key={worker.id}
-                            onClick={() => {
-                              setSelectedWorker(worker);
-                            }}
-                          >
-                            <p>{worker.employee.fio}</p>
-                            <img
-                              src={urlForLocal(worker.employee.avatar)}
-                              alt="avatar"
-                            />
-                          </div>
-                        );
-                      })
-                    ) : (
-                      <div>Нет пользователей</div>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-            <BaseButton styles={"button-add"} onClick={addUserToProject}>
-              Добавить
-            </BaseButton>
-          </div>
-        )}
-        {modalType === "createTiketProject" && (
-          <div>
-            <div className="title-project">
-              <h4>Введите название и описание задачи</h4>
-              <div className="input-container">
-                <input
-                  className="name-project"
-                  value={valueTiket}
-                  onChange={(e) => setValueTiket(e.target.value)}
-                  placeholder="Название задачи"
-                />
-              </div>
-              <div className="input-container">
-                <input
-                  className="name-project"
-                  value={descriptionTicket}
-                  onChange={(e) => setDescriptionTicket(e.target.value)}
-                  placeholder="Описание задачи"
-                />
-              </div>
-            </div>
-            <BaseButton styles={"button-add"} onClick={createTiket}>
-              Создать
-            </BaseButton>
-          </div>
-        )}
-        {modalType === "editProject" && (
-          <div>
-            <div className="title-project">
-              <h4>Введите новое название</h4>
-              <div className="input-container">
-                <input
-                  className="name-project"
-                  value={projectName}
-                  onChange={(e) => setProjectName(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <BaseButton styles={"button-add"} onClick={editProject}>
-              Сохранить
-            </BaseButton>
-          </div>
-        )}
-        {modalType === "createProject" && (
-          <div>
-            <div className="title-project">
-              <h4>{titleProject}</h4>
-              <div className="input-container">
-                <input
-                  className="name-project"
-                  value={nameProject}
-                  onChange={(e) => setNameProject(e.target.value)}
-                />
-              </div>
-              <BaseButton styles={"button-add"} onClick={createProject}>
-                Создать
-              </BaseButton>
-            </div>
-          </div>
-        )}
-        {modalType === "addSubtask" && (
-          <div>
-            <div className="title-project subtask">
-              <h4>
-                Вы добавляете подзадачу{" "}
-                <p>в колонку(id) задачи "{defautlInput}"</p>
-              </h4>
-              <p className="title-project__decs">Введите текст</p>
-              <div>
-                <textarea className="title-project__textarea"></textarea>
-              </div>
-            </div>
-            <BaseButton
-              styles={"button-add"}
-              onClick={(e) => e.preventDefault()}
+      {modalType === "addWorker" && (
+        <div>
+          <div className="title-project">
+            <h4>Добавьте участника</h4>
+            {/*<div className="input-container">*/}
+            {/*  <input*/}
+            {/*    className="name-project"*/}
+            {/*    value={emailWorker}*/}
+            {/*    onChange={(e) => setEmailWorker(e.target.value)}*/}
+            {/*  />*/}
+            {/*</div>*/}
+            <div
+              className={
+                selectWorkersOpen ? "select__worker open" : "select__worker"
+              }
+              onClick={() => setSelectWorkersOpen(!selectWorkersOpen)}
             >
-              Добавить
-            </BaseButton>
-          </div>
-        )}
-        {modalType === "createColumn" && (
-          <div>
-            <div className="title-project">
-              <h4>Введите название колонки</h4>
-              <div className="input-container">
-                <input
-                  className="name-project"
-                  value={valueColumn}
-                  onChange={(e) => setValueColumn(e.target.value)}
-                />
-              </div>
+              <p>
+                {selectedWorker
+                  ? selectedWorker.employee.fio
+                  : "Выберите пользователя"}
+              </p>
+              <img className="arrow" src={arrowDown} alt="arrow" />
+              {Boolean(selectWorkersOpen) && (
+                <div className="select__worker__dropDown">
+                  {Boolean(workers.length) ? (
+                    workers.map((worker) => {
+                      if (worker === selectedWorker) {
+                        return;
+                      }
+                      return (
+                        <div
+                          className="worker"
+                          key={worker.id}
+                          onClick={() => {
+                            setSelectedWorker(worker);
+                          }}
+                        >
+                          <p>{worker.employee.fio}</p>
+                          <img
+                            src={urlForLocal(worker.employee.avatar)}
+                            alt="avatar"
+                          />
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div>Нет пользователей</div>
+                  )}
+                </div>
+              )}
             </div>
-            <BaseButton styles={"button-add"} onClick={createTab}>
+          </div>
+          <BaseButton styles={"button-add"} onClick={addUserToProject}>
+            Добавить
+          </BaseButton>
+        </div>
+      )}
+      {modalType === "createTiketProject" && (
+        <div>
+          <div className="title-project">
+            <h4>Введите название и описание задачи</h4>
+            <div className="input-container">
+              <input
+                className="name-project"
+                value={valueTiket}
+                onChange={(e) => setValueTiket(e.target.value)}
+                placeholder="Название задачи"
+              />
+            </div>
+            <div className="input-container">
+              <input
+                className="name-project"
+                value={descriptionTicket}
+                onChange={(e) => setDescriptionTicket(e.target.value)}
+                placeholder="Описание задачи"
+              />
+            </div>
+          </div>
+          <BaseButton styles={"button-add"} onClick={createTiket}>
+            Создать
+          </BaseButton>
+        </div>
+      )}
+      {modalType === "editProject" && (
+        <div>
+          <div className="title-project">
+            <h4>Введите новое название</h4>
+            <div className="input-container">
+              <input
+                className="name-project"
+                value={projectName}
+                onChange={(e) => setProjectName(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <BaseButton styles={"button-add"} onClick={editProject}>
+            Сохранить
+          </BaseButton>
+        </div>
+      )}
+      {modalType === "createProject" && (
+        <div>
+          <div className="title-project">
+            <h4>{titleProject}</h4>
+            <div className="input-container">
+              <input
+                className="name-project"
+                value={nameProject}
+                onChange={(e) => setNameProject(e.target.value)}
+              />
+            </div>
+            <BaseButton styles={"button-add"} onClick={createProject}>
               Создать
             </BaseButton>
           </div>
-        )}
-        {modalType === "editColumn" && (
-          <div>
-            <div className="title-project">
-              <h4>Введите новое название</h4>
-              <div className="input-container">
-                <input
-                  className="name-project"
-                  value={columnName}
-                  onChange={(e) => dispatch(setColumnName(e.target.value))}
-                />
-              </div>
-              <h4>Приоритет колонки</h4>
-              <div className="input-container">
-                <input
-                  className="name-project"
-                  placeholder="Приоритет колонки"
-                  type="number"
-                  step="1"
-                  value={columnPriority}
-                  onChange={(e) => dispatch(setColumnPriority(e.target.value))}
-                />
-              </div>
+        </div>
+      )}
+      {modalType === "addSubtask" && (
+        <div>
+          <div className="title-project subtask">
+            <h4>
+              Вы добавляете подзадачу{" "}
+              <p>в колонку(id) задачи "{defautlInput}"</p>
+            </h4>
+            <p className="title-project__decs">Введите текст</p>
+            <div>
+              <textarea className="title-project__textarea"></textarea>
             </div>
-            <BaseButton styles={"button-add"} onClick={changeColumnParams}>
-              Сохранить
-            </BaseButton>
           </div>
-        )}
+          <BaseButton styles={"button-add"} onClick={(e) => e.preventDefault()}>
+            Добавить
+          </BaseButton>
+        </div>
+      )}
+      {modalType === "createColumn" && (
+        <div>
+          <div className="title-project">
+            <h4>Введите название колонки</h4>
+            <div className="input-container">
+              <input
+                className="name-project"
+                value={valueColumn}
+                onChange={(e) => setValueColumn(e.target.value)}
+              />
+            </div>
+          </div>
+          <BaseButton styles={"button-add"} onClick={createTab}>
+            Создать
+          </BaseButton>
+        </div>
+      )}
+      {modalType === "editColumn" && (
+        <div>
+          <div className="title-project">
+            <h4>Введите новое название</h4>
+            <div className="input-container">
+              <input
+                className="name-project"
+                value={columnName}
+                onChange={(e) => dispatch(setColumnName(e.target.value))}
+              />
+            </div>
+            <h4>Приоритет колонки</h4>
+            <div className="input-container">
+              <input
+                className="name-project"
+                placeholder="Приоритет колонки"
+                type="number"
+                step="1"
+                value={columnPriority}
+                onChange={(e) => dispatch(setColumnPriority(e.target.value))}
+              />
+            </div>
+          </div>
+          <BaseButton styles={"button-add"} onClick={changeColumnParams}>
+            Сохранить
+          </BaseButton>
+        </div>
+      )}
 
-        <span className="exit" onClick={() => setActive(false)}></span>
-      </div>
-    </div>
+      <span className="exit" onClick={() => setActive(false)}></span>
+    </ModalLayout>
   );
 };
 

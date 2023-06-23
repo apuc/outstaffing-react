@@ -32,6 +32,7 @@
       max-width: 85%;
       display: flex;
       align-items: center;
+      flex-direction: row;
 
       &__category {
         margin-right: 17px;
@@ -100,7 +101,7 @@
       .comments__list {
         display: flex;
         flex-direction: column;
-        max-height: 420px;
+        max-height: 300px;
         overflow: auto;
 
         &::-webkit-scrollbar {
