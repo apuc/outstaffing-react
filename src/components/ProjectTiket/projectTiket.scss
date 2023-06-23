@@ -6,6 +6,12 @@
   padding: 17px 26px 16px;
   cursor: pointer;
   max-width: 440px;
+  transition: 0.4s;
+
+  &:hover {
+    transition: 0.4s;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.11);
+  }
 
   @media (max-width: 1068px) {
     width: 47%;
