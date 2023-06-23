@@ -14,6 +14,7 @@ import { urlForLocal } from "@utils/helper";
 import { apiRequest } from "@api/request";
 
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
+import BaseButton from "@components/Common/BaseButton/BaseButton";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
@@ -190,15 +191,16 @@ export const Tracker = () => {
                       <img src={noProjects} alt="noProjectImg" />
                       <p>Создайте свой первый проект</p>
                     </div>
-                    <button
-                      className="createProjectBtn"
+
+                    <BaseButton
+                      styles={"createProjectBtn"}
                       onClick={() => {
                         dispatch(modalToggle("createProject"));
                         setModalCreateProject(true);
                       }}
                     >
                       <span>+</span>Создать проект
-                    </button>
+                    </BaseButton>
                   </div>
                   <p className="no-projects__info">
                     Ставьте задачи, следите за прогрессом, ведите учёт рабочего
@@ -208,15 +210,15 @@ export const Tracker = () => {
               )}
             {Boolean(projects.length) && !loader && (
               <div className="create-newProject">
-                <button
-                  className="createProjectBtn"
+                <BaseButton
+                  styles="createProjectBtn"
                   onClick={() => {
                     dispatch(modalToggle("createProject"));
                     setModalCreateProject(true);
                   }}
                 >
                   <span>+</span>Создать проект
-                </button>
+                </BaseButton>
                 <p>
                   Ставьте задачи, следите за прогрессом, ведите учёт рабочего
                   времени

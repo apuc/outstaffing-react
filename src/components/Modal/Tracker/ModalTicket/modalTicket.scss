@@ -17,32 +17,53 @@
 
 .modal-tiket__content {
   background: #ffffff;
-  //border: 1px solid #dde2e4;
   border-radius: 8px;
   display: flex;
   flex-direction: row;
 
   .content {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 600px;
     margin: 26px 0 0 21px;
 
     .title-project {
-      color: #1458dd;
-      font-family: "LabGrotesque", sans-serif;
+      max-width: 85%;
       display: flex;
       align-items: center;
-      font-weight: 700;
-      font-size: 22px;
-      line-height: 32px;
 
       &__category {
         margin-right: 17px;
       }
 
+      h2,
+      h3 {
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 32px;
+        color: #1458dd;
+        margin: 0;
+        font-family: "LabGrotesque", sans-serif;
+      }
+
+      h2 {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+
+        h3 {
+          margin-left: 5px;
+          word-break: break-all;
+        }
+      }
+
       &__full {
-        margin-left: 35%;
+        position: absolute;
+        position: absolute;
+        right: 28px;
+        top: 0;
       }
     }
 

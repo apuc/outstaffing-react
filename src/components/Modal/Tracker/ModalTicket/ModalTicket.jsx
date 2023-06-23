@@ -314,16 +314,17 @@ export const ModalTiсket = ({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="content">
-          <h3 className="title-project">
+          <Link to={`/tracker/task/${task.id}`} className="title-project__full">
+            <img src={fullScreen}></img>
+          </Link>
+
+          <div className="title-project">
             <img src={category} className="title-project__category"></img>
-            Проект: {projectName}
-            <Link
-              to={`/tracker/task/${task.id}`}
-              className="title-project__full"
-            >
-              <img src={fullScreen}></img>
-            </Link>
-          </h3>
+            <h2>
+              Проект:
+              <h3>{projectName}</h3>
+            </h2>
+          </div>
 
           <div className="content__task">
             <span>Задача</span>

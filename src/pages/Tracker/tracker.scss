@@ -142,8 +142,6 @@
                 margin-left: 17px;
               }
             }
-            button {
-            }
           }
 
           &__info {
@@ -155,16 +153,11 @@
         }
 
         .createProjectBtn {
-          background: #52b709;
-          border-radius: 44px;
           max-width: 188px;
           height: 50px;
           width: 100%;
-          border: none;
           font-weight: 400;
           font-size: 15px;
-          line-height: 32px;
-          color: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -228,6 +221,8 @@
             font-size: 22px;
             line-height: 32px;
             margin-bottom: 0;
+            max-width: 30%;
+            word-break: break-all;
           }
 
           &__add {
@@ -321,8 +316,9 @@
 
               &__close {
                 cursor: pointer;
-                width: 8px;
-                height: 8px;
+                position: absolute;
+                right: 20px;
+                top: 15px;
                 margin-left: auto;
               }
 
@@ -395,8 +391,8 @@
 
                 .delete {
                   cursor: pointer;
-                  width: 14px;
-                  height: 14px;
+                  width: 20px;
+                  height: 20px;
                 }
               }
 
@@ -770,6 +766,10 @@
               max-width: 450px;
               width: 100%;
 
+              &:focus-within {
+                border: 1px solid #0000004d;
+              }
+
               @media (max-width: 690px) {
                 max-width: 350px;
               }
@@ -833,7 +833,14 @@
               border-radius: 12px;
               padding: 12px 42px 7px 32px;
               justify-content: space-between;
+              transition: 0.4s;
               cursor: pointer;
+
+              &:hover {
+                transform: scale(0.99);
+                box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.11);
+                transition: 0.4s;
+              }
 
               &__info {
                 display: flex;
@@ -967,9 +974,12 @@
             background: #f1f1f1;
             border-radius: 12px;
             padding: 12px 42px 7px 32px;
+            transition: 0.4s;
 
             &:hover {
-              background: var(--ds-background-neutral-subtle-hovered, #f4f5f7);
+              transform: scale(0.99);
+              box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.11);
+              transition: 0.4s;
             }
 
             p {
@@ -1045,6 +1055,10 @@
               border-radius: 6px;
               max-width: 300px;
               width: 100%;
+
+              &:focus-within {
+                border: 1px solid #0000004d;
+              }
 
               @media (max-width: 590px) {
                 max-width: 230px;
