@@ -257,6 +257,13 @@
       display: flex;
       flex-direction: column;
       margin-top: 10px;
+
+      textarea {
+        min-height: 120px;
+        max-height: 450px;
+        font-size: 14px;
+      }
+
       p {
         font-weight: 400;
         font-size: 14px;

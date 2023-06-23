@@ -343,7 +343,7 @@ export const ModalTiсket = ({
             )}
             <div className="content__description">
               {editOpen ? (
-                <input
+                <textarea
                   value={inputsValue.description}
                   onChange={(e) => {
                     setInputsValue((prevValue) => ({
