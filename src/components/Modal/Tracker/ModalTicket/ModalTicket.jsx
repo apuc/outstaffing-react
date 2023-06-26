@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { getProfileInfo } from "@redux/outstaffingSlice";
 import { setProjectBoardFetch } from "@redux/projectsTrackerSlice";
 
 import { getCorrectRequestDate, urlForLocal } from "@utils/helper";
@@ -24,7 +25,6 @@ import send from "assets/icons/send.svg";
 import watch from "assets/icons/watch.svg";
 
 import "./modalTicket.scss";
-import { getProfileInfo } from "@redux/outstaffingSlice";
 
 export const ModalTiсket = ({
   active,
@@ -247,28 +247,32 @@ export const ModalTiсket = ({
       (res) => {
         let timerSeconds = 0;
         res.length &&
-        res.forEach((time) => {
-          timerSeconds += time.deltaSeconds;
-          setCurrentTimerCount({
-            hours: Math.floor(timerSeconds / 60 / 60),
-            minute: Math.floor((timerSeconds / 60) % 60),
-            seconds: timerSeconds % 60,
+          res.forEach((time) => {
+            timerSeconds += time.deltaSeconds;
+            setCurrentTimerCount({
+              hours: Math.floor(timerSeconds / 60 / 60),
+              minute: Math.floor((timerSeconds / 60) % 60),
+              seconds: timerSeconds % 60,
+            });
+            updateTimerHours = Math.floor(timerSeconds / 60 / 60);
+            updateTimerMinute = Math.floor((timerSeconds / 60) % 60);
+            updateTimerSec = timerSeconds % 60;
+            if (!time.stopped_at) {
+              setTimerStart(true);
+              startTimer();
+              setTimerInfo(time);
+            }
           });
-          updateTimerHours = Math.floor(timerSeconds / 60 / 60);
-          updateTimerMinute = Math.floor((timerSeconds / 60) % 60);
-          updateTimerSec = timerSeconds % 60;
-          if (!time.stopped_at) {
-            setTimerStart(true);
-            startTimer();
-            setTimerInfo(time);
-          }
-        });
       }
     );
 
     if (
       localStorage.getItem("role_status") !== "18" &&
-      Boolean(!correctProjectUsers.find((item) => item.user_id === profileInfo.id_user))
+      Boolean(
+        !correctProjectUsers.find(
+          (item) => item.user_id === profileInfo.id_user
+        )
+      )
     ) {
       setCorrectProjectUsers((prevState) => [
         ...prevState,
@@ -393,7 +397,7 @@ export const ModalTiсket = ({
               {/*  </button>*/}
               {/*</p>*/}
               <p className="file">
-                <button className='button-add-file'>
+                <button className="button-add-file">
                   <img src={file}></img>
                   Загрузить файл
                 </button>
@@ -448,7 +452,12 @@ export const ModalTiсket = ({
               </div>
             ) : (
               <div className="add-worker moreItems ">
-                <button className='button-add-worker' onClick={() => setDropListOpen(true)}>+</button>
+                <button
+                  className="button-add-worker"
+                  onClick={() => setDropListOpen(true)}
+                >
+                  +
+                </button>
                 <span>Добавить исполнителя</span>
                 {dropListOpen && (
                   <div className="dropdownList">
@@ -496,7 +505,12 @@ export const ModalTiсket = ({
             )}
 
             <div className="add-worker moreItems">
-              <button className='button-add-worker' onClick={() => setDropListMembersOpen(true)}>+</button>
+              <button
+                className="button-add-worker"
+                onClick={() => setDropListMembersOpen(true)}
+              >
+                +
+              </button>
               <span>Добавить участников</span>
               {dropListMembersOpen && (
                 <div className="dropdownList">
