@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { modalToggle, setProjectBoardFetch } from "@redux/projectsTrackerSlice";
+import { getProfileInfo } from "@redux/outstaffingSlice";
+import { setProjectBoardFetch } from "@redux/projectsTrackerSlice";
 
 import { getCorrectRequestDate, urlForLocal } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
-import BaseButton from "@components/Common/BaseButton/BaseButton";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
 
@@ -21,7 +21,6 @@ import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
 import file from "assets/icons/fileModal.svg";
 import link from "assets/icons/link.svg";
-import plus from "assets/icons/plus.svg";
 import send from "assets/icons/send.svg";
 import watch from "assets/icons/watch.svg";
 
@@ -57,6 +56,9 @@ export const ModalTiсket = ({
     seconds: 0,
   });
   const [timerId, setTimerId] = useState(null);
+  const [correctProjectUsers, setCorrectProjectUsers] = useState(projectUsers);
+  const [executorId, setExecutorId] = useState(task.executor_id);
+  const profileInfo = useSelector(getProfileInfo);
 
   function deleteTask() {
     apiRequest("/task/update-task", {
@@ -65,7 +67,7 @@ export const ModalTiсket = ({
         task_id: task.id,
         status: 0,
       },
-    }).then(() => {
+    }).then((res) => {
       setActive(false);
       dispatch(setProjectBoardFetch(projectId));
     });
@@ -79,7 +81,7 @@ export const ModalTiсket = ({
         title: inputsValue.title,
         description: inputsValue.description,
       },
-    }).then(() => {
+    }).then((res) => {
       dispatch(setProjectBoardFetch(projectId));
     });
   }
@@ -177,8 +179,10 @@ export const ModalTiсket = ({
         executor_id: person.user_id,
       },
     }).then((res) => {
+      setExecutorId(person.user_id);
       setDropListOpen(false);
       setExecutor(res.executor);
+      dispatch(setProjectBoardFetch(projectId));
     });
   }
 
@@ -190,7 +194,9 @@ export const ModalTiсket = ({
         executor_id: 0,
       },
     }).then(() => {
+      setExecutorId(null);
       setExecutor(null);
+      dispatch(setProjectBoardFetch(projectId));
     });
   }
 
@@ -204,6 +210,7 @@ export const ModalTiсket = ({
     }).then((res) => {
       setDropListMembersOpen(false);
       setMembers((prevValue) => [...prevValue, res]);
+      dispatch(setProjectBoardFetch(projectId));
     });
   }
 
@@ -216,6 +223,7 @@ export const ModalTiсket = ({
       },
     }).then(() => {
       setMembers(members.filter((item) => item.user_id !== person.user_id));
+      dispatch(setProjectBoardFetch(projectId));
     });
   }
 
@@ -257,6 +265,26 @@ export const ModalTiсket = ({
           });
       }
     );
+
+    if (
+      localStorage.getItem("role_status") !== "18" &&
+      Boolean(
+        !correctProjectUsers.find(
+          (item) => item.user_id === profileInfo.id_user
+        )
+      )
+    ) {
+      setCorrectProjectUsers((prevState) => [
+        ...prevState,
+        {
+          user: {
+            avatar: profileInfo.photo,
+            fio: profileInfo.fio,
+          },
+          user_id: profileInfo.id_user,
+        },
+      ]);
+    }
   }, []);
 
   function startTimer() {
@@ -314,17 +342,16 @@ export const ModalTiсket = ({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="content">
-          <Link to={`/tracker/task/${task.id}`} className="title-project__full">
-            <img src={fullScreen}></img>
-          </Link>
-
-          <div className="title-project">
+          <h3 className="title-project">
             <img src={category} className="title-project__category"></img>
-            <h2>
-              Проект:
-              <h3>{projectName}</h3>
-            </h2>
-          </div>
+            Проект: {projectName}
+            <Link
+              to={`/tracker/task/${task.id}`}
+              className="title-project__full"
+            >
+              <img src={fullScreen}></img>
+            </Link>
+          </h3>
 
           <div className="content__task">
             <span>Задача</span>
@@ -358,23 +385,22 @@ export const ModalTiсket = ({
               {/*<img src={taskImg} className="image-task"></img>*/}
             </div>
             <div className="content__communication">
-              <p className="tasks">
-                <BaseButton
-                  onClick={() => {
-                    dispatch(modalToggle("addSubtask"));
-                    setAddSubtask(true);
-                  }}
-                  styles={"button-green-add"}
-                >
-                  <img src={plus}></img>
-                  Добавить под задачу
-                </BaseButton>
-              </p>
+              {/*<p className="tasks">*/}
+              {/*  <button*/}
+              {/*    onClick={() => {*/}
+              {/*      dispatch(modalToggle("addSubtask"));*/}
+              {/*      setAddSubtask(true);*/}
+              {/*    }}*/}
+              {/*  >*/}
+              {/*    <img src={plus}></img>*/}
+              {/*    Добавить под задачу*/}
+              {/*  </button>*/}
+              {/*</p>*/}
               <p className="file">
-                <BaseButton styles={"button-add-file"}>
+                <button className="button-add-file">
                   <img src={file}></img>
                   Загрузить файл
-                </BaseButton>
+                </button>
                 <span>{0}</span>
                 Файлов
               </p>
@@ -426,12 +452,12 @@ export const ModalTiсket = ({
               </div>
             ) : (
               <div className="add-worker moreItems ">
-                <BaseButton
+                <button
+                  className="button-add-worker"
                   onClick={() => setDropListOpen(true)}
-                  styles={"button-add-worker"}
                 >
                   +
-                </BaseButton>
+                </button>
                 <span>Добавить исполнителя</span>
                 {dropListOpen && (
                   <div className="dropdownList">
@@ -440,7 +466,7 @@ export const ModalTiсket = ({
                       className="dropdownList__close"
                       onClick={() => setDropListOpen(false)}
                     />
-                    {projectUsers.map((person) => {
+                    {correctProjectUsers.map((person) => {
                       return (
                         <div
                           className="dropdownList__person"
@@ -479,12 +505,12 @@ export const ModalTiсket = ({
             )}
 
             <div className="add-worker moreItems">
-              <BaseButton
+              <button
+                className="button-add-worker"
                 onClick={() => setDropListMembersOpen(true)}
-                styles={"button-add-worker"}
               >
                 +
-              </BaseButton>
+              </button>
               <span>Добавить участников</span>
               {dropListMembersOpen && (
                 <div className="dropdownList">
@@ -526,19 +552,27 @@ export const ModalTiсket = ({
             </div>
 
             {timerStart ? (
-              <button className="stop" onClick={() => stopTaskTimer()}>
+              <button
+                className={
+                  executorId === Number(localStorage.getItem("id"))
+                    ? "stop"
+                    : "stop disable"
+                }
+                onClick={() => stopTaskTimer()}
+              >
                 Остановить
               </button>
             ) : (
               <button
                 className={
-                  task.executor_id === Number(localStorage.getItem("id"))
+                  executorId === Number(localStorage.getItem("id"))
                     ? "start"
                     : "start disable"
                 }
                 onClick={() => startTaskTimer()}
               >
-                Начать делать <img src={arrow}></img>
+                Начать делать
+                <img src={arrow}></img>
               </button>
             )}
           </div>

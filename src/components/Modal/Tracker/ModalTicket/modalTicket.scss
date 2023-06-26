@@ -277,6 +277,16 @@
         margin: 10px 0 20px 0;
         max-width: 330px;
       }
+
+      textarea {
+        height: 100px;
+        outline: none;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 140%;
+        color: #252c32;
+        resize: none;
+      }
     }
 
     &__communication {
@@ -304,7 +314,7 @@
 
       .file {
         justify-content: space-between;
-        margin-left: 20px;
+        margin-left: 7px;
 
         .button-add-file {
           display: flex;
@@ -437,11 +447,16 @@
       }
 
       .button-add-worker {
+        cursor: pointer;
+        background: #8bcc60;
+        border-radius: 44px;
         width: 33px;
         height: 33px;
         display: flex;
         justify-content: center;
         align-items: center;
+        border: none;
+        color: white;
         font-size: 17px;
       }
     }
