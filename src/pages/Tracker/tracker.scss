@@ -215,7 +215,7 @@
             align-items: center;
           }
 
-          h4 {
+          h5 {
             color: #1458dd;
             font-weight: 700;
             font-size: 22px;
@@ -546,6 +546,13 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: 0.4s;
+
+            &:hover {
+              transform: scale(0.99);
+              box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.11);
+              transition: 0.4s;
+            }
 
             &__hide {
               opacity: 0;

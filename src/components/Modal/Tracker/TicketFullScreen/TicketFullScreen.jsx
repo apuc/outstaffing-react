@@ -259,7 +259,7 @@ export const TicketFullScreen = () => {
             <div className="tracker__tabs__content content-tabs">
               <div className="tasks__head">
                 <div className="tasks__head__wrapper">
-                  <h4>Проект : {projectBoard.name}</h4>
+                  <h5>Проект : {projectBoard.name}</h5>
 
                   <TrackerModal
                     active={modalAddWorker}
