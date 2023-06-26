@@ -17,32 +17,54 @@
 
 .modal-tiket__content {
   background: #ffffff;
-  //border: 1px solid #dde2e4;
   border-radius: 8px;
   display: flex;
   flex-direction: row;
 
   .content {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 600px;
     margin: 26px 0 0 21px;
 
     .title-project {
-      color: #1458dd;
-      font-family: "LabGrotesque", sans-serif;
+      max-width: 85%;
       display: flex;
       align-items: center;
-      font-weight: 700;
-      font-size: 22px;
-      line-height: 32px;
+      flex-direction: row;
 
       &__category {
         margin-right: 17px;
       }
 
+      h2,
+      h3 {
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 32px;
+        color: #1458dd;
+        margin: 0;
+        font-family: "LabGrotesque", sans-serif;
+      }
+
+      h2 {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+
+        h3 {
+          margin-left: 5px;
+          word-break: break-all;
+        }
+      }
+
       &__full {
-        margin-left: 35%;
+        position: absolute;
+        position: absolute;
+        right: 28px;
+        top: 0;
       }
     }
 
@@ -79,7 +101,7 @@
       .comments__list {
         display: flex;
         flex-direction: column;
-        max-height: 420px;
+        max-height: 300px;
         overflow: auto;
 
         &::-webkit-scrollbar {
@@ -109,8 +131,8 @@
 
           &__subComment {
             &:before {
-              content: '';
-              background: #E4E4E6;
+              content: "";
+              background: #e4e4e6;
               height: 1px;
               width: 7px;
               position: absolute;
@@ -121,9 +143,9 @@
 
           &__main {
             &:after {
-              content: '';
+              content: "";
               position: absolute;
-              background-image: url("../../../assets/images/mainTaskCommentImg.png");
+              background-image: url("assets/images/mainTaskCommentImg.png");
               width: 10px;
               height: 8px;
               top: 50px;
@@ -131,9 +153,9 @@
             }
 
             &:before {
-              content: '';
+              content: "";
               position: absolute;
-              background: #E4E4E6;
+              background: #e4e4e6;
               width: 1px;
               height: calc(100% - 120px);
               left: 29px;
@@ -236,6 +258,13 @@
       display: flex;
       flex-direction: column;
       margin-top: 10px;
+
+      textarea {
+        min-height: 120px;
+        max-height: 450px;
+        font-size: 14px;
+      }
+
       p {
         font-weight: 400;
         font-size: 14px;
@@ -268,16 +297,12 @@
       .tasks {
         justify-content: space-evenly;
 
-        button {
+        .button-green-add {
           width: 180px;
           height: 40px;
-          background: #52b709;
-          border-radius: 44px;
           font-weight: 400;
           font-size: 12px;
           line-height: 32px;
-          border: none;
-          color: #ffffff;
         }
       }
 
@@ -291,7 +316,7 @@
         justify-content: space-between;
         margin-left: 7px;
 
-        button {
+        .button-add-file {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -337,7 +362,7 @@
         outline: none;
         padding-left: 30px;
         font-weight: 400;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 32px;
         border-radius: 44px;
       }
@@ -345,6 +370,10 @@
       img {
         cursor: pointer;
         margin-right: 18px;
+      }
+
+      &:focus-within {
+        border: 1px solid #0000004d;
       }
     }
   }
@@ -406,6 +435,7 @@
       display: flex;
       align-items: center;
       position: relative;
+      margin-bottom: 5px;
 
       span {
         color: #000000;
@@ -416,17 +446,12 @@
         font-weight: 400;
       }
 
-      button {
-        cursor: pointer;
-        background: #8bcc60;
-        border-radius: 44px;
+      .button-add-worker {
         width: 33px;
         height: 33px;
         display: flex;
         justify-content: center;
         align-items: center;
-        border: none;
-        color: white;
         font-size: 17px;
       }
     }
@@ -614,6 +639,10 @@
           p {
             font-weight: 700;
           }
+        }
+
+        p:hover {
+          text-decoration: underline;
         }
       }
     }

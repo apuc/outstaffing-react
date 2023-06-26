@@ -1,44 +1,48 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { Footer } from "@components/Common/Footer/Footer";
-import { Navigation } from "../../components/Navigation/Navigation";
-import { Loader } from "@components/Common/Loader/Loader";
-import { urlForLocal } from '../../utils/helper'
-
 import { useDispatch, useSelector } from "react-redux";
-import { apiRequest } from "../../api/request";
+import { Link, useParams } from "react-router-dom";
+
 import {
-  getProjectBoard,
-  getBoarderLoader,
-  modalToggle,
-  moveProjectTask,
-  setProjectBoardFetch,
-  setToggleTab,
   activeLoader,
-  setColumnName,
-  setColumnId,
-  setColumnPriority,
   deletePersonOnProject,
   filterCreatedByMe,
   filteredParticipateTasks,
-  movePositionProjectTask
-} from "../../redux/projectsTrackerSlice";
+  getBoarderLoader,
+  getProjectBoard,
+  modalToggle,
+  movePositionProjectTask,
+  moveProjectTask,
+  setColumnId,
+  setColumnName,
+  setColumnPriority,
+  setProjectBoardFetch,
+  setToggleTab,
+} from "@redux/projectsTrackerSlice";
 
-import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
-import TrackerModal from "../../components/Modal/TrackerModal/TrackerModal";
+import { urlForLocal } from "@utils/helper";
 
-import project from "../../assets/icons/trackerProject.svg";
-import tasks from "../../assets/icons/trackerTasks.svg";
-import archive from "../../assets/icons/archiveTracker.svg";
-import commentsBoard from "../../assets/icons/commentsBoard.svg";
-import filesBoard from "../../assets/icons/filesBoard.svg";
-import arrow from "../../assets/icons/arrows/arrowCalendar.png";
-import del from "../../assets/icons/delete.svg";
-import edit from "../../assets/icons/edit.svg";
-import close from "../../assets/icons/close.png"
-import accept from "../../assets/images/accept.png";
+import { apiRequest } from "@api/request";
+
+import BaseButton from "@components/Common/BaseButton/BaseButton";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Loader } from "@components/Common/Loader/Loader";
+import ModalTicket from "@components/Modal/Tracker/ModalTicket/ModalTicket";
+import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
+// import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+
+import archive from "assets/icons/archiveTracker.svg";
+import arrow from "assets/icons/arrows/arrowCalendar.png";
+import close from "assets/icons/close.png";
+import commentsBoard from "assets/icons/commentsBoard.svg";
+import del from "assets/icons/delete.svg";
+import edit from "assets/icons/edit.svg";
+import filesBoard from "assets/icons/filesBoard.svg";
+import project from "assets/icons/trackerProject.svg";
+import tasks from "assets/icons/trackerTasks.svg";
+import accept from "assets/images/accept.png";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();
@@ -48,13 +52,14 @@ export const ProjectTracker = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [priorityTask, setPriorityTask] = useState(0);
   const [wrapperHover, setWrapperHover] = useState({});
-  const [taskHover, setTaskHover] = useState({})
+  const [taskHover, setTaskHover] = useState({});
   const [modalAdd, setModalAdd] = useState(false);
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState({});
-  const [personListOpen, setPersonListOpen] = useState(false)
-  const [checkBoxParticipateTasks, setCheckBoxParticipateTasks] = useState(false)
-  const [checkBoxMyTasks, setCheckBoxMyTasks] = useState(false)
+  const [personListOpen, setPersonListOpen] = useState(false);
+  const [checkBoxParticipateTasks, setCheckBoxParticipateTasks] =
+    useState(false);
+  const [checkBoxMyTasks, setCheckBoxMyTasks] = useState(false);
   const startWrapperIndexTest = useRef({});
   const projectBoard = useSelector(getProjectBoard);
   const loader = useSelector(getBoarderLoader);
@@ -65,20 +70,20 @@ export const ProjectTracker = () => {
   }, []);
 
   useEffect(() => {
-    const tasksHover = {}
-    const columnHover = {}
+    const tasksHover = {};
+    const columnHover = {};
     if (Object.keys(projectBoard).length) {
       projectBoard.columns.forEach((column) => {
         setOpenColumnSelect((prevState) => ({
           ...prevState,
           [column.id]: false,
         }));
-        columnHover[column.id] = false
-        column.tasks.forEach(task => tasksHover[task.id] = false)
+        columnHover[column.id] = false;
+        column.tasks.forEach((task) => (tasksHover[task.id] = false));
       });
     }
-    setWrapperHover(columnHover)
-    setTaskHover(tasksHover)
+    setWrapperHover(columnHover);
+    setTaskHover(tasksHover);
   }, [projectBoard]);
 
   function dragStartHandler(e, task, columnId) {
@@ -86,35 +91,37 @@ export const ProjectTracker = () => {
   }
 
   function dragOverTaskHandler(e, task) {
-    e.preventDefault()
+    e.preventDefault();
     if (startWrapperIndexTest.current.task.id === task.id) {
-      return
+      return;
     }
-    setTaskHover((prevState) => ({[prevState]: false, [task.id]: true}))
+    setTaskHover((prevState) => ({ [prevState]: false, [task.id]: true }));
   }
 
-  function dragLeaveTaskHandler(e) {
-    setTaskHover((prevState) => ({[prevState]: false}))
+  function dragLeaveTaskHandler() {
+    setTaskHover((prevState) => ({ [prevState]: false }));
   }
 
   function dragEndTaskHandler() {
-    setTaskHover((prevState) => ({[prevState]: false}))
+    setTaskHover((prevState) => ({ [prevState]: false }));
     setWrapperHover((prevState) => ({
       [prevState]: false,
     }));
   }
 
   function dragDropTaskHandler(e, task, column) {
-    e.preventDefault()
+    e.preventDefault();
     if (task.id === startWrapperIndexTest.current.task.id) {
-      return
+      return;
     }
-    const finishTask = column.tasks.indexOf(task)
-    dispatch(movePositionProjectTask({
-      startTask: startWrapperIndexTest.current.task,
-      finishTask: task,
-      finishIndex: finishTask
-    }))
+    const finishTask = column.tasks.indexOf(task);
+    dispatch(
+      movePositionProjectTask({
+        startTask: startWrapperIndexTest.current.task,
+        finishTask: task,
+        finishIndex: finishTask,
+      })
+    );
   }
 
   function dragOverHandler(e) {
@@ -139,9 +146,10 @@ export const ProjectTracker = () => {
       [prevState]: false,
     }));
 
-    if (startWrapperIndexTest.current.index === columnId
-        ||
-        e.target.className.includes('__item')) {
+    if (
+      startWrapperIndexTest.current.index === columnId ||
+      e.target.className.includes("__item")
+    ) {
       return;
     }
 
@@ -159,7 +167,7 @@ export const ProjectTracker = () => {
     setSelectedTab(columnId);
     dispatch(modalToggle("createTiketProject"));
     setModalAdd(true);
-    setPriorityTask(length)
+    setPriorityTask(length);
   }
 
   function openTicket(e, task) {
@@ -168,7 +176,7 @@ export const ProjectTracker = () => {
   }
 
   function deleteColumn(column) {
-    const priorityColumns = []
+    const priorityColumns = [];
     apiRequest("/project-column/update-column", {
       method: "PUT",
       data: {
@@ -181,19 +189,19 @@ export const ProjectTracker = () => {
         for (let i = column.priority; i < projectBoard.columns.length; i++) {
           const currentColumn = {
             column_id: projectBoard.columns[i].id,
-            priority: i
-          }
-          priorityColumns.push(currentColumn)
+            priority: i,
+          };
+          priorityColumns.push(currentColumn);
         }
         apiRequest("/project-column/set-priority", {
           method: "POST",
           data: {
             project_id: projectBoard.id,
-            data: JSON.stringify(priorityColumns)
-          }
+            data: JSON.stringify(priorityColumns),
+          },
         }).then(() => {
           dispatch(setProjectBoardFetch(projectBoard.id));
-        })
+        });
       } else {
         dispatch(setProjectBoardFetch(projectBoard.id));
       }
@@ -205,33 +213,33 @@ export const ProjectTracker = () => {
       method: "DELETE",
       data: {
         project_id: projectBoard.id,
-        user_id: userId
+        user_id: userId,
       },
     }).then(() => {
-      dispatch(deletePersonOnProject(userId))
+      dispatch(deletePersonOnProject(userId));
     });
   }
 
   function filterParticipateTasks() {
     if (!checkBoxParticipateTasks) {
-      dispatch(filteredParticipateTasks(Number(localStorage.getItem('id'))))
+      dispatch(filteredParticipateTasks(Number(localStorage.getItem("id"))));
     } else {
-      dispatch(setProjectBoardFetch(projectId.id))
-      setCheckBoxParticipateTasks(false)
-      setCheckBoxMyTasks(false)
+      dispatch(setProjectBoardFetch(projectId.id));
+      setCheckBoxParticipateTasks(false);
+      setCheckBoxMyTasks(false);
     }
-    setCheckBoxParticipateTasks(!checkBoxParticipateTasks)
+    setCheckBoxParticipateTasks(!checkBoxParticipateTasks);
   }
 
   function filterMyTask() {
     if (!checkBoxMyTasks) {
-      dispatch(filterCreatedByMe(Number(localStorage.getItem('id'))))
+      dispatch(filterCreatedByMe(Number(localStorage.getItem("id"))));
     } else {
-      dispatch(setProjectBoardFetch(projectId.id))
-      setCheckBoxParticipateTasks(false)
-      setCheckBoxMyTasks(false)
+      dispatch(setProjectBoardFetch(projectId.id));
+      setCheckBoxParticipateTasks(false);
+      setCheckBoxMyTasks(false);
     }
-    setCheckBoxMyTasks(!checkBoxMyTasks)
+    setCheckBoxMyTasks(!checkBoxMyTasks);
   }
 
   return (
@@ -289,72 +297,108 @@ export const ProjectTracker = () => {
             <div className="tracker__tabs__content__tasks tasks active__content">
               <div className="tasks__head">
                 <div className="tasks__head__wrapper">
-                  <h4>Проект : {projectBoard.name}</h4>
+                  <h5>Проект : {projectBoard.name}</h5>
 
                   <div className="tasks__head__add">
-                    <span
+                    <BaseButton
+                      onClick={() => {
+                        dispatch(modalToggle("createColumn"));
+                        setModalAdd(true);
+                      }}
+                      styles={"button-add-column"}
+                    >
+                      +
+                    </BaseButton>
+                    {/* <span
                       onClick={() => {
                         dispatch(modalToggle("createColumn"));
                         setModalAdd(true);
                       }}
                     >
                       +
-                    </span>
+                    </span> */}
                     <p>добавить колонку</p>
                   </div>
                   <div className="tasks__head__persons">
-                    <span className="countPersons">{projectBoard.projectUsers?.length}</span>
+                    <span className="countPersons">
+                      {projectBoard.projectUsers?.length}
+                    </span>
                     <span
                       className="addPerson"
                       onClick={() => {
-                        setPersonListOpen(true)
+                        setPersonListOpen(true);
                       }}
                     >
                       +
                     </span>
                     <p>добавить участника</p>
-                    {personListOpen &&
-                    <div className='persons__list'>
-                      <img className='persons__list__close' src={close} alt='close' onClick={() => setPersonListOpen(false)} />
-                      <div className='persons__list__count'><span>{projectBoard.projectUsers?.length}</span>участник</div>
-                      <div className='persons__list__info'>В проекте - <span>“{projectBoard.name}”</span></div>
-                      <div className='persons__list__items'>
-                        {projectBoard.projectUsers?.map((person) => {
-                          return <div className='persons__list__item' key={person.user_id}>
-                                    <img className='avatar' src={urlForLocal(person.user.avatar)} alt='avatar' />
-                                    <span>{person.user.fio}</span>
-                                    <img className='delete' src={close} alt='delete' onClick={() => deletePerson(person.user_id)}/>
-                                </div>
-                        })
-                        }
+                    {personListOpen && (
+                      <div className="persons__list">
+                        <img
+                          className="persons__list__close"
+                          src={close}
+                          alt="close"
+                          onClick={() => setPersonListOpen(false)}
+                        />
+                        <div className="persons__list__count">
+                          <span>{projectBoard.projectUsers?.length}</span>
+                          участник
+                        </div>
+                        <div className="persons__list__info">
+                          В проекте - <span>“{projectBoard.name}”</span>
+                        </div>
+                        <div className="persons__list__items">
+                          {projectBoard.projectUsers?.map((person) => {
+                            return (
+                              <div
+                                className="persons__list__item"
+                                key={person.user_id}
+                              >
+                                <img
+                                  className="avatar"
+                                  src={urlForLocal(person.user.avatar)}
+                                  alt="avatar"
+                                />
+                                <span>{person.user.fio}</span>
+                                <img
+                                  className="delete"
+                                  src={close}
+                                  alt="delete"
+                                  onClick={() => deletePerson(person.user_id)}
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div
+                          className="persons__list__add"
+                          onClick={() => {
+                            dispatch(modalToggle("addWorker"));
+                            setModalAdd(true);
+                            setPersonListOpen(false);
+                          }}
+                        >
+                          <span className="addPerson">+</span>
+                          <p>Добавить участников</p>
+                        </div>
                       </div>
-                      <div className='persons__list__add'
-                           onClick={() => {
-                             dispatch(modalToggle("addWorker"));
-                             setModalAdd(true);
-                             setPersonListOpen(false)
-                           }}
-                      >
-                        <span className='addPerson'>+</span>
-                        <p>Добавить участников</p>
-                      </div>
-                    </div>
-                    }
+                    )}
                   </div>
-                  <div className="tasks__head__checkBox" onClick={filterParticipateTasks}>
+                  <div
+                    className="tasks__head__checkBox"
+                    onClick={filterParticipateTasks}
+                  >
                     <span>Участвую</span>
                     <div className="tasks__head__checkBox__box">
-                      {checkBoxParticipateTasks &&
-                        <img src={accept} alt='accept' />
-                      }
+                      {checkBoxParticipateTasks && (
+                        <img src={accept} alt="accept" />
+                      )}
                     </div>
                   </div>
                   <div className="tasks__head__checkBox" onClick={filterMyTask}>
                     <span>Мои</span>
                     <div className="tasks__head__checkBox__box">
-                      {checkBoxMyTasks &&
-                          <img src={accept} alt='accept' />
-                      }
+                      {checkBoxMyTasks && <img src={accept} alt="accept" />}
                     </div>
                   </div>
                   <Link to="/profile/tracker" className="tasks__head__back">
@@ -364,14 +408,16 @@ export const ProjectTracker = () => {
                 </div>
               </div>
 
-              {Boolean(modalActiveTicket) && <ModalTicket
+              {Boolean(modalActiveTicket) && (
+                <ModalTicket
                   active={modalActiveTicket}
                   setActive={setModalActiveTicket}
                   task={selectedTicket}
                   projectId={projectBoard.id}
                   projectName={projectBoard.name}
                   projectUsers={projectBoard.projectUsers}
-              />}
+                />
+              )}
 
               <div className="tasks__container">
                 {Boolean(projectBoard?.columns) &&
@@ -381,7 +427,7 @@ export const ProjectTracker = () => {
                       <div
                         key={column.id}
                         onDragOver={(e) => dragOverHandler(e)}
-                        onDragEnter={(e) => dragEnterHandler(column.id)}
+                        onDragEnter={() => dragEnterHandler(column.id)}
                         onDrop={(e) => dragDropHandler(e, column.id)}
                         className={`tasks__board ${
                           wrapperHover[column.id] ? "tasks__board__hover" : ""
@@ -392,7 +438,9 @@ export const ProjectTracker = () => {
                           <div>
                             <span
                               className="add"
-                              onClick={() => selectedTabTask(column.id, column.tasks.length)}
+                              onClick={() =>
+                                selectedTabTask(column.id, column.tasks.length)
+                              }
                             >
                               +
                             </span>
@@ -419,9 +467,9 @@ export const ProjectTracker = () => {
                                   [column.id]: false,
                                 }));
                                 dispatch(modalToggle("editColumn"));
-                                dispatch(setColumnName(column.title))
-                                dispatch(setColumnId(column.id))
-                                dispatch(setColumnPriority(column.priority))
+                                dispatch(setColumnName(column.title));
+                                dispatch(setColumnId(column.id));
+                                dispatch(setColumnPriority(column.priority));
                                 setModalAdd(true);
                               }}
                             >
@@ -442,18 +490,24 @@ export const ProjectTracker = () => {
                             <div
                               key={task.id}
                               className={`tasks__board__item ${
-                                  taskHover[task.id] ? "task__hover" : ""
+                                taskHover[task.id] ? "task__hover" : ""
                               }`}
                               draggable={true}
-                              onDragStart={(e) => dragStartHandler(e, task, column.id)}
+                              onDragStart={(e) =>
+                                dragStartHandler(e, task, column.id)
+                              }
                               onDragOver={(e) => dragOverTaskHandler(e, task)}
                               onDragLeave={(e) => dragLeaveTaskHandler(e)}
-                              onDragEnd={(e) => dragEndTaskHandler()}
-                              onDrop={(e) => dragDropTaskHandler(e, task, column)}
+                              onDragEnd={() => dragEndTaskHandler()}
+                              onDrop={(e) =>
+                                dragDropTaskHandler(e, task, column)
+                              }
                               onClick={(e) => openTicket(e, task)}
                             >
                               <div className="tasks__board__item__title">
-                                <p className='task__board__item__title'>{task.title}</p>
+                                <p className="task__board__item__title">
+                                  {task.title}
+                                </p>
                               </div>
                               <p className="tasks__board__item__description">
                                 {task.description}

@@ -142,8 +142,6 @@
                 margin-left: 17px;
               }
             }
-            button {
-            }
           }
 
           &__info {
@@ -155,16 +153,11 @@
         }
 
         .createProjectBtn {
-          background: #52b709;
-          border-radius: 44px;
           max-width: 188px;
           height: 50px;
           width: 100%;
-          border: none;
           font-weight: 400;
           font-size: 15px;
-          line-height: 32px;
-          color: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -222,23 +215,23 @@
             align-items: center;
           }
 
-          h4 {
+          h5 {
             color: #1458dd;
             font-weight: 700;
             font-size: 22px;
             line-height: 32px;
             margin-bottom: 0;
+            max-width: 30%;
+            word-break: break-all;
           }
 
           &__add {
             display: flex;
-            span {
+            margin: 0 15px 0 10px;
+
+            .button-add-column {
               width: 33px;
               height: 33px;
-              background: #52b709;
-              border-radius: 44px;
-              color: whitesmoke;
-              cursor: pointer;
               font-size: 15px;
               display: flex;
               align-items: center;
@@ -315,7 +308,7 @@
               z-index: 2;
               display: flex;
               flex-direction: column;
-              background: linear-gradient(180deg, #FFFFFF 0%, #EBEBEB 100%);
+              background: linear-gradient(180deg, #ffffff 0%, #ebebeb 100%);
               border-radius: 40px;
               padding: 33px 24px 44px 34px;
               width: 425px;
@@ -323,15 +316,16 @@
 
               &__close {
                 cursor: pointer;
-                width: 8px;
-                height: 8px;
+                position: absolute;
+                right: 20px;
+                top: 15px;
                 margin-left: auto;
               }
 
               &__count {
                 display: flex;
                 align-items: end;
-                color: #1458DD;
+                color: #1458dd;
                 font-size: 22px;
                 margin-top: 10px;
                 span {
@@ -355,7 +349,7 @@
                 span {
                   width: auto;
                   height: auto;
-                  color: #1458DD;
+                  color: #1458dd;
                   font-weight: 600;
                   font-size: 18px;
                   line-height: 22px;
@@ -397,8 +391,8 @@
 
                 .delete {
                   cursor: pointer;
-                  width: 14px;
-                  height: 14px;
+                  width: 20px;
+                  height: 20px;
                 }
               }
 
@@ -407,7 +401,7 @@
                 cursor: pointer;
 
                 span {
-                  background: #8BCC60;
+                  background: #8bcc60;
                   left: 0;
                 }
 
@@ -424,6 +418,7 @@
           }
 
           &__checkBox {
+            margin: 0 15px 0 0;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -551,6 +546,13 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: 0.4s;
+
+            &:hover {
+              transform: scale(0.99);
+              box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.11);
+              transition: 0.4s;
+            }
 
             &__hide {
               opacity: 0;
@@ -771,6 +773,10 @@
               max-width: 450px;
               width: 100%;
 
+              &:focus-within {
+                border: 1px solid #0000004d;
+              }
+
               @media (max-width: 690px) {
                 max-width: 350px;
               }
@@ -834,7 +840,14 @@
               border-radius: 12px;
               padding: 12px 42px 7px 32px;
               justify-content: space-between;
+              transition: 0.4s;
               cursor: pointer;
+
+              &:hover {
+                transform: scale(0.99);
+                box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.11);
+                transition: 0.4s;
+              }
 
               &__info {
                 display: flex;
@@ -968,9 +981,12 @@
             background: #f1f1f1;
             border-radius: 12px;
             padding: 12px 42px 7px 32px;
+            transition: 0.4s;
 
             &:hover {
-              background: var(--ds-background-neutral-subtle-hovered, #f4f5f7);
+              transform: scale(0.99);
+              box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.11);
+              transition: 0.4s;
             }
 
             p {
@@ -1046,6 +1062,10 @@
               border-radius: 6px;
               max-width: 300px;
               width: 100%;
+
+              &:focus-within {
+                border: 1px solid #0000004d;
+              }
 
               @media (max-width: 590px) {
                 max-width: 230px;
