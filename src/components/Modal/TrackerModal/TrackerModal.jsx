@@ -1,24 +1,23 @@
-import React, {useEffect, useState} from "react";
-
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { apiRequest } from "../../../api/request";
-import { urlForLocal } from '../../../utils/helper'
+import arrowDown from "../../../assets/icons/arrows/selectArrow.png";
 import {
-  setColumnName,
-  setColumnPriority,
+  addPersonToProject,
+  editColumnName,
+  editProjectName,
+  getColumnId,
+  getColumnName,
+  getColumnPriority,
   getProjectBoard,
   getValueModalType,
+  setColumnName,
+  setColumnPriority,
   setProject,
   setProjectBoardFetch,
-  editProjectName,
-  editColumnName,
-  getColumnName,
-  getColumnId,
-  addPersonToProject, getColumnPriority
 } from "../../../redux/projectsTrackerSlice";
-
-import arrowDown from "../../../assets/icons/arrows/selectArrow.png"
-
+import { urlForLocal } from "../../../utils/helper";
 import "./trackerModal.scss";
 
 export const TrackerModal = ({
@@ -33,8 +32,8 @@ export const TrackerModal = ({
   const dispatch = useDispatch();
   const projectBoard = useSelector(getProjectBoard);
   const columnName = useSelector(getColumnName);
-  const columnId = useSelector(getColumnId)
-  const columnPriority = useSelector(getColumnPriority)
+  const columnId = useSelector(getColumnId);
+  const columnPriority = useSelector(getColumnPriority);
 
   const modalType = useSelector(getValueModalType);
   const [projectName, setProjectName] = useState(defautlInput);
@@ -42,9 +41,9 @@ export const TrackerModal = ({
   const [nameProject, setNameProject] = useState("");
   const [valueTiket, setValueTiket] = useState("");
   const [descriptionTicket, setDescriptionTicket] = useState("");
-  const [workers, setWorkers] = useState([])
-  const [selectWorkersOpen, setSelectWorkersOpen] = useState(false)
-  const [selectedWorker, setSelectedWorker] = useState(null)
+  const [workers, setWorkers] = useState([]);
+  const [selectWorkersOpen, setSelectWorkersOpen] = useState(false);
+  const [selectedWorker, setSelectedWorker] = useState(null);
 
   function createTab() {
     if (!valueColumn) {
@@ -55,7 +54,9 @@ export const TrackerModal = ({
       method: "POST",
       data: {
         project_id: projectBoard.id,
-        priority: projectBoard.columns.length ? projectBoard.columns.at(-1).priority + 1 : 1,
+        priority: projectBoard.columns.length
+          ? projectBoard.columns.at(-1).priority + 1
+          : 1,
         title: valueColumn,
       },
     }).then(() => {
@@ -106,36 +107,38 @@ export const TrackerModal = ({
   function changeColumnParams() {
     projectBoard.columns.forEach((column) => {
       if (column.id === columnId && column.priority !== columnPriority) {
-        const priorityColumns = [{
-          column_id: column.id,
-          priority: Number(columnPriority)
-        }]
+        const priorityColumns = [
+          {
+            column_id: column.id,
+            priority: Number(columnPriority),
+          },
+        ];
         for (let i = column.priority; i < columnPriority; i++) {
           const currentColumn = {
             column_id: projectBoard.columns[i].id,
-            priority: i
-          }
-          priorityColumns.push(currentColumn)
+            priority: i,
+          };
+          priorityColumns.push(currentColumn);
         }
         for (let i = column.priority; i > columnPriority; i--) {
           const currentColumn = {
             column_id: projectBoard.columns[i - 2].id,
-            priority: i
-          }
-          priorityColumns.push(currentColumn)
+            priority: i,
+          };
+          priorityColumns.push(currentColumn);
         }
         apiRequest("/project-column/set-priority", {
           method: "POST",
           data: {
             project_id: projectBoard.id,
-            data: JSON.stringify(priorityColumns)
-          }
+            data: JSON.stringify(priorityColumns),
+          },
         }).then(() => {
           dispatch(setProjectBoardFetch(projectBoard.id));
-        })
+        });
       }
-    })
-    changeColumnTitle()
+    });
+    changeColumnTitle();
   }
 
   function changeColumnTitle() {
@@ -376,12 +379,12 @@ export const TrackerModal = ({
               <h4>Приоритет колонки</h4>
               <div className="input-container">
                 <input
-                    className="name-project"
-                    placeholder='Приоритет колонки'
-                    type='number'
-                    step='1'
-                    value={columnPriority}
-                    onChange={(e) => dispatch(setColumnPriority(e.target.value))}
+                  className="name-project"
+                  placeholder="Приоритет колонки"
+                  type="number"
+                  step="1"
+                  value={columnPriority}
+                  onChange={(e) => dispatch(setColumnPriority(e.target.value))}
                 />
               </div>
             </div>

@@ -10,7 +10,7 @@ const initialState = {
   boardLoader: false,
   columnName: "",
   columnId: 0,
-  columnPriority: 0
+  columnPriority: 0,
 };
 
 export const setProjectBoardFetch = createAsyncThunk("userInfo", (id) =>
@@ -51,13 +51,16 @@ export const projectsTrackerSlice = createSlice({
     moveProjectTask: (state, action) => {
       state.projectBoard.columns.forEach((column, index) => {
         if (column.id === action.payload.columnId) {
-          column.tasks.push({...action.payload.startWrapperIndex.task, column_id: column.id});
+          column.tasks.push({
+            ...action.payload.startWrapperIndex.task,
+            column_id: column.id,
+          });
           apiRequest(`/task/update-task`, {
             method: "PUT",
             data: {
               task_id: action.payload.startWrapperIndex.task.id,
               column_id: column.id,
-              priority: column.tasks.length - 1
+              priority: column.tasks.length - 1,
             },
           }).then(() => {});
         }
@@ -71,10 +74,15 @@ export const projectsTrackerSlice = createSlice({
     movePositionProjectTask: (state, action) => {
       state.projectBoard.columns.forEach((column, index) => {
         if (column.id === action.payload.startTask.column_id) {
-          state.projectBoard.columns[index].tasks = column.tasks.filter((task) => task.id !== action.payload.startTask.id)
+          state.projectBoard.columns[index].tasks = column.tasks.filter(
+            (task) => task.id !== action.payload.startTask.id
+          );
         }
         if (column.id === action.payload.finishTask.column_id) {
-          column.tasks.splice(action.payload.finishIndex, 0, {...action.payload.startTask, column_id: column.id})
+          column.tasks.splice(action.payload.finishIndex, 0, {
+            ...action.payload.startTask,
+            column_id: column.id,
+          });
           apiRequest(`/task/update-task`, {
             method: "PUT",
             data: {
@@ -82,14 +90,14 @@ export const projectsTrackerSlice = createSlice({
               column_id: column.id,
             },
           }).then(() => {});
-          const priorityTasks = []
+          const priorityTasks = [];
           column.tasks.forEach((task, index) => {
             const curTask = {
               task_id: task.id,
-              priority: index
-            }
-            priorityTasks.push(curTask)
-          })
+              priority: index,
+            };
+            priorityTasks.push(curTask);
+          });
           apiRequest(`/task/set-priority`, {
             method: "POST",
             data: {
@@ -98,17 +106,21 @@ export const projectsTrackerSlice = createSlice({
             },
           }).then(() => {});
         }
-      })
+      });
     },
     filterCreatedByMe: (state, action) => {
       state.projectBoard.columns.forEach((column) => {
-        column.tasks = column.tasks.filter((task) => task.user_id === action.payload)
-      })
+        column.tasks = column.tasks.filter(
+          (task) => task.user_id === action.payload
+        );
+      });
     },
     filteredParticipateTasks: (state, action) => {
       state.projectBoard.columns.forEach((column) => {
-        column.tasks = column.tasks.filter((task) => task.taskUsers.some((person) => person.user_id === action.payload))
-      })
+        column.tasks = column.tasks.filter((task) =>
+          task.taskUsers.some((person) => person.user_id === action.payload)
+        );
+      });
     },
     setColumnName: (state, action) => {
       state.columnName = action.payload;
@@ -117,7 +129,7 @@ export const projectsTrackerSlice = createSlice({
       state.columnId = action.payload;
     },
     setColumnPriority: (state, action) => {
-      state.columnPriority = action.payload
+      state.columnPriority = action.payload;
     },
     editProjectName: (state, action) => {
       state.projects.forEach((project) => {
@@ -162,7 +174,7 @@ export const {
   addPersonToProject,
   filterCreatedByMe,
   filteredParticipateTasks,
-  movePositionProjectTask
+  movePositionProjectTask,
 } = projectsTrackerSlice.actions;
 
 export const getProjects = (state) => state.tracker.projects;
@@ -172,6 +184,6 @@ export const getValueModalType = (state) => state.tracker.modalType;
 export const getBoarderLoader = (state) => state.tracker.boardLoader;
 export const getColumnName = (state) => state.tracker.columnName;
 export const getColumnId = (state) => state.tracker.columnId;
-export const getColumnPriority = (state) => state.tracker.columnPriority
+export const getColumnPriority = (state) => state.tracker.columnPriority;
 
 export default projectsTrackerSlice.reducer;
