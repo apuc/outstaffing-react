@@ -447,11 +447,16 @@
       }
 
       .button-add-worker {
+        cursor: pointer;
+        background: #8bcc60;
+        border-radius: 44px;
         width: 33px;
         height: 33px;
         display: flex;
         justify-content: center;
         align-items: center;
+        border: none;
+        color: white;
         font-size: 17px;
       }
     }
