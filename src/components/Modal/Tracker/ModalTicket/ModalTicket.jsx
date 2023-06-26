@@ -1,3 +1,5 @@
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -11,9 +13,6 @@ import { apiRequest } from "@api/request";
 
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
-
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import archive from "assets/icons/archive.svg";
 import arrow from "assets/icons/arrows/arrowStart.png";
@@ -374,21 +373,34 @@ export const ModalTiсket = ({
             <div className="content__description">
               {editOpen ? (
                 <CKEditor
-                  editor={ ClassicEditor }
+                  editor={ClassicEditor}
                   data={inputsValue.description}
                   config={{
-                    removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload', 'MediaEmbed', 'BlockQuote', ]
+                    removePlugins: [
+                      "CKFinderUploadAdapter",
+                      "CKFinder",
+                      "EasyImage",
+                      "Image",
+                      "ImageCaption",
+                      "ImageStyle",
+                      "ImageToolbar",
+                      "ImageUpload",
+                      "MediaEmbed",
+                      "BlockQuote",
+                    ],
                   }}
-                  onChange={ ( event, editor ) => {
+                  onChange={(event, editor) => {
                     const data = editor.getData();
                     setInputsValue((prevValue) => ({
                       ...prevValue,
                       description: data,
-                    }))
-                  } }
+                    }));
+                  }}
                 />
               ) : (
-                <p dangerouslySetInnerHTML={{__html: inputsValue.description}} />
+                <p
+                  dangerouslySetInnerHTML={{ __html: inputsValue.description }}
+                />
               )}
               {/*<img src={taskImg} className="image-task"></img>*/}
             </div>

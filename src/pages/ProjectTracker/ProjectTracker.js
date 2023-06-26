@@ -509,7 +509,12 @@ export const ProjectTracker = () => {
                                   {task.title}
                                 </p>
                               </div>
-                              <p dangerouslySetInnerHTML={{__html: task.description}} className="tasks__board__item__description"></p>
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: task.description,
+                                }}
+                                className="tasks__board__item__description"
+                              ></p>
                               <div className="tasks__board__item__info">
                                 <div className="tasks__board__item__info__more">
                                   <img src={commentsBoard} alt="commentsImg" />
