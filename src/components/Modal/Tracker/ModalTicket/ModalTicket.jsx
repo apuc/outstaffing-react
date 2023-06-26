@@ -1,3 +1,5 @@
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -370,17 +372,35 @@ export const ModalTiсket = ({
             )}
             <div className="content__description">
               {editOpen ? (
-                <textarea
-                  value={inputsValue.description}
-                  onChange={(e) => {
+                <CKEditor
+                  editor={ClassicEditor}
+                  data={inputsValue.description}
+                  config={{
+                    removePlugins: [
+                      "CKFinderUploadAdapter",
+                      "CKFinder",
+                      "EasyImage",
+                      "Image",
+                      "ImageCaption",
+                      "ImageStyle",
+                      "ImageToolbar",
+                      "ImageUpload",
+                      "MediaEmbed",
+                      "BlockQuote",
+                    ],
+                  }}
+                  onChange={(event, editor) => {
+                    const data = editor.getData();
                     setInputsValue((prevValue) => ({
                       ...prevValue,
-                      description: e.target.value,
+                      description: data,
                     }));
                   }}
                 />
               ) : (
-                <p>{inputsValue.description}</p>
+                <p
+                  dangerouslySetInnerHTML={{ __html: inputsValue.description }}
+                />
               )}
               {/*<img src={taskImg} className="image-task"></img>*/}
             </div>
