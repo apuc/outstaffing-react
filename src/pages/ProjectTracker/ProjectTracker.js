@@ -2,25 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
-import { Footer } from "@components/Common/Footer/Footer";
-import { Loader } from "@components/Common/Loader/Loader";
-
-import { apiRequest } from "../../api/request";
-import archive from "../../assets/icons/archiveTracker.svg";
-import arrow from "../../assets/icons/arrows/arrowCalendar.png";
-import close from "../../assets/icons/close.png";
-import commentsBoard from "../../assets/icons/commentsBoard.svg";
-import del from "../../assets/icons/delete.svg";
-import edit from "../../assets/icons/edit.svg";
-import filesBoard from "../../assets/icons/filesBoard.svg";
-import project from "../../assets/icons/trackerProject.svg";
-import tasks from "../../assets/icons/trackerTasks.svg";
-import accept from "../../assets/images/accept.png";
-import TrackerModal from "../../components/Modal/TrackerModal/TrackerModal";
-import { Navigation } from "../../components/Navigation/Navigation";
-import { ProfileBreadcrumbs } from "../../components/ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import ModalTicket from "../../components/UI/ModalTicket/ModalTicket";
 import {
   activeLoader,
   deletePersonOnProject,
@@ -36,8 +17,31 @@ import {
   setColumnPriority,
   setProjectBoardFetch,
   setToggleTab,
-} from "../../redux/projectsTrackerSlice";
-import { urlForLocal } from "../../utils/helper";
+} from "@redux/projectsTrackerSlice";
+
+import { urlForLocal } from "@utils/helper";
+
+import { apiRequest } from "@api/request";
+
+import BaseButton from "@components/Common/BaseButton/BaseButton";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Loader } from "@components/Common/Loader/Loader";
+import ModalTicket from "@components/Modal/Tracker/ModalTicket/ModalTicket";
+import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+
+import archive from "assets/icons/archiveTracker.svg";
+import arrow from "assets/icons/arrows/arrowCalendar.png";
+import close from "assets/icons/close.png";
+import commentsBoard from "assets/icons/commentsBoard.svg";
+import del from "assets/icons/delete.svg";
+import edit from "assets/icons/edit.svg";
+import filesBoard from "assets/icons/filesBoard.svg";
+import project from "assets/icons/trackerProject.svg";
+import tasks from "assets/icons/trackerTasks.svg";
+import accept from "assets/images/accept.png";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();
@@ -295,14 +299,23 @@ export const ProjectTracker = () => {
                   <h4>Проект : {projectBoard.name}</h4>
 
                   <div className="tasks__head__add">
-                    <span
+                    <BaseButton
+                      onClick={() => {
+                        dispatch(modalToggle("createColumn"));
+                        setModalAdd(true);
+                      }}
+                      styles={"button-add-column"}
+                    >
+                      +
+                    </BaseButton>
+                    {/* <span
                       onClick={() => {
                         dispatch(modalToggle("createColumn"));
                         setModalAdd(true);
                       }}
                     >
                       +
-                    </span>
+                    </span> */}
                     <p>добавить колонку</p>
                   </div>
                   <div className="tasks__head__persons">

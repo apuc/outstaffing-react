@@ -2,24 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-import { Footer } from "@components/Common/Footer/Footer";
-import { Loader } from "@components/Common/Loader/Loader";
-
-import { apiRequest } from "../../../../api/request";
-import archive from "../../../../assets/icons/archive.svg";
-import archive2 from "../../../../assets/icons/archive.svg";
-import arrow from "../../../../assets/icons/arrows/arrowCalendar.png";
-import arrow2 from "../../../../assets/icons/arrows/arrowStart.png";
-import close from "../../../../assets/icons/close.png";
-import del from "../../../../assets/icons/delete.svg";
-import edit from "../../../../assets/icons/edit.svg";
-import file from "../../../../assets/icons/fileModal.svg";
-import link from "../../../../assets/icons/link.svg";
-import plus from "../../../../assets/icons/plus.svg";
-import send from "../../../../assets/icons/send.svg";
-import project from "../../../../assets/icons/trackerProject.svg";
-import tasks from "../../../../assets/icons/trackerTasks.svg";
-import watch from "../../../../assets/icons/watch.svg";
 import {
   deletePersonOnProject,
   getBoarderLoader,
@@ -27,13 +9,36 @@ import {
   modalToggle,
   setProjectBoardFetch,
   setToggleTab,
-} from "../../../../redux/projectsTrackerSlice";
-import { getCorrectRequestDate, urlForLocal } from "../../../../utils/helper";
-import TrackerModal from "../../../Modal/TrackerModal/TrackerModal";
-import { Navigation } from "../../../Navigation/Navigation";
-import { ProfileBreadcrumbs } from "../../../ProfileBreadcrumbs/ProfileBreadcrumbs";
-import { ProfileHeader } from "../../../ProfileHeader/ProfileHeader";
-import TrackerTaskComment from "../../../TrackerTaskComment/TrackerTaskComment";
+} from "@redux/projectsTrackerSlice";
+
+import { getCorrectRequestDate, urlForLocal } from "@utils/helper";
+
+import { apiRequest } from "@api/request";
+
+import BaseButton from "@components/Common/BaseButton/BaseButton";
+import { Footer } from "@components/Common/Footer/Footer";
+import { Loader } from "@components/Common/Loader/Loader";
+import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
+import { Navigation } from "@components/Navigation/Navigation";
+import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
+import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
+
+import archive from "assets/icons/archive.svg";
+import archive2 from "assets/icons/archive.svg";
+import arrow from "assets/icons/arrows/arrowCalendar.png";
+import arrow2 from "assets/icons/arrows/arrowStart.png";
+import close from "assets/icons/close.png";
+import del from "assets/icons/delete.svg";
+import edit from "assets/icons/edit.svg";
+import file from "assets/icons/fileModal.svg";
+import link from "assets/icons/link.svg";
+import plus from "assets/icons/plus.svg";
+import send from "assets/icons/send.svg";
+import project from "assets/icons/trackerProject.svg";
+import tasks from "assets/icons/trackerTasks.svg";
+import watch from "assets/icons/watch.svg";
+
 import "./ticketFullScreen.scss";
 
 export const TicketFullScreen = () => {
@@ -262,8 +267,6 @@ export const TicketFullScreen = () => {
                   ></TrackerModal>
 
                   <div className="tasks__head__persons">
-                    {/*<img src={avatarTest} alt="avatar" />*/}
-                    {/*<img src={avatarTest} alt="avatar" />*/}
                     <span className="countPersons">
                       {projectBoard.projectUsers?.length}
                     </span>
@@ -368,25 +371,25 @@ export const TicketFullScreen = () => {
                     ) : (
                       <p>{inputsValue.description}</p>
                     )}
-                    {/*<img src={task} className="image-task"></img>*/}
                   </div>
                   <div className="content__communication">
                     <p className="tasks">
-                      <button
+                      <BaseButton
                         onClick={() => {
                           dispatch(modalToggle("addSubtask"));
                           setModalAddWorker(true);
                         }}
+                        styles={"button-green-add"}
                       >
-                        <img src={plus} alt="plus"></img>
+                        <img src={plus}></img>
                         Добавить под задачу
-                      </button>
+                      </BaseButton>
                     </p>
                     <p className="file">
-                      <button>
-                        <img src={file} alt="file"></img>
+                      <BaseButton styles={"button-add-file"}>
+                        <img src={file}></img>
                         Загрузить файл
-                      </button>
+                      </BaseButton>
                       <span>{0}</span>
                       Файлов
                     </p>
@@ -438,25 +441,28 @@ export const TicketFullScreen = () => {
                   </div>
 
                   <div className="add-worker moreItems">
-                    <button
+                    <BaseButton
                       onClick={() => {
                         dispatch(modalToggle("addWorker"));
                         setModalAddWorker(true);
                       }}
+                      styles={"button-add-worker"}
                     >
                       +
-                    </button>
+                    </BaseButton>
                     <span>Добавить исполнителя</span>
                   </div>
                   <div className="add-worker moreItems">
-                    <button
+                    <BaseButton
                       onClick={() => {
                         dispatch(modalToggle("addWorker"));
                         setModalAddWorker(true);
                       }}
+                      styles={"button-add-worker"}
                     >
                       +
-                    </button>
+                    </BaseButton>
+
                     <span>Добавить участников</span>
                   </div>
                 </div>

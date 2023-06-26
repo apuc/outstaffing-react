@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 
 import { modalToggle, setProjectBoardFetch } from "@redux/projectsTrackerSlice";
 
-import { urlForLocal } from "@utils/helper";
+import { getCorrectRequestDate, urlForLocal } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
-import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
-import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
-import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
+import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
+import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
 
 import archive from "assets/icons/archive.svg";
 import arrow from "assets/icons/arrows/arrowStart.png";
@@ -26,7 +25,7 @@ import plus from "assets/icons/plus.svg";
 import send from "assets/icons/send.svg";
 import watch from "assets/icons/watch.svg";
 
-import "./ModalTicket.scss";
+import "./modalTicket.scss";
 
 export const ModalTiсket = ({
   active,
@@ -45,13 +44,19 @@ export const ModalTiсket = ({
     comment: "",
   });
   const [comments, setComments] = useState([]);
-  const [commentsEditOpen, setCommentsEditOpen] = useState({});
-  const [commentsEditText, setCommentsEditText] = useState({});
   const [dropListOpen, setDropListOpen] = useState(false);
   const [dropListMembersOpen, setDropListMembersOpen] = useState(false);
   const [executor, setExecutor] = useState(task.executor);
   const [members, setMembers] = useState(task.taskUsers);
   const [users, setUsers] = useState([]);
+  const [timerStart, setTimerStart] = useState(false);
+  const [timerInfo, setTimerInfo] = useState({});
+  const [currentTimerCount, setCurrentTimerCount] = useState({
+    hours: 0,
+    minute: 0,
+    seconds: 0,
+  });
+  const [timerId, setTimerId] = useState(null);
 
   function deleteTask() {
     apiRequest("/task/update-task", {
@@ -90,37 +95,78 @@ export const ModalTiсket = ({
     }).then((res) => {
       let newComment = res;
       newComment.created_at = new Date();
+      newComment.subComments = [];
       setInputsValue((prevValue) => ({ ...prevValue, comment: "" }));
       setComments((prevValue) => [...prevValue, newComment]);
-      setCommentsEditOpen((prevValue) => ({ ...prevValue, [res.id]: false }));
-      setCommentsEditText((prevValue) => ({
-        ...prevValue,
-        [res.id]: res.text,
-      }));
-    });
-  }
-  function deleteComment(commentId) {
-    apiRequest("/comment/update", {
-      method: "PUT",
-      data: {
-        comment_id: commentId,
-        status: 0,
-      },
-    }).then(() => {
-      setComments((prevValue) =>
-        prevValue.filter((item) => item.id !== commentId)
-      );
     });
   }
 
-  function editComment(commentId) {
-    apiRequest("/comment/update", {
+  function commentDelete(comment) {
+    setComments((prevValue) =>
+      prevValue.filter((item) => item.id !== comment.id)
+    );
+    if (comment.subComments.length) {
+      // promiseAll
+      comment.subComments.forEach((subComment) => {
+        apiRequest("/comment/update", {
+          method: "PUT",
+          data: {
+            comment_id: subComment.id,
+            status: 0,
+          },
+        }).then(() => {});
+      });
+    }
+  }
+
+  function addSubComment(commentId, subComment) {
+    const addSubComment = comments;
+    addSubComment.forEach((comment) => {
+      if (comment.id === commentId) {
+        comment.subComments.push(subComment);
+      }
+    });
+    setComments(addSubComment);
+  }
+
+  function subCommentDelete(subComment) {
+    const deleteSubComment = comments;
+    deleteSubComment.forEach((comment, index) => {
+      if (comment.id === subComment.parent_id) {
+        deleteSubComment[index].subComments = comment.subComments.filter(
+          (item) => item.id !== subComment.id
+        );
+      }
+    });
+    setComments([...deleteSubComment]);
+  }
+
+  function startTaskTimer() {
+    apiRequest("/timer/create", {
+      method: "POST",
+      data: {
+        entity_type: 2,
+        entity_id: task.id,
+        created_at: getCorrectRequestDate(new Date()),
+      },
+    }).then((res) => {
+      setTimerStart(true);
+      setTimerInfo(res);
+      startTimer();
+    });
+  }
+
+  function stopTaskTimer() {
+    apiRequest("/timer/update", {
       method: "PUT",
       data: {
-        comment_id: commentId,
-        text: commentsEditText[commentId],
+        timer_id: timerInfo.id,
+        stopped_at: getCorrectRequestDate(new Date()),
       },
-    }).then(() => {});
+    }).then(() => {
+      setTimerStart(false);
+      clearInterval(timerId);
+    });
   }
 
   function taskExecutor(person) {
@@ -177,19 +223,76 @@ export const ModalTiсket = ({
     apiRequest(
       `/comment/get-by-entity?entity_type=2&entity_id=${task.id}`
     ).then((res) => {
-      setComments(res);
-      res.forEach((item) => {
-        setCommentsEditOpen((prevValue) => ({
-          ...prevValue,
-          [item.id]: false,
-        }));
-        setCommentsEditText((prevValue) => ({
-          ...prevValue,
-          [item.id]: item.text,
-        }));
-      });
+      const comments = res.reduce((acc, cur) => {
+        if (!cur.parent_id) {
+          acc.push({ ...cur, subComments: [] });
+        } else {
+          acc.forEach((item) => {
+            if (item.id === cur.parent_id) item.subComments.push(cur);
+          });
+        }
+        return acc;
+      }, []);
+      setComments(comments);
     });
+    apiRequest(`/timer/get-by-entity?entity_type=2&entity_id=${task.id}`).then(
+      (res) => {
+        let timerSeconds = 0;
+        res.length &&
+          res.forEach((time) => {
+            timerSeconds += time.deltaSeconds;
+            setCurrentTimerCount({
+              hours: Math.floor(timerSeconds / 60 / 60),
+              minute: Math.floor((timerSeconds / 60) % 60),
+              seconds: timerSeconds % 60,
+            });
+            updateTimerHours = Math.floor(timerSeconds / 60 / 60);
+            updateTimerMinute = Math.floor((timerSeconds / 60) % 60);
+            updateTimerSec = timerSeconds % 60;
+            if (!time.stopped_at) {
+              setTimerStart(true);
+              startTimer();
+              setTimerInfo(time);
+            }
+          });
+      }
+    );
   }, []);
+
+  function startTimer() {
+    setTimerId(
+      setInterval(() => {
+        run();
+      }, 1000)
+    );
+  }
+
+  let updateTimerSec = currentTimerCount.seconds,
+    updateTimerMinute = currentTimerCount.minute,
+    updateTimerHours = currentTimerCount.hours;
+
+  function run() {
+    updateTimerSec++;
+    if (updateTimerSec > 60) {
+      updateTimerMinute++;
+      updateTimerSec = 0;
+    }
+    if (updateTimerMinute === 60) {
+      updateTimerMinute = 0;
+      updateTimerHours++;
+    }
+
+    return setCurrentTimerCount({
+      hours: updateTimerHours,
+      minute: updateTimerMinute,
+      seconds: updateTimerSec,
+    });
+  }
+
+  function correctTimerTime(time) {
+    if (time < 10) return `0${time}`;
+    if (time > 10) return time;
+  }
 
   useEffect(() => {
     let ids = members.map((user) => user.user_id);
@@ -202,23 +305,26 @@ export const ModalTiсket = ({
   }, [members]);
 
   return (
-    <>
-      <ModalLayout
-        active={active}
-        setActive={setActive}
-        styles={"tracker-ticket"}
+    <div
+      className={active ? "modal-tiket active" : "modal-tiket"}
+      onClick={() => setActive(false)}
+    >
+      <div
+        className="modal-tiket__content"
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="content">
-          <h3 className="title-project">
+          <Link to={`/tracker/task/${task.id}`} className="title-project__full">
+            <img src={fullScreen}></img>
+          </Link>
+
+          <div className="title-project">
             <img src={category} className="title-project__category"></img>
-            Проект: {projectName}
-            <Link
-              to={`/tracker/task/${task.id}`}
-              className="title-project__full"
-            >
-              <img src={fullScreen}></img>
-            </Link>
-          </h3>
+            <h2>
+              Проект:
+              <h3>{projectName}</h3>
+            </h2>
+          </div>
 
           <div className="content__task">
             <span>Задача</span>
@@ -237,7 +343,7 @@ export const ModalTiсket = ({
             )}
             <div className="content__description">
               {editOpen ? (
-                <input
+                <textarea
                   value={inputsValue.description}
                   onChange={(e) => {
                     setInputsValue((prevValue) => ({
@@ -258,14 +364,14 @@ export const ModalTiсket = ({
                     dispatch(modalToggle("addSubtask"));
                     setAddSubtask(true);
                   }}
-                  styles={"tasks__button"}
+                  styles={"button-green-add"}
                 >
                   <img src={plus}></img>
                   Добавить под задачу
                 </BaseButton>
               </p>
               <p className="file">
-                <BaseButton styles={"file__button"}>
+                <BaseButton styles={"button-add-file"}>
                   <img src={file}></img>
                   Загрузить файл
                 </BaseButton>
@@ -289,50 +395,14 @@ export const ModalTiсket = ({
             <div className="comments__list">
               {comments.map((comment) => {
                 return (
-                  <div className="comments__list__item" key={comment.id}>
-                    <div className="comments__list__item__info">
-                      <span>{getCorrectDate(comment.created_at)}</span>
-                      <div
-                        className={
-                          commentsEditOpen[comment.id]
-                            ? "edit edit__open"
-                            : "edit"
-                        }
-                      >
-                        <img
-                          src={edit}
-                          alt="edit"
-                          onClick={() => {
-                            if (commentsEditOpen[comment.id]) {
-                              editComment(comment.id);
-                            }
-                            setCommentsEditOpen((prevValue) => ({
-                              ...prevValue,
-                              [comment.id]: !prevValue[comment.id],
-                            }));
-                          }}
-                        />
-                      </div>
-                      <img
-                        src={del}
-                        alt="delete"
-                        onClick={() => deleteComment(comment.id)}
-                      />
-                    </div>
-                    {commentsEditOpen[comment.id] ? (
-                      <input
-                        value={commentsEditText[comment.id]}
-                        onChange={(e) => {
-                          setCommentsEditText((prevValue) => ({
-                            ...prevValue,
-                            [comment.id]: e.target.value,
-                          }));
-                        }}
-                      />
-                    ) : (
-                      <p>{commentsEditText[comment.id]}</p>
-                    )}
-                  </div>
+                  <TrackerTaskComment
+                    key={comment.id}
+                    taskId={task.id}
+                    comment={comment}
+                    commentDelete={commentDelete}
+                    addSubComment={addSubComment}
+                    subCommentDelete={subCommentDelete}
+                  />
                 );
               })}
             </div>
@@ -356,7 +426,12 @@ export const ModalTiсket = ({
               </div>
             ) : (
               <div className="add-worker moreItems ">
-                <button onClick={() => setDropListOpen(true)}>+</button>
+                <BaseButton
+                  onClick={() => setDropListOpen(true)}
+                  styles={"button-add-worker"}
+                >
+                  +
+                </BaseButton>
                 <span>Добавить исполнителя</span>
                 {dropListOpen && (
                   <div className="dropdownList">
@@ -404,7 +479,12 @@ export const ModalTiсket = ({
             )}
 
             <div className="add-worker moreItems">
-              <button onClick={() => setDropListMembersOpen(true)}>+</button>
+              <BaseButton
+                onClick={() => setDropListMembersOpen(true)}
+                styles={"button-add-worker"}
+              >
+                +
+              </BaseButton>
               <span>Добавить участников</span>
               {dropListMembersOpen && (
                 <div className="dropdownList">
@@ -438,12 +518,29 @@ export const ModalTiсket = ({
             <div className="time">
               <img src={watch}></img>
               <span>Длительность : </span>
-              <p>{"0:00:00"}</p>
+              <p>
+                {correctTimerTime(currentTimerCount.hours)}:
+                {correctTimerTime(currentTimerCount.minute)}:
+                {correctTimerTime(currentTimerCount.seconds)}
+              </p>
             </div>
 
-            <button className="start">
-              Начать делать <img src={arrow}></img>
-            </button>
+            {timerStart ? (
+              <button className="stop" onClick={() => stopTaskTimer()}>
+                Остановить
+              </button>
+            ) : (
+              <button
+                className={
+                  task.executor_id === Number(localStorage.getItem("id"))
+                    ? "start"
+                    : "start disable"
+                }
+                onClick={() => startTaskTimer()}
+              >
+                Начать делать <img src={arrow}></img>
+              </button>
+            )}
           </div>
 
           <div className="workers_box-bottom">
@@ -475,14 +572,14 @@ export const ModalTiсket = ({
             </div>
           </div>
         </div>
-      </ModalLayout>
+      </div>
 
       <TrackerModal
         active={addSubtask}
         setActive={setAddSubtask}
         defautlInput={task.column_id}
       ></TrackerModal>
-    </>
+    </div>
   );
 };
 

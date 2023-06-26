@@ -7,7 +7,7 @@ import { deleteProject, modalToggle } from "@redux/projectsTrackerSlice";
 import { apiRequest } from "@api/request";
 
 import { ModalSelect } from "@components/Modal/ModalSelect/ModalSelect";
-import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
+import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 
 import archiveSet from "assets/icons/archive.svg";
 import del from "assets/icons/delete.svg";
