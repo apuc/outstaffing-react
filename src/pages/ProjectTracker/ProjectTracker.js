@@ -43,6 +43,7 @@ import filesBoard from "assets/icons/filesBoard.svg";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
 import accept from "assets/images/accept.png";
+import avatarMok from "assets/images/avatarMok.png";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();
@@ -323,6 +324,13 @@ export const ProjectTracker = () => {
                     <span className="countPersons">
                       {projectBoard.projectUsers?.length}
                     </span>
+                    <div className='projectPersons'>
+                      {projectBoard.projectUsers?.length &&
+                          projectBoard.projectUsers.slice(0, projectBoard.length > 3 ? 3 : projectBoard.length).map((person) => {
+                            return <img key={person.user_id} src={person.user?.avatar ? urlForLocal(person.user.avatar) : avatarMok} alt='avatar' />
+                          })
+                      }
+                    </div>
                     <span
                       className="addPerson"
                       onClick={() => {
@@ -515,6 +523,17 @@ export const ProjectTracker = () => {
                                 }}
                                 className="tasks__board__item__description"
                               ></p>
+                              <div className="tasks__board__item__executor">
+                                <span>{task.executor?.fio ? task.executor?.fio : 'Исполнитель не назначен'}</span>
+                                {task.executor?.avatar &&
+                                    <img
+                                        src={
+                                          task.executor?.avatar ? urlForLocal(task.executor?.avatar) : avatarMok
+                                        }
+                                        alt="avatar"
+                                    />
+                                }
+                              </div>
                               <div className="tasks__board__item__info">
                                 <div className="tasks__board__item__info__more">
                                   <img src={commentsBoard} alt="commentsImg" />

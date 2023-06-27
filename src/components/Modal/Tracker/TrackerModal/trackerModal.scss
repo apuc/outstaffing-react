@@ -32,6 +32,44 @@
   flex-direction: column;
   margin: 0 0 15px 0;
 
+  .select-priority {
+    background-color: white;
+    width: 100%;
+    margin: 12px 0;
+    padding: 10px 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+
+    img {
+      width: 15px;
+      height: 15px;
+    }
+
+    &__dropDown {
+      position: absolute;
+      width: 100%;
+      background: white;
+      left: 0;
+      padding: 8px;
+      top: 50px;
+      display: flex;
+      border-radius: 8px;
+      row-gap: 5px;
+      flex-direction: column;
+
+      span {
+        &:hover {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
   .input-container {
     width: 287px;
     height: 35px;

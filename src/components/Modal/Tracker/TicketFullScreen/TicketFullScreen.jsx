@@ -210,6 +210,10 @@ export const TicketFullScreen = () => {
     dispatch(setToggleTab(index));
   };
 
+  function copyTicketLink () {
+    navigator.clipboard.writeText(`https://itguild.info/tracker/task/${taskInfo.id}`)
+  }
+
   return (
     <section className="ticket-full-screen">
       <ProfileHeader />
@@ -510,7 +514,7 @@ export const TicketFullScreen = () => {
                   </div>
                   <div>
                     <img src={link} alt="link"></img>
-                    <p>ссылка на проект</p>
+                    <p onClick={copyTicketLink}>ссылка на задачу</p>
                   </div>
                   <div>
                     <img src={archive2} alt="arch"></img>
