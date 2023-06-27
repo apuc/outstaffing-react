@@ -334,6 +334,10 @@ export const ModalTiсket = ({
     );
   }, [members]);
 
+  function copyProjectLink () {
+    navigator.clipboard.writeText(`https://itguild.info/tracker/project/${projectId}`)
+  }
+
   return (
     <div
       className={active ? "modal-tiket active" : "modal-tiket"}
@@ -614,7 +618,7 @@ export const ModalTiсket = ({
             </div>
             <div>
               <img src={link}></img>
-              <p>ссылка на проект</p>
+              <p onClick={copyProjectLink}>ссылка на проект</p>
             </div>
             <div onClick={deleteTask}>
               <img src={archive}></img>

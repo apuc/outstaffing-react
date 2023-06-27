@@ -255,14 +255,27 @@
             cursor: pointer;
             align-items: center;
 
-            img {
+            .projectPersons {
+              display: flex;
               position: relative;
-              width: 32px;
-              height: 32px;
-            }
+              left: -10px;
+              img {
+                position: relative;
+                display: flex;
+                width: 32px;
+                height: 32px;
+              }
 
-            img:nth-child(2) {
-              right: 12px;
+              img:nth-child(1) {
+                left: -5px;
+              }
+
+              img:nth-child(2) {
+                left: -10px;
+              }
+              img:nth-child(3) {
+                left: -15px;
+              }
             }
 
             span {
@@ -282,15 +295,14 @@
               color: #252c32;
               border: 1px solid #dde2e4;
               background: white;
-              left: -18px;
-              z-index: 2;
+              left: -5px;
             }
 
             .addPerson {
               background: #00c5a8;
               color: white;
               font-size: 14px;
-              left: -30px;
+              left: -28px;
               z-index: 2;
             }
 
@@ -586,7 +598,7 @@
             }
 
             &__description {
-              margin: 8px 0 15px;
+              margin: 8px 0 4px;
               color: #5c6165;
               font-weight: 400;
               font-size: 14px;
@@ -627,6 +639,28 @@
                   right: -15px;
                   z-index: 2;
                 }
+              }
+            }
+
+            &__executor {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin: 10px 0 15px;
+              padding-right: 10px;
+              font-size: 14px;
+              font-weight: 500;
+
+              span {
+                max-width: 210px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+
+              img {
+                width: 25px;
+                height: 25px;
               }
             }
           }

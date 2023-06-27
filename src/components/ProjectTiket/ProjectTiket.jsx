@@ -52,6 +52,10 @@ export const ProjectTiket = ({ project, index }) => {
     });
   }
 
+  function copyProjectLink () {
+    navigator.clipboard.writeText(`https://itguild.info/tracker/project/${project.id}`)
+  }
+
   return (
     <div className="project" key={index}>
       <Link to={`/tracker/project/${project.id}`}>{project.name}</Link>
@@ -90,7 +94,7 @@ export const ProjectTiket = ({ project, index }) => {
           </div>
           <div>
             <img src={link}></img>
-            <p>ссылка на проект</p>
+            <p onClick={copyProjectLink}>ссылка на проект</p>
           </div>
           <div>
             <img src={archiveSet}></img>
