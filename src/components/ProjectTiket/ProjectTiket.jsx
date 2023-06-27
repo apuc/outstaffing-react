@@ -52,8 +52,10 @@ export const ProjectTiket = ({ project, index }) => {
     });
   }
 
-  function copyProjectLink () {
-    navigator.clipboard.writeText(`https://itguild.info/tracker/project/${project.id}`)
+  function copyProjectLink() {
+    navigator.clipboard.writeText(
+      `https://itguild.info/tracker/project/${project.id}`
+    );
   }
 
   return (

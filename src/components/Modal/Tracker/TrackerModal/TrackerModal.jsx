@@ -51,8 +51,11 @@ export const TrackerModal = ({
   const [workers, setWorkers] = useState([]);
   const [selectWorkersOpen, setSelectWorkersOpen] = useState(false);
   const [selectedWorker, setSelectedWorker] = useState(null);
-  const [selectColumnPriority, setSelectColumnPriority] = useState('Выберите приоритет колонки')
-  const [selectColumnPriorityOpen, setSelectColumnPriorityOpen] = useState(false)
+  const [selectColumnPriority, setSelectColumnPriority] = useState(
+    "Выберите приоритет колонки"
+  );
+  const [selectColumnPriorityOpen, setSelectColumnPriorityOpen] =
+    useState(false);
 
   function createTab() {
     if (!valueColumn) {
@@ -386,19 +389,31 @@ export const TrackerModal = ({
               />
             </div>
             <h4>Приоритет колонки</h4>
-            <div className='select-priority' onClick={() => setSelectColumnPriorityOpen(!selectColumnPriorityOpen)}>
-              <span>{selectColumnPriority}</span>
-              <img src={arrowDown} alt='arrow' />
-              {selectColumnPriorityOpen &&
-                  <div className='select-priority__dropDown'>
-                    {projectBoard.columns.map((column, index) => {
-                      return <span key={column.id} onClick={() => {
-                        setSelectColumnPriority(index + 1)
-                        dispatch(setColumnPriority(index + 1))
-                      }}>{index + 1}</span>
-                    })}
-                  </div>
+            <div
+              className="select-priority"
+              onClick={() =>
+                setSelectColumnPriorityOpen(!selectColumnPriorityOpen)
               }
+            >
+              <span>{selectColumnPriority}</span>
+              <img src={arrowDown} alt="arrow" />
+              {selectColumnPriorityOpen && (
+                <div className="select-priority__dropDown">
+                  {projectBoard.columns.map((column, index) => {
+                    return (
+                      <span
+                        key={column.id}
+                        onClick={() => {
+                          setSelectColumnPriority(index + 1);
+                          dispatch(setColumnPriority(index + 1));
+                        }}
+                      >
+                        {index + 1}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
             </div>
             {/*<div className="input-container">*/}
             {/*  <input*/}

@@ -334,8 +334,10 @@ export const ModalTiсket = ({
     );
   }, [members]);
 
-  function copyProjectLink () {
-    navigator.clipboard.writeText(`https://itguild.info/tracker/project/${projectId}`)
+  function copyProjectLink() {
+    navigator.clipboard.writeText(
+      `https://itguild.info/tracker/project/${projectId}`
+    );
   }
 
   return (
