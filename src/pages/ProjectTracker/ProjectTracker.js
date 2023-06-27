@@ -291,6 +291,7 @@ export const ProjectTracker = () => {
             setActive={setModalAdd}
             selectedTab={selectedTab}
             priorityTask={priorityTask}
+            projectUsers={projectBoard.projectUsers}
           />
 
           {loader && <Loader style="green" />}
@@ -324,12 +325,26 @@ export const ProjectTracker = () => {
                     <span className="countPersons">
                       {projectBoard.projectUsers?.length}
                     </span>
-                    <div className='projectPersons'>
+                    <div className="projectPersons">
                       {projectBoard.projectUsers?.length &&
-                          projectBoard.projectUsers.slice(0, projectBoard.length > 3 ? 3 : projectBoard.length).map((person) => {
-                            return <img key={person.user_id} src={person.user?.avatar ? urlForLocal(person.user.avatar) : avatarMok} alt='avatar' />
-                          })
-                      }
+                        projectBoard.projectUsers
+                          .slice(
+                            0,
+                            projectBoard.length > 3 ? 3 : projectBoard.length
+                          )
+                          .map((person) => {
+                            return (
+                              <img
+                                key={person.user_id}
+                                src={
+                                  person.user?.avatar
+                                    ? urlForLocal(person.user.avatar)
+                                    : avatarMok
+                                }
+                                alt="avatar"
+                              />
+                            );
+                          })}
                     </div>
                     <span
                       className="addPerson"
@@ -524,15 +539,21 @@ export const ProjectTracker = () => {
                                 className="tasks__board__item__description"
                               ></p>
                               <div className="tasks__board__item__executor">
-                                <span>{task.executor?.fio ? task.executor?.fio : 'Исполнитель не назначен'}</span>
-                                {task.executor?.avatar &&
-                                    <img
-                                        src={
-                                          task.executor?.avatar ? urlForLocal(task.executor?.avatar) : avatarMok
-                                        }
-                                        alt="avatar"
-                                    />
-                                }
+                                <span>
+                                  {task.executor?.fio
+                                    ? task.executor?.fio
+                                    : "Исполнитель не назначен"}
+                                </span>
+                                {task.executor?.avatar && (
+                                  <img
+                                    src={
+                                      task.executor?.avatar
+                                        ? urlForLocal(task.executor?.avatar)
+                                        : avatarMok
+                                    }
+                                    alt="avatar"
+                                  />
+                                )}
                               </div>
                               <div className="tasks__board__item__info">
                                 <div className="tasks__board__item__info__more">

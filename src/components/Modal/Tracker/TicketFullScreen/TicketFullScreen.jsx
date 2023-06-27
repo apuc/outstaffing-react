@@ -210,8 +210,10 @@ export const TicketFullScreen = () => {
     dispatch(setToggleTab(index));
   };
 
-  function copyTicketLink () {
-    navigator.clipboard.writeText(`https://itguild.info/tracker/task/${taskInfo.id}`)
+  function copyTicketLink() {
+    navigator.clipboard.writeText(
+      `https://itguild.info/tracker/task/${taskInfo.id}`
+    );
   }
 
   return (

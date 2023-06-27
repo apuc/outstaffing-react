@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { getProfileInfo } from "@redux/outstaffingSlice";
 import {
   addPersonToProject,
   editColumnName,
@@ -35,12 +36,14 @@ export const TrackerModal = ({
   titleProject,
   projectId,
   priorityTask,
+  projectUsers,
 }) => {
   const dispatch = useDispatch();
   const projectBoard = useSelector(getProjectBoard);
   const columnName = useSelector(getColumnName);
   const columnId = useSelector(getColumnId);
   const columnPriority = useSelector(getColumnPriority);
+  const profileInfo = useSelector(getProfileInfo);
 
   const modalType = useSelector(getValueModalType);
   const [projectName, setProjectName] = useState(defautlInput);
@@ -51,8 +54,16 @@ export const TrackerModal = ({
   const [workers, setWorkers] = useState([]);
   const [selectWorkersOpen, setSelectWorkersOpen] = useState(false);
   const [selectedWorker, setSelectedWorker] = useState(null);
-  const [selectColumnPriority, setSelectColumnPriority] = useState('Выберите приоритет колонки')
-  const [selectColumnPriorityOpen, setSelectColumnPriorityOpen] = useState(false)
+  const [selectColumnPriority, setSelectColumnPriority] = useState(
+    "Выберите приоритет колонки"
+  );
+  const [selectedExecutorTask, setSelectedExecutorTask] = useState(
+    "Выберите исполнителя задачи"
+  );
+  const [selectExecutorTaskOpen, setSelectExecutorTaskOpen] = useState(false);
+  const [correctProjectUsers, setCorrectProjectUsers] = useState([]);
+  const [selectColumnPriorityOpen, setSelectColumnPriorityOpen] =
+    useState(false);
 
   function createTab() {
     if (!valueColumn) {
@@ -91,13 +102,28 @@ export const TrackerModal = ({
         column_id: selectedTab,
         priority: priorityTask,
       },
-    }).then(() => {
-      dispatch(setProjectBoardFetch(projectBoard.id));
+    }).then((res) => {
+      if (selectedExecutorTask.user_id) {
+        apiRequest("/task/update-task", {
+          method: "PUT",
+          data: {
+            task_id: res.id,
+            executor_id: selectedExecutorTask.user_id,
+          },
+        }).then(() => {
+          dispatch(setProjectBoardFetch(projectBoard.id));
+          setActive(false);
+          setValueTiket("");
+          setDescriptionTicket("");
+          setSelectedExecutorTask("Выберите исполнителя задачи");
+        });
+      } else {
+        setActive(false);
+        setValueTiket("");
+        setDescriptionTicket("");
+        dispatch(setProjectBoardFetch(projectBoard.id));
+      }
     });
-
-    setActive(false);
-    setValueTiket("");
-    setDescriptionTicket("");
   }
 
   function editProject() {
@@ -211,6 +237,26 @@ export const TrackerModal = ({
           );
         })
       : "";
+    if (
+      localStorage.getItem("role_status") !== "18" &&
+      projectUsers &&
+      Boolean(
+        !projectUsers.find((item) => item.user_id === profileInfo.id_user)
+      )
+    ) {
+      setCorrectProjectUsers([
+        ...projectUsers,
+        {
+          user: {
+            avatar: profileInfo.photo,
+            fio: profileInfo.fio,
+          },
+          user_id: profileInfo.id_user,
+        },
+      ]);
+    } else {
+      setCorrectProjectUsers(projectUsers);
+    }
   }, [active]);
 
   return (
@@ -280,7 +326,7 @@ export const TrackerModal = ({
         </div>
       )}
       {modalType === "createTiketProject" && (
-        <div>
+        <>
           <div className="title-project">
             <h4>Введите название и описание задачи</h4>
             <div className="input-container">
@@ -299,11 +345,59 @@ export const TrackerModal = ({
                 placeholder="Описание задачи"
               />
             </div>
+            <div
+              onClick={() => setSelectExecutorTaskOpen(!selectExecutorTaskOpen)}
+              className={
+                selectExecutorTaskOpen
+                  ? "select__executor select__executor--open"
+                  : "select__executor"
+              }
+            >
+              <div className="selected__executor">
+                {selectedExecutorTask.user_id ? (
+                  <>
+                    <span>{selectedExecutorTask.user.fio}</span>
+                    <img
+                      className="avatar"
+                      src={urlForLocal(selectedExecutorTask.user.avatar)}
+                      alt="avatar"
+                    />
+                  </>
+                ) : (
+                  <span>{selectedExecutorTask}</span>
+                )}
+              </div>
+              <img className="arrow" src={arrowDown} alt="arrow" />
+              {selectExecutorTaskOpen && (
+                <div className="select__executor__dropDown">
+                  {correctProjectUsers.length ? (
+                    correctProjectUsers.map((person) => {
+                      return (
+                        <div
+                          onClick={() => setSelectedExecutorTask(person)}
+                          className="executor"
+                          key={person.user_id}
+                        >
+                          <span>{person.user.fio}</span>
+                          <img
+                            className="avatar"
+                            src={urlForLocal(person.user.avatar)}
+                            alt="avatar"
+                          />
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <span>Нет пользователей</span>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
           <BaseButton styles={"button-add"} onClick={createTiket}>
             Создать
           </BaseButton>
-        </div>
+        </>
       )}
       {modalType === "editProject" && (
         <div>
@@ -386,19 +480,35 @@ export const TrackerModal = ({
               />
             </div>
             <h4>Приоритет колонки</h4>
-            <div className='select-priority' onClick={() => setSelectColumnPriorityOpen(!selectColumnPriorityOpen)}>
-              <span>{selectColumnPriority}</span>
-              <img src={arrowDown} alt='arrow' />
-              {selectColumnPriorityOpen &&
-                  <div className='select-priority__dropDown'>
-                    {projectBoard.columns.map((column, index) => {
-                      return <span key={column.id} onClick={() => {
-                        setSelectColumnPriority(index + 1)
-                        dispatch(setColumnPriority(index + 1))
-                      }}>{index + 1}</span>
-                    })}
-                  </div>
+            <div
+              className={
+                selectColumnPriorityOpen
+                  ? "select-priority select-priority--open"
+                  : "select-priority"
               }
+              onClick={() =>
+                setSelectColumnPriorityOpen(!selectColumnPriorityOpen)
+              }
+            >
+              <span>{selectColumnPriority}</span>
+              <img src={arrowDown} alt="arrow" />
+              {selectColumnPriorityOpen && (
+                <div className="select-priority__dropDown">
+                  {projectBoard.columns.map((column, index) => {
+                    return (
+                      <span
+                        key={column.id}
+                        onClick={() => {
+                          setSelectColumnPriority(index + 1);
+                          dispatch(setColumnPriority(index + 1));
+                        }}
+                      >
+                        {index + 1}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
             </div>
             {/*<div className="input-container">*/}
             {/*  <input*/}
