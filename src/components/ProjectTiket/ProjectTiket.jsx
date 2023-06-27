@@ -25,6 +25,7 @@ export const ProjectTiket = ({ project, index }) => {
     initListeners();
   }, []);
 
+
   function initListeners() {
     document.addEventListener("click", closeByClickingOut);
   }

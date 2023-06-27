@@ -291,6 +291,7 @@ export const ProjectTracker = () => {
             setActive={setModalAdd}
             selectedTab={selectedTab}
             priorityTask={priorityTask}
+            projectUsers={projectBoard.projectUsers}
           />
 
           {loader && <Loader style="green" />}
