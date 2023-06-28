@@ -1,3 +1,5 @@
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import React, { useState } from "react";
 
 import { urlForLocal } from "@utils/helper";
@@ -6,8 +8,6 @@ import { apiRequest } from "@api/request";
 
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import TrackerTaskSubComment from "@components/TrackerTaskComment/TrackerTaskComment";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
 
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
@@ -78,7 +78,7 @@ export const TrackerTaskComment = ({
           ? "comments__list__item__main"
           : "",
         "comments__list__item",
-        commentsEditOpen ? 'comment__edit--open' : '',
+        commentsEditOpen ? "comment__edit--open" : "",
         comment.parent_id ? "comments__list__item__subComment" : "",
       ].join(" ")}
     >
@@ -132,7 +132,10 @@ export const TrackerTaskComment = ({
           }}
         />
       ) : (
-        <p dangerouslySetInnerHTML={{ __html: commentsEditText}} className="comments__list__item__text" />
+        <p
+          dangerouslySetInnerHTML={{ __html: commentsEditText }}
+          className="comments__list__item__text"
+        />
       )}
       {!comment.parent_id && !commentsEditOpen && (
         <>

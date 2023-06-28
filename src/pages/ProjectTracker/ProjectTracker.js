@@ -322,11 +322,9 @@ export const ProjectTracker = () => {
                     <p>добавить колонку</p>
                   </div>
                   <div className="tasks__head__persons">
-                    {projectBoard.projectUsers?.length > 3 &&
-                    <span className="countPersons">
-                      +1...
-                    </span>
-                    }
+                    {projectBoard.projectUsers?.length > 3 && (
+                      <span className="countPersons">+1...</span>
+                    )}
                     <div className="projectPersons">
                       {projectBoard.projectUsers?.length &&
                         projectBoard.projectUsers
@@ -468,7 +466,13 @@ export const ProjectTracker = () => {
                             <span
                               className="add"
                               onClick={() =>
-                                selectedTabTask(column.id, projectBoard?.columns ? projectBoard?.columns[0].tasks.at(-1).priority + 1 : 1)
+                                selectedTabTask(
+                                  column.id,
+                                  projectBoard?.columns
+                                    ? projectBoard?.columns[0].tasks.at(-1)
+                                        .priority + 1
+                                    : 1
+                                )
                               }
                             >
                               +

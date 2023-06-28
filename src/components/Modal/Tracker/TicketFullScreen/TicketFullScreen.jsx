@@ -1,8 +1,8 @@
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
 
 import {
   deletePersonOnProject,
@@ -40,9 +40,9 @@ import send from "assets/icons/send.svg";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
 import watch from "assets/icons/watch.svg";
+import avatarMok from "assets/images/avatarMok.png";
 
 import "./ticketFullScreen.scss";
-import avatarMok from "assets/images/avatarMok.png";
 
 export const TicketFullScreen = () => {
   const [modalAddWorker, setModalAddWorker] = useState(false);
@@ -89,10 +89,11 @@ export const TicketFullScreen = () => {
         }, []);
         setComments(comments);
       });
-      apiRequest(`/timer/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`).then(
-        (res) => {
-          let timerSeconds = 0;
-          res.length &&
+      apiRequest(
+        `/timer/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`
+      ).then((res) => {
+        let timerSeconds = 0;
+        res.length &&
           res.forEach((time) => {
             timerSeconds += time.deltaSeconds;
             setCurrentTimerCount({
@@ -109,8 +110,7 @@ export const TicketFullScreen = () => {
               setTimerInfo(time);
             }
           });
-        }
-      );
+      });
       dispatch(setProjectBoardFetch(taskInfo.project_id));
       setLoader(boardLoader);
     });
@@ -337,11 +337,9 @@ export const TicketFullScreen = () => {
                   ></TrackerModal>
 
                   <div className="tasks__head__persons">
-                    {projectBoard.projectUsers?.length > 3 &&
-                      <span className="countPersons">
-                      +1...
-                    </span>
-                    }
+                    {projectBoard.projectUsers?.length > 3 && (
+                      <span className="countPersons">+1...</span>
+                    )}
                     <div className="projectPersons">
                       {projectBoard.projectUsers?.length &&
                         projectBoard.projectUsers
@@ -478,7 +476,11 @@ export const TicketFullScreen = () => {
                         }}
                       />
                     ) : (
-                      <p dangerouslySetInnerHTML={{ __html: inputsValue.description }} />
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: inputsValue.description,
+                        }}
+                      />
                     )}
                   </div>
                   <div className="content__communication">
@@ -535,7 +537,8 @@ export const TicketFullScreen = () => {
               <div className="workers">
                 <div className="workers_box task__info">
                   <p className="workers__creator">
-                    Создатель : <br/>{taskInfo.user?.fio}
+                    Создатель : <br />
+                    {taskInfo.user?.fio}
                   </p>
                   <div>
                     {Boolean(taskInfo.taskUsers?.length) &&
@@ -590,7 +593,8 @@ export const TicketFullScreen = () => {
                   {timerStart ? (
                     <button
                       className={
-                        taskInfo.executor_id === Number(localStorage.getItem("id"))
+                        taskInfo.executor_id ===
+                        Number(localStorage.getItem("id"))
                           ? "stop"
                           : "stop disable"
                       }
@@ -601,7 +605,8 @@ export const TicketFullScreen = () => {
                   ) : (
                     <button
                       className={
-                        taskInfo.executor_id === Number(localStorage.getItem("id"))
+                        taskInfo.executor_id ===
+                        Number(localStorage.getItem("id"))
                           ? "start"
                           : "start disable"
                       }

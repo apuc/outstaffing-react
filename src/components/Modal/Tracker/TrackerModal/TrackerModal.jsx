@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getProfileInfo } from "@redux/outstaffingSlice";
 import {
@@ -27,9 +27,9 @@ import BaseButton from "@components/Common/BaseButton/BaseButton";
 import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 
 import arrowDown from "assets/icons/arrows/selectArrow.png";
+import avatarMok from "assets/images/avatarMok.png";
 
 import "./trackerModal.scss";
-import avatarMok from "assets/images/avatarMok.png";
 
 export const TrackerModal = ({
   active,
@@ -344,10 +344,17 @@ export const TrackerModal = ({
               editor={ClassicEditor}
               data={descriptionTicket}
               config={{
-                toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
-                removePlugins: [
-                  "BlockQuote",
+                toolbar: [
+                  "heading",
+                  "|",
+                  "bold",
+                  "italic",
+                  "link",
+                  "bulletedList",
+                  "numberedList",
+                  "blockQuote",
                 ],
+                removePlugins: ["BlockQuote"],
               }}
               onChange={(event, editor) => {
                 const data = editor.getData();
