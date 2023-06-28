@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 
 import { getProfileInfo } from "@redux/outstaffingSlice";
 import {
@@ -27,6 +29,7 @@ import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 import arrowDown from "assets/icons/arrows/selectArrow.png";
 
 import "./trackerModal.scss";
+import avatarMok from "assets/images/avatarMok.png";
 
 export const TrackerModal = ({
   active,
@@ -50,7 +53,7 @@ export const TrackerModal = ({
   const [valueColumn, setValueColumn] = useState("");
   const [nameProject, setNameProject] = useState("");
   const [valueTiket, setValueTiket] = useState("");
-  const [descriptionTicket, setDescriptionTicket] = useState("");
+  const [descriptionTicket, setDescriptionTicket] = useState("Описание задачи");
   const [workers, setWorkers] = useState([]);
   const [selectWorkersOpen, setSelectWorkersOpen] = useState(false);
   const [selectedWorker, setSelectedWorker] = useState(null);
@@ -114,13 +117,13 @@ export const TrackerModal = ({
           dispatch(setProjectBoardFetch(projectBoard.id));
           setActive(false);
           setValueTiket("");
-          setDescriptionTicket("");
+          setDescriptionTicket("Описание задачи");
           setSelectedExecutorTask("Выберите исполнителя задачи");
         });
       } else {
         setActive(false);
         setValueTiket("");
-        setDescriptionTicket("");
+        setDescriptionTicket("Описание задачи");
         dispatch(setProjectBoardFetch(projectBoard.id));
       }
     });
@@ -337,14 +340,20 @@ export const TrackerModal = ({
                 placeholder="Название задачи"
               />
             </div>
-            <div className="input-container">
-              <input
-                className="name-project"
-                value={descriptionTicket}
-                onChange={(e) => setDescriptionTicket(e.target.value)}
-                placeholder="Описание задачи"
-              />
-            </div>
+            <CKEditor
+              editor={ClassicEditor}
+              data={descriptionTicket}
+              config={{
+                toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+                removePlugins: [
+                  "BlockQuote",
+                ],
+              }}
+              onChange={(event, editor) => {
+                const data = editor.getData();
+                setDescriptionTicket(data);
+              }}
+            />
             <div
               onClick={() => setSelectExecutorTaskOpen(!selectExecutorTaskOpen)}
               className={
@@ -381,7 +390,11 @@ export const TrackerModal = ({
                           <span>{person.user.fio}</span>
                           <img
                             className="avatar"
-                            src={urlForLocal(person.user.avatar)}
+                            src={
+                              person.user?.avatar
+                                ? urlForLocal(person.user.avatar)
+                                : avatarMok
+                            }
                             alt="avatar"
                           />
                         </div>

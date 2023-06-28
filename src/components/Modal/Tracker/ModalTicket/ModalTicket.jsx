@@ -1,8 +1,8 @@
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 
 import { getProfileInfo } from "@redux/outstaffingSlice";
 import { setProjectBoardFetch } from "@redux/projectsTrackerSlice";
@@ -69,7 +69,7 @@ export const ModalTiсket = ({
         task_id: task.id,
         status: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       setActive(false);
       dispatch(setProjectBoardFetch(projectId));
     });
@@ -334,9 +334,9 @@ export const ModalTiсket = ({
     );
   }, [members]);
 
-  function copyProjectLink() {
+  function copyTicketLink() {
     navigator.clipboard.writeText(
-      `https://itguild.info/tracker/project/${projectId}`
+      `https://itguild.info/tracker/task/${task.id}`
     );
   }
 
@@ -620,7 +620,7 @@ export const ModalTiсket = ({
             </div>
             <div>
               <img src={link}></img>
-              <p onClick={copyProjectLink}>ссылка на проект</p>
+              <p onClick={copyTicketLink}>ссылка на задачу</p>
             </div>
             <div onClick={deleteTask}>
               <img src={archive}></img>

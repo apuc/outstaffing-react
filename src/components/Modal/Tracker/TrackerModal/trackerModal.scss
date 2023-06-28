@@ -31,6 +31,7 @@
   align-items: center;
   flex-direction: column;
   margin: 0 0 15px 0;
+  row-gap: 5px;
 
   .select-priority {
     background-color: white;
@@ -78,7 +79,7 @@
   }
 
   .input-container {
-    width: 287px;
+    width: 320px;
     height: 35px;
     background: #ffffff;
     border-radius: 8px;
@@ -89,8 +90,12 @@
     }
   }
 
+  .ck-editor {
+    max-width: 320px;
+  }
+
   .select__executor {
-    width: 287px;
+    width: 320px;
     background: white;
     border-radius: 8px;
     margin: 5px 0;

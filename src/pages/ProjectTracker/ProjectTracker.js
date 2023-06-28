@@ -322,9 +322,11 @@ export const ProjectTracker = () => {
                     <p>добавить колонку</p>
                   </div>
                   <div className="tasks__head__persons">
+                    {projectBoard.projectUsers?.length > 3 &&
                     <span className="countPersons">
-                      {projectBoard.projectUsers?.length}
+                      +1...
                     </span>
+                    }
                     <div className="projectPersons">
                       {projectBoard.projectUsers?.length &&
                         projectBoard.projectUsers
@@ -379,7 +381,11 @@ export const ProjectTracker = () => {
                               >
                                 <img
                                   className="avatar"
-                                  src={urlForLocal(person.user.avatar)}
+                                  src={
+                                    person.user?.avatar
+                                      ? urlForLocal(person.user.avatar)
+                                      : avatarMok
+                                  }
                                   alt="avatar"
                                 />
                                 <span>{person.user.fio}</span>
@@ -462,7 +468,7 @@ export const ProjectTracker = () => {
                             <span
                               className="add"
                               onClick={() =>
-                                selectedTabTask(column.id, column.tasks.length)
+                                selectedTabTask(column.id, projectBoard?.columns ? projectBoard?.columns[0].tasks.at(-1).priority + 1 : 1)
                               }
                             >
                               +

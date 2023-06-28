@@ -6,6 +6,8 @@ import { apiRequest } from "@api/request";
 
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import TrackerTaskSubComment from "@components/TrackerTaskComment/TrackerTaskComment";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
@@ -76,6 +78,7 @@ export const TrackerTaskComment = ({
           ? "comments__list__item__main"
           : "",
         "comments__list__item",
+        commentsEditOpen ? 'comment__edit--open' : '',
         comment.parent_id ? "comments__list__item__subComment" : "",
       ].join(" ")}
     >
@@ -106,17 +109,32 @@ export const TrackerTaskComment = ({
         </div>
       </div>
       {commentsEditOpen ? (
-        <input
-          className="comments__list__item__text"
-          value={commentsEditText}
-          onChange={(e) => {
-            setCommentsEditText(e.target.value);
+        <CKEditor
+          editor={ClassicEditor}
+          data={commentsEditText}
+          config={{
+            removePlugins: [
+              "CKFinderUploadAdapter",
+              "CKFinder",
+              "EasyImage",
+              "Image",
+              "ImageCaption",
+              "ImageStyle",
+              "ImageToolbar",
+              "ImageUpload",
+              "MediaEmbed",
+              "BlockQuote",
+            ],
+          }}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            setCommentsEditText(data);
           }}
         />
       ) : (
-        <p className="comments__list__item__text">{commentsEditText}</p>
+        <p dangerouslySetInnerHTML={{ __html: commentsEditText}} className="comments__list__item__text" />
       )}
-      {!comment.parent_id && (
+      {!comment.parent_id && !commentsEditOpen && (
         <>
           {subCommentsCreateOpen ? (
             <div className="comments__list__item__answer__new">

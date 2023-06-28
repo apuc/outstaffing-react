@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 
 import {
   deletePersonOnProject,
@@ -27,7 +29,7 @@ import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskCommen
 import archive from "assets/icons/archive.svg";
 import archive2 from "assets/icons/archive.svg";
 import arrow from "assets/icons/arrows/arrowCalendar.png";
-import arrow2 from "assets/icons/arrows/arrowStart.png";
+import arrowStart from "assets/icons/arrows/arrowStart.png";
 import close from "assets/icons/close.png";
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
@@ -40,6 +42,7 @@ import tasks from "assets/icons/trackerTasks.svg";
 import watch from "assets/icons/watch.svg";
 
 import "./ticketFullScreen.scss";
+import avatarMok from "assets/images/avatarMok.png";
 
 export const TicketFullScreen = () => {
   const [modalAddWorker, setModalAddWorker] = useState(false);
@@ -56,6 +59,12 @@ export const TicketFullScreen = () => {
   const [personListOpen, setPersonListOpen] = useState(false);
   const [timerStart, setTimerStart] = useState(false);
   const [timerInfo, setTimerInfo] = useState({});
+  const [currentTimerCount, setCurrentTimerCount] = useState({
+    hours: 0,
+    minute: 0,
+    seconds: 0,
+  });
+  const [timerId, setTimerId] = useState(null);
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
@@ -80,12 +89,28 @@ export const TicketFullScreen = () => {
         }, []);
         setComments(comments);
       });
-      taskInfo.timers.forEach((time) => {
-        if (!time.stopped_at) {
-          setTimerStart(true);
-          setTimerInfo(time);
+      apiRequest(`/timer/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`).then(
+        (res) => {
+          let timerSeconds = 0;
+          res.length &&
+          res.forEach((time) => {
+            timerSeconds += time.deltaSeconds;
+            setCurrentTimerCount({
+              hours: Math.floor(timerSeconds / 60 / 60),
+              minute: Math.floor((timerSeconds / 60) % 60),
+              seconds: timerSeconds % 60,
+            });
+            updateTimerHours = Math.floor(timerSeconds / 60 / 60);
+            updateTimerMinute = Math.floor((timerSeconds / 60) % 60);
+            updateTimerSec = timerSeconds % 60;
+            if (!time.stopped_at) {
+              setTimerStart(true);
+              startTimer();
+              setTimerInfo(time);
+            }
+          });
         }
-      });
+      );
       dispatch(setProjectBoardFetch(taskInfo.project_id));
       setLoader(boardLoader);
     });
@@ -142,6 +167,7 @@ export const TicketFullScreen = () => {
     }).then((res) => {
       setTimerStart(true);
       setTimerInfo(res);
+      startTimer();
     });
   }
 
@@ -152,7 +178,10 @@ export const TicketFullScreen = () => {
         timer_id: timerInfo.id,
         stopped_at: getCorrectRequestDate(new Date()),
       },
-    }).then(() => setTimerStart(false));
+    }).then(() => {
+      setTimerStart(false);
+      clearInterval(timerId);
+    });
   }
 
   function deletePerson(userId) {
@@ -216,6 +245,41 @@ export const TicketFullScreen = () => {
     );
   }
 
+  function startTimer() {
+    setTimerId(
+      setInterval(() => {
+        run();
+      }, 1000)
+    );
+  }
+
+  let updateTimerSec = currentTimerCount.seconds,
+    updateTimerMinute = currentTimerCount.minute,
+    updateTimerHours = currentTimerCount.hours;
+
+  function run() {
+    updateTimerSec++;
+    if (updateTimerSec > 60) {
+      updateTimerMinute++;
+      updateTimerSec = 0;
+    }
+    if (updateTimerMinute === 60) {
+      updateTimerMinute = 0;
+      updateTimerHours++;
+    }
+
+    return setCurrentTimerCount({
+      hours: updateTimerHours,
+      minute: updateTimerMinute,
+      seconds: updateTimerSec,
+    });
+  }
+
+  function correctTimerTime(time) {
+    if (time < 10) return `0${time}`;
+    if (time > 10) return time;
+  }
+
   return (
     <section className="ticket-full-screen">
       <ProfileHeader />
@@ -273,9 +337,32 @@ export const TicketFullScreen = () => {
                   ></TrackerModal>
 
                   <div className="tasks__head__persons">
-                    <span className="countPersons">
-                      {projectBoard.projectUsers?.length}
+                    {projectBoard.projectUsers?.length > 3 &&
+                      <span className="countPersons">
+                      +1...
                     </span>
+                    }
+                    <div className="projectPersons">
+                      {projectBoard.projectUsers?.length &&
+                        projectBoard.projectUsers
+                          .slice(
+                            0,
+                            projectBoard.length > 3 ? 3 : projectBoard.length
+                          )
+                          .map((person) => {
+                            return (
+                              <img
+                                key={person.user_id}
+                                src={
+                                  person.user?.avatar
+                                    ? urlForLocal(person.user.avatar)
+                                    : avatarMok
+                                }
+                                alt="avatar"
+                              />
+                            );
+                          })}
+                    </div>
                     <span
                       className="addPerson"
                       onClick={() => {
@@ -365,17 +452,33 @@ export const TicketFullScreen = () => {
                   )}
                   <div className="content__description">
                     {editOpen ? (
-                      <input
-                        value={inputsValue.description}
-                        onChange={(e) => {
+                      <CKEditor
+                        editor={ClassicEditor}
+                        data={inputsValue.description}
+                        config={{
+                          removePlugins: [
+                            "CKFinderUploadAdapter",
+                            "CKFinder",
+                            "EasyImage",
+                            "Image",
+                            "ImageCaption",
+                            "ImageStyle",
+                            "ImageToolbar",
+                            "ImageUpload",
+                            "MediaEmbed",
+                            "BlockQuote",
+                          ],
+                        }}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
                           setInputsValue((prevValue) => ({
                             ...prevValue,
-                            description: e.target.value,
+                            description: data,
                           }));
                         }}
                       />
                     ) : (
-                      <p>{inputsValue.description}</p>
+                      <p dangerouslySetInnerHTML={{ __html: inputsValue.description }} />
                     )}
                   </div>
                   <div className="content__communication">
@@ -430,9 +533,9 @@ export const TicketFullScreen = () => {
                 </div>
               </div>
               <div className="workers">
-                <div className="workers_box">
+                <div className="workers_box task__info">
                   <p className="workers__creator">
-                    Создатель : <span>{taskInfo.user?.fio}</span>
+                    Создатель : <br/>{taskInfo.user?.fio}
                   </p>
                   <div>
                     {Boolean(taskInfo.taskUsers?.length) &&
@@ -475,26 +578,37 @@ export const TicketFullScreen = () => {
 
                 <div className="workers_box-middle">
                   <div className="time">
-                    <img src={watch} alt="watch"></img>
+                    <img src={watch}></img>
                     <span>Длительность : </span>
-                    <p>{"0:00:00"}</p>
+                    <p>
+                      {correctTimerTime(currentTimerCount.hours)}:
+                      {correctTimerTime(currentTimerCount.minute)}:
+                      {correctTimerTime(currentTimerCount.seconds)}
+                    </p>
                   </div>
 
                   {timerStart ? (
-                    <button className="stop" onClick={() => stopTaskTimer()}>
+                    <button
+                      className={
+                        taskInfo.executor_id === Number(localStorage.getItem("id"))
+                          ? "stop"
+                          : "stop disable"
+                      }
+                      onClick={() => stopTaskTimer()}
+                    >
                       Остановить
                     </button>
                   ) : (
                     <button
                       className={
-                        taskInfo.executor_id ===
-                        Number(localStorage.getItem("id"))
+                        taskInfo.executor_id === Number(localStorage.getItem("id"))
                           ? "start"
                           : "start disable"
                       }
                       onClick={() => startTaskTimer()}
                     >
-                      Начать делать <img src={arrow2} alt="arrow"></img>
+                      Начать делать
+                      <img src={arrowStart}></img>
                     </button>
                   )}
                 </div>
