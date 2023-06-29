@@ -94,6 +94,22 @@
     max-width: 320px;
   }
 
+  .ck-editor__editable.ck-rounded-corners {
+    min-height: 100px;
+    font-size: 14px;
+  }
+
+  .ck-toolbar {
+    border: none !important;
+    border-radius: 8px 8px 0 0 !important;
+  }
+
+  .ck-content {
+    border: none !important;
+    border-radius: 0 0 8px 8px !important;
+    box-shadow: none !important;
+  }
+
   .select__executor {
     width: 320px;
     background: white;
@@ -229,6 +245,12 @@
       .worker {
         display: flex;
         justify-content: space-between;
+
+        &:hover {
+          p {
+            font-weight: 500;
+          }
+        }
       }
     }
   }

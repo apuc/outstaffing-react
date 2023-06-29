@@ -8,7 +8,6 @@ import {
   deletePersonOnProject,
   getBoarderLoader,
   modalToggle,
-  setProjectBoardFetch,
   setToggleTab,
 } from "@redux/projectsTrackerSlice";
 

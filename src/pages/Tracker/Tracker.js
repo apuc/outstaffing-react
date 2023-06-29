@@ -30,6 +30,7 @@ import tasks from "assets/icons/trackerTasks.svg";
 import noProjects from "assets/images/noProjects.png";
 
 import "./tracker.scss";
+import avatarMok from "assets/images/avatarMok.png";
 
 export const Tracker = () => {
   const dispatch = useDispatch();
@@ -253,11 +254,13 @@ export const Tracker = () => {
                       <div className="task" key={task.id}>
                         <div className="task__info">
                           <h5>{task.title}</h5>
-                          <p>{task.description}</p>
+                          <p dangerouslySetInnerHTML={{ __html: task.description }} />
                         </div>
                         <div className="task__person">
                           <img
-                            src={urlForLocal(task.user.avatar)}
+                            src={
+                              task.user?.avatar ? urlForLocal(task.user.avatar) : avatarMok
+                            }
                             alt="avatar"
                           />
                           <div className="task__project">
@@ -301,11 +304,13 @@ export const Tracker = () => {
                           <div className="archive__completeTask" key={index}>
                             <div className="archive__completeTask__description">
                               <p>{task.title}</p>
-                              <p className="date">{task.description}</p>
+                              <p className="date" dangerouslySetInnerHTML={{ __html: task.description }} />
                             </div>
                             <div className="archive__completeTask__info">
                               <img
-                                src={urlForLocal(task.user.avatar)}
+                                src={
+                                  task.user?.avatar ? urlForLocal(task.user.avatar) : avatarMok
+                                }
                                 alt="avatar"
                               />
                               <div className="archive__completeTask__info__project">
