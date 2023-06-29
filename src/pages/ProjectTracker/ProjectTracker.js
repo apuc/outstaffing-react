@@ -330,7 +330,7 @@ export const ProjectTracker = () => {
                         projectBoard.projectUsers
                           .slice(
                             0,
-                            projectBoard.length > 3 ? 3 : projectBoard.length
+                            3
                           )
                           .map((person) => {
                             return (

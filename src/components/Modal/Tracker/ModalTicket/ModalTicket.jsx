@@ -27,6 +27,7 @@ import send from "assets/icons/send.svg";
 import watch from "assets/icons/watch.svg";
 
 import "./modalTicket.scss";
+import avatarMok from "assets/images/avatarMok.png";
 
 export const ModalTiсket = ({
   active,
@@ -469,7 +470,13 @@ export const ModalTiсket = ({
             {executor ? (
               <div className="executor">
                 <p>Исполнитель: {executor.fio}</p>
-                <img src={urlForLocal(executor.avatar)} alt="avatar" />
+                <img
+                     src={
+                       executor?.avatar
+                         ? urlForLocal(executor.avatar)
+                         : avatarMok
+                     }
+                     alt="avatar" />
                 <img
                   src={close}
                   className="delete"
@@ -500,7 +507,14 @@ export const ModalTiсket = ({
                           onClick={() => taskExecutor(person)}
                         >
                           <span>{person.user.fio}</span>
-                          <img src={urlForLocal(person.user.avatar)} />
+                          <img
+                            src={
+                              person.user?.avatar
+                                ? urlForLocal(person.user.avatar)
+                                : avatarMok
+                            }
+                            alt='avatar'
+                          />
                         </div>
                       );
                     })}
@@ -517,7 +531,14 @@ export const ModalTiсket = ({
                     return (
                       <div className="worker" key={member.user_id}>
                         <p>{member.fio}</p>
-                        <img src={urlForLocal(member.avatar)} />
+                        <img
+                          src={
+                            member?.avatar
+                              ? urlForLocal(member.avatar)
+                              : avatarMok
+                          }
+                          alt='avatar'
+                        />
                         <img
                           src={close}
                           className="delete"
@@ -554,7 +575,14 @@ export const ModalTiсket = ({
                           onClick={() => addMember(person)}
                         >
                           <span>{person.user.fio}</span>
-                          <img src={urlForLocal(person.user.avatar)} />
+                          <img
+                            src={
+                              person.user?.avatar
+                                ? urlForLocal(person.user.avatar)
+                                : avatarMok
+                            }
+                            alt='avatar'
+                          />
                         </div>
                       );
                     })

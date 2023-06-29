@@ -7,10 +7,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   deletePersonOnProject,
   getBoarderLoader,
-  getProjectBoard,
-  modalToggle,
-  setProjectBoardFetch,
-  setToggleTab,
+  modalToggle, setProjectBoardFetch,
+  setToggleTab
 } from "@redux/projectsTrackerSlice";
 
 import { getCorrectRequestDate, urlForLocal } from "@utils/helper";
@@ -35,7 +33,6 @@ import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
 import file from "assets/icons/fileModal.svg";
 import link from "assets/icons/link.svg";
-import plus from "assets/icons/plus.svg";
 import send from "assets/icons/send.svg";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
@@ -49,8 +46,8 @@ export const TicketFullScreen = () => {
   const ticketId = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const projectBoard = useSelector(getProjectBoard);
   const boardLoader = useSelector(getBoarderLoader);
+  const [projectInfo, setProjectInfo] = useState({})
   const [taskInfo, setTaskInfo] = useState({});
   const [editOpen, setEditOpen] = useState(false);
   const [inputsValue, setInputsValue] = useState({});
@@ -65,6 +62,10 @@ export const TicketFullScreen = () => {
     seconds: 0,
   });
   const [timerId, setTimerId] = useState(null);
+  const [dropListOpen, setDropListOpen] = useState(false);
+  const [correctProjectUsers, setCorrectProjectUsers] = useState([]);
+  const [dropListMembersOpen, setDropListMembersOpen] = useState(false);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
@@ -111,7 +112,10 @@ export const TicketFullScreen = () => {
             }
           });
       });
-      dispatch(setProjectBoardFetch(taskInfo.project_id));
+      apiRequest(`/project/get-project?project_id=${taskInfo.project_id}&expand=columns`).then((res) => {
+        setProjectInfo(res)
+        setCorrectProjectUsers(res.projectUsers)
+      })
       setLoader(boardLoader);
     });
   }, []);
@@ -188,7 +192,7 @@ export const TicketFullScreen = () => {
     apiRequest("/project/del-user", {
       method: "DELETE",
       data: {
-        project_id: projectBoard.id,
+        project_id: projectInfo.id,
         user_id: userId,
       },
     }).then(() => {
@@ -253,6 +257,18 @@ export const TicketFullScreen = () => {
     );
   }
 
+  useEffect(() => {
+    if (taskInfo.taskUsers && projectInfo.projectUsers) {
+      let ids = taskInfo.taskUsers.map((user) => user.user_id);
+      setUsers(
+        projectInfo.projectUsers.reduce((acc, cur) => {
+          if (!ids.includes(cur.user_id)) acc.push(cur);
+          return acc;
+        }, [])
+      );
+    }
+  }, [taskInfo.taskUsers, projectInfo]);
+
   let updateTimerSec = currentTimerCount.seconds,
     updateTimerMinute = currentTimerCount.minute,
     updateTimerHours = currentTimerCount.hours;
@@ -278,6 +294,70 @@ export const TicketFullScreen = () => {
   function correctTimerTime(time) {
     if (time < 10) return `0${time}`;
     if (time > 10) return time;
+  }
+
+  function deleteTaskExecutor() {
+    apiRequest("/task/update-task", {
+      method: "PUT",
+      data: {
+        task_id: taskInfo.id,
+        executor_id: 0,
+      },
+    }).then(() => {
+      setTaskInfo((prevState) => ({
+        ...prevState,
+        executor_id: null,
+        executor: null
+      }))
+    });
+  }
+
+  function taskExecutor(person) {
+    apiRequest("/task/update-task", {
+      method: "PUT",
+      data: {
+        task_id: taskInfo.id,
+        executor_id: person.user_id,
+      },
+    }).then((res) => {
+      setDropListOpen(false);
+      setTaskInfo((prevState) => ({
+        ...prevState,
+        executor_id: res.executor_id,
+        executor: res.executor
+      }))
+    });
+  }
+
+  function deleteMember(person) {
+    apiRequest("/task/del-user", {
+      method: "DELETE",
+      data: {
+        task_id: taskInfo.id,
+        user_id: person.user_id,
+      },
+    }).then(() => {
+      setTaskInfo((prevState) => ({
+        ...prevState,
+        taskUsers: taskInfo.taskUsers.filter((item) => item.user_id !== person.user_id)
+      }))
+    });
+  }
+
+  function addMember(person) {
+    apiRequest("/task/add-user-to-task", {
+      method: "POST",
+      data: {
+        task_id: taskInfo.id,
+        user_id: person.user_id,
+      },
+    }).then((res) => {
+      setDropListMembersOpen(false);
+      setTaskInfo((prevValue) => ({
+        ...prevValue,
+        taskUsers: [...prevValue.taskUsers, res]
+      }));
+    });
   }
 
   return (
@@ -329,7 +409,7 @@ export const TicketFullScreen = () => {
             <div className="tracker__tabs__content content-tabs">
               <div className="tasks__head">
                 <div className="tasks__head__wrapper">
-                  <h5>Проект : {projectBoard.name}</h5>
+                  <h5>Проект : {projectInfo.name}</h5>
 
                   <TrackerModal
                     active={modalAddWorker}
@@ -337,15 +417,15 @@ export const TicketFullScreen = () => {
                   ></TrackerModal>
 
                   <div className="tasks__head__persons">
-                    {projectBoard.projectUsers?.length > 3 && (
+                    {projectInfo.projectUsers?.length > 3 && (
                       <span className="countPersons">+1...</span>
                     )}
                     <div className="projectPersons">
-                      {projectBoard.projectUsers?.length &&
-                        projectBoard.projectUsers
+                      {projectInfo.projectUsers?.length &&
+                        projectInfo.projectUsers
                           .slice(
                             0,
-                            projectBoard.length > 3 ? 3 : projectBoard.length
+                            3
                           )
                           .map((person) => {
                             return (
@@ -379,14 +459,14 @@ export const TicketFullScreen = () => {
                           onClick={() => setPersonListOpen(false)}
                         />
                         <div className="persons__list__count">
-                          <span>{projectBoard.projectUsers?.length}</span>
+                          <span>{projectInfo.projectUsers?.length}</span>
                           участник
                         </div>
                         <div className="persons__list__info">
-                          В проекте - <span>“{projectBoard.name}”</span>
+                          В проекте - <span>“{projectInfo.name}”</span>
                         </div>
                         <div className="persons__list__items">
-                          {projectBoard.projectUsers?.map((person) => {
+                          {projectInfo.projectUsers?.map((person) => {
                             return (
                               <div
                                 className="persons__list__item"
@@ -394,7 +474,11 @@ export const TicketFullScreen = () => {
                               >
                                 <img
                                   className="avatar"
-                                  src={urlForLocal(person.user.avatar)}
+                                  src={
+                                    person.user?.avatar
+                                      ? urlForLocal(person.user.avatar)
+                                      : avatarMok
+                                  }
                                   alt="avatar"
                                 />
                                 <span>{person.user.fio}</span>
@@ -484,18 +568,18 @@ export const TicketFullScreen = () => {
                     )}
                   </div>
                   <div className="content__communication">
-                    <p className="tasks">
-                      <BaseButton
-                        onClick={() => {
-                          dispatch(modalToggle("addSubtask"));
-                          setModalAddWorker(true);
-                        }}
-                        styles={"button-green-add"}
-                      >
-                        <img src={plus}></img>
-                        Добавить под задачу
-                      </BaseButton>
-                    </p>
+                    {/*<p className="tasks">*/}
+                    {/*  <BaseButton*/}
+                    {/*    onClick={() => {*/}
+                    {/*      dispatch(modalToggle("addSubtask"));*/}
+                    {/*      setModalAddWorker(true);*/}
+                    {/*    }}*/}
+                    {/*    styles={"button-green-add"}*/}
+                    {/*  >*/}
+                    {/*    <img src={plus}></img>*/}
+                    {/*    Добавить под задачу*/}
+                    {/*  </BaseButton>*/}
+                    {/*</p>*/}
                     <p className="file">
                       <BaseButton styles={"button-add-file"}>
                         <img src={file}></img>
@@ -540,42 +624,129 @@ export const TicketFullScreen = () => {
                     Создатель : <br />
                     {taskInfo.user?.fio}
                   </p>
-                  <div>
-                    {Boolean(taskInfo.taskUsers?.length) &&
-                      taskInfo.taskUsers.map((worker, index) => {
-                        return (
-                          <div className="worker" key={index}>
-                            <img src={worker.avatar} alt="worket"></img>
-                            <p>{worker.name}</p>
-                          </div>
-                        );
-                      })}
-                  </div>
 
+                  {taskInfo.executor ? (
+                    <div className="executor">
+                      <p>Исполнитель: {taskInfo.executor.fio}</p>
+                      <img
+                        src={
+                          taskInfo.executor?.avatar
+                            ? urlForLocal(taskInfo.executor.avatar)
+                            : avatarMok
+                        }
+                        alt="avatar" />
+                      <img
+                        src={close}
+                        className="delete"
+                        onClick={() => deleteTaskExecutor()}
+                      />
+                    </div>
+                  ) : (
+                    <div className="add-worker moreItems ">
+                      <button
+                        className="button-add-worker"
+                        onClick={() => setDropListOpen(true)}
+                      >
+                        +
+                      </button>
+                      <span>Добавить исполнителя</span>
+                      {dropListOpen && (
+                        <div className="dropdownList">
+                          <img
+                            src={close}
+                            className="dropdownList__close"
+                            onClick={() => setDropListOpen(false)}
+                          />
+                          {correctProjectUsers.map((person) => {
+                            return (
+                              <div
+                                className="dropdownList__person"
+                                key={person.user_id}
+                                onClick={() => taskExecutor(person)}
+                              >
+                                <span>{person.user.fio}</span>
+                                <img
+                                  src={
+                                    person.user?.avatar
+                                      ? urlForLocal(person.user.avatar)
+                                      : avatarMok
+                                  }
+                                  alt='avatar'
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  {Boolean(taskInfo.taskUsers.length) && (
+                    <div className="members">
+                      <p>Участники:</p>
+                      <div className="members__list">
+                        {taskInfo.taskUsers.map((member) => {
+                          return (
+                            <div className="worker" key={member.user_id}>
+                              <p>{member.fio}</p>
+                              <img
+                                src={
+                                  member?.avatar
+                                    ? urlForLocal(member.avatar)
+                                    : avatarMok
+                                }
+                                alt='avatar'
+                              />
+                              <img
+                                src={close}
+                                className="delete"
+                                onClick={() => deleteMember(member)}
+                              />
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                   <div className="add-worker moreItems">
-                    <BaseButton
-                      onClick={() => {
-                        dispatch(modalToggle("addWorker"));
-                        setModalAddWorker(true);
-                      }}
-                      styles={"button-add-worker"}
+                    <button
+                      className="button-add-worker"
+                      onClick={() => setDropListMembersOpen(true)}
                     >
                       +
-                    </BaseButton>
-                    <span>Добавить исполнителя</span>
-                  </div>
-                  <div className="add-worker moreItems">
-                    <BaseButton
-                      onClick={() => {
-                        dispatch(modalToggle("addWorker"));
-                        setModalAddWorker(true);
-                      }}
-                      styles={"button-add-worker"}
-                    >
-                      +
-                    </BaseButton>
-
+                    </button>
                     <span>Добавить участников</span>
+                    {dropListMembersOpen && (
+                      <div className="dropdownList">
+                        <img
+                          src={close}
+                          className="dropdownList__close"
+                          onClick={() => setDropListMembersOpen(false)}
+                        />
+                        {users.length ? (
+                          users.map((person) => {
+                            return (
+                              <div
+                                className="dropdownList__person"
+                                key={person.user_id}
+                                onClick={() => addMember(person)}
+                              >
+                                <span>{person.user.fio}</span>
+                                <img
+                                  src={
+                                    person.user?.avatar
+                                      ? urlForLocal(person.user.avatar)
+                                      : avatarMok
+                                  }
+                                  alt='avatar'
+                                />
+                              </div>
+                            );
+                          })
+                        ) : (
+                          <p className="noUsers">Нет пользователей</p>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
 
