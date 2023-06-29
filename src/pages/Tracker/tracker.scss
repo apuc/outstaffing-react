@@ -295,7 +295,7 @@
               color: #252c32;
               border: 1px solid #dde2e4;
               background: white;
-              left: -5px;
+              left: -6px;
             }
 
             .addPerson {
@@ -329,9 +329,11 @@
               &__close {
                 cursor: pointer;
                 position: absolute;
-                right: 20px;
-                top: 15px;
+                right: 25px;
+                top: 25px;
                 margin-left: auto;
+                width: 35px;
+                height: 35px;
               }
 
               &__count {
@@ -356,7 +358,7 @@
                 line-height: 22px;
                 color: #263238;
                 font-weight: 500;
-                margin: 13px 0 32px;
+                margin: 13px 0 10px;
 
                 span {
                   width: auto;

@@ -129,6 +129,10 @@
           width: 100%;
           position: relative;
 
+          .ck-editor {
+            margin: 10px 0;
+          }
+
           &__subComment {
             &:before {
               content: "";
@@ -249,6 +253,11 @@
                 border: none;
               }
             }
+          }
+        }
+        .comment__edit--open {
+          &:after {
+            display: none;
           }
         }
       }
@@ -508,7 +517,6 @@
 
     &__creator {
       font-size: 14px;
-      line-height: 32px;
       font-weight: 500;
       color: #2d4a17;
       max-width: 200px;

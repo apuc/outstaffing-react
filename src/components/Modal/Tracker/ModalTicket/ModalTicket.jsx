@@ -25,6 +25,7 @@ import file from "assets/icons/fileModal.svg";
 import link from "assets/icons/link.svg";
 import send from "assets/icons/send.svg";
 import watch from "assets/icons/watch.svg";
+import avatarMok from "assets/images/avatarMok.png";
 
 import "./modalTicket.scss";
 
@@ -69,7 +70,7 @@ export const ModalTiсket = ({
         task_id: task.id,
         status: 0,
       },
-    }).then((res) => {
+    }).then(() => {
       setActive(false);
       dispatch(setProjectBoardFetch(projectId));
     });
@@ -334,9 +335,9 @@ export const ModalTiсket = ({
     );
   }, [members]);
 
-  function copyProjectLink() {
+  function copyTicketLink() {
     navigator.clipboard.writeText(
-      `https://itguild.info/tracker/project/${projectId}`
+      `https://itguild.info/tracker/task/${task.id}`
     );
   }
 
@@ -469,7 +470,12 @@ export const ModalTiсket = ({
             {executor ? (
               <div className="executor">
                 <p>Исполнитель: {executor.fio}</p>
-                <img src={urlForLocal(executor.avatar)} alt="avatar" />
+                <img
+                  src={
+                    executor?.avatar ? urlForLocal(executor.avatar) : avatarMok
+                  }
+                  alt="avatar"
+                />
                 <img
                   src={close}
                   className="delete"
@@ -500,7 +506,14 @@ export const ModalTiсket = ({
                           onClick={() => taskExecutor(person)}
                         >
                           <span>{person.user.fio}</span>
-                          <img src={urlForLocal(person.user.avatar)} />
+                          <img
+                            src={
+                              person.user?.avatar
+                                ? urlForLocal(person.user.avatar)
+                                : avatarMok
+                            }
+                            alt="avatar"
+                          />
                         </div>
                       );
                     })}
@@ -517,7 +530,14 @@ export const ModalTiсket = ({
                     return (
                       <div className="worker" key={member.user_id}>
                         <p>{member.fio}</p>
-                        <img src={urlForLocal(member.avatar)} />
+                        <img
+                          src={
+                            member?.avatar
+                              ? urlForLocal(member.avatar)
+                              : avatarMok
+                          }
+                          alt="avatar"
+                        />
                         <img
                           src={close}
                           className="delete"
@@ -554,7 +574,14 @@ export const ModalTiсket = ({
                           onClick={() => addMember(person)}
                         >
                           <span>{person.user.fio}</span>
-                          <img src={urlForLocal(person.user.avatar)} />
+                          <img
+                            src={
+                              person.user?.avatar
+                                ? urlForLocal(person.user.avatar)
+                                : avatarMok
+                            }
+                            alt="avatar"
+                          />
                         </div>
                       );
                     })
@@ -620,7 +647,7 @@ export const ModalTiсket = ({
             </div>
             <div>
               <img src={link}></img>
-              <p onClick={copyProjectLink}>ссылка на проект</p>
+              <p onClick={copyTicketLink}>ссылка на задачу</p>
             </div>
             <div onClick={deleteTask}>
               <img src={archive}></img>
