@@ -327,24 +327,19 @@ export const ProjectTracker = () => {
                     )}
                     <div className="projectPersons">
                       {projectBoard.projectUsers?.length &&
-                        projectBoard.projectUsers
-                          .slice(
-                            0,
-                            3
-                          )
-                          .map((person) => {
-                            return (
-                              <img
-                                key={person.user_id}
-                                src={
-                                  person.user?.avatar
-                                    ? urlForLocal(person.user.avatar)
-                                    : avatarMok
-                                }
-                                alt="avatar"
-                              />
-                            );
-                          })}
+                        projectBoard.projectUsers.slice(0, 3).map((person) => {
+                          return (
+                            <img
+                              key={person.user_id}
+                              src={
+                                person.user?.avatar
+                                  ? urlForLocal(person.user.avatar)
+                                  : avatarMok
+                              }
+                              alt="avatar"
+                            />
+                          );
+                        })}
                     </div>
                     <span
                       className="addPerson"

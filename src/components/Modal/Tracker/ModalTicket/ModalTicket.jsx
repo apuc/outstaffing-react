@@ -25,9 +25,9 @@ import file from "assets/icons/fileModal.svg";
 import link from "assets/icons/link.svg";
 import send from "assets/icons/send.svg";
 import watch from "assets/icons/watch.svg";
+import avatarMok from "assets/images/avatarMok.png";
 
 import "./modalTicket.scss";
-import avatarMok from "assets/images/avatarMok.png";
 
 export const ModalTiсket = ({
   active,
@@ -471,12 +471,11 @@ export const ModalTiсket = ({
               <div className="executor">
                 <p>Исполнитель: {executor.fio}</p>
                 <img
-                     src={
-                       executor?.avatar
-                         ? urlForLocal(executor.avatar)
-                         : avatarMok
-                     }
-                     alt="avatar" />
+                  src={
+                    executor?.avatar ? urlForLocal(executor.avatar) : avatarMok
+                  }
+                  alt="avatar"
+                />
                 <img
                   src={close}
                   className="delete"
@@ -513,7 +512,7 @@ export const ModalTiсket = ({
                                 ? urlForLocal(person.user.avatar)
                                 : avatarMok
                             }
-                            alt='avatar'
+                            alt="avatar"
                           />
                         </div>
                       );
@@ -537,7 +536,7 @@ export const ModalTiсket = ({
                               ? urlForLocal(member.avatar)
                               : avatarMok
                           }
-                          alt='avatar'
+                          alt="avatar"
                         />
                         <img
                           src={close}
@@ -581,7 +580,7 @@ export const ModalTiсket = ({
                                 ? urlForLocal(person.user.avatar)
                                 : avatarMok
                             }
-                            alt='avatar'
+                            alt="avatar"
                           />
                         </div>
                       );

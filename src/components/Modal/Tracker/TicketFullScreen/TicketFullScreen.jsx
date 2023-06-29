@@ -7,8 +7,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   deletePersonOnProject,
   getBoarderLoader,
-  modalToggle, setProjectBoardFetch,
-  setToggleTab
+  modalToggle,
+  setProjectBoardFetch,
+  setToggleTab,
 } from "@redux/projectsTrackerSlice";
 
 import { getCorrectRequestDate, urlForLocal } from "@utils/helper";
@@ -47,7 +48,7 @@ export const TicketFullScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const boardLoader = useSelector(getBoarderLoader);
-  const [projectInfo, setProjectInfo] = useState({})
+  const [projectInfo, setProjectInfo] = useState({});
   const [taskInfo, setTaskInfo] = useState({});
   const [editOpen, setEditOpen] = useState(false);
   const [inputsValue, setInputsValue] = useState({});
@@ -112,10 +113,12 @@ export const TicketFullScreen = () => {
             }
           });
       });
-      apiRequest(`/project/get-project?project_id=${taskInfo.project_id}&expand=columns`).then((res) => {
-        setProjectInfo(res)
-        setCorrectProjectUsers(res.projectUsers)
-      })
+      apiRequest(
+        `/project/get-project?project_id=${taskInfo.project_id}&expand=columns`
+      ).then((res) => {
+        setProjectInfo(res);
+        setCorrectProjectUsers(res.projectUsers);
+      });
       setLoader(boardLoader);
     });
   }, []);
@@ -307,8 +310,8 @@ export const TicketFullScreen = () => {
       setTaskInfo((prevState) => ({
         ...prevState,
         executor_id: null,
-        executor: null
-      }))
+        executor: null,
+      }));
     });
   }
 
@@ -324,8 +327,8 @@ export const TicketFullScreen = () => {
       setTaskInfo((prevState) => ({
         ...prevState,
         executor_id: res.executor_id,
-        executor: res.executor
-      }))
+        executor: res.executor,
+      }));
     });
   }
 
@@ -339,8 +342,10 @@ export const TicketFullScreen = () => {
     }).then(() => {
       setTaskInfo((prevState) => ({
         ...prevState,
-        taskUsers: taskInfo.taskUsers.filter((item) => item.user_id !== person.user_id)
-      }))
+        taskUsers: taskInfo.taskUsers.filter(
+          (item) => item.user_id !== person.user_id
+        ),
+      }));
     });
   }
 
@@ -355,7 +360,7 @@ export const TicketFullScreen = () => {
       setDropListMembersOpen(false);
       setTaskInfo((prevValue) => ({
         ...prevValue,
-        taskUsers: [...prevValue.taskUsers, res]
+        taskUsers: [...prevValue.taskUsers, res],
       }));
     });
   }
@@ -422,24 +427,19 @@ export const TicketFullScreen = () => {
                     )}
                     <div className="projectPersons">
                       {projectInfo.projectUsers?.length &&
-                        projectInfo.projectUsers
-                          .slice(
-                            0,
-                            3
-                          )
-                          .map((person) => {
-                            return (
-                              <img
-                                key={person.user_id}
-                                src={
-                                  person.user?.avatar
-                                    ? urlForLocal(person.user.avatar)
-                                    : avatarMok
-                                }
-                                alt="avatar"
-                              />
-                            );
-                          })}
+                        projectInfo.projectUsers.slice(0, 3).map((person) => {
+                          return (
+                            <img
+                              key={person.user_id}
+                              src={
+                                person.user?.avatar
+                                  ? urlForLocal(person.user.avatar)
+                                  : avatarMok
+                              }
+                              alt="avatar"
+                            />
+                          );
+                        })}
                     </div>
                     <span
                       className="addPerson"
@@ -634,7 +634,8 @@ export const TicketFullScreen = () => {
                             ? urlForLocal(taskInfo.executor.avatar)
                             : avatarMok
                         }
-                        alt="avatar" />
+                        alt="avatar"
+                      />
                       <img
                         src={close}
                         className="delete"
@@ -671,7 +672,7 @@ export const TicketFullScreen = () => {
                                       ? urlForLocal(person.user.avatar)
                                       : avatarMok
                                   }
-                                  alt='avatar'
+                                  alt="avatar"
                                 />
                               </div>
                             );
@@ -694,7 +695,7 @@ export const TicketFullScreen = () => {
                                     ? urlForLocal(member.avatar)
                                     : avatarMok
                                 }
-                                alt='avatar'
+                                alt="avatar"
                               />
                               <img
                                 src={close}
@@ -737,7 +738,7 @@ export const TicketFullScreen = () => {
                                       ? urlForLocal(person.user.avatar)
                                       : avatarMok
                                   }
-                                  alt='avatar'
+                                  alt="avatar"
                                 />
                               </div>
                             );
