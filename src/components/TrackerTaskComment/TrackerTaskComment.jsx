@@ -87,9 +87,12 @@ export const TrackerTaskComment = ({
         <div className="comments__list__item__fio">
           <img
             src={
-              comment.user?.avatar ? urlForLocal(comment.user.avatar) : avatarMok
+              comment.user?.avatar
+                ? urlForLocal(comment.user.avatar)
+                : avatarMok
             }
-            alt="avatar" />
+            alt="avatar"
+          />
           <p>{comment.user.fio}</p>
         </div>
         <div className="comments__list__item__date">

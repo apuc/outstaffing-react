@@ -20,6 +20,7 @@ import {
 } from "@redux/projectsTrackerSlice";
 
 import { urlForLocal } from "@utils/helper";
+import { caseOfNum } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
@@ -43,7 +44,6 @@ import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
 import accept from "assets/images/accept.png";
 import avatarMok from "assets/images/avatarMok.png";
-import { caseOfNum } from "@utils/helper";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();
@@ -563,11 +563,17 @@ export const ProjectTracker = () => {
                               <div className="tasks__board__item__info">
                                 <div className="tasks__board__item__info__more">
                                   <img src={commentsBoard} alt="commentsImg" />
-                                  <span>{task.comment_count} {caseOfNum(task.comment_count, 'comments')}</span>
+                                  <span>
+                                    {task.comment_count}{" "}
+                                    {caseOfNum(task.comment_count, "comments")}
+                                  </span>
                                 </div>
                                 <div className="tasks__board__item__info__more">
                                   <img src={filesBoard} alt="filesImg" />
-                                  <span>{task.files ? task.files : 0} {caseOfNum(0, 'files')}</span>
+                                  <span>
+                                    {task.files ? task.files : 0}{" "}
+                                    {caseOfNum(0, "files")}
+                                  </span>
                                 </div>
                               </div>
                             </div>

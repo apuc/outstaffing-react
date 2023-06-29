@@ -64,20 +64,20 @@ export function getCorrectRequestDate(date) {
 
 export function caseOfNum(number, type) {
   const comments = ["коментарий", "комментария", " коментариев"];
-  const files = ["файлов", "файла", "файлов"]
+  const files = ["файлов", "файла", "файлов"];
   const cases = [2, 0, 1, 1, 1, 2];
-  if (type === 'comments') {
+  if (type === "comments") {
     return comments[
       number % 100 > 4 && number % 100 < 20
         ? 2
         : cases[number % 10 < 5 ? number % 10 : 5]
-      ];
+    ];
   }
-  if (type === 'files') {
+  if (type === "files") {
     return files[
       number % 100 > 4 && number % 100 < 20
         ? 2
         : cases[number % 10 < 5 ? number % 10 : 5]
-      ];
+    ];
   }
 }
