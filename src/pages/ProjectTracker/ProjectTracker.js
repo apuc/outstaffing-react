@@ -36,6 +36,7 @@ import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
 import archive from "assets/icons/archiveTracker.svg";
 import arrow from "assets/icons/arrows/arrowCalendar.png";
+import arrowDown from "assets/icons/arrows/selectArrow.png";
 import close from "assets/icons/close.png";
 import commentsBoard from "assets/icons/commentsBoard.svg";
 import del from "assets/icons/delete.svg";
@@ -45,7 +46,6 @@ import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
 import accept from "assets/images/accept.png";
 import avatarMok from "assets/images/avatarMok.png";
-import arrowDown from "assets/icons/arrows/selectArrow.png";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ export const ProjectTracker = () => {
     useState(false);
   const [checkBoxMyTasks, setCheckBoxMyTasks] = useState(false);
   const [selectedExecutor, setSelectedExecutor] = useState(null);
-  const [selectExecutorOpen, setSelectedExecutorOpen] = useState(false)
+  const [selectExecutorOpen, setSelectedExecutorOpen] = useState(false);
   const startWrapperIndexTest = useRef({});
   const projectBoard = useSelector(getProjectBoard);
   const loader = useSelector(getBoarderLoader);
@@ -248,12 +248,12 @@ export const ProjectTracker = () => {
   }
 
   function executorFilter(user) {
-    dispatch(filteredExecutorTasks(user.user_id))
-    setSelectedExecutor(user)
+    dispatch(filteredExecutorTasks(user.user_id));
+    setSelectedExecutor(user);
   }
 
   function deleteSelectedExecutorFilter() {
-    setSelectedExecutor(null)
+    setSelectedExecutor(null);
     dispatch(setProjectBoardFetch(projectId.id));
   }
 
@@ -437,17 +437,18 @@ export const ProjectTracker = () => {
                       {checkBoxMyTasks && <img src={accept} alt="accept" />}
                     </div>
                   </div>
-                  {selectedExecutor ?
-                    <div className='tasks__head__executorSelected'>
+                  {selectedExecutor ? (
+                    <div className="tasks__head__executorSelected">
                       <p>{selectedExecutor.user.fio}</p>
                       <img
-                        className='avatar'
+                        className="avatar"
                         src={
                           selectedExecutor.user?.avatar
                             ? urlForLocal(selectedExecutor.user.avatar)
                             : avatarMok
                         }
-                        alt='avatar' />
+                        alt="avatar"
+                      />
                       <img
                         className="delete"
                         src={close}
@@ -455,29 +456,44 @@ export const ProjectTracker = () => {
                         onClick={deleteSelectedExecutorFilter}
                       />
                     </div>
-                    :
-                    <div className="tasks__head__executor" onClick={() => setSelectedExecutorOpen(!selectExecutorOpen)}>
-                      <p>Выберите исполнитель</p>
-                      <img className={selectExecutorOpen ? "open" : ""} src={arrowDown} alt="arrow" />
-                      {selectExecutorOpen &&
-                        <div className='tasks__head__executorDropdown'>
-                          {projectBoard.projectUsers.map((user) => {
-                            return <div className='executorDropdown__person' key={user.user_id} onClick={() => executorFilter(user)}>
-                                      <p>{user.user?.fio}</p>
-                                      <img
-                                        src={
-                                          user.user?.avatar
-                                            ? urlForLocal(user.user.avatar)
-                                            : avatarMok
-                                        }
-                                        alt='avatar' />
-                                  </div>
-                          })
-                          }
-                        </div>
+                  ) : (
+                    <div
+                      className="tasks__head__executor"
+                      onClick={() =>
+                        setSelectedExecutorOpen(!selectExecutorOpen)
                       }
+                    >
+                      <p>Выберите исполнитель</p>
+                      <img
+                        className={selectExecutorOpen ? "open" : ""}
+                        src={arrowDown}
+                        alt="arrow"
+                      />
+                      {selectExecutorOpen && (
+                        <div className="tasks__head__executorDropdown">
+                          {projectBoard.projectUsers.map((user) => {
+                            return (
+                              <div
+                                className="executorDropdown__person"
+                                key={user.user_id}
+                                onClick={() => executorFilter(user)}
+                              >
+                                <p>{user.user?.fio}</p>
+                                <img
+                                  src={
+                                    user.user?.avatar
+                                      ? urlForLocal(user.user.avatar)
+                                      : avatarMok
+                                  }
+                                  alt="avatar"
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
-                  }
+                  )}
                   <Link to="/profile/tracker" className="tasks__head__back">
                     <p>Вернуться на проекты</p>
                     <img src={arrow} alt="arrow" />

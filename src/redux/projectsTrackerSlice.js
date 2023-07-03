@@ -124,7 +124,9 @@ export const projectsTrackerSlice = createSlice({
     },
     filteredExecutorTasks: (state, action) => {
       state.projectBoard.columns.forEach((column) => {
-        column.tasks = column.tasks.filter((task) => task.executor_id === action.payload);
+        column.tasks = column.tasks.filter(
+          (task) => task.executor_id === action.payload
+        );
       });
     },
     setColumnName: (state, action) => {
