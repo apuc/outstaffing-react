@@ -232,6 +232,7 @@ export const ProjectTracker = () => {
       dispatch(setProjectBoardFetch(projectId.id));
       setCheckBoxParticipateTasks(false);
       setCheckBoxMyTasks(false);
+      setSelectedExecutor(null);
     }
     setCheckBoxParticipateTasks(!checkBoxParticipateTasks);
   }
@@ -243,6 +244,7 @@ export const ProjectTracker = () => {
       dispatch(setProjectBoardFetch(projectId.id));
       setCheckBoxParticipateTasks(false);
       setCheckBoxMyTasks(false);
+      setSelectedExecutor(null);
     }
     setCheckBoxMyTasks(!checkBoxMyTasks);
   }
@@ -254,6 +256,8 @@ export const ProjectTracker = () => {
 
   function deleteSelectedExecutorFilter() {
     setSelectedExecutor(null);
+    setCheckBoxParticipateTasks(false);
+    setCheckBoxMyTasks(false);
     dispatch(setProjectBoardFetch(projectId.id));
   }
 
