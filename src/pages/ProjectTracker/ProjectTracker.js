@@ -42,6 +42,7 @@ import commentsBoard from "assets/icons/commentsBoard.svg";
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
 import filesBoard from "assets/icons/filesBoard.svg";
+import trackerNoTasks from "assets/icons/trackerNoTasks.svg";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
 import accept from "assets/images/accept.png";
@@ -62,6 +63,7 @@ export const ProjectTracker = () => {
   const [personListOpen, setPersonListOpen] = useState(false);
   const [checkBoxParticipateTasks, setCheckBoxParticipateTasks] =
     useState(false);
+  const [filteredNoTasks, setFilteredNoTasks] = useState(false);
   const [checkBoxMyTasks, setCheckBoxMyTasks] = useState(false);
   const [selectedExecutor, setSelectedExecutor] = useState(null);
   const [selectExecutorOpen, setSelectedExecutorOpen] = useState(false);
@@ -77,8 +79,10 @@ export const ProjectTracker = () => {
   useEffect(() => {
     const tasksHover = {};
     const columnHover = {};
+    let columnsTasksEmpty = true;
     if (Object.keys(projectBoard).length) {
       projectBoard.columns.forEach((column) => {
+        if (column.tasks.length) columnsTasksEmpty = false;
         setOpenColumnSelect((prevState) => ({
           ...prevState,
           [column.id]: false,
@@ -86,6 +90,14 @@ export const ProjectTracker = () => {
         columnHover[column.id] = false;
         column.tasks.forEach((task) => (tasksHover[task.id] = false));
       });
+    }
+    if (
+      columnsTasksEmpty &&
+      (checkBoxMyTasks || selectedExecutor || checkBoxParticipateTasks)
+    ) {
+      setFilteredNoTasks(true);
+    } else {
+      setFilteredNoTasks(false);
     }
     setWrapperHover(columnHover);
     setTaskHover(tasksHover);
@@ -381,7 +393,8 @@ export const ProjectTracker = () => {
                           участник
                         </div>
                         <div className="persons__list__info">
-                          В проекте - <span>“{projectBoard.name}”</span>
+                          <span>В проекте - </span>
+                          <p>“{projectBoard.name}”</p>
                         </div>
                         <div className="persons__list__items">
                           {projectBoard.projectUsers?.map((person) => {
@@ -518,6 +531,7 @@ export const ProjectTracker = () => {
 
               <div className="tasks__container">
                 {Boolean(projectBoard?.columns) &&
+                  !filteredNoTasks &&
                   Boolean(projectBoard.columns.length) &&
                   projectBoard.columns.map((column) => {
                     return (
@@ -663,6 +677,18 @@ export const ProjectTracker = () => {
                       В проекте нет задач.
                     </div>
                   )}
+                {filteredNoTasks && (
+                  <div className="tasks__board__noTasks">
+                    <div className="tasks__board__noTasksInfo">
+                      <img src={trackerNoTasks} alt="noTasks" />
+                      <p>Пока нет подходящих задач</p>
+                    </div>
+                    <p className="tasks__board__noTasksMore">
+                      Ставьте задачи, следите за прогрессом, ведите учёт
+                      рабочего времени
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           )}

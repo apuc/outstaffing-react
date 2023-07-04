@@ -53,6 +53,9 @@ export const SideBar = () => {
             <Link to={"/auth"}>Кабинет разработчика</Link>
           </li>
           <li>
+            <Link to={"/tracker-intro"}>Трекер</Link>
+          </li>
+          <li>
             <a href="#">Школа</a>
           </li>
           <li>
