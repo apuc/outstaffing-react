@@ -462,7 +462,8 @@ export const TicketFullScreen = () => {
                           участник
                         </div>
                         <div className="persons__list__info">
-                          <span>В проекте - </span><p>“{projectInfo.name}”</p>
+                          <span>В проекте - </span>
+                          <p>“{projectInfo.name}”</p>
                         </div>
                         <div className="persons__list__items">
                           {projectInfo.projectUsers?.map((person) => {
