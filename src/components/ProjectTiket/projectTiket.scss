@@ -35,6 +35,7 @@
     white-space: nowrap;
     display: flex;
     text-overflow: ellipsis;
+    max-width: 380px;
 
     &:hover {
       color: black;

@@ -208,7 +208,7 @@
 
           &__wrapper {
             display: flex;
-            max-width: 1260px;
+            max-width: 1280px;
             width: 100%;
             margin: 0 auto;
             justify-content: space-between;
@@ -222,8 +222,11 @@
             font-size: 22px;
             line-height: 32px;
             margin-bottom: 0;
-            max-width: 30%;
+            max-width: 21%;
             word-break: break-all;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
           }
 
           &__add {
@@ -360,19 +363,30 @@
 
               &__info {
                 display: flex;
-                font-size: 18px;
-                line-height: 22px;
-                color: #263238;
-                font-weight: 500;
                 margin: 13px 0 10px;
+                align-items: center;
 
                 span {
+                  display: flex;
                   width: auto;
-                  height: auto;
+                  font-size: 18px;
+                  line-height: 22px;
+                  color: #263238;
+                  font-weight: 500;
+                  white-space: nowrap;
+                }
+
+                p {
                   color: #1458dd;
                   font-weight: 600;
                   font-size: 18px;
                   line-height: 22px;
+                  display: flex;
+                  max-width: 250px;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  margin-left: 30px;
                 }
               }
 
@@ -838,6 +852,33 @@
           &__noItems {
             font-weight: 500;
             font-size: 25px;
+          }
+
+          &__noTasks {
+            display: flex;
+            flex-direction: column;
+
+            &Info {
+              display: flex;
+              align-items: center;
+              margin-bottom: 15px;
+              img {
+                width: 27px;
+                height: 27px;
+                margin-right: 17px;
+              }
+
+              p {
+                font-weight: 700;
+                font-size: 22px;
+                line-height: 32px;
+              }
+            }
+
+            &More {
+              font-size: 14px;
+              line-height: 22px;
+            }
           }
         }
 
