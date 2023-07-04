@@ -6,6 +6,7 @@ import {
   activeLoader,
   deletePersonOnProject,
   filterCreatedByMe,
+  filteredExecutorTasks,
   filteredParticipateTasks,
   getBoarderLoader,
   getProjectBoard,
@@ -20,6 +21,7 @@ import {
 } from "@redux/projectsTrackerSlice";
 
 import { urlForLocal } from "@utils/helper";
+import { caseOfNum } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
@@ -28,13 +30,13 @@ import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
 import ModalTicket from "@components/Modal/Tracker/ModalTicket/ModalTicket";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
-// import TrackerModal from "@components/Modal/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
 import archive from "assets/icons/archiveTracker.svg";
 import arrow from "assets/icons/arrows/arrowCalendar.png";
+import arrowDown from "assets/icons/arrows/selectArrow.png";
 import close from "assets/icons/close.png";
 import commentsBoard from "assets/icons/commentsBoard.svg";
 import del from "assets/icons/delete.svg";
@@ -61,6 +63,8 @@ export const ProjectTracker = () => {
   const [checkBoxParticipateTasks, setCheckBoxParticipateTasks] =
     useState(false);
   const [checkBoxMyTasks, setCheckBoxMyTasks] = useState(false);
+  const [selectedExecutor, setSelectedExecutor] = useState(null);
+  const [selectExecutorOpen, setSelectedExecutorOpen] = useState(false);
   const startWrapperIndexTest = useRef({});
   const projectBoard = useSelector(getProjectBoard);
   const loader = useSelector(getBoarderLoader);
@@ -228,6 +232,7 @@ export const ProjectTracker = () => {
       dispatch(setProjectBoardFetch(projectId.id));
       setCheckBoxParticipateTasks(false);
       setCheckBoxMyTasks(false);
+      setSelectedExecutor(null);
     }
     setCheckBoxParticipateTasks(!checkBoxParticipateTasks);
   }
@@ -239,8 +244,21 @@ export const ProjectTracker = () => {
       dispatch(setProjectBoardFetch(projectId.id));
       setCheckBoxParticipateTasks(false);
       setCheckBoxMyTasks(false);
+      setSelectedExecutor(null);
     }
     setCheckBoxMyTasks(!checkBoxMyTasks);
+  }
+
+  function executorFilter(user) {
+    dispatch(filteredExecutorTasks(user.user_id));
+    setSelectedExecutor(user);
+  }
+
+  function deleteSelectedExecutorFilter() {
+    setSelectedExecutor(null);
+    setCheckBoxParticipateTasks(false);
+    setCheckBoxMyTasks(false);
+    dispatch(setProjectBoardFetch(projectId.id));
   }
 
   return (
@@ -423,6 +441,63 @@ export const ProjectTracker = () => {
                       {checkBoxMyTasks && <img src={accept} alt="accept" />}
                     </div>
                   </div>
+                  {selectedExecutor ? (
+                    <div className="tasks__head__executorSelected">
+                      <p>{selectedExecutor.user.fio}</p>
+                      <img
+                        className="avatar"
+                        src={
+                          selectedExecutor.user?.avatar
+                            ? urlForLocal(selectedExecutor.user.avatar)
+                            : avatarMok
+                        }
+                        alt="avatar"
+                      />
+                      <img
+                        className="delete"
+                        src={close}
+                        alt="delete"
+                        onClick={deleteSelectedExecutorFilter}
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className="tasks__head__executor"
+                      onClick={() =>
+                        setSelectedExecutorOpen(!selectExecutorOpen)
+                      }
+                    >
+                      <p>Выберите исполнитель</p>
+                      <img
+                        className={selectExecutorOpen ? "open" : ""}
+                        src={arrowDown}
+                        alt="arrow"
+                      />
+                      {selectExecutorOpen && (
+                        <div className="tasks__head__executorDropdown">
+                          {projectBoard.projectUsers.map((user) => {
+                            return (
+                              <div
+                                className="executorDropdown__person"
+                                key={user.user_id}
+                                onClick={() => executorFilter(user)}
+                              >
+                                <p>{user.user?.fio}</p>
+                                <img
+                                  src={
+                                    user.user?.avatar
+                                      ? urlForLocal(user.user.avatar)
+                                      : avatarMok
+                                  }
+                                  alt="avatar"
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  )}
                   <Link to="/profile/tracker" className="tasks__head__back">
                     <p>Вернуться на проекты</p>
                     <img src={arrow} alt="arrow" />
@@ -563,11 +638,17 @@ export const ProjectTracker = () => {
                               <div className="tasks__board__item__info">
                                 <div className="tasks__board__item__info__more">
                                   <img src={commentsBoard} alt="commentsImg" />
-                                  <span>{task.comment_count} коментариев</span>
+                                  <span>
+                                    {task.comment_count}{" "}
+                                    {caseOfNum(task.comment_count, "comments")}
+                                  </span>
                                 </div>
                                 <div className="tasks__board__item__info__more">
                                   <img src={filesBoard} alt="filesImg" />
-                                  <span>{task.files} файлов</span>
+                                  <span>
+                                    {task.files ? task.files : 0}{" "}
+                                    {caseOfNum(0, "files")}
+                                  </span>
                                 </div>
                               </div>
                             </div>

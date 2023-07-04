@@ -122,6 +122,13 @@ export const projectsTrackerSlice = createSlice({
         );
       });
     },
+    filteredExecutorTasks: (state, action) => {
+      state.projectBoard.columns.forEach((column) => {
+        column.tasks = column.tasks.filter(
+          (task) => task.executor_id === action.payload
+        );
+      });
+    },
     setColumnName: (state, action) => {
       state.columnName = action.payload;
     },
@@ -174,6 +181,7 @@ export const {
   addPersonToProject,
   filterCreatedByMe,
   filteredParticipateTasks,
+  filteredExecutorTasks,
   movePositionProjectTask,
 } = projectsTrackerSlice.actions;
 

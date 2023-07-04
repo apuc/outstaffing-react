@@ -208,7 +208,8 @@
 
           &__wrapper {
             display: flex;
-            max-width: 1160px;
+            max-width: 1260px;
+            width: 100%;
             margin: 0 auto;
             justify-content: space-between;
             padding: 0 10px;
@@ -252,7 +253,6 @@
           &__persons {
             position: relative;
             display: flex;
-            cursor: pointer;
             align-items: center;
 
             .projectPersons {
@@ -302,8 +302,14 @@
               background: #00c5a8;
               color: white;
               font-size: 14px;
+              transition: all 0.15s ease;
               left: -28px;
               z-index: 2;
+              cursor: pointer;
+
+              &:hover {
+                background: #10d5bb;
+              }
             }
 
             p {
@@ -461,11 +467,114 @@
             }
           }
 
+          &__executor {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            margin-right: 10px;
+            border-radius: 8px;
+            border: 1px solid #e3e2e2;
+            padding: 2px 6px;
+            position: relative;
+            max-width: 220px;
+            width: 100%;
+
+            &Selected {
+              display: flex;
+              align-items: center;
+              border-radius: 8px;
+              max-width: 220px;
+              width: 100%;
+              margin-right: 10px;
+              justify-content: center;
+
+              p {
+                color: #252c32;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 24px;
+                max-width: 155px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
+
+              .avatar {
+                margin: 0 5px;
+              }
+
+              .delete {
+                cursor: pointer;
+              }
+
+              img {
+                display: flex;
+                width: 20px;
+                height: 20px;
+              }
+            }
+            p {
+              color: #252c32;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 24px;
+            }
+
+            img {
+              transition: all 0.15s ease;
+              margin-left: 5px;
+            }
+
+            .open {
+              transform: rotate(180deg);
+            }
+
+            &Dropdown {
+              position: absolute;
+              top: 33px;
+              background: white;
+              border-radius: 8px;
+              z-index: 5;
+              padding: 10px 10px;
+              display: flex;
+              flex-direction: column;
+              row-gap: 7px;
+              width: 100%;
+
+
+              .executorDropdown__person {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                p {
+                  max-width: 155px;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                }
+
+                img {
+                  width: 15px;
+                  height: 15px;
+                }
+
+                &:hover {
+                  p {
+                    font-weight: 600;
+                  }
+                }
+              }
+            }
+          }
+
           &__back {
             cursor: pointer;
             display: flex;
             align-items: center;
             color: black;
+            max-width: 180px;
+            width: 100%;
 
             p {
               font-weight: 400;
@@ -476,6 +585,12 @@
             img {
               margin-left: 10px;
               width: 20px;
+            }
+
+            &:hover {
+              p {
+                font-weight: 500;
+              }
             }
           }
         }
@@ -738,12 +853,20 @@
               font-weight: 500;
               font-size: 16px;
               line-height: 24px;
-              cursor: pointer;
+              max-width: 250px;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
             }
 
             .add {
               color: #6f6f6f;
               font-size: 19px;
+              cursor: pointer;
+
+              &:hover {
+                font-weight: 600;
+              }
             }
 
             .more {
@@ -751,6 +874,11 @@
               position: relative;
               bottom: 4px;
               font-size: 20px;
+              cursor: pointer;
+
+              &:hover {
+                font-weight: 600;
+              }
             }
 
             .done {

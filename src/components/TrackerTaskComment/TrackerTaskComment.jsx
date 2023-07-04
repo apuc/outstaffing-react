@@ -12,6 +12,7 @@ import TrackerTaskSubComment from "@components/TrackerTaskComment/TrackerTaskCom
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
 import accept from "assets/images/accept.png";
+import avatarMok from "assets/images/avatarMok.png";
 
 export const TrackerTaskComment = ({
   taskId,
@@ -84,7 +85,14 @@ export const TrackerTaskComment = ({
     >
       <div className="comments__list__item__info">
         <div className="comments__list__item__fio">
-          <img src={urlForLocal(comment.user.avatar)} alt="avatar" />
+          <img
+            src={
+              comment.user?.avatar
+                ? urlForLocal(comment.user.avatar)
+                : avatarMok
+            }
+            alt="avatar"
+          />
           <p>{comment.user.fio}</p>
         </div>
         <div className="comments__list__item__date">

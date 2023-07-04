@@ -78,8 +78,22 @@
         font-style: normal;
         font-size: 16px;
         line-height: 24px;
-        max-width: 340px;
+        padding: 5px;
         outline: none;
+        border-radius: 8px;
+        border: 1px solid rgb(204, 206, 209);
+      }
+
+      .ck-toolbar {
+        border-radius: 8px 8px 0 0 !important;
+      }
+
+      .ck-content {
+        font-size: 14px;
+        min-height: 100px;
+        border: 1px solid rgb(204, 206, 209) !important;
+        border-radius: 0 0 8px 8px !important;
+        box-shadow: none !important;
       }
 
       button {
@@ -228,7 +242,7 @@
             margin-left: 34px;
             text-decoration-line: underline;
             font-weight: 400;
-            font-size: 10px;
+            font-size: 11px;
             line-height: 32px;
             cursor: pointer;
 
@@ -381,9 +395,9 @@
         margin-right: 18px;
       }
 
-      &:focus-within {
-        border: 1px solid #0000004d;
-      }
+      //&:focus-within {
+      //  border: 1px solid #0000004d;
+      //}
     }
   }
 
@@ -467,6 +481,11 @@
         border: none;
         color: white;
         font-size: 17px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #6cc933;
+        }
       }
     }
 
@@ -479,6 +498,11 @@
       color: white;
       background: #1458dd;
       border-radius: 44px;
+      transition: all 0.15s ease;
+
+      &:hover {
+        background: #0255ff;
+      }
 
       img {
         margin-left: 10px;
@@ -499,6 +523,11 @@
       color: white;
       background: red;
       border-radius: 44px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #f5693d;
+      }
     }
 
     .time {

@@ -8,11 +8,10 @@ import {
   deletePersonOnProject,
   getBoarderLoader,
   modalToggle,
-  setProjectBoardFetch,
   setToggleTab,
 } from "@redux/projectsTrackerSlice";
 
-import { getCorrectRequestDate, urlForLocal } from "@utils/helper";
+import { caseOfNum, getCorrectRequestDate, urlForLocal } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
@@ -586,7 +585,7 @@ export const TicketFullScreen = () => {
                         Загрузить файл
                       </BaseButton>
                       <span>{0}</span>
-                      Файлов
+                      {caseOfNum(0, "files")}
                     </p>
                   </div>
                   <div className="content__input">

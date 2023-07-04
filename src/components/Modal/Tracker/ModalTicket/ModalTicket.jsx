@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { getProfileInfo } from "@redux/outstaffingSlice";
 import { setProjectBoardFetch } from "@redux/projectsTrackerSlice";
 
-import { getCorrectRequestDate, urlForLocal } from "@utils/helper";
+import { caseOfNum, getCorrectRequestDate, urlForLocal } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
@@ -429,7 +429,7 @@ export const ModalTiсket = ({
                   Загрузить файл
                 </button>
                 <span>{0}</span>
-                Файлов
+                {caseOfNum(0, "files")}
               </p>
             </div>
             <div className="content__input">
