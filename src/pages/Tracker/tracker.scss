@@ -55,6 +55,11 @@
       align-items: center;
       color: black;
 
+      img {
+        width: 16px;
+        height: 16px;
+      }
+
       @media (max-width: 490px) {
         padding: 8px 20px 8px 14px;
       }
@@ -214,6 +219,10 @@
             justify-content: space-between;
             padding: 0 10px;
             align-items: center;
+
+            &__fullScreen {
+              max-width: 1160px;
+            }
           }
 
           h5 {
@@ -616,6 +625,8 @@
           margin: 0 auto;
           overflow: auto;
           max-width: 100%;
+          transform: scaleY(-1);
+          align-items: end;
 
           &::-webkit-scrollbar {
             height: 8px;
@@ -650,6 +661,7 @@
           transition: all 0.3s ease;
           //max-height: 500px;
           //overflow-y: auto;
+          transform: scaleY(-1);
 
           &::-webkit-scrollbar {
             width: 3px;
@@ -692,9 +704,8 @@
             transition: 0.4s;
 
             &:hover {
-              transform: scale(0.99);
-              box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.11);
-              transition: 0.4s;
+              transform: scale(1.025);
+              transition: 0.3s;
             }
 
             &__hide {
@@ -712,6 +723,12 @@
                 font-size: 16px;
                 line-height: 24px;
                 margin-bottom: 0;
+                max-height: 100px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 5;
+                -webkit-box-orient: vertical;
               }
 
               span {
@@ -852,11 +869,13 @@
           &__noItems {
             font-weight: 500;
             font-size: 25px;
+            transform: scaleY(-1);
           }
 
           &__noTasks {
             display: flex;
             flex-direction: column;
+            transform: scaleY(-1);
 
             &Info {
               display: flex;
@@ -1057,6 +1076,7 @@
               &__info {
                 display: flex;
                 flex-direction: column;
+                max-width: 730px;
 
                 h5 {
                   font-weight: 700;
@@ -1068,7 +1088,7 @@
                 p {
                   font-size: 16px;
                   line-height: 32px;
-                  max-width: 400px;
+                  max-width: 710px;
                   overflow: hidden;
                   white-space: nowrap;
                   text-overflow: ellipsis;

@@ -153,11 +153,15 @@
   position: absolute;
   top: 35px;
   right: 40px;
+  width: 13px;
+  height: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:before,
   &:after {
     content: "";
-    position: absolute;
     width: 16px;
     height: 2px;
     background: #263238;

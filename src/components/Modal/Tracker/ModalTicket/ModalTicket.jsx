@@ -363,9 +363,9 @@ export const ModalTiсket = ({
           </h3>
 
           <div className="content__task">
-            <span>Задача</span>
             {editOpen ? (
               <input
+                maxLength="100"
                 value={inputsValue.title}
                 onChange={(e) => {
                   setInputsValue((prevValue) => ({
@@ -463,8 +463,8 @@ export const ModalTiсket = ({
         </div>
         <div className="workers">
           <div className="workers_box task__info">
-            <span className="exit" onClick={() => setActive(false)}></span>
-            <span className="nameProject">{task.title}</span>
+            <span className="exit" onClick={() => setActive(false)}>
+            </span>
             <p className="workers__creator">Создатель : {task.user?.fio}</p>
 
             {executor ? (

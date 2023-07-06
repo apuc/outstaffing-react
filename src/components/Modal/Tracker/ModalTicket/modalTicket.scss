@@ -33,6 +33,9 @@
       display: flex;
       align-items: center;
       flex-direction: row;
+      color: #1458DD;
+      font-weight: 700;
+      font-size: 22px;
 
       &__category {
         margin-right: 17px;
@@ -104,9 +107,9 @@
 
       h5 {
         font-family: "Inter", sans-serif;
-        font-weight: 500;
+        font-weight: 600;
         font-style: normal;
-        font-size: 16px;
+        font-size: 19px;
         line-height: 24px;
         color: #1a1919;
         margin-bottom: 0;
@@ -280,7 +283,7 @@
     &__description {
       display: flex;
       flex-direction: column;
-      margin-top: 10px;
+      margin-top: 12px;
 
       textarea {
         min-height: 120px;
@@ -405,6 +408,7 @@
     display: flex;
     flex-direction: column;
     font-size: 14px;
+    margin-top: 8px;
 
     &__list {
       display: flex;
@@ -420,13 +424,17 @@
     .exit {
       cursor: pointer;
       position: absolute;
-      top: 35px;
-      right: 40px;
+      top: 25px;
+      right: 30px;
+      width: 13px;
+      height: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &:before,
       &:after {
         content: "";
-        position: absolute;
         width: 16px;
         height: 2px;
         background: #263238;
@@ -459,6 +467,7 @@
       align-items: center;
       position: relative;
       margin-bottom: 5px;
+      margin-top: 12px;
 
       span {
         color: #000000;
@@ -552,6 +561,7 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+      margin-bottom: 8px;
 
       span {
         margin-left: 5px;
@@ -585,7 +595,6 @@
     .task__info {
       display: flex;
       flex-direction: column;
-      row-gap: 5px;
 
       .delete {
         cursor: pointer;
@@ -668,6 +677,10 @@
           cursor: pointer;
           align-items: center;
           padding-left: 10px;
+
+          img {
+            width: 11px;
+          }
 
           p {
             margin: 0 0 0 12px;

@@ -23,7 +23,7 @@ import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadc
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import ProjectTiket from "@components/ProjectTiket/ProjectTiket";
 
-import archive from "assets/icons/archiveTracker.svg";
+import archive from "assets/images/archiveIcon.png";
 import search from "assets/icons/serchIcon.png";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";

@@ -53,7 +53,7 @@ export const TrackerModal = ({
   const [valueColumn, setValueColumn] = useState("");
   const [nameProject, setNameProject] = useState("");
   const [valueTiket, setValueTiket] = useState("");
-  const [descriptionTicket, setDescriptionTicket] = useState("Описание задачи");
+  const [descriptionTicket, setDescriptionTicket] = useState("");
   const [workers, setWorkers] = useState([]);
   const [selectWorkersOpen, setSelectWorkersOpen] = useState(false);
   const [selectedWorker, setSelectedWorker] = useState(null);
@@ -271,62 +271,78 @@ export const TrackerModal = ({
       // }}
     >
       {modalType === "addWorker" && (
-        <div>
-          <div className="title-project">
-            <h4>Добавьте участника</h4>
-            {/*<div className="input-container">*/}
-            {/*  <input*/}
-            {/*    className="name-project"*/}
-            {/*    value={emailWorker}*/}
-            {/*    onChange={(e) => setEmailWorker(e.target.value)}*/}
-            {/*  />*/}
-            {/*</div>*/}
-            <div
-              className={
-                selectWorkersOpen ? "select__worker open" : "select__worker"
-              }
-              onClick={() => setSelectWorkersOpen(!selectWorkersOpen)}
-            >
-              <p>
-                {selectedWorker
-                  ? selectedWorker.employee.fio
-                  : "Выберите пользователя"}
-              </p>
-              <img className="arrow" src={arrowDown} alt="arrow" />
-              {Boolean(selectWorkersOpen) && (
-                <div className="select__worker__dropDown">
-                  {Boolean(workers.length) ? (
-                    workers.map((worker) => {
-                      if (worker === selectedWorker) {
-                        return;
-                      }
-                      return (
-                        <div
-                          className="worker"
-                          key={worker.id}
-                          onClick={() => {
-                            setSelectedWorker(worker);
-                          }}
-                        >
-                          <p>{worker.employee.fio}</p>
-                          <img
-                            src={urlForLocal(worker.employee.avatar)}
-                            alt="avatar"
-                          />
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <div>Нет пользователей</div>
-                  )}
+        <>
+          <div className='select__person'>
+            <div className="title-project selectPerson">
+              <h4>Добавьте участника</h4>
+              {/*<div className="input-container">*/}
+              {/*  <input*/}
+              {/*    className="name-project"*/}
+              {/*    value={emailWorker}*/}
+              {/*    onChange={(e) => setEmailWorker(e.target.value)}*/}
+              {/*  />*/}
+              {/*</div>*/}
+              <p className='selectPerson__info'>Выберите пользователя в проекте или добавьте по e- mail</p>
+              <div className='invite__blocks'>
+                <div className='addPersonBlock'>
+                  <div
+                    className={
+                      selectWorkersOpen ? "select__worker open" : "select__worker"
+                    }
+                    onClick={() => setSelectWorkersOpen(!selectWorkersOpen)}
+                  >
+                    <p>
+                      {selectedWorker
+                        ? selectedWorker.employee.fio
+                        : "Выберите пользователя"}
+                    </p>
+                    <img className="arrow" src={arrowDown} alt="arrow" />
+                    {Boolean(selectWorkersOpen) && (
+                      <div className="select__worker__dropDown">
+                        {Boolean(workers.length) ? (
+                          workers.map((worker) => {
+                            if (worker === selectedWorker) {
+                              return;
+                            }
+                            return (
+                              <div
+                                className="worker"
+                                key={worker.id}
+                                onClick={() => {
+                                  setSelectedWorker(worker);
+                                }}
+                              >
+                                <p>{worker.employee.fio}</p>
+                                <img
+                                  src={urlForLocal(worker.employee.avatar)}
+                                  alt="avatar"
+                                />
+                              </div>
+                            );
+                          })
+                        ) : (
+                          <div>Нет пользователей</div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                  <BaseButton styles={"button-add addPersonBtn"} onClick={addUserToProject}>
+                    Добавить
+                  </BaseButton>
                 </div>
-              )}
+                <span>или</span>
+                <div className='invitePersonBlock'>
+                  <div className='input-container invitePersonBlock__input'>
+                    <input className="name-project" placeholder='email' type="email" />
+                  </div>
+                  <BaseButton styles={"button-add invitePersonBlock__btn"}>
+                    Отправить приглашение
+                  </BaseButton>
+                </div>
+              </div>
             </div>
           </div>
-          <BaseButton styles={"button-add"} onClick={addUserToProject}>
-            Добавить
-          </BaseButton>
-        </div>
+        </>
       )}
       {modalType === "createTiketProject" && (
         <>
@@ -334,6 +350,7 @@ export const TrackerModal = ({
             <h4>Введите название и описание задачи</h4>
             <div className="input-container">
               <input
+                maxLength="100"
                 className="name-project"
                 value={valueTiket}
                 onChange={(e) => setValueTiket(e.target.value)}
@@ -355,6 +372,7 @@ export const TrackerModal = ({
                   "blockQuote",
                 ],
                 removePlugins: ["BlockQuote"],
+                placeholder: "Описание задачи"
               }}
               onChange={(event, editor) => {
                 const data = editor.getData();
@@ -443,6 +461,7 @@ export const TrackerModal = ({
             <h4>{titleProject}</h4>
             <div className="input-container">
               <input
+                maxLength="30"
                 className="name-project"
                 value={nameProject}
                 onChange={(e) => setNameProject(e.target.value)}
@@ -477,6 +496,7 @@ export const TrackerModal = ({
             <h4>Введите название колонки</h4>
             <div className="input-container">
               <input
+                maxLength="100"
                 className="name-project"
                 value={valueColumn}
                 onChange={(e) => setValueColumn(e.target.value)}

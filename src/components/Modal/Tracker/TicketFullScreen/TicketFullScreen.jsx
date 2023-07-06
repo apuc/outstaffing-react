@@ -24,8 +24,7 @@ import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadc
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
 
-import archive from "assets/icons/archive.svg";
-import archive2 from "assets/icons/archive.svg";
+import archive from "assets/images/archiveIcon.png";
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowStart from "assets/icons/arrows/arrowStart.png";
 import close from "assets/icons/close.png";
@@ -412,7 +411,7 @@ export const TicketFullScreen = () => {
           <>
             <div className="tracker__tabs__content content-tabs">
               <div className="tasks__head">
-                <div className="tasks__head__wrapper">
+                <div className="tasks__head__wrapper tasks__head__wrapper__fullScreen">
                   <h5>Проект : {projectInfo.name}</h5>
 
                   <TrackerModal
@@ -518,9 +517,9 @@ export const TicketFullScreen = () => {
             <div className="modal-tiket__content ticket">
               <div className="content ticket-whith">
                 <div className="content__task">
-                  <span>Задача</span>
                   {editOpen ? (
                     <input
+                      maxLength="100"
                       value={inputsValue.title}
                       onChange={(e) => {
                         setInputsValue((prevValue) => ({
@@ -810,7 +809,7 @@ export const TicketFullScreen = () => {
                     <p onClick={copyTicketLink}>ссылка на задачу</p>
                   </div>
                   <div>
-                    <img src={archive2} alt="arch"></img>
+                    <img src={archive} alt="arch"></img>
                     <p>в архив</p>
                   </div>
                   <div onClick={deleteTask}>
