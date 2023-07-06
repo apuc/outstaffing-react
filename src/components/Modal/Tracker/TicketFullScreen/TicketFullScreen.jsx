@@ -24,7 +24,6 @@ import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadc
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
 
-import archive from "assets/images/archiveIcon.png";
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowStart from "assets/icons/arrows/arrowStart.png";
 import close from "assets/icons/close.png";
@@ -36,6 +35,7 @@ import send from "assets/icons/send.svg";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
 import watch from "assets/icons/watch.svg";
+import archive from "assets/images/archiveIcon.png";
 import avatarMok from "assets/images/avatarMok.png";
 
 import "./ticketFullScreen.scss";

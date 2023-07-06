@@ -272,7 +272,7 @@ export const TrackerModal = ({
     >
       {modalType === "addWorker" && (
         <>
-          <div className='select__person'>
+          <div className="select__person">
             <div className="title-project selectPerson">
               <h4>Добавьте участника</h4>
               {/*<div className="input-container">*/}
@@ -282,12 +282,16 @@ export const TrackerModal = ({
               {/*    onChange={(e) => setEmailWorker(e.target.value)}*/}
               {/*  />*/}
               {/*</div>*/}
-              <p className='selectPerson__info'>Выберите пользователя в проекте или добавьте по e- mail</p>
-              <div className='invite__blocks'>
-                <div className='addPersonBlock'>
+              <p className="selectPerson__info">
+                Выберите пользователя в проекте или добавьте по e- mail
+              </p>
+              <div className="invite__blocks">
+                <div className="addPersonBlock">
                   <div
                     className={
-                      selectWorkersOpen ? "select__worker open" : "select__worker"
+                      selectWorkersOpen
+                        ? "select__worker open"
+                        : "select__worker"
                     }
                     onClick={() => setSelectWorkersOpen(!selectWorkersOpen)}
                   >
@@ -326,14 +330,21 @@ export const TrackerModal = ({
                       </div>
                     )}
                   </div>
-                  <BaseButton styles={"button-add addPersonBtn"} onClick={addUserToProject}>
+                  <BaseButton
+                    styles={"button-add addPersonBtn"}
+                    onClick={addUserToProject}
+                  >
                     Добавить
                   </BaseButton>
                 </div>
                 <span>или</span>
-                <div className='invitePersonBlock'>
-                  <div className='input-container invitePersonBlock__input'>
-                    <input className="name-project" placeholder='email' type="email" />
+                <div className="invitePersonBlock">
+                  <div className="input-container invitePersonBlock__input">
+                    <input
+                      className="name-project"
+                      placeholder="email"
+                      type="email"
+                    />
                   </div>
                   <BaseButton styles={"button-add invitePersonBlock__btn"}>
                     Отправить приглашение
@@ -372,7 +383,7 @@ export const TrackerModal = ({
                   "blockQuote",
                 ],
                 removePlugins: ["BlockQuote"],
-                placeholder: "Описание задачи"
+                placeholder: "Описание задачи",
               }}
               onChange={(event, editor) => {
                 const data = editor.getData();

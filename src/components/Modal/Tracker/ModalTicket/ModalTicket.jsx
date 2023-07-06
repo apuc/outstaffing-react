@@ -463,8 +463,7 @@ export const ModalTiсket = ({
         </div>
         <div className="workers">
           <div className="workers_box task__info">
-            <span className="exit" onClick={() => setActive(false)}>
-            </span>
+            <span className="exit" onClick={() => setActive(false)}></span>
             <p className="workers__creator">Создатель : {task.user?.fio}</p>
 
             {executor ? (

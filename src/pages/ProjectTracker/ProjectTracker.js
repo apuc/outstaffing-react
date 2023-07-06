@@ -34,7 +34,6 @@ import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
-import archive from "assets/images/archiveIcon.png";
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowDown from "assets/icons/arrows/selectArrow.png";
 import close from "assets/icons/close.png";
@@ -46,6 +45,7 @@ import trackerNoTasks from "assets/icons/trackerNoTasks.svg";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
 import accept from "assets/images/accept.png";
+import archive from "assets/images/archiveIcon.png";
 import avatarMok from "assets/images/avatarMok.png";
 
 export const ProjectTracker = () => {
@@ -390,7 +390,10 @@ export const ProjectTracker = () => {
                         />
                         <div className="persons__list__count">
                           <span>{projectBoard.projectUsers?.length}</span>
-                          {caseOfNum(projectBoard.projectUsers?.length, "persons")}
+                          {caseOfNum(
+                            projectBoard.projectUsers?.length,
+                            "persons"
+                          )}
                         </div>
                         <div className="persons__list__info">
                           <span>В проекте - </span>
