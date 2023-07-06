@@ -8,12 +8,12 @@ import { setRole } from "@redux/roleSlice";
 
 import { apiRequest } from "@api/request";
 
+import AuthBlock from "@components/AuthBlock/AuthBlock";
 import CategoriesItem from "@components/CategoriesItem/CategoriesItem";
 import AuthHeader from "@components/Common/AuthHeader/AuthHeader";
 import { Footer } from "@components/Common/Footer/Footer";
 import SideBar from "@components/SideBar/SideBar";
 import StepsForCandidate from "@components/StepsForCandidate/StepsForCandidate";
-import AuthBlock from "@components/AuthBlock/AuthBlock";
 
 import arrowBtn from "assets/icons/arrows/arrowRight.svg";
 import AdminImg from "assets/images/partnerProfile/PersonalAdmin.svg";
@@ -145,10 +145,12 @@ export const AuthForCandidate = () => {
     <div className="auth-candidate">
       <AuthHeader />
       <div className="container">
-        <AuthBlock title="Войти, уже есть доступ"
-                   description="если вы получили доступ пройдя
+        <AuthBlock
+          title="Войти, уже есть доступ"
+          description="если вы получили доступ пройдя
                    2 шага для входа или хотите узнать
-                  свои результаты в кабинете" />
+                  свои результаты в кабинете"
+        />
         <div className="auth-candidate__start">
           <h2 className="auth-candidate__start__title">
             Хочу в команду <span>Айти специалистов</span>
