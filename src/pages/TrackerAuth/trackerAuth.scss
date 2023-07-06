@@ -1,0 +1,35 @@
+.trackerAuth {
+  &__content {
+    font-family: "LabGrotesque", sans-serif;
+    background-color: #f1f1f1;
+    color: #000000;
+    padding: 50px 0 0;
+    min-height: 100vh;
+
+    @media (max-width: 1375px) {
+      padding-top: 100px;
+    }
+
+    .container {
+      padding-bottom: 30px;
+    }
+  }
+
+  &__title {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 46px;
+    color: #000000;
+    span {
+      color: #52B709;
+      position: relative;
+      img {
+        position: absolute;
+        bottom: -15px;
+        right: 10px;
+        max-width: 300px;
+
+      }
+    }
+  }
+}
