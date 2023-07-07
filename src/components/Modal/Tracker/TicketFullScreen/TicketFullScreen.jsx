@@ -1,6 +1,8 @@
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ru from "date-fns/locale/ru";
 import React, { useEffect, useState } from "react";
+import DatePicker, { registerLocale } from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -8,6 +10,7 @@ import {
   deletePersonOnProject,
   getBoarderLoader,
   modalToggle,
+  setProjectBoardFetch,
   setToggleTab,
 } from "@redux/projectsTrackerSlice";
 
@@ -15,6 +18,7 @@ import { caseOfNum, getCorrectRequestDate, urlForLocal } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
+import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
@@ -24,10 +28,9 @@ import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadc
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
 
-import archive from "assets/icons/archive.svg";
-import archive2 from "assets/icons/archive.svg";
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowStart from "assets/icons/arrows/arrowStart.png";
+import calendarIcon from "assets/icons/calendar.svg";
 import close from "assets/icons/close.png";
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
@@ -37,9 +40,12 @@ import send from "assets/icons/send.svg";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
 import watch from "assets/icons/watch.svg";
+import archive from "assets/images/archiveIcon.png";
 import avatarMok from "assets/images/avatarMok.png";
 
 import "./ticketFullScreen.scss";
+
+registerLocale("ru", ru);
 
 export const TicketFullScreen = () => {
   const [modalAddWorker, setModalAddWorker] = useState(false);
@@ -66,10 +72,17 @@ export const TicketFullScreen = () => {
   const [correctProjectUsers, setCorrectProjectUsers] = useState([]);
   const [dropListMembersOpen, setDropListMembersOpen] = useState(false);
   const [users, setUsers] = useState([]);
+  const [deadLine, setDeadLine] = useState("");
+  const [datePickerOpen, setDatePickerOpen] = useState(false);
+  const [startDate, setStartDate] = useState(null);
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
       setTaskInfo(taskInfo);
+      setDeadLine(taskInfo.dead_line);
+      setStartDate(
+        taskInfo.dead_line ? new Date(taskInfo.dead_line) : new Date()
+      );
       setInputsValue({
         title: taskInfo.title,
         description: taskInfo.description,
@@ -364,6 +377,16 @@ export const TicketFullScreen = () => {
     });
   }
 
+  function selectDeadLine(date) {
+    apiRequest("/task/update-task", {
+      method: "PUT",
+      data: {
+        task_id: taskInfo.id,
+        dead_line: getCorrectRequestDate(date),
+      },
+    }).then(() => {});
+  }
+
   return (
     <section className="ticket-full-screen">
       <ProfileHeader />
@@ -412,7 +435,7 @@ export const TicketFullScreen = () => {
           <>
             <div className="tracker__tabs__content content-tabs">
               <div className="tasks__head">
-                <div className="tasks__head__wrapper">
+                <div className="tasks__head__wrapper tasks__head__wrapper__fullScreen">
                   <h5>Проект : {projectInfo.name}</h5>
 
                   <TrackerModal
@@ -518,9 +541,9 @@ export const TicketFullScreen = () => {
             <div className="modal-tiket__content ticket">
               <div className="content ticket-whith">
                 <div className="content__task">
-                  <span>Задача</span>
                   {editOpen ? (
                     <input
+                      maxLength="100"
                       value={inputsValue.title}
                       onChange={(e) => {
                         setInputsValue((prevValue) => ({
@@ -752,6 +775,31 @@ export const TicketFullScreen = () => {
                 </div>
 
                 <div className="workers_box-middle">
+                  <div className="deadLine">
+                    <div
+                      className="deadLine__container"
+                      onClick={() => setDatePickerOpen(!datePickerOpen)}
+                    >
+                      <img src={calendarIcon} alt="calendar" />
+                      <span>
+                        {deadLine
+                          ? getCorrectDate(deadLine)
+                          : "Срок исполнения:"}
+                      </span>
+                    </div>
+                    <DatePicker
+                      className="datePicker"
+                      open={datePickerOpen}
+                      locale="ru"
+                      selected={startDate}
+                      onChange={(date) => {
+                        setDatePickerOpen(false);
+                        setStartDate(date);
+                        setDeadLine(date);
+                        selectDeadLine(date);
+                      }}
+                    />
+                  </div>
                   <div className="time">
                     <img src={watch}></img>
                     <span>Длительность : </span>
@@ -810,7 +858,7 @@ export const TicketFullScreen = () => {
                     <p onClick={copyTicketLink}>ссылка на задачу</p>
                   </div>
                   <div>
-                    <img src={archive2} alt="arch"></img>
+                    <img src={archive} alt="arch"></img>
                     <p>в архив</p>
                   </div>
                   <div onClick={deleteTask}>

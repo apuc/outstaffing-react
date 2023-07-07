@@ -8,6 +8,7 @@ import { setRole } from "@redux/roleSlice";
 
 import { apiRequest } from "@api/request";
 
+import AuthBlock from "@components/AuthBlock/AuthBlock";
 import CategoriesItem from "@components/CategoriesItem/CategoriesItem";
 import AuthHeader from "@components/Common/AuthHeader/AuthHeader";
 import { Footer } from "@components/Common/Footer/Footer";
@@ -112,68 +113,44 @@ export const AuthForCandidate = () => {
     }
   }, [getToken]);
 
-  const submitHandler = () => {
-    let formData = new FormData(ref.current);
-    if (!isLoading) {
-      dispatch(loading(true));
-      apiRequest("/user/login", {
-        method: "POST",
-        data: formData,
-      }).then((res) => {
-        if (!res.access_token) {
-          dispatch(loading(false));
-        } else {
-          localStorage.setItem("auth_token", res.access_token);
-          localStorage.setItem("id", res.id);
-          localStorage.setItem("cardId", res.card_id);
-          localStorage.setItem("role_status", res.status);
-          localStorage.setItem(
-            "access_token_expired_at",
-            res.access_token_expired_at
-          );
-          dispatch(auth(true));
-          dispatch(setUserInfo(res));
-          dispatch(loading(false));
-          dispatch(setRole("ROLE_PARTNER"));
-        }
-      });
-    }
-  };
+  // const submitHandler = () => {
+  //   let formData = new FormData(ref.current);
+  //   if (!isLoading) {
+  //     dispatch(loading(true));
+  //     apiRequest("/user/login", {
+  //       method: "POST",
+  //       data: formData,
+  //     }).then((res) => {
+  //       if (!res.access_token) {
+  //         dispatch(loading(false));
+  //       } else {
+  //         localStorage.setItem("auth_token", res.access_token);
+  //         localStorage.setItem("id", res.id);
+  //         localStorage.setItem("cardId", res.card_id);
+  //         localStorage.setItem("role_status", res.status);
+  //         localStorage.setItem(
+  //           "access_token_expired_at",
+  //           res.access_token_expired_at
+  //         );
+  //         dispatch(auth(true));
+  //         dispatch(setUserInfo(res));
+  //         dispatch(loading(false));
+  //         dispatch(setRole("ROLE_PARTNER"));
+  //       }
+  //     });
+  //   }
+  // };
 
   return (
     <div className="auth-candidate">
       <AuthHeader />
       <div className="container">
-        <div className="auth__wrapper">
-          <div className="auth__info">
-            <h3>Войти, уже есть доступ</h3>
-            <img src={authImg} alt="img" />
-            <p>
-              если вы получили доступ пройдя 2 шага для входа или хотите узнать
-              свои результаты в кабинете
-            </p>
-          </div>
-          <form ref={ref} className="auth__form">
-            <label htmlFor="login">Ваш email *</label>
-            <input id="login" type="text" name="username" placeholder="Email" />
-
-            <label htmlFor="password">Ваш пароль*</label>
-            <input
-              id="password"
-              type="password"
-              name="password"
-              placeholder="Пароль"
-            />
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                submitHandler();
-              }}
-            >
-              Войти
-            </button>
-          </form>
-        </div>
+        <AuthBlock
+          title="Войти, уже есть доступ"
+          description="если вы получили доступ пройдя
+                   2 шага для входа или хотите узнать
+                  свои результаты в кабинете"
+        />
         <div className="auth-candidate__start">
           <h2 className="auth-candidate__start__title">
             Хочу в команду <span>Айти специалистов</span>

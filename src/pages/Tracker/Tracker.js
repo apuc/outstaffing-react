@@ -23,10 +23,10 @@ import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadc
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import ProjectTiket from "@components/ProjectTiket/ProjectTiket";
 
-import archive from "assets/icons/archiveTracker.svg";
 import search from "assets/icons/serchIcon.png";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
+import archive from "assets/images/archiveIcon.png";
 import avatarMok from "assets/images/avatarMok.png";
 import noProjects from "assets/images/noProjects.png";
 

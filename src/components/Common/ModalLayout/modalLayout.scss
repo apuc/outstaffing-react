@@ -15,11 +15,60 @@
     position: relative;
     background: linear-gradient(180deg, #ffffff 0%, #ebebeb 100%);
     border-radius: 24px;
-    padding: 60px 60px 30px 60px;
+    padding: 20px 40px 30px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    .selectPerson {
+      align-items: start;
+
+      &__info {
+        font-size: 15px;
+        font-weight: 300;
+        margin: 12px 0 20px;
+      }
+    }
+
+    .invite__blocks {
+      display: flex;
+      column-gap: 20px;
+
+      span {
+        margin-top: 8px;
+        font-size: 15px;
+        font-weight: 300;
+      }
+
+      .invitePersonBlock {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        &__input {
+          margin: 0;
+          min-width: 320px;
+          height: 42px;
+
+          input {
+            height: 42px;
+          }
+        }
+
+        &__btn {
+          margin: 0 auto 0 0;
+          max-width: 242px;
+          width: 100%;
+        }
+      }
+    }
+
+    .select__person {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      padding: 39px 10px 29px 10px;
+    }
   }
 }
 

@@ -33,6 +33,9 @@
       display: flex;
       align-items: center;
       flex-direction: row;
+      color: #1458DD;
+      font-weight: 700;
+      font-size: 22px;
 
       &__category {
         margin-right: 17px;
@@ -104,9 +107,9 @@
 
       h5 {
         font-family: "Inter", sans-serif;
-        font-weight: 500;
+        font-weight: 600;
         font-style: normal;
-        font-size: 16px;
+        font-size: 19px;
         line-height: 24px;
         color: #1a1919;
         margin-bottom: 0;
@@ -280,7 +283,7 @@
     &__description {
       display: flex;
       flex-direction: column;
-      margin-top: 10px;
+      margin-top: 12px;
 
       textarea {
         min-height: 120px;
@@ -405,6 +408,7 @@
     display: flex;
     flex-direction: column;
     font-size: 14px;
+    margin-top: 8px;
 
     &__list {
       display: flex;
@@ -420,13 +424,17 @@
     .exit {
       cursor: pointer;
       position: absolute;
-      top: 35px;
-      right: 40px;
+      top: 25px;
+      right: 30px;
+      width: 13px;
+      height: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &:before,
       &:after {
         content: "";
-        position: absolute;
         width: 16px;
         height: 2px;
         background: #263238;
@@ -459,6 +467,7 @@
       align-items: center;
       position: relative;
       margin-bottom: 5px;
+      margin-top: 12px;
 
       span {
         color: #000000;
@@ -530,12 +539,89 @@
       }
     }
 
+    .deadLine {
+      position: relative;
+      &__container {
+        padding: 5px 10px 5px;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: 1px solid gray;
+        cursor: pointer;
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        max-width: 185px;
+        img {
+          width: 16px;
+          height: 16px;
+        }
+        span {
+          font-size: 12px;
+          color: #000000;
+          margin-left: 10px;
+          font-weight: 500;
+        }
+      }
+      .datePicker {
+        visibility: hidden;
+        height: 0;
+        padding: 0;
+        width: 0;
+        position: absolute;
+      }
+
+      .react-datepicker-wrapper {
+        position: absolute;
+      }
+
+      .react-datepicker {
+        border: 1px solid #398208;
+      }
+
+      .react-datepicker-popper {
+        top: 10px !important;
+        left: -110px !important;
+      }
+
+      .react-datepicker__current-month {
+        font-size: 14px;
+        font-family: "LabGrotesque", sans-serif;
+        text-transform: capitalize;
+      }
+
+      .react-datepicker__header {
+        padding: 5px 0 10px;
+        border-bottom: 1px solid #398208;
+      }
+
+      .react-datepicker__day {
+        font-size: 14px;
+        width: 35px;
+        font-family: "LabGrotesque", sans-serif;
+      }
+
+      .react-datepicker__day-name {
+        font-size: 14px;
+        width: 35px;
+        font-family: "LabGrotesque", sans-serif;
+      }
+
+      .react-datepicker__triangle {
+        left: 85px !important;
+
+        &:before {
+          border-bottom-color: #398208 !important;
+        }
+      }
+    }
+
     .time {
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-size: 12px;
-      margin-top: 20px;
+      margin-top: 10px;
       width: 160px;
 
       p {
@@ -552,6 +638,7 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+      margin-bottom: 8px;
 
       span {
         margin-left: 5px;
@@ -585,7 +672,6 @@
     .task__info {
       display: flex;
       flex-direction: column;
-      row-gap: 5px;
 
       .delete {
         cursor: pointer;
@@ -649,7 +735,7 @@
     }
 
     &_box {
-      padding: 25px 85px 40px 40px;
+      padding: 25px 85px 25px 40px;
       border-bottom: 1px solid #f1f1f1;
 
       &-middle {
@@ -658,7 +744,7 @@
       }
 
       &-bottom {
-        padding: 40px 110px 75px 56px;
+        padding: 20px 110px 35px 56px;
         font-weight: 400;
         font-size: 14px;
         line-height: 38px;
@@ -668,6 +754,10 @@
           cursor: pointer;
           align-items: center;
           padding-left: 10px;
+
+          img {
+            width: 11px;
+          }
 
           p {
             margin: 0 0 0 12px;

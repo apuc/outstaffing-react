@@ -133,13 +133,14 @@
       text-align: center;
       border: 2px solid #6aaf5c;
       margin-right: 1.5rem;
+      transition: 0.3s;
 
       &:hover {
-        background-image: none;
-        background-color: #ffffff;
-        border: 2px solid #6aaf5c;
-        color: #6aaf5c !important;
-        transition: 0.3s;
+        transform: scale(1.03);
+        //background-image: none;
+        //background-color: #ffffff;
+        //border: 2px solid #6aaf5c;
+        //color: #6aaf5c !important;
 
         .loader * {
           fill: #6aaf5c;

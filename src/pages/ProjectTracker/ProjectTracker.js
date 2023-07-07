@@ -34,7 +34,6 @@ import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
-import archive from "assets/icons/archiveTracker.svg";
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowDown from "assets/icons/arrows/selectArrow.png";
 import close from "assets/icons/close.png";
@@ -46,7 +45,10 @@ import trackerNoTasks from "assets/icons/trackerNoTasks.svg";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
 import accept from "assets/images/accept.png";
+import archive from "assets/images/archiveIcon.png";
 import avatarMok from "assets/images/avatarMok.png";
+
+import { getCorrectDate } from "../../components/Calendar/calendarHelper";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();
@@ -390,7 +392,10 @@ export const ProjectTracker = () => {
                         />
                         <div className="persons__list__count">
                           <span>{projectBoard.projectUsers?.length}</span>
-                          участник
+                          {caseOfNum(
+                            projectBoard.projectUsers?.length,
+                            "persons"
+                          )}
                         </div>
                         <div className="persons__list__info">
                           <span>В проекте - </span>
@@ -480,7 +485,7 @@ export const ProjectTracker = () => {
                         setSelectedExecutorOpen(!selectExecutorOpen)
                       }
                     >
-                      <p>Выберите исполнитель</p>
+                      <p>Выберите исполнителя</p>
                       <img
                         className={selectExecutorOpen ? "open" : ""}
                         src={arrowDown}
@@ -546,7 +551,7 @@ export const ProjectTracker = () => {
                       >
                         <div className="board__head">
                           <span>{column.title}</span>
-                          <div>
+                          <div className="board__head__more">
                             <span
                               className="add"
                               onClick={() =>
@@ -648,6 +653,14 @@ export const ProjectTracker = () => {
                                     alt="avatar"
                                   />
                                 )}
+                              </div>
+                              <div className="tasks__board__item__deadLine">
+                                <p>Срок исполнения:</p>
+                                <span>
+                                  {task.dead_line
+                                    ? getCorrectDate(task.dead_line)
+                                    : "Не выбран"}
+                                </span>
                               </div>
                               <div className="tasks__board__item__info">
                                 <div className="tasks__board__item__info__more">
