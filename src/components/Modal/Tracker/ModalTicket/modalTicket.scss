@@ -539,12 +539,89 @@
       }
     }
 
+    .deadLine {
+      position: relative;
+      &__container {
+        padding: 5px 10px 5px;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: 1px solid gray;
+        cursor: pointer;
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        max-width: 185px;
+        img {
+          width: 16px;
+          height: 16px;
+        }
+        span {
+          font-size: 12px;
+          color: #000000;
+          margin-left: 10px;
+          font-weight: 500;
+        }
+      }
+      .datePicker {
+        visibility: hidden;
+        height: 0;
+        padding: 0;
+        width: 0;
+        position: absolute;
+      }
+
+      .react-datepicker-wrapper {
+        position: absolute;
+      }
+
+      .react-datepicker {
+        border: 1px solid #398208;
+      }
+
+      .react-datepicker-popper {
+        top: 10px !important;
+        left: -110px !important;
+      }
+
+      .react-datepicker__current-month {
+        font-size: 14px;
+        font-family: "LabGrotesque", sans-serif;
+        text-transform: capitalize;
+      }
+
+      .react-datepicker__header {
+        padding: 5px 0 10px;
+        border-bottom: 1px solid #398208;
+      }
+
+      .react-datepicker__day {
+        font-size: 14px;
+        width: 35px;
+        font-family: "LabGrotesque", sans-serif;
+      }
+
+      .react-datepicker__day-name {
+        font-size: 14px;
+        width: 35px;
+        font-family: "LabGrotesque", sans-serif;
+      }
+
+      .react-datepicker__triangle {
+        left: 85px !important;
+
+        &:before {
+          border-bottom-color: #398208 !important;
+        }
+      }
+    }
+
     .time {
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-size: 12px;
-      margin-top: 20px;
+      margin-top: 10px;
       width: 160px;
 
       p {
@@ -658,7 +735,7 @@
     }
 
     &_box {
-      padding: 25px 85px 40px 40px;
+      padding: 25px 85px 25px 40px;
       border-bottom: 1px solid #f1f1f1;
 
       &-middle {
@@ -667,7 +744,7 @@
       }
 
       &-bottom {
-        padding: 40px 110px 75px 56px;
+        padding: 20px 110px 35px 56px;
         font-weight: 400;
         font-size: 14px;
         line-height: 38px;

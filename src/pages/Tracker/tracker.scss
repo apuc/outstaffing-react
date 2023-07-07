@@ -790,6 +790,23 @@
               }
             }
 
+            &__deadLine {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 10px;
+
+              p {
+                font-weight: 500;
+                font-size: 14px;
+              }
+
+              span {
+                font-weight: 500;
+                font-size: 14px;
+              }
+            }
+
             &__executor {
               display: flex;
               justify-content: space-between;
@@ -908,6 +925,11 @@
             justify-content: space-between;
             min-width: 300px;
 
+            &__more {
+              display: flex;
+              align-items: center;
+            }
+
             span {
               color: #6f6f6f;
               font-weight: 500;
@@ -935,6 +957,7 @@
               bottom: 4px;
               font-size: 20px;
               cursor: pointer;
+              width: 15px;
 
               &:hover {
                 font-weight: 600;

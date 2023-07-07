@@ -33,6 +33,9 @@ import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import {
+  getCorrectDate
+} from "../../components/Calendar/calendarHelper";
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowDown from "assets/icons/arrows/selectArrow.png";
@@ -549,7 +552,7 @@ export const ProjectTracker = () => {
                       >
                         <div className="board__head">
                           <span>{column.title}</span>
-                          <div>
+                          <div className='board__head__more'>
                             <span
                               className="add"
                               onClick={() =>
@@ -651,6 +654,11 @@ export const ProjectTracker = () => {
                                     alt="avatar"
                                   />
                                 )}
+                              </div>
+                              <div className="tasks__board__item__deadLine">
+                                <p>Срок исполнения:</p>
+                                <span>{task.dead_line ? getCorrectDate(task.dead_line) : 'Не выбран'}
+                                </span>
                               </div>
                               <div className="tasks__board__item__info">
                                 <div className="tasks__board__item__info__more">
