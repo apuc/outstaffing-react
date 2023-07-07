@@ -33,9 +33,6 @@ import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
-import {
-  getCorrectDate
-} from "../../components/Calendar/calendarHelper";
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowDown from "assets/icons/arrows/selectArrow.png";
@@ -50,6 +47,8 @@ import tasks from "assets/icons/trackerTasks.svg";
 import accept from "assets/images/accept.png";
 import archive from "assets/images/archiveIcon.png";
 import avatarMok from "assets/images/avatarMok.png";
+
+import { getCorrectDate } from "../../components/Calendar/calendarHelper";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();
@@ -552,7 +551,7 @@ export const ProjectTracker = () => {
                       >
                         <div className="board__head">
                           <span>{column.title}</span>
-                          <div className='board__head__more'>
+                          <div className="board__head__more">
                             <span
                               className="add"
                               onClick={() =>
@@ -657,7 +656,10 @@ export const ProjectTracker = () => {
                               </div>
                               <div className="tasks__board__item__deadLine">
                                 <p>Срок исполнения:</p>
-                                <span>{task.dead_line ? getCorrectDate(task.dead_line) : 'Не выбран'}
+                                <span>
+                                  {task.dead_line
+                                    ? getCorrectDate(task.dead_line)
+                                    : "Не выбран"}
                                 </span>
                               </div>
                               <div className="tasks__board__item__info">

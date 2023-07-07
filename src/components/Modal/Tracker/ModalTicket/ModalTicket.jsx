@@ -1,15 +1,11 @@
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import ru from "date-fns/locale/ru";
+import React, { useEffect, useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-import {
-  getCorrectDate
-} from "../../../Calendar/calendarHelper";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { getProfileInfo } from "@redux/outstaffingSlice";
 import { setProjectBoardFetch } from "@redux/projectsTrackerSlice";
@@ -24,6 +20,7 @@ import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskCommen
 import archive from "assets/icons/archive.svg";
 import arrow from "assets/icons/arrows/arrowStart.png";
 import fullScreen from "assets/icons/arrows/inFullScreen.svg";
+import calendarIcon from "assets/icons/calendar.svg";
 import category from "assets/icons/category.svg";
 import close from "assets/icons/closeProjectPersons.svg";
 import del from "assets/icons/delete.svg";
@@ -33,8 +30,8 @@ import link from "assets/icons/link.svg";
 import send from "assets/icons/send.svg";
 import watch from "assets/icons/watch.svg";
 import avatarMok from "assets/images/avatarMok.png";
-import calendarIcon from "assets/icons/calendar.svg";
 
+import { getCorrectDate } from "../../../Calendar/calendarHelper";
 import "./modalTicket.scss";
 
 registerLocale("ru", ru);
@@ -59,7 +56,7 @@ export const ModalTiсket = ({
   const [deadLine, setDeadLine] = useState(task.dead_line);
   const [datePickerOpen, setDatePickerOpen] = useState(false);
   const [startDate, setStartDate] = useState(
-      task.dead_line ? new Date(task.dead_line) : new Date()
+    task.dead_line ? new Date(task.dead_line) : new Date()
   );
   const [dropListOpen, setDropListOpen] = useState(false);
   const [dropListMembersOpen, setDropListMembersOpen] = useState(false);
@@ -361,7 +358,7 @@ export const ModalTiсket = ({
       method: "PUT",
       data: {
         task_id: task.id,
-        dead_line: getCorrectRequestDate(date)
+        dead_line: getCorrectRequestDate(date),
       },
     }).then(() => {
       dispatch(setProjectBoardFetch(projectId));
@@ -620,22 +617,27 @@ export const ModalTiсket = ({
           </div>
 
           <div className="workers_box-middle">
-            <div className='deadLine'>
-              <div className='deadLine__container' onClick={() => setDatePickerOpen(!datePickerOpen)}>
-                <img src={calendarIcon} alt='calendar' />
-                <span>{deadLine ? getCorrectDate(deadLine) : 'Срок исполнения:'}</span>
+            <div className="deadLine">
+              <div
+                className="deadLine__container"
+                onClick={() => setDatePickerOpen(!datePickerOpen)}
+              >
+                <img src={calendarIcon} alt="calendar" />
+                <span>
+                  {deadLine ? getCorrectDate(deadLine) : "Срок исполнения:"}
+                </span>
               </div>
               <DatePicker
-                  className="datePicker"
-                  open={datePickerOpen}
-                  locale="ru"
-                  selected={startDate}
-                  onChange={(date) => {
-                    setDatePickerOpen(false);
-                    setStartDate(date);
-                    setDeadLine(date)
-                    selectDeadLine(date)
-                  }}
+                className="datePicker"
+                open={datePickerOpen}
+                locale="ru"
+                selected={startDate}
+                onChange={(date) => {
+                  setDatePickerOpen(false);
+                  setStartDate(date);
+                  setDeadLine(date);
+                  selectDeadLine(date);
+                }}
               />
             </div>
             <div className="time">

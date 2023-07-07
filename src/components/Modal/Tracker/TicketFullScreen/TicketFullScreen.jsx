@@ -1,25 +1,24 @@
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ru from "date-fns/locale/ru";
 import React, { useEffect, useState } from "react";
+import DatePicker, { registerLocale } from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import {
   deletePersonOnProject,
   getBoarderLoader,
-  modalToggle, setProjectBoardFetch,
+  modalToggle,
+  setProjectBoardFetch,
   setToggleTab,
 } from "@redux/projectsTrackerSlice";
 
 import { caseOfNum, getCorrectRequestDate, urlForLocal } from "@utils/helper";
-import calendarIcon from "assets/icons/calendar.svg";
-import {getCorrectDate} from "@components/Calendar/calendarHelper";
-import DatePicker, { registerLocale } from "react-datepicker";
-import ru from "date-fns/locale/ru";
-registerLocale("ru", ru);
 
 import { apiRequest } from "@api/request";
 
+import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
@@ -31,6 +30,7 @@ import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskCommen
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowStart from "assets/icons/arrows/arrowStart.png";
+import calendarIcon from "assets/icons/calendar.svg";
 import close from "assets/icons/close.png";
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
@@ -44,6 +44,8 @@ import archive from "assets/images/archiveIcon.png";
 import avatarMok from "assets/images/avatarMok.png";
 
 import "./ticketFullScreen.scss";
+
+registerLocale("ru", ru);
 
 export const TicketFullScreen = () => {
   const [modalAddWorker, setModalAddWorker] = useState(false);
@@ -70,15 +72,17 @@ export const TicketFullScreen = () => {
   const [correctProjectUsers, setCorrectProjectUsers] = useState([]);
   const [dropListMembersOpen, setDropListMembersOpen] = useState(false);
   const [users, setUsers] = useState([]);
-  const [deadLine, setDeadLine] = useState('');
+  const [deadLine, setDeadLine] = useState("");
   const [datePickerOpen, setDatePickerOpen] = useState(false);
   const [startDate, setStartDate] = useState(null);
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
       setTaskInfo(taskInfo);
-      setDeadLine(taskInfo.dead_line)
-      setStartDate(taskInfo.dead_line ? new Date(taskInfo.dead_line) : new Date())
+      setDeadLine(taskInfo.dead_line);
+      setStartDate(
+        taskInfo.dead_line ? new Date(taskInfo.dead_line) : new Date()
+      );
       setInputsValue({
         title: taskInfo.title,
         description: taskInfo.description,
@@ -378,10 +382,9 @@ export const TicketFullScreen = () => {
       method: "PUT",
       data: {
         task_id: taskInfo.id,
-        dead_line: getCorrectRequestDate(date)
+        dead_line: getCorrectRequestDate(date),
       },
-    }).then(() => {
-    });
+    }).then(() => {});
   }
 
   return (
@@ -772,22 +775,29 @@ export const TicketFullScreen = () => {
                 </div>
 
                 <div className="workers_box-middle">
-                  <div className='deadLine'>
-                    <div className='deadLine__container' onClick={() => setDatePickerOpen(!datePickerOpen)}>
-                      <img src={calendarIcon} alt='calendar' />
-                      <span>{deadLine ? getCorrectDate(deadLine) : 'Срок исполнения:'}</span>
+                  <div className="deadLine">
+                    <div
+                      className="deadLine__container"
+                      onClick={() => setDatePickerOpen(!datePickerOpen)}
+                    >
+                      <img src={calendarIcon} alt="calendar" />
+                      <span>
+                        {deadLine
+                          ? getCorrectDate(deadLine)
+                          : "Срок исполнения:"}
+                      </span>
                     </div>
                     <DatePicker
-                        className="datePicker"
-                        open={datePickerOpen}
-                        locale="ru"
-                        selected={startDate}
-                        onChange={(date) => {
-                          setDatePickerOpen(false);
-                          setStartDate(date);
-                          setDeadLine(date)
-                          selectDeadLine(date)
-                        }}
+                      className="datePicker"
+                      open={datePickerOpen}
+                      locale="ru"
+                      selected={startDate}
+                      onChange={(date) => {
+                        setDatePickerOpen(false);
+                        setStartDate(date);
+                        setDeadLine(date);
+                        selectDeadLine(date);
+                      }}
                     />
                   </div>
                   <div className="time">
