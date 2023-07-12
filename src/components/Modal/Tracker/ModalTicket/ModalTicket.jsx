@@ -68,7 +68,7 @@ export const ModalTiсket = ({
   const [executor, setExecutor] = useState(task.executor);
   const [members, setMembers] = useState(task.taskUsers);
   const [users, setUsers] = useState([]);
-  const [selectedFile, setSelectedFile] = useState('');
+  const [selectedFile, setSelectedFile] = useState("");
   const [timerStart, setTimerStart] = useState(false);
   const [timerInfo, setTimerInfo] = useState({});
   const [currentTimerCount, setCurrentTimerCount] = useState({
@@ -308,32 +308,32 @@ export const ModalTiсket = ({
     }
   }, []);
 
-  function handleChange (event) {
-    setSelectedFile(event.target.files[0])
+  function handleChange(event) {
+    setSelectedFile(event.target.files[0]);
   }
 
-  async function handleUpload () {
+  async function handleUpload() {
     const formData = new FormData();
-    formData.append('uploadFile', selectedFile);
+    formData.append("uploadFile", selectedFile);
     const headers = {
       "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
-    }
+    };
     const fullHeaders = { ...headers, ...getToken() };
     const res = await fetch("https://itguild.info/api/file/upload", {
       method: "POST",
       body: formData,
-      headers: { ...fullHeaders }
+      headers: { ...fullHeaders },
     });
 
-    console.log(fullHeaders)
-    console.log(res)
+    console.log(fullHeaders);
+    console.log(res);
     // apiRequest('/file/upload', {
     //   method: 'POST',
     //   body: formData
     // }).then((res) => {
     // })
-  };
+  }
 
   function startTimer() {
     setTimerId(
