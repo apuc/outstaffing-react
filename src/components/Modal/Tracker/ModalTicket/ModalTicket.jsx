@@ -68,7 +68,7 @@ export const ModalTiсket = ({
   const [executor, setExecutor] = useState(task.executor);
   const [members, setMembers] = useState(task.taskUsers);
   const [users, setUsers] = useState([]);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState('');
   const [timerStart, setTimerStart] = useState(false);
   const [timerInfo, setTimerInfo] = useState({});
   const [currentTimerCount, setCurrentTimerCount] = useState({
@@ -308,29 +308,31 @@ export const ModalTiсket = ({
     }
   }, []);
 
-  const handleUpload = async (event) => {
+  function handleChange (event) {
+    setSelectedFile(event.target.files[0])
+  }
+
+  async function handleUpload () {
     const formData = new FormData();
-    formData.append("uploadFile ", event.target.files[0]);
-    // apiRequest('/file/upload', {
-    //   method: 'POST',
-    //   data: {
-    //     formData
-    //   }
-    // }).then((res) => {
-    //   console.log(res)
-    // })
-    // console.log(formData)
-    const res = await fetch("https://itguild.info/file/upload", {
+    formData.append('uploadFile', selectedFile);
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    }
+    const fullHeaders = { ...headers, ...getToken() };
+    const res = await fetch("https://itguild.info/api/file/upload", {
       method: "POST",
       body: formData,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-        ...getToken(),
-      },
+      headers: { ...fullHeaders }
     });
 
-    console.log(res);
+    console.log(fullHeaders)
+    console.log(res)
+    // apiRequest('/file/upload', {
+    //   method: 'POST',
+    //   body: formData
+    // }).then((res) => {
+    // })
   };
 
   function startTimer() {
@@ -486,13 +488,14 @@ export const ModalTiсket = ({
                     type="file"
                     accept="image/*,.png,.jpg,.svg,.jpeg"
                     className="input__file"
-                    onChange={handleUpload}
+                    onChange={handleChange}
                   />
                   <label htmlFor="input__file" className="button-add-file">
                     <img src={file}></img>
                     Загрузить файл
                   </label>
                 </div>
+                <p onClick={handleUpload}>Отправить</p>
                 <span>{0}</span>
                 {caseOfNum(0, "files")}
               </div>
