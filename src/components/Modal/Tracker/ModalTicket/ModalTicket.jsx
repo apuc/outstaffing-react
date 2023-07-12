@@ -10,7 +10,12 @@ import { Link } from "react-router-dom";
 import { getProfileInfo } from "@redux/outstaffingSlice";
 import { setProjectBoardFetch } from "@redux/projectsTrackerSlice";
 
-import { caseOfNum, getCorrectRequestDate, urlForLocal } from "@utils/helper";
+import {
+  caseOfNum,
+  getCorrectRequestDate,
+  getToken,
+  urlForLocal,
+} from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
@@ -63,6 +68,7 @@ export const ModalTiсket = ({
   const [executor, setExecutor] = useState(task.executor);
   const [members, setMembers] = useState(task.taskUsers);
   const [users, setUsers] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [timerStart, setTimerStart] = useState(false);
   const [timerInfo, setTimerInfo] = useState({});
   const [currentTimerCount, setCurrentTimerCount] = useState({
@@ -302,6 +308,31 @@ export const ModalTiсket = ({
     }
   }, []);
 
+  const handleUpload = async (event) => {
+    const formData = new FormData();
+    formData.append("uploadFile ", event.target.files[0]);
+    // apiRequest('/file/upload', {
+    //   method: 'POST',
+    //   data: {
+    //     formData
+    //   }
+    // }).then((res) => {
+    //   console.log(res)
+    // })
+    // console.log(formData)
+    const res = await fetch("https://itguild.info/file/upload", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+        ...getToken(),
+      },
+    });
+
+    console.log(res);
+  };
+
   function startTimer() {
     setTimerId(
       setInterval(() => {
@@ -447,14 +478,24 @@ export const ModalTiсket = ({
               {/*    Добавить под задачу*/}
               {/*  </button>*/}
               {/*</p>*/}
-              <p className="file">
-                <button className="button-add-file">
-                  <img src={file}></img>
-                  Загрузить файл
-                </button>
+              <div className="file">
+                <div className="input__wrapper">
+                  <input
+                    name="file"
+                    id="input__file"
+                    type="file"
+                    accept="image/*,.png,.jpg,.svg,.jpeg"
+                    className="input__file"
+                    onChange={handleUpload}
+                  />
+                  <label htmlFor="input__file" className="button-add-file">
+                    <img src={file}></img>
+                    Загрузить файл
+                  </label>
+                </div>
                 <span>{0}</span>
                 {caseOfNum(0, "files")}
-              </p>
+              </div>
             </div>
             <div className="content__input">
               <input
