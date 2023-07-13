@@ -70,7 +70,7 @@ export const ModalTiсket = ({
   const [users, setUsers] = useState([]);
   const [timerStart, setTimerStart] = useState(false);
   const [timerInfo, setTimerInfo] = useState({});
-  const [uploadedFile, setUploadedFile] = useState(null)
+  const [uploadedFile, setUploadedFile] = useState(null);
   const [currentTimerCount, setCurrentTimerCount] = useState({
     hours: 0,
     minute: 0,
@@ -317,9 +317,9 @@ export const ModalTiсket = ({
       headers: { ...getToken() },
     });
 
-    const data = await res.json()
+    const data = await res.json();
 
-    setUploadedFile(data)
+    setUploadedFile(data);
   }
 
   function startTimer() {
@@ -455,14 +455,15 @@ export const ModalTiсket = ({
               )}
               {/*<img src={taskImg} className="image-task"></img>*/}
             </div>
-            {uploadedFile &&
-                <div className='fileLoaded'>
-                  {uploadedFile.map((file) => {
-                    return <img src={urlForLocal(file.url)} alt='img' key={file.id}/>
-                  })
-                  }
-                </div>
-            }
+            {uploadedFile && (
+              <div className="fileLoaded">
+                {uploadedFile.map((file) => {
+                  return (
+                    <img src={urlForLocal(file.url)} alt="img" key={file.id} />
+                  );
+                })}
+              </div>
+            )}
             <div className="content__communication">
               {/*<p className="tasks">*/}
               {/*  <button*/}
