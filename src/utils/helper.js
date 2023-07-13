@@ -45,10 +45,7 @@ export const urlHasParams = (url) =>
 export const urlForLocal = (url) =>
   process.env.NODE_ENV === "development" ? `https://itguild.info${url}` : url;
 
-export const backendImg = (url) =>
-  process.env.NODE_ENV === "development"
-    ? `https://back.itguild.info${url}`
-    : url;
+export const backendImg = (url) => `https://back.itguild.info${url}`;
 
 export function scrollToForm() {
   window.scrollTo({
