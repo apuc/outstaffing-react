@@ -15,6 +15,7 @@ import {
   getCorrectRequestDate,
   getToken,
   urlForLocal,
+  backendImg
 } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
@@ -77,6 +78,7 @@ export const ModalTiсket = ({
     seconds: 0,
   });
   const [timerId, setTimerId] = useState(null);
+  const [taskFiles, setTaskFiles] = useState([])
   const [correctProjectUsers, setCorrectProjectUsers] = useState(projectUsers);
   const [executorId, setExecutorId] = useState(task.executor_id);
   const profileInfo = useSelector(getProfileInfo);
@@ -287,6 +289,12 @@ export const ModalTiсket = ({
       }
     );
 
+    apiRequest(`/file/get-by-entity?entity_type=2&entity_id=${task.id}`).then((res) => {
+      if (Array.isArray(res)) {
+        setTaskFiles(res)
+      }
+    })
+
     if (
       localStorage.getItem("role_status") !== "18" &&
       Boolean(
@@ -320,6 +328,39 @@ export const ModalTiсket = ({
     const data = await res.json();
 
     setUploadedFile(data);
+  }
+
+  function deleteLoadedFile() {
+    setUploadedFile(null)
+  }
+
+  function attachFile() {
+    apiRequest("/file/attach", {
+      method: "POST",
+      data: {
+        file_id: uploadedFile[0].id,
+        entity_type: 2,
+        entity_id: task.id,
+        status: 1
+      }
+    }).then((res) => {
+      setTaskFiles(prevValue => [...prevValue, res])
+      setUploadedFile(null)
+    })
+  }
+
+  function deleteFile(file) {
+    apiRequest("/file/detach", {
+      method: "DELETE",
+      data: {
+        file_id: file.id,
+        entity_type: 2,
+        entity_id: task.id,
+        status: 0
+      }
+    }).then(() => {
+      setTaskFiles(prevValue => prevValue.filter((item) => item.id !== file.id))
+    })
   }
 
   function startTimer() {
@@ -455,13 +496,32 @@ export const ModalTiсket = ({
               )}
               {/*<img src={taskImg} className="image-task"></img>*/}
             </div>
+            {Boolean(taskFiles.length) &&
+                <div className='task__files'>
+                  {taskFiles.map((file) => {
+                    return <div className='taskFile' key={file.id}>
+                      <img className='imgFile' src={backendImg(file.file?.url)} alt='img'  />
+                      <div className='deleteFile' onClick={() => deleteFile(file)}>
+                        <img src={close} alt='delete' />
+                      </div>
+                    </div>
+                  })
+                  }
+                </div>
+            }
             {uploadedFile && (
               <div className="fileLoaded">
                 {uploadedFile.map((file) => {
                   return (
-                    <img src={urlForLocal(file.url)} alt="img" key={file.id} />
+                      <div className='loadedFile' key={file.id}>
+                        <img src={backendImg(file.url)} alt="img" key={file.id} />
+                        <div className='deleteFile' onClick={() => deleteLoadedFile(file)}>
+                          <img src={close} alt='delete' />
+                        </div>
+                      </div>
                   );
                 })}
+                <button onClick={attachFile}>Загрузить</button>
               </div>
             )}
             <div className="content__communication">
@@ -491,8 +551,8 @@ export const ModalTiсket = ({
                     Загрузить файл
                   </label>
                 </div>
-                <span>{0}</span>
-                {caseOfNum(0, "files")}
+                <span>{taskFiles.length ? taskFiles.length : 0}</span>
+                {caseOfNum(taskFiles.length, "files")}
               </div>
             </div>
             <div className="content__input">

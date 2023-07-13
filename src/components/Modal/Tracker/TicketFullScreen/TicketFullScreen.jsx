@@ -10,16 +10,14 @@ import {
   deletePersonOnProject,
   getBoarderLoader,
   modalToggle,
-  setProjectBoardFetch,
   setToggleTab,
 } from "@redux/projectsTrackerSlice";
 
-import { caseOfNum, getCorrectRequestDate, urlForLocal } from "@utils/helper";
+import {backendImg, caseOfNum, getCorrectRequestDate, getToken, urlForLocal} from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
-import BaseButton from "@components/Common/BaseButton/BaseButton";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
@@ -32,6 +30,7 @@ import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowStart from "assets/icons/arrows/arrowStart.png";
 import calendarIcon from "assets/icons/calendar.svg";
 import close from "assets/icons/close.png";
+import fileDelete from "assets/icons/closeProjectPersons.svg";
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
 import file from "assets/icons/fileModal.svg";
@@ -75,6 +74,8 @@ export const TicketFullScreen = () => {
   const [deadLine, setDeadLine] = useState("");
   const [datePickerOpen, setDatePickerOpen] = useState(false);
   const [startDate, setStartDate] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState(null);
+  const [taskFiles, setTaskFiles] = useState([])
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
@@ -103,6 +104,11 @@ export const TicketFullScreen = () => {
         }, []);
         setComments(comments);
       });
+      apiRequest(`/file/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`).then((res) => {
+        if (Array.isArray(res)) {
+          setTaskFiles(res)
+        }
+      })
       apiRequest(
         `/timer/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`
       ).then((res) => {
@@ -387,6 +393,53 @@ export const TicketFullScreen = () => {
     }).then(() => {});
   }
 
+  async function handleUpload(event) {
+    const formData = new FormData();
+    formData.append("uploadFile", event.target.files[0]);
+    const res = await fetch("https://itguild.info/api/file/upload", {
+      method: "POST",
+      body: formData,
+      headers: { ...getToken() },
+    });
+
+    const data = await res.json();
+
+    setUploadedFile(data);
+  }
+
+  function attachFile() {
+    apiRequest("/file/attach", {
+      method: "POST",
+      data: {
+        file_id: uploadedFile[0].id,
+        entity_type: 2,
+        entity_id: taskInfo.id,
+        status: 1
+      }
+    }).then((res) => {
+      setTaskFiles(prevValue => [...prevValue, res])
+      setUploadedFile(null)
+    })
+  }
+
+  function deleteLoadedFile() {
+    setUploadedFile(null)
+  }
+
+  function deleteFile(file) {
+    apiRequest("/file/detach", {
+      method: "DELETE",
+      data: {
+        file_id: file.id,
+        entity_type: 2,
+        entity_id: taskInfo.id,
+        status: 0
+      }
+    }).then(() => {
+      setTaskFiles(prevValue => prevValue.filter((item) => item.id !== file.id))
+    })
+  }
+
   return (
     <section className="ticket-full-screen">
       <ProfileHeader />
@@ -590,6 +643,34 @@ export const TicketFullScreen = () => {
                       />
                     )}
                   </div>
+                  {Boolean(taskFiles.length) &&
+                      <div className='task__files'>
+                        {taskFiles.map((file) => {
+                          return <div className='taskFile' key={file.id}>
+                            <img className='imgFile' src={backendImg(file.file?.url)} alt='img'  />
+                            <div className='deleteFile' onClick={() => deleteFile(file)}>
+                              <img src={fileDelete} alt='delete' />
+                            </div>
+                          </div>
+                        })
+                        }
+                      </div>
+                  }
+                  {uploadedFile && (
+                      <div className="fileLoaded">
+                        {uploadedFile.map((file) => {
+                          return (
+                              <div className='loadedFile' key={file.id}>
+                                <img src={backendImg(file.url)} alt="img" key={file.id} />
+                                <div className='deleteFile' onClick={() => deleteLoadedFile(file)}>
+                                  <img src={fileDelete} alt='delete' />
+                                </div>
+                              </div>
+                          );
+                        })}
+                        <button onClick={attachFile}>Загрузить</button>
+                      </div>
+                  )}
                   <div className="content__communication">
                     {/*<p className="tasks">*/}
                     {/*  <BaseButton*/}
@@ -603,14 +684,24 @@ export const TicketFullScreen = () => {
                     {/*    Добавить под задачу*/}
                     {/*  </BaseButton>*/}
                     {/*</p>*/}
-                    <p className="file">
-                      <BaseButton styles={"button-add-file"}>
-                        <img src={file}></img>
-                        Загрузить файл
-                      </BaseButton>
-                      <span>{0}</span>
-                      {caseOfNum(0, "files")}
-                    </p>
+                    <div className="file">
+                      <div className="input__wrapper">
+                        <input
+                            name="file"
+                            id="input__file"
+                            type="file"
+                            accept="image/*,.png,.jpg,.svg,.jpeg"
+                            className="input__file"
+                            onChange={handleUpload}
+                        />
+                        <label htmlFor="input__file" className="button-add-file">
+                          <img src={file}></img>
+                          Загрузить файл
+                        </label>
+                      </div>
+                      <span>{taskFiles.length ? taskFiles.length : 0}</span>
+                      {caseOfNum(taskFiles.length, "files")}
+                    </div>
                   </div>
                   <div className="content__input">
                     <input
