@@ -315,6 +315,16 @@
       }
     }
 
+    .fileLoaded {
+      display: flex;
+      margin: 10px 0 0;
+
+      img {
+        max-width: 250px;
+        object-fit: contain;
+      }
+    }
+
     &__communication {
       display: flex;
       flex-direction: row;

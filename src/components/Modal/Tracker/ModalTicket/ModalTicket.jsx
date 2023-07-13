@@ -68,9 +68,9 @@ export const ModalTiсket = ({
   const [executor, setExecutor] = useState(task.executor);
   const [members, setMembers] = useState(task.taskUsers);
   const [users, setUsers] = useState([]);
-  const [selectedFile, setSelectedFile] = useState("");
   const [timerStart, setTimerStart] = useState(false);
   const [timerInfo, setTimerInfo] = useState({});
+  const [uploadedFile, setUploadedFile] = useState(null)
   const [currentTimerCount, setCurrentTimerCount] = useState({
     hours: 0,
     minute: 0,
@@ -308,31 +308,18 @@ export const ModalTiсket = ({
     }
   }, []);
 
-  function handleChange(event) {
-    setSelectedFile(event.target.files[0]);
-  }
-
-  async function handleUpload() {
+  async function handleUpload(event) {
     const formData = new FormData();
-    formData.append("uploadFile", selectedFile);
-    const headers = {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    };
-    const fullHeaders = { ...headers, ...getToken() };
+    formData.append("uploadFile", event.target.files[0]);
     const res = await fetch("https://itguild.info/api/file/upload", {
       method: "POST",
       body: formData,
-      headers: { ...fullHeaders },
+      headers: { ...getToken() },
     });
 
-    console.log(fullHeaders);
-    console.log(res);
-    // apiRequest('/file/upload', {
-    //   method: 'POST',
-    //   body: formData
-    // }).then((res) => {
-    // })
+    const data = await res.json()
+
+    setUploadedFile(data)
   }
 
   function startTimer() {
@@ -468,6 +455,14 @@ export const ModalTiсket = ({
               )}
               {/*<img src={taskImg} className="image-task"></img>*/}
             </div>
+            {uploadedFile &&
+                <div className='fileLoaded'>
+                  {uploadedFile.map((file) => {
+                    return <img src={urlForLocal(file.url)} alt='img' key={file.id}/>
+                  })
+                  }
+                </div>
+            }
             <div className="content__communication">
               {/*<p className="tasks">*/}
               {/*  <button*/}
@@ -488,14 +483,13 @@ export const ModalTiсket = ({
                     type="file"
                     accept="image/*,.png,.jpg,.svg,.jpeg"
                     className="input__file"
-                    onChange={handleChange}
+                    onChange={handleUpload}
                   />
                   <label htmlFor="input__file" className="button-add-file">
                     <img src={file}></img>
                     Загрузить файл
                   </label>
                 </div>
-                <p onClick={handleUpload}>Отправить</p>
                 <span>{0}</span>
                 {caseOfNum(0, "files")}
               </div>
