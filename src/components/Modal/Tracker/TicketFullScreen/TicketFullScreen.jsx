@@ -13,7 +13,13 @@ import {
   setToggleTab,
 } from "@redux/projectsTrackerSlice";
 
-import {backendImg, caseOfNum, getCorrectRequestDate, getToken, urlForLocal} from "@utils/helper";
+import {
+  backendImg,
+  caseOfNum,
+  getCorrectRequestDate,
+  getToken,
+  urlForLocal,
+} from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
@@ -75,7 +81,7 @@ export const TicketFullScreen = () => {
   const [datePickerOpen, setDatePickerOpen] = useState(false);
   const [startDate, setStartDate] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);
-  const [taskFiles, setTaskFiles] = useState([])
+  const [taskFiles, setTaskFiles] = useState([]);
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
@@ -104,11 +110,13 @@ export const TicketFullScreen = () => {
         }, []);
         setComments(comments);
       });
-      apiRequest(`/file/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`).then((res) => {
+      apiRequest(
+        `/file/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`
+      ).then((res) => {
         if (Array.isArray(res)) {
-          setTaskFiles(res)
+          setTaskFiles(res);
         }
-      })
+      });
       apiRequest(
         `/timer/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`
       ).then((res) => {
@@ -414,16 +422,16 @@ export const TicketFullScreen = () => {
         file_id: uploadedFile[0].id,
         entity_type: 2,
         entity_id: taskInfo.id,
-        status: 1
-      }
+        status: 1,
+      },
     }).then((res) => {
-      setTaskFiles(prevValue => [...prevValue, res])
-      setUploadedFile(null)
-    })
+      setTaskFiles((prevValue) => [...prevValue, res]);
+      setUploadedFile(null);
+    });
   }
 
   function deleteLoadedFile() {
-    setUploadedFile(null)
+    setUploadedFile(null);
   }
 
   function deleteFile(file) {
@@ -433,11 +441,13 @@ export const TicketFullScreen = () => {
         file_id: file.id,
         entity_type: 2,
         entity_id: taskInfo.id,
-        status: 0
-      }
+        status: 0,
+      },
     }).then(() => {
-      setTaskFiles(prevValue => prevValue.filter((item) => item.id !== file.id))
-    })
+      setTaskFiles((prevValue) =>
+        prevValue.filter((item) => item.id !== file.id)
+      );
+    });
   }
 
   return (
@@ -643,33 +653,48 @@ export const TicketFullScreen = () => {
                       />
                     )}
                   </div>
-                  {Boolean(taskFiles.length) &&
-                      <div className='task__files'>
-                        {taskFiles.map((file) => {
-                          return <div className='taskFile' key={file.id}>
-                            <img className='imgFile' src={backendImg(file.file?.url)} alt='img'  />
-                            <div className='deleteFile' onClick={() => deleteFile(file)}>
-                              <img src={fileDelete} alt='delete' />
+                  {Boolean(taskFiles.length) && (
+                    <div className="task__files">
+                      {taskFiles.map((file) => {
+                        return (
+                          <div className="taskFile" key={file.id}>
+                            <img
+                              className="imgFile"
+                              src={backendImg(file.file?.url)}
+                              alt="img"
+                            />
+                            <div
+                              className="deleteFile"
+                              onClick={() => deleteFile(file)}
+                            >
+                              <img src={fileDelete} alt="delete" />
                             </div>
                           </div>
-                        })
-                        }
-                      </div>
-                  }
+                        );
+                      })}
+                    </div>
+                  )}
                   {uploadedFile && (
-                      <div className="fileLoaded">
-                        {uploadedFile.map((file) => {
-                          return (
-                              <div className='loadedFile' key={file.id}>
-                                <img src={backendImg(file.url)} alt="img" key={file.id} />
-                                <div className='deleteFile' onClick={() => deleteLoadedFile(file)}>
-                                  <img src={fileDelete} alt='delete' />
-                                </div>
-                              </div>
-                          );
-                        })}
-                        <button onClick={attachFile}>Загрузить</button>
-                      </div>
+                    <div className="fileLoaded">
+                      {uploadedFile.map((file) => {
+                        return (
+                          <div className="loadedFile" key={file.id}>
+                            <img
+                              src={backendImg(file.url)}
+                              alt="img"
+                              key={file.id}
+                            />
+                            <div
+                              className="deleteFile"
+                              onClick={() => deleteLoadedFile(file)}
+                            >
+                              <img src={fileDelete} alt="delete" />
+                            </div>
+                          </div>
+                        );
+                      })}
+                      <button onClick={attachFile}>Загрузить</button>
+                    </div>
                   )}
                   <div className="content__communication">
                     {/*<p className="tasks">*/}
@@ -687,14 +712,17 @@ export const TicketFullScreen = () => {
                     <div className="file">
                       <div className="input__wrapper">
                         <input
-                            name="file"
-                            id="input__file"
-                            type="file"
-                            accept="image/*,.png,.jpg,.svg,.jpeg"
-                            className="input__file"
-                            onChange={handleUpload}
+                          name="file"
+                          id="input__file"
+                          type="file"
+                          accept="image/*,.png,.jpg,.svg,.jpeg"
+                          className="input__file"
+                          onChange={handleUpload}
                         />
-                        <label htmlFor="input__file" className="button-add-file">
+                        <label
+                          htmlFor="input__file"
+                          className="button-add-file"
+                        >
                           <img src={file}></img>
                           Загрузить файл
                         </label>

@@ -11,11 +11,11 @@ import { getProfileInfo } from "@redux/outstaffingSlice";
 import { setProjectBoardFetch } from "@redux/projectsTrackerSlice";
 
 import {
+  backendImg,
   caseOfNum,
   getCorrectRequestDate,
   getToken,
   urlForLocal,
-  backendImg
 } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
@@ -78,7 +78,7 @@ export const ModalTiсket = ({
     seconds: 0,
   });
   const [timerId, setTimerId] = useState(null);
-  const [taskFiles, setTaskFiles] = useState([])
+  const [taskFiles, setTaskFiles] = useState([]);
   const [correctProjectUsers, setCorrectProjectUsers] = useState(projectUsers);
   const [executorId, setExecutorId] = useState(task.executor_id);
   const profileInfo = useSelector(getProfileInfo);
@@ -289,11 +289,13 @@ export const ModalTiсket = ({
       }
     );
 
-    apiRequest(`/file/get-by-entity?entity_type=2&entity_id=${task.id}`).then((res) => {
-      if (Array.isArray(res)) {
-        setTaskFiles(res)
+    apiRequest(`/file/get-by-entity?entity_type=2&entity_id=${task.id}`).then(
+      (res) => {
+        if (Array.isArray(res)) {
+          setTaskFiles(res);
+        }
       }
-    })
+    );
 
     if (
       localStorage.getItem("role_status") !== "18" &&
@@ -331,7 +333,7 @@ export const ModalTiсket = ({
   }
 
   function deleteLoadedFile() {
-    setUploadedFile(null)
+    setUploadedFile(null);
   }
 
   function attachFile() {
@@ -341,12 +343,12 @@ export const ModalTiсket = ({
         file_id: uploadedFile[0].id,
         entity_type: 2,
         entity_id: task.id,
-        status: 1
-      }
+        status: 1,
+      },
     }).then((res) => {
-      setTaskFiles(prevValue => [...prevValue, res])
-      setUploadedFile(null)
-    })
+      setTaskFiles((prevValue) => [...prevValue, res]);
+      setUploadedFile(null);
+    });
   }
 
   function deleteFile(file) {
@@ -356,11 +358,13 @@ export const ModalTiсket = ({
         file_id: file.id,
         entity_type: 2,
         entity_id: task.id,
-        status: 0
-      }
+        status: 0,
+      },
     }).then(() => {
-      setTaskFiles(prevValue => prevValue.filter((item) => item.id !== file.id))
-    })
+      setTaskFiles((prevValue) =>
+        prevValue.filter((item) => item.id !== file.id)
+      );
+    });
   }
 
   function startTimer() {
@@ -496,29 +500,40 @@ export const ModalTiсket = ({
               )}
               {/*<img src={taskImg} className="image-task"></img>*/}
             </div>
-            {Boolean(taskFiles.length) &&
-                <div className='task__files'>
-                  {taskFiles.map((file) => {
-                    return <div className='taskFile' key={file.id}>
-                      <img className='imgFile' src={backendImg(file.file?.url)} alt='img'  />
-                      <div className='deleteFile' onClick={() => deleteFile(file)}>
-                        <img src={close} alt='delete' />
+            {Boolean(taskFiles.length) && (
+              <div className="task__files">
+                {taskFiles.map((file) => {
+                  return (
+                    <div className="taskFile" key={file.id}>
+                      <img
+                        className="imgFile"
+                        src={backendImg(file.file?.url)}
+                        alt="img"
+                      />
+                      <div
+                        className="deleteFile"
+                        onClick={() => deleteFile(file)}
+                      >
+                        <img src={close} alt="delete" />
                       </div>
                     </div>
-                  })
-                  }
-                </div>
-            }
+                  );
+                })}
+              </div>
+            )}
             {uploadedFile && (
               <div className="fileLoaded">
                 {uploadedFile.map((file) => {
                   return (
-                      <div className='loadedFile' key={file.id}>
-                        <img src={backendImg(file.url)} alt="img" key={file.id} />
-                        <div className='deleteFile' onClick={() => deleteLoadedFile(file)}>
-                          <img src={close} alt='delete' />
-                        </div>
+                    <div className="loadedFile" key={file.id}>
+                      <img src={backendImg(file.url)} alt="img" key={file.id} />
+                      <div
+                        className="deleteFile"
+                        onClick={() => deleteLoadedFile(file)}
+                      >
+                        <img src={close} alt="delete" />
                       </div>
+                    </div>
                   );
                 })}
                 <button onClick={attachFile}>Загрузить</button>
