@@ -26,12 +26,12 @@ import { apiRequest } from "@api/request";
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
+import AcceptModal from "@components/Modal/AcceptModal/AcceptModal";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
-import AcceptModal from "@components/Modal/AcceptModal/AcceptModal";
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowStart from "assets/icons/arrows/arrowStart.png";
@@ -83,7 +83,7 @@ export const TicketFullScreen = () => {
   const [startDate, setStartDate] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [taskFiles, setTaskFiles] = useState([]);
-  const [acceptModalOpen, setAcceptModalOpen] = useState(false)
+  const [acceptModalOpen, setAcceptModalOpen] = useState(false);
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
@@ -163,8 +163,8 @@ export const TicketFullScreen = () => {
     });
   }
 
-  function archiveTask () {
-    setAcceptModalOpen(true)
+  function archiveTask() {
+    setAcceptModalOpen(true);
   }
 
   function editTask() {
@@ -456,8 +456,8 @@ export const TicketFullScreen = () => {
     });
   }
 
-  function closeAcceptModal () {
-    setAcceptModalOpen(false)
+  function closeAcceptModal() {
+    setAcceptModalOpen(false);
   }
 
   return (
@@ -1000,12 +1000,9 @@ export const TicketFullScreen = () => {
           </>
         )}
       </div>
-      {acceptModalOpen &&
-        <AcceptModal
-            closeModal={closeAcceptModal}
-            agreeHandler={deleteTask}
-        />
-      }
+      {acceptModalOpen && (
+        <AcceptModal closeModal={closeAcceptModal} agreeHandler={deleteTask} />
+      )}
       <Footer />
     </section>
   );

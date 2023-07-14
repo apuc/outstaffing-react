@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 
 import { getProfileInfo } from "@redux/outstaffingSlice";
 import { setProjectBoardFetch } from "@redux/projectsTrackerSlice";
-import { useNotification } from "@hooks/useNotification";
 
 import {
   backendImg,
@@ -21,9 +20,11 @@ import {
 
 import { apiRequest } from "@api/request";
 
+import { useNotification } from "@hooks/useNotification";
+
+import AcceptModal from "@components/Modal/AcceptModal/AcceptModal";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
-import AcceptModal from "@components/Modal/AcceptModal/AcceptModal";
 
 import archive from "assets/icons/archive.svg";
 import arrow from "assets/icons/arrows/arrowStart.png";
@@ -84,8 +85,8 @@ export const ModalTiсket = ({
   const [correctProjectUsers, setCorrectProjectUsers] = useState(projectUsers);
   const [executorId, setExecutorId] = useState(task.executor_id);
   const profileInfo = useSelector(getProfileInfo);
-  const [acceptModalOpen, setAcceptModalOpen] = useState(false)
-  const { showNotification } = useNotification()
+  const [acceptModalOpen, setAcceptModalOpen] = useState(false);
+  const { showNotification } = useNotification();
 
   function deleteTask() {
     apiRequest("/task/update-task", {
@@ -97,12 +98,16 @@ export const ModalTiсket = ({
     }).then(() => {
       setActive(false);
       dispatch(setProjectBoardFetch(projectId));
-      showNotification({show: true, text: 'Задача успешно была перемещена в архив', type: 'archive'})
+      showNotification({
+        show: true,
+        text: "Задача успешно была перемещена в архив",
+        type: "archive",
+      });
     });
   }
 
-  function archiveTask () {
-    setAcceptModalOpen(true)
+  function archiveTask() {
+    setAcceptModalOpen(true);
   }
 
   function editTask() {
@@ -425,7 +430,11 @@ export const ModalTiсket = ({
     navigator.clipboard.writeText(
       `https://itguild.info/tracker/task/${task.id}`
     );
-    showNotification({show: true, text: 'Ссылка скопирована в буфер обмена', type: 'copy'})
+    showNotification({
+      show: true,
+      text: "Ссылка скопирована в буфер обмена",
+      type: "copy",
+    });
   }
 
   function selectDeadLine(date) {
@@ -440,8 +449,8 @@ export const ModalTiсket = ({
     });
   }
 
-  function closeAcceptModal () {
-    setAcceptModalOpen(false)
+  function closeAcceptModal() {
+    setAcceptModalOpen(false);
   }
 
   return (
@@ -833,12 +842,12 @@ export const ModalTiсket = ({
             </div>
           </div>
         </div>
-        {acceptModalOpen &&
-            <AcceptModal
-                closeModal={closeAcceptModal}
-                agreeHandler={deleteTask}
-            />
-        }
+        {acceptModalOpen && (
+          <AcceptModal
+            closeModal={closeAcceptModal}
+            agreeHandler={deleteTask}
+          />
+        )}
       </div>
       <TrackerModal
         active={addSubtask}

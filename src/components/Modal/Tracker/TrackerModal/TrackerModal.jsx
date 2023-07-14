@@ -23,6 +23,8 @@ import { urlForLocal } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
+import { useNotification } from "@hooks/useNotification";
+
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 
@@ -30,7 +32,6 @@ import arrowDown from "assets/icons/arrows/selectArrow.png";
 import avatarMok from "assets/images/avatarMok.png";
 
 import "./trackerModal.scss";
-import {useNotification} from "@hooks/useNotification";
 
 export const TrackerModal = ({
   active,
@@ -68,11 +69,11 @@ export const TrackerModal = ({
   const [correctProjectUsers, setCorrectProjectUsers] = useState([]);
   const [selectColumnPriorityOpen, setSelectColumnPriorityOpen] =
     useState(false);
-  const { showNotification } = useNotification()
+  const { showNotification } = useNotification();
 
   function createTab() {
     if (!valueColumn) {
-      showNotification({show: true, text: 'Введите название', type: 'error'})
+      showNotification({ show: true, text: "Введите название", type: "error" });
       return;
     }
 
@@ -94,7 +95,11 @@ export const TrackerModal = ({
 
   function createTiket() {
     if (!valueTiket || !descriptionTicket) {
-      showNotification({show: true, text: 'Введите название и описание', type: 'error'})
+      showNotification({
+        show: true,
+        text: "Введите название и описание",
+        type: "error",
+      });
       return;
     }
 
@@ -111,7 +116,11 @@ export const TrackerModal = ({
       },
     }).then((res) => {
       if (res.status === 500) {
-        showNotification({show: true, text: 'Задача с таким именем уже существует', type: 'error'})
+        showNotification({
+          show: true,
+          text: "Задача с таким именем уже существует",
+          type: "error",
+        });
       } else {
         if (selectedExecutorTask.user_id) {
           apiRequest("/task/update-task", {
@@ -133,7 +142,11 @@ export const TrackerModal = ({
           setDescriptionTicket("Описание задачи");
           dispatch(setProjectBoardFetch(projectBoard.id));
         }
-        showNotification({show: true, text: 'Задача создана', type: 'success'})
+        showNotification({
+          show: true,
+          text: "Задача создана",
+          type: "success",
+        });
       }
     });
   }
@@ -219,7 +232,11 @@ export const TrackerModal = ({
           setActive(false);
           setNameProject("");
         } else {
-          showNotification({show: true, text: 'Проект с таким именем уже существует', type: 'error'})
+          showNotification({
+            show: true,
+            text: "Проект с таким именем уже существует",
+            type: "error",
+          });
         }
       });
     }

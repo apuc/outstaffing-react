@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   tags: [],
@@ -16,9 +16,9 @@ const initialState = {
   partnerRequestInfo: {},
   notification: {
     show: false,
-    text: '',
-    type: ''
-  }
+    text: "",
+    type: "",
+  },
 };
 
 export const outstaffingSlice = createSlice({
@@ -68,11 +68,11 @@ export const outstaffingSlice = createSlice({
       state.partnerRequestInfo = action.payload;
     },
     setNotification: (state, action) => {
-      state.notification = action.payload
+      state.notification = action.payload;
     },
     closeNotification: (state) => {
-      state.notification.show = false
-    }
+      state.notification.show = false;
+    },
   },
 });
 
@@ -92,15 +92,14 @@ export const {
   setPartnerRequests,
   setPartnerRequestInfo,
   setNotification,
-  closeNotification
+  closeNotification,
 } = outstaffingSlice.actions;
 
 export const selectProfiles = (state) => state.outstaffing.profiles;
 export const selectTags = (state) => state.outstaffing.tags;
 export const selectFilteredCandidates = (state) =>
   state.outstaffing.filteredCandidates;
-export const getNotification = (state) =>
-    state.outstaffing.notification
+export const getNotification = (state) => state.outstaffing.notification;
 export const selectItems = (state) => state.outstaffing.selectedItems;
 export const selectCurrentCandidate = (state) =>
   state.outstaffing.currentCandidate;

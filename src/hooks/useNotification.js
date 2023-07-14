@@ -1,15 +1,15 @@
 import { useDispatch } from "react-redux";
 
-import { setNotification, closeNotification } from "../redux/outstaffingSlice";
+import { closeNotification, setNotification } from "../redux/outstaffingSlice";
 
 export const useNotification = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const showNotification = (notification) => {
-        dispatch(setNotification(notification))
-        setTimeout(() => {
-            dispatch(closeNotification())
-        }, 2500)
-    }
-    return { showNotification }
+  const showNotification = (notification) => {
+    dispatch(setNotification(notification));
+    setTimeout(() => {
+      dispatch(closeNotification());
+    }, 2500);
+  };
+  return { showNotification };
 };
