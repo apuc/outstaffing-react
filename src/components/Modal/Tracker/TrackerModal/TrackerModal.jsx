@@ -30,6 +30,7 @@ import arrowDown from "assets/icons/arrows/selectArrow.png";
 import avatarMok from "assets/images/avatarMok.png";
 
 import "./trackerModal.scss";
+import {useNotification} from "@hooks/useNotification";
 
 export const TrackerModal = ({
   active,
@@ -67,9 +68,11 @@ export const TrackerModal = ({
   const [correctProjectUsers, setCorrectProjectUsers] = useState([]);
   const [selectColumnPriorityOpen, setSelectColumnPriorityOpen] =
     useState(false);
+  const { showNotification } = useNotification()
 
   function createTab() {
     if (!valueColumn) {
+      showNotification({show: true, text: 'Введите название', type: 'error'})
       return;
     }
 
@@ -91,6 +94,7 @@ export const TrackerModal = ({
 
   function createTiket() {
     if (!valueTiket || !descriptionTicket) {
+      showNotification({show: true, text: 'Введите название и описание', type: 'error'})
       return;
     }
 
@@ -106,25 +110,30 @@ export const TrackerModal = ({
         priority: priorityTask,
       },
     }).then((res) => {
-      if (selectedExecutorTask.user_id) {
-        apiRequest("/task/update-task", {
-          method: "PUT",
-          data: {
-            task_id: res.id,
-            executor_id: selectedExecutorTask.user_id,
-          },
-        }).then(() => {
-          dispatch(setProjectBoardFetch(projectBoard.id));
+      if (res.status === 500) {
+        showNotification({show: true, text: 'Задача с таким именем уже существует', type: 'error'})
+      } else {
+        if (selectedExecutorTask.user_id) {
+          apiRequest("/task/update-task", {
+            method: "PUT",
+            data: {
+              task_id: res.id,
+              executor_id: selectedExecutorTask.user_id,
+            },
+          }).then(() => {
+            dispatch(setProjectBoardFetch(projectBoard.id));
+            setActive(false);
+            setValueTiket("");
+            setDescriptionTicket("Описание задачи");
+            setSelectedExecutorTask("Выберите исполнителя задачи");
+          });
+        } else {
           setActive(false);
           setValueTiket("");
           setDescriptionTicket("Описание задачи");
-          setSelectedExecutorTask("Выберите исполнителя задачи");
-        });
-      } else {
-        setActive(false);
-        setValueTiket("");
-        setDescriptionTicket("Описание задачи");
-        dispatch(setProjectBoardFetch(projectBoard.id));
+          dispatch(setProjectBoardFetch(projectBoard.id));
+        }
+        showNotification({show: true, text: 'Задача создана', type: 'success'})
       }
     });
   }
@@ -204,10 +213,14 @@ export const TrackerModal = ({
           status: 19,
         },
       }).then((res) => {
-        const result = { ...res, columns: [] };
-        dispatch(setProject(result));
-        setActive(false);
-        setNameProject("");
+        if (!Array.isArray(res.name)) {
+          const result = { ...res, columns: [] };
+          dispatch(setProject(result));
+          setActive(false);
+          setNameProject("");
+        } else {
+          showNotification({show: true, text: 'Проект с таким именем уже существует', type: 'error'})
+        }
       });
     }
   }

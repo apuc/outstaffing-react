@@ -6,6 +6,8 @@ import {
   Navigate,
 } from "react-router-dom";
 
+import { getNotification } from "@redux/outstaffingSlice";
+
 import AuthForPartners from "./pages/AuthForPartners/AuthForPartners";
 import AuthForDevelopers from "./pages/AuthForDevelopers/AuthForDevelopers";
 import { TrackerIntro } from "./pages/TrackerIntro/TrackerIntro"
@@ -42,12 +44,15 @@ import Blog from "./pages/Blog/Blog";
 import { ProjectTracker } from "./pages/ProjectTracker/ProjectTracker";
 import { FrequentlyAskedQuestions } from "./pages/FrequentlyAskedQuestions/FrequentlyAskedQuestions";
 import { FrequentlyAskedQuestion } from "./pages/FrequentlyAskedQuestion/FrequentlyAskedQuestion";
+import Notification from "@components/Notification/Notification";
+import { useSelector } from "react-redux";
 
 import "./assets/global.scss";
 import "./assets/fonts/stylesheet.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
+  const notification = useSelector(getNotification)
   return (
     <>
       <Router>
@@ -130,6 +135,9 @@ const App = () => {
           <Route path="*" element={<Navigate to="/auth" replace />} />
         </Routes>
       </Router>
+      {notification.show &&
+        <Notification />
+      }
     </>
   );
 };

@@ -3,11 +3,13 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { deleteProject, modalToggle } from "@redux/projectsTrackerSlice";
+import {useNotification} from "@hooks/useNotification";
 
 import { apiRequest } from "@api/request";
 
 import { ModalSelect } from "@components/Modal/ModalSelect/ModalSelect";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
+import AcceptModal from "@components/Modal/AcceptModal/AcceptModal"
 
 import archiveSet from "assets/icons/archive.svg";
 import del from "assets/icons/delete.svg";
@@ -19,7 +21,9 @@ import "./projectTiket.scss";
 export const ProjectTiket = ({ project, index }) => {
   const [modalSelect, setModalSelect] = useState(false);
   const [modalAdd, setModalAdd] = useState(false);
+  const [acceptModalOpen, setAcceptModalOpen] = useState(false);
   const dispatch = useDispatch();
+  const { showNotification } = useNotification()
 
   useEffect(() => {
     initListeners();
@@ -49,6 +53,7 @@ export const ProjectTiket = ({ project, index }) => {
       },
     }).then(() => {
       dispatch(deleteProject(project));
+      showNotification({show: true, text: 'Проект успешно была перемещена в архив', type: 'archive'});
     });
   }
 
@@ -56,6 +61,10 @@ export const ProjectTiket = ({ project, index }) => {
     navigator.clipboard.writeText(
       `https://itguild.info/tracker/project/${project.id}`
     );
+  }
+
+  function closeAcceptModal () {
+    setAcceptModalOpen(false)
   }
 
   return (
@@ -98,7 +107,10 @@ export const ProjectTiket = ({ project, index }) => {
             <img src={link}></img>
             <p onClick={copyProjectLink}>ссылка на проект</p>
           </div>
-          <div>
+          <div onClick={() => {
+            setModalSelect(false)
+            setAcceptModalOpen(true)
+          }}>
             <img src={archiveSet}></img>
             <p>в архив</p>
           </div>
@@ -108,6 +120,12 @@ export const ProjectTiket = ({ project, index }) => {
           </div>
         </div>
       </ModalSelect>
+      {acceptModalOpen &&
+        <AcceptModal
+            closeModal={closeAcceptModal}
+            agreeHandler={removeProject}
+        />
+      }
     </div>
   );
 };

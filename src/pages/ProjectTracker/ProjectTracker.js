@@ -49,6 +49,7 @@ import archive from "assets/images/archiveIcon.png";
 import avatarMok from "assets/images/avatarMok.png";
 
 import { getCorrectDate } from "../../components/Calendar/calendarHelper";
+import {useNotification} from "@hooks/useNotification";
 
 export const ProjectTracker = () => {
   const dispatch = useDispatch();
@@ -72,6 +73,7 @@ export const ProjectTracker = () => {
   const startWrapperIndexTest = useRef({});
   const projectBoard = useSelector(getProjectBoard);
   const loader = useSelector(getBoarderLoader);
+  const { showNotification } = useNotification()
 
   useEffect(() => {
     dispatch(activeLoader());
@@ -224,6 +226,7 @@ export const ProjectTracker = () => {
       } else {
         dispatch(setProjectBoardFetch(projectBoard.id));
       }
+      showNotification({show: true, text: 'Колонка удалена', type: 'error'})
     });
   }
 
