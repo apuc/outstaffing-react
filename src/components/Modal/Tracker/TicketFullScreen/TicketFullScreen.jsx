@@ -26,6 +26,7 @@ import { apiRequest } from "@api/request";
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
+import AcceptModal from "@components/Modal/AcceptModal/AcceptModal";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
@@ -82,6 +83,7 @@ export const TicketFullScreen = () => {
   const [startDate, setStartDate] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [taskFiles, setTaskFiles] = useState([]);
+  const [acceptModalOpen, setAcceptModalOpen] = useState(false);
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
@@ -159,6 +161,10 @@ export const TicketFullScreen = () => {
     }).then(() => {
       navigate(`/tracker/project/${taskInfo.project_id}`);
     });
+  }
+
+  function archiveTask() {
+    setAcceptModalOpen(true);
   }
 
   function editTask() {
@@ -448,6 +454,10 @@ export const TicketFullScreen = () => {
         prevValue.filter((item) => item.id !== file.id)
       );
     });
+  }
+
+  function closeAcceptModal() {
+    setAcceptModalOpen(false);
   }
 
   return (
@@ -976,7 +986,7 @@ export const TicketFullScreen = () => {
                     <img src={link} alt="link"></img>
                     <p onClick={copyTicketLink}>ссылка на задачу</p>
                   </div>
-                  <div>
+                  <div onClick={archiveTask}>
                     <img src={archive} alt="arch"></img>
                     <p>в архив</p>
                   </div>
@@ -990,6 +1000,9 @@ export const TicketFullScreen = () => {
           </>
         )}
       </div>
+      {acceptModalOpen && (
+        <AcceptModal closeModal={closeAcceptModal} agreeHandler={deleteTask} />
+      )}
       <Footer />
     </section>
   );

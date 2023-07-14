@@ -25,6 +25,8 @@ import { caseOfNum } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
+import { useNotification } from "@hooks/useNotification";
+
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
@@ -72,6 +74,7 @@ export const ProjectTracker = () => {
   const startWrapperIndexTest = useRef({});
   const projectBoard = useSelector(getProjectBoard);
   const loader = useSelector(getBoarderLoader);
+  const { showNotification } = useNotification();
 
   useEffect(() => {
     dispatch(activeLoader());
@@ -224,6 +227,7 @@ export const ProjectTracker = () => {
       } else {
         dispatch(setProjectBoardFetch(projectBoard.id));
       }
+      showNotification({ show: true, text: "Колонка удалена", type: "error" });
     });
   }
 

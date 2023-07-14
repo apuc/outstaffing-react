@@ -689,6 +689,7 @@
       .react-datepicker-popper {
         top: 10px !important;
         left: -110px !important;
+        z-index: 10;
       }
 
       .react-datepicker__current-month {
