@@ -1,0 +1,95 @@
+.trackerRegistration {
+  &__content {
+    font-family: "LabGrotesque", sans-serif;
+    background-color: #f1f1f1;
+    color: #000000;
+    padding: 50px 0 0;
+    min-height: 100vh;
+
+    @media (max-width: 1375px) {
+      padding-top: 100px;
+    }
+
+    .container {
+      padding-bottom: 30px;
+    }
+  }
+
+  &__form {
+    position: relative;
+    border-radius: 12px;
+    background: #FFF;
+    padding: 59px 115px 70px 102px;
+
+    &__inputs {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 650px;
+      row-gap: 25px;
+      column-gap: 44px;
+    }
+
+    &__submit {
+      display: flex;
+      align-items: center;
+
+      button {
+        border-radius: 44px;
+        padding: 9px 39px;
+        background: #52B709;
+        font-weight: 500;
+        font-size: 18px;
+        color: #FFF;
+        border: none;
+        margin-right: 165px;
+      }
+    }
+
+    &__info {
+      display: flex;
+      align-items: center;
+      img {
+        margin-right: 31px;
+      }
+
+      p {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 22px;
+        color: #000;
+        max-width: 430px;
+      }
+    }
+
+    &__img {
+      position: absolute;
+      top: -100px;
+      right: 58px;
+    }
+  }
+  &__inputContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    max-width: 300px;
+    width: 100%;
+    margin-bottom: 44px;
+
+    span {
+      font-weight: 400;
+      font-size: 15px;
+      color: #000;
+    }
+
+    input {
+      outline: none;
+      padding: 8px 12px 9px;
+      background-color: #EFF2F7;
+      border-radius: 8px;
+      border: none;
+      font-weight: 400;
+      font-size: 15px;
+      color: #000;
+    }
+  }
+}
