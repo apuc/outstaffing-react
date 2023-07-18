@@ -4,7 +4,7 @@ import authImg from "assets/images/partnerProfile/authCandidateFormImg.png";
 
 import "./authBlock.scss";
 
-export const AuthBlock = ({ title, description, img }) => {
+export const AuthBlock = ({ title, description, img, resetModal }) => {
   return (
     <div className="auth__wrapper">
       <div className="auth__info">
@@ -31,7 +31,7 @@ export const AuthBlock = ({ title, description, img }) => {
           >
             Войти
           </button>
-          <span>Вспомнить пароль</span>
+          <span onClick={() => resetModal(true)}>Вспомнить пароль</span>
         </div>
       </form>
       {img && <img src={img} alt="authImg" className="auth__img" />}

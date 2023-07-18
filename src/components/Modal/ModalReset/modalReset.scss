@@ -1,0 +1,59 @@
+.modalReset {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #FFF 0%, #EBEBEB 100%);
+  padding: 23px 110px 8px 36px;
+  row-gap: 29px;
+  position: relative;
+
+  &__title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #263238;
+    margin-bottom: 0;
+  }
+
+  &__input {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+
+    span {
+      font-size: 15px;
+      color: #000;
+    }
+
+    input {
+      padding: 8px 12px;
+      font-size: 15px;
+      border-radius: 8px;
+      background-color: #EFF2F7;
+      outline: none;
+      border: none;
+      max-width: 300px;
+    }
+  }
+
+  &__submit {
+    border-radius: 44px;
+    background: #52B709;
+    padding: 9px 46px;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 32px;
+    border: none;
+    max-width: 200px;
+    outline: none;
+  }
+
+  &__close {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
+}

@@ -12,6 +12,7 @@ import AuthForPartners from "./pages/AuthForPartners/AuthForPartners";
 import AuthForDevelopers from "./pages/AuthForDevelopers/AuthForDevelopers";
 import { TrackerIntro } from "./pages/TrackerIntro/TrackerIntro"
 import { TrackerAuth } from "@pages/TrackerAuth/TrackerAuth";
+import { TrackerRegistration } from "@pages/TrackerRegistration/TrackerRegistration";
 import Home from "./pages/Home/Home";
 import Candidate from "./components/Candidate/Candidate";
 import Calendar from "./components/Calendar/Calendar";
@@ -61,6 +62,7 @@ const App = () => {
           <Route exact path="/auth" element={<AuthForPartners />} />
           <Route exact path="/tracker-intro" element={<TrackerIntro />} />
           <Route exact path="/tracker-auth" element={<TrackerAuth />} />
+          <Route exact path="/tracker-registration" element={<TrackerRegistration />} />
 
           <Route exact path="/worker/:id" element={<FreeDevelopers />} />
           <Route
