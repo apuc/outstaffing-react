@@ -309,7 +309,9 @@ export const Tracker = () => {
                         return (
                           <div className="archive__completeTask" key={index}>
                             <div className="archive__completeTask__description">
-                              <p>{task.title}</p>
+                              <p className="completeTask__title">
+                                {task.title}
+                              </p>
                               <p
                                 className="date"
                                 dangerouslySetInnerHTML={{

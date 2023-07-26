@@ -487,7 +487,7 @@ export const ModalTiсket = ({
                 }}
               />
             ) : (
-              <h5>{inputsValue.title}</h5>
+              <h5 className="taskName">{inputsValue.title}</h5>
             )}
             <div className="content__description">
               {editOpen ? (
@@ -518,6 +518,7 @@ export const ModalTiсket = ({
                 />
               ) : (
                 <p
+                  className="taskDescription"
                   dangerouslySetInnerHTML={{ __html: inputsValue.description }}
                 />
               )}

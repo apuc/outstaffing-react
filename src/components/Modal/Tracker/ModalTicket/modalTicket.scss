@@ -115,6 +115,42 @@
         margin-bottom: 0;
       }
 
+      .taskName {
+        max-width: 550px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+      }
+
+      .taskDescription {
+        max-width: 550px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+      }
+
+      .fullName {
+        max-width: 800px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+      }
+
+      .fullDescription {
+        max-width: 800px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+      }
+
       .comments__list {
         display: flex;
         flex-direction: column;
@@ -318,13 +354,32 @@
     .task__files {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      column-gap: 25px;
+      row-gap: 20px;
       margin-top: 10px;
+      max-height: 350px;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #cbd9f9;
+        border-radius: 20px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #c5c0c6;
+        border-radius: 20px;
+      }
 
       .taskFile {
         position: relative;
         .imgFile {
-          max-width: 180px;
+          max-width: 170px;
+          max-height: 104px;
           object-fit: contain;
         }
 
@@ -665,7 +720,7 @@
         }
         span {
           font-size: 12px;
-          color: #000000;
+          color: #1458DD;
           margin-left: 10px;
           font-weight: 500;
         }
@@ -683,7 +738,8 @@
       }
 
       .react-datepicker {
-        border: 1px solid #398208;
+        border: 1px solid #e8ede4;
+        border-radius: 8px;
       }
 
       .react-datepicker-popper {
@@ -693,25 +749,58 @@
       }
 
       .react-datepicker__current-month {
-        font-size: 14px;
+        font-size: 18px;
         font-family: "LabGrotesque", sans-serif;
         text-transform: capitalize;
       }
 
+      .react-datepicker__navigation-icon {
+        width: 20px;
+        height: 20px;
+        border-radius: 50px;
+        border: 2px solid #cbd1d2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+          background-color: white;
+        }
+      }
+
+      .react-datepicker__navigation-icon--next::before {
+        border-width: 2px 2px 0 0;
+        top: auto;
+        left: 4px;
+        height: 6px;
+        width: 6px;
+      }
+
+      .react-datepicker__navigation-icon--previous::before {
+        border-width: 2px 2px 0 0;
+        top: auto;
+        left: 6px;
+        height: 6px;
+        width: 6px;
+      }
+
       .react-datepicker__header {
         padding: 5px 0 10px;
-        border-bottom: 1px solid #398208;
+        border-bottom: 1px solid #baacc0;
       }
 
       .react-datepicker__day {
-        font-size: 14px;
+        font-size: 16px;
         width: 35px;
         font-family: "LabGrotesque", sans-serif;
+        border-radius: 50px;
+        padding: 7px;
       }
 
       .react-datepicker__day-name {
-        font-size: 14px;
+        font-size: 18px;
         width: 35px;
+        font-weight: 500;
         font-family: "LabGrotesque", sans-serif;
       }
 
@@ -719,7 +808,7 @@
         left: 85px !important;
 
         &:before {
-          border-bottom-color: #398208 !important;
+          border: 1px solid #e8ede4;
         }
       }
     }

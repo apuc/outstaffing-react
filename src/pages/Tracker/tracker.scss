@@ -340,9 +340,9 @@
               flex-direction: column;
               background: linear-gradient(180deg, #ffffff 0%, #ebebeb 100%);
               border-radius: 40px;
-              padding: 33px 24px 44px 34px;
-              width: 425px;
+              padding: 31px 128px 41px 49px;
               cursor: default;
+              width: 650px;
 
               &__close {
                 cursor: pointer;
@@ -372,7 +372,7 @@
 
               &__info {
                 display: flex;
-                margin: 13px 0 10px;
+                margin: 11px 0 35px;
                 align-items: center;
 
                 span {
@@ -402,31 +402,33 @@
               &__items {
                 display: flex;
                 flex-wrap: wrap;
-                row-gap: 10px;
-                column-gap: 35px;
+                row-gap: 32px;
+                column-gap: 85px;
                 margin-bottom: 38px;
               }
 
               &__item {
-                width: 145px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                max-width: 190px;
+                width: 100%;
 
                 .avatar {
-                  width: 22px;
-                  height: 22px;
+                  width: 38px;
+                  height: 38px;
+                  margin-right: 12px;
                 }
 
                 span {
                   display: block;
                   font-weight: 400;
-                  font-size: 12px;
+                  font-size: 15px;
                   line-height: initial;
                   color: #807777;
                   width: auto;
                   height: auto;
-                  max-width: 85px;
+                  max-width: 130px;
                   overflow: hidden;
                   white-space: nowrap;
                   text-overflow: ellipsis;
@@ -452,9 +454,10 @@
                   margin-left: 17px;
                   color: #000000;
                   font-weight: 400;
-                  font-size: 12px;
+                  font-size: 16px;
                   line-height: 32px;
                   position: initial;
+                  max-width: none;
                 }
               }
             }
@@ -800,6 +803,7 @@
               p {
                 font-weight: 500;
                 font-size: 14px;
+                color: #1458DD;
               }
 
               span {
@@ -1239,14 +1243,17 @@
             }
 
             p {
-              max-width: 250px;
+              max-width: 420px;
               overflow: hidden;
               white-space: nowrap;
               text-overflow: ellipsis;
               margin-bottom: 0;
               color: #111112;
+            }
+
+            .completeTask__title {
               font-weight: 700;
-              font-size: 16px;
+              font-size: 20px;
               line-height: 32px;
             }
 
@@ -1256,7 +1263,7 @@
 
               .date {
                 font-weight: 500;
-                font-size: 10px;
+                font-size: 16px;
                 line-height: 24px;
                 color: #6f6f6f;
               }

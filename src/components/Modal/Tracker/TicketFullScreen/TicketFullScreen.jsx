@@ -626,7 +626,7 @@ export const TicketFullScreen = () => {
                       }}
                     />
                   ) : (
-                    <h5>{inputsValue.title}</h5>
+                    <h5 className="fullName">{inputsValue.title}</h5>
                   )}
                   <div className="content__description">
                     {editOpen ? (
@@ -657,6 +657,7 @@ export const TicketFullScreen = () => {
                       />
                     ) : (
                       <p
+                        className="fullDescription"
                         dangerouslySetInnerHTML={{
                           __html: inputsValue.description,
                         }}
