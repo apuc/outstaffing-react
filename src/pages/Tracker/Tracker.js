@@ -44,7 +44,7 @@ export const Tracker = () => {
   const [allCompletedTasks, setAllCompletedTasks] = useState([]);
 
   const [modalCreateProject, setModalCreateProject] = useState(false);
-  const tabs = ['projectsTab', 'tasksTab', 'archiveTab']
+  const tabs = ["projectsTab", "tasksTab", "archiveTab"];
 
   useEffect(() => {
     setLoader(true);
@@ -136,7 +136,9 @@ export const Tracker = () => {
       <div className="tracker__tabs">
         <div className="tracker__tabs__head">
           <div
-            className={tab === 1 ? "tab active-tab projectsTab" : "tab projectsTab"}
+            className={
+              tab === 1 ? "tab active-tab projectsTab" : "tab projectsTab"
+            }
             onClick={() => toggleTabs(1)}
           >
             <img src={project} alt="img" />
@@ -150,7 +152,9 @@ export const Tracker = () => {
             <p>Все мои задачи</p>
           </div>
           <div
-            className={tab === 3 ? "tab active-tab archiveTab" : "tab archiveTab"}
+            className={
+              tab === 3 ? "tab active-tab archiveTab" : "tab archiveTab"
+            }
             onClick={() => toggleTabs(3)}
           >
             <img src={archive} alt="img" />
