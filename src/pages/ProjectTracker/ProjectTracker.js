@@ -194,8 +194,8 @@ export const ProjectTracker = () => {
   }
 
   function openTicket(e, task) {
-    if (window. innerWidth < 900) {
-      return
+    if (window.innerWidth < 900) {
+      return;
     }
     setSelectedTicket(task);
     setModalActiveTicket(true);
@@ -687,9 +687,12 @@ export const ProjectTracker = () => {
                                 </div>
                               </div>
                               <TrackerSelectColumn
-                                  columns={projectBoard.columns.filter((item) => item.id !== column.id)}
-                                  currentColumn={column.id}
-                                  task={task} />
+                                columns={projectBoard.columns.filter(
+                                  (item) => item.id !== column.id
+                                )}
+                                currentColumn={column.id}
+                                task={task}
+                              />
                             </div>
                           );
                         })}
