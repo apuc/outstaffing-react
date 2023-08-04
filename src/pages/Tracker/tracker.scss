@@ -231,12 +231,24 @@
         background: #ffffff;
         border-radius: 12px;
         flex-direction: column;
+
+        @media (max-width: 650px) {
+          border-radius: 0;
+        }
       }
 
       .tasks {
         &__head {
           border-bottom: 1px solid #dde2e4;
           padding: 0 35px 15px;
+
+          @media (max-width: 1000px) {
+            padding: 0 15px 15px;
+          }
+
+          @media (max-width: 650px) {
+            background-color: #DFF1FF;
+          }
 
           &__wrapper {
             display: flex;
@@ -249,6 +261,13 @@
 
             &__fullScreen {
               max-width: 1160px;
+            }
+
+            @media (max-width: 1350px) {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 10px;
+              padding: 0px;
             }
           }
 
@@ -263,6 +282,11 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+
+            @media (max-width: 1350px) {
+              width: 100%;
+              max-width: none;
+            }
           }
 
           &__add {
@@ -287,12 +311,28 @@
               display: flex;
               align-items: center;
             }
+
+            @media (max-width: 1350px) {
+              margin-left: 0;
+            }
+
+            @media (max-width: 700px) {
+              width: 100%;
+            }
           }
 
           &__persons {
             position: relative;
             display: flex;
             align-items: center;
+
+            @media (max-width: 700px) {
+              right: -15px;
+            }
+
+            @media (max-width: 465px) {
+              width: 100%;
+            }
 
             .projectPersons {
               display: flex;
@@ -496,6 +536,10 @@
             display: flex;
             align-items: center;
 
+            @media (max-width: 650px) {
+              margin: 0;
+            }
+
             span {
               color: #252c32;
               font-weight: 400;
@@ -532,6 +576,16 @@
             position: relative;
             max-width: 220px;
             width: 100%;
+
+            @media (max-width: 915px) {
+              margin-right: 0;
+              width: 100%;
+              max-width: none;
+            }
+
+            @media (max-width: 650px) {
+              border-color: gray;
+            }
 
             &Selected {
               display: flex;
@@ -646,6 +700,10 @@
                 font-weight: 500;
               }
             }
+
+            @media (max-width: 1150px) {
+              display: none;
+            }
           }
         }
 
@@ -673,6 +731,13 @@
             background: #c5c0c6;
             border-radius: 20px;
           }
+
+          @media (max-width: 900px) {
+            padding: 15px;
+            flex-direction: column;
+            row-gap: 25px;
+            transform: none;
+          }
         }
 
         &__board {
@@ -690,9 +755,14 @@
           height: fit-content;
           position: relative;
           transition: all 0.3s ease;
-          //max-height: 500px;
-          //overflow-y: auto;
           transform: scaleY(-1);
+
+          @media (max-width: 900px) {
+            min-width: auto;
+            width: 100%;
+            max-width: none;
+            transform: scaleX(1);
+          }
 
           &::-webkit-scrollbar {
             width: 3px;
@@ -737,6 +807,14 @@
             &:hover {
               transform: scale(1.025);
               transition: 0.3s;
+            }
+
+            @media (max-width: 900px) {
+              width: 100%;
+
+              &:hover {
+                transform: none;
+              }
             }
 
             &__hide {
@@ -1456,7 +1534,8 @@
     @media (max-width: 650px) {
 
       &__content {
-        padding: 28px 0;
+        padding: 28px 0 0;
+        background-color: #DFF1FF;
 
         .project {
           background-color: white;

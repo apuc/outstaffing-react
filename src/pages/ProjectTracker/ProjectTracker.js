@@ -35,6 +35,7 @@ import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
+import TrackerSelectColumn from "@components/TrackerSelectColumn/TrackerSelectColumn";
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowDown from "assets/icons/arrows/selectArrow.png";
@@ -193,6 +194,9 @@ export const ProjectTracker = () => {
   }
 
   function openTicket(e, task) {
+    if (window. innerWidth < 900) {
+      return
+    }
     setSelectedTicket(task);
     setModalActiveTicket(true);
   }
@@ -298,7 +302,7 @@ export const ProjectTracker = () => {
         <div className="tracker__tabs__head">
           <Link
             to="/profile/tracker"
-            className="tab active-tab tab"
+            className="tab active-tab tab projectsTab"
             onClick={() => dispatch(setToggleTab(1))}
           >
             <img src={project} alt="img" />
@@ -306,7 +310,7 @@ export const ProjectTracker = () => {
           </Link>
           <Link
             to="/profile/tracker"
-            className="tab"
+            className="tab tasksTab"
             onClick={() => dispatch(setToggleTab(2))}
           >
             <img src={tasks} alt="img" />
@@ -314,7 +318,7 @@ export const ProjectTracker = () => {
           </Link>
           <Link
             to="/profile/tracker"
-            className="tab"
+            className="tab archiveTab"
             onClick={() => dispatch(setToggleTab(3))}
           >
             <img src={archive} alt="img" />
@@ -682,6 +686,10 @@ export const ProjectTracker = () => {
                                   </span>
                                 </div>
                               </div>
+                              <TrackerSelectColumn
+                                  columns={projectBoard.columns.filter((item) => item.id !== column.id)}
+                                  currentColumn={column.id}
+                                  task={task} />
                             </div>
                           );
                         })}
