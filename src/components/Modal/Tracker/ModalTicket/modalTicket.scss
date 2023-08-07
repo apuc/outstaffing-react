@@ -746,6 +746,11 @@
         top: 10px !important;
         left: -110px !important;
         z-index: 10;
+
+        @media (max-width: 880px) {
+          left: 0 !important;
+          top: -15px !important;
+        }
       }
 
       .react-datepicker__current-month {

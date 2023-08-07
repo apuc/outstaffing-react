@@ -15,7 +15,7 @@ export const TrackerSelectColumn = ({ columns, task, currentColumn }) => {
       className="trackerSelectColumn"
       onClick={() => setOpenSelect(!openSelect)}
     >
-      <p>Выберите колонку</p>
+      <p>{currentColumn.title}</p>
       <img className={openSelect ? "open" : ""} src={arrowDown} alt="arrow" />
       {openSelect && (
         <div className="trackerSelectColumn__dropDown">
@@ -26,7 +26,7 @@ export const TrackerSelectColumn = ({ columns, task, currentColumn }) => {
                 onClick={() => {
                   dispatch(
                     moveProjectTask({
-                      startWrapperIndex: { index: currentColumn, task },
+                      startWrapperIndex: { index: currentColumn.id, task },
                       columnId: column.id,
                     })
                   );

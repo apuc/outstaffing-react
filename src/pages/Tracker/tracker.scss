@@ -402,7 +402,7 @@
 
             .persons__list {
               position: absolute;
-              z-index: 2;
+              z-index: 20;
               display: flex;
               flex-direction: column;
               background: linear-gradient(180deg, #ffffff 0%, #ebebeb 100%);
@@ -527,6 +527,33 @@
                   max-width: none;
                 }
               }
+
+              @media (max-width: 1000px) {
+                width: 390px;
+                padding: 15px 30px;
+                .persons__list__info {
+                  margin: 10px;
+                }
+
+                .persons__list__items {
+                  flex-direction: column;
+                  margin-bottom: 20px;
+                  row-gap: 15px;
+
+                  .persons__list__item {
+                    max-width: none;
+                    span {
+                      max-width: none;
+                      width: 100%;
+                    }
+                  }
+                }
+              }
+
+              @media (max-width: 440px) {
+                width: 290px;
+                padding: 15px 20px;
+              }
             }
           }
 
@@ -620,6 +647,17 @@
                 width: 20px;
                 height: 20px;
               }
+
+              @media (max-width: 915px) {
+                width: 100%;
+                max-width: none;
+                justify-content: start;
+
+                p {
+                  font-size: 16px;
+                  max-width: none;
+                }
+              }
             }
             p {
               color: #252c32;
@@ -659,6 +697,11 @@
                   overflow: hidden;
                   white-space: nowrap;
                   text-overflow: ellipsis;
+
+
+                  @media (max-width: 915px) {
+                    max-width: none;
+                  }
                 }
 
                 img {
@@ -811,6 +854,7 @@
 
             @media (max-width: 900px) {
               width: 100%;
+              max-height: none;
 
               &:hover {
                 transform: none;
@@ -1024,6 +1068,10 @@
             &More {
               font-size: 14px;
               line-height: 22px;
+            }
+
+            @media (max-width: 900px) {
+              transform: none;
             }
           }
         }
