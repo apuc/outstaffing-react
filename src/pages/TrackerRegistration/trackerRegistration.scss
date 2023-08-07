@@ -21,12 +21,26 @@
     background: #FFF;
     padding: 59px 115px 70px 102px;
 
+    @media (max-width: 1000px) {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+
     &__inputs {
       display: flex;
       flex-wrap: wrap;
       max-width: 650px;
       row-gap: 25px;
       column-gap: 44px;
+
+      @media (max-width: 1000px) {
+        order: 2;
+      }
+
+      @media (max-width: 6755px) {
+        margin-bottom: 35px;
+      }
     }
 
     &__submit {
@@ -43,6 +57,16 @@
         border: none;
         margin-right: 165px;
       }
+
+      @media (max-width: 1000px) {
+        order: 3;
+      }
+
+      @media (max-width: 675px) {
+        flex-direction: column;
+        align-items: start;
+        row-gap: 35px;
+      }
     }
 
     &__info {
@@ -50,6 +74,10 @@
       align-items: center;
       img {
         margin-right: 31px;
+
+        @media (max-width: 675px) {
+          margin-right: 27px;
+        }
       }
 
       p {
@@ -58,6 +86,10 @@
         line-height: 22px;
         color: #000;
         max-width: 430px;
+
+        @media (max-width: 675px) {
+          font-size: 14px;
+        }
       }
     }
 
@@ -65,6 +97,15 @@
       position: absolute;
       top: -100px;
       right: 58px;
+
+      @media (max-width: 1000px) {
+        position: inherit;
+        order: 1;
+        top: inherit;
+        right: inherit;
+        max-width: 115px;
+        margin-bottom: 25px;
+      }
     }
   }
   &__inputContainer {
@@ -90,6 +131,11 @@
       font-weight: 400;
       font-size: 15px;
       color: #000;
+    }
+
+    @media (max-width: 675px) {
+      margin-bottom: 0;
+      max-width: none;
     }
   }
 }

@@ -3,6 +3,14 @@
     font-family: "LabGrotesque", sans-serif;
     background-color: #f1f1f1;
     color: #000000;
+
+    @media (max-width: 1375px) {
+      padding-top: 80px;
+    }
+
+    @media (max-width: 1200px) {
+      background-color: white;
+    }
   }
 
   &__intro {
@@ -14,12 +22,33 @@
     &__img {
       max-width: 530px;
       max-height: 287px;
+
+      @media (max-width: 1100px) {
+        max-width: 35%;
+      }
+
+      @media (max-width: 800px) {
+        margin-top: 25px;
+        max-width: 350px;
+      }
+
+      @media (max-width: 450px) {
+        max-width: 280px;
+      }
     }
 
     &__info {
       display: flex;
       flex-direction: column;
       margin-right: 50px;
+
+      @media (max-width: 1100px) {
+        align-items: center;
+      }
+
+      @media (max-width: 800px) {
+        margin-right: 0;
+      }
     }
 
     &__suptitle {
@@ -30,6 +59,10 @@
         margin-left: 25px;
         font-weight: 500;
         font-size: 16px;
+      }
+
+      @media (max-width: 1100px) {
+        display: none;
       }
     }
 
@@ -48,6 +81,30 @@
         bottom: -30px;
         right: 0;
         max-width: 405px;
+
+        @media (max-width: 1175px) {
+          max-width: none;
+          width: 100%;
+        }
+
+        @media (max-width: 800px) {
+          max-width: 250px;
+          left: 50%;
+          margin-left: -120px;
+        }
+      }
+
+      @media (max-width: 1100px) {
+        text-align: center;
+      }
+
+      @media (max-width: 800px) {
+        font-size: 28px;
+        display: block;
+      }
+
+      @media (max-width: 450px) {
+        margin-bottom: 55px;
       }
     }
 
@@ -55,6 +112,27 @@
       font-size: 17px;
       font-weight: 500;
       margin-bottom: 105px;
+
+      @media (max-width: 1100px) {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      @media (max-width: 500px) {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      align-items: center;
+    }
+
+    @media (max-width: 800px) {
+      flex-direction: column;
+    }
+
+    @media (max-width: 800px) {
+      padding: 40px 0;
     }
   }
 
@@ -87,10 +165,29 @@
       margin-bottom: 34px;
     }
 
+    .board {
+      width: 100%;
+    }
+
     .heard {
       position: absolute;
       bottom: -64px;
       left: 325px;
+
+      @media (max-width: 1320px) {
+        left: inherit;
+        right: 80px;
+        bottom: inherit;
+        top: 30px;
+      }
+
+      @media (max-width: 900px) {
+        max-width: 70px;
+      }
+
+      @media (max-width: 650px) {
+        display: none;
+      }
     }
 
     &__info {
@@ -103,7 +200,27 @@
         font-weight: 500;
         max-width: 695px;
         margin-bottom: 30px;
+
+        @media (max-width: 700px) {
+          font-size: 20px;
+        }
       }
+
+      @media (max-width: 880px) {
+        width: 100%;
+        padding: 0 30px;
+        align-items: center;
+
+        p {
+          text-align: center;
+          max-width: none;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    @media (max-width: 1000px) {
+      margin-bottom: 60px;
     }
   }
 
@@ -132,6 +249,15 @@
         position: absolute;
         max-width: 311px;
         bottom: -28px;
+
+        @media (max-width: 650px) {
+          max-width: 196px;
+        }
+      }
+
+      @media (max-width: 650px) {
+        font-size: 24px;
+        margin-bottom: 65px;
       }
     }
 
@@ -139,12 +265,21 @@
       display: flex;
       justify-content: space-between;
       width: 100%;
+
+      @media (max-width: 850px) {
+        flex-direction: column;
+        row-gap: 50px;
+      }
     }
 
     &__item {
       display: flex;
       flex-direction: column;
       max-width: 415px;
+
+      @media (max-width: 850px) {
+        max-width: none;
+      }
 
       &Head {
         display: flex;
@@ -161,6 +296,12 @@
           height: 71px;
           color: #FFFFFF;
           font-size: 30px;
+
+          @media (max-width: 650px) {
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+          }
         }
 
         h3 {
@@ -168,6 +309,15 @@
           font-size: 32px;
           font-weight: 500;
           margin-bottom: 0;
+
+          @media (max-width: 650px) {
+            margin-left: 26px;
+            font-size: 21px;
+          }
+        }
+
+        @media (max-width: 650px) {
+          margin-bottom: 26px;
         }
       }
 
@@ -175,6 +325,10 @@
         font-size: 19px;
         font-weight: 500;
         line-height: 32px;
+
+        @media (max-width: 650px) {
+          font-size: 16px;
+        }
       }
     }
   }

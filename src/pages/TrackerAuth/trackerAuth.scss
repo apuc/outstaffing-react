@@ -10,6 +10,10 @@
       padding-top: 100px;
     }
 
+    @media (max-width: 1000px) {
+      background-color: white;
+    }
+
     .container {
       padding-bottom: 30px;
     }
@@ -29,7 +33,21 @@
         right: 10px;
         max-width: 300px;
 
+        @media (max-width: 600px) {
+          max-width: 257px;
+          right: 0;
+        }
+
+        @media (max-width: 483px) {
+          max-width: 160px;
+          left: -175px;
+        }
       }
+    }
+
+    @media (max-width: 600px) {
+      font-size: 24px;
+      margin-bottom: 25px;
     }
   }
 }

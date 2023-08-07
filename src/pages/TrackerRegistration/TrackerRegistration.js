@@ -35,12 +35,12 @@ export const TrackerRegistration = () => {
                 <input placeholder="Имя" />
               </div>
               <div className="trackerRegistration__inputContainer">
-                <span>Придумайте пароль*</span>
-                <input placeholder="Пароль" />
-              </div>
-              <div className="trackerRegistration__inputContainer">
                 <span>Ваш email *</span>
                 <input placeholder="Email" type="email" />
+              </div>
+              <div className="trackerRegistration__inputContainer">
+                <span>Придумайте пароль*</span>
+                <input placeholder="Пароль" />
               </div>
               <div className="trackerRegistration__inputContainer">
                 <span>Повторите пароль*</span>

@@ -1,0 +1,51 @@
+.trackerSelectColumn {
+  display: none;
+
+  @media (max-width: 900px) {
+    display: flex;
+    width: 100%;
+    margin: 10px 0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 6px;
+    cursor: pointer;
+    border: 1px solid #e3e2e2;;
+    border-radius: 8px;
+    position: relative;
+
+    p {
+      color: #252c32;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+    }
+
+    img {
+      transition: all 0.3s ease;
+    }
+
+    .open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__dropDown {
+    position: absolute;
+    top: -110px;
+    background: white;
+    border-radius: 8px;
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    width: 100%;
+    z-index: 100;
+    border: 1px solid #c7c7c7;
+    left: 0;
+
+    p {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}
