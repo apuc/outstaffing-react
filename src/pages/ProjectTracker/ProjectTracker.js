@@ -639,7 +639,7 @@ export const ProjectTracker = () => {
                                 onClick={() => {
                                   if (window.innerWidth < 985) {
                                     window.location.replace(
-                                      `https://itguild.info/tracker/task/${task.id}`
+                                      `/tracker/task/${task.id}`
                                     );
                                   }
                                 }}
