@@ -634,11 +634,16 @@ export const ProjectTracker = () => {
                               }
                               onClick={(e) => openTicket(e, task)}
                             >
-                              <div className="tasks__board__item__title" onClick={() => {
-                                if (window.innerWidth < 985) {
-                                  window.location.replace(`/tracker/task/${task.id}`)
-                                }
-                              }}>
+                              <div
+                                className="tasks__board__item__title"
+                                onClick={() => {
+                                  if (window.innerWidth < 985) {
+                                    window.location.replace(
+                                      `/tracker/task/${task.id}`
+                                    );
+                                  }
+                                }}
+                              >
                                 <p className="task__board__item__title">
                                   {task.title}
                                 </p>

@@ -626,7 +626,9 @@ export const TicketFullScreen = () => {
                       }}
                     />
                   ) : (
-                    <h5 className="fullName nameFullScreen">{inputsValue.title}</h5>
+                    <h5 className="fullName nameFullScreen">
+                      {inputsValue.title}
+                    </h5>
                   )}
                   <div className="content__description">
                     {editOpen ? (
@@ -774,8 +776,7 @@ export const TicketFullScreen = () => {
               <div className="workers fullScreenWorkers">
                 <div className="workers_box task__info">
                   <p className="workers__creator">
-                    Создатель :
-                    <p>&nbsp;{taskInfo.user?.fio}</p>
+                    Создатель :<p>&nbsp;{taskInfo.user?.fio}</p>
                   </p>
 
                   {taskInfo.executor ? (
