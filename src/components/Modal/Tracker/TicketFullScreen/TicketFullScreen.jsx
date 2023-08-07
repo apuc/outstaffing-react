@@ -479,7 +479,7 @@ export const TicketFullScreen = () => {
         <div className="tracker__tabs__head">
           <Link
             to="/profile/tracker"
-            className="tab active-tab"
+            className="tab active-tab projectsTab"
             onClick={() => toggleTabs(1)}
           >
             <img src={project} alt="img" />
@@ -487,7 +487,7 @@ export const TicketFullScreen = () => {
           </Link>
           <Link
             to="/profile/tracker"
-            className="tab"
+            className="tab tasksTab"
             onClick={() => toggleTabs(2)}
           >
             <img src={tasks} alt="img" />
@@ -495,7 +495,7 @@ export const TicketFullScreen = () => {
           </Link>
           <Link
             to="/profile/tracker"
-            className="tab"
+            className="tab archiveTab"
             onClick={() => toggleTabs(3)}
           >
             <img src={archive} alt="img" />
@@ -626,7 +626,9 @@ export const TicketFullScreen = () => {
                       }}
                     />
                   ) : (
-                    <h5 className="fullName">{inputsValue.title}</h5>
+                    <h5 className="fullName nameFullScreen">
+                      {inputsValue.title}
+                    </h5>
                   )}
                   <div className="content__description">
                     {editOpen ? (
@@ -657,7 +659,7 @@ export const TicketFullScreen = () => {
                       />
                     ) : (
                       <p
-                        className="fullDescription"
+                        className="fullDescription fullScreenDescription"
                         dangerouslySetInnerHTML={{
                           __html: inputsValue.description,
                         }}
@@ -665,7 +667,7 @@ export const TicketFullScreen = () => {
                     )}
                   </div>
                   {Boolean(taskFiles.length) && (
-                    <div className="task__files">
+                    <div className="task__files filesFullScreen">
                       {taskFiles.map((file) => {
                         return (
                           <div className="taskFile" key={file.id}>
@@ -742,7 +744,7 @@ export const TicketFullScreen = () => {
                       {caseOfNum(taskFiles.length, "files")}
                     </div>
                   </div>
-                  <div className="content__input">
+                  <div className="content__input commentFullScreen">
                     <input
                       placeholder="Оставить комментарий"
                       value={inputsValue.comment}
@@ -771,11 +773,10 @@ export const TicketFullScreen = () => {
                   </div>
                 </div>
               </div>
-              <div className="workers">
+              <div className="workers fullScreenWorkers">
                 <div className="workers_box task__info">
                   <p className="workers__creator">
-                    Создатель : <br />
-                    {taskInfo.user?.fio}
+                    Создатель :<p>&nbsp;{taskInfo.user?.fio}</p>
                   </p>
 
                   {taskInfo.executor ? (

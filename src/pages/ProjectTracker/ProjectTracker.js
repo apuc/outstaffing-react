@@ -194,7 +194,7 @@ export const ProjectTracker = () => {
   }
 
   function openTicket(e, task) {
-    if (window.innerWidth < 900) {
+    if (window.innerWidth < 985) {
       return;
     }
     setSelectedTicket(task);
@@ -634,7 +634,16 @@ export const ProjectTracker = () => {
                               }
                               onClick={(e) => openTicket(e, task)}
                             >
-                              <div className="tasks__board__item__title">
+                              <div
+                                className="tasks__board__item__title"
+                                onClick={() => {
+                                  if (window.innerWidth < 985) {
+                                    window.location.replace(
+                                      `https://itguild.info/tracker/task/${task.id}`
+                                    );
+                                  }
+                                }}
+                              >
                                 <p className="task__board__item__title">
                                   {task.title}
                                 </p>
@@ -690,7 +699,7 @@ export const ProjectTracker = () => {
                                 columns={projectBoard.columns.filter(
                                   (item) => item.id !== column.id
                                 )}
-                                currentColumn={column.id}
+                                currentColumn={column}
                                 task={task}
                               />
                             </div>
