@@ -48,7 +48,6 @@
       height: 60px;
 
       @media (max-width: 650px) {
-        padding: 0 15px;
         background: none;
         justify-content: space-between;
         position: relative;
@@ -149,10 +148,7 @@
         @media (max-width: 785px) {
           row-gap: 25px;
           justify-content: center;
-        }
-
-        @media (max-width: 460px) {
-          padding: 0 15px;
+          padding: 0 15px 20px;
         }
 
         .no-projects {
@@ -557,6 +553,21 @@
             }
           }
 
+          .noProjectUsers {
+            @media (max-width: 900px) {
+              position: inherit;
+
+              .addPerson {
+                position: inherit;
+              }
+
+              p {
+                position: inherit;
+                margin-left: 14px;
+              }
+            }
+          }
+
           &__checkBox {
             margin: 0 15px 0 0;
             cursor: pointer;
@@ -678,6 +689,7 @@
             &Dropdown {
               position: absolute;
               top: 33px;
+              left: 0;
               background: white;
               border-radius: 8px;
               z-index: 5;
@@ -1023,6 +1035,11 @@
             display: flex;
             flex-direction: column;
 
+            @media (max-width: 910px) {
+              right: 10px;
+              top: 40px;
+            }
+
             &__item {
               cursor: pointer;
               display: flex;
@@ -1041,6 +1058,10 @@
             font-weight: 500;
             font-size: 25px;
             transform: scaleY(-1);
+
+            @media (max-width: 900px) {
+              transform: none;
+            }
           }
 
           &__noTasks {
@@ -1328,6 +1349,10 @@
             }
           }
         }
+
+        @media (max-width: 650px) {
+          padding-bottom: 20px;
+        }
       }
 
       &__archive {
@@ -1340,6 +1365,10 @@
         @media (max-width: 1100px) {
           flex-direction: column;
           row-gap: 20px;
+        }
+
+        @media (max-width: 650px) {
+          padding-bottom: 20px;
         }
 
         .archive {
@@ -1492,7 +1521,6 @@
             max-height: 450px;
             padding-right: 15px;
             width: 65%;
-            overflow: hidden;
 
             @media (max-width: 1100px) {
               width: 100%;
