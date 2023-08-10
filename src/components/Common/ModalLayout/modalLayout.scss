@@ -15,7 +15,7 @@
     position: relative;
     background: linear-gradient(180deg, #ffffff 0%, #ebebeb 100%);
     border-radius: 24px;
-    padding: 35px 15px 15px 15px;
+    padding: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,6 +28,10 @@
         font-size: 15px;
         font-weight: 300;
         margin: 12px 0 20px;
+      }
+
+      @media (max-width: 805px) {
+        row-gap: 0;
       }
     }
 
@@ -53,12 +57,37 @@
           input {
             height: 42px;
           }
+
+          @media (max-width: 500px) {
+            min-width: auto;
+          }
         }
 
         &__btn {
           margin: 0 auto 0 0;
           max-width: 242px;
           width: 100%;
+        }
+      }
+
+      @media (max-width: 805px) {
+        flex-direction: column;
+        width: 100%;
+
+        span {
+          text-align: center;
+          margin: 5px 0;
+        }
+
+        .invitePersonBlock {
+          row-gap: 5px;
+          &__btn {
+            margin: 5px auto;
+          }
+        }
+
+        .addPersonBtn {
+          margin: 10px auto 0;
         }
       }
     }
@@ -68,11 +97,15 @@
       flex-direction: column;
       row-gap: 10px;
       padding: 39px 10px 29px 10px;
+
+      @media (max-width: 500px) {
+        padding: 10px;
+      }
     }
   }
 
   .ck-editor {
-    width: 100%;
+    width: 100% !important;
   }
 }
 

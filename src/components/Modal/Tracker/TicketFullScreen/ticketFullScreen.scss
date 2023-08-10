@@ -84,6 +84,16 @@
       }
     }
   }
+
+  @media (max-width: 450px) {
+    .workers_box {
+      .executor {
+        p {
+          max-width: 210px !important;
+        }
+      }
+    }
+  }
 }
 
 .commentFullScreen {

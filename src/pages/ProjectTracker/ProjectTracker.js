@@ -361,13 +361,19 @@ export const ProjectTracker = () => {
                     </span> */}
                     <p>добавить колонку</p>
                   </div>
-                  <div className="tasks__head__persons">
+                  <div
+                    className={
+                      projectBoard.projectUsers?.length
+                        ? "tasks__head__persons"
+                        : "tasks__head__persons noProjectUsers"
+                    }
+                  >
                     {projectBoard.projectUsers?.length > 3 && (
                       <span className="countPersons">+1...</span>
                     )}
-                    <div className="projectPersons">
-                      {projectBoard.projectUsers?.length &&
-                        projectBoard.projectUsers.slice(0, 3).map((person) => {
+                    {Boolean(projectBoard.projectUsers?.length) && (
+                      <div className="projectPersons">
+                        {projectBoard.projectUsers.slice(0, 3).map((person) => {
                           return (
                             <img
                               key={person.user_id}
@@ -380,7 +386,8 @@ export const ProjectTracker = () => {
                             />
                           );
                         })}
-                    </div>
+                      </div>
+                    )}
                     <span
                       className="addPerson"
                       onClick={() => {
@@ -639,7 +646,7 @@ export const ProjectTracker = () => {
                                 onClick={() => {
                                   if (window.innerWidth < 985) {
                                     window.location.replace(
-                                      `https://itguild.info/tracker/task/${task.id}`
+                                      `/tracker/task/${task.id}`
                                     );
                                   }
                                 }}
