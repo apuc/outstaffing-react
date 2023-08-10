@@ -361,28 +361,33 @@ export const ProjectTracker = () => {
                     </span> */}
                     <p>добавить колонку</p>
                   </div>
-                  <div className={projectBoard.projectUsers?.length ? "tasks__head__persons" : "tasks__head__persons noProjectUsers"}>
+                  <div
+                    className={
+                      projectBoard.projectUsers?.length
+                        ? "tasks__head__persons"
+                        : "tasks__head__persons noProjectUsers"
+                    }
+                  >
                     {projectBoard.projectUsers?.length > 3 && (
                       <span className="countPersons">+1...</span>
                     )}
-                    {Boolean(projectBoard.projectUsers?.length) &&
+                    {Boolean(projectBoard.projectUsers?.length) && (
                       <div className="projectPersons">
-                        {
-                          projectBoard.projectUsers.slice(0, 3).map((person) => {
-                            return (
-                                <img
-                                    key={person.user_id}
-                                    src={
-                                      person.user?.avatar
-                                          ? urlForLocal(person.user.avatar)
-                                          : avatarMok
-                                    }
-                                    alt="avatar"
-                                />
-                            );
-                          })}
+                        {projectBoard.projectUsers.slice(0, 3).map((person) => {
+                          return (
+                            <img
+                              key={person.user_id}
+                              src={
+                                person.user?.avatar
+                                  ? urlForLocal(person.user.avatar)
+                                  : avatarMok
+                              }
+                              alt="avatar"
+                            />
+                          );
+                        })}
                       </div>
-                    }
+                    )}
                     <span
                       className="addPerson"
                       onClick={() => {
