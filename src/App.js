@@ -11,6 +11,7 @@ import { getNotification } from "@redux/outstaffingSlice";
 import AuthForPartners from "./pages/AuthForPartners/AuthForPartners";
 import AuthForDevelopers from "./pages/AuthForDevelopers/AuthForDevelopers";
 import { TrackerIntro } from "./pages/TrackerIntro/TrackerIntro"
+import { CompanyInfo } from "@pages/CompanyInfo/CompanyInfo";
 import { TrackerAuth } from "@pages/TrackerAuth/TrackerAuth";
 import { TrackerRegistration } from "@pages/TrackerRegistration/TrackerRegistration";
 import Home from "./pages/Home/Home";
@@ -63,6 +64,7 @@ const App = () => {
           <Route exact path="/tracker-intro" element={<TrackerIntro />} />
           <Route exact path="/tracker-auth" element={<TrackerAuth />} />
           <Route exact path="/tracker-registration" element={<TrackerRegistration />} />
+          <Route exact path="/company" element={<CompanyInfo />} />
 
           <Route exact path="/worker/:id" element={<FreeDevelopers />} />
           <Route

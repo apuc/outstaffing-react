@@ -1,0 +1,167 @@
+.companyInfo {
+  &__content {
+    font-family: "LabGrotesque", sans-serif;
+    background-color: #F1F1F1;
+    padding-top: 60px;
+  }
+
+  &__title {
+    font-weight: 500;
+    font-size: 48px;
+    color: #000000;
+    line-height: 48px;
+    max-width: 745px;
+    margin: 0 auto;
+    text-align: center;
+    span {
+      color: #52B709;
+      font-weight: 700;
+    }
+  }
+
+  &__subTitle {
+    max-width: 735px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .arrowElement {
+    width: 48px;
+    height: 48px;
+    background-color: #D3E4BC;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arrowDown {
+    margin: 35px auto 45px;
+    img {
+      transform: rotate(90deg);
+    }
+  }
+
+  &__info {
+    padding-top: 85px;
+
+    &__img {
+      margin: 20.5px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    &__items {
+      display: flex;
+      column-gap: 17px;
+
+      .info__item {
+        padding: 32px 40px;
+        border-radius: 12px;
+        background-color: white;
+        width: 50%;
+        font-size: 15px;
+        line-height: 22px;
+        color: #000000;
+        ul {
+          padding-left: 18px;
+        }
+      }
+    }
+
+    &__total {
+      display: flex;
+      flex-direction: column;
+      row-gap: 12px;
+      margin: 20px auto 70px;
+      max-width: 1000px;
+
+      span {
+        color: #52B709;
+        font-weight: 700;
+      }
+
+      &__title {
+        font-size: 21px;
+        line-height: 48px;
+      }
+
+      &__text {
+        display: flex;
+        flex-direction: column;
+        font-size: 18px;
+        line-height: 22px;
+        row-gap: 20px;
+      }
+    }
+  }
+
+  &__countingBlock {
+    padding: 27px 185px 26px 45px;
+    border-radius: 12px;
+    background: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    position: relative;
+
+    &__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__bottom {
+      display: flex;
+      flex-direction: column;
+      row-gap: 12px;
+
+      .titleBottom {
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 48px;
+      }
+
+      .subTitleBottom {
+        color: #000000;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+      }
+
+      span {
+        color: #52B709;
+      }
+    }
+
+    .countingBlock__info {
+      display: flex;
+      flex-direction: column;
+      row-gap: 12px;
+    }
+
+    .countingBlock {
+      &__title {
+        font-size: 18px;
+        font-weight: 500;
+        color: #000000;
+        line-height: 22px;
+      }
+
+      &__subTitle {
+        color: #6F6F6F;
+        font-size: 12px;
+        line-height: 20px;
+      }
+    }
+
+    .countingBlockImg {
+      position: absolute;
+      right: -140px;
+      top: -55px;
+    }
+  }
+}
