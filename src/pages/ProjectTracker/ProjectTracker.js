@@ -569,15 +569,14 @@ export const ProjectTracker = () => {
                           <div className="board__head__more">
                             <span
                               className="add"
-                              onClick={() =>
+                              onClick={() => {
                                 selectedTabTask(
                                   column.id,
-                                  projectBoard?.columns
-                                    ? projectBoard?.columns[0].tasks.at(-1)
-                                        .priority + 1
+                                  projectBoard?.columns && column.tasks.length
+                                    ? column.tasks.at(-1).priority + 1
                                     : 1
-                                )
-                              }
+                                );
+                              }}
                             >
                               +
                             </span>

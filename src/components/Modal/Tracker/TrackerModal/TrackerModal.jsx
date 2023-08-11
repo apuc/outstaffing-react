@@ -410,7 +410,6 @@ export const TrackerModal = ({
                   "link",
                   "bulletedList",
                   "numberedList",
-                  "blockQuote",
                 ],
                 removePlugins: ["BlockQuote"],
                 placeholder: "Описание задачи",
