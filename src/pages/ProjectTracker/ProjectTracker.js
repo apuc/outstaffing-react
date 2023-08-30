@@ -546,6 +546,7 @@ export const ProjectTracker = () => {
                   projectId={projectBoard.id}
                   projectName={projectBoard.name}
                   projectUsers={projectBoard.projectUsers}
+                  projectOwnerId={projectBoard.owner_id}
                 />
               )}
 
@@ -621,96 +622,104 @@ export const ProjectTracker = () => {
                             </div>
                           </div>
                         )}
-                        {column.tasks.map((task) => {
-                          return (
-                            <div
-                              key={task.id}
-                              className={`tasks__board__item ${
-                                taskHover[task.id] ? "task__hover" : ""
-                              }`}
-                              draggable={true}
-                              onDragStart={(e) =>
-                                dragStartHandler(e, task, column.id)
-                              }
-                              onDragOver={(e) => dragOverTaskHandler(e, task)}
-                              onDragLeave={(e) => dragLeaveTaskHandler(e)}
-                              onDragEnd={() => dragEndTaskHandler()}
-                              onDrop={(e) =>
-                                dragDropTaskHandler(e, task, column)
-                              }
-                              onClick={(e) => openTicket(e, task)}
-                            >
+                        <div className="tasksContainer">
+                          {column.tasks.map((task) => {
+                            return (
                               <div
-                                className="tasks__board__item__title"
-                                onClick={() => {
-                                  if (window.innerWidth < 985) {
-                                    window.location.replace(
-                                      `/tracker/task/${task.id}`
-                                    );
-                                  }
-                                }}
+                                key={task.id}
+                                className={`tasks__board__item ${
+                                  taskHover[task.id] ? "task__hover" : ""
+                                }`}
+                                draggable={true}
+                                onDragStart={(e) =>
+                                  dragStartHandler(e, task, column.id)
+                                }
+                                onDragOver={(e) => dragOverTaskHandler(e, task)}
+                                onDragLeave={(e) => dragLeaveTaskHandler(e)}
+                                onDragEnd={() => dragEndTaskHandler()}
+                                onDrop={(e) =>
+                                  dragDropTaskHandler(e, task, column)
+                                }
+                                onClick={(e) => openTicket(e, task)}
                               >
-                                <p className="task__board__item__title">
-                                  {task.title}
-                                </p>
-                              </div>
-                              <p
-                                dangerouslySetInnerHTML={{
-                                  __html: task.description,
-                                }}
-                                className="tasks__board__item__description"
-                              ></p>
-                              <div className="tasks__board__item__executor">
-                                <span>
-                                  {task.executor?.fio
-                                    ? task.executor?.fio
-                                    : "Исполнитель не назначен"}
-                                </span>
-                                {task.executor?.avatar && (
-                                  <img
-                                    src={
-                                      task.executor?.avatar
-                                        ? urlForLocal(task.executor?.avatar)
-                                        : avatarMok
+                                <div
+                                  className="tasks__board__item__title"
+                                  onClick={() => {
+                                    if (window.innerWidth < 985) {
+                                      window.location.replace(
+                                        `/tracker/task/${task.id}`
+                                      );
                                     }
-                                    alt="avatar"
-                                  />
-                                )}
-                              </div>
-                              <div className="tasks__board__item__deadLine">
-                                <p>Срок исполнения:</p>
-                                <span>
-                                  {task.dead_line
-                                    ? getCorrectDate(task.dead_line)
-                                    : "Не выбран"}
-                                </span>
-                              </div>
-                              <div className="tasks__board__item__info">
-                                <div className="tasks__board__item__info__more">
-                                  <img src={commentsBoard} alt="commentsImg" />
-                                  <span>
-                                    {task.comment_count}{" "}
-                                    {caseOfNum(task.comment_count, "comments")}
-                                  </span>
+                                  }}
+                                >
+                                  <p className="task__board__item__title">
+                                    {task.title}
+                                  </p>
                                 </div>
-                                <div className="tasks__board__item__info__more">
-                                  <img src={filesBoard} alt="filesImg" />
+                                <p
+                                  dangerouslySetInnerHTML={{
+                                    __html: task.description,
+                                  }}
+                                  className="tasks__board__item__description"
+                                ></p>
+                                <div className="tasks__board__item__executor">
                                   <span>
-                                    {task.files ? task.files : 0}{" "}
-                                    {caseOfNum(0, "files")}
+                                    {task.executor?.fio
+                                      ? task.executor?.fio
+                                      : "Исполнитель не назначен"}
                                   </span>
+                                  {task.executor?.avatar && (
+                                    <img
+                                      src={
+                                        task.executor?.avatar
+                                          ? urlForLocal(task.executor?.avatar)
+                                          : avatarMok
+                                      }
+                                      alt="avatar"
+                                    />
+                                  )}
                                 </div>
-                              </div>
-                              <TrackerSelectColumn
-                                columns={projectBoard.columns.filter(
-                                  (item) => item.id !== column.id
+                                {task.dead_line && (
+                                  <div className="tasks__board__item__deadLine">
+                                    <p>Срок исполнения:</p>
+                                    <span>
+                                      {getCorrectDate(task.dead_line)}
+                                    </span>
+                                  </div>
                                 )}
-                                currentColumn={column}
-                                task={task}
-                              />
-                            </div>
-                          );
-                        })}
+                                <div className="tasks__board__item__info">
+                                  <div className="tasks__board__item__info__more">
+                                    <img
+                                      src={commentsBoard}
+                                      alt="commentsImg"
+                                    />
+                                    <span>
+                                      {task.comment_count}{" "}
+                                      {caseOfNum(
+                                        task.comment_count,
+                                        "comments"
+                                      )}
+                                    </span>
+                                  </div>
+                                  <div className="tasks__board__item__info__more">
+                                    <img src={filesBoard} alt="filesImg" />
+                                    <span>
+                                      {task.files ? task.files : 0}{" "}
+                                      {caseOfNum(0, "files")}
+                                    </span>
+                                  </div>
+                                </div>
+                                <TrackerSelectColumn
+                                  columns={projectBoard.columns.filter(
+                                    (item) => item.id !== column.id
+                                  )}
+                                  currentColumn={column}
+                                  task={task}
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
                     );
                   })}

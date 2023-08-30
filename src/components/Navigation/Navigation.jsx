@@ -17,6 +17,7 @@ export const Navigation = () => {
   const [user] = useState(
     localStorage.getItem("role_status") === "18" ? "partner" : "developer"
   );
+
   const [navInfo] = useState({
     developer: [
       {

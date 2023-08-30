@@ -9,7 +9,7 @@ import {
   setToggleTab,
 } from "@redux/projectsTrackerSlice";
 
-import { urlForLocal } from "@utils/helper";
+import { caseOfNum, urlForLocal } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
@@ -295,7 +295,10 @@ export const Tracker = () => {
             <div className="archive__tasks">
               <div className="archive__title">
                 <h3>Архив задач:</h3>
-                <p>{filterCompleteTasks.length} задач(а)</p>
+                <p>
+                  {`${filterCompleteTasks.length} 
+                    ${caseOfNum(filterCompleteTasks.length, "tasks")}`}
+                </p>
                 <div className="archive__tasks__search">
                   <img src={search} alt="search" />
                   <input
@@ -354,8 +357,14 @@ export const Tracker = () => {
               <div className="archive__title">
                 <h3>Архив проектов:</h3>
                 <p>
-                  {projects.filter((project) => project.status === 10).length}{" "}
-                  проект(ов)
+                  {`${
+                    projects.filter((project) => project.status === 10).length
+                  } 
+                     ${caseOfNum(
+                       projects.filter((project) => project.status === 10)
+                         .length,
+                       "projects"
+                     )}`}
                 </p>
               </div>
               <div className="archive__tasksWrapper">

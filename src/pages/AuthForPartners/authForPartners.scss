@@ -21,11 +21,23 @@
   &__vector-black {
     top: 460px;
     right: -224px;
+
+    @media (max-width: 1200px) {
+      top: 370px;
+    }
+
+    @media (max-width: 1024px) {
+      top: 180px;
+    }
   }
 
   &__arrow {
     margin-top: 360px;
     cursor: pointer;
+
+    @media (max-width: 1200px) {
+      display: none;
+    }
   }
 
   @media (max-width: 575.98px) {
@@ -43,6 +55,10 @@
     padding-top: 30px;
     position: relative;
     padding-bottom: 310px;
+
+    @media (max-width: 1200px) {
+      display: none;
+    }
   }
 
   @media (max-width: 575.98px) {
@@ -305,7 +321,7 @@
       transform: rotate(90deg);
     }
 
-    @media (max-width: 660px) {
+    @media (max-width: 1024px) {
       margin: 15px 0;
     }
   }

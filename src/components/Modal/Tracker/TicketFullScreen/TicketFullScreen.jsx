@@ -6,6 +6,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+import { getProfileInfo } from "@redux/outstaffingSlice";
 import {
   deletePersonOnProject,
   getBoarderLoader,
@@ -22,6 +23,8 @@ import {
 } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
+
+import { useNotification } from "@hooks/useNotification";
 
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import { Footer } from "@components/Common/Footer/Footer";
@@ -73,6 +76,7 @@ export const TicketFullScreen = () => {
     minute: 0,
     seconds: 0,
   });
+  const profileInfo = useSelector(getProfileInfo);
   const [timerId, setTimerId] = useState(null);
   const [dropListOpen, setDropListOpen] = useState(false);
   const [correctProjectUsers, setCorrectProjectUsers] = useState([]);
@@ -84,6 +88,7 @@ export const TicketFullScreen = () => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [taskFiles, setTaskFiles] = useState([]);
   const [acceptModalOpen, setAcceptModalOpen] = useState(false);
+  const { showNotification } = useNotification();
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
@@ -175,7 +180,13 @@ export const TicketFullScreen = () => {
         title: inputsValue.title,
         description: inputsValue.description,
       },
-    }).then(() => {});
+    }).then(() => {
+      showNotification({
+        show: true,
+        text: "Изменения сохранены",
+        type: "success",
+      });
+    });
   }
 
   function createComment() {
@@ -988,11 +999,27 @@ export const TicketFullScreen = () => {
                     <img src={link} alt="link"></img>
                     <p onClick={copyTicketLink}>ссылка на задачу</p>
                   </div>
-                  <div onClick={archiveTask}>
+                  <div
+                    onClick={archiveTask}
+                    className={
+                      profileInfo.id_user === projectInfo.owner_id ||
+                      profileInfo.id_user === taskInfo.user_id
+                        ? ""
+                        : "disable"
+                    }
+                  >
                     <img src={archive} alt="arch"></img>
                     <p>в архив</p>
                   </div>
-                  <div onClick={deleteTask}>
+                  <div
+                    onClick={deleteTask}
+                    className={
+                      profileInfo.id_user === projectInfo.owner_id ||
+                      profileInfo.id_user === taskInfo.user_id
+                        ? ""
+                        : "disable"
+                    }
+                  >
                     <img src={del} alt="delete"></img>
                     <p>удалить</p>
                   </div>

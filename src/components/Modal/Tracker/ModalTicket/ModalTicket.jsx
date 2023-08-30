@@ -22,6 +22,7 @@ import { apiRequest } from "@api/request";
 
 import { useNotification } from "@hooks/useNotification";
 
+import FileTracker from "@components/FileTracker/FileTracker";
 import AcceptModal from "@components/Modal/AcceptModal/AcceptModal";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
@@ -52,6 +53,7 @@ export const ModalTiсket = ({
   projectId,
   projectName,
   projectUsers,
+  projectOwnerId,
 }) => {
   const dispatch = useDispatch();
   const [addSubtask, setAddSubtask] = useState(false);
@@ -120,6 +122,11 @@ export const ModalTiсket = ({
       },
     }).then((res) => {
       dispatch(setProjectBoardFetch(projectId));
+      showNotification({
+        show: true,
+        text: "Изменения сохранены",
+        type: "success",
+      });
     });
   }
 
@@ -366,19 +373,9 @@ export const ModalTiсket = ({
   }
 
   function deleteFile(file) {
-    apiRequest("/file/detach", {
-      method: "DELETE",
-      data: {
-        file_id: file.id,
-        entity_type: 2,
-        entity_id: task.id,
-        status: 0,
-      },
-    }).then(() => {
-      setTaskFiles((prevValue) =>
-        prevValue.filter((item) => item.id !== file.id)
-      );
-    });
+    setTaskFiles((prevValue) =>
+      prevValue.filter((item) => item.id !== file.id)
+    );
   }
 
   function startTimer() {
@@ -528,19 +525,12 @@ export const ModalTiсket = ({
               <div className="task__files">
                 {taskFiles.map((file) => {
                   return (
-                    <div className="taskFile" key={file.id}>
-                      <img
-                        className="imgFile"
-                        src={backendImg(file.file?.url)}
-                        alt="img"
-                      />
-                      <div
-                        className="deleteFile"
-                        onClick={() => deleteFile(file)}
-                      >
-                        <img src={close} alt="delete" />
-                      </div>
-                    </div>
+                    <FileTracker
+                      key={file.id}
+                      file={file}
+                      setDeletedTask={deleteFile}
+                      taskId={task.id}
+                    />
                   );
                 })}
               </div>
@@ -833,11 +823,27 @@ export const ModalTiсket = ({
               <img src={link}></img>
               <p onClick={copyTicketLink}>ссылка на задачу</p>
             </div>
-            <div onClick={archiveTask}>
+            <div
+              onClick={archiveTask}
+              className={
+                profileInfo.id_user === projectOwnerId ||
+                profileInfo.id_user === task.user_id
+                  ? ""
+                  : "disable"
+              }
+            >
               <img src={archive}></img>
               <p>в архив</p>
             </div>
-            <div onClick={deleteTask}>
+            <div
+              onClick={deleteTask}
+              className={
+                profileInfo.id_user === projectOwnerId ||
+                profileInfo.id_user === task.user_id
+                  ? ""
+                  : "disable"
+              }
+            >
               <img src={del}></img>
               <p>удалить</p>
             </div>

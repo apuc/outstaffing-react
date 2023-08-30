@@ -32,6 +32,15 @@
       line-height: 22px;
       color: #000000;
     }
+
+    @media (max-width: 1024px) {
+      text-align: center;
+      margin-top: 20px;
+
+      p {
+        margin-top: 15px;
+      }
+    }
   }
 
   .slick-list {
