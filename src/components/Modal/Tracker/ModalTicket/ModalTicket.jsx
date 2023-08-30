@@ -120,6 +120,11 @@ export const ModalTiсket = ({
       },
     }).then((res) => {
       dispatch(setProjectBoardFetch(projectId));
+      showNotification({
+        show: true,
+        text: "Изменения сохранены",
+        type: "success",
+      });
     });
   }
 

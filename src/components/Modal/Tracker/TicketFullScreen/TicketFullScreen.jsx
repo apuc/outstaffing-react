@@ -21,6 +21,8 @@ import {
   urlForLocal,
 } from "@utils/helper";
 
+import { useNotification } from "@hooks/useNotification";
+
 import { apiRequest } from "@api/request";
 
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
@@ -84,6 +86,7 @@ export const TicketFullScreen = () => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [taskFiles, setTaskFiles] = useState([]);
   const [acceptModalOpen, setAcceptModalOpen] = useState(false);
+  const { showNotification } = useNotification();
 
   useEffect(() => {
     apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
@@ -175,7 +178,13 @@ export const TicketFullScreen = () => {
         title: inputsValue.title,
         description: inputsValue.description,
       },
-    }).then(() => {});
+    }).then(() => {
+      showNotification({
+        show: true,
+        text: "Изменения сохранены",
+        type: "success",
+      });
+    });
   }
 
   function createComment() {
