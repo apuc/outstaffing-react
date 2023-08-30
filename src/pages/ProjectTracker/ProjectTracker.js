@@ -621,7 +621,7 @@ export const ProjectTracker = () => {
                             </div>
                           </div>
                         )}
-                        <div className='tasksContainer'>
+                        <div className="tasksContainer">
                           {column.tasks.map((task) => {
                             return (
                               <div
@@ -678,20 +678,26 @@ export const ProjectTracker = () => {
                                     />
                                   )}
                                 </div>
-                                {task.dead_line &&
-                                    <div className="tasks__board__item__deadLine">
-                                      <p>Срок исполнения:</p>
-                                      <span>
-                                        {getCorrectDate(task.dead_line)}
-                                      </span>
-                                    </div>
-                                }
+                                {task.dead_line && (
+                                  <div className="tasks__board__item__deadLine">
+                                    <p>Срок исполнения:</p>
+                                    <span>
+                                      {getCorrectDate(task.dead_line)}
+                                    </span>
+                                  </div>
+                                )}
                                 <div className="tasks__board__item__info">
                                   <div className="tasks__board__item__info__more">
-                                    <img src={commentsBoard} alt="commentsImg" />
+                                    <img
+                                      src={commentsBoard}
+                                      alt="commentsImg"
+                                    />
                                     <span>
                                       {task.comment_count}{" "}
-                                      {caseOfNum(task.comment_count, "comments")}
+                                      {caseOfNum(
+                                        task.comment_count,
+                                        "comments"
+                                      )}
                                     </span>
                                   </div>
                                   <div className="tasks__board__item__info__more">
