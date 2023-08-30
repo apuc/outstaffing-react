@@ -13,6 +13,8 @@ import {
   setToggleTab,
 } from "@redux/projectsTrackerSlice";
 
+import { getProfileInfo } from "@redux/outstaffingSlice";
+
 import {
   backendImg,
   caseOfNum,
@@ -75,6 +77,7 @@ export const TicketFullScreen = () => {
     minute: 0,
     seconds: 0,
   });
+  const profileInfo = useSelector(getProfileInfo);
   const [timerId, setTimerId] = useState(null);
   const [dropListOpen, setDropListOpen] = useState(false);
   const [correctProjectUsers, setCorrectProjectUsers] = useState([]);
@@ -997,11 +1000,14 @@ export const TicketFullScreen = () => {
                     <img src={link} alt="link"></img>
                     <p onClick={copyTicketLink}>ссылка на задачу</p>
                   </div>
-                  <div onClick={archiveTask}>
+                  <div onClick={archiveTask}
+                       className={(profileInfo.id_user === projectInfo.owner_id) || (profileInfo.id_user === taskInfo.user_id) ? '' : 'disable'}>
                     <img src={archive} alt="arch"></img>
                     <p>в архив</p>
                   </div>
-                  <div onClick={deleteTask}>
+                  <div onClick={deleteTask}
+                       className={(profileInfo.id_user === projectInfo.owner_id) || (profileInfo.id_user === taskInfo.user_id) ? '' : 'disable'}
+                  >
                     <img src={del} alt="delete"></img>
                     <p>удалить</p>
                   </div>

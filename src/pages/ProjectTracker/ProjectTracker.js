@@ -546,6 +546,7 @@ export const ProjectTracker = () => {
                   projectId={projectBoard.id}
                   projectName={projectBoard.name}
                   projectUsers={projectBoard.projectUsers}
+                  projectOwnerId={projectBoard.owner_id}
                 />
               )}
 

@@ -367,6 +367,7 @@
       }
 
       .taskFile {
+        cursor: pointer;
         position: relative;
         .imgFile {
           max-width: 170px;
@@ -398,6 +399,26 @@
             width: 12px;
             height: 12px;
           }
+        }
+      }
+
+      .ImgOpened {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        background-color: rgba(0, 0, 0, 0.2);
+
+        .imgFile {
+          width: 90vw;
+          height: 90vh;
+          max-width: none;
+          max-height: none;
         }
       }
     }
