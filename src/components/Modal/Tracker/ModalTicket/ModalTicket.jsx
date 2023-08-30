@@ -22,10 +22,10 @@ import { apiRequest } from "@api/request";
 
 import { useNotification } from "@hooks/useNotification";
 
+import FileTracker from "@components/FileTracker/FileTracker";
 import AcceptModal from "@components/Modal/AcceptModal/AcceptModal";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
-import FileTracker from "@components/FileTracker/FileTracker";
 
 import archive from "assets/icons/archive.svg";
 import arrow from "assets/icons/arrows/arrowStart.png";
@@ -53,7 +53,7 @@ export const ModalTiсket = ({
   projectId,
   projectName,
   projectUsers,
-  projectOwnerId
+  projectOwnerId,
 }) => {
   const dispatch = useDispatch();
   const [addSubtask, setAddSubtask] = useState(false);
@@ -373,9 +373,9 @@ export const ModalTiсket = ({
   }
 
   function deleteFile(file) {
-     setTaskFiles((prevValue) =>
-        prevValue.filter((item) => item.id !== file.id)
-      );
+    setTaskFiles((prevValue) =>
+      prevValue.filter((item) => item.id !== file.id)
+    );
   }
 
   function startTimer() {
@@ -525,12 +525,12 @@ export const ModalTiсket = ({
               <div className="task__files">
                 {taskFiles.map((file) => {
                   return (
-                      <FileTracker
-                        key={file.id}
-                        file={file}
-                        setDeletedTask={deleteFile}
-                        taskId={task.id}
-                      />
+                    <FileTracker
+                      key={file.id}
+                      file={file}
+                      setDeletedTask={deleteFile}
+                      taskId={task.id}
+                    />
                   );
                 })}
               </div>
@@ -823,12 +823,27 @@ export const ModalTiсket = ({
               <img src={link}></img>
               <p onClick={copyTicketLink}>ссылка на задачу</p>
             </div>
-            <div onClick={archiveTask} className={(profileInfo.id_user === projectOwnerId) || (profileInfo.id_user === task.user_id) ? '' : 'disable'}>
+            <div
+              onClick={archiveTask}
+              className={
+                profileInfo.id_user === projectOwnerId ||
+                profileInfo.id_user === task.user_id
+                  ? ""
+                  : "disable"
+              }
+            >
               <img src={archive}></img>
               <p>в архив</p>
             </div>
-            <div onClick={deleteTask} className={
-              (profileInfo.id_user === projectOwnerId) || (profileInfo.id_user === task.user_id) ? '' : 'disable'}>
+            <div
+              onClick={deleteTask}
+              className={
+                profileInfo.id_user === projectOwnerId ||
+                profileInfo.id_user === task.user_id
+                  ? ""
+                  : "disable"
+              }
+            >
               <img src={del}></img>
               <p>удалить</p>
             </div>

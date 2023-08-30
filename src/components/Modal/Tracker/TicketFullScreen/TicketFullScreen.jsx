@@ -6,14 +6,13 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+import { getProfileInfo } from "@redux/outstaffingSlice";
 import {
   deletePersonOnProject,
   getBoarderLoader,
   modalToggle,
   setToggleTab,
 } from "@redux/projectsTrackerSlice";
-
-import { getProfileInfo } from "@redux/outstaffingSlice";
 
 import {
   backendImg,
@@ -1000,13 +999,26 @@ export const TicketFullScreen = () => {
                     <img src={link} alt="link"></img>
                     <p onClick={copyTicketLink}>ссылка на задачу</p>
                   </div>
-                  <div onClick={archiveTask}
-                       className={(profileInfo.id_user === projectInfo.owner_id) || (profileInfo.id_user === taskInfo.user_id) ? '' : 'disable'}>
+                  <div
+                    onClick={archiveTask}
+                    className={
+                      profileInfo.id_user === projectInfo.owner_id ||
+                      profileInfo.id_user === taskInfo.user_id
+                        ? ""
+                        : "disable"
+                    }
+                  >
                     <img src={archive} alt="arch"></img>
                     <p>в архив</p>
                   </div>
-                  <div onClick={deleteTask}
-                       className={(profileInfo.id_user === projectInfo.owner_id) || (profileInfo.id_user === taskInfo.user_id) ? '' : 'disable'}
+                  <div
+                    onClick={deleteTask}
+                    className={
+                      profileInfo.id_user === projectInfo.owner_id ||
+                      profileInfo.id_user === taskInfo.user_id
+                        ? ""
+                        : "disable"
+                    }
                   >
                     <img src={del} alt="delete"></img>
                     <p>удалить</p>
