@@ -6,11 +6,11 @@ import "slick-carousel/slick/slick.css";
 
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 
+import avatarMockFirst from "assets/images/mock/avatarMoсk3.png";
+import avatarMockSecond from "assets/images/mock/avatarMoсk4.png";
+import avatarMockThird from "assets/images/mock/avatarMoсk5.png";
+import avatarMockFourth from "assets/images/mock/avatarMoсk6.png";
 import mockWorker from "assets/images/mock/mokPerson.png";
-import avatarMockFirst from "assets/images/mock/avatarMoсk3.png"
-import avatarMockSecond from "assets/images/mock/avatarMoсk4.png"
-import avatarMockThird from "assets/images/mock/avatarMoсk5.png"
-import avatarMockFourth from "assets/images/mock/avatarMoсk6.png"
 
 import "./sliderWorkers.scss";
 

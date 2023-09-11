@@ -12,8 +12,8 @@ import { Loader } from "@components/Common/Loader/Loader";
 import ModalErrorLogin from "@components/Modal/ModalErrorLogin/ModalErrorLogin";
 import ModalRegistration from "@components/Modal/ModalRegistration/ModalRegistration";
 
-import authHead from "assets/icons/authHead.svg"
-import eyePassword from "assets/icons/passwordIcon.svg"
+import authHead from "assets/icons/authHead.svg";
+import eyePassword from "assets/icons/passwordIcon.svg";
 
 import "./authBox.scss";
 
@@ -28,7 +28,7 @@ export const AuthBox = ({ title }) => {
   const [error, setError] = useState(null);
   const [modalError, setModalError] = useState(false);
   const [modalReg, setModalReg] = useState(false);
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem("auth_token")) {
@@ -75,7 +75,7 @@ export const AuthBox = ({ title }) => {
   return (
     <div className="auth-box">
       <h2 className="auth-box__header">
-        Вход <img src={authHead} alt='authImg' />
+        Вход <img src={authHead} alt="authImg" />
       </h2>
       <div className="auth-box__title">
         <span>{title}</span>
@@ -85,14 +85,19 @@ export const AuthBox = ({ title }) => {
         <input id="login" type="text" name="username" placeholder="Логин" />
 
         <label htmlFor="password">Ваш пароль*</label>
-        <div className='inputWrapper'>
+        <div className="inputWrapper">
           <input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="Пароль"
+            id="password"
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Пароль"
           />
-          <img onClick={() => setShowPassword(!showPassword)} className='eye' src={eyePassword} alt='eye' />
+          <img
+            onClick={() => setShowPassword(!showPassword)}
+            className="eye"
+            src={eyePassword}
+            alt="eye"
+          />
         </div>
 
         {error && (
@@ -115,19 +120,17 @@ export const AuthBox = ({ title }) => {
           >
             {isLoading ? <Loader /> : "Войти"}
           </button>
-          <span className="auth-box__reset">
-            Вспомнить пароль
-          </span>
+          <span className="auth-box__reset">Вспомнить пароль</span>
 
           <ModalRegistration active={modalReg} setActive={setModalReg} />
         </div>
         <p className="auth-box__registration">
           У вас еще нет аккаунта? &nbsp;
           <span
-              onClick={(e) => {
-                e.preventDefault();
-                setModalReg(true);
-              }}
+            onClick={(e) => {
+              e.preventDefault();
+              setModalReg(true);
+            }}
           >
             Зарегистрироваться
           </span>

@@ -30,7 +30,9 @@ export const AuthHeader = () => {
                     e.preventDefault();
                     scrollToForm();
                   }}
-                >Кабинет разработчика</a>
+                >
+                  Кабинет разработчика
+                </a>
               </li>
               <li>
                 <a href="#">Школа</a>
