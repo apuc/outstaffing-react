@@ -7,6 +7,10 @@ import "slick-carousel/slick/slick.css";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 
 import mockWorker from "assets/images/mock/mokPerson.png";
+import avatarMockFirst from "assets/images/mock/avatarMoсk3.png"
+import avatarMockSecond from "assets/images/mock/avatarMoсk4.png"
+import avatarMockThird from "assets/images/mock/avatarMoсk5.png"
+import avatarMockFourth from "assets/images/mock/avatarMoсk6.png"
 
 import "./sliderWorkers.scss";
 
@@ -17,19 +21,19 @@ export const SliderWorkers = ({ title, titleInfo, subTitle }) => {
       skils: "React / Vue Front end, Middle разработчик",
     },
     {
-      avatar: mockWorker,
+      avatar: avatarMockFirst,
       skils: "Vue / React Front end, Senior разработчик",
     },
     {
-      avatar: mockWorker,
+      avatar: avatarMockSecond,
       skils: "NodeJs  Fullstack, Middle разработчик",
     },
     {
-      avatar: mockWorker,
+      avatar: avatarMockThird,
       skils: "React / Vue Front end, Middle разработчик",
     },
     {
-      avatar: mockWorker,
+      avatar: avatarMockFourth,
       skils: "React / PHP Fullstack, Middle разработчик",
     },
   ]);

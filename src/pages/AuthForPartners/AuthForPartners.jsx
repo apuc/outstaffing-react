@@ -67,7 +67,7 @@ const AuthForPartners = () => {
           <div className="row">
             <div className="col-12 col-xl-6">
               <div className="auth-partners__box">
-                <AuthBox title="Для партнёров" />
+                <AuthBox title="для партнёров" />
               </div>
             </div>
             <div className="col-xl-2">
@@ -92,7 +92,7 @@ const AuthForPartners = () => {
                     <div>
                       {/* <img className='auth-specialists} src={specialists} alt="" /> */}
                       <p className="auth-partners__specialists">
-                        20 Специалистов
+                        300 Специалистов
                       </p>
                     </div>
                   </div>

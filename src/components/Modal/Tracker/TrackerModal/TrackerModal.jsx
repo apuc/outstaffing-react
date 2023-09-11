@@ -133,13 +133,13 @@ export const TrackerModal = ({
             dispatch(setProjectBoardFetch(projectBoard.id));
             setActive(false);
             setValueTiket("");
-            setDescriptionTicket("Описание задачи");
+            setDescriptionTicket("");
             setSelectedExecutorTask("Выберите исполнителя задачи");
           });
         } else {
           setActive(false);
           setValueTiket("");
-          setDescriptionTicket("Описание задачи");
+          setDescriptionTicket("");
           dispatch(setProjectBoardFetch(projectBoard.id));
         }
         showNotification({

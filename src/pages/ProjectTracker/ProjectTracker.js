@@ -574,7 +574,7 @@ export const ProjectTracker = () => {
                                 selectedTabTask(
                                   column.id,
                                   projectBoard?.columns && column.tasks.length
-                                    ? column.tasks.at(-1).priority + 1
+                                    ? column.tasks[0].priority - 1
                                     : 1
                                 );
                               }}

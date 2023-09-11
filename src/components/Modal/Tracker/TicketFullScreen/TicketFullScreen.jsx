@@ -173,6 +173,13 @@ export const TicketFullScreen = () => {
   }
 
   function editTask() {
+    if (!inputsValue.title || !inputsValue.description) {
+      return showNotification({
+        show: true,
+        text: "Заполните поля",
+        type: "error",
+      });
+    }
     apiRequest("/task/update-task", {
       method: "PUT",
       data: {
@@ -186,6 +193,7 @@ export const TicketFullScreen = () => {
         text: "Изменения сохранены",
         type: "success",
       });
+      setEditOpen(!editOpen);
     });
   }
 
@@ -985,7 +993,6 @@ export const TicketFullScreen = () => {
                     className={editOpen ? "edit" : ""}
                     onClick={() => {
                       if (editOpen) {
-                        setEditOpen(!editOpen);
                         editTask();
                       } else {
                         setEditOpen(!editOpen);
