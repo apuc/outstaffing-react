@@ -18,7 +18,9 @@ export const ModalLayout = ({
     >
       <div
         className={
-          styles ? `modal-layout__content ${styles}` : `modal-layout__content ${type}`
+          styles
+            ? `modal-layout__content ${styles}`
+            : `modal-layout__content ${type}`
         }
         onClick={(e) => e.stopPropagation()}
       >
