@@ -2,7 +2,7 @@
   z-index: 9;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.11);
+  background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
   top: 0;
   left: 0;
@@ -102,6 +102,11 @@
         padding: 10px;
       }
     }
+  }
+
+  .createTiketProject {
+    padding: 0;
+    background: white;
   }
 
   .ck-editor {
