@@ -12,7 +12,8 @@ import { Loader } from "@components/Common/Loader/Loader";
 import ModalErrorLogin from "@components/Modal/ModalErrorLogin/ModalErrorLogin";
 import ModalRegistration from "@components/Modal/ModalRegistration/ModalRegistration";
 
-import ellipse from "assets/icons/ellipse.png";
+import authHead from "assets/icons/authHead.svg";
+import eyePassword from "assets/icons/passwordIcon.svg";
 
 import "./authBox.scss";
 
@@ -27,6 +28,7 @@ export const AuthBox = ({ title }) => {
   const [error, setError] = useState(null);
   const [modalError, setModalError] = useState(false);
   const [modalReg, setModalReg] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem("auth_token")) {
@@ -73,23 +75,30 @@ export const AuthBox = ({ title }) => {
   return (
     <div className="auth-box">
       <h2 className="auth-box__header">
-        Войти в <span>систему</span>
+        Вход <img src={authHead} alt="authImg" />
       </h2>
       <div className="auth-box__title">
-        <img src={ellipse} alt="." />
         <span>{title}</span>
       </div>
       <form ref={ref} className="auth-box__form">
-        <label htmlFor="login">Ваш логин:</label>
+        <label htmlFor="login">Ваш email *</label>
         <input id="login" type="text" name="username" placeholder="Логин" />
 
-        <label htmlFor="password">Пароль:</label>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          placeholder="Пароль"
-        />
+        <label htmlFor="password">Ваш пароль*</label>
+        <div className="inputWrapper">
+          <input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Пароль"
+          />
+          <img
+            onClick={() => setShowPassword(!showPassword)}
+            className="eye"
+            src={eyePassword}
+            alt="eye"
+          />
+        </div>
 
         {error && (
           <div className="auth-box__form-error">
@@ -111,18 +120,21 @@ export const AuthBox = ({ title }) => {
           >
             {isLoading ? <Loader /> : "Войти"}
           </button>
+          <span className="auth-box__reset">Вспомнить пароль</span>
 
           <ModalRegistration active={modalReg} setActive={setModalReg} />
-          <button
-            className="auth-box__form-btn--role auth-box__auth-link"
+        </div>
+        <p className="auth-box__registration">
+          У вас еще нет аккаунта? &nbsp;
+          <span
             onClick={(e) => {
               e.preventDefault();
               setModalReg(true);
             }}
           >
-            Регистрация
-          </button>
-        </div>
+            Зарегистрироваться
+          </span>
+        </p>
       </form>
     </div>
   );

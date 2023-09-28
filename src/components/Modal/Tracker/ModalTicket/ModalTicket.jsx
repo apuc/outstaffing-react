@@ -113,6 +113,13 @@ export const ModalTiсket = ({
   }
 
   function editTask() {
+    if (!inputsValue.title || !inputsValue.description) {
+      return showNotification({
+        show: true,
+        text: "Заполните поля",
+        type: "error",
+      });
+    }
     apiRequest("/task/update-task", {
       method: "PUT",
       data: {
@@ -121,6 +128,7 @@ export const ModalTiсket = ({
         description: inputsValue.description,
       },
     }).then((res) => {
+      setEditOpen(!editOpen);
       dispatch(setProjectBoardFetch(projectId));
       showNotification({
         show: true,
@@ -809,7 +817,6 @@ export const ModalTiсket = ({
               className={editOpen ? "edit" : ""}
               onClick={() => {
                 if (editOpen) {
-                  setEditOpen(!editOpen);
                   editTask();
                 } else {
                   setEditOpen(!editOpen);

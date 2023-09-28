@@ -2,7 +2,7 @@
   z-index: 9;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.11);
+  background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
   top: 0;
   left: 0;
@@ -126,12 +126,24 @@
       }
 
       .taskDescription {
-        display: -webkit-box;
-        max-width: 550px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        -webkit-line-clamp: 7;
-        -webkit-box-orient: vertical;
+        max-height: 150px;
+        overflow-y: auto;
+        padding-right: 10px;
+
+        &::-webkit-scrollbar {
+          width: 4px;
+          border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: #cbd9f9;
+          border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #c5c0c6;
+          border-radius: 10px;
+        }
       }
 
       .fullName {

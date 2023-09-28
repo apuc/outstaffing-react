@@ -3,7 +3,7 @@
   z-index: 9;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.11);
+  background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
   top: 0;
   left: 0;
@@ -145,7 +145,7 @@
       align-items: center;
 
       span {
-        max-width: 205px;
+        max-width: 250px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -162,9 +162,9 @@
 
     &__dropDown {
       position: absolute;
-      background: white;
+      background: #F1F1F1;
       border-radius: 8px;
-      top: 50px;
+      top: 55px;
       left: 0;
       width: 100%;
       padding: 9.5px 12px;
@@ -273,6 +273,235 @@
   .open {
     .arrow {
       transform: rotate(180deg);
+    }
+  }
+
+  .createTaskHead {
+    width: 100%;
+    padding: 30px 42px 18px;
+    display: flex;
+    column-gap: 9.5px;
+    align-items: center;
+    background: #F1F1F1;
+    border-radius: 22px 22px 0 0;
+
+    span {
+      font-size: 15px;
+      color: #000000;
+    }
+
+    &__selectColumn {
+      display: flex;
+      column-gap: 8px;
+      cursor: pointer;
+
+      span {
+        padding: 3.75px 16.25px 5.75px;
+        color: #FFFFFF;
+        font-size: 12px;
+        font-weight: 500;
+        background: #52B709;
+        border-radius: 12px;
+      }
+    }
+  }
+
+  .createTaskBody {
+    padding: 13px 43px 46px 42px;
+    display: flex;
+    column-gap: 55px;
+
+    &__left {
+      display: flex;
+      flex-direction: column;
+      h4 {
+        color: #263238 !important;
+        font-size: 16px;
+        line-height: 19.2px;
+        margin-bottom: 25px;
+      }
+
+      .input-container {
+        background: #F1F1F1;
+        margin: 0 0 17px;
+        width: 393px;
+        height: 47px;
+
+        input {
+          background: #F1F1F1;
+          color: #000000;
+          font-size: 15px;
+          line-height: 18px;
+          font-weight: 300;
+        }
+      }
+
+      .ck-editor {
+        border: 1px solid #DDDDDD;
+        border-radius: 8px;
+      }
+
+      .ck-editor__editable.ck-rounded-corners {
+        min-height: 110px;
+        max-height: 110px;
+      }
+    }
+
+    &__right {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: end;
+
+      &__owner {
+        display: flex;
+        align-items: center;
+        column-gap: 9.5px;
+        margin-bottom: 30px;
+        p {
+          color: #2D4A17;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 32px;
+        }
+
+        img {
+          width: 22px;
+          height: 22px;
+        }
+      }
+
+      .select__executor {
+        background: #F1F1F1;
+        width: 393px;
+        height: 47px;
+        font-weight: 300;
+        line-height: 18px;
+        font-size: 15px;
+        margin-bottom: 17.5px;
+        z-index: 100;
+      }
+
+      .button-add {
+        margin: 0;
+        width: 185px;
+        height: 42px;
+        color: #FFFFFF;
+        font-weight: 500;
+        font-size: 16px;
+      }
+
+      &__deadLine {
+        display: flex;
+        align-items: center;
+        column-gap: 18px;
+        font-weight: 300;
+        line-height: 18px;
+        font-size: 15px;
+        position: relative;
+        margin-bottom: 22px;
+
+        span {
+          color: #6F6F6F;
+        }
+
+        p {
+          cursor: pointer;
+          color: #000000;
+        }
+
+        .datePicker {
+          visibility: hidden;
+          height: 0;
+          padding: 0;
+          width: 0;
+          position: absolute;
+        }
+
+        .react-datepicker-wrapper {
+          position: absolute;
+          top: -15px;
+          max-width: 120px;
+          right: 0;
+        }
+
+        .react-datepicker {
+          border: 1px solid #e8ede4;
+          border-radius: 8px;
+        }
+
+        .react-datepicker-popper {
+          top: 20px !important;
+          left: -110px !important;
+          z-index: 10;
+        }
+
+        .react-datepicker__current-month {
+          font-size: 18px;
+          font-family: "LabGrotesque", sans-serif;
+          text-transform: capitalize;
+          padding-bottom: 8px;
+        }
+
+        .react-datepicker__navigation-icon {
+          width: 20px;
+          height: 20px;
+          border-radius: 50px;
+          border: 2px solid #cbd1d2;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 0;
+
+          &:hover {
+            background-color: white;
+          }
+        }
+
+        .react-datepicker__navigation-icon--next::before {
+          border-width: 2px 2px 0 0;
+          top: auto;
+          left: 4px;
+          height: 6px;
+          width: 6px;
+        }
+
+        .react-datepicker__navigation-icon--previous::before {
+          border-width: 2px 2px 0 0;
+          top: 5px;
+          left: 7px;
+          height: 6px;
+          width: 6px;
+        }
+
+        .react-datepicker__header {
+          padding: 5px 0 10px;
+          border-bottom: 1px solid #baacc0;
+        }
+
+        .react-datepicker__day {
+          font-size: 16px;
+          width: 35px;
+          font-family: "LabGrotesque", sans-serif;
+          border-radius: 50px;
+          padding: 7px;
+        }
+
+        .react-datepicker__day-name {
+          font-size: 18px;
+          width: 35px;
+          font-weight: 500;
+          font-family: "LabGrotesque", sans-serif;
+        }
+
+        .react-datepicker__triangle {
+          left: 85px !important;
+
+          &:before {
+            border: 1px solid #e8ede4;
+          }
+        }
+      }
     }
   }
 }

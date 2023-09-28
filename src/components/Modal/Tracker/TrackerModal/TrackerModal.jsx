@@ -1,6 +1,9 @@
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ru from "date-fns/locale/ru";
 import React, { useEffect, useState } from "react";
+import DatePicker, { registerLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getProfileInfo } from "@redux/outstaffingSlice";
@@ -19,19 +22,25 @@ import {
   setProjectBoardFetch,
 } from "@redux/projectsTrackerSlice";
 
-import { urlForLocal } from "@utils/helper";
+import { getCorrectRequestDate, urlForLocal } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
 import { useNotification } from "@hooks/useNotification";
 
+import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 
+import arrowCreateTask from "assets/icons/arrows/arrowCreateTask.svg";
+import arrowRight from "assets/icons/arrows/arrowRightCreateTask.svg";
 import arrowDown from "assets/icons/arrows/selectArrow.png";
+import calendarImg from "assets/icons/createTaskCalendar.svg";
 import avatarMok from "assets/images/avatarMok.png";
 
 import "./trackerModal.scss";
+
+registerLocale("ru", ru);
 
 export const TrackerModal = ({
   active,
@@ -70,6 +79,9 @@ export const TrackerModal = ({
   const [selectColumnPriorityOpen, setSelectColumnPriorityOpen] =
     useState(false);
   const { showNotification } = useNotification();
+  const [deadLineDate, setDeadLineDate] = useState("");
+  const [datePickerOpen, setDatePickerOpen] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
 
   function createTab() {
     if (!valueColumn) {
@@ -113,6 +125,7 @@ export const TrackerModal = ({
         user_id: localStorage.getItem("id"),
         column_id: selectedTab,
         priority: priorityTask,
+        dead_line: deadLineDate ? getCorrectRequestDate(deadLineDate) : "",
       },
     }).then((res) => {
       if (res.status === 500) {
@@ -133,15 +146,16 @@ export const TrackerModal = ({
             dispatch(setProjectBoardFetch(projectBoard.id));
             setActive(false);
             setValueTiket("");
-            setDescriptionTicket("Описание задачи");
+            setDescriptionTicket("");
             setSelectedExecutorTask("Выберите исполнителя задачи");
           });
         } else {
           setActive(false);
           setValueTiket("");
-          setDescriptionTicket("Описание задачи");
+          setDescriptionTicket("");
           dispatch(setProjectBoardFetch(projectBoard.id));
         }
+        setDeadLineDate("");
         showNotification({
           show: true,
           text: "Задача создана",
@@ -296,6 +310,7 @@ export const TrackerModal = ({
     <ModalLayout
       active={active}
       setActive={setActive}
+      type={modalType}
       // onClick={() => {
       //   setSelectWorkersOpen(false);
       // }}
@@ -388,93 +403,140 @@ export const TrackerModal = ({
       {modalType === "createTiketProject" && (
         <>
           <div className="title-project">
-            <h4>Введите название и описание задачи</h4>
-            <div className="input-container">
-              <input
-                maxLength="100"
-                className="name-project"
-                value={valueTiket}
-                onChange={(e) => setValueTiket(e.target.value)}
-                placeholder="Название задачи"
-              />
-            </div>
-            <CKEditor
-              editor={ClassicEditor}
-              data={descriptionTicket}
-              config={{
-                toolbar: [
-                  "heading",
-                  "|",
-                  "bold",
-                  "italic",
-                  "link",
-                  "bulletedList",
-                  "numberedList",
-                ],
-                removePlugins: ["BlockQuote"],
-                placeholder: "Описание задачи",
-              }}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                setDescriptionTicket(data);
-              }}
-            />
-            <div
-              onClick={() => setSelectExecutorTaskOpen(!selectExecutorTaskOpen)}
-              className={
-                selectExecutorTaskOpen
-                  ? "select__executor select__executor--open"
-                  : "select__executor"
-              }
-            >
-              <div className="selected__executor">
-                {selectedExecutorTask.user_id ? (
-                  <>
-                    <span>{selectedExecutorTask.user.fio}</span>
-                    <img
-                      className="avatar"
-                      src={urlForLocal(selectedExecutorTask.user.avatar)}
-                      alt="avatar"
-                    />
-                  </>
-                ) : (
-                  <span>{selectedExecutorTask}</span>
-                )}
+            <div className="createTaskHead">
+              <span>Этап</span>
+              <div className="createTaskHead__selectColumn">
+                <span>Backlog</span>
+                <img src={arrowCreateTask} alt="arrow" />
               </div>
-              <img className="arrow" src={arrowDown} alt="arrow" />
-              {selectExecutorTaskOpen && (
-                <div className="select__executor__dropDown">
-                  {correctProjectUsers.length ? (
-                    correctProjectUsers.map((person) => {
-                      return (
-                        <div
-                          onClick={() => setSelectedExecutorTask(person)}
-                          className="executor"
-                          key={person.user_id}
-                        >
-                          <span>{person.user.fio}</span>
-                          <img
-                            className="avatar"
-                            src={
-                              person.user?.avatar
-                                ? urlForLocal(person.user.avatar)
-                                : avatarMok
-                            }
-                            alt="avatar"
-                          />
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <span>Нет пользователей</span>
+            </div>
+            <div className="createTaskBody">
+              <div className="createTaskBody__left">
+                <h4>Введите название и описание задачи</h4>
+                <div className="input-container">
+                  <input
+                    maxLength="100"
+                    className="name-project"
+                    value={valueTiket}
+                    onChange={(e) => setValueTiket(e.target.value)}
+                    placeholder="Название задачи"
+                  />
+                </div>
+                <CKEditor
+                  editor={ClassicEditor}
+                  data={descriptionTicket}
+                  config={{
+                    toolbar: [
+                      "heading",
+                      "|",
+                      "bold",
+                      "italic",
+                      "link",
+                      "bulletedList",
+                      "numberedList",
+                    ],
+                    removePlugins: ["BlockQuote"],
+                    placeholder: "Описание задачи",
+                  }}
+                  onChange={(event, editor) => {
+                    const data = editor.getData();
+                    setDescriptionTicket(data);
+                  }}
+                />
+              </div>
+              <div className="createTaskBody__right">
+                <div className="createTaskBody__right__owner">
+                  <p>Создатель : {profileInfo?.fio}</p>
+                  <img
+                    src={
+                      profileInfo.photo
+                        ? urlForLocal(profileInfo.photo)
+                        : avatarMok
+                    }
+                    alt="avatar"
+                  />
+                </div>
+                <div
+                  onClick={() =>
+                    setSelectExecutorTaskOpen(!selectExecutorTaskOpen)
+                  }
+                  className={
+                    selectExecutorTaskOpen
+                      ? "select__executor select__executor--open"
+                      : "select__executor"
+                  }
+                >
+                  <div className="selected__executor">
+                    {selectedExecutorTask.user_id ? (
+                      <>
+                        <span>{selectedExecutorTask.user.fio}</span>
+                        <img
+                          className="avatar"
+                          src={urlForLocal(selectedExecutorTask.user.avatar)}
+                          alt="avatar"
+                        />
+                      </>
+                    ) : (
+                      <span>{selectedExecutorTask}</span>
+                    )}
+                  </div>
+                  <img className="arrow" src={arrowDown} alt="arrow" />
+                  {selectExecutorTaskOpen && (
+                    <div className="select__executor__dropDown">
+                      {correctProjectUsers.length ? (
+                        correctProjectUsers.map((person) => {
+                          return (
+                            <div
+                              onClick={() => setSelectedExecutorTask(person)}
+                              className="executor"
+                              key={person.user_id}
+                            >
+                              <span>{person.user.fio}</span>
+                              <img
+                                className="avatar"
+                                src={
+                                  person.user?.avatar
+                                    ? urlForLocal(person.user.avatar)
+                                    : avatarMok
+                                }
+                                alt="avatar"
+                              />
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <span>Нет пользователей</span>
+                      )}
+                    </div>
                   )}
                 </div>
-              )}
+                <div className="createTaskBody__right__deadLine">
+                  <img src={calendarImg} alt="calendar" />
+                  <span>Срок исполнения</span>
+                  <img src={arrowRight} className="arrow" alt="arrow" />
+                  <p onClick={() => setDatePickerOpen(!datePickerOpen)}>
+                    {deadLineDate
+                      ? getCorrectDate(deadLineDate)
+                      : "Дата не выбрана"}
+                  </p>
+                  <DatePicker
+                    className="datePicker"
+                    open={datePickerOpen}
+                    locale="ru"
+                    selected={startDate}
+                    onChange={(date) => {
+                      setDatePickerOpen(false);
+                      setStartDate(date);
+                      setDeadLineDate(date);
+                    }}
+                  />
+                </div>
+                <BaseButton styles={"button-add"} onClick={createTiket}>
+                  Создать
+                </BaseButton>
+              </div>
             </div>
           </div>
-          <BaseButton styles={"button-add"} onClick={createTiket}>
-            Создать
-          </BaseButton>
         </>
       )}
       {modalType === "editProject" && (
