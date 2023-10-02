@@ -92,7 +92,10 @@ export const ProjectTiket = ({ project, index }) => {
           ...
         </span>
       </div>
-      <Link to={`#`} className="project__statistics">
+      <Link
+        to={`/profile/statistics/${project.id}`}
+        className="project__statistics"
+      >
         Просмотреть статистику
       </Link>
 

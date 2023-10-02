@@ -43,6 +43,7 @@ import { RegistrationForCandidate } from "./pages/RegistrationForCandidate/Regis
 import { ProfileCandidate } from "./pages/ProfileCandidate/ProfileCandidate";
 import { PassingTests } from "./pages/quiz/PassingTests";
 import Blog from "./pages/Blog/Blog";
+import Statistics from "@pages/Statistics/Statistics";
 import { ProjectTracker } from "./pages/ProjectTracker/ProjectTracker";
 import { FrequentlyAskedQuestions } from "./pages/FrequentlyAskedQuestions/FrequentlyAskedQuestions";
 import { FrequentlyAskedQuestion } from "./pages/FrequentlyAskedQuestion/FrequentlyAskedQuestion";
@@ -52,6 +53,7 @@ import { useSelector } from "react-redux";
 import "./assets/global.scss";
 import "./assets/fonts/stylesheet.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 
 const App = () => {
   const notification = useSelector(getNotification)
@@ -118,6 +120,7 @@ const App = () => {
             <Route exact path="summary" element={<Summary />} />
             <Route exact path="view/:id" element={<ViewReport />} />
             <Route exact path="tracker" element={<Tracker />} />
+            <Route exact path="statistics/:id" element={<Statistics/>}/>
             <Route exact path="payouts" element={<Payouts />} />
             <Route exact path="settings" element={<PartnerSettings />} />
             <Route exact path="requests" element={<PartnerRequests />} />
