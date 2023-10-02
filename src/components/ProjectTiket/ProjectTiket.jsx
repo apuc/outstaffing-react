@@ -16,6 +16,7 @@ import archiveSet from "assets/icons/archive.svg";
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
 import link from "assets/icons/link.svg";
+import avatarProject from "assets/images/avatarMok.png";
 
 import "./projectTiket.scss";
 
@@ -74,7 +75,9 @@ export const ProjectTiket = ({ project, index }) => {
 
   return (
     <div className="project" key={index}>
-      <Link to={`/tracker/project/${project.id}`}>{project.name}</Link>
+      <Link to={`/tracker/project/${project.id}`} className="project__link">
+        {project.name}
+      </Link>
       <div className="project__info">
         <p>Открытые задачи</p>
         <span className="count">
@@ -84,10 +87,14 @@ export const ProjectTiket = ({ project, index }) => {
             0
           )}
         </span>
+        <img src={avatarProject} alt="#" className="project__avatar" />
         <span className="menu-settings" onClick={() => setModalSelect(true)}>
           ...
         </span>
       </div>
+      <Link to={`#`} className="project__statistics">
+        Просмотреть статистику
+      </Link>
 
       <TrackerModal
         active={modalAdd}

@@ -173,51 +173,38 @@
               }
             }
           }
-
-          &__info {
-            margin-top: 27px;
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 22px;
-          }
         }
 
         .createProjectBtn {
-          max-width: 188px;
-          height: 50px;
-          width: 100%;
+          max-width: 322px;
+          width: 322px;
+          height: 166px;
+          border-radius: 12px;
+          background: #ecf8e5;
+          color: #000000;
           font-weight: 400;
           font-size: 15px;
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: 0.4s;
 
-          span {
-            margin-right: 9px;
-            font-weight: 700;
-            font-size: 18px;
+          &__text {
+            text-align: left;
+            font-size: 14px;
+            font-weight: 250;
+            width: 190px;
+            margin-left: 25px;
+          }
+
+          &:hover {
+            transition: 0.4s;
+            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.11);
           }
 
           @media (max-width: 650px) {
             height: 40px;
             font-size: 12px;
-          }
-        }
-
-        .create-newProject {
-          display: flex;
-          align-items: center;
-
-          p {
-            margin-left: 32px;
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 22px;
-            max-width: 214px;
-
-            @media (max-width: 450px) {
-              max-width: none;
-            }
           }
         }
       }
@@ -243,7 +230,7 @@
           }
 
           @media (max-width: 650px) {
-            background-color: #DFF1FF;
+            background-color: #dff1ff;
           }
 
           &__wrapper {
@@ -699,7 +686,6 @@
               row-gap: 7px;
               width: 100%;
 
-
               .executorDropdown__person {
                 display: flex;
                 justify-content: space-between;
@@ -709,7 +695,6 @@
                   overflow: hidden;
                   white-space: nowrap;
                   text-overflow: ellipsis;
-
 
                   @media (max-width: 915px) {
                     max-width: none;
@@ -974,7 +959,7 @@
               p {
                 font-weight: 500;
                 font-size: 14px;
-                color: #1458DD;
+                color: #1458dd;
               }
 
               span {
@@ -1618,10 +1603,9 @@
     }
 
     @media (max-width: 650px) {
-
       &__content {
         padding: 28px 0 0;
-        background-color: #DFF1FF;
+        background-color: #dff1ff;
 
         .project {
           background-color: white;
@@ -1630,15 +1614,15 @@
       }
 
       .projectsTab {
-        background-color: #DFF1FF;
+        background-color: #dff1ff;
       }
 
       .tasksTab {
-        background-color: #E8FFEB;
+        background-color: #e8ffeb;
       }
 
       .archiveTab {
-        background-color: #FFECEF;
+        background-color: #ffecef;
       }
     }
   }
