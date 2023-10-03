@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { deleteProject, modalToggle } from "@redux/projectsTrackerSlice";
 
+import { copyProjectLink } from "@utils/helper";
+
 import { apiRequest } from "@api/request";
 
 import { useNotification } from "@hooks/useNotification";
@@ -63,12 +65,6 @@ export const ProjectTiket = ({ project, index }) => {
     });
   }
 
-  function copyProjectLink() {
-    navigator.clipboard.writeText(
-      `https://itguild.info/tracker/project/${project.id}`
-    );
-  }
-
   function closeAcceptModal() {
     setAcceptModalOpen(false);
   }
@@ -120,7 +116,7 @@ export const ProjectTiket = ({ project, index }) => {
           </div>
           <div>
             <img src={link}></img>
-            <p onClick={copyProjectLink}>ссылка на проект</p>
+            <p onClick={copyProjectLink(project.id)}>ссылка на проект</p>
           </div>
           <div
             onClick={() => {

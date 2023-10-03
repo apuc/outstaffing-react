@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { setToggleTab } from "@redux/projectsTrackerSlice";
 
+import { copyProjectLink } from "@utils/helper";
+
 import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
@@ -103,7 +105,9 @@ const Statistics = () => {
               <div className="statistics-header__menu">
                 <h1>Статистика проекта</h1>
                 <img src={link} alt="#" />
-                <span className="return-text">ссылка на проект</span>
+                <span className="return-text" onClick={copyProjectLink("62")}>
+                  ссылка на проект
+                </span>
               </div>
 
               <div className="statistics-header__return">

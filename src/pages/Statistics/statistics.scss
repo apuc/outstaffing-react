@@ -17,6 +17,16 @@
         transform: rotate(-180deg);
         margin-right: 22px;
       }
+
+      a {
+        cursor: pointer;
+        transition: 0.4s;
+
+        &:hover {
+          text-decoration: underline !important;
+          transition: 0.4s;
+        }
+      }
     }
 
     &__menu {
@@ -33,6 +43,13 @@
 
       span {
         margin-left: 17px;
+        cursor: pointer;
+        transition: 0.4s;
+
+        &:hover {
+          text-decoration: underline;
+          transition: 0.4s;
+        }
       }
     }
   }

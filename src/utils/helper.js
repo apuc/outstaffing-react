@@ -79,3 +79,9 @@ export function caseOfNum(number, type) {
       : cases[number % 10 < 5 ? number % 10 : 5]
   ];
 }
+
+export function copyProjectLink(projectId) {
+  navigator.clipboard.writeText(
+    `https://itguild.info/tracker/project/${projectId}`
+  );
+}
