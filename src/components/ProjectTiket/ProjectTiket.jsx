@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { deleteProject, modalToggle } from "@redux/projectsTrackerSlice";
 
+import { copyProjectLink } from "@utils/helper";
+
 import { apiRequest } from "@api/request";
 
 import { useNotification } from "@hooks/useNotification";
@@ -16,6 +18,7 @@ import archiveSet from "assets/icons/archive.svg";
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
 import link from "assets/icons/link.svg";
+import avatarProject from "assets/images/avatarMok.png";
 
 import "./projectTiket.scss";
 
@@ -62,19 +65,15 @@ export const ProjectTiket = ({ project, index }) => {
     });
   }
 
-  function copyProjectLink() {
-    navigator.clipboard.writeText(
-      `https://itguild.info/tracker/project/${project.id}`
-    );
-  }
-
   function closeAcceptModal() {
     setAcceptModalOpen(false);
   }
 
   return (
     <div className="project" key={index}>
-      <Link to={`/tracker/project/${project.id}`}>{project.name}</Link>
+      <Link to={`/tracker/project/${project.id}`} className="project__link">
+        {project.name}
+      </Link>
       <div className="project__info">
         <p>Открытые задачи</p>
         <span className="count">
@@ -84,10 +83,17 @@ export const ProjectTiket = ({ project, index }) => {
             0
           )}
         </span>
+        <img src={avatarProject} alt="#" className="project__avatar" />
         <span className="menu-settings" onClick={() => setModalSelect(true)}>
           ...
         </span>
       </div>
+      <Link
+        to={`/profile/statistics/${project.id}`}
+        className="project__statistics"
+      >
+        Просмотреть статистику
+      </Link>
 
       <TrackerModal
         active={modalAdd}
@@ -110,7 +116,7 @@ export const ProjectTiket = ({ project, index }) => {
           </div>
           <div>
             <img src={link}></img>
-            <p onClick={copyProjectLink}>ссылка на проект</p>
+            <p onClick={copyProjectLink(project.id)}>ссылка на проект</p>
           </div>
           <div
             onClick={() => {

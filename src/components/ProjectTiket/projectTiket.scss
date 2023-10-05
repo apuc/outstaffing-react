@@ -1,6 +1,7 @@
 .project {
   position: relative;
-  width: 48%;
+  width: 322px;
+
   background: #f1f1f1;
   border-radius: 12px;
   padding: 17px 26px 16px;
@@ -21,12 +22,12 @@
     width: 100%;
   }
 
-  a {
+  &__link {
     font-weight: 700;
     font-size: 18px;
     line-height: 32px;
     color: #111112;
-    margin-bottom: 10px;
+    margin-bottom: 22px;
     overflow: hidden;
     white-space: nowrap;
     display: flex;
@@ -42,19 +43,21 @@
     display: flex;
     align-items: center;
     position: relative;
+    margin-bottom: 27px;
 
     p {
       color: #6f6f6f;
-      font-weight: 500;
-      font-size: 12px;
-      line-height: 24px;
       margin-bottom: 0;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 17px;
+      width: 60px;
     }
 
     .count {
       margin-left: 8px;
-      width: 21px;
-      height: 24px;
+      width: 26px;
+      height: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -83,5 +86,20 @@
       right: 0;
       top: -35%;
     }
+  }
+
+  &__avatar {
+    width: 25px;
+    height: 25px;
+    margin-left: 56px;
+  }
+
+  &__statistics {
+    color: #678eda;
+    margin-top: 27px;
+    text-decoration: underline;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 17px;
   }
 }

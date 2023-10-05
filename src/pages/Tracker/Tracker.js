@@ -23,6 +23,7 @@ import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadc
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import ProjectTiket from "@components/ProjectTiket/ProjectTiket";
 
+import addProjectImg from "assets/icons/addProjectImg.svg";
 import search from "assets/icons/serchIcon.png";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
@@ -205,17 +206,17 @@ export const Tracker = () => {
                         setModalCreateProject(true);
                       }}
                     >
-                      <span>+</span>Создать проект
+                      <img src={addProjectImg} alt="#"></img>
+                      <p className="createProjectBtn__text">
+                        Ставьте задачи, следите за прогрессом, ведите учёт
+                        рабочего времени
+                      </p>
                     </BaseButton>
                   </div>
-                  <p className="no-projects__info">
-                    Ставьте задачи, следите за прогрессом, ведите учёт рабочего
-                    времени
-                  </p>
                 </div>
               )}
             {Boolean(projects.length) && !loader && (
-              <div className="create-newProject">
+              <>
                 <BaseButton
                   styles="createProjectBtn"
                   onClick={() => {
@@ -223,13 +224,13 @@ export const Tracker = () => {
                     setModalCreateProject(true);
                   }}
                 >
-                  <span>+</span>Создать проект
+                  <img src={addProjectImg} alt="#"></img>
+                  <p className="createProjectBtn__text">
+                    Ставьте задачи, следите за прогрессом, ведите учёт рабочего
+                    времени
+                  </p>
                 </BaseButton>
-                <p>
-                  Ставьте задачи, следите за прогрессом, ведите учёт рабочего
-                  времени
-                </p>
-              </div>
+              </>
             )}
           </div>
           <div
