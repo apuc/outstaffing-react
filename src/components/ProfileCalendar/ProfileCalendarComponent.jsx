@@ -1,6 +1,9 @@
+import ru from "date-fns/locale/ru";
 import moment from "moment";
 import "moment/locale/ru";
 import React, { useEffect, useState } from "react";
+import DatePicker, { registerLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -10,10 +13,15 @@ import {
   setSendRequest,
 } from "@redux/reportSlice";
 
+import { getCorrectYYMMDD } from "@utils/helper";
+
+import { apiRequest } from "@api/request";
+
 import "@components/Calendar/calendarComponent.scss";
 import {
   calendarHelper,
   currentMonthAndDay,
+  getCorrectDate,
   getReports,
   hourOfNum,
 } from "@components/Calendar/calendarHelper";
@@ -22,6 +30,8 @@ import ShortReport from "@components/ShortReport/ShortReport";
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import calendarIcon from "assets/icons/calendar.svg";
 import rectangle from "assets/images/rectangle__calendar.png";
+
+registerLocale("ru", ru);
 
 // eslint-disable-next-line react/display-name
 export const ProfileCalendarComponent = React.memo(
@@ -32,6 +42,10 @@ export const ProfileCalendarComponent = React.memo(
     const [calendar, setCalendar] = useState([]);
     const [month, setMonth] = useState("");
     const [shortReport, setShortReport] = useState(false);
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(null);
+    const [datePickerOpen, setDatePickerOpen] = useState(false);
+    const [totalRangeHours, setTotalRangeHours] = useState(0);
 
     useEffect(() => {
       setCalendar(calendarHelper(value));
@@ -87,6 +101,27 @@ export const ProfileCalendarComponent = React.memo(
 
     function nextMonth() {
       return value.clone().add(1, "month");
+    }
+
+    function reportsByDate(start, end) {
+      const requestDates = `fromDate=${getCorrectYYMMDD(
+        start
+      )}&toDate=${getCorrectYYMMDD(end)}`;
+      apiRequest(
+        `/reports/reports-by-date?${requestDates}&user_card_id=${localStorage.getItem(
+          "cardId"
+        )}`
+      ).then((reports) => {
+        let spendTime = 0;
+        for (const report of reports) {
+          report.task.map((task) => {
+            if (task.hours_spent) {
+              spendTime += Number(task.hours_spent);
+            }
+          });
+        }
+        setTotalRangeHours(spendTime);
+      });
     }
 
     return (
@@ -170,7 +205,39 @@ export const ProfileCalendarComponent = React.memo(
             )}
           </div>
         </div>
-
+        <div className="selectDateRange">
+          <span
+            className="select"
+            onClick={() => {
+              setDatePickerOpen(!datePickerOpen);
+            }}
+          >
+            {endDate
+              ? `${getCorrectDate(startDate)} - ${getCorrectDate(endDate)}`
+              : "Выбрать диапазон"}
+          </span>
+          <DatePicker
+            selected={startDate}
+            open={datePickerOpen}
+            startDate={startDate}
+            endDate={endDate}
+            onChange={(dates) => {
+              const [start, end] = dates;
+              setStartDate(start);
+              setEndDate(end);
+              if (end) {
+                setDatePickerOpen(false);
+                reportsByDate(start, end);
+              }
+            }}
+            selectsRange
+          />
+          <span>
+            {totalRangeHours
+              ? `${totalRangeHours} ${hourOfNum(totalRangeHours)}`
+              : "0 часов"}
+          </span>
+        </div>
         {shortReport && <ShortReport />}
       </div>
     );
