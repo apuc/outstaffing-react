@@ -219,6 +219,7 @@ export const ProfileCalendarComponent = React.memo(
           <DatePicker
             selected={startDate}
             open={datePickerOpen}
+            locale="ru"
             startDate={startDate}
             endDate={endDate}
             onChange={(dates) => {
