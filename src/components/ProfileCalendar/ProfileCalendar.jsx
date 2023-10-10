@@ -42,8 +42,8 @@ export const ProfileCalendar = () => {
     setValue(value);
   }
 
-  function toggleStartRangeDays () {
-    setStartRangeDays(!startRangeDays)
+  function toggleStartRangeDays() {
+    setStartRangeDays(!startRangeDays);
   }
 
   useEffect(() => {
