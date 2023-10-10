@@ -31,7 +31,14 @@ import rectangle from "assets/images/rectangle__calendar.png";
 
 // eslint-disable-next-line react/display-name
 export const ProfileCalendarComponent = React.memo(
-  ({ value, setValueHandler, reports, totalHours }) => {
+  ({
+    value,
+    setValueHandler,
+    reports,
+    totalHours,
+    startRangeDays,
+    toggleRangeDays,
+  }) => {
     const dispatch = useDispatch();
 
     const [currentDay] = useState(moment());
@@ -40,7 +47,6 @@ export const ProfileCalendarComponent = React.memo(
     const [shortReport, setShortReport] = useState(false);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    const [startRangeDays, setStartRangeDays] = useState(false);
     const [totalRangeHours, setTotalRangeHours] = useState(0);
     const [selectedRangeDays, setSelectedRangeDays] = useState({});
 
@@ -269,7 +275,7 @@ export const ProfileCalendarComponent = React.memo(
             className="select"
             onClick={() => {
               if (startRangeDays) resetRangeDays();
-              setStartRangeDays(!startRangeDays);
+              toggleRangeDays();
             }}
           >
             {endDate
