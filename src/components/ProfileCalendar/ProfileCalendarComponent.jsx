@@ -26,8 +26,8 @@ import ShortReport from "@components/ShortReport/ShortReport";
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import calendarIcon from "assets/icons/calendar.svg";
-import rectangle from "assets/images/rectangle__calendar.png";
 import close from "assets/icons/closeProjectPersons.svg";
+import rectangle from "assets/images/rectangle__calendar.png";
 
 // eslint-disable-next-line react/display-name
 export const ProfileCalendarComponent = React.memo(
@@ -40,15 +40,18 @@ export const ProfileCalendarComponent = React.memo(
     const [shortReport, setShortReport] = useState(false);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    const [startRangeDays, setStartRangeDays] = useState(false)
+    const [startRangeDays, setStartRangeDays] = useState(false);
     const [totalRangeHours, setTotalRangeHours] = useState(0);
-    const [selectedRangeDays, setSelectedRangeDays] = useState({})
+    const [selectedRangeDays, setSelectedRangeDays] = useState({});
 
     useEffect(() => {
       setCalendar(calendarHelper(value));
       calendarHelper(value).map((array) => {
-          setSelectedRangeDays((prevState) => ({...prevState, [array[0]]: false}))
-      })
+        setSelectedRangeDays((prevState) => ({
+          ...prevState,
+          [array[0]]: false,
+        }));
+      });
     }, [value]);
 
     useEffect(() => {
@@ -104,7 +107,9 @@ export const ProfileCalendarComponent = React.memo(
     }
 
     function reportsByDate(endDay) {
-      const requestDates = `fromDate=${getCorrectYYMMDD(startDate._d)}&toDate=${getCorrectYYMMDD(endDay._d)}`;
+      const requestDates = `fromDate=${getCorrectYYMMDD(
+        startDate._d
+      )}&toDate=${getCorrectYYMMDD(endDay._d)}`;
       apiRequest(
         `/reports/reports-by-date?${requestDates}&user_card_id=${localStorage.getItem(
           "cardId"
@@ -122,34 +127,41 @@ export const ProfileCalendarComponent = React.memo(
       });
     }
 
-    function rangeDays (day) {
-        if (!startDate) {
-            setStartDate(day)
+    function rangeDays(day) {
+      if (!startDate) {
+        setStartDate(day);
+      } else {
+        setEndDate(day);
+        reportsByDate(day);
+      }
+    }
+
+    function onMouseRangeDays(day) {
+      let selectRange = {};
+      for (let curDay in selectedRangeDays) {
+        if (
+          day > startDate &&
+          new Date(curDay) > startDate &&
+          new Date(curDay) < day
+        ) {
+          selectRange[curDay] = true;
         } else {
-            setEndDate(day)
-            reportsByDate(day)
+          selectRange[curDay] = false;
         }
+      }
+      setSelectedRangeDays(selectRange);
     }
 
-    function onMouseRangeDays (day) {
-        let selectRange = {}
-        for (let curDay in selectedRangeDays) {
-            if (day > startDate && new Date(curDay) > startDate && new Date(curDay) < day) {
-                selectRange[curDay] = true
-            } else {
-                selectRange[curDay] = false
-            }
-        }
-        setSelectedRangeDays(selectRange)
-    }
-
-    function resetRangeDays () {
-        setStartDate(null)
-        setEndDate(null)
-        setTotalRangeHours(0)
-        calendarHelper(value).map((array) => {
-            setSelectedRangeDays((prevState) => ({...prevState, [array[0]]: false}))
-        })
+    function resetRangeDays() {
+      setStartDate(null);
+      setEndDate(null);
+      setTotalRangeHours(0);
+      calendarHelper(value).map((array) => {
+        setSelectedRangeDays((prevState) => ({
+          ...prevState,
+          [array[0]]: false,
+        }));
+      });
     }
 
     return (
@@ -211,27 +223,35 @@ export const ProfileCalendarComponent = React.memo(
               week.map((day) => (
                 <button
                   onClick={() => {
-                    if(startRangeDays) {
-                        rangeDays(day)
+                    if (startRangeDays) {
+                      rangeDays(day);
                     } else {
-                        dispatch(setReportDate(day));
-                        setShortReport(true);
-                        dispatch(setSendRequest(true));
+                      dispatch(setReportDate(day));
+                      setShortReport(true);
+                      dispatch(setSendRequest(true));
                     }
                   }}
                   onMouseEnter={() => {
-                      if (startRangeDays && startDate && !endDate) {
-                          onMouseRangeDays(day)
-                      }
+                    if (startRangeDays && startDate && !endDate) {
+                      onMouseRangeDays(day);
+                    }
                   }}
                   key={day}
-                  className={startRangeDays ?
-                      `selectDays ${startDate === day || endDate === day ? 'selectedDay' : ''} ${endDate ? 'disable' : ''} ${selectedRangeDays[day] ? 'selectedDay' : ''}`
-                      : dayStyles(day)}
+                  className={
+                    startRangeDays
+                      ? `selectDays ${
+                          startDate === day || endDate === day
+                            ? "selectedDay"
+                            : ""
+                        } ${endDate ? "disable" : ""} ${
+                          selectedRangeDays[day] ? "selectedDay" : ""
+                        }`
+                      : dayStyles(day)
+                  }
                   name={day.format("dddd")}
                   id="btn"
                 >
-                  <Link to={startRangeDays ? '#' : correctRoute(day)}>
+                  <Link to={startRangeDays ? "#" : correctRoute(day)}>
                     <img
                       className={"calendar__icon"}
                       src={calendarIcon}
@@ -248,8 +268,8 @@ export const ProfileCalendarComponent = React.memo(
           <span
             className="select"
             onClick={() => {
-                if (startRangeDays) resetRangeDays()
-                setStartRangeDays(!startRangeDays)
+              if (startRangeDays) resetRangeDays();
+              setStartRangeDays(!startRangeDays);
             }}
           >
             {endDate
@@ -261,11 +281,16 @@ export const ProfileCalendarComponent = React.memo(
               ? `${totalRangeHours} ${hourOfNum(totalRangeHours)}`
               : "0 часов"}
           </span>
-            {endDate &&
-                <img className='close' src={close} alt='close' onClick={() => {
-                    resetRangeDays()
-                }} />
-            }
+          {endDate && (
+            <img
+              className="close"
+              src={close}
+              alt="close"
+              onClick={() => {
+                resetRangeDays();
+              }}
+            />
+          )}
         </div>
         {shortReport && <ShortReport />}
       </div>
