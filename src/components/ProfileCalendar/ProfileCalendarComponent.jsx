@@ -1,9 +1,6 @@
-import ru from "date-fns/locale/ru";
 import moment from "moment";
 import "moment/locale/ru";
 import React, { useEffect, useState } from "react";
-import DatePicker, { registerLocale } from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -29,9 +26,8 @@ import ShortReport from "@components/ShortReport/ShortReport";
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import calendarIcon from "assets/icons/calendar.svg";
+import close from "assets/icons/closeProjectPersons.svg";
 import rectangle from "assets/images/rectangle__calendar.png";
-
-registerLocale("ru", ru);
 
 // eslint-disable-next-line react/display-name
 export const ProfileCalendarComponent = React.memo(
@@ -42,13 +38,20 @@ export const ProfileCalendarComponent = React.memo(
     const [calendar, setCalendar] = useState([]);
     const [month, setMonth] = useState("");
     const [shortReport, setShortReport] = useState(false);
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    const [datePickerOpen, setDatePickerOpen] = useState(false);
+    const [startRangeDays, setStartRangeDays] = useState(false);
     const [totalRangeHours, setTotalRangeHours] = useState(0);
+    const [selectedRangeDays, setSelectedRangeDays] = useState({});
 
     useEffect(() => {
       setCalendar(calendarHelper(value));
+      calendarHelper(value).map((array) => {
+        setSelectedRangeDays((prevState) => ({
+          ...prevState,
+          [array[0]]: false,
+        }));
+      });
     }, [value]);
 
     useEffect(() => {
@@ -103,10 +106,10 @@ export const ProfileCalendarComponent = React.memo(
       return value.clone().add(1, "month");
     }
 
-    function reportsByDate(start, end) {
+    function reportsByDate(endDay) {
       const requestDates = `fromDate=${getCorrectYYMMDD(
-        start
-      )}&toDate=${getCorrectYYMMDD(end)}`;
+        startDate._d
+      )}&toDate=${getCorrectYYMMDD(endDay._d)}`;
       apiRequest(
         `/reports/reports-by-date?${requestDates}&user_card_id=${localStorage.getItem(
           "cardId"
@@ -121,6 +124,43 @@ export const ProfileCalendarComponent = React.memo(
           });
         }
         setTotalRangeHours(spendTime);
+      });
+    }
+
+    function rangeDays(day) {
+      if (!startDate) {
+        setStartDate(day);
+      } else {
+        setEndDate(day);
+        reportsByDate(day);
+      }
+    }
+
+    function onMouseRangeDays(day) {
+      let selectRange = {};
+      for (let curDay in selectedRangeDays) {
+        if (
+          day > startDate &&
+          new Date(curDay) > startDate &&
+          new Date(curDay) < day
+        ) {
+          selectRange[curDay] = true;
+        } else {
+          selectRange[curDay] = false;
+        }
+      }
+      setSelectedRangeDays(selectRange);
+    }
+
+    function resetRangeDays() {
+      setStartDate(null);
+      setEndDate(null);
+      setTotalRangeHours(0);
+      calendarHelper(value).map((array) => {
+        setSelectedRangeDays((prevState) => ({
+          ...prevState,
+          [array[0]]: false,
+        }));
       });
     }
 
@@ -183,16 +223,35 @@ export const ProfileCalendarComponent = React.memo(
               week.map((day) => (
                 <button
                   onClick={() => {
-                    dispatch(setReportDate(day));
-                    setShortReport(true);
-                    dispatch(setSendRequest(true));
+                    if (startRangeDays) {
+                      rangeDays(day);
+                    } else {
+                      dispatch(setReportDate(day));
+                      setShortReport(true);
+                      dispatch(setSendRequest(true));
+                    }
+                  }}
+                  onMouseEnter={() => {
+                    if (startRangeDays && startDate && !endDate) {
+                      onMouseRangeDays(day);
+                    }
                   }}
                   key={day}
-                  className={dayStyles(day)}
+                  className={
+                    startRangeDays
+                      ? `selectDays ${
+                          startDate === day || endDate === day
+                            ? "selectedDay"
+                            : ""
+                        } ${endDate ? "disable" : ""} ${
+                          selectedRangeDays[day] ? "selectedDay" : ""
+                        }`
+                      : dayStyles(day)
+                  }
                   name={day.format("dddd")}
                   id="btn"
                 >
-                  <Link to={correctRoute(day)}>
+                  <Link to={startRangeDays ? "#" : correctRoute(day)}>
                     <img
                       className={"calendar__icon"}
                       src={calendarIcon}
@@ -209,35 +268,29 @@ export const ProfileCalendarComponent = React.memo(
           <span
             className="select"
             onClick={() => {
-              setDatePickerOpen(!datePickerOpen);
+              if (startRangeDays) resetRangeDays();
+              setStartRangeDays(!startRangeDays);
             }}
           >
             {endDate
               ? `${getCorrectDate(startDate)} - ${getCorrectDate(endDate)}`
               : "Выбрать диапазон"}
           </span>
-          <DatePicker
-            selected={startDate}
-            open={datePickerOpen}
-            locale="ru"
-            startDate={startDate}
-            endDate={endDate}
-            onChange={(dates) => {
-              const [start, end] = dates;
-              setStartDate(start);
-              setEndDate(end);
-              if (end) {
-                setDatePickerOpen(false);
-                reportsByDate(start, end);
-              }
-            }}
-            selectsRange
-          />
           <span>
             {totalRangeHours
               ? `${totalRangeHours} ${hourOfNum(totalRangeHours)}`
               : "0 часов"}
           </span>
+          {endDate && (
+            <img
+              className="close"
+              src={close}
+              alt="close"
+              onClick={() => {
+                resetRangeDays();
+              }}
+            />
+          )}
         </div>
         {shortReport && <ShortReport />}
       </div>

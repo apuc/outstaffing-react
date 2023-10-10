@@ -536,9 +536,6 @@ export const TicketFullScreen = () => {
                   ></TrackerModal>
 
                   <div className="tasks__head__persons">
-                    {projectInfo.projectUsers?.length > 3 && (
-                      <span className="countPersons">+1...</span>
-                    )}
                     <div className="projectPersons">
                       {projectInfo.projectUsers?.length &&
                         projectInfo.projectUsers.slice(0, 3).map((person) => {
@@ -555,6 +552,9 @@ export const TicketFullScreen = () => {
                           );
                         })}
                     </div>
+                    {projectInfo.projectUsers?.length > 3 && (
+                      <span className="countPersons">+1</span>
+                    )}
                     <span
                       className="addPerson"
                       onClick={() => {

@@ -70,8 +70,8 @@ export const Tracker = () => {
     apiRequest(
       `/task/get-user-tasks?user_id=${localStorage.getItem("id")}`
     ).then((el) => {
-      const allTasks = el.filter((item) => item.status !== 0);
-      const completedTasks = el.filter((item) => item.status === 0);
+      const allTasks = el ? el.filter((item) => item.status !== 0) : [];
+      const completedTasks = el ? el.filter((item) => item.status === 0) : [];
       setAllTasks(allTasks);
       setFilteredAllTasks(allTasks);
       setAllCompletedTasks(completedTasks);
@@ -178,7 +178,8 @@ export const Tracker = () => {
 
             {loader && <Loader style="green" />}
 
-            {Boolean(projects.length) &&
+            {projects &&
+              Boolean(projects.length) &&
               !loader &&
               projects.map((project, index) => {
                 return project.status !== 10 ? (
@@ -187,10 +188,11 @@ export const Tracker = () => {
                   ""
                 );
               })}
-            {(!Boolean(projects.length) ||
-              !Boolean(
-                projects.filter((project) => project.status !== 10).length
-              )) &&
+            {typeof projects === "object" &&
+              (!Boolean(projects.length) ||
+                !Boolean(
+                  projects.filter((project) => project.status !== 10).length
+                )) &&
               !loader && (
                 <div className="no-projects">
                   <div className="no-projects__createNew">
@@ -215,7 +217,7 @@ export const Tracker = () => {
                   </div>
                 </div>
               )}
-            {Boolean(projects.length) && !loader && (
+            {projects && Boolean(projects.length) && !loader && (
               <>
                 <BaseButton
                   styles="createProjectBtn"
