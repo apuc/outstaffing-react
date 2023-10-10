@@ -14,7 +14,7 @@
   &__content {
     position: relative;
     background: linear-gradient(180deg, #ffffff 0%, #ebebeb 100%);
-    border-radius: 24px;
+    border-radius: 10px;
     padding: 25px;
     display: flex;
     flex-direction: column;
@@ -116,4 +116,18 @@
 
 .modal-layout.active {
   transform: scale(1);
+}
+
+.createProject {
+  background: linear-gradient(180deg, #fff 0%, #ebebeb 37.29%);
+  .title-project {
+    margin-top: 20px;
+  }
+  .button-add {
+    margin-top: 8px;
+  }
+  .exit {
+    top: 16px;
+    right: 15px;
+  }
 }

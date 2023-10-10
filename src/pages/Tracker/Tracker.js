@@ -24,6 +24,7 @@ import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import ProjectTiket from "@components/ProjectTiket/ProjectTiket";
 
 import addProjectImg from "assets/icons/addProjectImg.svg";
+import arrowViewReport from "assets/icons/arrows/arrowViewReport.svg";
 import search from "assets/icons/serchIcon.png";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
@@ -300,6 +301,21 @@ export const Tracker = () => {
                   {`${filterCompleteTasks.length} 
                     ${caseOfNum(filterCompleteTasks.length, "tasks")}`}
                 </p>
+
+                <div className="archive__tasks-period">
+                  <div className="buttons-month">
+                    <button>
+                      <img src={arrowViewReport} alt="<"></img>
+                    </button>
+                    <button>
+                      <img src={arrowViewReport} alt=">"></img>
+                    </button>
+                  </div>
+                  <div className="month-period">
+                    <h2>Сентябрь,</h2>
+                    <h3>2023</h3>
+                  </div>
+                </div>
                 <div className="archive__tasks__search">
                   <img src={search} alt="search" />
                   <input

@@ -1356,23 +1356,25 @@
         padding: 0 20px;
         margin: 0 auto;
         display: flex;
-        column-gap: 28px;
+        flex-direction: column;
 
-        @media (max-width: 1100px) {
-          flex-direction: column;
-          row-gap: 20px;
-        }
+        // column-gap: 28px;
 
-        @media (max-width: 650px) {
-          padding-bottom: 20px;
-        }
+        // @media (max-width: 1100px) {
+        //   flex-direction: column;
+        //   row-gap: 20px;
+        // }
+
+        // @media (max-width: 650px) {
+        //   padding-bottom: 20px;
+        // }
 
         .archive {
           &__title {
             padding-bottom: 8px;
             display: flex;
             align-items: center;
-            color: #1458dd;
+            color: #000;
             min-height: 48px;
 
             h3 {
@@ -1406,7 +1408,7 @@
             display: flex;
             flex-direction: column;
             row-gap: 15px;
-            max-height: 400px;
+            // max-height: 400px;
             overflow-y: auto;
             margin-right: -16px;
             padding-right: 10px;
@@ -1513,13 +1515,59 @@
           }
 
           &__tasks {
-            min-height: 400px;
-            max-height: 450px;
+            // min-height: 400px;
+            // max-height: 450px;
             padding-right: 15px;
-            width: 65%;
+            // width: 65%;
 
             @media (max-width: 1100px) {
               width: 100%;
+            }
+
+            &-period {
+              display: flex;
+              align-items: center;
+              margin-left: 73px;
+
+              .buttons-month {
+                display: flex;
+                gap: 34px;
+
+                button {
+                  width: 30px;
+                  height: 30px;
+                  background-color: #8dc63f;
+                  border-radius: 15px;
+                  border: none;
+
+                  img {
+                    width: 14px;
+                    height: 14px;
+                  }
+
+                  &:first-child {
+                    transform: rotate(-180deg);
+                  }
+                }
+              }
+
+              .month-period {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-left: 62px;
+
+                h2 {
+                  color: #1458dd;
+                }
+
+                h3 {
+                  color: #252c32;
+                  font-size: 18px;
+                  font-weight: 700;
+                  margin-left: 5px;
+                }
+              }
             }
 
             &__search {
@@ -1569,7 +1617,7 @@
           }
 
           &__projects {
-            display: flex;
+            display: none;
             flex-direction: column;
             width: 33%;
             min-height: 400px;
