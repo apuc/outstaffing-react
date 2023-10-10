@@ -178,7 +178,8 @@ export const Tracker = () => {
 
             {loader && <Loader style="green" />}
 
-            {projects && Boolean(projects.length) &&
+            {projects &&
+              Boolean(projects.length) &&
               !loader &&
               projects.map((project, index) => {
                 return project.status !== 10 ? (
@@ -187,10 +188,11 @@ export const Tracker = () => {
                   ""
                 );
               })}
-            {typeof projects === "object" && (!Boolean(projects.length) ||
-              !Boolean(
-                projects.filter((project) => project.status !== 10).length
-              )) &&
+            {typeof projects === "object" &&
+              (!Boolean(projects.length) ||
+                !Boolean(
+                  projects.filter((project) => project.status !== 10).length
+                )) &&
               !loader && (
                 <div className="no-projects">
                   <div className="no-projects__createNew">

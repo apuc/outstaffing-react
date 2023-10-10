@@ -386,7 +386,7 @@ export const ProjectTracker = () => {
                       </div>
                     )}
                     {projectBoard.projectUsers?.length > 3 && (
-                        <span className="countPersons">+1</span>
+                      <span className="countPersons">+1</span>
                     )}
                     <span
                       className="addPerson"

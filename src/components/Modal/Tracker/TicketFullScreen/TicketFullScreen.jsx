@@ -553,7 +553,7 @@ export const TicketFullScreen = () => {
                         })}
                     </div>
                     {projectInfo.projectUsers?.length > 3 && (
-                        <span className="countPersons">+1</span>
+                      <span className="countPersons">+1</span>
                     )}
                     <span
                       className="addPerson"
