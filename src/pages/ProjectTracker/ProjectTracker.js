@@ -368,9 +368,6 @@ export const ProjectTracker = () => {
                         : "tasks__head__persons noProjectUsers"
                     }
                   >
-                    {projectBoard.projectUsers?.length > 3 && (
-                      <span className="countPersons">+1...</span>
-                    )}
                     {Boolean(projectBoard.projectUsers?.length) && (
                       <div className="projectPersons">
                         {projectBoard.projectUsers.slice(0, 3).map((person) => {
@@ -387,6 +384,9 @@ export const ProjectTracker = () => {
                           );
                         })}
                       </div>
+                    )}
+                    {projectBoard.projectUsers?.length > 3 && (
+                      <span className="countPersons">+1</span>
                     )}
                     <span
                       className="addPerson"
