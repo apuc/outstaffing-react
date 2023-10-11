@@ -1401,14 +1401,29 @@
             @media (max-width: 450px) {
               flex-wrap: wrap;
             }
+
+            &-table {
+              margin: 29px 0 0 0;
+              height: 67px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              background: #f1f1f1;
+              color: #5b6871;
+              font-size: 14px;
+              font-weight: 400;
+              border-radius: 12px;
+              padding-left: 15px;
+              padding-right: 15px;
+              margin-right: -6px;
+            }
           }
 
           &__tasksWrapper {
-            margin-top: 10px;
+            margin-top: 20px;
             display: flex;
             flex-direction: column;
             row-gap: 15px;
-            // max-height: 400px;
             overflow-y: auto;
             margin-right: -16px;
             padding-right: 10px;
@@ -1443,7 +1458,7 @@
             transition: all 0.3s ease;
             background: #f1f1f1;
             border-radius: 12px;
-            padding: 12px 42px 7px 32px;
+            padding: 12px 15px 7px 16px;
 
             &:hover {
               transform: scale(0.99);
@@ -1462,7 +1477,7 @@
 
             .completeTask__title {
               font-weight: 700;
-              font-size: 20px;
+              font-size: 18px;
               line-height: 32px;
             }
 
@@ -1472,7 +1487,7 @@
 
               .date {
                 font-weight: 500;
-                font-size: 16px;
+                font-size: 14px;
                 line-height: 24px;
                 color: #6f6f6f;
               }
@@ -1504,6 +1519,15 @@
               }
             }
 
+            &-project {
+              background: #f1f1f1;
+              width: 328px;
+              border-radius: 8px;
+              display: flex;
+              flex-direction: column;
+              padding: 23px;
+            }
+
             @media (max-width: 740px) {
               flex-direction: column;
               padding: 10px 20px;
@@ -1515,10 +1539,7 @@
           }
 
           &__tasks {
-            // min-height: 400px;
-            // max-height: 450px;
             padding-right: 15px;
-            // width: 65%;
 
             @media (max-width: 1100px) {
               width: 100%;
@@ -1617,34 +1638,74 @@
           }
 
           &__projects {
-            display: none;
+            display: flex;
             flex-direction: column;
-            width: 33%;
-            min-height: 400px;
-            max-height: 450px;
-            padding-right: 15px;
 
             @media (max-width: 1100px) {
               width: 100%;
               min-height: auto;
             }
+
+            &-title {
+              background: #e1fccf;
+              display: flex;
+              align-items: center;
+              height: 66px;
+              border-radius: 12px;
+              margin: 25px 0 0 0;
+              padding-left: 15px;
+              color: #000;
+              font-style: normal;
+
+              h3 {
+                font-size: 16px;
+                font-weight: 700;
+                margin: 0 5px 0 0;
+              }
+
+              p {
+                font-size: 16px;
+                font-weight: 300;
+              }
+            }
           }
 
           &__noItem {
-            background: #f1f1f1;
-            border-radius: 12px;
             padding: 23px 0 19px;
+            color: #6f6f6f;
 
             p {
+              font-size: 17px;
+              font-style: normal;
               font-weight: 700;
-              font-size: 22px;
-              line-height: 32px;
-              color: #111112;
-              text-align: center;
+              padding-left: 15px;
             }
 
             @media (max-width: 650px) {
               background-color: white;
+            }
+
+            &-project {
+              background: #f1f1f1;
+              width: 328px;
+              height: 108px;
+              border-radius: 8px;
+              display: flex;
+              gap: 21px;
+              padding: 23px;
+              align-items: center;
+
+              p {
+                width: 105px;
+                color: #6f6f6f;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 700;
+              }
+
+              img {
+                margin-left: 10px;
+              }
             }
           }
         }

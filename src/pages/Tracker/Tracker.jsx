@@ -24,11 +24,13 @@ import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import ProjectTiket from "@components/ProjectTiket/ProjectTiket";
 
 import addProjectImg from "assets/icons/addProjectImg.svg";
+import archiveTrackerProjects from "assets/icons/archiveTrackerProjects.svg";
 import arrowViewReport from "assets/icons/arrows/arrowViewReport.svg";
 import search from "assets/icons/serchIcon.png";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
 import archive from "assets/images/archiveIcon.png";
+import mockAvatar from "assets/images/avatarMok.png";
 import avatarMok from "assets/images/avatarMok.png";
 import noProjects from "assets/images/noProjects.png";
 
@@ -327,6 +329,13 @@ export const Tracker = () => {
                   />
                 </div>
               </div>
+
+              <div className="archive__title-table">
+                <p>Задача</p>
+                <p>Потраченное время</p>
+                <p>Дата окончания</p>
+              </div>
+
               <div className="archive__tasksWrapper">
                 {loader && <Loader style="green" />}
                 {!loader && (
@@ -347,14 +356,6 @@ export const Tracker = () => {
                               />
                             </div>
                             <div className="archive__completeTask__info">
-                              <img
-                                src={
-                                  task.user?.avatar
-                                    ? urlForLocal(task.user.avatar)
-                                    : avatarMok
-                                }
-                                alt="avatar"
-                              />
                               <div className="archive__completeTask__info__project">
                                 {/*<span>Проект</span>*/}
                                 <p>{getCorrectDate(task.updated_at)}</p>
@@ -365,7 +366,7 @@ export const Tracker = () => {
                       })
                     ) : (
                       <div className="archive__noItem">
-                        <p>В архиве задач нет</p>
+                        <p>В данном месяце у вас не было задач</p>
                       </div>
                     )}
                   </>
@@ -373,7 +374,7 @@ export const Tracker = () => {
               </div>
             </div>
             <div className="archive__projects">
-              <div className="archive__title">
+              <div className="archive__projects-title">
                 <h3>Архив проектов:</h3>
                 <p>
                   {`${
@@ -392,10 +393,20 @@ export const Tracker = () => {
                 ) ? (
                   projects.map((project, index) => {
                     return project.status === 10 ? (
-                      <div className="archive__completeTask" key={index}>
+                      <div
+                        className="archive__completeTask-project"
+                        key={index}
+                      >
                         <div className="archive__completeTask__description">
                           <p>{project.name}</p>
                           <p className="date">{project.date}</p>
+                        </div>
+                        <div className="archive__copmpleteTask-creator">
+                          <img src={mockAvatar} alt="#" />
+                          <div className="creator-title">
+                            <h4>Создатель проекта:</h4>
+                            <p>{"Василий Тарасов"}</p>
+                          </div>
                         </div>
                       </div>
                     ) : (
@@ -403,7 +414,8 @@ export const Tracker = () => {
                     );
                   })
                 ) : (
-                  <div className="archive__noItem">
+                  <div className="archive__noItem-project">
+                    <img src={archiveTrackerProjects} alt="#" />
                     <p>В архиве проектов нет</p>
                   </div>
                 )}
