@@ -37,9 +37,14 @@ export const ProfileCalendar = () => {
   const [totalHours, setTotalHours] = useState(0);
   const [loader, setLoader] = useState(true);
   const [startRangeDays, setStartRangeDays] = useState(false);
+  const [startDate, setStartDate] = useState(null);
 
   function setValueHandler(value) {
     setValue(value);
+  }
+
+  function setStartDateRange (date) {
+    setStartDate(date)
   }
 
   function toggleStartRangeDays() {
@@ -122,6 +127,8 @@ export const ProfileCalendar = () => {
                 totalHours={totalHours}
                 startRangeDays={startRangeDays}
                 toggleRangeDays={toggleStartRangeDays}
+                startDate={startDate}
+                setStartDateRange={setStartDateRange}
               />
             </div>
           </div>
