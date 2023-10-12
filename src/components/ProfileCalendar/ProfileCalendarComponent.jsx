@@ -38,6 +38,8 @@ export const ProfileCalendarComponent = React.memo(
     totalHours,
     startRangeDays,
     toggleRangeDays,
+    startDate,
+    setStartDateRange,
   }) => {
     const dispatch = useDispatch();
 
@@ -45,7 +47,6 @@ export const ProfileCalendarComponent = React.memo(
     const [calendar, setCalendar] = useState([]);
     const [month, setMonth] = useState("");
     const [shortReport, setShortReport] = useState(false);
-    const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [totalRangeHours, setTotalRangeHours] = useState(0);
     const [selectedRangeDays, setSelectedRangeDays] = useState({});
@@ -58,6 +59,9 @@ export const ProfileCalendarComponent = React.memo(
           [array[0]]: false,
         }));
       });
+      if (endDate) {
+        resetRangeDays();
+      }
     }, [value]);
 
     useEffect(() => {
@@ -113,9 +117,14 @@ export const ProfileCalendarComponent = React.memo(
     }
 
     function reportsByDate(endDay) {
-      const requestDates = `fromDate=${getCorrectYYMMDD(
-        startDate._d
-      )}&toDate=${getCorrectYYMMDD(endDay._d)}`;
+      const requestDates =
+        startDate < endDay
+          ? `fromDate=${getCorrectYYMMDD(
+              startDate._d
+            )}&toDate=${getCorrectYYMMDD(endDay._d)}`
+          : `fromDate=${getCorrectYYMMDD(endDay._d)}&toDate=${getCorrectYYMMDD(
+              startDate._d
+            )}`;
       apiRequest(
         `/reports/reports-by-date?${requestDates}&user_card_id=${localStorage.getItem(
           "cardId"
@@ -135,7 +144,7 @@ export const ProfileCalendarComponent = React.memo(
 
     function rangeDays(day) {
       if (!startDate) {
-        setStartDate(day);
+        setStartDateRange(day);
       } else {
         setEndDate(day);
         reportsByDate(day);
@@ -145,21 +154,33 @@ export const ProfileCalendarComponent = React.memo(
     function onMouseRangeDays(day) {
       let selectRange = {};
       for (let curDay in selectedRangeDays) {
-        if (
-          day > startDate &&
-          new Date(curDay) > startDate &&
-          new Date(curDay) < day
-        ) {
-          selectRange[curDay] = true;
+        if (day > startDate) {
+          if (
+            day > startDate &&
+            new Date(curDay) > startDate &&
+            new Date(curDay) < day
+          ) {
+            selectRange[curDay] = true;
+          } else {
+            selectRange[curDay] = false;
+          }
         } else {
-          selectRange[curDay] = false;
+          if (
+            day < startDate &&
+            new Date(curDay) < startDate &&
+            new Date(curDay) > day
+          ) {
+            selectRange[curDay] = true;
+          } else {
+            selectRange[curDay] = false;
+          }
         }
       }
       setSelectedRangeDays(selectRange);
     }
 
     function resetRangeDays() {
-      setStartDate(null);
+      setStartDateRange(null);
       setEndDate(null);
       setTotalRangeHours(0);
       calendarHelper(value).map((array) => {
@@ -246,7 +267,8 @@ export const ProfileCalendarComponent = React.memo(
                   className={
                     startRangeDays
                       ? `selectDays ${
-                          startDate === day || endDate === day
+                          String(startDate?._d) === String(day._d) ||
+                          endDate === day
                             ? "selectedDay"
                             : ""
                         } ${endDate ? "disable" : ""} ${
@@ -279,7 +301,9 @@ export const ProfileCalendarComponent = React.memo(
             }}
           >
             {endDate
-              ? `${getCorrectDate(startDate)} - ${getCorrectDate(endDate)}`
+              ? startDate < endDate
+                ? `${getCorrectDate(startDate)} - ${getCorrectDate(endDate)}`
+                : `${getCorrectDate(endDate)} - ${getCorrectDate(startDate)}`
               : "Выбрать диапазон"}
           </span>
           <span>
