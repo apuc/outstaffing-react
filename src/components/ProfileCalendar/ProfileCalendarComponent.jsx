@@ -39,7 +39,7 @@ export const ProfileCalendarComponent = React.memo(
     startRangeDays,
     toggleRangeDays,
     startDate,
-    setStartDateRange
+    setStartDateRange,
   }) => {
     const dispatch = useDispatch();
 
@@ -60,7 +60,7 @@ export const ProfileCalendarComponent = React.memo(
         }));
       });
       if (endDate) {
-        resetRangeDays()
+        resetRangeDays();
       }
     }, [value]);
 
@@ -117,11 +117,14 @@ export const ProfileCalendarComponent = React.memo(
     }
 
     function reportsByDate(endDay) {
-      const requestDates = startDate < endDay ? `fromDate=${getCorrectYYMMDD(
-        startDate._d
-      )}&toDate=${getCorrectYYMMDD(endDay._d)}` : `fromDate=${getCorrectYYMMDD(
-          endDay._d
-      )}&toDate=${getCorrectYYMMDD(startDate._d)}`;
+      const requestDates =
+        startDate < endDay
+          ? `fromDate=${getCorrectYYMMDD(
+              startDate._d
+            )}&toDate=${getCorrectYYMMDD(endDay._d)}`
+          : `fromDate=${getCorrectYYMMDD(endDay._d)}&toDate=${getCorrectYYMMDD(
+              startDate._d
+            )}`;
       apiRequest(
         `/reports/reports-by-date?${requestDates}&user_card_id=${localStorage.getItem(
           "cardId"
@@ -153,24 +156,22 @@ export const ProfileCalendarComponent = React.memo(
       for (let curDay in selectedRangeDays) {
         if (day > startDate) {
           if (
-              day > startDate &&
-              new Date(curDay) > startDate &&
-              new Date(curDay) < day
+            day > startDate &&
+            new Date(curDay) > startDate &&
+            new Date(curDay) < day
           ) {
             selectRange[curDay] = true;
-          }
-          else {
+          } else {
             selectRange[curDay] = false;
           }
         } else {
           if (
-              day < startDate &&
-              new Date(curDay) < startDate &&
-              new Date(curDay) > day
+            day < startDate &&
+            new Date(curDay) < startDate &&
+            new Date(curDay) > day
           ) {
             selectRange[curDay] = true;
-          }
-          else {
+          } else {
             selectRange[curDay] = false;
           }
         }
@@ -266,7 +267,8 @@ export const ProfileCalendarComponent = React.memo(
                   className={
                     startRangeDays
                       ? `selectDays ${
-                            String(startDate?._d) === String(day._d) || endDate === day
+                          String(startDate?._d) === String(day._d) ||
+                          endDate === day
                             ? "selectedDay"
                             : ""
                         } ${endDate ? "disable" : ""} ${
@@ -299,7 +301,9 @@ export const ProfileCalendarComponent = React.memo(
             }}
           >
             {endDate
-              ? startDate < endDate ? `${getCorrectDate(startDate)} - ${getCorrectDate(endDate)}` : `${getCorrectDate(endDate)} - ${getCorrectDate(startDate)}`
+              ? startDate < endDate
+                ? `${getCorrectDate(startDate)} - ${getCorrectDate(endDate)}`
+                : `${getCorrectDate(endDate)} - ${getCorrectDate(startDate)}`
               : "Выбрать диапазон"}
           </span>
           <span>

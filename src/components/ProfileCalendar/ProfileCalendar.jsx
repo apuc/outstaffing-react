@@ -43,8 +43,8 @@ export const ProfileCalendar = () => {
     setValue(value);
   }
 
-  function setStartDateRange (date) {
-    setStartDate(date)
+  function setStartDateRange(date) {
+    setStartDate(date);
   }
 
   function toggleStartRangeDays() {
