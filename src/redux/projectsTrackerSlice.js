@@ -14,7 +14,7 @@ const initialState = {
 };
 
 export const setProjectBoardFetch = createAsyncThunk("userInfo", (id) =>
-  apiRequest(`/project/get-project?project_id=${id}&expand=columns`)
+  apiRequest(`/project/get-project?project_id=${id}&expand=columns,mark`)
 );
 
 export const projectsTrackerSlice = createSlice({

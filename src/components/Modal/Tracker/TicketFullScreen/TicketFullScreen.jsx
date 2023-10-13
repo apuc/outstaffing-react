@@ -91,7 +91,7 @@ export const TicketFullScreen = () => {
   const { showNotification } = useNotification();
 
   useEffect(() => {
-    apiRequest(`/task/get-task?task_id=${ticketId.id}`).then((taskInfo) => {
+    apiRequest(`/task/get-task?task_id=${ticketId.id}&expand=mark`).then((taskInfo) => {
       setTaskInfo(taskInfo);
       setDeadLine(taskInfo.dead_line);
       setStartDate(
