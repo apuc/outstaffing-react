@@ -91,69 +91,71 @@ export const TicketFullScreen = () => {
   const { showNotification } = useNotification();
 
   useEffect(() => {
-    apiRequest(`/task/get-task?task_id=${ticketId.id}&expand=mark`).then((taskInfo) => {
-      setTaskInfo(taskInfo);
-      setDeadLine(taskInfo.dead_line);
-      setStartDate(
-        taskInfo.dead_line ? new Date(taskInfo.dead_line) : new Date()
-      );
-      setInputsValue({
-        title: taskInfo.title,
-        description: taskInfo.description,
-        comment: "",
-      });
-      apiRequest(
-        `/comment/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`
-      ).then((res) => {
-        const comments = res.reduce((acc, cur) => {
-          if (!cur.parent_id) {
-            acc.push({ ...cur, subComments: [] });
-          } else {
-            acc.forEach((item) => {
-              if (item.id === cur.parent_id) item.subComments.push(cur);
-            });
-          }
-          return acc;
-        }, []);
-        setComments(comments);
-      });
-      apiRequest(
-        `/file/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`
-      ).then((res) => {
-        if (Array.isArray(res)) {
-          setTaskFiles(res);
-        }
-      });
-      apiRequest(
-        `/timer/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`
-      ).then((res) => {
-        let timerSeconds = 0;
-        res.length &&
-          res.forEach((time) => {
-            timerSeconds += time.deltaSeconds;
-            setCurrentTimerCount({
-              hours: Math.floor(timerSeconds / 60 / 60),
-              minute: Math.floor((timerSeconds / 60) % 60),
-              seconds: timerSeconds % 60,
-            });
-            updateTimerHours = Math.floor(timerSeconds / 60 / 60);
-            updateTimerMinute = Math.floor((timerSeconds / 60) % 60);
-            updateTimerSec = timerSeconds % 60;
-            if (!time.stopped_at) {
-              setTimerStart(true);
-              startTimer();
-              setTimerInfo(time);
+    apiRequest(`/task/get-task?task_id=${ticketId.id}&expand=mark`).then(
+      (taskInfo) => {
+        setTaskInfo(taskInfo);
+        setDeadLine(taskInfo.dead_line);
+        setStartDate(
+          taskInfo.dead_line ? new Date(taskInfo.dead_line) : new Date()
+        );
+        setInputsValue({
+          title: taskInfo.title,
+          description: taskInfo.description,
+          comment: "",
+        });
+        apiRequest(
+          `/comment/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`
+        ).then((res) => {
+          const comments = res.reduce((acc, cur) => {
+            if (!cur.parent_id) {
+              acc.push({ ...cur, subComments: [] });
+            } else {
+              acc.forEach((item) => {
+                if (item.id === cur.parent_id) item.subComments.push(cur);
+              });
             }
-          });
-      });
-      apiRequest(
-        `/project/get-project?project_id=${taskInfo.project_id}&expand=columns`
-      ).then((res) => {
-        setProjectInfo(res);
-        setCorrectProjectUsers(res.projectUsers);
-      });
-      setLoader(boardLoader);
-    });
+            return acc;
+          }, []);
+          setComments(comments);
+        });
+        apiRequest(
+          `/file/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`
+        ).then((res) => {
+          if (Array.isArray(res)) {
+            setTaskFiles(res);
+          }
+        });
+        apiRequest(
+          `/timer/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`
+        ).then((res) => {
+          let timerSeconds = 0;
+          res.length &&
+            res.forEach((time) => {
+              timerSeconds += time.deltaSeconds;
+              setCurrentTimerCount({
+                hours: Math.floor(timerSeconds / 60 / 60),
+                minute: Math.floor((timerSeconds / 60) % 60),
+                seconds: timerSeconds % 60,
+              });
+              updateTimerHours = Math.floor(timerSeconds / 60 / 60);
+              updateTimerMinute = Math.floor((timerSeconds / 60) % 60);
+              updateTimerSec = timerSeconds % 60;
+              if (!time.stopped_at) {
+                setTimerStart(true);
+                startTimer();
+                setTimerInfo(time);
+              }
+            });
+        });
+        apiRequest(
+          `/project/get-project?project_id=${taskInfo.project_id}&expand=columns`
+        ).then((res) => {
+          setProjectInfo(res);
+          setCorrectProjectUsers(res.projectUsers);
+        });
+        setLoader(boardLoader);
+      }
+    );
   }, []);
 
   function deleteTask() {
