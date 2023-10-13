@@ -71,7 +71,7 @@ export const Tracker = () => {
       // }, []))
     });
     apiRequest(
-      `/task/get-user-tasks?user_id=${localStorage.getItem("id")}`
+      `/task/get-user-tasks?user_id=${localStorage.getItem("id")}&expand=timers`
     ).then((el) => {
       const allTasks = el ? el.filter((item) => item.status !== 0) : [];
       const completedTasks = el ? el.filter((item) => item.status === 0) : [];
@@ -355,6 +355,16 @@ export const Tracker = () => {
                                 }}
                               />
                             </div>
+                            <div className="archive__completeTask__time">
+                              <p>
+                                {task.timers.map((item) => {
+                                  let time = new Date(item.deltaSeconds * 1000)
+                                    .toISOString()
+                                    .slice(11, 19);
+                                  return `${time}`;
+                                })}
+                              </p>
+                            </div>
                             <div className="archive__completeTask__info">
                               <div className="archive__completeTask__info__project">
                                 {/*<span>Проект</span>*/}
@@ -398,10 +408,12 @@ export const Tracker = () => {
                         key={index}
                       >
                         <div className="archive__completeTask__description">
-                          <p>{project.name}</p>
+                          <p className="project-title-archive">
+                            {project.name}
+                          </p>
                           <p className="date">{project.date}</p>
                         </div>
-                        <div className="archive__copmpleteTask-creator">
+                        <div className="archive__completeTask__creator">
                           <img src={mockAvatar} alt="#" />
                           <div className="creator-title">
                             <h4>Создатель проекта:</h4>
