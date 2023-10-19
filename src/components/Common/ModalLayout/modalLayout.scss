@@ -118,7 +118,11 @@
   transform: scale(1);
 }
 
-.createProject {
+.createProject,
+.createColumn,
+.editProject,
+.addWorker,
+.editColumn {
   background: linear-gradient(180deg, #fff 0%, #ebebeb 37.29%);
   .title-project {
     margin-top: 20px;
