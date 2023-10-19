@@ -26,6 +26,7 @@ export const ProjectTiket = ({ project, index }) => {
   const [modalSelect, setModalSelect] = useState(false);
   const [modalAdd, setModalAdd] = useState(false);
   const [acceptModalOpen, setAcceptModalOpen] = useState(false);
+  const [path, setPath] = useState("");
   const dispatch = useDispatch();
   const { showNotification } = useNotification();
 
@@ -69,25 +70,29 @@ export const ProjectTiket = ({ project, index }) => {
     setAcceptModalOpen(false);
   }
 
+  function linkProject() {}
+
   return (
     <div className="project" key={index}>
-      <Link to={`/tracker/project/${project.id}`} className="project__link">
-        {project.name}
+      <Link to={`/tracker/project/${project.id}`}>
+        <p className="project__link">{project.name}</p>
+
+        <div className="project__info">
+          <p>Открытые задачи</p>
+          <span className="count">
+            {project.columns.reduce(
+              (accumulator, currentValue) =>
+                accumulator + currentValue.tasks.length,
+              0
+            )}
+          </span>
+          <img src={avatarProject} alt="#" className="project__avatar" />
+        </div>
       </Link>
-      <div className="project__info">
-        <p>Открытые задачи</p>
-        <span className="count">
-          {project.columns.reduce(
-            (accumulator, currentValue) =>
-              accumulator + currentValue.tasks.length,
-            0
-          )}
-        </span>
-        <img src={avatarProject} alt="#" className="project__avatar" />
-        <span className="menu-settings" onClick={() => setModalSelect(true)}>
-          ...
-        </span>
-      </div>
+
+      <span className="menu-settings" onClick={() => setModalSelect(true)}>
+        ...
+      </span>
       <Link
         to={`/profile/statistics/${project.id}`}
         className="project__statistics"
@@ -102,7 +107,7 @@ export const ProjectTiket = ({ project, index }) => {
         projectId={project.id}
       ></TrackerModal>
 
-      <ModalSelect active={modalSelect}>
+      <ModalSelect active={modalSelect} onClick={(e) => e.stopPropagation()}>
         <div className="project__settings-menu">
           <div
             onClick={() => {
