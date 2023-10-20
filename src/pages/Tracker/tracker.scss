@@ -1184,7 +1184,7 @@
             }
 
             &__search {
-              margin-left: auto;
+              // margin-left: auto;
               padding: 6px 12px;
               display: flex;
               align-items: center;
@@ -1192,7 +1192,7 @@
               border: 1px solid #dde2e4;
               box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
               border-radius: 6px;
-              max-width: 450px;
+              max-width: 300px;
               width: 100%;
 
               &:focus-within {
@@ -1220,6 +1220,154 @@
                 font-weight: 400;
                 font-size: 14px;
                 line-height: 24px;
+              }
+            }
+          }
+
+          &__tasks-period {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+
+            .buttons-month {
+              display: flex;
+              gap: 34px;
+
+              button {
+                width: 30px;
+                height: 30px;
+                background-color: #8dc63f;
+                border-radius: 15px;
+                border: none;
+
+                img {
+                  width: 14px;
+                  height: 14px;
+                }
+
+                &:first-child {
+                  transform: rotate(-180deg);
+                }
+              }
+            }
+
+            .month-period {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+
+              p {
+                color: #1458dd;
+                font-size: 33px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 32px;
+                margin-right: 50px;
+              }
+
+              h3 {
+                color: #252c32;
+                font-size: 18px;
+                font-weight: 700;
+                margin-left: 5px;
+              }
+            }
+          }
+
+          &__filters {
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+
+            &-filter {
+              width: 116px;
+              height: 40px;
+
+              img {
+                margin-right: 14px;
+              }
+            }
+
+            &-clear {
+              width: 151px;
+              height: 40px;
+              background: #b0babf;
+            }
+          }
+
+          &__table {
+            margin-top: 20px;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 32px;
+
+            thead {
+              height: 65px;
+              background: #f1f1f1;
+              color: #5b6871;
+
+              th {
+                &:first-child {
+                  padding-left: 10px;
+                  border-top-left-radius: 12px;
+                  border-bottom-left-radius: 12px;
+                }
+                &:last-child {
+                  border-top-right-radius: 12px;
+                  border-bottom-right-radius: 12px;
+                }
+              }
+            }
+
+            tbody {
+              color: #000;
+              td {
+                height: 65px;
+                border-bottom: 1px solid rgba(241, 241, 241, 1);
+
+                &:first-child {
+                  max-width: 275px;
+
+                  color: #111112;
+                  font-size: 17px;
+                  font-weight: 700;
+                }
+              }
+
+              .task-status {
+                width: 130px;
+                border: 1px solid #52b709;
+                border-radius: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #000;
+                font-size: 14px;
+                font-weight: 400;
+              }
+            }
+
+            &__title-task {
+            }
+
+            &__name-project {
+              display: none;
+              flex-direction: column;
+
+              h4 {
+                margin: 0;
+                color: #807777;
+                font-size: 10px;
+                font-weight: 500;
+                line-height: 24px;
+              }
+
+              p {
+                color: #000;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 32px;
               }
             }
           }

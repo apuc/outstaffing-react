@@ -26,6 +26,7 @@ import ProjectTiket from "@components/ProjectTiket/ProjectTiket";
 import addProjectImg from "assets/icons/addProjectImg.svg";
 import archiveTrackerProjects from "assets/icons/archiveTrackerProjects.svg";
 import arrowViewReport from "assets/icons/arrows/arrowViewReport.svg";
+import filterIcon from "assets/icons/filterIcon.svg";
 import search from "assets/icons/serchIcon.png";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
@@ -246,7 +247,25 @@ export const Tracker = () => {
             }
           >
             <div className="taskList__head">
-              <h3>Список всех задач</h3>
+              <div className="taskList__tasks-period">
+                <div className="month-period">
+                  <p>
+                    {25} - {35}
+                  </p>
+                  <h2>Сентября,</h2>
+                  <h3>2023</h3>
+                </div>
+
+                <div className="buttons-month">
+                  <button>
+                    <img src={arrowViewReport} alt="<"></img>
+                  </button>
+                  <button>
+                    <img src={arrowViewReport} alt=">"></img>
+                  </button>
+                </div>
+              </div>
+
               <div className="taskList__head__search">
                 <img src={search} alt="search" />
                 <input
@@ -255,7 +274,68 @@ export const Tracker = () => {
                   onChange={(event) => filterAllTask(event)}
                 />
               </div>
+
+              <div className="taskList__filters">
+                <BaseButton styles={"taskList__filters-filter"}>
+                  <img src={filterIcon} alt="#" />
+                  <p>Фильтр</p>
+                </BaseButton>
+                <BaseButton styles={"taskList__filters-clear"}>
+                  <p> Очистить фильтр</p>
+                </BaseButton>
+              </div>
             </div>
+
+            <table className="taskList__table">
+              <thead>
+                <tr>
+                  <th>Задача</th>
+                  <th>Статус</th>
+                  <th>Потраченное время</th>
+                  <th>Дата начала</th>
+                  <th>Дедлайн</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <div className="taskList__table__title-task">
+                      Разработка трекера <img src="#" alt="#" />
+                    </div>
+                    <div className="taskList__table__name-project">
+                      <h4>Проект:</h4>
+                      <p>Туман</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="task-status">In Progress</div>
+                  </td>
+                  <td>14ч 25 мин</td>
+                  <td>13.09.2020</td>
+                  <td>20.09.2020</td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div className="taskList__table__title-task">
+                      Разработка трекера <img src="#" alt="#" />
+                    </div>
+                    <div className="taskList__table__name-project">
+                      <h4>Проект:</h4>
+                      <p>Туман</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="task-status">In Progress</div>
+                  </td>
+                  <td>14ч 25 мин</td>
+                  <td>13.09.2020</td>
+                  <td>20.09.2020</td>
+                </tr>
+              </tbody>
+            </table>
+
             {loader && <Loader style="green" />}
             {!loader && (
               <div className="taskList__wrapper">
