@@ -1322,13 +1322,21 @@
 
             tbody {
               color: #000;
+              tr {
+                background-color: white;
+
+                &:nth-child(2n) {
+                  background-color: rgba(241, 241, 241, 0.23);
+                }
+              }
+
               td {
                 height: 65px;
                 border-bottom: 1px solid rgba(241, 241, 241, 1);
 
                 &:first-child {
                   max-width: 275px;
-
+                  padding-left: 10px;
                   color: #111112;
                   font-size: 17px;
                   font-weight: 700;
@@ -1349,11 +1357,33 @@
             }
 
             &__title-task {
+              display: flex;
+              gap: 10px;
+              align-items: center;
+              transition: 0.4s;
+
+              div {
+                cursor: pointer;
+
+                width: 15px;
+                height: 15px;
+                display: flex;
+                background-color: #000;
+                align-items: center;
+                justify-content: center;
+                border-radius: 90px;
+
+                img {
+                  transition: 0.4s;
+                  transform: rotate(0deg);
+                }
+              }
             }
 
             &__name-project {
-              display: none;
+              display: flex;
               flex-direction: column;
+              transition: 0.4s;
 
               h4 {
                 margin: 0;
@@ -1365,10 +1395,104 @@
 
               p {
                 color: #000;
+                margin-top: -5px;
                 font-size: 14px;
                 font-weight: 400;
                 line-height: 32px;
               }
+            }
+          }
+
+          &__time {
+            padding: 30px 40px 20px 40px;
+            border-radius: 12px;
+            background: #e1fccf;
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+
+            h3 {
+              color: #111112;
+              font-size: 17px;
+              font-weight: 700;
+              line-height: 32px;
+              margin: 0;
+            }
+
+            &-compited {
+              display: flex;
+              flex-direction: column;
+
+              p {
+                font-weight: 700;
+                color: #1458dd;
+                font-size: 22px;
+              }
+
+              h4 {
+                color: #5b6871;
+                font-size: 14px;
+                margin-bottom: 12px;
+              }
+
+              h3 {
+                display: flex;
+                gap: 20px;
+              }
+            }
+
+            &-all {
+              display: flex;
+              gap: 20px;
+              align-items: flex-end;
+
+              p {
+                font-weight: 700;
+                color: #1458dd;
+                font-size: 22px;
+              }
+            }
+
+            &-status {
+              display: flex;
+              gap: 64px;
+
+              div {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-end;
+                gap: 10px;
+
+                p {
+                  width: 55px;
+                  font-size: 12px;
+                  color: #5b6871;
+                  font-weight: 400;
+                }
+              }
+            }
+          }
+
+          &__end {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            margin: 24px 0 40px 0;
+
+            .close-day {
+              padding: 8px 25px;
+              font-size: 17px;
+              font-style: normal;
+              font-weight: 500;
+            }
+
+            p {
+              color: #5b6871;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 400;
             }
           }
 
@@ -1497,6 +1621,16 @@
         @media (max-width: 650px) {
           padding-bottom: 20px;
         }
+      }
+
+      .hide-desc {
+        display: none !important;
+        transition: 0.4s;
+      }
+
+      .open-desc-item {
+        transition: 0.4s !important;
+        transform: rotate(45deg) !important;
       }
 
       &__archive {

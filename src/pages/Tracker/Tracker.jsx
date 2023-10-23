@@ -27,13 +27,15 @@ import addProjectImg from "assets/icons/addProjectImg.svg";
 import archiveTrackerProjects from "assets/icons/archiveTrackerProjects.svg";
 import arrowViewReport from "assets/icons/arrows/arrowViewReport.svg";
 import filterIcon from "assets/icons/filterIcon.svg";
+import plus from "assets/icons/plus.svg";
 import search from "assets/icons/serchIcon.png";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
 import archive from "assets/images/archiveIcon.png";
 import mockAvatar from "assets/images/avatarMok.png";
-import avatarMok from "assets/images/avatarMok.png";
+import downloadExel from "assets/images/downloadExel.svg";
 import noProjects from "assets/images/noProjects.png";
+import statusTimeTask from "assets/images/statusTimeTask.svg";
 
 import "./tracker.scss";
 
@@ -121,6 +123,14 @@ export const Tracker = () => {
         }
       })
     );
+  }
+
+  function toggleDescTask(e) {
+    e.target.closest("img").classList.toggle("open-desc-item");
+    e.target
+      .closest("td")
+      .querySelector(".taskList__table__name-project")
+      .classList.toggle("hide-desc");
   }
 
   return (
@@ -286,6 +296,7 @@ export const Tracker = () => {
               </div>
             </div>
 
+            {loader && <Loader style="green" />}
             <table className="taskList__table">
               <thead>
                 <tr>
@@ -298,78 +309,93 @@ export const Tracker = () => {
               </thead>
 
               <tbody>
-                <tr>
-                  <td>
-                    <div className="taskList__table__title-task">
-                      Разработка трекера <img src="#" alt="#" />
-                    </div>
-                    <div className="taskList__table__name-project">
-                      <h4>Проект:</h4>
-                      <p>Туман</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="task-status">In Progress</div>
-                  </td>
-                  <td>14ч 25 мин</td>
-                  <td>13.09.2020</td>
-                  <td>20.09.2020</td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <div className="taskList__table__title-task">
-                      Разработка трекера <img src="#" alt="#" />
-                    </div>
-                    <div className="taskList__table__name-project">
-                      <h4>Проект:</h4>
-                      <p>Туман</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="task-status">In Progress</div>
-                  </td>
-                  <td>14ч 25 мин</td>
-                  <td>13.09.2020</td>
-                  <td>20.09.2020</td>
-                </tr>
+                {!loader && (
+                  <>
+                    {Boolean(filteredAllTasks.length) &&
+                      filteredAllTasks.map((task, index) => {
+                        return (
+                          <tr key={task.id}>
+                            <td>
+                              <div className="taskList__table__title-task">
+                                {task.title}
+                                <div
+                                  onClick={(e) => {
+                                    toggleDescTask(e);
+                                  }}
+                                >
+                                  <img src={plus} alt="#" />
+                                </div>
+                              </div>
+                              <div className="taskList__table__name-project hide-desc">
+                                <h4>Проект:</h4>
+                                <p>
+                                  {projects.map((project) => {
+                                    if (project.id == task.project_id) {
+                                      return project.name;
+                                    }
+                                  })}
+                                </p>
+                              </div>
+                            </td>
+                            <td>
+                              <div className="task-status">
+                                {task.status == 1 ? "Active" : "Close"}
+                              </div>
+                            </td>
+                            <td>
+                              {task.timers.map((item) => {
+                                let time = new Date(item.deltaSeconds * 1000)
+                                  .toISOString()
+                                  .slice(11, 19);
+                                return `${time}`;
+                              })}
+                            </td>
+                            <td>
+                              {new Date(task.created_at).toLocaleDateString()}
+                            </td>
+                            <td>
+                              {new Date(task.dead_line).toLocaleDateString()}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                  </>
+                )}
               </tbody>
             </table>
 
-            {loader && <Loader style="green" />}
-            {!loader && (
-              <div className="taskList__wrapper">
-                {Boolean(filteredAllTasks.length) &&
-                  filteredAllTasks.map((task) => {
-                    return (
-                      <div className="task" key={task.id}>
-                        <div className="task__info">
-                          <h5>{task.title}</h5>
-                          <p
-                            dangerouslySetInnerHTML={{
-                              __html: task.description,
-                            }}
-                          />
-                        </div>
-                        <div className="task__person">
-                          <img
-                            src={
-                              task.user?.avatar
-                                ? urlForLocal(task.user.avatar)
-                                : avatarMok
-                            }
-                            alt="avatar"
-                          />
-                          <div className="task__project">
-                            <p>{task.user.fio}</p>
-                            <span>{getCorrectDate(task.created_at)}</span>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+            <div className="taskList__time">
+              <div className="taskList__time-compited">
+                <h4>Учет моего рабочего времени за день</h4>
+                <h3>
+                  Задач выполнено: <p>{2}</p>
+                </h3>
               </div>
-            )}
+              <div className="taskList__time-all">
+                <h3>Общее время:</h3>
+                <p>{"4 ч 34 мин"}</p>
+              </div>
+              <div className="taskList__time-status">
+                <div>
+                  <img src={statusTimeTask} alt="#" />
+                  <p>Сверка пройдена</p>
+                </div>
+                <div>
+                  <img src={downloadExel} alt="#" />
+                  <p>Скачать Exel отчет</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="taskList__end">
+              <BaseButton styles={"close-day"}>
+                Закрыть сегоднящний день
+              </BaseButton>
+              <p>
+                Нажимая кнопку - “Закрыть сегодняшний день” - вы отправляете
+                потрачеенное время на сверку
+              </p>
+            </div>
           </div>
           <div
             className={
