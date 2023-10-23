@@ -1672,21 +1672,58 @@
             @media (max-width: 450px) {
               flex-wrap: wrap;
             }
+          }
 
-            &-table {
-              margin: 29px 0 0 0;
-              height: 67px;
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
+          &__table {
+            margin: 29px 0 0 0;
+            height: 67px;
+            width: 100%;
+            font-size: 14px;
+            font-weight: 400;
+
+            thead {
               background: #f1f1f1;
               color: #5b6871;
-              font-size: 14px;
-              font-weight: 400;
               border-radius: 12px;
-              padding-left: 15px;
-              padding-right: 15px;
-              margin-right: -6px;
+              height: 65px;
+              background: #f1f1f1;
+              color: #5b6871;
+
+              th {
+                &:first-child {
+                  padding-left: 10px;
+                  border-top-left-radius: 12px;
+                  border-bottom-left-radius: 12px;
+                }
+                &:last-child {
+                  border-top-right-radius: 12px;
+                  border-bottom-right-radius: 12px;
+                }
+              }
+            }
+
+            tbody {
+              color: #000;
+              tr {
+                background-color: white;
+
+                &:nth-child(2n) {
+                  background-color: rgba(241, 241, 241, 0.23);
+                }
+              }
+
+              td {
+                height: 65px;
+                border-bottom: 1px solid rgba(241, 241, 241, 1);
+
+                &:first-child {
+                  max-width: 275px;
+                  padding-left: 10px;
+                  color: #111112;
+                  font-size: 17px;
+                  font-weight: 700;
+                }
+              }
             }
           }
 
@@ -1727,16 +1764,9 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            transition: all 0.3s ease;
             background: #f1f1f1;
             border-radius: 12px;
             padding: 12px 15px 7px 16px;
-
-            &:hover {
-              transform: scale(0.99);
-              box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.11);
-              transition: 0.4s;
-            }
 
             p {
               max-width: 420px;
@@ -1819,8 +1849,8 @@
             }
 
             &__description {
-              width: 70px;
-              max-width: 70px;
+              width: 270px;
+              max-width: 270px;
               font-size: 14px;
               font-weight: 500;
 

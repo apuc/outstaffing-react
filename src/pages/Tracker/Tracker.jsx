@@ -436,58 +436,65 @@ export const Tracker = () => {
                 </div>
               </div>
 
-              <div className="archive__title-table">
-                <p>Задача</p>
-                <p>Потраченное время</p>
-                <p>Дата окончания</p>
-              </div>
+              {loader && <Loader style="green" />}
+              <table className="archive__table">
+                <thead>
+                  <tr>
+                    <th>Задача</th>
+                    <th>Потраченное время</th>
+                    <th>Дата окончания</th>
+                  </tr>
+                </thead>
 
-              <div className="archive__tasksWrapper">
-                {loader && <Loader style="green" />}
-                {!loader && (
-                  <>
-                    {Boolean(filterCompleteTasks.length) ? (
-                      filterCompleteTasks.map((task, index) => {
-                        return (
-                          <div className="archive__completeTask" key={index}>
-                            <div className="archive__completeTask__description">
-                              <p className="completeTask__title">
-                                {task.title}
-                              </p>
-                              <p
-                                className="date"
-                                dangerouslySetInnerHTML={{
-                                  __html: task.description,
-                                }}
-                              />
-                            </div>
-                            <div className="archive__completeTask__time">
-                              <p>
-                                {task.timers.map((item) => {
-                                  let time = new Date(item.deltaSeconds * 1000)
-                                    .toISOString()
-                                    .slice(11, 19);
-                                  return `${time}`;
-                                })}
-                              </p>
-                            </div>
-                            <div className="archive__completeTask__info">
-                              <div className="archive__completeTask__info__project">
-                                {/*<span>Проект</span>*/}
-                                <p>{getCorrectDate(task.updated_at)}</p>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })
-                    ) : (
-                      <div className="archive__noItem">
-                        <p>В данном месяце у вас не было задач</p>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
+                <tbody>
+                  {!loader && (
+                    <>
+                      {Boolean(filterCompleteTasks.length) ? (
+                        filterCompleteTasks.map((task, index) => {
+                          return (
+                            <tr>
+                              <td className="archive__completeTask__description">
+                                <p className="completeTask__title">
+                                  {task.title}
+                                </p>
+                                <p
+                                  className="date"
+                                  dangerouslySetInnerHTML={{
+                                    __html: task.description,
+                                  }}
+                                />
+                              </td>
+                              <td className="archive__completeTask__time">
+                                <p>
+                                  {task.timers.length == 0
+                                    ? "-"
+                                    : task.timers.map((item) => {
+                                        let time = new Date(
+                                          item.deltaSeconds * 1000
+                                        )
+                                          .toISOString()
+                                          .slice(11, 19);
+                                        return `${time}`;
+                                      })}
+                                </p>
+                              </td>
+                              <td className="archive__completeTask__info">
+                                <div>
+                                  <p>{getCorrectDate(task.updated_at)}</p>
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <div className="archive__noItem">
+                          <p>В данном месяце у вас не было задач</p>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </tbody>
+              </table>
             </div>
             <div className="archive__projects">
               <div className="archive__projects-title">
