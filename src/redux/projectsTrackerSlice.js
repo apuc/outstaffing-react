@@ -46,7 +46,7 @@ export const projectsTrackerSlice = createSlice({
       state.projectBoard.projectUsers.push(action.payload);
     },
     addNewTagToProject: (state, action) => {
-      state.projectBoard.mark.push(action.payload)
+      state.projectBoard.mark.push(action.payload);
     },
     activeLoader: (state) => {
       state.boardLoader = true;
