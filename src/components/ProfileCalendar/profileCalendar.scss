@@ -90,3 +90,12 @@
     }
   }
 }
+.clear-days {
+  background: red;
+  padding: 5px 20px;
+  font-size: 14px;
+
+  &:hover {
+    background: rgba(255, 0, 0, 0.637);
+  }
+}
