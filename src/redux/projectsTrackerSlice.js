@@ -45,6 +45,9 @@ export const projectsTrackerSlice = createSlice({
     addPersonToProject: (state, action) => {
       state.projectBoard.projectUsers.push(action.payload);
     },
+    addNewTagToProject: (state, action) => {
+      state.projectBoard.mark.push(action.payload)
+    },
     activeLoader: (state) => {
       state.boardLoader = true;
     },
@@ -179,6 +182,7 @@ export const {
   setColumnPriority,
   deletePersonOnProject,
   addPersonToProject,
+  addNewTagToProject,
   filterCreatedByMe,
   filteredParticipateTasks,
   filteredExecutorTasks,

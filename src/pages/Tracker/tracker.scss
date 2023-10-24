@@ -236,7 +236,7 @@
 
           &__wrapper {
             display: flex;
-            max-width: 1280px;
+            max-width: 1400px;
             width: 100%;
             margin: 0 auto;
             justify-content: space-between;
@@ -744,6 +744,163 @@
 
             @media (max-width: 1150px) {
               display: none;
+            }
+          }
+
+          &__tags {
+            position: relative;
+            .tags {
+              &__add {
+                display: flex;
+                align-items: center;
+                margin: 0 10px;
+                column-gap: 5px;
+                cursor: pointer;
+                padding: 4px;
+                border-radius: 8px;
+                border: 1px solid #e3e2e2;
+                max-height: 30px;
+                p {
+                  white-space: nowrap;
+                  font-weight: 400;
+                  font-size: 14px;
+                  line-height: 17px;
+                }
+                span {
+                  width: 14px;
+                  height: 14px;
+                  font-weight: 400;
+                  line-height: 16px;
+                  border-radius: 50px;
+                  align-items: center;
+                  justify-content: center;
+                  display: flex;
+                  background: #cbd9f9;
+                  color: white;
+                  font-size: 14px;
+                  transition: all 0.15s ease;
+                }
+              }
+              &__list {
+                position: absolute;
+                background: #f8f9fa;
+                z-index: 20;
+                border-radius: 8px;
+                padding: 20px 10px 10px;
+                top: 30px;
+                width: 220px;
+                display: flex;
+                flex-direction: column;
+
+                .close {
+                  cursor: pointer;
+                  width: 20px;
+                  height: 20px;
+                  position: absolute;
+                  right: 10px;
+                  top: 2px;
+                }
+
+                &__created {
+                  display: flex;
+                  flex-direction: column;
+                  row-gap: 8px;
+                  margin-top: 8px;
+
+                  .tagItem {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 5px;
+                    border: 1px solid #e3e2e2;
+                    border-radius: 8px;
+
+                    &__description {
+                      font-size: 14px;
+                    }
+
+                    &__info {
+                      display: flex;
+                      align-items: center;
+                      column-gap: 10px;
+
+                      &__name {
+                        font-size: 16px;
+                        font-weight: 600;
+                      }
+
+                      &__color {
+                        border: 1px solid #e3e2e2;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50px;
+                      }
+                    }
+                  }
+                }
+
+                .addNewTag {
+                  display: flex;
+                  align-items: center;
+                  column-gap: 8px;
+                  cursor: pointer;
+                  justify-content: center;
+
+                  p {
+                    font-size: 13px;
+                  }
+
+                  span {
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50px;
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+                    background: #52b709;
+                    color: white;
+                    font-size: 16px;
+                    transition: all 0.15s ease;
+                  }
+                }
+
+                .formTag {
+                  display: flex;
+                  flex-direction: column;
+                  padding-top: 8px;
+                  row-gap: 8px;
+                  .arrow {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 5px;
+                    width: 15px;
+                    height: 15px;
+                    transform: rotate(180deg);
+                  }
+
+                  &__input {
+                    outline: none;
+                    border-radius: 8px;
+                    border: 1px solid #e3e2e2;
+                    font-size: 15px;
+                    padding: 5px;
+                  }
+
+                  &__btn {
+                    outline: none;
+                    border: none;
+                    background: #6f6f6f;
+                    color: whitesmoke;
+                    margin: 0 auto;
+                    border-radius: 10px;
+                    font-size: 15px;
+                  }
+
+                  .disable {
+                    opacity: 0.5;
+                    pointer-events: none;
+                  }
+                }
+              }
             }
           }
         }
