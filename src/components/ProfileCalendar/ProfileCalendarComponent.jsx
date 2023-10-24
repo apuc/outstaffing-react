@@ -22,11 +22,12 @@ import {
   getReports,
   hourOfNum,
 } from "@components/Calendar/calendarHelper";
+import BaseButton from "@components/Common/BaseButton/BaseButton";
 import ShortReport from "@components/ShortReport/ShortReport";
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import calendarIcon from "assets/icons/calendar.svg";
-import close from "assets/icons/closeProjectPersons.svg";
+// import close from "assets/icons/closeProjectPersons.svg";
 import rectangle from "assets/images/rectangle__calendar.png";
 
 // eslint-disable-next-line react/display-name
@@ -50,6 +51,7 @@ export const ProfileCalendarComponent = React.memo(
     const [endDate, setEndDate] = useState(null);
     const [totalRangeHours, setTotalRangeHours] = useState(0);
     const [selectedRangeDays, setSelectedRangeDays] = useState({});
+    const [activePeriod, setActivePeriod] = useState(false);
 
     useEffect(() => {
       setCalendar(calendarHelper(value));
@@ -140,6 +142,14 @@ export const ProfileCalendarComponent = React.memo(
         }
         setTotalRangeHours(spendTime);
       });
+    }
+
+    function toggleActivePeriod() {
+      if (!activePeriod) {
+        setActivePeriod(true);
+      } else {
+        setActivePeriod(false);
+      }
     }
 
     function rangeDays(day) {
@@ -298,12 +308,15 @@ export const ProfileCalendarComponent = React.memo(
             onClick={() => {
               if (startRangeDays) resetRangeDays();
               toggleRangeDays();
+              toggleActivePeriod();
             }}
           >
             {endDate
               ? startDate < endDate
                 ? `${getCorrectDate(startDate)} - ${getCorrectDate(endDate)}`
                 : `${getCorrectDate(endDate)} - ${getCorrectDate(startDate)}`
+              : activePeriod
+              ? "Выберите начало диапазона"
               : "Выбрать диапазон"}
           </span>
           <span>
@@ -312,14 +325,14 @@ export const ProfileCalendarComponent = React.memo(
               : "0 часов"}
           </span>
           {endDate && (
-            <img
-              className="close"
-              src={close}
-              alt="close"
+            <BaseButton
+              styles={"clear-days"}
               onClick={() => {
                 resetRangeDays();
               }}
-            />
+            >
+              Сбросить
+            </BaseButton>
           )}
         </div>
         {shortReport && <ShortReport />}
