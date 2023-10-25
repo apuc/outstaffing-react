@@ -12,6 +12,7 @@ import {
   filteredParticipateTasks,
   getBoarderLoader,
   getProjectBoard,
+  deleteTagProject,
   modalToggle,
   movePositionProjectTask,
   moveProjectTask,
@@ -71,6 +72,7 @@ export const ProjectTracker = () => {
   const [tags, setTags] = useState({
     open: false,
     add: false,
+    edit: false
   });
   const [color, setColor] = useState("#aabbcc");
   const [tagInfo, setTagInfo] = useState({ description: "", name: "" });
@@ -316,6 +318,37 @@ export const ProjectTracker = () => {
         }));
       });
     });
+  }
+
+  function editTag() {
+    apiRequest("/mark/update", {
+      method: "PUT",
+      data: {
+        mark_id: tagInfo.editMarkId,
+        title: tagInfo.description,
+        slug: tagInfo.name,
+        color: color
+      }
+    }).then(() => {
+      dispatch(setProjectBoardFetch(projectId.id))
+      setTags((prevState) => ({
+        ...prevState,
+        edit: false,
+      }));
+    })
+  }
+
+  function deleteTag(tagId) {
+    apiRequest("/mark/detach", {
+      method: "DELETE",
+      data: {
+        mark_id: tagId,
+        entity_type: 1,
+        entity_id: projectId.id,
+      }
+    }).then(() => {
+      dispatch(deleteTagProject(tagId))
+    })
   }
 
   return (
@@ -586,13 +619,19 @@ export const ProjectTracker = () => {
                           className="close"
                           alt="close"
                           onClick={() => {
-                            setTags((prevState) => ({
-                              ...prevState,
+                            setTags({
                               open: false,
-                            }));
+                              add: false,
+                              edit: false
+                            });
+                            setTagInfo({
+                              description: '',
+                              name: ''
+                            })
+                            setColor("#aabbcc")
                           }}
                         />
-                        {!tags.add && (
+                        {!tags.add && !tags.edit && (
                           <div className="tags__list__created">
                             {projectBoard.mark.map((tag) => {
                               return (
@@ -608,6 +647,21 @@ export const ProjectTracker = () => {
                                       className="tagItem__info__color"
                                       style={{ background: tag.color }}
                                     />
+                                  </div>
+                                  <div className='tagItem__images'>
+                                    <img src={edit} alt='edit' onClick={() => {
+                                      setTags((prevState) => ({
+                                        ...prevState,
+                                        edit: true,
+                                      }))
+                                      setTagInfo({
+                                        description: tag.title,
+                                        name: tag.slug,
+                                        editMarkId: tag.id
+                                      })
+                                      setColor(tag.color)
+                                    }} />
+                                    <img onClick={() => deleteTag(tag.id)} className='delete' src={close} alt='delete' />
                                   </div>
                                 </div>
                               );
@@ -626,7 +680,7 @@ export const ProjectTracker = () => {
                             </div>
                           </div>
                         )}
-                        {tags.add && (
+                        {(tags.add || tags.edit) && (
                           <div className="formTag">
                             <img
                               src={arrow}
@@ -636,7 +690,13 @@ export const ProjectTracker = () => {
                                 setTags((prevState) => ({
                                   ...prevState,
                                   add: false,
+                                  edit: false
                                 }));
+                                setTagInfo({
+                                  description: '',
+                                  name: ''
+                                })
+                                setColor("#aabbcc")
                               }}
                             />
                             <input
@@ -665,14 +725,17 @@ export const ProjectTracker = () => {
                             />
                             <HexColorPicker color={color} onChange={setColor} />
                             <button
-                              onClick={addNewTag}
+                              onClick={() => {
+                                tags.add ? addNewTag() : editTag()
+                              }
+                            }
                               className={
                                 tagInfo.name && tagInfo.description
                                   ? "formTag__btn"
                                   : "formTag__btn disable"
                               }
                             >
-                              Добавить
+                              {tags.add ? 'Добавить' : 'Изменить'}
                             </button>
                           </div>
                         )}
@@ -695,6 +758,7 @@ export const ProjectTracker = () => {
                   projectName={projectBoard.name}
                   projectUsers={projectBoard.projectUsers}
                   projectOwnerId={projectBoard.owner_id}
+                  projectMarks={projectBoard.mark}
                 />
               )}
 
@@ -827,6 +891,14 @@ export const ProjectTracker = () => {
                                     />
                                   )}
                                 </div>
+                                {Boolean(task.mark.length) &&
+                                  <div className='tasks__board__item__tags'>
+                                    {task.mark.map((tag) => {
+                                      return <div className='tagItem' key={tag.id} style={{background: tag.color}}><p>{tag.slug}</p></div>
+                                    })
+                                    }
+                                  </div>
+                                }
                                 {task.dead_line && (
                                   <div className="tasks__board__item__deadLine">
                                     <p>Срок исполнения:</p>

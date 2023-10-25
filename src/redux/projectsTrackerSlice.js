@@ -42,6 +42,9 @@ export const projectsTrackerSlice = createSlice({
         (person) => person.user_id !== action.payload
       );
     },
+    deleteTagProject: (state, action) => {
+      state.projectBoard.mark = state.projectBoard.mark.filter((tag) => tag.id !== action.payload)
+    },
     addPersonToProject: (state, action) => {
       state.projectBoard.projectUsers.push(action.payload);
     },
@@ -181,6 +184,7 @@ export const {
   setColumnId,
   setColumnPriority,
   deletePersonOnProject,
+  deleteTagProject,
   addPersonToProject,
   addNewTagToProject,
   filterCreatedByMe,
