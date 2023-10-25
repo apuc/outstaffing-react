@@ -7,12 +7,12 @@ import {
   activeLoader,
   addNewTagToProject,
   deletePersonOnProject,
+  deleteTagProject,
   filterCreatedByMe,
   filteredExecutorTasks,
   filteredParticipateTasks,
   getBoarderLoader,
   getProjectBoard,
-  deleteTagProject,
   modalToggle,
   movePositionProjectTask,
   moveProjectTask,
@@ -72,7 +72,7 @@ export const ProjectTracker = () => {
   const [tags, setTags] = useState({
     open: false,
     add: false,
-    edit: false
+    edit: false,
   });
   const [color, setColor] = useState("#aabbcc");
   const [tagInfo, setTagInfo] = useState({ description: "", name: "" });
@@ -327,15 +327,15 @@ export const ProjectTracker = () => {
         mark_id: tagInfo.editMarkId,
         title: tagInfo.description,
         slug: tagInfo.name,
-        color: color
-      }
+        color: color,
+      },
     }).then(() => {
-      dispatch(setProjectBoardFetch(projectId.id))
+      dispatch(setProjectBoardFetch(projectId.id));
       setTags((prevState) => ({
         ...prevState,
         edit: false,
       }));
-    })
+    });
   }
 
   function deleteTag(tagId) {
@@ -345,10 +345,10 @@ export const ProjectTracker = () => {
         mark_id: tagId,
         entity_type: 1,
         entity_id: projectId.id,
-      }
+      },
     }).then(() => {
-      dispatch(deleteTagProject(tagId))
-    })
+      dispatch(deleteTagProject(tagId));
+    });
   }
 
   return (
@@ -622,13 +622,13 @@ export const ProjectTracker = () => {
                             setTags({
                               open: false,
                               add: false,
-                              edit: false
+                              edit: false,
                             });
                             setTagInfo({
-                              description: '',
-                              name: ''
-                            })
-                            setColor("#aabbcc")
+                              description: "",
+                              name: "",
+                            });
+                            setColor("#aabbcc");
                           }}
                         />
                         {!tags.add && !tags.edit && (
@@ -648,20 +648,29 @@ export const ProjectTracker = () => {
                                       style={{ background: tag.color }}
                                     />
                                   </div>
-                                  <div className='tagItem__images'>
-                                    <img src={edit} alt='edit' onClick={() => {
-                                      setTags((prevState) => ({
-                                        ...prevState,
-                                        edit: true,
-                                      }))
-                                      setTagInfo({
-                                        description: tag.title,
-                                        name: tag.slug,
-                                        editMarkId: tag.id
-                                      })
-                                      setColor(tag.color)
-                                    }} />
-                                    <img onClick={() => deleteTag(tag.id)} className='delete' src={close} alt='delete' />
+                                  <div className="tagItem__images">
+                                    <img
+                                      src={edit}
+                                      alt="edit"
+                                      onClick={() => {
+                                        setTags((prevState) => ({
+                                          ...prevState,
+                                          edit: true,
+                                        }));
+                                        setTagInfo({
+                                          description: tag.title,
+                                          name: tag.slug,
+                                          editMarkId: tag.id,
+                                        });
+                                        setColor(tag.color);
+                                      }}
+                                    />
+                                    <img
+                                      onClick={() => deleteTag(tag.id)}
+                                      className="delete"
+                                      src={close}
+                                      alt="delete"
+                                    />
                                   </div>
                                 </div>
                               );
@@ -690,13 +699,13 @@ export const ProjectTracker = () => {
                                 setTags((prevState) => ({
                                   ...prevState,
                                   add: false,
-                                  edit: false
+                                  edit: false,
                                 }));
                                 setTagInfo({
-                                  description: '',
-                                  name: ''
-                                })
-                                setColor("#aabbcc")
+                                  description: "",
+                                  name: "",
+                                });
+                                setColor("#aabbcc");
                               }}
                             />
                             <input
@@ -726,16 +735,15 @@ export const ProjectTracker = () => {
                             <HexColorPicker color={color} onChange={setColor} />
                             <button
                               onClick={() => {
-                                tags.add ? addNewTag() : editTag()
-                              }
-                            }
+                                tags.add ? addNewTag() : editTag();
+                              }}
                               className={
                                 tagInfo.name && tagInfo.description
                                   ? "formTag__btn"
                                   : "formTag__btn disable"
                               }
                             >
-                              {tags.add ? 'Добавить' : 'Изменить'}
+                              {tags.add ? "Добавить" : "Изменить"}
                             </button>
                           </div>
                         )}
@@ -891,14 +899,21 @@ export const ProjectTracker = () => {
                                     />
                                   )}
                                 </div>
-                                {Boolean(task.mark.length) &&
-                                  <div className='tasks__board__item__tags'>
+                                {Boolean(task.mark.length) && (
+                                  <div className="tasks__board__item__tags">
                                     {task.mark.map((tag) => {
-                                      return <div className='tagItem' key={tag.id} style={{background: tag.color}}><p>{tag.slug}</p></div>
-                                    })
-                                    }
+                                      return (
+                                        <div
+                                          className="tagItem"
+                                          key={tag.id}
+                                          style={{ background: tag.color }}
+                                        >
+                                          <p>{tag.slug}</p>
+                                        </div>
+                                      );
+                                    })}
                                   </div>
-                                }
+                                )}
                                 {task.dead_line && (
                                   <div className="tasks__board__item__deadLine">
                                     <p>Срок исполнения:</p>

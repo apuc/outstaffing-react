@@ -30,6 +30,7 @@ import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskCommen
 import archive from "assets/icons/archive.svg";
 import arrow from "assets/icons/arrows/arrowStart.png";
 import fullScreen from "assets/icons/arrows/inFullScreen.svg";
+import arrowDown from "assets/icons/arrows/selectArrow.png";
 import calendarIcon from "assets/icons/calendar.svg";
 import category from "assets/icons/category.svg";
 import close from "assets/icons/closeProjectPersons.svg";
@@ -39,7 +40,6 @@ import file from "assets/icons/fileModal.svg";
 import link from "assets/icons/link.svg";
 import send from "assets/icons/send.svg";
 import watch from "assets/icons/watch.svg";
-import arrowDown from "assets/icons/arrows/selectArrow.png";
 import avatarMok from "assets/images/avatarMok.png";
 
 import { getCorrectDate } from "../../../Calendar/calendarHelper";
@@ -55,7 +55,7 @@ export const ModalTiсket = ({
   projectName,
   projectUsers,
   projectOwnerId,
-  projectMarks
+  projectMarks,
 }) => {
   const dispatch = useDispatch();
   const [addSubtask, setAddSubtask] = useState(false);
@@ -75,7 +75,7 @@ export const ModalTiсket = ({
   const [dropListMembersOpen, setDropListMembersOpen] = useState(false);
   const [executor, setExecutor] = useState(task.executor);
   const [members, setMembers] = useState(task.taskUsers);
-  const [taskTags, setTaskTags] = useState(task.mark)
+  const [taskTags, setTaskTags] = useState(task.mark);
   const [users, setUsers] = useState([]);
   const [timerStart, setTimerStart] = useState(false);
   const [timerInfo, setTimerInfo] = useState({});
@@ -88,11 +88,11 @@ export const ModalTiсket = ({
   const [timerId, setTimerId] = useState(null);
   const [taskFiles, setTaskFiles] = useState([]);
   const [correctProjectUsers, setCorrectProjectUsers] = useState(projectUsers);
-  const [correctProjectTags, setCorrectProjectTags] = useState([])
+  const [correctProjectTags, setCorrectProjectTags] = useState([]);
   const [executorId, setExecutorId] = useState(task.executor_id);
   const profileInfo = useSelector(getProfileInfo);
   const [acceptModalOpen, setAcceptModalOpen] = useState(false);
-  const [selectTagsOpen, setSelectTagsOpen] = useState(false)
+  const [selectTagsOpen, setSelectTagsOpen] = useState(false);
   const { showNotification } = useNotification();
 
   function deleteTask() {
@@ -353,12 +353,14 @@ export const ModalTiсket = ({
   }, []);
 
   useEffect(() => {
-    let tagIds = taskTags.map((tag) => tag.id)
-    setCorrectProjectTags(projectMarks.reduce((acc, cur) => {
-      if (!tagIds.includes(cur.id)) acc.push(cur)
-      return acc
-    }, []))
-    }, [taskTags])
+    let tagIds = taskTags.map((tag) => tag.id);
+    setCorrectProjectTags(
+      projectMarks.reduce((acc, cur) => {
+        if (!tagIds.includes(cur.id)) acc.push(cur);
+        return acc;
+      }, [])
+    );
+  }, [taskTags]);
 
   async function handleUpload(event) {
     const formData = new FormData();
@@ -473,13 +475,13 @@ export const ModalTiсket = ({
       data: {
         mark_id: tagId,
         entity_type: 2,
-        entity_id: task.id
-      }
+        entity_id: task.id,
+      },
     }).then((data) => {
-      setSelectTagsOpen(false)
-      setTaskTags((prevValue) => [...prevValue, data.mark])
+      setSelectTagsOpen(false);
+      setTaskTags((prevValue) => [...prevValue, data.mark]);
       dispatch(setProjectBoardFetch(projectId));
-    })
+    });
   }
 
   function deleteTagFromTask(tagId) {
@@ -488,12 +490,12 @@ export const ModalTiсket = ({
       data: {
         mark_id: tagId,
         entity_type: 2,
-        entity_id: task.id
-      }
+        entity_id: task.id,
+      },
     }).then(() => {
-      setTaskTags((prevValue) => prevValue.filter((tag) => tag.id !== tagId))
+      setTaskTags((prevValue) => prevValue.filter((tag) => tag.id !== tagId));
       dispatch(setProjectBoardFetch(projectId));
-    })
+    });
   }
 
   function closeAcceptModal() {
@@ -854,41 +856,62 @@ export const ModalTiсket = ({
           </div>
 
           <div className="workers_box-bottom">
-            <div className='tags'>
-              <div className='tags__selected'>
+            <div className="tags">
+              <div className="tags__selected">
                 {taskTags.map((tag) => {
-                  return <div className='tags__selected__item' key={tag.id} style={{background: tag.color}}>
-                    <p>
-                      {tag.slug}
-                    </p>
-                    <img src={close} className='delete' alt='delete' onClick={() => deleteTagFromTask(tag.id)} />
-                  </div>
-                })
-                }
+                  return (
+                    <div
+                      className="tags__selected__item"
+                      key={tag.id}
+                      style={{ background: tag.color }}
+                    >
+                      <p>{tag.slug}</p>
+                      <img
+                        src={close}
+                        className="delete"
+                        alt="delete"
+                        onClick={() => deleteTagFromTask(tag.id)}
+                      />
+                    </div>
+                  );
+                })}
               </div>
-              <div className='tags__select' onClick={() => setSelectTagsOpen(!selectTagsOpen)}>
+              <div
+                className="tags__select"
+                onClick={() => setSelectTagsOpen(!selectTagsOpen)}
+              >
                 <span>Выберите тег</span>
                 <img
-                    className={selectTagsOpen ? "open" : ""}
-                    src={arrowDown}
-                    alt="arrow"
+                  className={selectTagsOpen ? "open" : ""}
+                  src={arrowDown}
+                  alt="arrow"
                 />
               </div>
-              {selectTagsOpen &&
-                  <div className='tags__dropDown'>
-                    <img onClick={() => setSelectTagsOpen(false)} className='tags__dropDown__close' src={close} alt="close" />
-                    {correctProjectTags.map((tag) => {
-                      return <div className='tagItem' key={tag.id} onClick={() => addTagToTask(tag.id)}>
+              {selectTagsOpen && (
+                <div className="tags__dropDown">
+                  <img
+                    onClick={() => setSelectTagsOpen(false)}
+                    className="tags__dropDown__close"
+                    src={close}
+                    alt="close"
+                  />
+                  {correctProjectTags.map((tag) => {
+                    return (
+                      <div
+                        className="tagItem"
+                        key={tag.id}
+                        onClick={() => addTagToTask(tag.id)}
+                      >
                         <p>{tag.slug}</p>
-                        <span style={{background: tag.color}} />
+                        <span style={{ background: tag.color }} />
                       </div>
-                    })
-                    }
-                    {!Boolean(correctProjectTags.length) &&
-                      <p className='tags__dropDown__noItem'>Нет тегов</p>
-                    }
-                  </div>
-              }
+                    );
+                  })}
+                  {!Boolean(correctProjectTags.length) && (
+                    <p className="tags__dropDown__noItem">Нет тегов</p>
+                  )}
+                </div>
+              )}
             </div>
             <div
               className={editOpen ? "edit" : ""}

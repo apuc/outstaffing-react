@@ -43,7 +43,9 @@ export const projectsTrackerSlice = createSlice({
       );
     },
     deleteTagProject: (state, action) => {
-      state.projectBoard.mark = state.projectBoard.mark.filter((tag) => tag.id !== action.payload)
+      state.projectBoard.mark = state.projectBoard.mark.filter(
+        (tag) => tag.id !== action.payload
+      );
     },
     addPersonToProject: (state, action) => {
       state.projectBoard.projectUsers.push(action.payload);
