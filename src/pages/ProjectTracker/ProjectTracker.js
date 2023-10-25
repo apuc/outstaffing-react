@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
+import { HexColorPicker } from "react-colorful";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
 import {
   activeLoader,
+  addNewTagToProject,
   deletePersonOnProject,
+  deleteTagProject,
   filterCreatedByMe,
   filteredExecutorTasks,
   filteredParticipateTasks,
@@ -66,6 +69,13 @@ export const ProjectTracker = () => {
   const [modalActiveTicket, setModalActiveTicket] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState({});
   const [personListOpen, setPersonListOpen] = useState(false);
+  const [tags, setTags] = useState({
+    open: false,
+    add: false,
+    edit: false,
+  });
+  const [color, setColor] = useState("#aabbcc");
+  const [tagInfo, setTagInfo] = useState({ description: "", name: "" });
   const [checkBoxParticipateTasks, setCheckBoxParticipateTasks] =
     useState(false);
   const [filteredNoTasks, setFilteredNoTasks] = useState(false);
@@ -281,6 +291,64 @@ export const ProjectTracker = () => {
     setCheckBoxParticipateTasks(false);
     setCheckBoxMyTasks(false);
     dispatch(setProjectBoardFetch(projectId.id));
+  }
+
+  function addNewTag() {
+    apiRequest("/mark/create", {
+      method: "POST",
+      data: {
+        title: tagInfo.description,
+        slug: tagInfo.name,
+        color: color,
+        status: 1,
+      },
+    }).then((data) => {
+      apiRequest("/mark/attach", {
+        method: "POST",
+        data: {
+          mark_id: data.id,
+          entity_type: 1,
+          entity_id: projectId.id,
+        },
+      }).then((data) => {
+        dispatch(addNewTagToProject(data.mark));
+        setTags((prevState) => ({
+          ...prevState,
+          add: false,
+        }));
+      });
+    });
+  }
+
+  function editTag() {
+    apiRequest("/mark/update", {
+      method: "PUT",
+      data: {
+        mark_id: tagInfo.editMarkId,
+        title: tagInfo.description,
+        slug: tagInfo.name,
+        color: color,
+      },
+    }).then(() => {
+      dispatch(setProjectBoardFetch(projectId.id));
+      setTags((prevState) => ({
+        ...prevState,
+        edit: false,
+      }));
+    });
+  }
+
+  function deleteTag(tagId) {
+    apiRequest("/mark/detach", {
+      method: "DELETE",
+      data: {
+        mark_id: tagId,
+        entity_type: 1,
+        entity_id: projectId.id,
+      },
+    }).then(() => {
+      dispatch(deleteTagProject(tagId));
+    });
   }
 
   return (
@@ -531,6 +599,157 @@ export const ProjectTracker = () => {
                       )}
                     </div>
                   )}
+                  <div className="tasks__head__tags">
+                    <div
+                      className="tags__add"
+                      onClick={() => {
+                        setTags((prevState) => ({
+                          ...prevState,
+                          open: !tags.open,
+                        }));
+                      }}
+                    >
+                      <p>Список тегов</p>
+                      <span>+</span>
+                    </div>
+                    {tags.open && (
+                      <div className="tags__list">
+                        <img
+                          src={close}
+                          className="close"
+                          alt="close"
+                          onClick={() => {
+                            setTags({
+                              open: false,
+                              add: false,
+                              edit: false,
+                            });
+                            setTagInfo({
+                              description: "",
+                              name: "",
+                            });
+                            setColor("#aabbcc");
+                          }}
+                        />
+                        {!tags.add && !tags.edit && (
+                          <div className="tags__list__created">
+                            {projectBoard.mark.map((tag) => {
+                              return (
+                                <div className="tagItem" key={tag.id}>
+                                  <p className="tagItem__description">
+                                    {tag.title}
+                                  </p>
+                                  <div className="tagItem__info">
+                                    <span className="tagItem__info__name">
+                                      {tag.slug}
+                                    </span>
+                                    <span
+                                      className="tagItem__info__color"
+                                      style={{ background: tag.color }}
+                                    />
+                                  </div>
+                                  <div className="tagItem__images">
+                                    <img
+                                      src={edit}
+                                      alt="edit"
+                                      onClick={() => {
+                                        setTags((prevState) => ({
+                                          ...prevState,
+                                          edit: true,
+                                        }));
+                                        setTagInfo({
+                                          description: tag.title,
+                                          name: tag.slug,
+                                          editMarkId: tag.id,
+                                        });
+                                        setColor(tag.color);
+                                      }}
+                                    />
+                                    <img
+                                      onClick={() => deleteTag(tag.id)}
+                                      className="delete"
+                                      src={close}
+                                      alt="delete"
+                                    />
+                                  </div>
+                                </div>
+                              );
+                            })}
+                            <div
+                              className="addNewTag"
+                              onClick={() =>
+                                setTags((prevState) => ({
+                                  ...prevState,
+                                  add: true,
+                                }))
+                              }
+                            >
+                              <p>Добавить новый тег</p>
+                              <span>+</span>
+                            </div>
+                          </div>
+                        )}
+                        {(tags.add || tags.edit) && (
+                          <div className="formTag">
+                            <img
+                              src={arrow}
+                              className="arrow"
+                              alt="arrow"
+                              onClick={() => {
+                                setTags((prevState) => ({
+                                  ...prevState,
+                                  add: false,
+                                  edit: false,
+                                }));
+                                setTagInfo({
+                                  description: "",
+                                  name: "",
+                                });
+                                setColor("#aabbcc");
+                              }}
+                            />
+                            <input
+                              className="formTag__input"
+                              placeholder="Описание метки"
+                              maxLength="25"
+                              value={tagInfo.description}
+                              onChange={(e) =>
+                                setTagInfo((prevState) => ({
+                                  ...prevState,
+                                  description: e.target.value,
+                                }))
+                              }
+                            />
+                            <input
+                              className="formTag__input"
+                              placeholder="Тег"
+                              value={tagInfo.name}
+                              maxLength="10"
+                              onChange={(e) =>
+                                setTagInfo((prevState) => ({
+                                  ...prevState,
+                                  name: e.target.value,
+                                }))
+                              }
+                            />
+                            <HexColorPicker color={color} onChange={setColor} />
+                            <button
+                              onClick={() => {
+                                tags.add ? addNewTag() : editTag();
+                              }}
+                              className={
+                                tagInfo.name && tagInfo.description
+                                  ? "formTag__btn"
+                                  : "formTag__btn disable"
+                              }
+                            >
+                              {tags.add ? "Добавить" : "Изменить"}
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
                   <Link to="/profile/tracker" className="tasks__head__back">
                     <p>Вернуться на проекты</p>
                     <img src={arrow} alt="arrow" />
@@ -547,6 +766,7 @@ export const ProjectTracker = () => {
                   projectName={projectBoard.name}
                   projectUsers={projectBoard.projectUsers}
                   projectOwnerId={projectBoard.owner_id}
+                  projectMarks={projectBoard.mark}
                 />
               )}
 
@@ -679,6 +899,21 @@ export const ProjectTracker = () => {
                                     />
                                   )}
                                 </div>
+                                {Boolean(task.mark.length) && (
+                                  <div className="tasks__board__item__tags">
+                                    {task.mark.map((tag) => {
+                                      return (
+                                        <div
+                                          className="tagItem"
+                                          key={tag.id}
+                                          style={{ background: tag.color }}
+                                        >
+                                          <p>{tag.slug}</p>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                )}
                                 {task.dead_line && (
                                   <div className="tasks__board__item__deadLine">
                                     <p>Срок исполнения:</p>
