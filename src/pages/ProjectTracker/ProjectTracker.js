@@ -335,6 +335,8 @@ export const ProjectTracker = () => {
         ...prevState,
         edit: false,
       }));
+      setTagInfo({ description: "", name: "" });
+      setColor("#aabbcc");
     });
   }
 
