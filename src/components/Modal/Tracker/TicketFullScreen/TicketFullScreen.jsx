@@ -38,6 +38,7 @@ import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskCommen
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowStart from "assets/icons/arrows/arrowStart.png";
+import arrowDown from "assets/icons/arrows/selectArrow.png";
 import calendarIcon from "assets/icons/calendar.svg";
 import close from "assets/icons/close.png";
 import fileDelete from "assets/icons/closeProjectPersons.svg";
@@ -53,7 +54,6 @@ import archive from "assets/images/archiveIcon.png";
 import avatarMok from "assets/images/avatarMok.png";
 
 import "./ticketFullScreen.scss";
-import arrowDown from "assets/icons/arrows/selectArrow.png";
 
 registerLocale("ru", ru);
 
@@ -107,7 +107,7 @@ export const TicketFullScreen = () => {
           description: taskInfo.description,
           comment: "",
         });
-        setTaskTags(taskInfo.mark)
+        setTaskTags(taskInfo.mark);
         apiRequest(
           `/comment/get-by-entity?entity_type=2&entity_id=${taskInfo.id}`
         ).then((res) => {
@@ -167,10 +167,10 @@ export const TicketFullScreen = () => {
     let tagIds = taskTags.map((tag) => tag.id);
     if (projectInfo.mark) {
       setCorrectProjectTags(
-          projectInfo.mark.reduce((acc, cur) => {
-            if (!tagIds.includes(cur.id)) acc.push(cur);
-            return acc;
-          }, [])
+        projectInfo.mark.reduce((acc, cur) => {
+          if (!tagIds.includes(cur.id)) acc.push(cur);
+          return acc;
+        }, [])
       );
     }
   }, [taskTags, projectInfo]);
@@ -1039,57 +1039,57 @@ export const TicketFullScreen = () => {
                     <div className="tags__selected">
                       {taskTags.map((tag) => {
                         return (
-                            <div
-                                className="tags__selected__item"
-                                key={tag.id}
-                                style={{ background: tag.color }}
-                            >
-                              <p>{tag.slug}</p>
-                              <img
-                                  src={close}
-                                  className="delete"
-                                  alt="delete"
-                                  onClick={() => deleteTagFromTask(tag.id)}
-                              />
-                            </div>
+                          <div
+                            className="tags__selected__item"
+                            key={tag.id}
+                            style={{ background: tag.color }}
+                          >
+                            <p>{tag.slug}</p>
+                            <img
+                              src={close}
+                              className="delete"
+                              alt="delete"
+                              onClick={() => deleteTagFromTask(tag.id)}
+                            />
+                          </div>
                         );
                       })}
                     </div>
                     <div
-                        className="tags__select"
-                        onClick={() => setSelectTagsOpen(!selectTagsOpen)}
+                      className="tags__select"
+                      onClick={() => setSelectTagsOpen(!selectTagsOpen)}
                     >
                       <span>Выберите тег</span>
                       <img
-                          className={selectTagsOpen ? "open" : ""}
-                          src={arrowDown}
-                          alt="arrow"
+                        className={selectTagsOpen ? "open" : ""}
+                        src={arrowDown}
+                        alt="arrow"
                       />
                     </div>
                     {selectTagsOpen && (
-                        <div className="tags__dropDown">
-                          <img
-                              onClick={() => setSelectTagsOpen(false)}
-                              className="tags__dropDown__close"
-                              src={close}
-                              alt="close"
-                          />
-                          {correctProjectTags.map((tag) => {
-                            return (
-                                <div
-                                    className="tagItem"
-                                    key={tag.id}
-                                    onClick={() => addTagToTask(tag.id)}
-                                >
-                                  <p>{tag.slug}</p>
-                                  <span style={{ background: tag.color }} />
-                                </div>
-                            );
-                          })}
-                          {!Boolean(correctProjectTags.length) && (
-                              <p className="tags__dropDown__noItem">Нет тегов</p>
-                          )}
-                        </div>
+                      <div className="tags__dropDown">
+                        <img
+                          onClick={() => setSelectTagsOpen(false)}
+                          className="tags__dropDown__close"
+                          src={close}
+                          alt="close"
+                        />
+                        {correctProjectTags.map((tag) => {
+                          return (
+                            <div
+                              className="tagItem"
+                              key={tag.id}
+                              onClick={() => addTagToTask(tag.id)}
+                            >
+                              <p>{tag.slug}</p>
+                              <span style={{ background: tag.color }} />
+                            </div>
+                          );
+                        })}
+                        {!Boolean(correctProjectTags.length) && (
+                          <p className="tags__dropDown__noItem">Нет тегов</p>
+                        )}
+                      </div>
                     )}
                   </div>
                   <div
