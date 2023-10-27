@@ -129,7 +129,7 @@ export const Tracker = () => {
     e.target.closest("img").classList.toggle("open-desc-item");
     e.target
       .closest("td")
-      .querySelector(".taskList__table__name-project")
+      ?.querySelector(".taskList__table__name-project")
       .classList.toggle("hide-desc");
   }
 
