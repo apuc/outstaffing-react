@@ -94,6 +94,7 @@ export const ModalTiсket = ({
   const [acceptModalOpen, setAcceptModalOpen] = useState(false);
   const [selectTagsOpen, setSelectTagsOpen] = useState(false);
   const { showNotification } = useNotification();
+  const [commentSendDisable, setCommentSendDisable] = useState(false)
 
   function deleteTask() {
     apiRequest("/task/update-task", {
@@ -144,6 +145,8 @@ export const ModalTiсket = ({
   }
 
   function createComment() {
+    if (!inputsValue.comment) return
+    setCommentSendDisable(true)
     apiRequest("/comment/create", {
       method: "POST",
       data: {
@@ -153,6 +156,7 @@ export const ModalTiсket = ({
       },
     }).then((res) => {
       let newComment = res;
+      setCommentSendDisable(false)
       newComment.created_at = new Date();
       newComment.subComments = [];
       setInputsValue((prevValue) => ({ ...prevValue, comment: "" }));
@@ -285,6 +289,7 @@ export const ModalTiсket = ({
   }
 
   useEffect(() => {
+    initListeners()
     apiRequest(
       `/comment/get-by-entity?entity_type=2&entity_id=${task.id}`
     ).then((res) => {
@@ -502,14 +507,60 @@ export const ModalTiсket = ({
     setAcceptModalOpen(false);
   }
 
+  const initListeners = () => {
+    document.addEventListener("click", closeByClickingOut);
+  };
+
+  const closeByClickingOut = (event) => {
+    const path = event.path || (event.composedPath && event.composedPath());
+
+    if (
+        event &&
+        !path.find(
+            (div) =>
+                div.classList &&
+                (div.classList.contains("button-add-worker") ||
+                    div.classList.contains("dropdownList"))
+        )
+    ) {
+      setDropListOpen(false);
+      setDropListMembersOpen(false)
+    }
+
+    if (
+        event &&
+        !path.find(
+            (div) =>
+                div.classList &&
+                (div.classList.contains("deadLine") ||
+                    div.classList.contains("react-datepicker-popper"))
+        )
+    ) {
+      setDatePickerOpen(false)
+    }
+
+    if (
+        event &&
+        !path.find(
+            (div) =>
+                div.classList &&
+                (div.classList.contains("tags") ||
+                    div.classList.contains("tags__dropDown"))
+        )
+    ) {
+      setSelectTagsOpen(false)
+    }
+  }
+
   return (
     <div
       className={active ? "modal-tiket active" : "modal-tiket"}
-      onClick={() => setActive(false)}
+      onClick={(e) => {
+        if(e.target.className.includes('modal-tiket')) setActive(false)
+      }}
     >
       <div
         className="modal-tiket__content"
-        onClick={(e) => e.stopPropagation()}
       >
         <div className="content">
           <h3 className="title-project">
@@ -646,7 +697,7 @@ export const ModalTiсket = ({
                   }));
                 }}
               />
-              <img src={send} onClick={createComment}></img>
+              <img className={commentSendDisable ? 'disable' : ''} src={send} onClick={createComment}></img>
             </div>
             <div className="comments__list">
               {comments.map((comment) => {

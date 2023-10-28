@@ -584,6 +584,11 @@
         margin-right: 18px;
       }
 
+      .disable {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+
       //&:focus-within {
       //  border: 1px solid #0000004d;
       //}

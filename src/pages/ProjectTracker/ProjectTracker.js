@@ -90,6 +90,7 @@ export const ProjectTracker = () => {
   useEffect(() => {
     dispatch(activeLoader());
     dispatch(setProjectBoardFetch(projectId.id));
+    initListeners()
   }, []);
 
   useEffect(() => {
@@ -352,6 +353,72 @@ export const ProjectTracker = () => {
       dispatch(deleteTagProject(tagId));
     });
   }
+
+  const initListeners = () => {
+    document.addEventListener("click", closeByClickingOut);
+  };
+
+  const closeByClickingOut = (event) => {
+    const path = event.path || (event.composedPath && event.composedPath());
+
+    if (
+        event &&
+        !path.find(
+            (div) =>
+                div.classList &&
+                (div.classList.contains("addPerson") ||
+                    div.classList.contains("persons__list"))
+        )
+    ) {
+      setPersonListOpen(false);
+    }
+
+    if (
+        event &&
+        !path.find(
+            (div) =>
+                div.classList &&
+                (div.classList.contains("tasks__head__executor") ||
+                    div.classList.contains("tasks__head__executorDropdown"))
+        )
+    ) {
+      setSelectedExecutorOpen(false);
+    }
+
+    if (
+        event &&
+        !path.find(
+            (div) =>
+                div.classList &&
+                (div.classList.contains("tasks__head__tags") ||
+                    div.classList.contains("tags__list"))
+        )
+    ) {
+      setTags({
+        open: false,
+        add: false,
+        edit: false,
+      });
+    }
+
+    if (
+        event &&
+        !path.find(
+            (div) =>
+                div.classList &&
+                (div.classList.contains("board__head__more") ||
+                    div.classList.contains("column__select"))
+        )
+    ) {
+      setOpenColumnSelect((prevState) => {
+        const newState = {}
+        for (const key in prevState) {
+          newState[key] = false;
+        }
+        return newState;
+      })
+    }
+  };
 
   return (
     <div className="tracker">
