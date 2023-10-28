@@ -93,8 +93,10 @@ export const TicketFullScreen = () => {
   const [selectTagsOpen, setSelectTagsOpen] = useState(false);
   const [correctProjectTags, setCorrectProjectTags] = useState([]);
   const { showNotification } = useNotification();
+  const [commentSendDisable, setCommentSendDisable] = useState(false);
 
   useEffect(() => {
+    initListeners();
     apiRequest(`/task/get-task?task_id=${ticketId.id}&expand=mark`).then(
       (taskInfo) => {
         setTaskInfo(taskInfo);
@@ -217,6 +219,8 @@ export const TicketFullScreen = () => {
   }
 
   function createComment() {
+    if (!inputsValue.comment) return;
+    setCommentSendDisable(true);
     apiRequest("/comment/create", {
       method: "POST",
       data: {
@@ -226,6 +230,7 @@ export const TicketFullScreen = () => {
       },
     }).then((res) => {
       let newComment = res;
+      setCommentSendDisable(false);
       newComment.created_at = new Date();
       newComment.subComments = [];
       setInputsValue((prevValue) => ({ ...prevValue, comment: "" }));
@@ -525,6 +530,63 @@ export const TicketFullScreen = () => {
     });
   }
 
+  const initListeners = () => {
+    document.addEventListener("click", closeByClickingOut);
+  };
+
+  const closeByClickingOut = (event) => {
+    const path = event.path || (event.composedPath && event.composedPath());
+
+    if (
+      event &&
+      !path.find(
+        (div) =>
+          div.classList &&
+          (div.classList.contains("button-add-worker") ||
+            div.classList.contains("dropdownList"))
+      )
+    ) {
+      setDropListOpen(false);
+      setDropListMembersOpen(false);
+    }
+
+    if (
+      event &&
+      !path.find(
+        (div) =>
+          div.classList &&
+          (div.classList.contains("deadLine") ||
+            div.classList.contains("react-datepicker-popper"))
+      )
+    ) {
+      setDatePickerOpen(false);
+    }
+
+    if (
+      event &&
+      !path.find(
+        (div) =>
+          div.classList &&
+          (div.classList.contains("tags") ||
+            div.classList.contains("tags__dropDown"))
+      )
+    ) {
+      setSelectTagsOpen(false);
+    }
+
+    if (
+      event &&
+      !path.find(
+        (div) =>
+          div.classList &&
+          (div.classList.contains("addPerson") ||
+            div.classList.contains("persons__list"))
+      )
+    ) {
+      setPersonListOpen(false);
+    }
+  };
+
   return (
     <section className="ticket-full-screen">
       <ProfileHeader />
@@ -820,7 +882,12 @@ export const TicketFullScreen = () => {
                         }));
                       }}
                     />
-                    <img src={send} onClick={createComment} alt="send"></img>
+                    <img
+                      className={commentSendDisable ? "disable" : ""}
+                      src={send}
+                      onClick={createComment}
+                      alt="send"
+                    ></img>
                   </div>
                   <div className="comments__list">
                     {comments.map((comment) => {
