@@ -90,7 +90,7 @@ export const ProjectTracker = () => {
   useEffect(() => {
     dispatch(activeLoader());
     dispatch(setProjectBoardFetch(projectId.id));
-    initListeners()
+    initListeners();
   }, []);
 
   useEffect(() => {
@@ -362,37 +362,37 @@ export const ProjectTracker = () => {
     const path = event.path || (event.composedPath && event.composedPath());
 
     if (
-        event &&
-        !path.find(
-            (div) =>
-                div.classList &&
-                (div.classList.contains("addPerson") ||
-                    div.classList.contains("persons__list"))
-        )
+      event &&
+      !path.find(
+        (div) =>
+          div.classList &&
+          (div.classList.contains("addPerson") ||
+            div.classList.contains("persons__list"))
+      )
     ) {
       setPersonListOpen(false);
     }
 
     if (
-        event &&
-        !path.find(
-            (div) =>
-                div.classList &&
-                (div.classList.contains("tasks__head__executor") ||
-                    div.classList.contains("tasks__head__executorDropdown"))
-        )
+      event &&
+      !path.find(
+        (div) =>
+          div.classList &&
+          (div.classList.contains("tasks__head__executor") ||
+            div.classList.contains("tasks__head__executorDropdown"))
+      )
     ) {
       setSelectedExecutorOpen(false);
     }
 
     if (
-        event &&
-        !path.find(
-            (div) =>
-                div.classList &&
-                (div.classList.contains("tasks__head__tags") ||
-                    div.classList.contains("tags__list"))
-        )
+      event &&
+      !path.find(
+        (div) =>
+          div.classList &&
+          (div.classList.contains("tasks__head__tags") ||
+            div.classList.contains("tags__list"))
+      )
     ) {
       setTags({
         open: false,
@@ -402,21 +402,21 @@ export const ProjectTracker = () => {
     }
 
     if (
-        event &&
-        !path.find(
-            (div) =>
-                div.classList &&
-                (div.classList.contains("board__head__more") ||
-                    div.classList.contains("column__select"))
-        )
+      event &&
+      !path.find(
+        (div) =>
+          div.classList &&
+          (div.classList.contains("board__head__more") ||
+            div.classList.contains("column__select"))
+      )
     ) {
       setOpenColumnSelect((prevState) => {
-        const newState = {}
+        const newState = {};
         for (const key in prevState) {
           newState[key] = false;
         }
         return newState;
-      })
+      });
     }
   };
 

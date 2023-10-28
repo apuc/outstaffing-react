@@ -94,7 +94,7 @@ export const ModalTiсket = ({
   const [acceptModalOpen, setAcceptModalOpen] = useState(false);
   const [selectTagsOpen, setSelectTagsOpen] = useState(false);
   const { showNotification } = useNotification();
-  const [commentSendDisable, setCommentSendDisable] = useState(false)
+  const [commentSendDisable, setCommentSendDisable] = useState(false);
 
   function deleteTask() {
     apiRequest("/task/update-task", {
@@ -145,8 +145,8 @@ export const ModalTiсket = ({
   }
 
   function createComment() {
-    if (!inputsValue.comment) return
-    setCommentSendDisable(true)
+    if (!inputsValue.comment) return;
+    setCommentSendDisable(true);
     apiRequest("/comment/create", {
       method: "POST",
       data: {
@@ -156,7 +156,7 @@ export const ModalTiсket = ({
       },
     }).then((res) => {
       let newComment = res;
-      setCommentSendDisable(false)
+      setCommentSendDisable(false);
       newComment.created_at = new Date();
       newComment.subComments = [];
       setInputsValue((prevValue) => ({ ...prevValue, comment: "" }));
@@ -289,7 +289,7 @@ export const ModalTiсket = ({
   }
 
   useEffect(() => {
-    initListeners()
+    initListeners();
     apiRequest(
       `/comment/get-by-entity?entity_type=2&entity_id=${task.id}`
     ).then((res) => {
@@ -515,53 +515,51 @@ export const ModalTiсket = ({
     const path = event.path || (event.composedPath && event.composedPath());
 
     if (
-        event &&
-        !path.find(
-            (div) =>
-                div.classList &&
-                (div.classList.contains("button-add-worker") ||
-                    div.classList.contains("dropdownList"))
-        )
+      event &&
+      !path.find(
+        (div) =>
+          div.classList &&
+          (div.classList.contains("button-add-worker") ||
+            div.classList.contains("dropdownList"))
+      )
     ) {
       setDropListOpen(false);
-      setDropListMembersOpen(false)
+      setDropListMembersOpen(false);
     }
 
     if (
-        event &&
-        !path.find(
-            (div) =>
-                div.classList &&
-                (div.classList.contains("deadLine") ||
-                    div.classList.contains("react-datepicker-popper"))
-        )
+      event &&
+      !path.find(
+        (div) =>
+          div.classList &&
+          (div.classList.contains("deadLine") ||
+            div.classList.contains("react-datepicker-popper"))
+      )
     ) {
-      setDatePickerOpen(false)
+      setDatePickerOpen(false);
     }
 
     if (
-        event &&
-        !path.find(
-            (div) =>
-                div.classList &&
-                (div.classList.contains("tags") ||
-                    div.classList.contains("tags__dropDown"))
-        )
+      event &&
+      !path.find(
+        (div) =>
+          div.classList &&
+          (div.classList.contains("tags") ||
+            div.classList.contains("tags__dropDown"))
+      )
     ) {
-      setSelectTagsOpen(false)
+      setSelectTagsOpen(false);
     }
-  }
+  };
 
   return (
     <div
       className={active ? "modal-tiket active" : "modal-tiket"}
       onClick={(e) => {
-        if(e.target.className.includes('modal-tiket')) setActive(false)
+        if (e.target.className.includes("modal-tiket")) setActive(false);
       }}
     >
-      <div
-        className="modal-tiket__content"
-      >
+      <div className="modal-tiket__content">
         <div className="content">
           <h3 className="title-project">
             <img src={category} className="title-project__category"></img>
@@ -697,7 +695,11 @@ export const ModalTiсket = ({
                   }));
                 }}
               />
-              <img className={commentSendDisable ? 'disable' : ''} src={send} onClick={createComment}></img>
+              <img
+                className={commentSendDisable ? "disable" : ""}
+                src={send}
+                onClick={createComment}
+              ></img>
             </div>
             <div className="comments__list">
               {comments.map((comment) => {
