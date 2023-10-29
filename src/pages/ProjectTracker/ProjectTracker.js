@@ -469,6 +469,7 @@ export const ProjectTracker = () => {
             selectedTab={selectedTab}
             priorityTask={priorityTask}
             projectUsers={projectBoard.projectUsers}
+            projectMarks={projectBoard.mark}
           />
 
           {loader && <Loader style="green" />}

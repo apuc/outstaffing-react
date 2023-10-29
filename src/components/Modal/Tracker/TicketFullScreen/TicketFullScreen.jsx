@@ -1126,7 +1126,7 @@ export const TicketFullScreen = () => {
                       className="tags__select"
                       onClick={() => setSelectTagsOpen(!selectTagsOpen)}
                     >
-                      <span>Выберите тег</span>
+                      <span>Выберете тег</span>
                       <img
                         className={selectTagsOpen ? "open" : ""}
                         src={arrowDown}
