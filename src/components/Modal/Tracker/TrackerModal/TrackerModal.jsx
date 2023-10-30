@@ -35,6 +35,7 @@ import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 import arrowCreateTask from "assets/icons/arrows/arrowCreateTask.svg";
 import arrowRight from "assets/icons/arrows/arrowRightCreateTask.svg";
 import arrowDown from "assets/icons/arrows/selectArrow.png";
+import close from "assets/icons/close.png";
 import calendarImg from "assets/icons/createTaskCalendar.svg";
 import avatarMok from "assets/images/avatarMok.png";
 
@@ -51,6 +52,7 @@ export const TrackerModal = ({
   projectId,
   priorityTask,
   projectUsers,
+  projectMarks,
 }) => {
   const dispatch = useDispatch();
   const projectBoard = useSelector(getProjectBoard);
@@ -76,6 +78,9 @@ export const TrackerModal = ({
   );
   const [selectExecutorTaskOpen, setSelectExecutorTaskOpen] = useState(false);
   const [correctProjectUsers, setCorrectProjectUsers] = useState([]);
+  const [correctProjectTags, setCorrectProjectTags] = useState([]);
+  const [taskTags, setTaskTags] = useState([]);
+  const [selectTagsOpen, setSelectTagsOpen] = useState(false);
   const [selectColumnPriorityOpen, setSelectColumnPriorityOpen] =
     useState(false);
   const { showNotification } = useNotification();
@@ -135,6 +140,18 @@ export const TrackerModal = ({
           type: "error",
         });
       } else {
+        for (let i = 0; i < taskTags.length; i++) {
+          apiRequest("/mark/attach", {
+            method: "POST",
+            data: {
+              mark_id: taskTags[i].id,
+              entity_type: 2,
+              entity_id: res.id,
+            },
+          }).then(() => {
+            setTaskTags([]);
+          });
+        }
         if (selectedExecutorTask.user_id) {
           apiRequest("/task/update-task", {
             method: "PUT",
@@ -306,6 +323,18 @@ export const TrackerModal = ({
     }
   }, [active]);
 
+  useEffect(() => {
+    let tagIds = taskTags.map((tag) => tag.id);
+    if (projectMarks) {
+      setCorrectProjectTags(
+        projectMarks.reduce((acc, cur) => {
+          if (!tagIds.includes(cur.id)) acc.push(cur);
+          return acc;
+        }, [])
+      );
+    }
+  }, [taskTags, projectMarks]);
+
   return (
     <ModalLayout
       active={active}
@@ -404,11 +433,22 @@ export const TrackerModal = ({
         <>
           <div className="title-project">
             <div className="createTaskHead">
-              <span>Этап</span>
-              <div className="createTaskHead__selectColumn">
-                <span>Backlog</span>
-                <img src={arrowCreateTask} alt="arrow" />
+              <div className="createTaskBody__right__owner">
+                <p>Создатель : {profileInfo?.fio}</p>
+                <img
+                  src={
+                    profileInfo.photo
+                      ? urlForLocal(profileInfo.photo)
+                      : avatarMok
+                  }
+                  alt="avatar"
+                />
               </div>
+              {/*<span>Этап</span>*/}
+              {/*<div className="createTaskHead__selectColumn">*/}
+              {/*  <span>Backlog</span>*/}
+              {/*  <img src={arrowCreateTask} alt="arrow" />*/}
+              {/*</div>*/}
             </div>
             <div className="createTaskBody">
               <div className="createTaskBody__left">
@@ -445,16 +485,73 @@ export const TrackerModal = ({
                 />
               </div>
               <div className="createTaskBody__right">
-                <div className="createTaskBody__right__owner">
-                  <p>Создатель : {profileInfo?.fio}</p>
-                  <img
-                    src={
-                      profileInfo.photo
-                        ? urlForLocal(profileInfo.photo)
-                        : avatarMok
-                    }
-                    alt="avatar"
-                  />
+                <div className="createTaskBody__right__tags">
+                  <div className="tags__selected">
+                    <div className="tags__selected__items">
+                      {taskTags.map((tag) => {
+                        return (
+                          <div
+                            className="selectedTag"
+                            key={tag.id}
+                            style={{ background: tag.color }}
+                          >
+                            <p>{tag.slug}</p>
+                            <img
+                              src={close}
+                              className="delete"
+                              alt="delete"
+                              onClick={() =>
+                                setTaskTags((prevState) =>
+                                  prevState.filter(
+                                    (prevTag) => prevTag.id !== tag.id
+                                  )
+                                )
+                              }
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div
+                      className="tags__selected__name"
+                      onClick={() => setSelectTagsOpen(!selectTagsOpen)}
+                    >
+                      Выберете тег
+                      <img
+                        className={
+                          selectTagsOpen ? "arrow arrow--open" : "arrow"
+                        }
+                        src={arrowDown}
+                        alt="arrow"
+                      />
+                    </div>
+                  </div>
+                  {selectTagsOpen && (
+                    <div className="tags__dropDown">
+                      <img
+                        src={close}
+                        className="close"
+                        onClick={() => setSelectTagsOpen(false)}
+                      />
+                      {correctProjectTags.map((tag) => {
+                        return (
+                          <div
+                            className="tag__item"
+                            key={tag.id}
+                            onClick={() =>
+                              setTaskTags((prevState) => [...prevState, tag])
+                            }
+                          >
+                            <p>{tag.slug}</p>
+                            <span style={{ background: tag.color }} />
+                          </div>
+                        );
+                      })}
+                      {Boolean(!correctProjectTags.length) && (
+                        <p className="noTags">Нет тегов</p>
+                      )}
+                    </div>
+                  )}
                 </div>
                 <div
                   onClick={() =>
