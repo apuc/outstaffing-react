@@ -32,7 +32,7 @@ const Candidate = () => {
   if (localStorage.getItem("role_status") !== "18") {
     return <Navigate to="/profile" replace />;
   }
-  const { id: candidateId } = useParams();
+  // const { id: candidateId } = useParams();
 
   const navigate = useNavigate();
 
@@ -47,10 +47,10 @@ const Candidate = () => {
   }, []);
 
   useEffect(() => {
-    apiRequest(`/profile/${candidateId}`, {
-      params: Number(candidateId),
-    }).then((el) => dispatch(currentCandidate(el)));
-  }, [dispatch, candidateId]);
+    apiRequest(`/user/me`, {}).then((el) =>
+      dispatch(currentCandidate(el.userCard))
+    );
+  }, [dispatch]);
 
   const { position_id, skillValues, vc_text: text } = currentCandidateObj;
 

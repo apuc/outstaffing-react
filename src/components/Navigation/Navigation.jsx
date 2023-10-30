@@ -73,8 +73,8 @@ export const Navigation = () => {
     if (localStorage.getItem("role_status") === "18") {
       return;
     }
-    apiRequest(`/profile/${localStorage.getItem("cardId")}`).then(
-      (profileInfo) => dispatch(setProfileInfo(profileInfo))
+    apiRequest(`/user/me`).then((profileInfo) =>
+      dispatch(setProfileInfo(profileInfo.userCard))
     );
   }, [dispatch]);
 

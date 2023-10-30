@@ -329,6 +329,8 @@ export const ProfileCalendarComponent = React.memo(
               styles={"clear-days"}
               onClick={() => {
                 resetRangeDays();
+                toggleActivePeriod();
+                toggleRangeDays();
               }}
             >
               Сбросить
