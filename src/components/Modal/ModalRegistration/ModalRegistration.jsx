@@ -2,9 +2,10 @@ import React, { useState } from "react";
 
 import { apiRequest } from "@api/request";
 
+import { useNotification } from "@hooks/useNotification";
+
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
-import { useNotification } from "@hooks/useNotification";
 
 import anyMoment from "assets/icons/anyMoment.svg";
 import doc from "assets/icons/doc.svg";
@@ -18,6 +19,15 @@ export const ModalRegistration = ({ active, setActive }) => {
     email: "",
     password: "",
   });
+
+  const validateEmail = (email) => {
+    // регулярное выражение для проверки email
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // возвращаем true, если email проходит проверку, и false, если нет
+    return re.test(email);
+  }
+
   const { showNotification } = useNotification();
   const submitHandler = () => {
     apiRequest("/register/sign-up", {
@@ -28,11 +38,11 @@ export const ModalRegistration = ({ active, setActive }) => {
         password: inputsValue.password,
       },
     }).then(() => {
-      setActive(false)
+      setActive(false);
       showNotification({
         show: true,
         text: "Аккаунт успешно создан",
-        type: "success"
+        type: "success",
       });
     });
   };
@@ -91,11 +101,11 @@ export const ModalRegistration = ({ active, setActive }) => {
         <div className="button-box">
           <BaseButton
             onClick={(e) => {
-              e.preventDefault()
-              submitHandler()
+              e.preventDefault();
+              submitHandler();
             }}
             styles={
-              inputsValue.userName && inputsValue.email && inputsValue.password
+              inputsValue.userName && validateEmail(inputsValue.email) && inputsValue.password
                 ? "button-box__submit"
                 : "button-box__submit disable"
             }
