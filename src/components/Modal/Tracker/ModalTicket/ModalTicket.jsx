@@ -1011,6 +1011,7 @@ export const ModalTiсket = ({
         </div>
         {acceptModalOpen && (
           <AcceptModal
+            title={"Вы точно хотите переместить задачу в архив?"}
             closeModal={closeAcceptModal}
             agreeHandler={deleteTask}
           />
