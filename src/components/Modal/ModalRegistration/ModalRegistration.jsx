@@ -4,6 +4,7 @@ import { apiRequest } from "@api/request";
 
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
+import { useNotification } from "@hooks/useNotification";
 
 import anyMoment from "assets/icons/anyMoment.svg";
 import doc from "assets/icons/doc.svg";
@@ -17,7 +18,7 @@ export const ModalRegistration = ({ active, setActive }) => {
     email: "",
     password: "",
   });
-
+  const { showNotification } = useNotification();
   const submitHandler = () => {
     apiRequest("/register/sign-up", {
       method: "POST",
@@ -26,8 +27,13 @@ export const ModalRegistration = ({ active, setActive }) => {
         email: inputsValue.email,
         password: inputsValue.password,
       },
-    }).then((data) => {
-      console.log(data);
+    }).then(() => {
+      setActive(false)
+      showNotification({
+        show: true,
+        text: "Аккаунт успешно создан",
+        type: "success"
+      });
     });
   };
   return (
@@ -84,7 +90,10 @@ export const ModalRegistration = ({ active, setActive }) => {
         </div>
         <div className="button-box">
           <BaseButton
-            onClick={() => submitHandler()}
+            onClick={(e) => {
+              e.preventDefault()
+              submitHandler()
+            }}
             styles={
               inputsValue.userName && inputsValue.email && inputsValue.password
                 ? "button-box__submit"
