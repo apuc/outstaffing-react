@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
+import { apiRequest } from "@api/request";
+
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
-
-import { apiRequest } from "@api/request";
 
 import anyMoment from "assets/icons/anyMoment.svg";
 import doc from "assets/icons/doc.svg";
@@ -13,10 +13,10 @@ import "./modalRegistration.scss";
 
 export const ModalRegistration = ({ active, setActive }) => {
   const [inputsValue, setInputsValue] = useState({
-    userName: '',
-    email: '',
-    password: ''
-  })
+    userName: "",
+    email: "",
+    password: "",
+  });
 
   const submitHandler = () => {
     apiRequest("/register/sign-up", {
@@ -24,12 +24,12 @@ export const ModalRegistration = ({ active, setActive }) => {
       data: {
         username: inputsValue.userName,
         email: inputsValue.email,
-        password: inputsValue.password
-      }
+        password: inputsValue.password,
+      },
     }).then((data) => {
-      console.log(data)
-    })
-  }
+      console.log(data);
+    });
+  };
   return (
     <ModalLayout active={active} setActive={setActive} styles={"registration"}>
       <div className="registration-body__left">
@@ -45,14 +45,24 @@ export const ModalRegistration = ({ active, setActive }) => {
           <div className="input-body__box">
             <h5>Ваше имя</h5>
             <input
-              onChange={(e) => setInputsValue((prevValue) => ({...prevValue, userName: e.target.value}))}
-              placeholder='Name'
+              onChange={(e) =>
+                setInputsValue((prevValue) => ({
+                  ...prevValue,
+                  userName: e.target.value,
+                }))
+              }
+              placeholder="Name"
             />
             <h5>E-mail</h5>
             <input
-              type='email'
-              onChange={(e) => setInputsValue((prevValue) => ({...prevValue, email: e.target.value}))}
-              placeholder='Email'
+              type="email"
+              onChange={(e) =>
+                setInputsValue((prevValue) => ({
+                  ...prevValue,
+                  email: e.target.value,
+                }))
+              }
+              placeholder="Email"
             />
           </div>
 
@@ -61,16 +71,25 @@ export const ModalRegistration = ({ active, setActive }) => {
             {/*<input></input>*/}
             <h5>Пароль</h5>
             <input
-              type='password'
-              onChange={(e) => setInputsValue((prevValue) => ({...prevValue, password: e.target.value}))}
-              placeholder='Password'
+              type="password"
+              onChange={(e) =>
+                setInputsValue((prevValue) => ({
+                  ...prevValue,
+                  password: e.target.value,
+                }))
+              }
+              placeholder="Password"
             />
           </div>
         </div>
         <div className="button-box">
           <BaseButton
             onClick={() => submitHandler()}
-            styles={inputsValue.userName && inputsValue.email && inputsValue.password ? "button-box__submit" : "button-box__submit disable"}
+            styles={
+              inputsValue.userName && inputsValue.email && inputsValue.password
+                ? "button-box__submit"
+                : "button-box__submit disable"
+            }
           >
             Отправить
           </BaseButton>
