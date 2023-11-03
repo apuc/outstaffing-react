@@ -39,6 +39,7 @@ import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import TrackerSelectColumn from "@components/TrackerSelectColumn/TrackerSelectColumn";
+import AcceptModal from "@components/Modal/AcceptModal/AcceptModal";
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowDown from "assets/icons/arrows/selectArrow.png";
@@ -74,6 +75,8 @@ export const ProjectTracker = () => {
     add: false,
     edit: false,
   });
+  const [acceptModalOpen, setAcceptModalOpen] = useState(false);
+  const [currentColumnDelete, setCurrentColumnDelete] = useState(null)
   const [color, setColor] = useState("#aabbcc");
   const [tagInfo, setTagInfo] = useState({ description: "", name: "" });
   const [checkBoxParticipateTasks, setCheckBoxParticipateTasks] =
@@ -419,6 +422,10 @@ export const ProjectTracker = () => {
       });
     }
   };
+
+  function closeAcceptModal() {
+    setAcceptModalOpen(false);
+  }
 
   return (
     <div className="tracker">
@@ -905,7 +912,15 @@ export const ProjectTracker = () => {
                             </div>
                             <div
                               className="column__select__item"
-                              onClick={() => deleteColumn(column)}
+                              onClick={() => {
+                                  if (column.tasks.length) {
+                                    setAcceptModalOpen(true)
+                                    setCurrentColumnDelete(column)
+                                  } else {
+                                    deleteColumn(column)
+                                  }
+                                }
+                              }
                             >
                               <img src={del} alt="delete" />
                               <span>Удалить</span>
@@ -1051,6 +1066,13 @@ export const ProjectTracker = () => {
           )}
         </div>
       </div>
+      {acceptModalOpen && (
+          <AcceptModal
+              title={'В колонке еще есть задачи, Вы точно хотите удалить её ?'}
+              closeModal={closeAcceptModal}
+              agreeHandler={() => deleteColumn(currentColumnDelete)}
+          />
+      )}
       <Footer />
     </div>
   );

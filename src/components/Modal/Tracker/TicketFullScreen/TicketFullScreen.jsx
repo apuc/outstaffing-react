@@ -1207,7 +1207,10 @@ export const TicketFullScreen = () => {
         )}
       </div>
       {acceptModalOpen && (
-        <AcceptModal closeModal={closeAcceptModal} agreeHandler={deleteTask} />
+        <AcceptModal
+            title={'Вы точно хотите переместить задачу в архив?'}
+            closeModal={closeAcceptModal}
+            agreeHandler={deleteTask} />
       )}
       <Footer />
     </section>
