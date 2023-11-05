@@ -103,7 +103,7 @@ export const Profile = () => {
           {user === "developer" ? (
             <span>
               <p>Добрый день,&nbsp;</p>
-              {profileInfo.fio}
+              {profileInfo?.fio ? profileInfo?.fio : profileInfo?.username}
             </span>
           ) : (
             "ООО НДВ Консалтинг"
@@ -113,7 +113,7 @@ export const Profile = () => {
           <div className="summary__person">
             <img
               src={
-                profileInfo.photo ? urlForLocal(profileInfo.photo) : avatarMok
+                profileInfo?.photo ? urlForLocal(profileInfo.photo) : avatarMok
               }
               className="summary__avatar"
               alt="avatar"
@@ -121,7 +121,8 @@ export const Profile = () => {
             <p className="summary__name">
               {user === "developer" ? (
                 <span>
-                  {profileInfo.fio}, {profileInfo.specification} разработчик
+                  {profileInfo?.fio ? profileInfo?.fio : profileInfo?.username},{" "}
+                  {profileInfo?.specification} разработчик
                 </span>
               ) : (
                 "ООО НДВ Консалтинг"

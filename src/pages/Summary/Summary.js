@@ -16,6 +16,7 @@ import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import rightArrow from "assets/icons/arrows/arrowRight.svg";
 import arrow from "assets/icons/arrows/left-arrow.png";
 import gitImgItem from "assets/icons/gitItemImg.svg";
+import avatarMok from "assets/images/avatarMok.png";
 
 import "./summary.scss";
 
@@ -56,12 +57,17 @@ export const Summary = () => {
           <div className={openGit ? "summary__info openGit" : "summary__info"}>
             <div className="summary__person">
               <img
-                src={urlForLocal(profileInfo.photo)}
+                src={
+                  profileInfo?.photo
+                    ? urlForLocal(profileInfo.photo)
+                    : avatarMok
+                }
                 className="summary__avatar"
                 alt="avatar"
               />
               <p className="summary__name">
-                {profileInfo.fio}, {profileInfo.specification} разработчик
+                {profileInfo?.fio ? profileInfo?.fio : profileInfo?.username},{" "}
+                {profileInfo.specification} разработчик
               </p>
             </div>
             {!openGit && (
