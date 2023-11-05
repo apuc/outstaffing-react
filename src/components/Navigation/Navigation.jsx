@@ -73,8 +73,11 @@ export const Navigation = () => {
     if (localStorage.getItem("role_status") === "18") {
       return;
     }
+    if (Object.keys(profileInfo).length) {
+      return;
+    }
     apiRequest(`/user/me`).then((profileInfo) =>
-      dispatch(setProfileInfo(profileInfo.userCard))
+      dispatch(setProfileInfo(profileInfo.userCard ? profileInfo.userCard : profileInfo))
     );
   }, [dispatch]);
 
@@ -93,12 +96,12 @@ export const Navigation = () => {
 
         <div className="profileHeader__personalInfo">
           <h3 className="profileHeader__personalInfoName">
-            {user === "developer" ? profileInfo?.fio : ""}
+            {profileInfo?.fio ? profileInfo?.fio : profileInfo?.username}
           </h3>
           <NavLink end to={"/profile"}>
             <img
               src={
-                profileInfo.photo ? urlForLocal(profileInfo.photo) : avatarMok
+                profileInfo?.photo ? urlForLocal(profileInfo.photo) : avatarMok
               }
               className="profileHeader__personalInfoAvatar"
               alt="avatar"

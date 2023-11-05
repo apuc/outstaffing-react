@@ -18,6 +18,7 @@ import arrow from "assets/icons/arrows/left-arrow.png";
 import gitImgItem from "assets/icons/gitItemImg.svg";
 
 import "./summary.scss";
+import avatarMok from "assets/images/avatarMok.png";
 
 export const Summary = () => {
   if (localStorage.getItem("role_status") === "18") {
@@ -56,12 +57,14 @@ export const Summary = () => {
           <div className={openGit ? "summary__info openGit" : "summary__info"}>
             <div className="summary__person">
               <img
-                src={urlForLocal(profileInfo.photo)}
+                src={
+                  profileInfo?.photo ? urlForLocal(profileInfo.photo) : avatarMok
+                }
                 className="summary__avatar"
                 alt="avatar"
               />
               <p className="summary__name">
-                {profileInfo.fio}, {profileInfo.specification} разработчик
+                {profileInfo?.fio ? profileInfo?.fio : profileInfo?.username}, {profileInfo.specification} разработчик
               </p>
             </div>
             {!openGit && (

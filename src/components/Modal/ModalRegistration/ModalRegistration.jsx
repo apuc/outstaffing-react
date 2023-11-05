@@ -26,6 +26,14 @@ export const ModalRegistration = ({ active, setActive }) => {
 
     // возвращаем true, если email проходит проверку, и false, если нет
     return re.test(email);
+  };
+
+  const resetInputsValue = () => {
+    setInputsValue({
+      userName: "",
+      email: "",
+      password: "",
+    })
   }
 
   const { showNotification } = useNotification();
@@ -39,6 +47,7 @@ export const ModalRegistration = ({ active, setActive }) => {
       },
     }).then(() => {
       setActive(false);
+      resetInputsValue()
       showNotification({
         show: true,
         text: "Аккаунт успешно создан",
@@ -105,7 +114,9 @@ export const ModalRegistration = ({ active, setActive }) => {
               submitHandler();
             }}
             styles={
-              inputsValue.userName && validateEmail(inputsValue.email) && inputsValue.password
+              inputsValue.userName &&
+              validateEmail(inputsValue.email) &&
+              inputsValue.password
                 ? "button-box__submit"
                 : "button-box__submit disable"
             }

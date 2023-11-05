@@ -23,6 +23,7 @@ import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadc
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 
 import { ProfileCalendarComponent } from "./ProfileCalendarComponent";
+import avatarMok from "assets/images/avatarMok.png";
 import "./profileCalendar.scss";
 
 export const ProfileCalendar = () => {
@@ -94,12 +95,14 @@ export const ProfileCalendar = () => {
         <div className="summary__info">
           <div className="summary__person">
             <img
-              src={urlForLocal(profileInfo.photo)}
+                src={
+                  profileInfo?.photo ? urlForLocal(profileInfo.photo) : avatarMok
+                }
               className="summary__avatar"
               alt="avatar"
             />
             <p className="summary__name">
-              {profileInfo.fio}, {profileInfo.specification} разработчик
+              {profileInfo?.fio ? profileInfo?.fio : profileInfo?.username}, {profileInfo.specification} разработчик
             </p>
           </div>
           <Link to="/report">
