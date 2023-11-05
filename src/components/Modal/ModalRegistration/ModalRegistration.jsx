@@ -33,8 +33,8 @@ export const ModalRegistration = ({ active, setActive }) => {
       userName: "",
       email: "",
       password: "",
-    })
-  }
+    });
+  };
 
   const { showNotification } = useNotification();
   const submitHandler = () => {
@@ -47,7 +47,7 @@ export const ModalRegistration = ({ active, setActive }) => {
       },
     }).then(() => {
       setActive(false);
-      resetInputsValue()
+      resetInputsValue();
       showNotification({
         show: true,
         text: "Аккаунт успешно создан",

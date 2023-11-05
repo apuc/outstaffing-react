@@ -121,7 +121,8 @@ export const Profile = () => {
             <p className="summary__name">
               {user === "developer" ? (
                 <span>
-                  {profileInfo?.fio ? profileInfo?.fio : profileInfo?.username}, {profileInfo?.specification} разработчик
+                  {profileInfo?.fio ? profileInfo?.fio : profileInfo?.username},{" "}
+                  {profileInfo?.specification} разработчик
                 </span>
               ) : (
                 "ООО НДВ Консалтинг"
