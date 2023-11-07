@@ -197,7 +197,7 @@ export const Tracker = () => {
               !loader &&
               projects.map((project, index) => {
                 return project.status !== 10 ? (
-                  <ProjectTiket key={index} project={project}></ProjectTiket>
+                  <ProjectTiket key={index} project={project} />
                 ) : (
                   ""
                 );
@@ -452,7 +452,7 @@ export const Tracker = () => {
                       {Boolean(filterCompleteTasks.length) ? (
                         filterCompleteTasks.map((task, index) => {
                           return (
-                            <tr>
+                            <tr key={index}>
                               <td className="archive__completeTask__description">
                                 <p className="completeTask__title">
                                   {task.title}
