@@ -74,7 +74,10 @@ export const ProjectTiket = ({ project, index }) => {
 
   return (
     <div className="project" key={index}>
-      <Link to={`/tracker/project/${project.id}`}>
+      <Link
+        to={`/tracker/project/${project.id}`}
+        className="project__open-traker"
+      >
         <p className="project__link">{project.name}</p>
 
         <div className="project__info">
@@ -93,6 +96,7 @@ export const ProjectTiket = ({ project, index }) => {
       <span className="menu-settings" onClick={() => setModalSelect(true)}>
         ...
       </span>
+
       <Link
         to={`/profile/statistics/${project.id}`}
         className="project__statistics"

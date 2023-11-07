@@ -1,10 +1,12 @@
 .project {
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 322px;
 
   background: #f1f1f1;
   border-radius: 12px;
-  padding: 17px 26px 16px;
+
   cursor: pointer;
   max-width: 440px;
   transition: 0.4s;
@@ -43,7 +45,7 @@
     display: flex;
     align-items: center;
     position: relative;
-    margin-bottom: 27px;
+    margin-bottom: 45px;
 
     p {
       color: #6f6f6f;
@@ -94,9 +96,15 @@
     margin-left: 56px;
   }
 
+  &__open-traker {
+    padding: 17px 26px 16px;
+  }
+
   &__statistics {
+    position: absolute;
+    bottom: 18px;
+    left: 26px;
     color: #678eda;
-    margin-top: 27px;
     text-decoration: underline;
     font-size: 12px;
     font-weight: 300;
