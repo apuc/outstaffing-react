@@ -31,7 +31,7 @@ export const AuthBlock = ({ title, description, img, resetModal }) => {
           >
             Войти
           </button>
-          <span onClick={() => resetModal(true)}>Вспомнить пароль</span>
+          <span onClick={() => resetModal(true)}>Восстановить пароль</span>
         </div>
       </form>
       {img && <img src={img} alt="authImg" className="auth__img" />}

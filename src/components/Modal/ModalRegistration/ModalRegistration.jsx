@@ -38,6 +38,20 @@ export const ModalRegistration = ({ active, setActive }) => {
 
   const { showNotification } = useNotification();
   const submitHandler = () => {
+    if (!inputsValue.password || !inputsValue.userName || !inputsValue.email) {
+      return showNotification({
+        show: true,
+        text: "Введите коректные данные",
+        type: "error",
+      });
+    }
+    if (!validateEmail(inputsValue.email)) {
+      return showNotification({
+        show: true,
+        text: "Введите коректный email",
+        type: "error",
+      });
+    }
     apiRequest("/register/sign-up", {
       method: "POST",
       data: {
@@ -45,14 +59,22 @@ export const ModalRegistration = ({ active, setActive }) => {
         email: inputsValue.email,
         password: inputsValue.password,
       },
-    }).then(() => {
-      setActive(false);
-      resetInputsValue();
-      showNotification({
-        show: true,
-        text: "Аккаунт успешно создан",
-        type: "success",
-      });
+    }).then((data) => {
+      if (!data) {
+        showNotification({
+          show: true,
+          text: "Аккаунт с таким логином или email уже существует",
+          type: "error",
+        });
+      } else {
+        setActive(false);
+        resetInputsValue();
+        showNotification({
+          show: true,
+          text: "Аккаунт успешно создан",
+          type: "success",
+        });
+      }
     });
   };
   return (
@@ -113,13 +135,7 @@ export const ModalRegistration = ({ active, setActive }) => {
               e.preventDefault();
               submitHandler();
             }}
-            styles={
-              inputsValue.userName &&
-              validateEmail(inputsValue.email) &&
-              inputsValue.password
-                ? "button-box__submit"
-                : "button-box__submit disable"
-            }
+            styles="button-box__submit"
           >
             Отправить
           </BaseButton>
