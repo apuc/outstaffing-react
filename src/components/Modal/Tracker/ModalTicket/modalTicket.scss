@@ -20,7 +20,29 @@
   border-radius: 8px;
   display: flex;
   flex-direction: row;
-  max-height: 750px;
+  max-height: 650px;
+  overflow-y: auto;
+
+
+  @media (max-width: 880px) {
+    max-height: none;
+    overflow-y: inherit;
+  }
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #cbd9f9;
+    border-radius: 20px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #c5c0c6;
+    border-radius: 20px;
+  }
 
   .content {
     position: relative;
@@ -125,27 +147,6 @@
         -webkit-box-orient: vertical;
       }
 
-      .taskDescription {
-        max-height: 150px;
-        overflow-y: auto;
-        padding-right: 10px;
-
-        &::-webkit-scrollbar {
-          width: 4px;
-          border-radius: 10px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background: #cbd9f9;
-          border-radius: 10px;
-        }
-
-        &::-webkit-scrollbar-track {
-          background: #c5c0c6;
-          border-radius: 10px;
-        }
-      }
-
       .fullName {
         max-width: 800px;
       }
@@ -157,8 +158,6 @@
       .comments__list {
         display: flex;
         flex-direction: column;
-        max-height: 215px;
-        overflow: auto;
 
         &::-webkit-scrollbar {
           width: 4px;

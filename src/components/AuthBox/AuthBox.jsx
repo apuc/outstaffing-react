@@ -11,6 +11,7 @@ import { apiRequest } from "@api/request";
 import { Loader } from "@components/Common/Loader/Loader";
 import ModalErrorLogin from "@components/Modal/ModalErrorLogin/ModalErrorLogin";
 import ModalRegistration from "@components/Modal/ModalRegistration/ModalRegistration";
+import ModalResetPassword from "@components/Modal/ModalResetPassword/ModalResetPassword";
 
 import authHead from "assets/icons/authHead.svg";
 import eyePassword from "assets/icons/passwordIcon.svg";
@@ -27,6 +28,7 @@ export const AuthBox = ({ title }) => {
 
   const [error, setError] = useState(null);
   const [modalError, setModalError] = useState(false);
+  const [modalReset, setModalReset] = useState(false);
   const [modalReg, setModalReg] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -120,8 +122,10 @@ export const AuthBox = ({ title }) => {
           >
             {isLoading ? <Loader /> : "Войти"}
           </button>
-          <span className="auth-box__reset">Вспомнить пароль</span>
-
+          <span className="auth-box__reset" onClick={() => setModalReset(true)}>
+            Восстановить пароль
+          </span>
+          <ModalResetPassword active={modalReset} setActive={setModalReset} />
           <ModalRegistration active={modalReg} setActive={setModalReg} />
         </div>
         <p className="auth-box__registration">

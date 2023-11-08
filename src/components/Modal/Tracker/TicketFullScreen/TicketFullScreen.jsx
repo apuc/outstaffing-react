@@ -729,9 +729,12 @@ export const TicketFullScreen = () => {
                       </div>
                     )}
                   </div>
-                  <Link to={`/profile/tracker`} className="link">
+                  <Link
+                    to={`/tracker/project/${taskInfo.project_id}`}
+                    className="link"
+                  >
                     <div className="tasks__head__back">
-                      <p>Вернуться на проекты</p>
+                      <p>Вернуться на проект</p>
                       <img src={arrow} alt="arrow" />
                     </div>
                   </Link>
