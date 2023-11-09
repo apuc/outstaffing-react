@@ -162,7 +162,7 @@
 
     &__dropDown {
       position: absolute;
-      background: #F1F1F1;
+      background: #f1f1f1;
       border-radius: 8px;
       top: 55px;
       left: 0;
@@ -242,6 +242,8 @@
     }
 
     &__dropDown {
+      max-height: 155px;
+      overflow-y: hidden;
       display: flex;
       flex-direction: column;
       position: absolute;
@@ -282,7 +284,7 @@
     display: flex;
     column-gap: 9.5px;
     align-items: center;
-    background: #F1F1F1;
+    background: #f1f1f1;
     border-radius: 22px 22px 0 0;
 
     span {
@@ -297,10 +299,10 @@
 
       span {
         padding: 3.75px 16.25px 5.75px;
-        color: #FFFFFF;
+        color: #ffffff;
         font-size: 12px;
         font-weight: 500;
-        background: #52B709;
+        background: #52b709;
         border-radius: 12px;
       }
     }
@@ -322,13 +324,13 @@
       }
 
       .input-container {
-        background: #F1F1F1;
+        background: #f1f1f1;
         margin: 0 0 17px;
         width: 393px;
         height: 47px;
 
         input {
-          background: #F1F1F1;
+          background: #f1f1f1;
           color: #000000;
           font-size: 15px;
           line-height: 18px;
@@ -337,7 +339,7 @@
       }
 
       .ck-editor {
-        border: 1px solid #DDDDDD;
+        border: 1px solid #dddddd;
         border-radius: 8px;
       }
 
@@ -358,7 +360,7 @@
         align-items: center;
         column-gap: 9.5px;
         p {
-          color: #2D4A17;
+          color: #2d4a17;
           font-size: 14px;
           font-weight: 500;
           line-height: 32px;
@@ -492,7 +494,7 @@
       }
 
       .select__executor {
-        background: #F1F1F1;
+        background: #f1f1f1;
         width: 393px;
         height: 47px;
         font-weight: 300;
@@ -506,7 +508,7 @@
         margin: 0;
         width: 185px;
         height: 42px;
-        color: #FFFFFF;
+        color: #ffffff;
         font-weight: 500;
         font-size: 16px;
       }
@@ -522,7 +524,7 @@
         margin-bottom: 22px;
 
         span {
-          color: #6F6F6F;
+          color: #6f6f6f;
         }
 
         p {
