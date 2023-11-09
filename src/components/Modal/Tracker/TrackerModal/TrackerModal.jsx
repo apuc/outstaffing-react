@@ -37,6 +37,7 @@ import arrowRight from "assets/icons/arrows/arrowRightCreateTask.svg";
 import arrowDown from "assets/icons/arrows/selectArrow.png";
 import close from "assets/icons/close.png";
 import calendarImg from "assets/icons/createTaskCalendar.svg";
+import crossWhite from "assets/icons/crossWhite.svg";
 import avatarMok from "assets/images/avatarMok.png";
 
 import "./trackerModal.scss";
@@ -497,7 +498,7 @@ export const TrackerModal = ({
                           >
                             <p>{tag.slug}</p>
                             <img
-                              src={close}
+                              src={crossWhite}
                               className="delete"
                               alt="delete"
                               onClick={() =>

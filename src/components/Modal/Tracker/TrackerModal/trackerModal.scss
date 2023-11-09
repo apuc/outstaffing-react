@@ -162,7 +162,7 @@
 
     &__dropDown {
       position: absolute;
-      background: #F1F1F1;
+      background: #f1f1f1;
       border-radius: 8px;
       top: 55px;
       left: 0;
@@ -242,6 +242,8 @@
     }
 
     &__dropDown {
+      max-height: 155px;
+      overflow-y: hidden;
       display: flex;
       flex-direction: column;
       position: absolute;
@@ -282,7 +284,7 @@
     display: flex;
     column-gap: 9.5px;
     align-items: center;
-    background: #F1F1F1;
+    background: #f1f1f1;
     border-radius: 22px 22px 0 0;
 
     span {
@@ -297,10 +299,10 @@
 
       span {
         padding: 3.75px 16.25px 5.75px;
-        color: #FFFFFF;
+        color: #ffffff;
         font-size: 12px;
         font-weight: 500;
-        background: #52B709;
+        background: #52b709;
         border-radius: 12px;
       }
     }
@@ -322,13 +324,13 @@
       }
 
       .input-container {
-        background: #F1F1F1;
+        background: #f1f1f1;
         margin: 0 0 17px;
         width: 393px;
         height: 47px;
 
         input {
-          background: #F1F1F1;
+          background: #f1f1f1;
           color: #000000;
           font-size: 15px;
           line-height: 18px;
@@ -337,7 +339,7 @@
       }
 
       .ck-editor {
-        border: 1px solid #DDDDDD;
+        border: 1px solid #dddddd;
         border-radius: 8px;
       }
 
@@ -358,7 +360,7 @@
         align-items: center;
         column-gap: 9.5px;
         p {
-          color: #2D4A17;
+          color: #2d4a17;
           font-size: 14px;
           font-weight: 500;
           line-height: 32px;
@@ -388,11 +390,17 @@
             row-gap: 8px;
 
             &__name {
+              color: #000;
+              font-size: 15px;
+              font-weight: 400;
+              line-height: normal;
               cursor: pointer;
               display: flex;
+              align-items: center;
               justify-content: space-between;
-              padding: 5px;
+              padding: 9.5px 12px;
               border-radius: 8px;
+              height: 47px;
               border: 1px solid #e4e4e4;
 
               img {
@@ -414,17 +422,18 @@
 
               .selectedTag {
                 display: flex;
-                padding: 3px 5px 3px 8px;
-                border-radius: 8px;
+                padding: 7px 7px 7px 8px;
+                border-radius: 35px;
                 align-items: center;
                 column-gap: 8px;
 
                 p {
-                  font-weight: 600;
-                  font-size: 15px;
+                  color: #fff;
+                  font-size: 13px;
+                  font-style: normal;
+                  font-weight: 500;
+                  line-height: 0px;
                   margin: 0;
-                  line-height: 15px;
-                  color: white;
                 }
 
                 .delete {
@@ -445,41 +454,46 @@
             border: 1px solid #e4e4e4;
             top: 90%;
             z-index: 101;
-            padding: 20px 10px 10px;
-            background: white;
+            padding: 30px 10px 10px;
+            background: #ebebeb;
             row-gap: 8px;
 
             .close {
               position: absolute;
               cursor: pointer;
-              width: 20px;
-              height: 20px;
-              right: 5px;
-              top: 0;
+              width: 22px;
+              height: 22px;
+              right: 9px;
+              top: 4px;
             }
 
             .tag__item {
               display: flex;
+              align-items: center;
+              height: 42px;
+              background: white;
               width: 100%;
               cursor: pointer;
               column-gap: 8px;
-              padding: 5px;
+              padding: 9px 14px;
               border: 1px solid #ececec;
               border-radius: 8px;
               justify-content: space-between;
 
               p {
-                font-size: 18px;
-                font-weight: 500;
+                color: #000;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 300;
+                line-height: 0px;
                 margin: 0;
-                line-height: 20px;
                 text-decoration: none;
               }
 
               span {
-                width: 18px;
-                height: 18px;
-                border-radius: 50px;
+                width: 22px;
+                height: 23px;
+                border-radius: 8px;
               }
             }
 
@@ -492,7 +506,7 @@
       }
 
       .select__executor {
-        background: #F1F1F1;
+        background: #f1f1f1;
         width: 393px;
         height: 47px;
         font-weight: 300;
@@ -506,7 +520,7 @@
         margin: 0;
         width: 185px;
         height: 42px;
-        color: #FFFFFF;
+        color: #ffffff;
         font-weight: 500;
         font-size: 16px;
       }
@@ -522,7 +536,7 @@
         margin-bottom: 22px;
 
         span {
-          color: #6F6F6F;
+          color: #6f6f6f;
         }
 
         p {

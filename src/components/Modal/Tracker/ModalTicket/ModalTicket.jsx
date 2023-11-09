@@ -933,7 +933,7 @@ export const ModalTiсket = ({
                 className="tags__select"
                 onClick={() => setSelectTagsOpen(!selectTagsOpen)}
               >
-                <span>Выберете тег</span>
+                <span>Выберите тег</span>
                 <img
                   className={selectTagsOpen ? "open" : ""}
                   src={arrowDown}
