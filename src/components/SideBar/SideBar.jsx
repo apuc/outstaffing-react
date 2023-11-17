@@ -72,10 +72,10 @@ export const SideBar = () => {
           </li>
         </ul>
         <p className="auth-body__politic">Политика конфиденциальности</p>
-        <div className="auth-body__contacts">
-          <h4>+7 812 363 17 87</h4>
-          <p>Перезвонить Вам?</p>
-        </div>
+        {/*<div className="auth-body__contacts">*/}
+        {/*  <h4>+7 812 363 17 87</h4>*/}
+        {/*  <p>Перезвонить Вам?</p>*/}
+        {/*</div>*/}
       </div>
     </div>
   );
