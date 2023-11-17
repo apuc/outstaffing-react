@@ -34,6 +34,7 @@ import arrowDown from "assets/icons/arrows/selectArrow.png";
 import calendarIcon from "assets/icons/calendar.svg";
 import category from "assets/icons/category.svg";
 import close from "assets/icons/closeProjectPersons.svg";
+import crossWhite from "assets/icons/crossWhite.svg";
 import del from "assets/icons/delete.svg";
 import edit from "assets/icons/edit.svg";
 import file from "assets/icons/fileModal.svg";
@@ -908,7 +909,7 @@ export const ModalTiсket = ({
             )}
           </div>
 
-          <div className="workers_box-bottom">
+          <div className="workers_box-tag">
             <div className="tags">
               <div className="tags__selected">
                 {taskTags.map((tag) => {
@@ -920,7 +921,7 @@ export const ModalTiсket = ({
                     >
                       <p>{tag.slug}</p>
                       <img
-                        src={close}
+                        src={crossWhite}
                         className="delete"
                         alt="delete"
                         onClick={() => deleteTagFromTask(tag.id)}
@@ -942,12 +943,12 @@ export const ModalTiсket = ({
               </div>
               {selectTagsOpen && (
                 <div className="tags__dropDown">
-                  <img
+                  {/* <img
                     onClick={() => setSelectTagsOpen(false)}
                     className="tags__dropDown__close"
                     src={close}
                     alt="close"
-                  />
+                  /> */}
                   {correctProjectTags.map((tag) => {
                     return (
                       <div
@@ -966,6 +967,8 @@ export const ModalTiсket = ({
                 </div>
               )}
             </div>
+          </div>
+          <div className="workers_box-bottom">
             <div
               className={editOpen ? "edit" : ""}
               onClick={() => {
