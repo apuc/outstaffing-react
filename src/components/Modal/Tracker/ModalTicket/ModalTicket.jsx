@@ -79,7 +79,7 @@ export const ModalTiсket = ({
   const [users, setUsers] = useState([]);
   const [timerStart, setTimerStart] = useState(false);
   const [timerInfo, setTimerInfo] = useState({});
-  const [uploadedFile, setUploadedFile] = useState(null);
+  // const [uploadedFile, setUploadedFile] = useState(null);
   const [currentTimerCount, setCurrentTimerCount] = useState({
     hours: 0,
     minute: 0,
@@ -378,25 +378,26 @@ export const ModalTiсket = ({
 
     const data = await res.json();
 
-    setUploadedFile(data);
+    // setUploadedFile(data);
+    attachFile(data[0].id)
   }
 
-  function deleteLoadedFile() {
-    setUploadedFile(null);
-  }
+  // function deleteLoadedFile() {
+  //   setUploadedFile(null);
+  // }
 
-  function attachFile() {
+  function attachFile(id) {
     apiRequest("/file/attach", {
       method: "POST",
       data: {
-        file_id: uploadedFile[0].id,
+        file_id: id,
         entity_type: 2,
         entity_id: task.id,
         status: 1,
       },
     }).then((res) => {
       setTaskFiles((prevValue) => [...prevValue, res]);
-      setUploadedFile(null);
+      // setUploadedFile(null);
     });
   }
 
@@ -635,24 +636,24 @@ export const ModalTiсket = ({
                 })}
               </div>
             )}
-            {uploadedFile && (
-              <div className="fileLoaded">
-                {uploadedFile.map((file) => {
-                  return (
-                    <div className="loadedFile" key={file.id}>
-                      <img src={backendImg(file.url)} alt="img" key={file.id} />
-                      <div
-                        className="deleteFile"
-                        onClick={() => deleteLoadedFile(file)}
-                      >
-                        <img src={close} alt="delete" />
-                      </div>
-                    </div>
-                  );
-                })}
-                <button onClick={attachFile}>Загрузить</button>
-              </div>
-            )}
+            {/*{uploadedFile && (*/}
+            {/*  <div className="fileLoaded">*/}
+            {/*    {uploadedFile.map((file) => {*/}
+            {/*      return (*/}
+            {/*        <div className="loadedFile" key={file.id}>*/}
+            {/*          <img src={backendImg(file.url)} alt="img" key={file.id} />*/}
+            {/*          <div*/}
+            {/*            className="deleteFile"*/}
+            {/*            onClick={() => deleteLoadedFile(file)}*/}
+            {/*          >*/}
+            {/*            <img src={close} alt="delete" />*/}
+            {/*          </div>*/}
+            {/*        </div>*/}
+            {/*      );*/}
+            {/*    })}*/}
+            {/*    <button onClick={attachFile}>Загрузить</button>*/}
+            {/*  </div>*/}
+            {/*)}*/}
             <div className="content__communication">
               {/*<p className="tasks">*/}
               {/*  <button*/}

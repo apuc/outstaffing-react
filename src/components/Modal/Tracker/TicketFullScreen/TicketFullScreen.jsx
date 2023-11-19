@@ -35,6 +35,7 @@ import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
+import FileTracker from "@components/FileTracker/FileTracker";
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowStart from "assets/icons/arrows/arrowStart.png";
@@ -483,20 +484,26 @@ export const TicketFullScreen = () => {
     setUploadedFile(null);
   }
 
+  // function deleteFile(file) {
+  //   apiRequest("/file/detach", {
+  //     method: "DELETE",
+  //     data: {
+  //       file_id: file.id,
+  //       entity_type: 2,
+  //       entity_id: taskInfo.id,
+  //       status: 0,
+  //     },
+  //   }).then(() => {
+  //     setTaskFiles((prevValue) =>
+  //       prevValue.filter((item) => item.id !== file.id)
+  //     );
+  //   });
+  // }
+
   function deleteFile(file) {
-    apiRequest("/file/detach", {
-      method: "DELETE",
-      data: {
-        file_id: file.id,
-        entity_type: 2,
-        entity_id: taskInfo.id,
-        status: 0,
-      },
-    }).then(() => {
-      setTaskFiles((prevValue) =>
+    setTaskFiles((prevValue) =>
         prevValue.filter((item) => item.id !== file.id)
-      );
-    });
+    );
   }
 
   function closeAcceptModal() {
@@ -800,19 +807,12 @@ export const TicketFullScreen = () => {
                     <div className="task__files filesFullScreen">
                       {taskFiles.map((file) => {
                         return (
-                          <div className="taskFile" key={file.id}>
-                            <img
-                              className="imgFile"
-                              src={backendImg(file.file?.url)}
-                              alt="img"
+                            <FileTracker
+                                key={file.id}
+                                file={file}
+                                setDeletedTask={deleteFile}
+                                taskId={taskInfo.id}
                             />
-                            <div
-                              className="deleteFile"
-                              onClick={() => deleteFile(file)}
-                            >
-                              <img src={fileDelete} alt="delete" />
-                            </div>
-                          </div>
                         );
                       })}
                     </div>
