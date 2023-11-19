@@ -29,13 +29,13 @@ import { useNotification } from "@hooks/useNotification";
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
+import FileTracker from "@components/FileTracker/FileTracker";
 import AcceptModal from "@components/Modal/AcceptModal/AcceptModal";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
 import TrackerTaskComment from "@components/TrackerTaskComment/TrackerTaskComment";
-import FileTracker from "@components/FileTracker/FileTracker";
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
 import arrowStart from "assets/icons/arrows/arrowStart.png";
@@ -502,7 +502,7 @@ export const TicketFullScreen = () => {
 
   function deleteFile(file) {
     setTaskFiles((prevValue) =>
-        prevValue.filter((item) => item.id !== file.id)
+      prevValue.filter((item) => item.id !== file.id)
     );
   }
 
@@ -807,12 +807,12 @@ export const TicketFullScreen = () => {
                     <div className="task__files filesFullScreen">
                       {taskFiles.map((file) => {
                         return (
-                            <FileTracker
-                                key={file.id}
-                                file={file}
-                                setDeletedTask={deleteFile}
-                                taskId={taskInfo.id}
-                            />
+                          <FileTracker
+                            key={file.id}
+                            file={file}
+                            setDeletedTask={deleteFile}
+                            taskId={taskInfo.id}
+                          />
                         );
                       })}
                     </div>

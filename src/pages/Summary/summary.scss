@@ -298,6 +298,16 @@
       column-gap: 25px;
       justify-content: space-between;
 
+      .noGitItems {
+        width: 100%;
+        font-size: 20px;
+        background: #FFFFFF;
+        border-radius: 12px;
+        padding: 35px 30px 30px 45px;
+        color: #000000;
+        font-weight: 600;
+      }
+
       .gitItem {
         width: 48%;
         display: flex;

@@ -379,7 +379,7 @@ export const ModalTiсket = ({
     const data = await res.json();
 
     // setUploadedFile(data);
-    attachFile(data[0].id)
+    attachFile(data[0].id);
   }
 
   // function deleteLoadedFile() {

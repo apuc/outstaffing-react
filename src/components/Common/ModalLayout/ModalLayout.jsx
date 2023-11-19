@@ -13,7 +13,11 @@ export const ModalLayout = ({
   return (
     <div
       className={active ? `modal-layout active` : "modal-layout"}
-      onClick={() => setActive(false)}
+      onClick={(event) => {
+        if (event.target.className === 'modal-layout active') {
+          setActive(false)
+        }
+      }}
       {...props}
     >
       <div
@@ -22,7 +26,6 @@ export const ModalLayout = ({
             ? `modal-layout__content ${styles}`
             : `modal-layout__content ${type}`
         }
-        onClick={(e) => e.stopPropagation()}
       >
         {children}
       </div>
