@@ -43,7 +43,10 @@ export const ProjectTiket = ({ project, index }) => {
 
     if (
       event &&
-      !path.find((item) => item.classList && item.classList.contains("project"))
+      !path.find(
+        (div) =>
+          div.classList && div.classList.contains(`project-${project.id}`)
+      )
     ) {
       setModalSelect(false);
     }
@@ -73,7 +76,7 @@ export const ProjectTiket = ({ project, index }) => {
   function linkProject() {}
 
   return (
-    <div className="project" key={index}>
+    <div className={`project project-${project.id}`} key={index}>
       <Link
         to={`/tracker/project/${project.id}`}
         className="project__open-traker"
@@ -93,7 +96,12 @@ export const ProjectTiket = ({ project, index }) => {
         </div>
       </Link>
 
-      <span className="menu-settings" onClick={() => setModalSelect(true)}>
+      <span
+        className="menu-settings"
+        onClick={() => {
+          setModalSelect(!modalSelect);
+        }}
+      >
         ...
       </span>
 

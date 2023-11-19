@@ -29,6 +29,7 @@ import { useNotification } from "@hooks/useNotification";
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
+import FileTracker from "@components/FileTracker/FileTracker";
 import AcceptModal from "@components/Modal/AcceptModal/AcceptModal";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
@@ -483,20 +484,26 @@ export const TicketFullScreen = () => {
     setUploadedFile(null);
   }
 
+  // function deleteFile(file) {
+  //   apiRequest("/file/detach", {
+  //     method: "DELETE",
+  //     data: {
+  //       file_id: file.id,
+  //       entity_type: 2,
+  //       entity_id: taskInfo.id,
+  //       status: 0,
+  //     },
+  //   }).then(() => {
+  //     setTaskFiles((prevValue) =>
+  //       prevValue.filter((item) => item.id !== file.id)
+  //     );
+  //   });
+  // }
+
   function deleteFile(file) {
-    apiRequest("/file/detach", {
-      method: "DELETE",
-      data: {
-        file_id: file.id,
-        entity_type: 2,
-        entity_id: taskInfo.id,
-        status: 0,
-      },
-    }).then(() => {
-      setTaskFiles((prevValue) =>
-        prevValue.filter((item) => item.id !== file.id)
-      );
-    });
+    setTaskFiles((prevValue) =>
+      prevValue.filter((item) => item.id !== file.id)
+    );
   }
 
   function closeAcceptModal() {
@@ -800,19 +807,12 @@ export const TicketFullScreen = () => {
                     <div className="task__files filesFullScreen">
                       {taskFiles.map((file) => {
                         return (
-                          <div className="taskFile" key={file.id}>
-                            <img
-                              className="imgFile"
-                              src={backendImg(file.file?.url)}
-                              alt="img"
-                            />
-                            <div
-                              className="deleteFile"
-                              onClick={() => deleteFile(file)}
-                            >
-                              <img src={fileDelete} alt="delete" />
-                            </div>
-                          </div>
+                          <FileTracker
+                            key={file.id}
+                            file={file}
+                            setDeletedTask={deleteFile}
+                            taskId={taskInfo.id}
+                          />
                         );
                       })}
                     </div>

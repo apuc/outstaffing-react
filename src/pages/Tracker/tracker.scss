@@ -391,9 +391,9 @@
               flex-direction: column;
               background: linear-gradient(180deg, #ffffff 0%, #ebebeb 100%);
               border-radius: 40px;
-              padding: 31px 128px 41px 49px;
+              padding: 15px 30px;
               cursor: default;
-              width: 650px;
+              width: 800px;
 
               &__close {
                 cursor: pointer;
@@ -410,7 +410,6 @@
                 align-items: end;
                 color: #1458dd;
                 font-size: 22px;
-                margin-top: 10px;
                 span {
                   font-size: 44px;
                   font-weight: 700;
@@ -462,7 +461,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                max-width: 190px;
+                max-width: 300px;
                 width: 100%;
 
                 .avatar {
@@ -479,7 +478,7 @@
                   color: #807777;
                   width: auto;
                   height: auto;
-                  max-width: 130px;
+                  max-width: 215px;
                   overflow: hidden;
                   white-space: nowrap;
                   text-overflow: ellipsis;

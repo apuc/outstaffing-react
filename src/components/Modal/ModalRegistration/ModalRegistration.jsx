@@ -20,6 +20,12 @@ export const ModalRegistration = ({ active, setActive }) => {
     password: "",
   });
 
+  const [inputsError, setInputsError] = useState({
+    name: false,
+    email: false,
+    password: false,
+  });
+
   const validateEmail = (email) => {
     // регулярное выражение для проверки email
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -37,20 +43,29 @@ export const ModalRegistration = ({ active, setActive }) => {
   };
 
   const { showNotification } = useNotification();
-  const submitHandler = () => {
-    if (!inputsValue.password || !inputsValue.userName || !inputsValue.email) {
-      return showNotification({
-        show: true,
-        text: "Введите коректные данные",
-        type: "error",
-      });
+
+  const validateForm = () => {
+    if (inputsValue.password.length < 6) {
+      setInputsError((prevValue) => ({ ...prevValue, password: true }));
+    }
+    if (inputsValue.userName.length < 6) {
+      setInputsError((prevValue) => ({ ...prevValue, name: true }));
     }
     if (!validateEmail(inputsValue.email)) {
-      return showNotification({
-        show: true,
-        text: "Введите коректный email",
-        type: "error",
-      });
+      setInputsError((prevValue) => ({ ...prevValue, email: true }));
+    }
+    if (
+      inputsValue.password.length < 6 ||
+      inputsValue.userName.length < 6 ||
+      !validateEmail(inputsValue.email)
+    ) {
+      return true;
+    }
+  };
+
+  const submitHandler = () => {
+    if (validateForm()) {
+      return;
     }
     apiRequest("/register/sign-up", {
       method: "POST",
@@ -90,43 +105,70 @@ export const ModalRegistration = ({ active, setActive }) => {
 
         <div className="input-body">
           <div className="input-body__box">
-            <h5>Ваше имя</h5>
-            <input
-              onChange={(e) =>
-                setInputsValue((prevValue) => ({
-                  ...prevValue,
-                  userName: e.target.value,
-                }))
-              }
-              placeholder="Name"
-            />
-            <h5>E-mail</h5>
-            <input
-              type="email"
-              onChange={(e) =>
-                setInputsValue((prevValue) => ({
-                  ...prevValue,
-                  email: e.target.value,
-                }))
-              }
-              placeholder="Email"
-            />
+            <div className="inputContainer">
+              <h5>Ваше имя</h5>
+              <input
+                className={inputsError.name ? "error" : ""}
+                onChange={(e) => {
+                  setInputsError({
+                    name: false,
+                    email: false,
+                    password: false,
+                  });
+                  setInputsValue((prevValue) => ({
+                    ...prevValue,
+                    userName: e.target.value,
+                  }));
+                }}
+                placeholder="Name"
+              />
+              {inputsError.name && <span>Минимум 6 символов</span>}
+            </div>
+            <div className="inputContainer">
+              <h5>E-mail</h5>
+              <input
+                type="email"
+                className={inputsError.email ? "error" : ""}
+                onChange={(e) => {
+                  setInputsError({
+                    name: false,
+                    email: false,
+                    password: false,
+                  });
+                  setInputsValue((prevValue) => ({
+                    ...prevValue,
+                    email: e.target.value,
+                  }));
+                }}
+                placeholder="Email"
+              />
+              {inputsError.email && <span>Введите коректный email</span>}
+            </div>
           </div>
 
           <div className="input-body__box">
             {/*<h5>Название компании</h5>*/}
             {/*<input></input>*/}
-            <h5>Пароль</h5>
-            <input
-              type="password"
-              onChange={(e) =>
-                setInputsValue((prevValue) => ({
-                  ...prevValue,
-                  password: e.target.value,
-                }))
-              }
-              placeholder="Password"
-            />
+            <div className="inputContainer">
+              <h5>Пароль</h5>
+              <input
+                className={inputsError.password ? "error" : ""}
+                type="password"
+                onChange={(e) => {
+                  setInputsError({
+                    name: false,
+                    email: false,
+                    password: false,
+                  });
+                  setInputsValue((prevValue) => ({
+                    ...prevValue,
+                    password: e.target.value,
+                  }));
+                }}
+                placeholder="Password"
+              />
+              {inputsError.password && <span>Минимум 6 символов</span>}
+            </div>
           </div>
         </div>
         <div className="button-box">

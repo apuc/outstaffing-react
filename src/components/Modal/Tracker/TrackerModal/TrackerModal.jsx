@@ -322,6 +322,7 @@ export const TrackerModal = ({
     } else {
       setCorrectProjectUsers(projectUsers);
     }
+    initListeners();
   }, [active]);
 
   useEffect(() => {
@@ -335,6 +336,38 @@ export const TrackerModal = ({
       );
     }
   }, [taskTags, projectMarks]);
+
+  const initListeners = () => {
+    document.addEventListener("click", closeByClickingOut);
+  };
+
+  const closeByClickingOut = (event) => {
+    const path = event.path || (event.composedPath && event.composedPath());
+
+    if (
+      event &&
+      !path.find(
+        (div) =>
+          div.classList &&
+          (div.classList.contains("tags__selected__name") ||
+            div.classList.contains("tags__dropDown"))
+      )
+    ) {
+      setSelectTagsOpen(false);
+    }
+
+    if (
+      event &&
+      !path.find(
+        (div) =>
+          div.classList &&
+          (div.classList.contains("select__executor") ||
+            div.classList.contains("select__executor__dropDown"))
+      )
+    ) {
+      setSelectExecutorTaskOpen(false);
+    }
+  };
 
   return (
     <ModalLayout
