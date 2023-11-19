@@ -14,8 +14,8 @@ export const ModalLayout = ({
     <div
       className={active ? `modal-layout active` : "modal-layout"}
       onClick={(event) => {
-        if (event.target.className === 'modal-layout active') {
-          setActive(false)
+        if (event.target.className === "modal-layout active") {
+          setActive(false);
         }
       }}
       {...props}

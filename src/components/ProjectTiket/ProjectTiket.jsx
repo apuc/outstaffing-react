@@ -43,7 +43,10 @@ export const ProjectTiket = ({ project, index }) => {
 
     if (
       event &&
-      !path.find((div) => div.classList && div.classList.contains(`project-${project.id}`))
+      !path.find(
+        (div) =>
+          div.classList && div.classList.contains(`project-${project.id}`)
+      )
     ) {
       setModalSelect(false);
     }
@@ -93,9 +96,12 @@ export const ProjectTiket = ({ project, index }) => {
         </div>
       </Link>
 
-      <span className="menu-settings" onClick={() => {
-        setModalSelect(!modalSelect)
-      }}>
+      <span
+        className="menu-settings"
+        onClick={() => {
+          setModalSelect(!modalSelect);
+        }}
+      >
         ...
       </span>
 

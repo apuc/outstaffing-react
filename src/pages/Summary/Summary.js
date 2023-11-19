@@ -151,9 +151,9 @@ export const Summary = () => {
                     </a>
                   );
                 })}
-                {!Boolean(gitInfo.length) &&
-                    <p className="noGitItems">Нет актуальных проектов</p>
-                }
+              {!Boolean(gitInfo.length) && (
+                <p className="noGitItems">Нет актуальных проектов</p>
+              )}
             </div>
           </div>
         )}
