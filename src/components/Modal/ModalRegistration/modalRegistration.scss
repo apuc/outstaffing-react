@@ -59,8 +59,23 @@
             background: #eff2f7;
             border-radius: 8px;
             border: none;
-            margin-bottom: 35px;
+            margin-bottom: 5px;
             padding-left: 20px;
+          }
+
+          .inputContainer {
+            height: 81px;
+            margin-bottom: 10px;
+            max-width: 294px;
+          }
+
+          span {
+            color: red;
+            font-size: 12px;
+          }
+
+          .error {
+            border: 1px solid red;
           }
         }
       }
