@@ -32,7 +32,6 @@ import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 
-import arrowCreateTask from "assets/icons/arrows/arrowCreateTask.svg";
 import arrowRight from "assets/icons/arrows/arrowRightCreateTask.svg";
 import arrowDown from "assets/icons/arrows/selectArrow.png";
 import close from "assets/icons/close.png";
@@ -82,12 +81,29 @@ export const TrackerModal = ({
   const [correctProjectTags, setCorrectProjectTags] = useState([]);
   const [taskTags, setTaskTags] = useState([]);
   const [selectTagsOpen, setSelectTagsOpen] = useState(false);
+  const [selectedPriority, setSelectedPriority] = useState(null)
+  const [selectPriority, setSelectPriority] = useState(false)
   const [selectColumnPriorityOpen, setSelectColumnPriorityOpen] =
     useState(false);
   const { showNotification } = useNotification();
   const [deadLineDate, setDeadLineDate] = useState("");
   const [datePickerOpen, setDatePickerOpen] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
+
+  const priority = [
+      {
+        name: 'Высокий',
+        key: 2
+      },
+    {
+      name: 'Средний',
+      key: 1
+    },
+    {
+      name: 'Низкий',
+      key: 0
+    },
+  ]
 
   function createTab() {
     if (!valueColumn) {
@@ -130,6 +146,7 @@ export const TrackerModal = ({
         status: 1,
         user_id: localStorage.getItem("id"),
         column_id: selectedTab,
+        execution_priority: selectedPriority ? selectedPriority.key : '',
         priority: priorityTask,
         dead_line: deadLineDate ? getCorrectRequestDate(deadLineDate) : "",
       },
@@ -166,6 +183,7 @@ export const TrackerModal = ({
             setValueTiket("");
             setDescriptionTicket("");
             setSelectedExecutorTask("Выберите исполнителя задачи");
+            setSelectedPriority(null)
           });
         } else {
           setActive(false);
@@ -586,6 +604,34 @@ export const TrackerModal = ({
                       )}
                     </div>
                   )}
+                </div>
+                <div className='select__priority'>
+                  <div className='select__priority__name'
+                       onClick={() => setSelectPriority(!selectPriority)}
+                  >
+                    {selectedPriority ? `Приоритет: ${selectedPriority.name}` : 'Выберети приоритет'}
+                    <img
+                        className={
+                          selectPriority ? "arrow arrow--open" : "arrow"
+                        }
+                        src={arrowDown}
+                        alt="arrow"
+                    />
+                  </div>
+                  {selectPriority &&
+                      <div className='select__priority__dropDown'>
+                        {priority.map((item) => {
+                          return <div
+                              className='dropdown__item'
+                              key={item.key}
+                              onClick={() => {
+                                setSelectPriority(false)
+                                setSelectedPriority(item)
+                              }}
+                          >{item.name}</div>
+                        })}
+                      </div>
+                  }
                 </div>
                 <div
                   onClick={() =>
