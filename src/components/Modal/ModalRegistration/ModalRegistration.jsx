@@ -48,7 +48,7 @@ export const ModalRegistration = ({ active, setActive }) => {
     if (inputsValue.password.length < 6) {
       setInputsError((prevValue) => ({ ...prevValue, password: true }));
     }
-    if (inputsValue.userName.length < 6) {
+    if (inputsValue.userName.length < 2) {
       setInputsError((prevValue) => ({ ...prevValue, name: true }));
     }
     if (!validateEmail(inputsValue.email)) {
@@ -120,9 +120,9 @@ export const ModalRegistration = ({ active, setActive }) => {
                     userName: e.target.value,
                   }));
                 }}
-                placeholder="Name"
+                placeholder="Имя"
               />
-              {inputsError.name && <span>Минимум 6 символов</span>}
+              {inputsError.name && <span>Минимум 2 символов</span>}
             </div>
             <div className="inputContainer">
               <h5>E-mail</h5>
@@ -140,7 +140,7 @@ export const ModalRegistration = ({ active, setActive }) => {
                     email: e.target.value,
                   }));
                 }}
-                placeholder="Email"
+                placeholder="Почта"
               />
               {inputsError.email && <span>Введите коректный email</span>}
             </div>
@@ -165,7 +165,7 @@ export const ModalRegistration = ({ active, setActive }) => {
                     password: e.target.value,
                   }));
                 }}
-                placeholder="Password"
+                placeholder="Пароль"
               />
               {inputsError.password && <span>Минимум 6 символов</span>}
             </div>
