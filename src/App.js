@@ -108,7 +108,7 @@ const App = () => {
 
           <Route exact path="quiz">
             <Route index element={<QuizPage />} />
-            <Route exact path="test" element={<PassingTests />} />
+            <Route exact path="test/:uuid" element={<PassingTests />} />
             <Route exact path="report" element={<QuizReportPage />} />
           </Route>
 

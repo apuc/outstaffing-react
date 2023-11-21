@@ -27,7 +27,7 @@ import BackEndImg from "assets/images/partnerProfile/personalBackEnd.svg";
 import "./quiz-page.scss";
 
 export const QuizPage = () => {
-  const questionnaires = useSelector(questionnairesSelector);
+  const [questionnaires,setQuestionnaires] = useState([]);
   const dispatch = useDispatch();
   const [personalInfoItems] = useState([
     {
@@ -36,7 +36,7 @@ export const QuizPage = () => {
       description:
         "Java PHP Python C# React Vue.js NodeJs Golang Ruby JavaScript",
       available: true,
-      img: BackEndImg,
+      img: BackEndImg
     },
     {
       title: "Frontend разработчики",
@@ -44,14 +44,14 @@ export const QuizPage = () => {
       description:
         "Java PHP Python C# React Vue.js NodeJs Golang Ruby JavaScript",
       available: true,
-      img: FrontendImg,
+      img: FrontendImg
     },
     {
       title: "Архитектура проектов",
       link: "/registration-candidate",
       description: "Потоки данных ER ERP CRM CQRS UML BPMN",
       available: true,
-      img: ArchitectureImg,
+      img: ArchitectureImg
     },
     {
       title: "Дизайн проектов",
@@ -59,35 +59,35 @@ export const QuizPage = () => {
       description:
         "Java PHP Python C# React Vue.js NodeJs Golang Ruby JavaScript",
       available: true,
-      img: DesignImg,
+      img: DesignImg
     },
     {
       title: "Тестирование проектов",
       link: "/registration-candidate",
       description: "SQL Postman TestRail Kibana Ручное тестирование",
       available: false,
-      img: TestImg,
+      img: TestImg
     },
     {
       title: "Администрирование проектов",
       link: "/registration-candidate",
       description: "DevOps ELK Kubernetes Docker Bash Apache Oracle Git",
       available: false,
-      img: AdminImg,
+      img: AdminImg
     },
     {
       title: "Управление проектом",
       link: "/registration-candidate",
       description: "Scrum Kanban Agile Miro CustDev",
       available: false,
-      img: ManageImg,
+      img: ManageImg
     },
     {
       title: "Копирайтинг проектов",
       link: "/registration-candidate",
       description: "Теги Заголовок H1 Дескриптор Абзац Сценарий",
       available: false,
-      img: CopyImg,
+      img: CopyImg
     },
     {
       title: "Реклама и SMM",
@@ -95,16 +95,18 @@ export const QuizPage = () => {
       description:
         "Java PHP Python C# React Vue.js NodeJs Golang Ruby JavaScript",
       available: false,
-      img: SmmImg,
-    },
+      img: SmmImg
+    }
   ]);
   const userId = localStorage.getItem("id");
-  const [selectedCategory, setsetSelectedCategory] = useState(false);
+  const [selectedCategory, setSetSelectedCategory] = useState(false);
 
   useEffect(() => {
     apiRequest(
       `/user-questionnaire/questionnaires-list?user_id=${userId}`
-    ).then((res) => dispatch(setQuestionnaires(res)));
+    )
+      .then(res => setQuestionnaires(res))
+      .catch(e => console.log(e));
   }, []);
 
   return (
@@ -115,7 +117,7 @@ export const QuizPage = () => {
         <ProfileBreadcrumbs
           links={[
             { name: "Главная", link: "/profile-candidate" },
-            { name: "Тестирование", link: "/quiz" },
+            { name: "Тестирование", link: "/quiz" }
           ]}
         />
         <div className="quiz-page__title main-title">
@@ -124,17 +126,15 @@ export const QuizPage = () => {
         {!selectedCategory && (
           <>
             <div className="quiz-page__specialization">
-              <SelectedCategory setSelectedCategory={setsetSelectedCategory} />
+              <SelectedCategory setSelectedCategory={setSetSelectedCategory} />
             </div>
             <div className="quiz-page__block">Доступные тесты</div>
             <div className="quiz-page__cards-test">
               {questionnaires.length ? (
                 questionnaires.map((item, index) => (
                   <CardAvailableTest
-                    description={
-                      "Вы новичок с реальным опытом работы до 1 года, или без опыта"
-                    }
-                    path={"quiz/test"}
+                    description={item.description}
+                    path={`quiz/test/${item.uuid}`}
                     status={item.status}
                     title={item.questionnaire_title}
                     passedTest={item.passedTest}
@@ -151,7 +151,6 @@ export const QuizPage = () => {
             </div>
           </>
         )}
-
         {selectedCategory && (
           <div className="quiz-page__categories-items">
             {personalInfoItems.map((item, index) => {

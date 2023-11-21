@@ -32,12 +32,11 @@ export const QuizReportPage = () => {
           ]}
         />
         <div className="quiz-report-page__title main-title">
-          Отчет по тестированию позиции Junior разработчик{" "}
+          Отчет по тестированию позиции Junior разработчик
         </div>
         <div className="quiz-report-page__report-quiz">
           <QuizReport />
         </div>
-
         <AlertResult />
       </div>
       <Footer />

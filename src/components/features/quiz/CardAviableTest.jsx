@@ -5,15 +5,16 @@ import StarRating from "@components/StarRating/StarRating";
 
 import rightArrow from "assets/icons/arrows/arrowRight.svg";
 
-export const CardAvailableTest = ({ title, description, path, passedTest }) => {
+export const CardAvailableTest = ({ title, description, path, status }) => {
   return (
     <div className="card-available-test">
       <Link
         to={`/${path}`}
+        aria-disabled={true}
         className="card-available-test__container"
         style={{
-          opacity: passedTest ? 0.3 : 1,
-          pointerEvents: passedTest ? "none" : "all",
+          // opacity: status !== 1 ? 0.3 : 1,
+          // pointerEvents: status !== 1 ? "none" : "all",
         }}
       >
         <div className="card-available-test__top-head">
@@ -27,8 +28,7 @@ export const CardAvailableTest = ({ title, description, path, passedTest }) => {
           </div>
         </div>
       </Link>
-
-      {passedTest && (
+      {status === 2 && (
         <div className="card-available-test__finished">
           <p>Получить отчет по тестированию</p>
           <Link to={"/quiz/report"}>Отчет по тесту</Link>

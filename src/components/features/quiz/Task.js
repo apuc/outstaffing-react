@@ -1,148 +1,138 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import {
-  answersSelector,
-  fetchGetAnswers, // fetchUserAnswerOne,
-  // fetchUserAnswersMany,
-  questionsSelector,
-  selectedTest, // setAnswers,
-  setCompleteTest,
-} from "@redux/quizSlice";
-
-import { apiRequest } from "@api/request";
-
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { questionsSelector } from "@redux/quizSlice";
 import questionIcon from "assets/images/question.png";
-
 import { GetOptionTask } from "./GetOptionTask";
-// import { HeaderQuiz } from "./HeaderQuiz";
-// import { Progressbar } from "./ProgressbarQuiz";
 import "./quiz.scss";
+import { useHandlerFieldTest } from "@hooks/useHandlerFieldTest";
+import { useParams } from "react-router-dom";
+import moment from "moment";
+import { Loader } from "@components/Common/Loader/Loader";
+import { apiRequest } from "@api/request";
+import { useNotification } from "@hooks/useNotification";
 
-export const TaskQuiz = () => {
-  const dispatch = useDispatch();
+export const TaskQuiz = ({ timer }) => {
 
-  const answers = useSelector(answersSelector);
+  const { restart } = timer;
+  const { uuid } = useParams();
   const questions = useSelector(questionsSelector);
-
-  const dataTest = useSelector(selectedTest);
   const [index, setIndex] = useState(0);
-  const [checkedValues, setCheckedValues] = useState([]);
-  //const [stripValue, setStripValue] = useState(0);
-  const [inputValue, setInputValue] = useState("");
+  const [isLoadingSendAnswers, setLoadingSendAnswers] = useState(false);
+  const { showNotification } = useNotification();
 
-  const id = localStorage.getItem("id");
-
-  useEffect(() => {
-    // fetch('https://itguild.info/api/user-questionnaire/questionnaires-list?user_id=110').then(response => response.json())
-    // .then(json => console.log(json))
-    apiRequest(`/question/get-questions?uuid=${dataTest.uuid}`).then(
-      (response) => {
-        dispatch(fetchGetAnswers(response[0].id));
-        setStripValue(((+index + 1) * 100) / response.length);
-      }
-    );
-  }, [dispatch]);
+  const { values, handleChange, setValues } = useHandlerFieldTest({
+    uuid,
+    questions,
+    indexQuestion: index
+  });
 
   const nextQuestion = async (e) => {
     e.preventDefault();
-    //Проверка на валидацию ответов
-    if (!(checkedValues.length || inputValue)) {
+    //Проверка на существование овтетов
+    if (!(values.length)) {
       alert("Вы не ответили на вопрос");
       return;
     }
 
     //отправка ответов на сервер
-    if (questions[index].question_type_id != 3) {
-      //dispatch(fetchUserAnswerOne(checkedValues));
-    } else {
-      console.log(checkedValues);
-      // dispatch(fetchUserAnswersMany(checkedValues));
-    }
+    setLoadingSendAnswers(true);
+    await apiRequest(`/user-response/set-responses`, {
+      method: "POST",
+      data: values
+    })
+      .then(res => {
+        if (String(res?.status)[0] !== "2") {
+          showNotification({
+            show: true,
+            text: res?.message || "",
+            type: "error"
+          });
+          return
+        }
 
-    //Проверка на окончание теста
-    if (!(index < questions.length - 1)) {
-      dispatch(setCompleteTest());
-      return;
-    }
+        if (index === questions.length - 1) return;
 
-    dispatch(fetchGetAnswers(questions[index + 1].id));
-    setIndex((prev) => prev + 1);
-    setCheckedValues([]);
-    setInputValue("");
+        //установка таймера на вопрос если он существует
+        if (questions[index + 1]?.time_limit !== "00:00:00") setValueTimer();
+
+        // очищение полей и переход на следующий вопрос
+        setIndex((prev) => prev + 1);
+        setValues([]);
+      })
+      .catch(e => {
+        showNotification({
+          show: true,
+          text: e?.message || "",
+          type: "error"
+        });
+      })
+      .finally(() => setLoadingSendAnswers(false));
   };
 
-  const handleChange = (e) => {
-    const checked = e.target.checked;
-
-    if (questions[index].question_type_id != 3) {
-      setCheckedValues([
-        {
-          user_id: id,
-          user_questionnaire_uuid: dataTest.uuid,
-          question_id: questions[index].id,
-          response_body: e.target.value,
-        },
-      ]);
-      return;
-    }
-
-    checked
-      ? setCheckedValues((prev) => [
-          ...prev,
-          {
-            user_id: id,
-            user_questionnaire_uuid: dataTest.uuid,
-            question_id: questions[index].id,
-            response_body: e.target.value,
-          },
-        ])
-      : setCheckedValues((prev) => [
-          ...prev.filter((item) => item.response_body !== e.target.value),
-        ]);
+  const complete = (e) => {
+    e.preventDefault();
+    console.log(values);
   };
 
-  console.log("render task");
+  const setValueTimer = () => {
+    const time_limit = questions[index + 1].time_limit.split(":");
+    restart(moment()
+      .add(time_limit[0], "hours")
+      .add(time_limit[1], "minutes")
+      .add(time_limit[2], "seconds"));
+  };
 
+  console.log(questions);
   return (
     <div className="task">
       {
-        <div className="task__container">
-          <div className="task__header">
-            <img src={questionIcon} alt="" />
-            <h3 className="task__title quiz-title_h3">
-              {questions[index].question_body}
-            </h3>
-          </div>
-
-          <div className="task__body">
-            <form className="task__form form-task" onSubmit={nextQuestion}>
-              {answers.map((answer) => (
-                <GetOptionTask
-                  key={answer.id}
-                  type={questions[index].question_type_id}
-                  handleChange={handleChange}
-                  answer={answer}
-                />
-              ))}
-              <div className="form-task__buttons">
-                {/* {
-                  index != 0 && <button type='submit' className='form-task__btn quiz-btn quiz-btn_back'
-                    onClick={prevQuestion}>Назад</button>
-                } */}
-                {index != questions.length && (
+        questions ?
+          <div className="task__container">
+            <div className="task__header">
+              <img src={questionIcon} alt="questionIcon" />
+              <h3 className="task__title quiz-title_h3">
+                {questions[index].question_body}
+              </h3>
+            </div>
+            <div className="task__body">
+              <form className="task__form form-task"
+                    onSubmit={index !== questions.length - 1 ? nextQuestion : complete}>
+                {
+                  questions[index].question_type_id === 1 ?
+                    <div className="form-task__group">
+                    <textarea
+                      className="form-task__field"
+                      value={values[0]?.response_body}
+                      onChange={handleChange}
+                    />
+                    </div>
+                    : questions[index]?.answers?.map((answer) => (
+                      <GetOptionTask
+                        key={answer.id}
+                        type={questions[index].question_type_id}
+                        handleChange={handleChange}
+                        answer={answer}
+                      />
+                    ))
+                }
+                <div className="form-task__buttons">
                   <button
                     onClick={nextQuestion}
+                    disabled={isLoadingSendAnswers}
                     className="form-task__btn quiz-btn"
                   >
-                    Далее
+                    {isLoadingSendAnswers ? <Loader width={25} height={25} />
+                      : (index !== questions.length - 1 ? "Далее" : "Завершить")
+                    }
                   </button>
-                )}
-              </div>
-            </form>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
+          :
+          <h1>ОШибка</h1>
       }
+
     </div>
   );
 };

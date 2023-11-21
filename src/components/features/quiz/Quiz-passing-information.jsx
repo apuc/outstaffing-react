@@ -1,36 +1,67 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useTimer } from "react-timer-hook";
-
-import { completedTestSelector } from "@redux/quizSlice";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setQuestions } from "@redux/quizSlice";
 import StarRating from "@components/StarRating/StarRating";
-
 import accempt from "assets/images/quiz/accempt.png";
-import timer from "assets/images/quiz/timer.png";
+import iconTomer from "assets/images/quiz/timer.png";
+import { apiRequest } from "@api/request";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
+import { useNotification } from "@hooks/useNotification";
 
-export const QuizPassingInformation = ({ expiryTimestamp, setStartTest }) => {
-  const { seconds, minutes, isRunning, start, restart } = useTimer({
-    expiryTimestamp,
-    autoStart: false,
-    onExpire: () => {
-      console.warn("onExpire called");
-    },
-  });
-  const completedTest = useSelector(completedTestSelector);
+export const QuizPassingInformation = ({ setStartTest, uuid, timer }) => {
+
+  const { restart, pause, hours, minutes, seconds, isRunning } = timer;
+  const navigate = useNavigate();
+  const { showNotification } = useNotification();
+  const dispatch = useDispatch();
 
   const startTesting = () => {
-    setStartTest(true);
-    start();
+    apiRequest(
+      `/question/get-questions?uuid=${uuid}`
+    )
+      .then((res) => {
+        if (res.status === 400) {
+          dispatch(setQuestions(null));
+          showNotification({
+            show: true,
+            text: res?.message || "",
+            type: "error"
+          });
+          return;
+        }
+        dispatch(setQuestions(res));
+        setStartTest(true);
+        restart(moment()
+          .add(res[0]?.time_limit.split(":")[0], "hours")
+          .add(res[0]?.time_limit.split(":")[1], "minutes")
+          .add(res[0]?.time_limit.split(":")[2], "seconds"), true);
+      })
+      .catch(e => {
+        dispatch(setQuestions(null));
+      });
   };
 
-  useEffect(() => {
-    if (completedTest) {
-      const time = new Date();
-      time.setSeconds(time.getSeconds() + 0); //600 - кол-во секунд для прохождения теста
-      restart(time, false);
-    }
-  }, [completedTest]);
+
+  const checkTest = () => apiRequest(
+    `user-questionnaire/questionnaire-completed?user_questionnaire_uuid=${uuid}`
+  );
+
+  const completeTest = () => apiRequest(
+    "/user-questionnaire/questionnaire-completed", {
+      method: "POST"
+    });
+
+  const finishQuiz = async () => {
+    Promise.all([checkTest, completeTest])
+      .then(function() {
+        pause();
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
 
   return (
     <div className="quiz-passing-information">
@@ -48,22 +79,25 @@ export const QuizPassingInformation = ({ expiryTimestamp, setStartTest }) => {
               разработчик
             </div>
           </div>
-          <div className="quiz-passing-information__timer timer-quiz">
+          {isRunning && <div className="quiz-passing-information__timer timer-quiz">
             <div className="quiz-passing-information__icon">
-              <img src={timer} alt="" />
+              <img src={iconTomer} alt="" />
             </div>
             <div className="quiz-passing-information__text">
-              {completedTest ? "Время вышло" : "Время на прохождение теста:"}{" "}
+              Время на прохождение теста:
               <br />
               <span>
-                {minutes.toString().padStart(2, "0") +
+                {hours.toString().padStart(2, "0") +
                   ":" +
-                  seconds.toString().padStart(2, "0")}{" "}
+                  minutes.toString().padStart(2, "0") +
+                  ":" +
+                  seconds.toString().padStart(2, "0")
+                }
                 секунд
               </span>
             </div>
-          </div>
-          <div className="quiz-passing-information__attempt">
+          </div>}
+          {!isRunning && <div className="quiz-passing-information__attempt">
             <div className="quiz-passing-information__icon">
               <img src={accempt} alt="" />
             </div>
@@ -71,9 +105,9 @@ export const QuizPassingInformation = ({ expiryTimestamp, setStartTest }) => {
               Попыток прохождения: <br />
               <span>1 попытка</span>
             </div>
-          </div>
+          </div>}
           <div>
-            {!completedTest && !isRunning && (
+            {!isRunning && (
               <button
                 className="quiz-passing-information__button btn-green"
                 onClick={startTesting}
@@ -82,9 +116,9 @@ export const QuizPassingInformation = ({ expiryTimestamp, setStartTest }) => {
               </button>
             )}
           </div>
+          {isRunning &&
+            <button className="quiz-passing-information__button quiz-btn" onClick={finishQuiz}>Завершить</button>}
         </div>
-
-        {/* {isRunning && <button className="quiz-passing-information__button quiz-btn" onClick={pause}>Завершить</button>} */}
       </div>
     </div>
   );

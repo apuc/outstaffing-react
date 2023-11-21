@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectUserInfo, setUserInfo } from "@redux/quizSlice";
+import { selectUserInfo } from "@redux/quizSlice";
 
 import { urlForLocal } from "@utils/helper";
 
@@ -13,14 +13,6 @@ export const HeaderQuiz = ({ header }) => {
   const userId = localStorage.getItem("id");
   const userInfo = useSelector(selectUserInfo);
 
-  useEffect(() => {
-    dispatch(setUserInfo(userId));
-  }, [userId, dispatch]);
-
-  useEffect(() => {
-    // apiRequest(`/user-questionnaire/questionnaires-list?user_id=${userId}`)
-    //     .then(res => dispatch(setQuestionnairesList(res)))
-  }, [userId, dispatch]);
 
   return (
     <div>
