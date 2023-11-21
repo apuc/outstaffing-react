@@ -1,7 +1,7 @@
 import React from "react";
 
 export const GetOptionTask = ({ type, answer, handleChange }) => {
-  const {answer_body,id} = answer
+  const { answer_body, id } = answer;
   return (
     <div className="form-task__group" key={id}>
       <input

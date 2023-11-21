@@ -1,7 +1,11 @@
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useTimer } from "react-timer-hook";
+
 import { completedTestSelector } from "@redux/quizSlice";
+
 import { Footer } from "@components/Common/Footer/Footer";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
 import { ProfileHeader } from "@components/ProfileHeader/ProfileHeader";
@@ -10,32 +14,29 @@ import { BlockCompletedTest } from "@components/features/quiz/BlockCompletedTest
 import { CardIntroduction } from "@components/features/quiz/Card-introduction";
 import { QuizPassingInformation } from "@components/features/quiz/Quiz-passing-information";
 import { TaskQuiz } from "@components/features/quiz/Task";
-import { useTimer } from "react-timer-hook";
-import moment from "moment";
 
 export const PassingTests = () => {
-
   const [startTest, setStartTest] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const completedTest = useSelector(completedTestSelector);
-  const { uuid } = useParams()
+  const { uuid } = useParams();
 
   const timer = useTimer({
     expiryTimestamp: moment(),
     autoStart: false,
     onExpire: () => {
-     navigate("/quiz")
-    }
+      navigate("/quiz");
+    },
   });
 
   const onCloseWindow = (e) => {
     e.preventDefault();
-    if(startTest){
-      let confirmationMessage = "\o/";
+    if (startTest) {
+      let confirmationMessage = "o/";
       (e || window.e).returnValue = confirmationMessage;
       return confirmationMessage;
     }
-  }
+  };
 
   const introduction = [
     {
@@ -56,21 +57,23 @@ export const PassingTests = () => {
   ];
 
   function onSwitchTab(e) {
-    console.log(e,document.visibilityState);
+    console.log(e, document.visibilityState);
     if (document.visibilityState === "hidden" && startTest) {
-      alert("Убедительная просьба не покидать страницу и не переключаться. Рассчитывайте только на свои знания и умения!!!")
+      alert(
+        "Убедительная просьба не покидать страницу и не переключаться. Рассчитывайте только на свои знания и умения!!!"
+      );
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     window.addEventListener("beforeunload", onCloseWindow);
     window.addEventListener("visibilitychange", onSwitchTab);
-    window.onblur = onSwitchTab
+    window.onblur = onSwitchTab;
     return () => {
       window.removeEventListener("beforeunload", onCloseWindow);
       window.removeEventListener("visibilitychange", onSwitchTab);
-    }
-  }, [startTest])
+    };
+  }, [startTest]);
 
   return (
     <div className="passing-tests-page">
@@ -103,7 +106,7 @@ export const PassingTests = () => {
               </div>
             )}
             {startTest ? (
-              <TaskQuiz timer={timer}/>
+              <TaskQuiz timer={timer} />
             ) : (
               <div className="passing-tests-page__introduction">
                 {introduction.map((item, i) => (
@@ -141,5 +144,3 @@ export const PassingTests = () => {
     </div>
   );
 };
-
-

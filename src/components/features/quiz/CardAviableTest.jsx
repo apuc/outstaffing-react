@@ -12,10 +12,12 @@ export const CardAvailableTest = ({ title, description, path, status }) => {
         to={`/${path}`}
         aria-disabled={true}
         className="card-available-test__container"
-        style={{
-          // opacity: status !== 1 ? 0.3 : 1,
-          // pointerEvents: status !== 1 ? "none" : "all",
-        }}
+        style={
+          {
+            // opacity: status !== 1 ? 0.3 : 1,
+            // pointerEvents: status !== 1 ? "none" : "all",
+          }
+        }
       >
         <div className="card-available-test__top-head">
           <StarRating />

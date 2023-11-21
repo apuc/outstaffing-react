@@ -13,7 +13,6 @@ export const HeaderQuiz = ({ header }) => {
   const userId = localStorage.getItem("id");
   const userInfo = useSelector(selectUserInfo);
 
-
   return (
     <div>
       {userInfo?.status === 500 ? (
