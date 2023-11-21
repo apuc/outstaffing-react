@@ -1164,7 +1164,7 @@ export const TicketFullScreen = () => {
                       className="tags__select"
                       onClick={() => setSelectTagsOpen(!selectTagsOpen)}
                     >
-                      <span>Выберете тег</span>
+                      <span>Выберите тег</span>
                       <img
                         className={selectTagsOpen ? "open" : ""}
                         src={arrowDown}
@@ -1207,7 +1207,7 @@ export const TicketFullScreen = () => {
                     <span>
                       {typeof taskPriority === "number"
                         ? priority[taskPriority]
-                        : "Выберете приоритет"}
+                        : "Выберите приоритет"}
                     </span>
                     <img
                       className={selectPriorityOpen ? "open" : ""}

@@ -1013,7 +1013,7 @@ export const ModalTiсket = ({
               <span>
                 {typeof taskPriority === "number"
                   ? priority[taskPriority]
-                  : "Выберете приоритет"}
+                  : "Выберите приоритет"}
               </span>
               <img
                 className={selectPriorityOpen ? "open" : ""}

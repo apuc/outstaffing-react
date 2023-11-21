@@ -568,7 +568,7 @@ export const TrackerModal = ({
                       className="tags__selected__name"
                       onClick={() => setSelectTagsOpen(!selectTagsOpen)}
                     >
-                      Выберете тег
+                      Выберите тег
                       <img
                         className={
                           selectTagsOpen ? "arrow arrow--open" : "arrow"
@@ -612,7 +612,7 @@ export const TrackerModal = ({
                   >
                     {selectedPriority
                       ? `Приоритет: ${selectedPriority.name}`
-                      : "Выберети приоритет"}
+                      : "Выберити приоритет"}
                     <img
                       className={selectPriority ? "arrow arrow--open" : "arrow"}
                       src={arrowDown}
