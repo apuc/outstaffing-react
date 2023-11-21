@@ -1124,6 +1124,36 @@
               }
             }
 
+            &__priority {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 8px;
+
+
+              p {
+                font-weight: 500;
+                font-size: 14px;
+              }
+
+              span {
+                font-weight: 500;
+                font-size: 14px;
+              }
+
+              .high {
+                color: red;
+              }
+
+              .middle {
+                color: #cece00;
+              }
+
+              .low {
+                color: green;
+              }
+            }
+
             &__deadLine {
               display: flex;
               align-items: center;

@@ -11,6 +11,7 @@ import {
   deletePersonOnProject,
   getBoarderLoader,
   modalToggle,
+  setProjectBoardFetch,
   setToggleTab,
 } from "@redux/projectsTrackerSlice";
 
@@ -89,12 +90,35 @@ export const TicketFullScreen = () => {
   const [startDate, setStartDate] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [taskFiles, setTaskFiles] = useState([]);
+  const [taskPriority, setTaskPriority] = useState("");
   const [acceptModalOpen, setAcceptModalOpen] = useState(false);
   const [taskTags, setTaskTags] = useState([]);
   const [selectTagsOpen, setSelectTagsOpen] = useState(false);
+  const [selectPriorityOpen, setSelectPriorityOpen] = useState(false);
   const [correctProjectTags, setCorrectProjectTags] = useState([]);
   const { showNotification } = useNotification();
   const [commentSendDisable, setCommentSendDisable] = useState(false);
+
+  const priority = {
+    2: "Высокий",
+    1: "Средний",
+    0: "Низкий",
+  };
+
+  const priorityTypes = [
+    {
+      name: "Высокий",
+      key: 2,
+    },
+    {
+      name: "Средний",
+      key: 1,
+    },
+    {
+      name: "Низкий",
+      key: 0,
+    },
+  ];
 
   useEffect(() => {
     initListeners();
@@ -102,6 +126,7 @@ export const TicketFullScreen = () => {
       (taskInfo) => {
         setTaskInfo(taskInfo);
         setDeadLine(taskInfo.dead_line);
+        setTaskPriority(taskInfo.execution_priority);
         setStartDate(
           taskInfo.dead_line ? new Date(taskInfo.dead_line) : new Date()
         );
@@ -482,6 +507,17 @@ export const TicketFullScreen = () => {
 
   function deleteLoadedFile() {
     setUploadedFile(null);
+  }
+
+  function updateTaskPriority(key) {
+    setSelectPriorityOpen(false);
+    apiRequest("/task/update-task", {
+      method: "PUT",
+      data: {
+        task_id: taskInfo.id,
+        execution_priority: key,
+      },
+    }).then(() => {});
   }
 
   // function deleteFile(file) {
@@ -1103,8 +1139,7 @@ export const TicketFullScreen = () => {
                     </button>
                   )}
                 </div>
-
-                <div className="workers_box-bottom">
+                <div className="workers_box-tag">
                   <div className="tags">
                     <div className="tags__selected">
                       {taskTags.map((tag) => {
@@ -1162,6 +1197,44 @@ export const TicketFullScreen = () => {
                       </div>
                     )}
                   </div>
+                </div>
+
+                <div className="workers_box-priority">
+                  <div
+                    className="priority__name"
+                    onClick={() => setSelectPriorityOpen(!selectPriorityOpen)}
+                  >
+                    <span>
+                      {typeof taskPriority === "number"
+                        ? priority[taskPriority]
+                        : "Выберете приоритет"}
+                    </span>
+                    <img
+                      className={selectPriorityOpen ? "open" : ""}
+                      src={arrowDown}
+                      alt="arrow"
+                    />
+                  </div>
+                  {selectPriorityOpen && (
+                    <div className="priority__dropDown">
+                      {priorityTypes.map((item) => {
+                        return (
+                          <div
+                            className="priority__dropDown__item"
+                            key={item.key}
+                            onClick={() => {
+                              setTaskPriority(item.key);
+                              updateTaskPriority(item.key);
+                            }}
+                          >
+                            {item.name}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+                <div className="workers_box-bottom">
                   <div
                     className={editOpen ? "edit" : ""}
                     onClick={() => {
