@@ -75,7 +75,7 @@ export const ModalTiсket = ({
   const [dropListOpen, setDropListOpen] = useState(false);
   const [dropListMembersOpen, setDropListMembersOpen] = useState(false);
   const [executor, setExecutor] = useState(task.executor);
-  const [taskPriority, setTaskPriority] = useState(task.execution_priority)
+  const [taskPriority, setTaskPriority] = useState(task.execution_priority);
   const [members, setMembers] = useState(task.taskUsers);
   const [taskTags, setTaskTags] = useState(task.mark);
   const [users, setUsers] = useState([]);
@@ -95,7 +95,7 @@ export const ModalTiсket = ({
   const profileInfo = useSelector(getProfileInfo);
   const [acceptModalOpen, setAcceptModalOpen] = useState(false);
   const [selectTagsOpen, setSelectTagsOpen] = useState(false);
-  const [selectPriorityOpen, setSelectPriorityOpen] = useState(false)
+  const [selectPriorityOpen, setSelectPriorityOpen] = useState(false);
   const { showNotification } = useNotification();
   const [commentSendDisable, setCommentSendDisable] = useState(false);
 
@@ -117,27 +117,26 @@ export const ModalTiсket = ({
     });
   }
 
-  const priority =
-      {
-        2: 'Высокий',
-        1: 'Средний',
-        0: 'Низкий'
-      }
+  const priority = {
+    2: "Высокий",
+    1: "Средний",
+    0: "Низкий",
+  };
 
   const priorityTypes = [
     {
-      name: 'Высокий',
-      key: 2
+      name: "Высокий",
+      key: 2,
     },
     {
-      name: 'Средний',
-      key: 1
+      name: "Средний",
+      key: 1,
     },
     {
-      name: 'Низкий',
-      key: 0
+      name: "Низкий",
+      key: 0,
     },
-  ]
+  ];
 
   function archiveTask() {
     setAcceptModalOpen(true);
@@ -287,12 +286,12 @@ export const ModalTiсket = ({
   }
 
   function updateTaskPriority(key) {
-    setSelectPriorityOpen(false)
+    setSelectPriorityOpen(false);
     apiRequest("/task/update-task", {
       method: "PUT",
       data: {
         task_id: task.id,
-        execution_priority: key
+        execution_priority: key,
       },
     }).then(() => {
       dispatch(setProjectBoardFetch(projectId));
@@ -1006,29 +1005,40 @@ export const ModalTiсket = ({
               )}
             </div>
           </div>
-          <div className='workers_box-priority'>
-            <div className='priority__name' onClick={() => setSelectPriorityOpen(!selectPriorityOpen)}>
-              <span>{typeof taskPriority === "number" ?  priority[taskPriority] : 'Выберете приоритет'}</span>
+          <div className="workers_box-priority">
+            <div
+              className="priority__name"
+              onClick={() => setSelectPriorityOpen(!selectPriorityOpen)}
+            >
+              <span>
+                {typeof taskPriority === "number"
+                  ? priority[taskPriority]
+                  : "Выберете приоритет"}
+              </span>
               <img
-                  className={selectPriorityOpen ? "open" : ""}
-                  src={arrowDown}
-                  alt="arrow"
+                className={selectPriorityOpen ? "open" : ""}
+                src={arrowDown}
+                alt="arrow"
               />
             </div>
-            {selectPriorityOpen &&
-                <div className='priority__dropDown'>
-                  {priorityTypes.map((item) => {
-                    return <div
-                        className='priority__dropDown__item'
-                        key={item.key}
-                        onClick={() => {
-                          setTaskPriority(item.key)
-                          updateTaskPriority(item.key)
-                        }}
-                    >{item.name}</div>
-                  })}
-                </div>
-            }
+            {selectPriorityOpen && (
+              <div className="priority__dropDown">
+                {priorityTypes.map((item) => {
+                  return (
+                    <div
+                      className="priority__dropDown__item"
+                      key={item.key}
+                      onClick={() => {
+                        setTaskPriority(item.key);
+                        updateTaskPriority(item.key);
+                      }}
+                    >
+                      {item.name}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
           <div className="workers_box-bottom">
             <div

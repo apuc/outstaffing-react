@@ -90,18 +90,17 @@ export const ProjectTracker = () => {
   const loader = useSelector(getBoarderLoader);
   const { showNotification } = useNotification();
 
-  const priority =
-    {
-      2: 'Высокий',
-      1: 'Средний',
-      0: 'Низкий'
-    }
+  const priority = {
+    2: "Высокий",
+    1: "Средний",
+    0: "Низкий",
+  };
 
-    const priorityClass = {
-      2: 'high',
-      1: 'middle',
-      0: 'low'
-    }
+  const priorityClass = {
+    2: "high",
+    1: "middle",
+    0: "low",
+  };
 
   useEffect(() => {
     dispatch(activeLoader());
@@ -1011,12 +1010,19 @@ export const ProjectTracker = () => {
                                     })}
                                   </div>
                                 )}
-                                {typeof task.execution_priority === "number" &&
-                                    <div className='tasks__board__item__priority'>
-                                       <p>Приоритет:</p>
-                                        <span className={priorityClass[task.execution_priority]}>{priority[task.execution_priority]}</span>
-                                    </div>
-                                }
+                                {typeof task.execution_priority ===
+                                  "number" && (
+                                  <div className="tasks__board__item__priority">
+                                    <p>Приоритет:</p>
+                                    <span
+                                      className={
+                                        priorityClass[task.execution_priority]
+                                      }
+                                    >
+                                      {priority[task.execution_priority]}
+                                    </span>
+                                  </div>
+                                )}
                                 {task.dead_line && (
                                   <div className="tasks__board__item__deadLine">
                                     <p>Срок исполнения:</p>

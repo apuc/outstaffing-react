@@ -10,7 +10,8 @@ import { getProfileInfo } from "@redux/outstaffingSlice";
 import {
   deletePersonOnProject,
   getBoarderLoader,
-  modalToggle, setProjectBoardFetch,
+  modalToggle,
+  setProjectBoardFetch,
   setToggleTab,
 } from "@redux/projectsTrackerSlice";
 
@@ -89,35 +90,35 @@ export const TicketFullScreen = () => {
   const [startDate, setStartDate] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [taskFiles, setTaskFiles] = useState([]);
-  const [taskPriority, setTaskPriority] = useState("")
+  const [taskPriority, setTaskPriority] = useState("");
   const [acceptModalOpen, setAcceptModalOpen] = useState(false);
   const [taskTags, setTaskTags] = useState([]);
   const [selectTagsOpen, setSelectTagsOpen] = useState(false);
-  const [selectPriorityOpen, setSelectPriorityOpen] = useState(false)
+  const [selectPriorityOpen, setSelectPriorityOpen] = useState(false);
   const [correctProjectTags, setCorrectProjectTags] = useState([]);
   const { showNotification } = useNotification();
   const [commentSendDisable, setCommentSendDisable] = useState(false);
 
   const priority = {
-        2: 'Высокий',
-        1: 'Средний',
-        0: 'Низкий'
-      }
+    2: "Высокий",
+    1: "Средний",
+    0: "Низкий",
+  };
 
   const priorityTypes = [
     {
-      name: 'Высокий',
-      key: 2
+      name: "Высокий",
+      key: 2,
     },
     {
-      name: 'Средний',
-      key: 1
+      name: "Средний",
+      key: 1,
     },
     {
-      name: 'Низкий',
-      key: 0
+      name: "Низкий",
+      key: 0,
     },
-  ]
+  ];
 
   useEffect(() => {
     initListeners();
@@ -125,7 +126,7 @@ export const TicketFullScreen = () => {
       (taskInfo) => {
         setTaskInfo(taskInfo);
         setDeadLine(taskInfo.dead_line);
-        setTaskPriority(taskInfo.execution_priority)
+        setTaskPriority(taskInfo.execution_priority);
         setStartDate(
           taskInfo.dead_line ? new Date(taskInfo.dead_line) : new Date()
         );
@@ -509,15 +510,14 @@ export const TicketFullScreen = () => {
   }
 
   function updateTaskPriority(key) {
-    setSelectPriorityOpen(false)
+    setSelectPriorityOpen(false);
     apiRequest("/task/update-task", {
       method: "PUT",
       data: {
         task_id: taskInfo.id,
-        execution_priority: key
+        execution_priority: key,
       },
-    }).then(() => {
-    });
+    }).then(() => {});
   }
 
   // function deleteFile(file) {
@@ -1144,84 +1144,95 @@ export const TicketFullScreen = () => {
                     <div className="tags__selected">
                       {taskTags.map((tag) => {
                         return (
-                            <div
-                                className="tags__selected__item"
-                                key={tag.id}
-                                style={{ background: tag.color }}
-                            >
-                              <p>{tag.slug}</p>
-                              <img
-                                  src={close}
-                                  className="delete"
-                                  alt="delete"
-                                  onClick={() => deleteTagFromTask(tag.id)}
-                              />
-                            </div>
+                          <div
+                            className="tags__selected__item"
+                            key={tag.id}
+                            style={{ background: tag.color }}
+                          >
+                            <p>{tag.slug}</p>
+                            <img
+                              src={close}
+                              className="delete"
+                              alt="delete"
+                              onClick={() => deleteTagFromTask(tag.id)}
+                            />
+                          </div>
                         );
                       })}
                     </div>
                     <div
-                        className="tags__select"
-                        onClick={() => setSelectTagsOpen(!selectTagsOpen)}
+                      className="tags__select"
+                      onClick={() => setSelectTagsOpen(!selectTagsOpen)}
                     >
                       <span>Выберете тег</span>
                       <img
-                          className={selectTagsOpen ? "open" : ""}
-                          src={arrowDown}
-                          alt="arrow"
+                        className={selectTagsOpen ? "open" : ""}
+                        src={arrowDown}
+                        alt="arrow"
                       />
                     </div>
                     {selectTagsOpen && (
-                        <div className="tags__dropDown">
-                          <img
-                              onClick={() => setSelectTagsOpen(false)}
-                              className="tags__dropDown__close"
-                              src={close}
-                              alt="close"
-                          />
-                          {correctProjectTags.map((tag) => {
-                            return (
-                                <div
-                                    className="tagItem"
-                                    key={tag.id}
-                                    onClick={() => addTagToTask(tag.id)}
-                                >
-                                  <p>{tag.slug}</p>
-                                  <span style={{ background: tag.color }} />
-                                </div>
-                            );
-                          })}
-                          {!Boolean(correctProjectTags.length) && (
-                              <p className="tags__dropDown__noItem">Нет тегов</p>
-                          )}
-                        </div>
+                      <div className="tags__dropDown">
+                        <img
+                          onClick={() => setSelectTagsOpen(false)}
+                          className="tags__dropDown__close"
+                          src={close}
+                          alt="close"
+                        />
+                        {correctProjectTags.map((tag) => {
+                          return (
+                            <div
+                              className="tagItem"
+                              key={tag.id}
+                              onClick={() => addTagToTask(tag.id)}
+                            >
+                              <p>{tag.slug}</p>
+                              <span style={{ background: tag.color }} />
+                            </div>
+                          );
+                        })}
+                        {!Boolean(correctProjectTags.length) && (
+                          <p className="tags__dropDown__noItem">Нет тегов</p>
+                        )}
+                      </div>
                     )}
                   </div>
                 </div>
 
-                <div className='workers_box-priority'>
-                  <div className='priority__name' onClick={() => setSelectPriorityOpen(!selectPriorityOpen)}>
-                    <span>{typeof taskPriority === "number" ?  priority[taskPriority] : 'Выберете приоритет'}</span>
+                <div className="workers_box-priority">
+                  <div
+                    className="priority__name"
+                    onClick={() => setSelectPriorityOpen(!selectPriorityOpen)}
+                  >
+                    <span>
+                      {typeof taskPriority === "number"
+                        ? priority[taskPriority]
+                        : "Выберете приоритет"}
+                    </span>
                     <img
-                        className={selectPriorityOpen ? "open" : ""}
-                        src={arrowDown}
-                        alt="arrow"
+                      className={selectPriorityOpen ? "open" : ""}
+                      src={arrowDown}
+                      alt="arrow"
                     />
                   </div>
-                  {selectPriorityOpen &&
-                      <div className='priority__dropDown'>
-                        {priorityTypes.map((item) => {
-                          return <div
-                              className='priority__dropDown__item'
-                              key={item.key}
-                              onClick={() => {
-                                setTaskPriority(item.key)
-                                updateTaskPriority(item.key)
-                              }}
-                          >{item.name}</div>
-                        })}
-                      </div>
-                  }
+                  {selectPriorityOpen && (
+                    <div className="priority__dropDown">
+                      {priorityTypes.map((item) => {
+                        return (
+                          <div
+                            className="priority__dropDown__item"
+                            key={item.key}
+                            onClick={() => {
+                              setTaskPriority(item.key);
+                              updateTaskPriority(item.key);
+                            }}
+                          >
+                            {item.name}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
                 <div className="workers_box-bottom">
                   <div
