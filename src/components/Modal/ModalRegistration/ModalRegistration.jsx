@@ -99,8 +99,7 @@ export const ModalRegistration = ({ active, setActive }) => {
           Подключайтесь к <p>itguild.</p>
         </h2>
         <p className="registration-body__left-desc">
-          Зарегистрируйтесь и назначайте собеседования любым специалистам без
-          задержек
+          Зарегистрируйтесь и начните работу уже сегодня
         </p>
 
         <div className="input-body">
