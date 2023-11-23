@@ -5,8 +5,8 @@ import { apiRequest } from "@api/request";
 import { useNotification } from "@hooks/useNotification";
 
 import BaseButton from "@components/Common/BaseButton/BaseButton";
-import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 import { Loader } from "@components/Common/Loader/Loader";
+import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 
 import anyMoment from "assets/icons/anyMoment.svg";
 import doc from "assets/icons/doc.svg";
@@ -27,7 +27,7 @@ export const ModalRegistration = ({ active, setActive }) => {
     password: false,
   });
 
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
 
   const validateEmail = (email) => {
     // регулярное выражение для проверки email
@@ -62,7 +62,7 @@ export const ModalRegistration = ({ active, setActive }) => {
     if (validateForm()) {
       return;
     }
-    setLoader(true)
+    setLoader(true);
     apiRequest("/register/sign-up", {
       method: "POST",
       data: {
@@ -71,7 +71,7 @@ export const ModalRegistration = ({ active, setActive }) => {
         password: inputsValue.password,
       },
     }).then((data) => {
-      setLoader(false)
+      setLoader(false);
       if (!data) {
         showNotification({
           show: true,
@@ -79,7 +79,7 @@ export const ModalRegistration = ({ active, setActive }) => {
           type: "error",
         });
       } else {
-        closeModal()
+        closeModal();
         showNotification({
           show: true,
           text: "Аккаунт успешно создан",
@@ -101,7 +101,7 @@ export const ModalRegistration = ({ active, setActive }) => {
       password: false,
     });
     setActive(false);
-  }
+  };
   return (
     <ModalLayout active={active} setActive={closeModal} styles={"registration"}>
       <div className="registration-body__left">
@@ -185,18 +185,19 @@ export const ModalRegistration = ({ active, setActive }) => {
           </div>
         </div>
         <div className="button-box">
-          {loader ?
-            <Loader style={'green'} /> :
+          {loader ? (
+            <Loader style={"green"} />
+          ) : (
             <BaseButton
-                onClick={(e) => {
-                  e.preventDefault();
-                  submitHandler();
-                }}
-                styles="button-box__submit"
+              onClick={(e) => {
+                e.preventDefault();
+                submitHandler();
+              }}
+              styles="button-box__submit"
             >
               Отправить
             </BaseButton>
-          }
+          )}
           {/*<h5>*/}
           {/*  У вас уже есть аккаунт? <p>Войти</p>*/}
           {/*</h5>*/}
