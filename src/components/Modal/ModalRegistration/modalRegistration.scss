@@ -87,7 +87,7 @@
 
         &__submit {
           width: 174px;
-          height: 46px;
+          height: 50px;
           font-size: 18px;
           margin-right: 55px;
         }
@@ -144,5 +144,10 @@
         }
       }
     }
+  }
+
+  .loader {
+    justify-content: start;
+    left: 80px;
   }
 }
