@@ -5,6 +5,7 @@ import { apiRequest } from "@api/request";
 import { useNotification } from "@hooks/useNotification";
 
 import BaseButton from "@components/Common/BaseButton/BaseButton";
+import { Loader } from "@components/Common/Loader/Loader";
 import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 
 import anyMoment from "assets/icons/anyMoment.svg";
@@ -26,20 +27,14 @@ export const ModalRegistration = ({ active, setActive }) => {
     password: false,
   });
 
+  const [loader, setLoader] = useState(false);
+
   const validateEmail = (email) => {
     // регулярное выражение для проверки email
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     // возвращаем true, если email проходит проверку, и false, если нет
     return re.test(email);
-  };
-
-  const resetInputsValue = () => {
-    setInputsValue({
-      userName: "",
-      email: "",
-      password: "",
-    });
   };
 
   const { showNotification } = useNotification();
@@ -67,6 +62,7 @@ export const ModalRegistration = ({ active, setActive }) => {
     if (validateForm()) {
       return;
     }
+    setLoader(true);
     apiRequest("/register/sign-up", {
       method: "POST",
       data: {
@@ -75,6 +71,7 @@ export const ModalRegistration = ({ active, setActive }) => {
         password: inputsValue.password,
       },
     }).then((data) => {
+      setLoader(false);
       if (!data) {
         showNotification({
           show: true,
@@ -82,8 +79,7 @@ export const ModalRegistration = ({ active, setActive }) => {
           type: "error",
         });
       } else {
-        setActive(false);
-        resetInputsValue();
+        closeModal();
         showNotification({
           show: true,
           text: "Аккаунт успешно создан",
@@ -92,8 +88,22 @@ export const ModalRegistration = ({ active, setActive }) => {
       }
     });
   };
+
+  const closeModal = () => {
+    setInputsValue({
+      userName: "",
+      email: "",
+      password: "",
+    });
+    setInputsError({
+      name: false,
+      email: false,
+      password: false,
+    });
+    setActive(false);
+  };
   return (
-    <ModalLayout active={active} setActive={setActive} styles={"registration"}>
+    <ModalLayout active={active} setActive={closeModal} styles={"registration"}>
       <div className="registration-body__left">
         <h2>
           Подключайтесь к <p>itguild.</p>
@@ -120,6 +130,7 @@ export const ModalRegistration = ({ active, setActive }) => {
                     userName: e.target.value,
                   }));
                 }}
+                value={inputsValue.userName}
                 placeholder="Имя"
               />
               {inputsError.name && <span>Минимум 2 символов</span>}
@@ -140,6 +151,7 @@ export const ModalRegistration = ({ active, setActive }) => {
                     email: e.target.value,
                   }));
                 }}
+                value={inputsValue.email}
                 placeholder="Почта"
               />
               {inputsError.email && <span>Введите коректный email</span>}
@@ -165,6 +177,7 @@ export const ModalRegistration = ({ active, setActive }) => {
                     password: e.target.value,
                   }));
                 }}
+                value={inputsValue.password}
                 placeholder="Пароль"
               />
               {inputsError.password && <span>Минимум 6 символов</span>}
@@ -172,15 +185,19 @@ export const ModalRegistration = ({ active, setActive }) => {
           </div>
         </div>
         <div className="button-box">
-          <BaseButton
-            onClick={(e) => {
-              e.preventDefault();
-              submitHandler();
-            }}
-            styles="button-box__submit"
-          >
-            Отправить
-          </BaseButton>
+          {loader ? (
+            <Loader style={"green"} />
+          ) : (
+            <BaseButton
+              onClick={(e) => {
+                e.preventDefault();
+                submitHandler();
+              }}
+              styles="button-box__submit"
+            >
+              Отправить
+            </BaseButton>
+          )}
           {/*<h5>*/}
           {/*  У вас уже есть аккаунт? <p>Войти</p>*/}
           {/*</h5>*/}
@@ -209,7 +226,7 @@ export const ModalRegistration = ({ active, setActive }) => {
           <p>Напишите нам в Телеграм. Мы с удовольствием ответим!</p>
         </div>
       </div>
-      <span onClick={() => setActive(false)} className="exit"></span>
+      <span onClick={() => closeModal()} className="exit"></span>
     </ModalLayout>
   );
 };
