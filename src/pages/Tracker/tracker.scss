@@ -786,12 +786,13 @@
               }
               &__list {
                 position: absolute;
-                background: #f8f9fa;
+                border-radius: 2px;
+                background: #d9d9d9;
                 z-index: 8;
-                border-radius: 8px;
-                padding: 20px 10px 10px;
+
+                // padding: 0 8px 10px;
                 top: 30px;
-                width: 220px;
+                width: 265px;
                 display: flex;
                 flex-direction: column;
 
@@ -809,17 +810,27 @@
                   flex-direction: column;
                   row-gap: 8px;
                   margin-top: 8px;
+                  padding: 0 8px 8px;
 
                   .tagItem {
-                    position: relative;
                     display: flex;
-                    flex-direction: column;
-                    padding: 5px;
-                    border: 1px solid #e3e2e2;
+                    align-items: center;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    padding: 0px 8px;
                     border-radius: 8px;
+                    height: 50px;
+                    max-height: 50px;
+                    background: #fff;
 
                     &__description {
-                      font-size: 14px;
+                      font-size: 12px;
+                      word-break: break-word;
+                      max-width: 115px;
+                      max-height: 40px;
+                      overflow: hidden;
+                      text-wrap: wrap;
+                      text-overflow: ellipsis;
                     }
 
                     &__info {
@@ -828,32 +839,29 @@
                       column-gap: 10px;
 
                       &__name {
-                        font-size: 16px;
+                        font-size: 12px;
                         font-weight: 600;
                       }
 
                       &__color {
-                        border: 1px solid #e3e2e2;
-                        width: 20px;
-                        height: 20px;
-                        border-radius: 50px;
-                      }
-                    }
-
-                    &__images {
-                      position: absolute;
-                      right: 5px;
-                      top: 3px;
-                      display: flex;
-                      column-gap: 3px;
-
-                      img {
-                        cursor: pointer;
+                        width: 22.25px;
+                        height: 23.217px;
+                        border-radius: 8px;
                       }
 
-                      .delete {
-                        width: 14px;
-                        height: 14px;
+                      &__images {
+                        display: flex;
+                        flex-direction: column-reverse;
+                        row-gap: 6px;
+
+                        img {
+                          cursor: pointer;
+                        }
+
+                        .delete {
+                          width: 14px;
+                          height: 14px;
+                        }
                       }
                     }
                   }
@@ -862,17 +870,21 @@
                 .addNewTag {
                   display: flex;
                   align-items: center;
-                  column-gap: 8px;
+                  column-gap: 15px;
+                  border-radius: 8px;
+                  background: #252c32;
+                  color: white;
+                  height: 42px;
                   cursor: pointer;
                   justify-content: center;
 
                   p {
-                    font-size: 13px;
+                    font-size: 15px;
                   }
 
                   span {
-                    width: 16px;
-                    height: 16px;
+                    width: 19px;
+                    height: 19px;
                     border-radius: 50px;
                     align-items: center;
                     justify-content: center;
@@ -887,8 +899,9 @@
                 .formTag {
                   display: flex;
                   flex-direction: column;
-                  padding-top: 8px;
+                  padding: 8px;
                   row-gap: 8px;
+
                   .arrow {
                     position: absolute;
                     cursor: pointer;
@@ -909,11 +922,12 @@
                   &__btn {
                     outline: none;
                     border: none;
-                    background: #6f6f6f;
+                    background: #252c32;
                     color: whitesmoke;
-                    margin: 0 auto;
+                    margin: 10px auto 0;
                     border-radius: 10px;
                     font-size: 15px;
+                    padding: 5px 12px;
                   }
 
                   .disable {
