@@ -4,6 +4,7 @@ import { apiRequest } from "@api/request";
 
 import { useNotification } from "@hooks/useNotification";
 
+import { Loader } from "@components/Common/Loader/Loader";
 import ModalLayout from "@components/Common/ModalLayout/ModalLayout";
 
 import arrow from "assets/icons/arrows/arrowCalendar.png";
@@ -19,6 +20,12 @@ export const ModalResetPassword = ({ active, setActive }) => {
     password: "",
   });
 
+  const [inputsError, setInputsError] = useState({
+    email: false,
+    password: false,
+    token: false,
+  });
+
   const validateEmail = (email) => {
     // регулярное выражение для проверки email
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -26,6 +33,8 @@ export const ModalResetPassword = ({ active, setActive }) => {
     // возвращаем true, если email проходит проверку, и false, если нет
     return re.test(email);
   };
+
+  const [loader, setLoader] = useState(false);
 
   const resetInputsValue = () => {
     setInputsValue({
@@ -38,18 +47,21 @@ export const ModalResetPassword = ({ active, setActive }) => {
   const { showNotification } = useNotification();
   const submitHandler = () => {
     if (!validateEmail(inputsValue.email)) {
+      setInputsError((prevValue) => ({ ...prevValue, email: true }));
       return showNotification({
         show: true,
         text: "Введите коректный email",
         type: "error",
       });
     }
+    setLoader(true);
     apiRequest("/register/request-password-reset", {
       method: "POST",
       data: {
         email: inputsValue.email,
       },
     }).then((data) => {
+      setLoader(false);
       if (data) {
         showNotification({
           show: true,
@@ -62,26 +74,45 @@ export const ModalResetPassword = ({ active, setActive }) => {
   };
   const resetPassword = () => {
     if (!inputsValue.password || !inputsValue.token) {
+      setInputsError((prevValue) => ({
+        ...prevValue,
+        password: true,
+        token: true,
+      }));
       return showNotification({
         show: true,
         text: "Введите данные",
         type: "error",
       });
     }
+    if (inputsValue.password.length < 6) {
+      setInputsError((prevValue) => ({ ...prevValue, password: true }));
+      return;
+    }
+    setLoader(true);
     apiRequest("/register/reset-password", {
       method: "POST",
       data: {
         token: inputsValue.token,
         password: inputsValue.password,
       },
-    }).then(() => {
-      setActive(false);
-      resetInputsValue();
-      showNotification({
-        show: true,
-        text: "Пароль изменён",
-        type: "success",
-      });
+    }).then((data) => {
+      setLoader(false);
+      if (data.code === 0) {
+        showNotification({
+          show: true,
+          text: "Введите коректные данные",
+          type: "error",
+        });
+      } else {
+        setActive(false);
+        resetInputsValue();
+        showNotification({
+          show: true,
+          text: "Пароль изменён",
+          type: "success",
+        });
+      }
     });
   };
   return (
@@ -99,23 +130,37 @@ export const ModalResetPassword = ({ active, setActive }) => {
             <h5>Введите email:</h5>
             <input
               type="email"
-              onChange={(e) =>
+              onChange={(e) => {
                 setInputsValue((prevValue) => ({
                   ...prevValue,
                   email: e.target.value,
-                }))
-              }
-              placeholder="Email"
-            />
-            <button
-              className="resetPassword__btn"
-              onClick={(e) => {
-                e.preventDefault();
-                submitHandler();
+                }));
+                setInputsError({
+                  email: false,
+                  password: false,
+                  token: false,
+                });
               }}
-            >
-              Отправить
-            </button>
+              placeholder="Email"
+              value={inputsValue.email}
+              className={inputsError.email ? "error" : ""}
+            />
+            {inputsError.email && (
+              <span className="warningText">Введите коректный email</span>
+            )}
+            {loader ? (
+              <Loader style={"green"} />
+            ) : (
+              <button
+                className="resetPassword__btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  submitHandler();
+                }}
+              >
+                Отправить
+              </button>
+            )}
           </div>
         ) : (
           <div className="resetPassword__email">
@@ -127,34 +172,58 @@ export const ModalResetPassword = ({ active, setActive }) => {
             <h5>Введите код подтверждения:</h5>
             <input
               type="text"
-              onChange={(e) =>
+              onChange={(e) => {
+                setInputsError({
+                  email: false,
+                  password: false,
+                  token: false,
+                });
                 setInputsValue((prevValue) => ({
                   ...prevValue,
                   token: e.target.value,
-                }))
-              }
+                }));
+              }}
+              value={inputsValue.token}
+              className={inputsError.token ? "error" : ""}
               placeholder="token"
             />
+            {inputsError.token && (
+              <span className="warningText">Введите данные</span>
+            )}
             <h5>Введите новый пароль:</h5>
             <input
               type="password"
-              onChange={(e) =>
+              onChange={(e) => {
                 setInputsValue((prevValue) => ({
                   ...prevValue,
                   password: e.target.value,
-                }))
-              }
-              placeholder="password"
-            />
-            <button
-              className="resetPassword__btn"
-              onClick={(e) => {
-                e.preventDefault();
-                resetPassword();
+                }));
+                setInputsError({
+                  email: false,
+                  password: false,
+                  token: false,
+                });
               }}
-            >
-              Отправить
-            </button>
+              placeholder="password"
+              value={inputsValue.password}
+              className={inputsError.password ? "error" : ""}
+            />
+            {inputsError.password && (
+              <span className="warningText">Минимум 6 символов</span>
+            )}
+            {loader ? (
+              <Loader style={"green"} />
+            ) : (
+              <button
+                className="resetPassword__btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  resetPassword();
+                }}
+              >
+                Отправить
+              </button>
+            )}
           </div>
         )}
       </div>
