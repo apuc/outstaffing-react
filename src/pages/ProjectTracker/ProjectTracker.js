@@ -414,6 +414,11 @@ export const ProjectTracker = () => {
         add: false,
         edit: false,
       });
+      setTagInfo({
+        description: "",
+        name: "",
+      });
+      setColor("#aabbcc");
     }
 
     if (
@@ -703,23 +708,19 @@ export const ProjectTracker = () => {
                     </div>
                     {tags.open && (
                       <div className="tags__list">
-                        <img
-                          src={close}
-                          className="close"
-                          alt="close"
-                          onClick={() => {
-                            setTags({
-                              open: false,
-                              add: false,
-                              edit: false,
-                            });
-                            setTagInfo({
-                              description: "",
-                              name: "",
-                            });
-                            setColor("#aabbcc");
-                          }}
-                        />
+                        <div
+                          className="addNewTag"
+                          onClick={() =>
+                            setTags((prevState) => ({
+                              ...prevState,
+                              add: true,
+                            }))
+                          }
+                        >
+                          <p>Добавить новый тег</p>
+                          <span>+</span>
+                        </div>
+
                         {!tags.add && !tags.edit && (
                           <div className="tags__list__created">
                             {projectBoard.mark.map((tag) => {
@@ -736,46 +737,35 @@ export const ProjectTracker = () => {
                                       className="tagItem__info__color"
                                       style={{ background: tag.color }}
                                     />
-                                  </div>
-                                  <div className="tagItem__images">
-                                    <img
-                                      src={edit}
-                                      alt="edit"
-                                      onClick={() => {
-                                        setTags((prevState) => ({
-                                          ...prevState,
-                                          edit: true,
-                                        }));
-                                        setTagInfo({
-                                          description: tag.title,
-                                          name: tag.slug,
-                                          editMarkId: tag.id,
-                                        });
-                                        setColor(tag.color);
-                                      }}
-                                    />
-                                    <img
-                                      onClick={() => deleteTag(tag.id)}
-                                      className="delete"
-                                      src={close}
-                                      alt="delete"
-                                    />
+
+                                    <div className="tagItem__info__images">
+                                      <img
+                                        src={edit}
+                                        alt="edit"
+                                        onClick={() => {
+                                          setTags((prevState) => ({
+                                            ...prevState,
+                                            edit: true,
+                                          }));
+                                          setTagInfo({
+                                            description: tag.title,
+                                            name: tag.slug,
+                                            editMarkId: tag.id,
+                                          });
+                                          setColor(tag.color);
+                                        }}
+                                      />
+                                      <img
+                                        onClick={() => deleteTag(tag.id)}
+                                        className="delete"
+                                        src={close}
+                                        alt="delete"
+                                      />
+                                    </div>
                                   </div>
                                 </div>
                               );
                             })}
-                            <div
-                              className="addNewTag"
-                              onClick={() =>
-                                setTags((prevState) => ({
-                                  ...prevState,
-                                  add: true,
-                                }))
-                              }
-                            >
-                              <p>Добавить новый тег</p>
-                              <span>+</span>
-                            </div>
                           </div>
                         )}
                         {(tags.add || tags.edit) && (
