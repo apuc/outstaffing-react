@@ -7,11 +7,11 @@
   border: 1px solid #dde2e4;
   border-radius: 8px;
   width: 1088px;
-  height: 529px;
+  height: 515px;
 
   &-body {
     &__left {
-      padding: 60px 0 30px 77px;
+      padding: 33px 0 30px 77px;
 
       h2 {
         font-weight: 500;
@@ -114,12 +114,13 @@
 
     &__right {
       border-left: 1px solid #f1f1f1;
-      padding: 80px 32px 46px 25px;
+      padding: 30px 32px 46px 25px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
 
       h4 {
+        margin: 22px 0 22px 0;
         font-weight: 900;
         font-size: 14px;
         line-height: 24px;
@@ -140,7 +141,7 @@
         }
 
         img {
-          margin: 0 18px 20px 0;
+          margin: 0 18px 0 0;
         }
       }
     }

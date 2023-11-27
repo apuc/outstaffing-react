@@ -12,7 +12,7 @@
 
   .acceptModal {
     border-radius: 20px;
-    background: linear-gradient(180deg, #FFF 0%, #EBEBEB 100%);
+    background: linear-gradient(180deg, #fff 0%, #ebebeb 100%);
     padding: 50px 34px 25px;
     display: flex;
     flex-direction: column;
@@ -43,16 +43,18 @@
       }
 
       .agree {
-        background: #52B709;
+        background: #52b709;
       }
 
       .cancel {
-        background: #B0BABF;
+        background: #b0babf;
       }
     }
 
     &__close {
       position: absolute;
+      width: 14px;
+      height: 14px;
       top: 15px;
       right: 22px;
       cursor: pointer;
