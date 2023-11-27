@@ -2,9 +2,9 @@ import React from "react";
 
 import "./basebutton.scss";
 
-export const BaseButton = ({ children, styles, ...props }) => {
+export const BaseButton = ({ children, styles, onClick, ...props }) => {
   return (
-    <button className={styles ? `${styles} button` : "button"} {...props}>
+    <button onClick={onClick} className={styles ? `${styles} button` : "button"} {...props}>
       {children}
     </button>
   );
