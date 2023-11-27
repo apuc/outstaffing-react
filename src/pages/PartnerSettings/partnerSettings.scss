@@ -34,26 +34,37 @@
       margin: 39px 0 10px 0;
     }
     &-second {
-      margin: 31px 0 10px 0;
+      margin: 15px 0 10px 0;
     }
   }
 
   &__input {
-    background: #eff2f7;
-    border-radius: 8px;
-    width: 373px;
-    height: 35px;
-    border: none;
-
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
     input {
-      font-size: 15px;
+      padding: 5px 10px;
       background: #eff2f7;
-      height: 100%;
-      margin-left: 15px;
-      width: 85%;
+      border-radius: 8px;
+      width: 373px;
+      height: 35px;
       border: none;
+      font-size: 15px;
       outline: none;
     }
+
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+
+    .warning {
+      border: 1px solid red;
+    }
+  }
+
+  .oldPassword {
+    margin-bottom: 25px;
   }
 
   &__agreement {
@@ -72,7 +83,7 @@
 
     &-cancel,
     &-save {
-      width: 151px;
+      min-width: 151px;
       height: 40px;
       font-size: 14px;
       line-height: 32px;
@@ -143,7 +154,6 @@
   &__report,
   &__login {
     width: 500px;
-    height: 435px;
     background: #ffffff;
     border-radius: 12px;
     padding: 30px 60px;
