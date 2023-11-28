@@ -79,6 +79,8 @@ const App = () => {
             path="/tracker/project/:id"
             element={<ProjectTracker />}
           />
+          <Route exact path="/tracker-start"></Route>
+          
           <Route exact path="/auth-candidate" element={<AuthForCandidate />} />
           <Route
             exact
@@ -135,6 +137,8 @@ const App = () => {
               element={<PartnerEmployees />}
             />
           </Route>
+          
+
           <Route exact path="profile-candidate/:id">
             <Route index element={<ProfileCandidate />} />
           </Route>

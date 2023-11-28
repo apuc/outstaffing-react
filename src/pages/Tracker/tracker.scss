@@ -1611,12 +1611,20 @@
               gap: 10px;
               align-items: center;
               transition: 0.4s;
+              max-width: 350px;
+
+              p {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
 
               div {
                 cursor: pointer;
 
                 width: 15px;
-                height: 15px;
+                min-width: 15px;
+                min-height: 15px;
                 display: flex;
                 background-color: #000;
                 align-items: center;
