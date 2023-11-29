@@ -25,17 +25,10 @@ export const AuthHeader = () => {
                 </NavLink>
               </li>
               <li>
-                <a
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToForm();
-                  }}
-                >
-                  Кабинет разработчика
-                </a>
+                <NavLink to={"/auth"}>Кабинет разработчика</NavLink>
               </li>
               <li>
-                <NavLink to={"/tracker-start"}>Трекер</NavLink>
+                <NavLink to={"/tracker-intro"}>Трекер</NavLink>
               </li>
               <li>
                 <NavLink to={"/auth-candidate"} className="candidate">

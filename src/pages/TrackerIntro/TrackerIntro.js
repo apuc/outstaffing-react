@@ -36,7 +36,7 @@ export const TrackerIntro = () => {
                 компании в одном месте: проекты, задачи, цели, сотрудники,
                 документы, переписки, отчеты
               </p>
-              <NavLink to="/auth" className="trackerIntro__btn">
+              <NavLink to="/tracker-registration" className="trackerIntro__btn">
                 Начать работу
               </NavLink>
             </div>
@@ -57,7 +57,7 @@ export const TrackerIntro = () => {
               Управление большим количеством проектов и гибкая настройка
               структуры под любые процессы
             </p>
-            <NavLink to="/auth" className="trackerIntro__btn">
+            <NavLink to="/tracker-registration" className="trackerIntro__btn">
               Начать работу
             </NavLink>
           </div>

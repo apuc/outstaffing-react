@@ -55,6 +55,7 @@ import "./assets/fonts/stylesheet.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
+
 const App = () => {
   const notification = useSelector(getNotification)
   return (
@@ -79,8 +80,7 @@ const App = () => {
             path="/tracker/project/:id"
             element={<ProjectTracker />}
           />
-          <Route exact path="/tracker-start"></Route>
-          
+
           <Route exact path="/auth-candidate" element={<AuthForCandidate />} />
           <Route
             exact
