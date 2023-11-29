@@ -322,6 +322,7 @@
               display: flex;
               position: relative;
               left: 5px;
+
               img {
                 position: relative;
                 display: flex;
@@ -338,6 +339,19 @@
               }
               img:nth-child(3) {
                 left: -15px;
+              }
+            }
+
+            .onePerson {
+              display: flex;
+              position: relative;
+              left: -15px;
+
+              img {
+                position: relative;
+                display: flex;
+                width: 32px;
+                height: 32px;
               }
             }
 
@@ -1597,12 +1611,20 @@
               gap: 10px;
               align-items: center;
               transition: 0.4s;
+              max-width: 350px;
+
+              p {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
 
               div {
                 cursor: pointer;
 
                 width: 15px;
-                height: 15px;
+                min-width: 15px;
+                min-height: 15px;
                 display: flex;
                 background-color: #000;
                 align-items: center;

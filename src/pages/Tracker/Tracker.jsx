@@ -317,7 +317,8 @@ export const Tracker = () => {
                           <tr key={task.id}>
                             <td>
                               <div className="taskList__table__title-task">
-                                {task.title}
+                                <p>{task.title}</p>
+
                                 <div
                                   onClick={(e) => {
                                     toggleDescTask(e);

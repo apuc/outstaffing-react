@@ -531,7 +531,13 @@ export const ProjectTracker = () => {
                     }
                   >
                     {Boolean(projectBoard.projectUsers?.length) && (
-                      <div className="projectPersons">
+                      <div
+                        className={
+                          projectBoard.projectUsers?.length == 1
+                            ? "onePerson"
+                            : "projectPersons"
+                        }
+                      >
                         {projectBoard.projectUsers.slice(0, 3).map((person) => {
                           return (
                             <img

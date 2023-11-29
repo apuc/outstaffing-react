@@ -25,6 +25,7 @@ import "./projectTiket.scss";
 export const ProjectTiket = ({ project, index }) => {
   const [modalSelect, setModalSelect] = useState(false);
   const [modalAdd, setModalAdd] = useState(false);
+  const [modalDelete, setModalDelete] = useState(false);
   const [acceptModalOpen, setAcceptModalOpen] = useState(false);
   const [path, setPath] = useState("");
   const dispatch = useDispatch();
@@ -71,6 +72,7 @@ export const ProjectTiket = ({ project, index }) => {
 
   function closeAcceptModal() {
     setAcceptModalOpen(false);
+    setModalDelete(false);
   }
 
   function linkProject() {}
@@ -144,7 +146,13 @@ export const ProjectTiket = ({ project, index }) => {
             <img src={archiveSet}></img>
             <p>в архив</p>
           </div>
-          <div onClick={removeProject}>
+
+          <div
+            onClick={() => {
+              setModalDelete(true);
+              setModalSelect(false);
+            }}
+          >
             <img src={del}></img>
             <p>удалить</p>
           </div>
@@ -152,6 +160,15 @@ export const ProjectTiket = ({ project, index }) => {
       </ModalSelect>
       {acceptModalOpen && (
         <AcceptModal
+          title={"Вы точно хотите переместить проект в архив?"}
+          closeModal={closeAcceptModal}
+          agreeHandler={removeProject}
+        />
+      )}
+
+      {modalDelete && (
+        <AcceptModal
+          title={"Вы точно хотите удалить?"}
           closeModal={closeAcceptModal}
           agreeHandler={removeProject}
         />

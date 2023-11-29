@@ -1060,7 +1060,7 @@
               height: 42px;
               cursor: pointer;
               column-gap: 8px;
-              padding: 5px;
+              padding: 5px 5px 5px 14px;
               border-radius: 8px;
               background: #fff;
 
@@ -1138,9 +1138,13 @@
             z-index: 10;
 
             &__item {
+              width: 66px;
+              font-size: 15px;
+              transition: 0.4s;
               cursor: pointer;
 
               &:hover {
+                transition: 0.4s;
                 font-weight: 700;
               }
             }
