@@ -220,6 +220,11 @@
         white-space: nowrap;
       }
     }
+
+    .edit {
+      background-color: green;
+      color: white;
+    }
   }
 
   .skills__section {
@@ -285,6 +290,15 @@
         }
       }
     }
+  }
+
+  .ck-toolbar {
+    border: none !important;
+  }
+
+  .ck-content {
+    border: none !important;
+    padding: 15px 35px 15px 50px !important;
   }
 
   &__sectionGit {
