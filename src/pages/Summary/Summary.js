@@ -1,8 +1,8 @@
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
 
 import { getProfileInfo } from "@redux/outstaffingSlice";
 
@@ -29,8 +29,8 @@ export const Summary = () => {
   const profileInfo = useSelector(getProfileInfo);
   const [openGit, setOpenGit] = useState(false);
   const [gitInfo, setGitInfo] = useState([]);
-  const [editSummeryOpen, setEditSummeryOpen] = useState(false)
-  const [summery, setSummery] = useState('')
+  const [editSummeryOpen, setEditSummeryOpen] = useState(false);
+  const [summery, setSummery] = useState("");
 
   useEffect(() => {
     apiRequest(
@@ -39,19 +39,17 @@ export const Summary = () => {
   }, []);
 
   useEffect(() => {
-      setSummery(profileInfo.vc_text)
-  }, [profileInfo])
+    setSummery(profileInfo.vc_text);
+  }, [profileInfo]);
 
-    function editSummery() {
-        apiRequest("/resume/edit-text", {
-            method: "PUT",
-            data: {
-                resume: summery
-            },
-        }).then(() => {
-
-        });
-    }
+  function editSummery() {
+    apiRequest("/resume/edit-text", {
+      method: "PUT",
+      data: {
+        resume: summery,
+      },
+    }).then(() => {});
+  }
   return (
     <div className="summary">
       <ProfileHeader />
@@ -120,45 +118,47 @@ export const Summary = () => {
             <div className="experience__block">
               <div className="summary__sections__head">
                 <h3>Описание опыта работы</h3>
-                <button className={editSummeryOpen ? 'edit' : ''} onClick={() => {
+                <button
+                  className={editSummeryOpen ? "edit" : ""}
+                  onClick={() => {
                     if (editSummeryOpen) {
-                        editSummery()
+                      editSummery();
                     }
-                    setEditSummeryOpen(!editSummeryOpen)
-                }}>{
-                    editSummeryOpen ? 'Сохранить' : 'Редактировать раздел'
-                }</button>
-              </div>
-            {editSummeryOpen ?
-                <CKEditor
-                    editor={ClassicEditor}
-                    data={summery}
-                    config={{
-                        removePlugins: [
-                            "CKFinderUploadAdapter",
-                            "CKFinder",
-                            "EasyImage",
-                            "Image",
-                            "ImageCaption",
-                            "ImageStyle",
-                            "ImageToolbar",
-                            "ImageUpload",
-                            "MediaEmbed",
-                            "BlockQuote",
-                        ],
-                    }}
-                    onChange={(event, editor) => {
-                        const data = editor.getData();
-                        setSummery(data);
-                    }}
-                />
-                :
-                <div
-                    className="experience__content"
-                    dangerouslySetInnerHTML={{ __html: summery }}
+                    setEditSummeryOpen(!editSummeryOpen);
+                  }}
                 >
-                </div>
-            }
+                  {editSummeryOpen ? "Сохранить" : "Редактировать раздел"}
+                </button>
+              </div>
+              {editSummeryOpen ? (
+                <CKEditor
+                  editor={ClassicEditor}
+                  data={summery}
+                  config={{
+                    removePlugins: [
+                      "CKFinderUploadAdapter",
+                      "CKFinder",
+                      "EasyImage",
+                      "Image",
+                      "ImageCaption",
+                      "ImageStyle",
+                      "ImageToolbar",
+                      "ImageUpload",
+                      "MediaEmbed",
+                      "BlockQuote",
+                    ],
+                  }}
+                  onChange={(event, editor) => {
+                    const data = editor.getData();
+                    setSummery(data);
+                  }}
+                />
+              ) : (
+                <div
+                  className="experience__content"
+                  dangerouslySetInnerHTML={{ __html: summery }}
+                ></div>
+              )}
             </div>
           </div>
         )}
