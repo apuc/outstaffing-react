@@ -1,3 +1,5 @@
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
@@ -27,12 +29,27 @@ export const Summary = () => {
   const profileInfo = useSelector(getProfileInfo);
   const [openGit, setOpenGit] = useState(false);
   const [gitInfo, setGitInfo] = useState([]);
+  const [editSummeryOpen, setEditSummeryOpen] = useState(false);
+  const [summery, setSummery] = useState("");
 
   useEffect(() => {
     apiRequest(
       `/profile/portfolio-projects?card_id=${localStorage.getItem("cardId")}`
     ).then((responseGit) => setGitInfo(responseGit));
   }, []);
+
+  useEffect(() => {
+    setSummery(profileInfo.vc_text);
+  }, [profileInfo]);
+
+  function editSummery() {
+    apiRequest("/resume/edit-text", {
+      method: "PUT",
+      data: {
+        resume: summery,
+      },
+    }).then(() => {});
+  }
   return (
     <div className="summary">
       <ProfileHeader />
@@ -101,12 +118,47 @@ export const Summary = () => {
             <div className="experience__block">
               <div className="summary__sections__head">
                 <h3>Описание опыта работы</h3>
-                <button>Редактировать раздел</button>
+                <button
+                  className={editSummeryOpen ? "edit" : ""}
+                  onClick={() => {
+                    if (editSummeryOpen) {
+                      editSummery();
+                    }
+                    setEditSummeryOpen(!editSummeryOpen);
+                  }}
+                >
+                  {editSummeryOpen ? "Сохранить" : "Редактировать раздел"}
+                </button>
               </div>
-              <div
-                className="experience__content"
-                dangerouslySetInnerHTML={{ __html: profileInfo.vc_text }}
-              ></div>
+              {editSummeryOpen ? (
+                <CKEditor
+                  editor={ClassicEditor}
+                  data={summery}
+                  config={{
+                    removePlugins: [
+                      "CKFinderUploadAdapter",
+                      "CKFinder",
+                      "EasyImage",
+                      "Image",
+                      "ImageCaption",
+                      "ImageStyle",
+                      "ImageToolbar",
+                      "ImageUpload",
+                      "MediaEmbed",
+                      "BlockQuote",
+                    ],
+                  }}
+                  onChange={(event, editor) => {
+                    const data = editor.getData();
+                    setSummery(data);
+                  }}
+                />
+              ) : (
+                <div
+                  className="experience__content"
+                  dangerouslySetInnerHTML={{ __html: summery }}
+                ></div>
+              )}
             </div>
           </div>
         )}
