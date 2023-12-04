@@ -13,12 +13,11 @@ import { caseOfNum } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
+import AllTaskTableTracker from "@components/AllTaskTableTracker/AllTaskTableTracker";
 import ArchiveTableTracker from "@components/ArchiveTableTracker/ArchiveTableTracker";
-import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
-import TrackerArchivePaginated from "@components/Common/TrackerArchivePaginated/TrackerArchivePaginated";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
@@ -29,7 +28,6 @@ import addProjectImg from "assets/icons/addProjectImg.svg";
 import archiveTrackerProjects from "assets/icons/archiveTrackerProjects.svg";
 import arrowViewReport from "assets/icons/arrows/arrowViewReport.svg";
 import filterIcon from "assets/icons/filterIcon.svg";
-import plus from "assets/icons/plus.svg";
 import search from "assets/icons/serchIcon.png";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
@@ -299,73 +297,12 @@ export const Tracker = () => {
             </div>
 
             {loader && <Loader style="green" />}
-            <table className="taskList__table">
-              <thead>
-                <tr>
-                  <th>Задача</th>
-                  <th>Статус</th>
-                  <th>Потраченное время</th>
-                  <th>Дата начала</th>
-                  <th>Дедлайн</th>
-                </tr>
-              </thead>
 
-              <tbody>
-                {!loader && (
-                  <>
-                    {Boolean(filteredAllTasks.length) &&
-                      filteredAllTasks.map((task, index) => {
-                        return (
-                          <tr key={task.id}>
-                            <td>
-                              <div className="taskList__table__title-task">
-                                <p>{task.title}</p>
-
-                                <div
-                                  onClick={(e) => {
-                                    toggleDescTask(e);
-                                  }}
-                                >
-                                  <img src={plus} alt="#" />
-                                </div>
-                              </div>
-                              <div className="taskList__table__name-project hide-desc">
-                                <h4>Проект:</h4>
-                                <p>
-                                  {projects.map((project) => {
-                                    if (project.id == task.project_id) {
-                                      return project.name;
-                                    }
-                                  })}
-                                </p>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="task-status">
-                                {task.status == 1 ? "Active" : "Close"}
-                              </div>
-                            </td>
-                            <td>
-                              {task.timers.map((item) => {
-                                let time = new Date(item.deltaSeconds * 1000)
-                                  .toISOString()
-                                  .slice(11, 19);
-                                return `${time}`;
-                              })}
-                            </td>
-                            <td>
-                              {new Date(task.created_at).toLocaleDateString()}
-                            </td>
-                            <td>
-                              {new Date(task.dead_line).toLocaleDateString()}
-                            </td>
-                          </tr>
-                        );
-                      })}
-                  </>
-                )}
-              </tbody>
-            </table>
+            <AllTaskTableTracker
+              loader={loader}
+              filteredAllTasks={filteredAllTasks}
+              projects={projects}
+            />
 
             <div className="taskList__time">
               <div className="taskList__time-compited">
