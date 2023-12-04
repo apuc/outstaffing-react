@@ -9,10 +9,11 @@ import {
   setToggleTab,
 } from "@redux/projectsTrackerSlice";
 
-import { caseOfNum, urlForLocal } from "@utils/helper";
+import { caseOfNum } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
+import ArchiveTableTracker from "@components/ArchiveTableTracker/ArchiveTableTracker";
 import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import { Footer } from "@components/Common/Footer/Footer";
@@ -438,64 +439,12 @@ export const Tracker = () => {
               </div>
 
               {loader && <Loader style="green" />}
-              <table className="archive__table">
-                <thead>
-                  <tr>
-                    <th>Задача</th>
-                    <th>Потраченное время</th>
-                    <th>Дата окончания</th>
-                  </tr>
-                </thead>
 
-                <tbody>
-                  {!loader && (
-                    <>
-                      {Boolean(filterCompleteTasks.length) ? (
-                        filterCompleteTasks.map((task, index) => {
-                          return (
-                            <tr key={index}>
-                              <td className="archive__completeTask__description">
-                                <p className="completeTask__title">
-                                  {task.title}
-                                </p>
-                                <p
-                                  className="date"
-                                  dangerouslySetInnerHTML={{
-                                    __html: task.description,
-                                  }}
-                                />
-                              </td>
-                              <td className="archive__completeTask__time">
-                                <p>
-                                  {task.timers.length == 0
-                                    ? "-"
-                                    : task.timers.map((item) => {
-                                        let time = new Date(
-                                          item.deltaSeconds * 1000
-                                        )
-                                          .toISOString()
-                                          .slice(11, 19);
-                                        return `${time}`;
-                                      })}
-                                </p>
-                              </td>
-                              <td className="archive__completeTask__info">
-                                <div>
-                                  <p>{getCorrectDate(task.updated_at)}</p>
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })
-                      ) : (
-                        <div className="archive__noItem">
-                          <p>В данном месяце у вас не было задач</p>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </tbody>
-              </table>
+              <ArchiveTableTracker
+                loader={loader}
+                filterCompleteTasks={filterCompleteTasks}
+                projects={projects}
+              />
             </div>
             <div className="archive__projects">
               <div className="archive__projects-title">
