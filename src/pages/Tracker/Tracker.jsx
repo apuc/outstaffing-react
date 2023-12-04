@@ -18,6 +18,7 @@ import { getCorrectDate } from "@components/Calendar/calendarHelper";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
+import TrackerArchivePaginated from "@components/Common/TrackerArchivePaginated/TrackerArchivePaginated";
 import TrackerModal from "@components/Modal/Tracker/TrackerModal/TrackerModal";
 import { Navigation } from "@components/Navigation/Navigation";
 import { ProfileBreadcrumbs } from "@components/ProfileBreadcrumbs/ProfileBreadcrumbs";
@@ -443,7 +444,6 @@ export const Tracker = () => {
               <ArchiveTableTracker
                 loader={loader}
                 filterCompleteTasks={filterCompleteTasks}
-                projects={projects}
               />
             </div>
             <div className="archive__projects">

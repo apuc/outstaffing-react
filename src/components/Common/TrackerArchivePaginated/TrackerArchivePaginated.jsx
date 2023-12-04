@@ -1,6 +1,11 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import ReactPaginate from "react-paginate";
 
-const PaginatedItems = ({ itemsPerPage, items }) => {
+import ArchiveTableTracker from "@components/ArchiveTableTracker/ArchiveTableTracker";
+
+const TrackerArchivePaginated = ({ itemsPerPage, items, projects, loader }) => {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -22,7 +27,6 @@ const PaginatedItems = ({ itemsPerPage, items }) => {
 
   return (
     <>
-      {/* <Items currentItems={currentItems} /> */}
       <ReactPaginate
         nextLabel=">"
         onPageChange={handlePageClick}
@@ -47,4 +51,4 @@ const PaginatedItems = ({ itemsPerPage, items }) => {
   );
 };
 
-export default PaginatedItems;
+export default TrackerArchivePaginated;
