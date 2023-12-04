@@ -1,7 +1,6 @@
 import React from "react";
 
-import { getCorrectDate } from "@components/Calendar/calendarHelper";
-import ArchiveTasksItem from "@components/Common/AllMyTasksItem/ArchiveTasksItem";
+import ArchiveTasksItem from "@components/Common/ArchiveTasksItem/ArchiveTasksItem";
 
 import "./archiveTableTracker.scss";
 
