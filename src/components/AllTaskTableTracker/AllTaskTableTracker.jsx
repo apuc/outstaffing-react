@@ -227,11 +227,10 @@ const AllTaskTableTracker = ({ filteredAllTasks, projects, loader }) => {
 
   useEffect(() => {
     setItems(filteredAllTasks);
+    const endOffset = itemOffset + itemsPerPage;
+    setCurrentItems(filteredAllTasks.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(filteredAllTasks.length / itemsPerPage));
   }, [filteredAllTasks]);
-
-  // Баг с отрисовкой массив currentItems пустой
-  console.log(currentItems);
-  console.log(items);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
