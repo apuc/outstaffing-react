@@ -2,9 +2,11 @@ import React from "react";
 
 import plus from "assets/icons/plus.svg";
 
+import "./allTaskTableItem.scss";
+
 const AllTaskTableItem = ({ task, projects }) => {
   function toggleDescTask(e) {
-    e.target.closest("img").classList.toggle("open-desc-item");
+    e.target?.classList.toggle("open-desc-item");
     e.target
       .closest("td")
       ?.querySelector(".taskList__table__name-project")
@@ -17,13 +19,13 @@ const AllTaskTableItem = ({ task, projects }) => {
         <div className="taskList__table__title-task">
           <p>{task.title}</p>
 
-          <div
+          <img
+            src={plus}
+            alt="#"
             onClick={(e) => {
               toggleDescTask(e);
             }}
-          >
-            <img src={plus} alt="#" />
-          </div>
+          />
         </div>
         <div className="taskList__table__name-project hide-desc">
           <h4>Проект:</h4>

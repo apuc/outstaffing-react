@@ -1,6 +1,6 @@
 import React from "react";
 
-import ArchiveTasksItem from "@components/Common/ArchiveTasksItem/ArchiveTasksItem";
+import ArchiveTasksItem from "@components/ArchiveTableTracker/ArchiveTasksItem/ArchiveTasksItem";
 
 import "./archiveTableTracker.scss";
 
