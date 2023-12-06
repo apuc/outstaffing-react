@@ -18,7 +18,7 @@ const ArchiveTableTracker = ({ filterCompleteTasks, loader }) => {
         {!loader && (
           <>
             {Boolean(filterCompleteTasks.length) ? (
-              filterCompleteTasks.map((task, index) => {
+              filterCompleteTasks?.map((task, index) => {
                 return (
                   <ArchiveTasksItem task={task} index={index} key={index} />
                 );

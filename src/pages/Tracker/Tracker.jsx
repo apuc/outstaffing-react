@@ -187,7 +187,7 @@ export const Tracker = () => {
             {projects &&
               Boolean(projects.length) &&
               !loader &&
-              projects.map((project, index) => {
+              projects?.map((project, index) => {
                 return project.status !== 10 ? (
                   <ProjectTiket key={index} project={project} />
                 ) : (
@@ -197,7 +197,7 @@ export const Tracker = () => {
             {typeof projects === "object" &&
               (!Boolean(projects.length) ||
                 !Boolean(
-                  projects.filter((project) => project.status !== 10).length
+                  projects?.filter((project) => project.status !== 10).length
                 )) &&
               !loader && (
                 <div className="no-projects">
@@ -380,10 +380,10 @@ export const Tracker = () => {
                 <h3>Архив проектов:</h3>
                 <p>
                   {`${
-                    projects.filter((project) => project.status === 10).length
+                    projects?.filter((project) => project.status === 10).length
                   } 
                      ${caseOfNum(
-                       projects.filter((project) => project.status === 10)
+                       projects?.filter((project) => project.status === 10)
                          .length,
                        "projects"
                      )}`}
@@ -391,9 +391,9 @@ export const Tracker = () => {
               </div>
               <div className="archive__tasksWrapper">
                 {Boolean(
-                  projects.filter((project) => project.status === 10).length
+                  projects?.filter((project) => project.status === 10).length
                 ) ? (
-                  projects.map((project, index) => {
+                  projects?.map((project, index) => {
                     return project.status === 10 ? (
                       <div
                         className="archive__completeTask-project"

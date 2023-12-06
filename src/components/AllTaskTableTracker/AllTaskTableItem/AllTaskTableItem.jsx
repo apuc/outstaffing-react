@@ -30,7 +30,7 @@ const AllTaskTableItem = ({ task, projects }) => {
         <div className="taskList__table__name-project hide-desc">
           <h4>Проект:</h4>
           <p>
-            {projects.map((project) => {
+            {projects?.map((project) => {
               if (project.id == task.project_id) {
                 return project.name;
               }
