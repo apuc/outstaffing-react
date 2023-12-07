@@ -23,9 +23,14 @@
   max-height: 700px;
   // overflow-y: auto;
 
+  @media (max-width: 990px) {
+    width: 96%;
+  }
+
   @media (max-width: 880px) {
     max-height: none;
     overflow-y: inherit;
+    width: 96%;
   }
 
   &::-webkit-scrollbar {
@@ -576,6 +581,14 @@
       //&:focus-within {
       //  border: 1px solid #0000004d;
       //}
+
+      @media (max-width: 880px) {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 880px) {
+      width: 100%;
     }
   }
 
@@ -1088,6 +1101,10 @@
               cursor: default;
             }
           }
+        }
+
+        @media (max-width: 880px) {
+          width: 100%;
         }
       }
 

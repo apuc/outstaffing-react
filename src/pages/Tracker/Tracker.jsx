@@ -9,11 +9,12 @@ import {
   setToggleTab,
 } from "@redux/projectsTrackerSlice";
 
-import { caseOfNum, urlForLocal } from "@utils/helper";
+import { caseOfNum } from "@utils/helper";
 
 import { apiRequest } from "@api/request";
 
-import { getCorrectDate } from "@components/Calendar/calendarHelper";
+import AllTaskTableTracker from "@components/AllTaskTableTracker/AllTaskTableTracker";
+import ArchiveTableTracker from "@components/ArchiveTableTracker/ArchiveTableTracker";
 import BaseButton from "@components/Common/BaseButton/BaseButton";
 import { Footer } from "@components/Common/Footer/Footer";
 import { Loader } from "@components/Common/Loader/Loader";
@@ -27,7 +28,6 @@ import addProjectImg from "assets/icons/addProjectImg.svg";
 import archiveTrackerProjects from "assets/icons/archiveTrackerProjects.svg";
 import arrowViewReport from "assets/icons/arrows/arrowViewReport.svg";
 import filterIcon from "assets/icons/filterIcon.svg";
-import plus from "assets/icons/plus.svg";
 import search from "assets/icons/serchIcon.png";
 import project from "assets/icons/trackerProject.svg";
 import tasks from "assets/icons/trackerTasks.svg";
@@ -125,14 +125,6 @@ export const Tracker = () => {
     );
   }
 
-  function toggleDescTask(e) {
-    e.target.closest("img").classList.toggle("open-desc-item");
-    e.target
-      .closest("td")
-      ?.querySelector(".taskList__table__name-project")
-      .classList.toggle("hide-desc");
-  }
-
   return (
     <div className="tracker">
       <ProfileHeader />
@@ -195,7 +187,7 @@ export const Tracker = () => {
             {projects &&
               Boolean(projects.length) &&
               !loader &&
-              projects.map((project, index) => {
+              projects?.map((project, index) => {
                 return project.status !== 10 ? (
                   <ProjectTiket key={index} project={project} />
                 ) : (
@@ -205,7 +197,7 @@ export const Tracker = () => {
             {typeof projects === "object" &&
               (!Boolean(projects.length) ||
                 !Boolean(
-                  projects.filter((project) => project.status !== 10).length
+                  projects?.filter((project) => project.status !== 10).length
                 )) &&
               !loader && (
                 <div className="no-projects">
@@ -297,73 +289,12 @@ export const Tracker = () => {
             </div>
 
             {loader && <Loader style="green" />}
-            <table className="taskList__table">
-              <thead>
-                <tr>
-                  <th>Задача</th>
-                  <th>Статус</th>
-                  <th>Потраченное время</th>
-                  <th>Дата начала</th>
-                  <th>Дедлайн</th>
-                </tr>
-              </thead>
 
-              <tbody>
-                {!loader && (
-                  <>
-                    {Boolean(filteredAllTasks.length) &&
-                      filteredAllTasks.map((task, index) => {
-                        return (
-                          <tr key={task.id}>
-                            <td>
-                              <div className="taskList__table__title-task">
-                                <p>{task.title}</p>
-
-                                <div
-                                  onClick={(e) => {
-                                    toggleDescTask(e);
-                                  }}
-                                >
-                                  <img src={plus} alt="#" />
-                                </div>
-                              </div>
-                              <div className="taskList__table__name-project hide-desc">
-                                <h4>Проект:</h4>
-                                <p>
-                                  {projects.map((project) => {
-                                    if (project.id == task.project_id) {
-                                      return project.name;
-                                    }
-                                  })}
-                                </p>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="task-status">
-                                {task.status == 1 ? "Active" : "Close"}
-                              </div>
-                            </td>
-                            <td>
-                              {task.timers.map((item) => {
-                                let time = new Date(item.deltaSeconds * 1000)
-                                  .toISOString()
-                                  .slice(11, 19);
-                                return `${time}`;
-                              })}
-                            </td>
-                            <td>
-                              {new Date(task.created_at).toLocaleDateString()}
-                            </td>
-                            <td>
-                              {new Date(task.dead_line).toLocaleDateString()}
-                            </td>
-                          </tr>
-                        );
-                      })}
-                  </>
-                )}
-              </tbody>
-            </table>
+            <AllTaskTableTracker
+              loader={loader}
+              filteredAllTasks={filteredAllTasks}
+              projects={projects}
+            />
 
             <div className="taskList__time">
               <div className="taskList__time-compited">
@@ -438,74 +369,21 @@ export const Tracker = () => {
               </div>
 
               {loader && <Loader style="green" />}
-              <table className="archive__table">
-                <thead>
-                  <tr>
-                    <th>Задача</th>
-                    <th>Потраченное время</th>
-                    <th>Дата окончания</th>
-                  </tr>
-                </thead>
 
-                <tbody>
-                  {!loader && (
-                    <>
-                      {Boolean(filterCompleteTasks.length) ? (
-                        filterCompleteTasks.map((task, index) => {
-                          return (
-                            <tr key={index}>
-                              <td className="archive__completeTask__description">
-                                <p className="completeTask__title">
-                                  {task.title}
-                                </p>
-                                <p
-                                  className="date"
-                                  dangerouslySetInnerHTML={{
-                                    __html: task.description,
-                                  }}
-                                />
-                              </td>
-                              <td className="archive__completeTask__time">
-                                <p>
-                                  {task.timers.length == 0
-                                    ? "-"
-                                    : task.timers.map((item) => {
-                                        let time = new Date(
-                                          item.deltaSeconds * 1000
-                                        )
-                                          .toISOString()
-                                          .slice(11, 19);
-                                        return `${time}`;
-                                      })}
-                                </p>
-                              </td>
-                              <td className="archive__completeTask__info">
-                                <div>
-                                  <p>{getCorrectDate(task.updated_at)}</p>
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })
-                      ) : (
-                        <div className="archive__noItem">
-                          <p>В данном месяце у вас не было задач</p>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </tbody>
-              </table>
+              <ArchiveTableTracker
+                loader={loader}
+                filterCompleteTasks={filterCompleteTasks}
+              />
             </div>
             <div className="archive__projects">
               <div className="archive__projects-title">
                 <h3>Архив проектов:</h3>
                 <p>
                   {`${
-                    projects.filter((project) => project.status === 10).length
+                    projects?.filter((project) => project.status === 10).length
                   } 
                      ${caseOfNum(
-                       projects.filter((project) => project.status === 10)
+                       projects?.filter((project) => project.status === 10)
                          .length,
                        "projects"
                      )}`}
@@ -513,9 +391,9 @@ export const Tracker = () => {
               </div>
               <div className="archive__tasksWrapper">
                 {Boolean(
-                  projects.filter((project) => project.status === 10).length
+                  projects?.filter((project) => project.status === 10).length
                 ) ? (
-                  projects.map((project, index) => {
+                  projects?.map((project, index) => {
                     return project.status === 10 ? (
                       <div
                         className="archive__completeTask-project"

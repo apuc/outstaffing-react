@@ -612,7 +612,7 @@ export const TrackerModal = ({
                   >
                     {selectedPriority
                       ? `Приоритет: ${selectedPriority.name}`
-                      : "Выберити приоритет"}
+                      : "Выберите приоритет"}
                     <img
                       className={selectPriority ? "arrow arrow--open" : "arrow"}
                       src={arrowDown}

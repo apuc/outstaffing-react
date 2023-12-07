@@ -1206,7 +1206,7 @@ export const TicketFullScreen = () => {
                   >
                     <span>
                       {typeof taskPriority === "number"
-                        ? priority[taskPriority]
+                        ? `Приоритет: ${priority[taskPriority]}`
                         : "Выберите приоритет"}
                     </span>
                     <img

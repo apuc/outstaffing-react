@@ -1,0 +1,24 @@
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  justify-content: center;
+  margin-top: 50px;
+  font-size: 14px;
+
+  &__item {
+  }
+
+  &__link {
+    border-radius: 15px;
+    color: black;
+    padding: 6px 10px;
+  }
+}
+
+.active-btn {
+  .pagination__link {
+    color: white;
+    background-color: #52b709;
+  }
+}
